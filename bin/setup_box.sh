@@ -22,4 +22,10 @@ sudo pip install -r /vagrant/requirements.txt
 echo "Instal Python 3"
 sudo apt-get install -y python3
 
+echo "Install pip3"
+sudo apt-get install -y python3-pip
+
+echo "Install pip3 requirements"
+sudo pip3 install -r /vagrant/requirements.txt
+
 echo "=> End config box..."
