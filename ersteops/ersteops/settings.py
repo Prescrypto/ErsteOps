@@ -41,8 +41,8 @@ if PRODUCTION:
     ALLOWED_HOSTS = [os.environ['HEROKU_APP_NAME']+".herokuapp.com"]
 else:
     # Correct way
-    ALLOWED_HOSTS = [os.environ['ALLOWED_HOSTS']]
-    #ALLOWED_HOSTS = []
+    #ALLOWED_HOSTS = [os.environ['ALLOWED_HOSTS']]
+    ALLOWED_HOSTS = [*]
 
 # Application definition
 
