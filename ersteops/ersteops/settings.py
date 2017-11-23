@@ -42,7 +42,7 @@ if PRODUCTION:
 else:
     # Correct way
     #ALLOWED_HOSTS = [os.environ['ALLOWED_HOSTS']]
-    ALLOWED_HOSTS = [*]
+    ALLOWED_HOSTS = ['*']
 
 # Application definition
 
