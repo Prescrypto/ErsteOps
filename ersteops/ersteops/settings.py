@@ -54,6 +54,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    'emergency.apps.EmergencyConfig',
+    'vehicle.apps.VehicleConfig',
+
 ]
 
 MIDDLEWARE = [
