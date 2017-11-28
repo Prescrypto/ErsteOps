@@ -2,6 +2,6 @@
 
 echo "==>Post DEPLOY Rules"
 
-python ./chuko/manage.py migrate
+python ./ersteops/manage.py migrate
 
 echo "==> END postdeploy"
