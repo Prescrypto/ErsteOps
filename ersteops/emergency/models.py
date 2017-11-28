@@ -44,7 +44,7 @@ class AttentionKind(models.Model):
         verbose_name_plural = "Kind of Attention"
         ordering = ['created_at']
     def __str__(self):  
-        return self.grade + ' - ' +self.name
+        return self.grade_type + ' - ' +self.name
 
 
 @python_2_unicode_compatible
