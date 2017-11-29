@@ -5,7 +5,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.shortcuts import render
-from django.views.generic import View, CreateView, ListView
+from django.views.generic import View, CreateView, ListView, DetailView
 from emergency.models import Emergency
 from django.utils import timezone
 
@@ -29,5 +29,14 @@ class EmergencyListView(ListView):
     model = Emergency
     def get_context_data(self, **kwargs):
         context = super(EmergencyListView, self).get_context_data(**kwargs)
+        context['now'] = timezone.now()
+        return context
+
+
+class EmergencyDetailView(DetailView):
+    template_name = "emergency/detail.html"
+    model = Emergency
+    def get_context_data(self, **kwargs):
+        context = super(EmergencyDetailView, self).get_context_data(**kwargs)
         context['now'] = timezone.now()
         return context
