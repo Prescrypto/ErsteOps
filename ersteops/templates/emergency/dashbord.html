@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<h1>Dashbord</h1>
+
+<table class="table table-hover">
+	<thead>
+   <tr>
+     <th>Incident Id</th>
+     <th>Start Time</th>
+     <th>End Time</th>
+     <th>Type</th>
+     <th>Zone</th>
+     <th>Status</th>
+   </tr> 
+  </thead>
+  <tbody>
+    {% for emergency in object_list %}
+      <tr>
+        <td><a href="/emergency/{{emergency.id}}/">Id:{{emergency.id}}</td>
+        <td>{{ emergency.start_time }}</td>
+        <td>{{ emergency.end_time }}</td>
+        <td>{{ emergency.grade_type.name }}</td>
+        <td>{{ emergency.zone.name }}</td>
+        {% if emergency.is_active%}
+          <td>Activa</td>
+        {% else %}
+          <td>Inactiva</td>
+        {% endif%}
+      </tr>
+    {% empty %}
+    <li>No incidents yet.</li>
+    {% endfor %}
+
+  </tbody>
+</table>
+
+
+{% endblock %}

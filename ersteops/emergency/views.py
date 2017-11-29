@@ -40,3 +40,15 @@ class EmergencyDetailView(DetailView):
         context = super(EmergencyDetailView, self).get_context_data(**kwargs)
         context['now'] = timezone.now()
         return context
+
+
+class EmergencyDashbordList(ListView):
+    template_name = "emergency/dashbord.html"
+    model = Emergency
+    def get_context_data(self, **kwargs):
+        context = super(EmergencyDashbordList, self).get_context_data(**kwargs)
+        context['now'] = timezone.now()
+        return context
+
+
+        
