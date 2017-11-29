@@ -5,9 +5,9 @@
 <h1>Incidents</h1>
 <ul>
 {% for emergency in object_list %}
-    <li>Id:{{emergency.id}} - {{ emergency.start_time|date }} - {{ emergency.grade_type.name }}</li>
+    <li><a href="/emergency/{{emergency.id}}/">Id:{{emergency.id}}</a> - {{ emergency.start_time|date }} - {{ emergency.grade_type.name }}</li>
 {% empty %}
-    <li>No articles yet.</li>
+    <li>No incidents yet.</li>
 {% endfor %}
 </ul>
 {% endblock %}
