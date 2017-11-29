@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<h1>Incidents</h1>
+<ul>
+{% for emergency in object_list %}
+    <li>{{ emergency.start_time|date }} - {{ emergency.grade_type.name }}</li>
+{% empty %}
+    <li>No articles yet.</li>
+{% endfor %}
+</ul>
+{% endblock %}
