@@ -48,11 +48,11 @@ class Unit(models.Model):
         verbose_name_plural = "Unidad"
         ordering = ['created_at']
     def __str__(self):  
-        return str(self.id)
+        return str(self.unit_id) + ' - '+ self.unit_type.name
 
 @python_2_unicode_compatible
 class Brand(models.Model):
-    name = models.CharField("modelo",max_length=50,unique=True)
+    name = models.CharField("marca",max_length=50,unique=True)
     created_at = models.DateTimeField("fecha de alta",auto_now_add=True,editable=False)
     last_modified = models.DateTimeField("ultima modificacion",auto_now=True,editable=False)
     class Meta:
