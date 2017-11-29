@@ -20,3 +20,4 @@ class EmergencyNew(CreateView):
 	template_name = "emergency/new.html"
 	model = Emergency
 	fields = ['odoo_client','grade_type','zone','start_time','end_time','is_active','unit']
+	success_url = '/emergency/'

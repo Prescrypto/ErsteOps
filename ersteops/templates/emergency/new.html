@@ -3,7 +3,7 @@
 
 {% block content %}
   <h1 class="page-header">New Incident</h1>
-  <form action="/emergency/new" method="post">{% csrf_token %}
+  <form action="/emergency/new/" method="post">{% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Save" />
   </form>

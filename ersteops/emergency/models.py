@@ -9,7 +9,7 @@ from vehicle import models as models_vehicle
 # Create your models here.
 @python_2_unicode_compatible
 class Emergency(models.Model):
-    odoo_client = models.CharField("cliente id",max_length=50,unique=True)
+    odoo_client = models.CharField("cliente id",max_length=50,unique=False)
     grade_type = models.ForeignKey("AttentionKind",
     related_name="attention_kind_name",
     verbose_name= "tipo"
