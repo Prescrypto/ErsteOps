@@ -22,7 +22,8 @@ class Emergency(models.Model):
     end_time = models.DateTimeField("fin",default=datetime.now,blank=True)
     is_active = models.NullBooleanField("activa")
     unit = models.ManyToManyField(models_vehicle.Unit,
-    related_name="Unidad"
+        related_name="unit_name",
+        verbose_name="Unidad"
     )
     created_at = models.DateTimeField("fecha de alta",auto_now_add=True,editable=False)
     last_modified = models.DateTimeField("ultima modificacion",auto_now=True,editable=False)
