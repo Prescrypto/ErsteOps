@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'emergency.apps.EmergencyConfig',
     'vehicle.apps.VehicleConfig',
+    'odoodb.apps.OdoodbConfig'
 
 ]
 
@@ -91,7 +92,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ersteops.wsgi.application'
 
-APPEND_SLASH=False
+#APPEND_SLASH=False
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
@@ -106,15 +107,34 @@ APPEND_SLASH=False
 DATABASE_LOCAL =  ast.literal_eval(os.environ['DATABASE_LOCAL'])
 DATABASE_URL = os.environ['DATABASE_URL']
 DATABASE_REMOTE_URL = os.environ['DATABASE_REMOTE_URL']
+#DATABASE_ODOO_URL = os.environ['DATABASE_ODOO_URL']
+
+ODOO_HEROKU_HOST = os.environ['ODOO_HEROKU_HOST']
+ODOO_HEROKU_DB = os.environ['ODOO_HEROKU_DB']
+ODOO_HEROKU_USER = os.environ['ODOO_HEROKU_USER']
+ODOO_HEROKU_PASSWD = os.environ['ODOO_HEROKU_PASSWD']
+ODDO_HEROKU_PORT = os.environ['ODDO_HEROKU_PORT']
 
 if DATABASE_LOCAL:
     DATABASES = {
                 'default': dj_database_url.config(default=DATABASE_URL),
+                #'odoodb': dj_database_url.config(default=DATABASE_ODOO_URL),
+                'odoodb' :{
+                    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                    'NAME': ODOO_HEROKU_DB,
+                    'USER': ODOO_HEROKU_USER,
+                    'PASSWORD': ODOO_HEROKU_PASSWD,
+                    'HOST' : ODOO_HEROKU_HOST,
+                    'PORT': ODDO_HEROKU_PORT,
+
+                },
                 }
 else:
     DATABASES = {
                 'default': dj_database_url.config(default=DATABASE_REMOTE_URL),
                 }
+
+DATABASE_ROUTERS = ['odoodb.OdooDBRouter.OdooDBRouter']
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators

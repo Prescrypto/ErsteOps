@@ -7,6 +7,7 @@ from django.shortcuts import render
 from django.shortcuts import render
 from django.views.generic import View, CreateView, ListView, DetailView
 from emergency.models import Emergency
+from odoodb.models import res_partner
 from django.utils import timezone
 
 
@@ -51,4 +52,9 @@ class EmergencyDashbordList(ListView):
         return context
 
 
-        
+class EmergencyOdo(View):
+    template_name="emergency/odoo.html"
+    def get(self, request, *args, **kwargs):
+        client_data = res_partner.objects.get(id=146)
+        print (client_data.name)
+        return render(request, self.template_name,{"client_data":client_data})
