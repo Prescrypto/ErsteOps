@@ -107,7 +107,7 @@ WSGI_APPLICATION = 'ersteops.wsgi.application'
 DATABASE_LOCAL =  ast.literal_eval(os.environ['DATABASE_LOCAL'])
 DATABASE_URL = os.environ['DATABASE_URL']
 DATABASE_REMOTE_URL = os.environ['DATABASE_REMOTE_URL']
-DATABASE_ODOO_URL = os.environ['DATABASE_ODOO_URL']
+#DATABASE_ODOO_URL = os.environ['DATABASE_ODOO_URL']
 
 ODOO_HEROKU_HOST = os.environ['ODOO_HEROKU_HOST']
 ODOO_HEROKU_DB = os.environ['ODOO_HEROKU_DB']
