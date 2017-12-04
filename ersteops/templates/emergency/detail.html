@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<h1>Incident {{ object.id }}</h1>
+<p>Client Id: {{ object.odoo_client }}</p>
+<p>Attention Type: {{ object.grade_type.name }}</p>
+<p>Attention Zone: {{ object.zone.name }}</p>
+<p>Start Time: {{ object.start_time }}</p>
+<p>End Time: {{ object.end_time }}</p>
+
+<p>Unidad: 
+	{% for vehicle in object.unit.all%}
+		{{ vehicle }} ;
+	{% endfor %}
+</p>
+
+{% endblock %}

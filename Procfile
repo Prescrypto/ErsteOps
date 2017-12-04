@@ -1,0 +1,1 @@
+web: sh -c 'cd ersteops && gunicorn ersteops.wsgi:application'
