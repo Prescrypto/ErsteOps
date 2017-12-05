@@ -23,3 +23,10 @@ Migrate:
 python3 manage.py migrate
 
 etc, etc,..
+
+
+#For windows
+vagrant may throw the next error "unknown filesystem type 'vboxsf'"
+
+Install the plugin:
+vagrant plugin install vagrant-vbguest
