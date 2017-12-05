@@ -11,18 +11,44 @@ from django.utils import timezone
 
 
 class EmergencyBlank(View):
-	template_name = "emergency/blank.html"
-	def get(self, request, *args, **kwargs):
-		form=''
-		return render(request, self.template_name,{"form": form})
+    template_name = "emergency/blank.html"
+    def get(self, request, *args, **kwargs):
+        form=''
+        return render(request, self.template_name,{"form": form})
 
 
 
 class EmergencyNew(CreateView):
-	template_name = "emergency/new.html"
-	model = Emergency
-	fields = ['odoo_client','grade_type','zone','start_time','end_time','is_active','unit']
-	success_url = '/emergency/list/'
+    template_name = "emergency/new.html"
+    model = Emergency
+    fields = ['odoo_client',
+                'grade_type',
+                'zone',
+                'start_time',
+                'end_time',
+                'is_active',
+                'unit',
+                'unit_assigned_time',
+                'unit_dispatched_time',
+                'arrival_time',
+                'attention_time',
+                'derivation_time',
+                'hospital_arrival',
+                'patient_arrival',
+                'final_emergency_time',
+                'address_street',
+                'address_extra',
+                'address_zip_code',
+                'address_county',
+                'address_col',
+                'address_between',
+                'address_and_street',
+                'address_ref',
+                'address_front',
+                'address_instructions',
+                'address_notes',
+                ]
+    success_url = '/emergency/list/'
 
 class EmergencyListView(ListView):
     template_name = "emergency/list.html"

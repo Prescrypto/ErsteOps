@@ -7,9 +7,15 @@ from datetime import datetime, timedelta
 from vehicle import models as models_vehicle
 
 # Create your models here.
+#Emergency incident table
 @python_2_unicode_compatible
 class Emergency(models.Model):
+    GENDER = (
+        ("Masculino","Masculino"),
+        ("Femenino","Femanino"),
+        )
     odoo_client = models.CharField("cliente id",max_length=50,unique=False)
+    # Triage
     grade_type = models.ForeignKey("AttentionKind",
     related_name="attention_kind_name",
     verbose_name= "tipo"
@@ -18,13 +24,58 @@ class Emergency(models.Model):
     related_name="zone_name",
     verbose_name="zone"
         )
-    start_time = models.DateTimeField("inicio",default=datetime.now)
-    end_time = models.DateTimeField("fin",default=datetime.now,blank=True)
+    # Timers
+    # Emergency statrt an end time: when the operator select new incident
+    # Initial call time
+    start_time = models.DateTimeField("inicio toma de datos",default=datetime.now)
+    # Records when the operator ends capture of basic emergency data
+    end_time = models.DateTimeField("fin toma de datos",default=datetime.now,blank=True)
+    # Records when unit is assigned
+    unit_assigned_time = models.DateTimeField("asignacion de unidad",default=datetime.now,blank=True)
+    # Records when unit is dispatched from current location to emergency address
+    unit_dispatched_time = models.DateTimeField("despacho de unidad",default=datetime.now,blank=True)
+    # Records when unit arives to emergency adress
+    arrival_time = models.DateTimeField("arrivo de unidad",default=datetime.now,blank=True)
+    # Records when TUM begins attention
+    attention_time = models.DateTimeField("inicio de atencion",default=datetime.now,blank=True)
+    # Records when patient is derived
+    derivation_time = models.DateTimeField("inicio de derivacion",default=datetime.now,blank=True)
+    # Records when unit arrive to hospital
+    hospital_arrival = models.DateTimeField("llegada hopital",default=datetime.now,blank=True)
+    # Record when patient arrive to hopsital
+    patient_arrival = models.DateTimeField("paciente atencion hopital",default=datetime.now,blank=True)
+    final_emergency_time = models.DateTimeField("fin emergencia",default=datetime.now,blank=True)
     is_active = models.NullBooleanField("activa")
     unit = models.ManyToManyField(models_vehicle.Unit,
         related_name="unit_name",
         verbose_name="Unidad"
     )
+    # Attention address
+    address_street = models.CharField('Calle y numero',default='', max_length=100,blank=True)
+    address_extra = models.CharField('Calle',default='',max_length=100,blank=True)
+    address_zip_code = models.CharField('zip',default='',max_length=5,blank=True)
+    address_county = models.CharField('Delegacion',default='',max_length=50,blank=True)
+    address_col = models.CharField('Colonia',default='',max_length=50,blank=True)
+    address_between = models.CharField('entre la calle',default='',max_length=100,blank=True)
+    address_and_street = models.CharField('y la calle',default='',max_length=100,blank=True)
+    address_ref = models.CharField('referencias',default='',max_length=100,blank=True)
+    address_front = models.CharField('fachada',default='',max_length=100,blank=True)
+    address_instructions = models.CharField('Instruccciones',default='',max_length=100, blank=False)
+    address_notes = models.TextField('Notas',default='',blank=True)
+    # Caller Data
+    caller_name = models.CharField('Persona que llama',max_length=100,blank=True)
+    caller_relation = models.CharField('Relacion',max_length=50,blank=True)
+    # Paient Data
+    patient_gender = models.CharField('genero',max_length=9,default= 0,choices = GENDER)
+    patient_age = models.IntegerField('edad',default=0,blank=True)
+    patient_allergies = models.CharField('alergias',max_length=100,default='',blank=True)
+    patient_illnesses = models.CharField('Enfermedades diagnosticadas',max_length=100,default='',blank=True)
+    patient_notes = models.TextField('Notas paciente',blank=True,default='')
+    # Symptoms
+    main_complaint = models.CharField('sintoma principal',max_length=100,default='',blank=True)
+    complaint_descriprion = models.TextField('descripcion de los sintomas',default='',blank=True)
+    required_attention = models.CharField('Tipo de atencion requerida',default='',max_length=100,blank=True)
+    subscription_type = models.CharField('subscripcion',max_length=100,default='',blank=True)
     created_at = models.DateTimeField("fecha de alta",auto_now_add=True,editable=False)
     last_modified = models.DateTimeField("ultima modificacion",auto_now=True,editable=False)
     class Meta:
@@ -33,7 +84,7 @@ class Emergency(models.Model):
     def __str__(self):  
         return str(self.id)
 
-
+# Emergency attention grade G1,G2,G3, etc.(Triage)
 @python_2_unicode_compatible
 class AttentionKind(models.Model):
     grade_type = models.CharField("Grado",max_length=100,unique=True,primary_key=True)
@@ -47,7 +98,7 @@ class AttentionKind(models.Model):
     def __str__(self):  
         return self.grade_type + ' - ' +self.name
 
-
+# Emergency attention zone
 @python_2_unicode_compatible
 class AttentionZone(models.Model):
     zone_id = models.CharField("Zona id",max_length=100,unique=True,primary_key=True)
@@ -59,4 +110,5 @@ class AttentionZone(models.Model):
         ordering = ['created_at']
     def __str__(self):  
         return self.zone_id + ' - ' +self.name
+
 
