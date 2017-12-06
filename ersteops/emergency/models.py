@@ -6,6 +6,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from datetime import datetime, timedelta
 from vehicle import models as models_vehicle
 
+from core.utils import eventDuration
 # Create your models here.
 
 #Emergency incident table
@@ -90,6 +91,42 @@ class Emergency(models.Model):
         ordering = ['created_at']
     def __str__(self):  
         return str(self.id)
+    # Emergency Timer
+    def emergencyTimer(self):
+        # Calculate emergency Timer
+        return eventDuration(self.start_time,self.final_emergency_time)
+    # data Timer
+    def dataTimer(self):
+        # Calculate data timer
+        return eventDuration(self.start_time,self.end_time)
+    # Unit Timer
+    def unitTimer(self):
+        # Calculate unit assigment timer
+        return eventDuration(self.start_time,self.unit_assigned_time)
+    # Dispatch Timer
+    def dispatchTimer(self):
+        # Calculate Dispatch Timer
+        return eventDuration(self.start_time,self.unit_dispatched_time)
+    #Arrival Timer
+    def arrivalTimer(self):
+        # Calculate Arrival Timer
+        return eventDuration(self.start_time,self.arrival_time)
+    # Attention timer
+    def attentionTimer(self):
+        # Calculate Attention timer: time takes medic between arrive location and begin attend to patient
+        return eventDuration(self.start_time,self.attention_time)
+    # Derivation Timer
+    def derivationTimer(self):
+        # Calculate derivation timer
+        return eventDuration(self.start_time,self.derivation_time)
+    # Hospital timer
+    def hospitalTimer(self):
+        # Calculate hospital timer
+        return eventDuration(self.start_time,self.hospital_arrival)
+    # Patient arival
+    def patientTimer(self):
+        # Calculate patient arrival
+        return eventDuration(self.start_time,self.patient_arrival)
 
 # Emergency attention grade G1,G2,G3, etc.(Triage)
 @python_2_unicode_compatible
