@@ -56,7 +56,7 @@ class Emergency(models.Model):
     # Attention address
     address_street = models.CharField('Calle y numero',default='', max_length=100,blank=True)
     address_extra = models.CharField('Calle',default='',max_length=100,blank=True)
-    address_zip_code = models.CharField('zip',default='',max_length=5,blank=True)
+    address_zip_code = models.CharField('Codigo Postal',default='',max_length=5,blank=True)
     address_county = models.CharField('Delegacion',default='',max_length=50,blank=True)
     address_col = models.CharField('Colonia',default='',max_length=50,blank=True)
     address_between = models.CharField('entre la calle',default='',max_length=100,blank=True)
@@ -67,7 +67,7 @@ class Emergency(models.Model):
     address_notes = models.TextField('Notas',default='',blank=True)
     # Caller Data
     caller_name = models.CharField('Persona que llama',max_length=100,blank=True)
-    caller_relation = models.CharField('Relacion',max_length=50,blank=True)
+    caller_relation = models.CharField('Relacion con el paciente',max_length=50,blank=True)
     # Paient Data
     # patient_gender = models.CharField('genero',max_length=9,default= '',blank=True,choices = GENDER)
     # patient_age = models.IntegerField('edad',default=0,blank=True)
@@ -155,6 +155,7 @@ class AttentionZone(models.Model):
     def __str__(self):  
         return self.zone_id + ' - ' +self.name
 
+# Hospital model
 @python_2_unicode_compatible
 class AttentionHospital(models.Model):
     name = models.CharField("hospital",max_length=100,unique=True)
@@ -168,6 +169,7 @@ class AttentionHospital(models.Model):
     def __str__(self):  
         return self.name
 
+# Hospital
 @python_2_unicode_compatible
 class AttentionDerivation(models.Model):
     emergency = models.ForeignKey('Emergency',
