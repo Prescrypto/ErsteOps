@@ -6,7 +6,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.shortcuts import render
 from django.views.generic import View, CreateView, ListView, DetailView
-from emergency.models import Emergency
+from emergency.models import Emergency,AttentionDerivation
 from django.utils import timezone
 
 
@@ -47,6 +47,15 @@ class EmergencyNew(CreateView):
                 'address_front',
                 'address_instructions',
                 'address_notes',
+                'caller_name',
+                'caller_relation',
+                'patient_allergies',
+                'patient_illnesses',
+                'patient_notes',
+                'main_complaint',
+                'complaint_descriprion',
+                'required_attention',
+                'subscription_type'
                 ]
     success_url = '/emergency/list/'
 
@@ -77,4 +86,14 @@ class EmergencyDashbordList(ListView):
         return context
 
 
-        
+class EmergencyDerivation(CreateView):
+    template_name = "emergency/derivation.html"
+    model = AttentionDerivation
+    fields = ['emergency',
+                'motive',
+                'hospital',
+                'eventualities',
+                'reception',
+                'notes',
+        ]
+    success_url = '/emergency/list/'
