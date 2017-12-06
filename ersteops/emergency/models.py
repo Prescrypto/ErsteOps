@@ -14,7 +14,7 @@ from core.utils import eventDuration
 class Emergency(models.Model):
     GENDER = (
         ("Masculino","Masculino"),
-        ("Femenino","Femanino"),
+        ("Femenino","Femenino"),
         )
     odoo_client = models.CharField("cliente id",max_length=50,unique=False)
     # Triage
