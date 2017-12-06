@@ -28,4 +28,7 @@ sudo apt-get install -y python3-pip
 echo "Install pip3 requirements"
 sudo pip3 install -r /vagrant/requirements.txt
 
+echo "setuptools"
+sudo pip3 install -vU setuptools
+
 echo "=> End config box..."
