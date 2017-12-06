@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 from vehicle import models as models_vehicle
 
 # Create your models here.
+
 #Emergency incident table
 @python_2_unicode_compatible
 class Emergency(models.Model):
@@ -48,7 +49,8 @@ class Emergency(models.Model):
     is_active = models.NullBooleanField("activa")
     unit = models.ManyToManyField(models_vehicle.Unit,
         related_name="unit_name",
-        verbose_name="Unidad"
+        verbose_name="Unidad",
+        blank=True,
     )
     # Attention address
     address_street = models.CharField('Calle y numero',default='', max_length=100,blank=True)
@@ -60,14 +62,14 @@ class Emergency(models.Model):
     address_and_street = models.CharField('y la calle',default='',max_length=100,blank=True)
     address_ref = models.CharField('referencias',default='',max_length=100,blank=True)
     address_front = models.CharField('fachada',default='',max_length=100,blank=True)
-    address_instructions = models.CharField('Instruccciones',default='',max_length=100, blank=False)
+    address_instructions = models.CharField('Instruccciones llegada',default='',max_length=100, blank=True)
     address_notes = models.TextField('Notas',default='',blank=True)
     # Caller Data
     caller_name = models.CharField('Persona que llama',max_length=100,blank=True)
     caller_relation = models.CharField('Relacion',max_length=50,blank=True)
     # Paient Data
-    patient_gender = models.CharField('genero',max_length=9,default= 0,choices = GENDER)
-    patient_age = models.IntegerField('edad',default=0,blank=True)
+    # patient_gender = models.CharField('genero',max_length=9,default= '',blank=True,choices = GENDER)
+    # patient_age = models.IntegerField('edad',default=0,blank=True)
     patient_allergies = models.CharField('alergias',max_length=100,default='',blank=True)
     patient_illnesses = models.CharField('Enfermedades diagnosticadas',max_length=100,default='',blank=True)
     patient_notes = models.TextField('Notas paciente',blank=True,default='')
@@ -76,6 +78,11 @@ class Emergency(models.Model):
     complaint_descriprion = models.TextField('descripcion de los sintomas',default='',blank=True)
     required_attention = models.CharField('Tipo de atencion requerida',default='',max_length=100,blank=True)
     subscription_type = models.CharField('subscripcion',max_length=100,default='',blank=True)
+    # derivation = models.ManyToManyField('AttentionDerivation',
+    #     related_name = 'derivation_issue',
+    #     verbose_name = 'Derivacion',
+    #     blank=True,
+    #     )
     created_at = models.DateTimeField("fecha de alta",auto_now_add=True,editable=False)
     last_modified = models.DateTimeField("ultima modificacion",auto_now=True,editable=False)
     class Meta:
@@ -110,5 +117,41 @@ class AttentionZone(models.Model):
         ordering = ['created_at']
     def __str__(self):  
         return self.zone_id + ' - ' +self.name
+
+@python_2_unicode_compatible
+class AttentionHospital(models.Model):
+    name = models.CharField("hospital",max_length=100,unique=True)
+    address = models.TextField("direccion",max_length=100,blank=True)
+    phone = models.CharField("telefono",max_length=15,default='',blank=True)
+    created_at = models.DateTimeField("fecha de alta",auto_now_add=True,editable=False)
+    last_modified = models.DateTimeField("ultima modificacion",auto_now=True,editable=False)
+    class Meta:
+        verbose_name_plural = "Hospital"
+        ordering = ['name']
+    def __str__(self):  
+        return self.name
+
+@python_2_unicode_compatible
+class AttentionDerivation(models.Model):
+    emergency = models.ForeignKey('Emergency',
+        related_name = "derivation_emergency_name",
+        verbose_name = "emergencia",
+        default=1,
+        )
+    motive = models.CharField("Motivo",max_length=100,blank=True)
+    hospital = models.ForeignKey("AttentionHospital",
+    related_name="attention_hospital_name",
+    verbose_name= "hospital"
+        )
+    eventualities = models.TextField("eventualidades",max_length=100,blank=True)
+    reception = models.CharField("quien recibe en hospital",max_length=100,blank=True)
+    notes = models.TextField("notas",max_length=100,blank=True)
+    created_at = models.DateTimeField("fecha de alta",auto_now_add=True,editable=False)
+    last_modified = models.DateTimeField("ultima modificacion",auto_now=True,editable=False)
+    class Meta:
+        verbose_name_plural = "Derivacion"
+        ordering = ['created_at']
+    def __str__(self):  
+        return self.motive
 
 
