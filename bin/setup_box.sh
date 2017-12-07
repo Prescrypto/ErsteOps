@@ -19,8 +19,11 @@ sudo -i -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE mydb TO vagrant;"
 echo "=> Installing requirements..."
 sudo pip install -r /vagrant/requirements.txt
 
-echo "Instal Python 3"
+echo "Install Python 3"
 sudo apt-get install -y python3
+
+echo "Install Python 3 dev"
+sudo apt-get install -y python3-dev
 
 echo "Install pip3"
 sudo apt-get install -y python3-pip
@@ -30,5 +33,7 @@ sudo pip3 install -r /vagrant/requirements.txt
 
 echo "setuptools"
 sudo pip3 install -vU setuptools
+
+
 
 echo "=> End config box..."
