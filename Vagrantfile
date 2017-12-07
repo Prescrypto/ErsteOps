@@ -29,6 +29,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # 35729 - Livereload
   # 5316  - Jasmine
   # 8000 - Django
+  # 8888 - daphne (Django Channels)
   [1080, 3000, 3005, 5432, 6379, 5316, 8000].each do |p|
     config.vm.network :forwarded_port, guest: p, host: p
   end

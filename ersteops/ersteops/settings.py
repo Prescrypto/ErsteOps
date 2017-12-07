@@ -56,6 +56,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'emergency.apps.EmergencyConfig',
     'vehicle.apps.VehicleConfig',
+    #'minichat.apps.MinichatConfig',
+    'notifications.apps.MinichatConfig',
+    'channels',
 
 ]
 
@@ -187,3 +190,68 @@ LOGGING = {
         }
     },
 }
+
+
+
+#define channel layer
+"""
+Django channels funciona un a wsgi, ahora todas las peticiones llegan a una nueva capa
+asgi "channels", para pruevas simples se puede usar runserver, para iniciar las capas
+por separado se usa lo siguiente.
+chanels(interface servers) ejemplo:
+    daphne ersteops.asgi:channel_layer --port 8000 -b 0.0.0.0
+
+worker (worker servers) ejemplo:
+    python manage.py runworker
+
+para mas informacion sobre el deployado o sus configuraciones
+http://channels.readthedocs.io/en/latest/deploying.html
+"""
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "asgi_redis.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379/0')],
+        },
+        "ROUTING": "ersteops.routing.channel_routing",
+    },
+}
+
+
+
+
+"""
+#Redis Cache
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": os.getenv('REDISTOGO_URL', 'redis://localhost:6379/0'),
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "CONNECTION_POOL_KWARGS": {
+                    # config for pool connections
+                    "max_connections": 10
+            }
+        }
+    }
+}
+# Redis Config
+RQ_QUEUES = {
+    'default': {
+        'USE_REDIS_CACHE': 'default',
+    },
+    'high': {
+        'USE_REDIS_CACHE': 'default',
+    },
+    'low': {
+        'USE_REDIS_CACHE': 'default',
+    }
+}
+# extra config args for RQ
+RQ = {
+    #RQ_EXCEPTION_HANDLERS = ['']
+}
+# CORS configuration
+CORS_ORIGIN_ALLOW_ALL = True
+
+"""

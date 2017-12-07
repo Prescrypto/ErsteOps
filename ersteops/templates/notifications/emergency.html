@@ -1,0 +1,33 @@
+{% extends "notifications/base.html" %}
+
+{% block content %}
+  {% load staticfiles %}
+  <h1>Emergencies</h1>
+  <p>
+    <label for="handle">Ejemplo de Notificaciones de Emergencias</label>
+  </p>
+  <table id="notifications">
+    <tbody>
+      {% for emergency in emergencies %}
+        <tr>
+          <td>{{ emergency.odoo_client }}</td>
+          <td>{{ emergency.grade_type }}</td>
+          <td>{{ emergency.zone }}</td>
+          <td>{{ emergency.start_time }}</td>
+          <td>{{ emergency.end_time }}</td>
+          <td>{{ emergency.is_active }}</td>
+          <td>{{ emergency.unit }}</td>
+          <td>{{ emergency.created_at }}</td>
+          <td>{{ emergency.last_modified }}</td> 
+        </tr> 
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock content %}
+
+
+{% block extra_body %}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.min.js"></script>
+    <script src="{% static 'notifications/emergency.js' %}"></script>
+{% endblock %}
