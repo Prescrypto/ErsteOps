@@ -34,4 +34,5 @@ vagrant plugin install vagrant-vbguest
 Run server with Cannels:
 
 daphne ersteops.asgi:channel_layer --port 8000 -b 0.0.0.0
-python manage.py runworker
+
+python3 manage.py runworker
