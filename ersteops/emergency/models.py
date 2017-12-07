@@ -6,6 +6,11 @@ from django.utils.encoding import python_2_unicode_compatible
 from datetime import datetime, timedelta
 from vehicle import models as models_vehicle
 
+import json
+from channels import Group
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+
 # Create your models here.
 @python_2_unicode_compatible
 class Emergency(models.Model):
@@ -32,6 +37,26 @@ class Emergency(models.Model):
         ordering = ['created_at']
     def __str__(self):  
         return str(self.id)
+
+@receiver(post_save, sender=Emergency, dispatch_uid="emergency_notifications")
+def emergency_notifications(sender, instance, **kwargs):
+
+    emergDict={}
+    emergDict["odoo_client"]=instance.odoo_client
+    emergDict["grade_type"]=str(instance.grade_type)
+    emergDict["zone"]=str(instance.zone)
+    emergDict["start_time"]=instance.start_time.strftime('%b %-d %-I:%M %p')
+    emergDict["end_time"]=instance.end_time.strftime('%b %-d %-I:%M %p')
+    emergDict["is_active"]=instance.is_active
+    emergDict["unit"]=str(instance.unit)
+    emergDict["created_at"]=instance.created_at.strftime('%b %-d %-I:%M %p')
+    emergDict["last_modified"]=instance.last_modified .strftime('%b %-d %-I:%M %p')
+    emergJson=json.dumps(emergDict)
+    
+    Group('notify-emergency').send(
+            {"text": json.dumps(emergJson)}
+        )
+    
 
 
 @python_2_unicode_compatible
