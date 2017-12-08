@@ -26,4 +26,24 @@ class OdooApi(object):
 
         return response.json()
 
+    def get_by_patient_name(self,patient,access_token):
+        url = self.url + '/api/res.partner/'
+        payload = {'filters': "[('name','like','"+patient+"')]"}
+        header = {"Access-Token": access_token,"Content-Type":"text/html"}
+        response = requests.post(url, data=json.dumps(payload), headers=header)
+        print("********** patient ***********")
+        print(response)
+        return response.json()
+
+
+    def get_by_patient_id(self,patient_id,access_token):
+        url = self.url + '/api/rest.partner/' + patient_id
+        #payload = {'id': patient_id}
+        header = {"Access-Token": access_token,"Content-Type":"text/html"}
+        response = requests.get(url,headers=header)
+        print("********** patient ***********")
+        print(response)
+        print("********** url ***********")
+        print(response.url)
+        return response.json()
 
