@@ -11,6 +11,7 @@ class OdooClientForm(forms.Form):
         ("2","Direccion"),
         ("3","id cliente"),
         ("4","get token"),
+        ("5","get all patients"),
         )
 
     client_name = forms.CharField(

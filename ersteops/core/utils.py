@@ -53,3 +53,16 @@ class OdooApi(object):
         print(response.url)
         return response.json()
 
+    def get_by_all(self,patient_id,access_token):
+        url = self.url + '/api/res.partner'
+        #payload = {'id': patient_id}
+        header = {"Access-Token": access_token,"Content-Type":"text/html"}
+        response = requests.get(url,headers=header)
+        print("********** patient ***********")
+        print(patient_id)
+        print("********** response ***********")
+        print(response)
+        print("********** url ***********")
+        print(response.url)
+        return response.json()
+
