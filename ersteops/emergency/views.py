@@ -10,6 +10,8 @@ from emergency.models import Emergency,AttentionDerivation
 from django.utils import timezone
 from emergency.forms import OdooClientForm
 from core.utils import OdooApi
+import requests
+from requests.auth import HTTPBasicAuth
 
 class EmergencyBlank(View):
     template_name = "emergency/blank.html"
@@ -146,17 +148,21 @@ class EmergencyClientOdoo(View):
     def get(self, request, *args, **kwargs):
         form = OdooClientForm
         _api_odoo = OdooApi()
-        print ("********** init ********************")
-        print (_api_odoo)
-        print ("*********** url *******************")
-        print (_api_odoo.url)
-        print ("******** username **********************")
-        print (_api_odoo.auth.username)
-        print ("************ headers ******************")
-        print (_api_odoo.headers)
+        # print ("********** init ********************")
+        # print (_api_odoo)
+        # print ("*********** url *******************")
+        # print (_api_odoo.url)
+        # print ("******** username **********************")
+        # print (_api_odoo.auth.username)
+        # print ("************ headers ******************")
+        # print (_api_odoo.headers)
         result = _api_odoo.get_token()
         #print (str(client_data))
-        print ("******************************")
+        #print ("******************************")
+        #p_response = requests.post(url='https://erste-staging-pr-19.herokuapp.com/api/auth/get_tokens',auth=('admin','admin'),headers='content-type: text/html')
+        #print (p_response)
+        #response = requests.post('https://erste-staging-pr-19.herokuapp.com/api/auth/get_tokens')
+        #print (response)
         return render(request, self.template_name,{"form": form})
 
 
