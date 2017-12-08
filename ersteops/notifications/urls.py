@@ -4,5 +4,5 @@ from . import views
 urlpatterns = [
     url(r'^emergency/', views.emergency),
     #url(r'^units/', views.units),
-    #url(r'^hospitals/', views.hospitals),
+    url(r'^derivation/', views.derivation),
 ]

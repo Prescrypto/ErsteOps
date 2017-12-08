@@ -25,7 +25,7 @@ def ws_connect(message):
     except ValueError:
         print('invalid ws path=%s'%message['path'])
         return
-    if not label in ["emergency", "units", "hospitals"]:
+    if not label in ["emergency", "units", "derivation"]:
         print('invalid ws path=%s'%message['path'])
         return
 
