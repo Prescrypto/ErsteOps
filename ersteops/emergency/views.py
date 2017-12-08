@@ -151,11 +151,22 @@ class EmergencyClientOdoo(View):
         return render(request, self.template_name,{"form": form})
 
     def post(self, request, *args, **kwargs):
-        # Ini Odoo api
-        _api_odoo = OdooApi()
-        # Get Access token
-        result = _api_odoo.get_token()
         form = OdooClientForm(request.POST)
+        if form.is_valid():
+            # Ini Odoo api
+            _api_odoo = OdooApi()
+            # Get Access token
+            result = _api_odoo.get_token()
+            print("************* Access-token **************")
+            print(result['access_token'])
+            if form.cleaned_data['search_type'] == '1':
+                patient = form.cleaned_data['client_name']
+                patient_data = _api_odoo.get_by_patient_name( patient,result['access_token'])
+            if form.cleaned_data['search_type'] == '3':
+                patient = form.cleaned_data['client_name']
+                patient_data = _api_odoo.get_by_patient_id( patient,result['access_token'])
+            else:
+                return render(request, self.template_name,{"form": form, "result": result})
         return render(request, self.template_name,{"form": form, "result": result})
 
 
