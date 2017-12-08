@@ -190,3 +190,8 @@ LOGGING = {
         }
     },
 }
+
+# Odoo api variables
+ODOO_URL = os.environ['ODOO_URL']
+ODOO_USERNAME = os.environ['ODOO_USERNAME']
+ODOO_PASSWORD = os.environ['ODOO_PASSWORD']

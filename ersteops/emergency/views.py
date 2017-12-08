@@ -8,7 +8,8 @@ from django.shortcuts import render
 from django.views.generic import View, CreateView, ListView, DetailView, UpdateView
 from emergency.models import Emergency,AttentionDerivation
 from django.utils import timezone
-
+from emergency.forms import OdooClientForm
+from core.utils import OdooApi
 
 class EmergencyBlank(View):
     template_name = "emergency/blank.html"
@@ -138,4 +139,25 @@ class EmergencyUpdate(UpdateView):
                 'subscription_type'
                 ]
     success_url = '/emergency/list/'
+
+
+class EmergencyClientOdoo(View):
+    template_name = "emergency/odooclient.html"
+    def get(self, request, *args, **kwargs):
+        form = OdooClientForm
+        _api_odoo = OdooApi()
+        print ("********** init ********************")
+        print (_api_odoo)
+        print ("*********** url *******************")
+        print (_api_odoo.url)
+        print ("******** username **********************")
+        print (_api_odoo.auth.username)
+        print ("************ headers ******************")
+        print (_api_odoo.headers)
+        result = _api_odoo.get_token()
+        #print (str(client_data))
+        print ("******************************")
+        return render(request, self.template_name,{"form": form})
+
+
 
