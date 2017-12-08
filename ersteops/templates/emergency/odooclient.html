@@ -16,6 +16,12 @@
       </form>
       <p>Access Token</p>
       {{ result.access_token}}
+      <h3>Patient Data</h3>
+      {{ patients.count }} bla!!!
+      {% for patient in patients.results %}
+        <p>Paciente</p>
+        <p>{{ patient.name }}</p>
+      {% endfor%}
   </div>
   </div>
 </div>
