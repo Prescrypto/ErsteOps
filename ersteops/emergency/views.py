@@ -155,8 +155,6 @@ class EmergencyClientOdoo(View):
         _api_odoo = OdooApi()
         # Get Access token
         result = _api_odoo.get_token()
-        print("*********** access token ***********")
-        print(result['access_token'])
         form = OdooClientForm(request.POST)
         return render(request, self.template_name,{"form": form, "result": result})
 
