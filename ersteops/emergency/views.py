@@ -165,6 +165,9 @@ class EmergencyClientOdoo(View):
             if form.cleaned_data['search_type'] == '3':
                 patient = form.cleaned_data['client_name']
                 patient_data = _api_odoo.get_by_patient_id( patient,result['access_token'])
+            if form.cleaned_data['search_type'] == '2':
+                patient = form.cleaned_data['client_name']
+                patient_data = _api_odoo.get_by_patient_street( patient,result['access_token'])
             else:
                 return render(request, self.template_name,{"form": form, "result": result})
         return render(request, self.template_name,{"form": form, "result": result})
