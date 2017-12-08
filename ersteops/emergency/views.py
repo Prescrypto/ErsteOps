@@ -148,21 +148,9 @@ class EmergencyClientOdoo(View):
     def get(self, request, *args, **kwargs):
         form = OdooClientForm
         _api_odoo = OdooApi()
-        # print ("********** init ********************")
-        # print (_api_odoo)
-        # print ("*********** url *******************")
-        # print (_api_odoo.url)
-        # print ("******** username **********************")
-        # print (_api_odoo.auth.username)
-        # print ("************ headers ******************")
-        # print (_api_odoo.headers)
         result = _api_odoo.get_token()
-        #print (str(client_data))
-        #print ("******************************")
-        #p_response = requests.post(url='https://erste-staging-pr-19.herokuapp.com/api/auth/get_tokens',auth=('admin','admin'),headers='content-type: text/html')
-        #print (p_response)
-        #response = requests.post('https://erste-staging-pr-19.herokuapp.com/api/auth/get_tokens')
-        #print (response)
+        print("*********** access token ***********")
+        print(result['access_token'])
         return render(request, self.template_name,{"form": form})
 
 

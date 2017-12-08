@@ -14,33 +14,16 @@ class OdooApi(object):
 
     def __init__(self, *args, **kwargs):
         self.logger = logging.getLogger('django_info')
-        self.auth = HTTPBasicAuth(settings.ODOO_USERNAME, settings.ODOO_PASSWORD)
-        self.url = 'https://' + settings.ODOO_URL #+ '/api/auth/get_tokens'
-        self.headers = {"Content-Type": 'text/html'}
-        #print ("******** init *******")
-        #print (str(self))
-        #self.admin_user = admin_user
+        #self.auth = HTTPBasicAuth(settings.ODOO_USERNAME, settings.ODOO_PASSWORD)
+        self.url = settings.BASE_URL + settings.ODOO_URL
+        self.headers = {"Content-Type": "text/html"}
+
 
     def get_token(self):
         url = self.url + '/api/auth/get_tokens'
+        payload = {'username': settings.ODOO_USERNAME, 'password': settings.ODOO_PASSWORD}
+        response = requests.post(url, data=json.dumps(payload), headers=self.headers)
 
-        #response = requests.get(url, auth=self.auth)
-        #response = requests.post(url='https://erste-staging-pr-19.herokuapp.com/api/auth/get_tokens',auth=self.auth,headers=self.headers,)
-        print ("********** requests **********")
-        payload = {'username':'admin', 'password':'admin'}
-        response = requests.post('https://erste-staging-pr-19.herokuapp.com/api/auth/get_tokens',auth=HTTPBasicAuth('admin', 'admin'))
-        print ("********** response **********")
-        print (response.text)
-        print ("********** response **********")
-        print (response.url)
-        print ("********** response headers **********")
-        print (response.headers)
-        print ("********** status code **********")
-        print (response.status_code)
-        #print (response.auth)
-        #print (response.json())
-        #print ("********** response **********")
-        #print (response)
-        #return response.json()
-        return 0
+        return response.json()
+
 
