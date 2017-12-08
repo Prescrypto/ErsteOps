@@ -2,7 +2,7 @@
 $(function () {
     // Correctly decide between ws:// and wss://
     var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
-    var ws_path = ws_scheme + '://' + window.location.host +  "/notify/emergency/";
+    var ws_path = ws_scheme + '://' + window.location.host +  "/notify/derivation/";
     console.log("Connecting to " + ws_path);
     var socket = new ReconnectingWebSocket(ws_path);
 
@@ -13,7 +13,7 @@ $(function () {
     socket.onclose = function () {
         console.log("Disconnected from notifications socket");
     };
-    
+
     socket.onmessage = function(message) {
         var dataTemp = JSON.parse(message.data);
         var data = JSON.parse(dataTemp);
@@ -23,25 +23,22 @@ $(function () {
         console.log(data);
 
         ele.append(
-            $("<td></td>").text(data.odoo_client)
+            $("<td></td>").text(data.emergency)
         )
         ele.append(
-            $("<td></td>").text(data.grade_type)
+            $("<td></td>").text(data.motive)
         )
         ele.append(
-            $("<td></td>").text(data.zone)
+            $("<td></td>").text(data.hospital)
         )
         ele.append(
-            $("<td></td>").text(data.start_time)
+            $("<td></td>").text(data.eventualities)
         )
         ele.append(
-            $("<td></td>").text(data.end_time)
+            $("<td></td>").text(data.reception)
         )
         ele.append(
-            $("<td></td>").text(data.is_active)
-        )
-        ele.append(
-            $("<td></td>").text(data.unit)
+            $("<td></td>").text(data.notes)
         )
         ele.append(
             $("<td></td>").text(data.created_at)
@@ -52,6 +49,5 @@ $(function () {
         
         notifications.append(ele)
     };
-    
 
 });
