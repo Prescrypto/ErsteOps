@@ -137,15 +137,63 @@ class Emergency(models.Model):
 def emergency_notifications(sender, instance, **kwargs):
 
     emergDict={}
+    emergDict["pk"]=instance.pk
     emergDict["odoo_client"]=instance.odoo_client
     emergDict["grade_type"]=str(instance.grade_type)
     emergDict["zone"]=str(instance.zone)
+
+    emergDict["unit"]=[]
+    for unit in instance.unit.all():
+        unitDict={}
+        unitDict["pk"]=unit.pk
+        unitDict["unit_id"]=unit.unit_id
+        unitDict["model"]=unit.model
+        unitDict["year"]=unit.year
+        unitDict["license_plate"]=unit.license_plate
+        unitDict["brand"]=str(unit.brand)
+        unitDict["unit_type"]=str(unit.unit_type)
+        unitDict["is_active"]=unit.is_active
+        unitDict["assigned"]=unit.assigned
+        unitDict["created_at"]=unit.created_at.strftime('%b %-d %-I:%M %p')
+        unitDict["last_modified"]=unit.last_modified.strftime('%b %-d %-I:%M %p')
+        emergDict["unit"].append(unitDict)
+
+
     emergDict["start_time"]=instance.start_time.strftime('%b %-d %-I:%M %p')
     emergDict["end_time"]=instance.end_time.strftime('%b %-d %-I:%M %p')
-    emergDict["is_active"]=instance.is_active
-    emergDict["unit"]=str(instance.unit)
     emergDict["created_at"]=instance.created_at.strftime('%b %-d %-I:%M %p')
     emergDict["last_modified"]=instance.last_modified .strftime('%b %-d %-I:%M %p')
+    emergDict["unit_assigned_time"]=instance.unit_assigned_time.strftime('%b %-d %-I:%M %p')
+    emergDict["unit_dispatched_time"]=instance.unit_dispatched_time.strftime('%b %-d %-I:%M %p')
+    emergDict["arrival_time"]=instance.arrival_time.strftime('%b %-d %-I:%M %p')
+    emergDict["attention_time"]=instance.attention_time.strftime('%b %-d %-I:%M %p')
+    emergDict["derivation_time"]=instance.derivation_time.strftime('%b %-d %-I:%M %p')
+    emergDict["hospital_arrival"]=instance.hospital_arrival.strftime('%b %-d %-I:%M %p')
+    emergDict["patient_arrival"]=instance.patient_arrival.strftime('%b %-d %-I:%M %p')
+    emergDict["final_emergency_time"]=instance.final_emergency_time.strftime('%b %-d %-I:%M %p')
+    
+    emergDict["is_active"]=instance.is_active
+    emergDict["address_street"]=instance.address_street
+    emergDict["address_extra"]=instance.address_extra
+    emergDict["address_zip_code"]=instance.address_zip_code
+    emergDict["address_county"]=instance.address_county
+    emergDict["address_col"]=instance.address_col
+    emergDict["address_between"]=instance.address_between
+    emergDict["address_and_street"]=instance.address_and_street
+    emergDict["address_ref"]=instance.address_ref
+    emergDict["address_front"]=instance.address_front
+    emergDict["address_instructions"]=instance.address_instructions
+    emergDict["address_notes"]=instance.address_notes
+    emergDict["caller_name"]=instance.caller_name
+    emergDict["caller_relation"]=instance.caller_relation
+    emergDict["patient_allergies"]=instance.patient_allergies
+    emergDict["patient_illnesses"]=instance.patient_illnesses
+    emergDict["patient_notes"]=instance.patient_notes
+    emergDict["main_complaint"]=instance.main_complaint
+    emergDict["complaint_descriprion"]=instance.complaint_descriprion
+    emergDict["required_attention"]=instance.required_attention
+    emergDict["subscription_type"]=instance.subscription_type
+
     emergJson=json.dumps(emergDict)
     
     Group('notify-emergency').send(
@@ -218,5 +266,23 @@ class AttentionDerivation(models.Model):
         ordering = ['created_at']
     def __str__(self):  
         return self.motive
+@receiver(post_save, sender=AttentionDerivation, dispatch_uid="derivation_notifications")
+def derivation_notifications(sender, instance, **kwargs):
 
+    derivDict={}
+
+    derivDict["pk"]=instance.pk
+    derivDict["emergency"]=str(instance.emergency)
+    derivDict["motive"]=instance.motive
+    derivDict["hospital"]=str(instance.hospital)
+    derivDict["eventualities"]=instance.eventualities
+    derivDict["reception"]=instance.reception
+    derivDict["notes"]=instance.notes
+    derivDict["created_at"]=instance.created_at.strftime('%b %-d %-I:%M %p')
+    derivDict["last_modified"]=instance.last_modified.strftime('%b %-d %-I:%M %p')
+    derivJson=json.dumps(derivDict)
+    
+    Group('notify-derivation').send(
+            {"text": json.dumps(derivJson)}
+        )
 
