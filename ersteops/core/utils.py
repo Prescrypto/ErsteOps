@@ -28,13 +28,35 @@ class OdooApi(object):
 
     def get_by_patient_name(self,patient,access_token):
         url = self.url + '/api/res.partner/'
-        payload = {'filters': "[('name','like','"+patient+"')]"}
+        #payload = {'filters': "[('name','like','"+patient+"')]"}
+        #payload = {"filters": "[(\"name\", \"like\", \"ompany\")]"}
+        payload = {"filters": "[(\"name\", \"like\", \"{}\")]".format(patient)}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
-        response = requests.post(url, data=json.dumps(payload), headers=header)
+        #response = requests.post(url, data=json.dumps(payload), headers=header)
+        response = requests.get(url, json=payload, headers=header)
         print("********** patient ***********")
+        print(patient)
+        print("********** response **********")
         print(response)
+        print("********** payload **********")
+        print(payload)
         return response.json()
 
+    def get_by_patient_street(self,patient,access_token):
+        url = self.url + '/api/res.partner/'
+        #payload = {'filters': "[('name','like','"+patient+"')]"}
+        #payload = {"filters": "[(\"name\", \"like\", \"ompany\")]"}
+        payload = {"filters": "[(\"street\", \"like\", \"{}\")]".format(patient)}
+        header = {"Access-Token": access_token,"Content-Type":"text/html"}
+        #response = requests.post(url, data=json.dumps(payload), headers=header)
+        response = requests.get(url, json=payload, headers=header)
+        print("********** patient ***********")
+        print(patient)
+        print("********** response **********")
+        print(response)
+        print("********** payload **********")
+        print(payload)
+        return response.json()
 
     def get_by_patient_id(self,patient_id,access_token):
         url = self.url + '/api/rest.partner/' + patient_id
@@ -42,6 +64,8 @@ class OdooApi(object):
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         response = requests.get(url,headers=header)
         print("********** patient ***********")
+        print(patient_id)
+        print("********** response ***********")
         print(response)
         print("********** url ***********")
         print(response.url)
