@@ -8,15 +8,16 @@
     <h1 class="c-login__title">Bienvenido a ErsteOps</h1>
   </header>
 
-  <form class="c-login__content">
+  <form class="c-login__content" method="POST" action=".">
+    {% csrf_token %}
     <div class="c-field u-mb-small">
       <label class="c-field__label" for="input1">Inicia sesión con tu email</label>
-      <input class="c-input" type="email" id="input1" placeholder="clark@dashboard.com">
+      <input class="c-input" type="text" id="input1" name="username" placeholder="clark@dashboard.com">
     </div>
 
     <div class="c-field u-mb-small">
       <label class="c-field__label" for="input2">Contraseña</label>
-      <input class="c-input" type="password" id="input2" placeholder="Contraseña">
+      <input class="c-input" type="password" id="input2" name="password" placeholder="Contraseña">
     </div>
 
     <button class="c-btn c-btn--info c-btn--fullwidth" type="submit">Inicia Sesión</button>
