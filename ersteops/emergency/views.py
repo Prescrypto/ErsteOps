@@ -8,7 +8,14 @@ from django.shortcuts import render
 from django.views.generic import View, CreateView, ListView, DetailView, UpdateView
 from emergency.models import Emergency,AttentionDerivation
 from django.utils import timezone
-
+from emergency.forms import OdooClientForm
+from core.utils import OdooApi
+import requests
+from requests.auth import HTTPBasicAuth
+# Logging library
+import logging
+# Load Logging definition, this is defined in settings.py in the LOGGING section
+logger = logging.getLogger('django_info')
 
 class EmergencyBlank(View):
     template_name = "emergency/blank.html"
@@ -138,4 +145,45 @@ class EmergencyUpdate(UpdateView):
                 'subscription_type'
                 ]
     success_url = '/emergency/list/'
+
+
+class EmergencyClientOdoo(View):
+    template_name = "emergency/odooclient.html"
+    def get(self, request, *args, **kwargs):
+        form = OdooClientForm
+
+        return render(request, self.template_name,{"form": form})
+
+    def post(self, request, *args, **kwargs):
+        form = OdooClientForm(request.POST)
+        if form.is_valid():
+            # Ini Odoo api
+            _api_odoo = OdooApi()
+            # Get Access token
+            result = _api_odoo.get_token()
+            logger.info('%s (%s)' % ('Access-Token',result['access_token']))
+            if form.cleaned_data['search_type'] == '1':
+                patient = form.cleaned_data['client_name']
+                patient_data = _api_odoo.get_by_patient_name( patient,result['access_token'])
+                #print(patient_data)
+                logger.info('%s (%s)' % ('OdooApi',patient_data))
+            if form.cleaned_data['search_type'] == '3':
+                patient = form.cleaned_data['client_name']
+                patient_data = _api_odoo.get_by_patient_id( patient,result['access_token'])
+                #print(patient_data)
+                logger.info('%s (%s)' % ('OdooApi',patient_data))
+            if form.cleaned_data['search_type'] == '2':
+                patient = form.cleaned_data['client_name']
+                patient_data = _api_odoo.get_by_patient_street( patient,result['access_token'])
+                #print(patient_data)
+                logger.info('%s (%s)' % ('OdooApi',patient_data))
+            if form.cleaned_data['search_type'] == '5':
+                patient = form.cleaned_data['client_name']
+                patient_data = _api_odoo.get_by_all( patient,result['access_token'])
+                #print(patient_data)
+                logger.info('%s (%s)' % ('OdooApi',patient_data))
+            else:
+                return render(request, self.template_name,{"form": form, "result": result})
+        return render(request, self.template_name,{"form": form, "result": result, "patients": patient_data})
+
 
