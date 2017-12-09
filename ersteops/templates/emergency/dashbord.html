@@ -4,7 +4,7 @@
 {% block content %}
 <h1>Dashboard</h1>
 
-<table class="table table-hover">
+<table class="table table-hover" id="notifications">
 	<thead>
    <tr>
      <th>Incident Id</th>
@@ -44,5 +44,19 @@
   </tbody>
 </table>
 
+
+{% endblock %}
+
+
+
+
+
+
+
+{% block javascript %}
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.min.js"></script>
+    
+    <script src="{% static 'notifications/dashboard.js' %}"></script>
 
 {% endblock %}
