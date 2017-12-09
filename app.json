@@ -16,7 +16,11 @@
     },
     "DJANGO_SETTINGS_MODULE": {
       "required": true
+    },
+    "DATABASE_LOCAL":{
+      "required": true
     }
+
   },
   "formation": {
     "web": {
