@@ -22,6 +22,18 @@
     },
     "DATABASE_REMOTE_URL":{
       "value": ""
+    },
+   "BASE_URL": {
+      "value": ""
+    },
+    "ODOO_URL": {
+      "value": ""
+    },
+    "ODOO_USERNAME": {
+      "value": ""
+    },
+    "ODOO_PASSWORD": {
+      "value": ""
     }
   },
   "formation": {
