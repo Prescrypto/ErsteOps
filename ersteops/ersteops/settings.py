@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     #'minichat.apps.MinichatConfig',
     'notifications.apps.MinichatConfig',
     'channels',
+    'home.apps.HomeConfig',
 
 ]
 
