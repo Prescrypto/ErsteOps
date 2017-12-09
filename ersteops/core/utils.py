@@ -28,29 +28,22 @@ class OdooApi(object):
 
     def get_by_patient_name(self,patient,access_token):
         url = self.url + '/api/res.partner/'
-        payload = {"filters": "[(\"name\", \"like\", \"{}\")]".format(patient)}
+        payload = {"filters": "[(\"name\", \"ilike\", \"{}\")]".format(patient)}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         response = requests.get(url, json=payload, headers=header)
         return response.json()
 
     def get_by_patient_street(self,patient,access_token):
         url = self.url + '/api/res.partner/'
-        payload = {"filters": "[(\"street\", \"like\", \"{}\")]".format(patient)}
+        payload = {"filters": "[(\"street\", \"ilike\", \"{}\")]".format(patient)}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         response = requests.get(url, json=payload, headers=header)
         return response.json()
 
     def get_by_patient_id(self,patient_id,access_token):
         url = self.url + '/api/res.partner/' + patient_id + '/'
-        #payload = {'id': patient_id}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         response = requests.get(url,headers=header)
-        print("********** patient ***********")
-        print(patient_id)
-        print("********** response ***********")
-        print(response)
-        print("********** url ***********")
-        print(response.url)
         return response.json()
 
     def get_by_all(self,patient_id,access_token):
@@ -58,11 +51,5 @@ class OdooApi(object):
         #payload = {'id': patient_id}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         response = requests.get(url,headers=header)
-        print("********** patient ***********")
-        print(patient_id)
-        print("********** response ***********")
-        print(response)
-        print("********** url ***********")
-        print(response.url)
         return response.json()
 
