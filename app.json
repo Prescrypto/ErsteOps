@@ -21,7 +21,19 @@
       "required": true
     },
     "DATABASE_REMOTE_URL":{
-      "required": ""
+      "required": true
+    },
+    "BASE_URL": {
+      "required": true
+    },
+    "ODOO_URL": {
+      "required": true
+    },
+    "ODOO_USERNAME": {
+      "required": true
+    },
+    "ODOO_PASSWORD": {
+      "required": true
     }
 
   },
