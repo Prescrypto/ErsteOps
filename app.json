@@ -19,6 +19,9 @@
     },
     "DATABASE_LOCAL":{
       "required": true
+    },
+    "DATABASE_REMOTE_URL":{
+      "required": ""
     }
 
   },
