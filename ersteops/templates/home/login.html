@@ -2,5 +2,25 @@
 {% block title %}Bienvenido{% endblock title %}
 
 {% block content %}
-    <h1>Bienvenido</h1>
+<div class="c-login">
+  <header class="c-login__head">
+    {#<a class="c-login__brand" href="#!"><img src="img/logo-login.svg" alt="Dashboard's Logo"></a>#}
+    <h1 class="c-login__title">Bienvenido a ErsteOps</h1>
+  </header>
+
+  <form class="c-login__content">
+    <div class="c-field u-mb-small">
+      <label class="c-field__label" for="input1">Inicia sesión con tu email</label>
+      <input class="c-input" type="email" id="input1" placeholder="clark@dashboard.com">
+    </div>
+
+    <div class="c-field u-mb-small">
+      <label class="c-field__label" for="input2">Contraseña</label>
+      <input class="c-input" type="password" id="input2" placeholder="Contraseña">
+    </div>
+
+    <button class="c-btn c-btn--info c-btn--fullwidth" type="submit">Inicia Sesión</button>
+
+  </form>
+</div>
 {% endblock content %}
