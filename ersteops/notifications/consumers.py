@@ -30,7 +30,7 @@ def ws_connect(message):
         return
 
     message.channel_session['room'] = label
-    Group('notify-'+label, channel_layer=message.channel_layer).add(
+    Group("notifications", channel_layer=message.channel_layer).add(
             message.reply_channel)
 
 
