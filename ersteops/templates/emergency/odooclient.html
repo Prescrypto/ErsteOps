@@ -14,17 +14,22 @@
           <input type="submit" value="Save" />
         </div>
       </form>
+      <!-- Get access token -->
       <p>Access Token</p>
       {{ result.access_token}}
-      <h3>Patient Data</h3>
+
+      <!-- Show patient data -->
+      <h3>Patient Data Count</h3>
       {{ patients.count }} bla!!!
       {% for patient in patients.results %}
         <p>Paciente</p>
         <p>{{ patient.name }}</p>
       {% endfor%}
+      {{ patients.name }}
   </div>
   </div>
 </div>
+
 <!-- <h2>Manualy render fields</h2>
 
 {{ form.non_field_errors }}
