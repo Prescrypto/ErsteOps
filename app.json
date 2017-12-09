@@ -16,6 +16,27 @@
     },
     "DJANGO_SETTINGS_MODULE": {
       "required": true
+    },
+    "DATABASE_LOCAL":{
+      "required": true
+    },
+    "DATABASE_REMOTE_URL":{
+      "value": ""
+    },
+   "BASE_URL": {
+      "value": "https://"
+    },
+    "ODOO_URL": {
+      "value": "erste-staging-pr-19.herokuapp.com"
+    },
+    "ODOO_USERNAME": {
+      "value": "admin"
+    },
+    "ODOO_PASSWORD": {
+      "value": "admin"
+    },
+    "DISABLE_COLLECTSTATIC": {
+      "value": "1"
     }
   },
   "formation": {
