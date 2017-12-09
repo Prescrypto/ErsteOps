@@ -34,6 +34,9 @@
     },
     "ODOO_PASSWORD": {
       "value": "admin"
+    },
+    "DISABLE_COLLECTSTATIC": {
+      "value": 1
     }
   },
   "formation": {
