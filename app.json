@@ -24,16 +24,16 @@
       "value": ""
     },
    "BASE_URL": {
-      "value": ""
+      "value": "https://"
     },
     "ODOO_URL": {
-      "value": ""
+      "value": "erste-staging-pr-19.herokuapp.com"
     },
     "ODOO_USERNAME": {
-      "value": ""
+      "value": "admin"
     },
     "ODOO_PASSWORD": {
-      "value": ""
+      "value": "admin"
     }
   },
   "formation": {
