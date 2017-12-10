@@ -1,62 +1,15 @@
-{% extends 'base.html' %}
+{% extends 'home/base_ui.html' %}
 {% load staticfiles %}
 
+{% block header %}
+  {% include "ui_component/sidebar.html" %}
+{% endblock header %}
+
 {% block content %}
-<h1>Dashboard</h1>
-
-<table class="table table-hover" id="notifications">
-	<thead>
-   <tr>
-     <th>Incident Id</th>
-     <th>Start Time</th>
-     <th>End Time</th>
-     <th>Type</th>
-     <th>Zone</th>
-     <th>Status</th>
-     <th>Client Id</th>
-     <th>Unit</th>
-   </tr> 
-  </thead>
-  <tbody>
-    {% for emergency in object_list %}
-      <tr>
-        <td><a href="/emergency/{{emergency.id}}/">Id:{{emergency.id}}</td>
-        <td>{{ emergency.start_time }}</td>
-        <td>{{ emergency.end_time }}</td>
-        <td>{{ emergency.grade_type.name }}</td>
-        <td>{{ emergency.zone.name }}</td>
-        {% if emergency.is_active%}
-          <td>Activa</td>
-        {% else %}
-          <td>Inactiva</td>
-        {% endif%}
-        <td>{{ emergency.odoo_client }}</td>
-        <td>
-        {% for vehicle in emergency.unit.all%}
-          {{ vehicle }}<br>
-        {% endfor %}
-        </td>
-      </tr>
-    {% empty %}
-    <li>No incidents yet.</li>
-    {% endfor %}
-
-  </tbody>
-</table>
-
-
+  <h1>Hola</h1>
 {% endblock %}
 
-
-
-
-
-
-
-{% block javascript %}
-
-    <script src="//cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.min.js"></script>
-    
-    <script src="{% static 'notifications/dashboard.js' %}"></script>
-
-{% endblock %}
+{% block jsblock %}
+  <script src="//cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.min.js"></script>
+  <script src="{% static 'notifications/dashboard.js' %}"></script>
+{% endblock jsblock%}
