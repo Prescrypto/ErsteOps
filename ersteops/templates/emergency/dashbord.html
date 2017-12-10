@@ -2,11 +2,85 @@
 {% load staticfiles %}
 
 {% block header %}
+  {# Main Sidebar #}
   {% include "ui_component/sidebar.html" %}
+
 {% endblock header %}
 
 {% block content %}
-  <h1>Hola</h1>
+  <main class="o-page__content">
+    {# Main header #}
+    {% include "ui_component/header.html" %}
+
+    <div class="container">
+      <div class="row">
+        {# TODO mini components of wireframe#}
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="c-card u-mb-large">
+            <div class="c-card__head">
+              <h3 class="c-card__title">Invoicing</h3>
+            </div>
+
+            <table class="c-table">
+                <thead class="c-table__head c-table__head--slim">
+                    <tr class="c-table__row">
+                        <th class="c-table__cell c-table__cell--head">Cliente</th>
+                        <th class="c-table__cell c-table__cell--head">Grado</th>
+                        <th class="c-table__cell c-table__cell--head">Unidad</th>
+                        <th class="c-table__cell c-table__cell--head">Tiempo</th>
+                        <th class="c-table__cell c-table__cell--head">Estado</th>
+                        <th class="c-table__cell c-table__cell--head">
+                            <span class="u-hidden-visually">Acciones</span>
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr class="c-table__row">
+                        <td class="c-table__cell"><span class="u-text-mute">00450</span></td>
+                        <td class="c-table__cell">Design Works</td>
+                        <td class="c-table__cell">
+                            <span class="u-text-mute">Carlson Limited</span>
+                        </td>
+                        <td class="c-table__cell">
+                            <span class="u-text-mute">87956621</span>
+                        </td>
+                        <td class="c-table__cell">
+                            <span class="u-text-mute">15 Dec 2017</span>
+                        </td>
+                        <td class="c-table__cell">
+                            <span class="c-badge c-badge--small c-badge--success">Paid</span>
+                        </td>
+                        <td class="c-table__cell">$887</td>
+
+                        <td class="c-table__cell u-text-right">
+                            <a href="invoice.html" class="c-btn c-btn--info u-mr-xsmall">Manage</a>
+                            <div class="c-dropdown dropdown">
+                                <button class="c-btn c-btn--secondary has-dropdown dropdown-toggle" id="dropdownMenuButton10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Actions</button>
+
+                                <div class="c-dropdown__menu dropdown-menu" aria-labelledby="dropdownMenuButton10">
+                                    <a class="c-dropdown__item dropdown-item" href="#">Complete</a>
+                                    <a class="c-dropdown__item dropdown-item" href="#">Share</a>
+                                    <a class="c-dropdown__item dropdown-item" href="#">Archive</a>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="c-table__cell">
+                            <a class="u-text-mute" href="invoice.html">
+                                <i class="fa fa-cloud-download"></i>
+                            </a>
+                        </td>
+                    </tr><!-- // .table__row -->
+                </tbody>
+            </table>
+          </div><!-- // .c-card -->
+        </div>
+      </div><!-- // .row -->
+    </div> <!-- // .container -->
+  </main><!-- // .o-page__content -->
 {% endblock %}
 
 {% block jsblock %}
