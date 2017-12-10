@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+  <div class="row row-content">
+    <div class="col-md-12">
+      <h1 class="page-header">Search Odoo Client</h1>
+      <form action="/emergency/odooapi/" method="post">{% csrf_token %}
+      	<table>
+        {{ form.as_table }}
+        </table>
+        <div>
+          <input type="submit" value="Save" />
+        </div>
+      </form>
+      <!-- Get access token -->
+      <p>Access Token</p>
+      {{ result.access_token}}
+
+      <!-- Show patient data -->
+      <h3>Patient Data Count</h3>
+      {{ patients.count }} bla!!!
+      {% for patient in patients.results %}
+        <p>Paciente</p>
+        <p>{{ patient.name }}</p>
+      {% endfor%}
+      {{ patients.name }}
+  </div>
+  </div>
+</div>
+
+<!-- <h2>Manualy render fields</h2>
+
+{{ form.non_field_errors }}
+<div class="fieldWrapper">
+    {{ form.unit.errors }}
+    <label for="{{ form.unit.id_for_label }}">Email subject:</label>
+    {{ form.unit }}
+</div>
+
+<h2>another approach</h2>
+<div class="fieldWrapper">
+    {{ form.unit.errors }}
+    {{ form.unit.label_tag }}
+    {{ form.unit }}
+</div> -->
+
+{% endblock %}

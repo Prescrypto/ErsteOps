@@ -2,10 +2,30 @@
 {% load staticfiles %}
 
 {% block content %}
+<h2></h2>
+
   <h1 class="page-header">New Incident</h1>
   <form action="/emergency/new/" method="post">{% csrf_token %}
-    {{ form.as_p }}
+  	<table>
+    {{ form.as_table }}
+    </table>
     <input type="submit" value="Save" />
   </form>
+
+<!-- <h2>Manualy render fields</h2>
+
+{{ form.non_field_errors }}
+<div class="fieldWrapper">
+    {{ form.unit.errors }}
+    <label for="{{ form.unit.id_for_label }}">Email subject:</label>
+    {{ form.unit }}
+</div>
+
+<h2>another approach</h2>
+<div class="fieldWrapper">
+    {{ form.unit.errors }}
+    {{ form.unit.label_tag }}
+    {{ form.unit }}
+</div> -->
 
 {% endblock %}
