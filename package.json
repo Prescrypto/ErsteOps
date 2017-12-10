@@ -1,0 +1,58 @@
+{
+  "name": "erste-ops",
+  "description": "Operations for erste",
+  "version": "1.0.0",
+  "scripts": {
+    "lint": "eslint '**/*.js'",
+    "precommit": "lint-staged",
+    "build": "webpack --config webpack.config.js",
+    "start": "yarn build",
+    "dev": "webpack --config webpack.config.js --watch"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint lint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Prescrypto/ErsteOps.git"
+  },
+  "author": "Prescrypto",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/Prescrypto/ErsteOps/issues"
+  },
+  "dependencies": {
+    "date-fns": "^1.29.0",
+    "lodash": "^4.17.4",
+    "vue": "^2.5.9"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.3",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-date-fns": "^0.1.0",
+    "babel-plugin-lodash": "^3.3.2",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "eslint": "^4.9.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-prettier": "^2.3.1",
+    "eslint-plugin-vue": "^4.0.0-beta.2",
+    "eslint_d": "^5.2.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^6.0.0",
+    "prettier": "^1.9.1",
+    "webpack": "^3.10.0",
+    "webpack-bundle-tracker": "^0.2.0"
+  },
+  "homepage": "https://github.com/Prescrypto/ErsteOps#readme"
+}

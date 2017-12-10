@@ -63,7 +63,7 @@ INSTALLED_APPS = [
     'notifications.apps.MinichatConfig',
     'channels',
     'home.apps.HomeConfig',
-
+    'webpack_loader',
 ]
 
 MIDDLEWARE = [
@@ -170,6 +170,15 @@ STATICFILES_DIRS = [
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Webpack loader for compiled front-end asserts
+# https://github.com/ezhome/django-webpack-loader
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'bundles/',
+        'STATS_FILE': os.path.join(BASE_DIR, '../webpack-stats.json'),
+    }
+}
 
 # Console logging for DEBUG=False - Probably should disable if DEBUG = True
 LOGGING = {
