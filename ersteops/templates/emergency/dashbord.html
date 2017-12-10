@@ -47,7 +47,7 @@
                     <td class="c-table__cell">
                       <span class="u-text-mute">
                         {% for unit in emergency.unit.all %}
-                          {{unit}}
+                          {% if forloop.last %} {{unit}} {% else %} {{unit}}, {% endif %}
                         {% empty %}
                           Sin Asignar
                         {% endfor %}
