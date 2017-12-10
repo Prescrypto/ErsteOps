@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from . import views
-from emergency.views import EmergencyBlank, EmergencyNew, EmergencyListView, EmergencyDetailView, EmergencyDashbordList, EmergencyDerivation, EmergencyUpdate, EmergencyClientOdoo, EmergencyClientModal,EmergencyNewModal
+from emergency.views import EmergencyBlank, EmergencyNew, EmergencyListView, EmergencyDetailView, EmergencyDashbordList, EmergencyDerivation, EmergencyUpdate, EmergencyClientOdoo, EmergencyClientModal,EmergencyNewModal, EmergencyGetPatient
 
 urlpatterns = [
     url(r'^$',EmergencyBlank.as_view(),name="emergencyblank"),
@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^dashbord/$',EmergencyDashbordList.as_view(),name="emergencydashbord"),
     url(r'^derivation/$',EmergencyDerivation.as_view(),name="emergencyderivation"),
     url(r'^(?P<pk>[0-9]+)/$', EmergencyDetailView.as_view(), name='emergencydetail'),
+    url(r'^getpatient/(?P<patient_id>\d+)/$', EmergencyGetPatient.as_view(), name='emergencyeeteatient'),
 ]

@@ -27,6 +27,7 @@
      //    	$('#abre').trigger('click');
      //    }
         $('#abre').trigger('click');
+        $('#id_odoo_client').val('{{ request.session.patientrequest.id }}');
     });
     //$("#myModal").dialog({modal: true});
 </script>
