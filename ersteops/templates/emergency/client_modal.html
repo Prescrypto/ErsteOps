@@ -1,0 +1,47 @@
+<!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.dsfsdf </p>
+        </div>
+        <!-- form -->
+          <div class="row row-content">
+    <div class="col-md-12">
+      <h1 class="page-header">Search Odoo Client</h1>
+      <form action="/emergency/modal/" method="post">{% csrf_token %}
+        <table>
+        {{ form.as_table }}
+        </table>
+        <div>
+          <input type="submit" value="Buscar" />
+        </div>
+      </form>
+      <!-- Get access token -->
+      <p>Access Token</p>
+      {{ result.access_token}}
+
+      <!-- Show patient data -->
+      <h3>Patient Data Count</h3>
+      {{ patients.count }} bla!!!
+      {% for patient in patients.results %}
+        <p>Paciente</p>
+        <p>{{ patient.name }}</p>
+      {% endfor%}
+      {{ patients.name }}
+  </div>
+  </div>
+        <!-- endform -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>

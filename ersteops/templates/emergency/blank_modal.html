@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="container">
+  <h2>Basic Modal Example</h2>
+  <!-- Trigger the modal with a button -->
+  <button type="button" id="abre" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+{% include "emergency/client_modal.html" %}
+
+
+
+</div>
+
+
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript" language="javascript">
+    $(document).ready(function(){
+    	var openmodal = 'true;'
+    	if( openmodal == {{ openmodal }} ){
+        	$("#myModal").dialog({modal: true});
+        	//$("#myModal").click();
+        	$('#abre').trigger('click');
+        }
+        $('#abre').trigger('click');
+    });
+    //$("#myModal").dialog({modal: true});
+</script>
+{% endblock %}
