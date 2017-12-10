@@ -39,33 +39,41 @@
               </thead>
 
               <tbody>
-                <tr class="c-table__row">
-                  <td class="c-table__cell"><span class="u-text-mute">00450</span></td>
-                  <td class="c-table__cell">C1</td>
-                  <td class="c-table__cell">
-                    <span class="u-text-mute">87956621</span>
-                  </td>
-                  <td class="c-table__cell">
-                    <span class="u-text-mute">15 Dec 2017</span>
-                  </td>
-                  <td class="c-table__cell">
-                    <span class="c-badge c-badge--small c-badge--success">En Camino</span>
-                  </td>
 
-                  <td class="c-table__cell u-text-center">
-                    <div class="c-dropdown dropdown">
-                      <button class="c-btn c-btn--secondary has-dropdown dropdown-toggle" id="dropdownMenuButton10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
+                {% for emergency in object_list %}
+                  <tr id="emergency-{{ forloop.counter }}" class="c-table__row">
+                    <td class="c-table__cell"><span class="u-text-mute">{{emergency.odoo_client}}</span></td>
+                    <td class="c-table__cell">{{emergency.grade_type}}</td>
+                    <td class="c-table__cell">
+                      <span class="u-text-mute">
+                        {% for unit in emergency.unit.all %}
+                          {{unit}}
+                        {% empty %}
+                          Sin Asignar
+                        {% endfor %}
+                    </span>
+                    </td>
+                    <td class="c-table__cell">
+                      <span class="u-text-mute">{{emergency.start_time}}</span>
+                    </td>
+                    <td class="c-table__cell">
+                      <span class="c-badge c-badge--small c-badge--success">{{emergency.is_active|yesno:"En Camino, Terminado"}}</span>
+                    </td>
 
-                      <div class="c-dropdown__menu dropdown-menu" aria-labelledby="dropdownMenuButton10">
-                        <a class="c-dropdown__item dropdown-item" href="#">Servicio de Derivación</a>
-                        <a class="c-dropdown__item dropdown-item" href="#">Ver tiempos</a>
-                        <a class="c-dropdown__item dropdown-item" href="#">Ver resumen</a>
-                        <a class="c-dropdown__item dropdown-item" href="#">Ver resumen</a>
+                    <td class="c-table__cell u-text-center">
+                      <div class="c-dropdown dropdown">
+                        <button class="c-btn c-btn--secondary has-dropdown dropdown-toggle" id="dropdownMenuButton10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
+
+                        <div class="c-dropdown__menu dropdown-menu" aria-labelledby="dropdownMenuButton10">
+                          <a class="c-dropdown__item dropdown-item" href="#">Servicio de Derivación</a>
+                          <a class="c-dropdown__item dropdown-item" href="#">Ver tiempos</a>
+                          <a class="c-dropdown__item dropdown-item" href="#">Ver resumen</a>
+                          <a class="c-dropdown__item dropdown-item" href="#">Ver resumen</a>
+                        </div>
                       </div>
-                    </div>
-                  </td>
-                </tr><!-- // .table__row -->
-                <tr class="c-table__row"></tr>
+                    </td>
+                  </tr><!-- // .table__row -->
+                {% endfor %}
               </tbody>
             </table>
           </div><!-- // .c-card -->
