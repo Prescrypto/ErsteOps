@@ -1,0 +1,240 @@
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+<div class="modal-dialog">
+
+<!-- Modal content-->
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal">&times;</button>
+<h4 class="modal-title">Nuevo Incidente</h4>
+</div>
+<div class="modal-body">
+<p>Some text in the modal.dsfsdf </p>
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Paciente</a></li>
+    <li><a data-toggle="tab" href="#menu1">Dirección</a></li>
+    <li><a data-toggle="tab" href="#menu2">Unidad</a></li>
+    <li><a data-toggle="tab" href="#menu3">Timers</a></li>
+  </ul>
+  <form action="/emergency/new/" method="post">
+    {% csrf_token %}
+    <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <h3>Paciente</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      <div class="fieldWrapper">
+        {{ form.odoo_client.errors }}
+        {{ form.odoo_client.label_tag }}
+        {{ form.odoo_client }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.patient_gender.errors }}
+        {{ form.patient_gender.label_tag }}
+        {{ form.patient_gender }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.patient_age.errors }}
+        {{ form.patient_age.label_tag }}
+        {{ form.patient_age }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.grade_type.errors }}
+        {{ form.grade_type.label_tag }}
+        {{ form.grade_type }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.zone.errors }}
+        {{ form.zone.label_tag }}
+        {{ form.zone }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.caller_name.errors }}
+        {{ form.caller_name.label_tag }}
+        {{ form.caller_name }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.caller_relation.errors }}
+        {{ form.caller_relation.label_tag }}
+        {{ form.caller_relation }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.patient_allergies.errors }}
+        {{ form.patient_allergies.label_tag }}
+        {{ form.patient_allergies }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.patient_illnesses.errors }}
+        {{ form.patient_illnesses.label_tag }}
+        {{ form.patient_illnesses }}
+      </div>
+
+      <div class="fieldWrapper">
+        {{ form.patient_notes.errors }}
+        {{ form.patient_notes.label_tag }}
+        {{ form.patient_notes }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.main_complaint.errors }}
+        {{ form.main_complaint.label_tag }}
+        {{ form.main_complaint }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.complaint_descriprion.errors }}
+        {{ form.complaint_descriprion.label_tag }}
+        {{ form.complaint_descriprion }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.required_attention.errors }}
+        {{ form.required_attention.label_tag }}
+        {{ form.required_attention }}
+      </div>
+
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <h3>Dirección</h3>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <div class="fieldWrapper">
+        {{ form.address_street.errors }}
+        {{ form.address_street.label_tag }}
+        {{ form.address_street }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.address_extra.errors }}
+        {{ form.address_extra.label_tag }}
+        {{ form.address_extra }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.address_zip_code.errors }}
+        {{ form.address_zip_code.label_tag }}
+        {{ form.address_zip_code }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.address_county.errors }}
+        {{ form.address_county.label_tag }}
+        {{ form.address_county }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.address_col.errors }}
+        {{ form.address_col.label_tag }}
+        {{ form.address_col }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.address_between.errors }}
+        {{ form.address_between.label_tag }}
+        {{ form.address_between }}
+      </div>
+
+      <div class="fieldWrapper">
+        {{ form.address_and_street.errors }}
+        {{ form.address_and_street.label_tag }}
+        {{ form.address_and_street }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.address_ref.errors }}
+        {{ form.address_ref.label_tag }}
+        {{ form.address_ref }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.address_front.errors }}
+        {{ form.address_front.label_tag }}
+        {{ form.address_front }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.address_instructions.errors }}
+        {{ form.address_instructions.label_tag }}
+        {{ form.address_instructions }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.address_notes.errors }}
+        {{ form.address_notes.label_tag }}
+        {{ form.address_notes }}
+      </div>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <h3>Unidad</h3>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+      {{ form.non_field_errors }}
+      <div class="fieldWrapper">
+        {{ form.unit.errors }}
+        {{ form.unit.label_tag }}
+        {{ form.unit }}
+      </div>
+    </div>
+    <div id="menu3" class="tab-pane fade">
+      <h3>Timers</h3>
+      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+      <div class="fieldWrapper">
+        {{ form.start_time.errors }}
+        {{ form.start_time.label_tag }}
+        {{ form.start_time }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.end_time.errors }}
+        {{ form.end_time.label_tag }}
+        {{ form.end_time }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.unit_assigned_time.errors }}
+        {{ form.unit_assigned_time.label_tag }}
+        {{ form.unit_assigned_time }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.unit_dispatched_time.errors }}
+        {{ form.unit_dispatched_time.label_tag }}
+        {{ form.unit_dispatched_time }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.arrival_time.errors }}
+        {{ form.arrival_time.label_tag }}
+        {{ form.arrival_time }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.attention_time.errors }}
+        {{ form.attention_time.label_tag }}
+        {{ form.attention_time }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.derivation_time.errors }}
+        {{ form.derivation_time.label_tag }}
+        {{ form.derivation_time }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.hospital_arrival.errors }}
+        {{ form.hospital_arrival.label_tag }}
+        {{ form.hospital_arrival }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.patient_arrival.errors }}
+        {{ form.patient_arrival.label_tag }}
+        {{ form.patient_arrival }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.final_emergency_time.errors }}
+        {{ form.final_emergency_time.label_tag }}
+        {{ form.final_emergency_time }}
+      </div>
+      <div class="fieldWrapper">
+        {{ form.is_active.errors }}
+        {{ form.is_active.label_tag }}
+        {{ form.is_active }}
+      </div>
+    </div>
+
+    </div>
+    <hr>
+    <input type="submit" value="Guardar" />
+  </form>
+
+</div>
+<!-- form -->
+<div class="row row-content">
+
+</div>
+<!-- endform -->
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+
+</div>
+</div>

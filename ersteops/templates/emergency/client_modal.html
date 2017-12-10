@@ -1,20 +1,26 @@
 <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
-        </div>
-        <div class="modal-body">
-          <p>Some text in the modal.dsfsdf </p>
-        </div>
-        <!-- form -->
-          <div class="row row-content">
-    <div class="col-md-12">
-      <h1 class="page-header">Search Odoo Client</h1>
+<div class="modal fade" id="myModal" role="dialog">
+<div class="modal-dialog">
+
+<!-- Modal content-->
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal">&times;</button>
+<h4 class="modal-title">Nuevo Incidente</h4>
+</div>
+<div class="modal-body">
+<p>Some text in the modal.dsfsdf </p>
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Buscar</a></li>
+    <li><a data-toggle="tab" href="#menu1">Paciente</a></li>
+    <li><a data-toggle="tab" href="#menu2">Direccion</a></li>
+    <li><a data-toggle="tab" href="#menu3">Unidad</a></li>
+    <li><a data-toggle="tab" href="#menu4">Timers</a></li>
+  </ul>
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <h3>Busqueda</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
       <form action="/emergency/modal/" method="post">{% csrf_token %}
         <table>
         {{ form.as_table }}
@@ -23,25 +29,58 @@
           <input type="submit" value="Buscar" />
         </div>
       </form>
-      <!-- Get access token -->
-      <p>Access Token</p>
-      {{ result.access_token}}
+      <!-- Show Data -->
+      <div>
+        <hr>
+        <!-- Get access token -->
+        <p>Access Token</p>
+        {{ result.access_token}}
 
-      <!-- Show patient data -->
-      <h3>Patient Data Count</h3>
-      {{ patients.count }} bla!!!
-      {% for patient in patients.results %}
-        <p>Paciente</p>
-        <p>{{ patient.name }}</p>
-      {% endfor%}
-      {{ patients.name }}
-  </div>
-  </div>
-        <!-- endform -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
+        <!-- Show patient data -->
+        <h3>Patient Data Count</h3>
+        {{ patients.count }} bla!!!
+        {% for patient in patients.results %}
+          <p>Paciente</p>
+          <p>{{ patient.name }}</p>
+        {% endfor%}
+        {{ patients.name }}
       </div>
-      
+      <!-- End Show Data -->
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <h3>Paciente</h3>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <form action="/emergency/new/" method="post">
+        {% csrf_token %}
+        <table>
+          {{ form.as_table }}
+        </table>
+        <input type="submit" value="Save" />
+      </form>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <h3>Direccion</h3>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    </div>
+    <div id="menu3" class="tab-pane fade">
+      <h3>Unidad</h3>
+      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+    </div>
+    <div id="menu4" class="tab-pane fade">
+      <h3>Timers</h3>
+      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
     </div>
   </div>
+</div>
+<!-- form -->
+<div class="row row-content">
+
+</div>
+<!-- endform -->
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+
+</div>
+</div>

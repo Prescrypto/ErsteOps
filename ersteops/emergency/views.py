@@ -186,7 +186,7 @@ class EmergencyClientOdoo(View):
                 return render(request, self.template_name,{"form": form, "result": result})
         return render(request, self.template_name,{"form": form, "result": result, "patients": patient_data})
 
-class EmergencyModal(View):
+class EmergencyClientModal(View):
     # template_name = "emergency/blank_modal.html"
     # def get(self, request, *args, **kwargs):
     #     form=''
@@ -230,3 +230,45 @@ class EmergencyModal(View):
                 return render(request, self.template_name,{"form": form, "result": result, "openmodal": jq_openmodal, })
         return render(request, self.template_name,{"form": form, "result": result, "patients": patient_data, "openmodal": jq_openmodal})
 
+class EmergencyNewModal(CreateView):
+    template_name = "emergency/blanknew_modal.html"
+    model = Emergency
+    fields = ['odoo_client',
+                'grade_type',
+                'zone',
+                'start_time',
+                'end_time',
+                'is_active',
+                'unit',
+                'unit_assigned_time',
+                'unit_dispatched_time',
+                'arrival_time',
+                'attention_time',
+                'derivation_time',
+                'hospital_arrival',
+                'patient_arrival',
+                'final_emergency_time',
+                'address_street',
+                'address_extra',
+                'address_zip_code',
+                'address_county',
+                'address_col',
+                'address_between',
+                'address_and_street',
+                'address_ref',
+                'address_front',
+                'address_instructions',
+                'address_notes',
+                'caller_name',
+                'caller_relation',
+                'patient_allergies',
+                'patient_illnesses',
+                'patient_notes',
+                'main_complaint',
+                'complaint_descriprion',
+                'required_attention',
+                'subscription_type',
+                'patient_gender',
+                'patient_age',
+                ]
+    success_url = '/emergency/list/'
