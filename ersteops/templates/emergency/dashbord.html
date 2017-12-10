@@ -15,6 +15,7 @@
     <div class="container">
       <div class="row">
         {# TODO add mini components of wireframe#}
+        {% include "ui_component/analytics.html" %}
       </div>
 
       <div class="row">
@@ -41,7 +42,7 @@
               <tbody>
 
                 {% for emergency in object_list %}
-                  <tr id="{{emergency.id}}" class="c-table__row">
+                  <tr id="emergency-{{emergency.id}}" class="c-table__row">
                     <td class="c-table__cell"><span class="u-text-mute">{{emergency.odoo_client}}</span></td>
                     <td class="c-table__cell">{{emergency.grade_type}}</td>
                     <td class="c-table__cell">
@@ -88,5 +89,6 @@
   <script src="{% static 'notifications/dashboard.js' %}"></script>
   <script>
     console.log(socket_data);
+    // TODO ADD dinammic change on dashboard
   </script>
 {% endblock jsblock%}
