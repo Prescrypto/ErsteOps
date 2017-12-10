@@ -11,3 +11,4 @@ django-redis
 django-rq
 django-jet==1.0.6
 feedparser==5.2.1
+django-webpack-loader

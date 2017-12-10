@@ -77,11 +77,11 @@ class EmergencyDetailView(DetailView):
         return context
 
 
-class EmergencyDashbordList(ListView):
-    template_name = "emergency/dashbord.html"
+class EmergencyDashboardList(ListView):
+    template_name = "emergency/dashboard.html"
     model = Emergency
     def get_context_data(self, **kwargs):
-        context = super(EmergencyDashbordList, self).get_context_data(**kwargs)
+        context = super(EmergencyDashboardList, self).get_context_data(**kwargs)
         context.update({'now': timezone.now()})
         return context
 

@@ -24,6 +24,28 @@ python3 manage.py migrate
 
 etc, etc,..
 
+# Front End
+
+The front-end's interactive elements are composed with Vue. The javascript is compiled by Webpack and integrated with Django using `django-webpack-loader`.
+
+To add a new bundle, add a new named entry to the `entry` collection in `webpack.config.js`. Then require it in Django with:
+
+```
+{% load render_bundle from webpack_loader %}
+{% render_bundle 'entry_name' %}
+```
+
+- Install dependencies:
+
+`yarn install`
+
+- Development server:
+
+`yarn dev`
+
+- Build production assets:
+
+`NODE_ENV=production yarn build`
 
 # For windows
 vagrant may throw the next error "unknown filesystem type 'vboxsf'"
