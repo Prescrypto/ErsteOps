@@ -50,7 +50,8 @@
   },
   "addons": [
     "papertrail",
-    "heroku-postgresql"
+    "heroku-postgresql",
+    "redistogo:nano"
   ],
   "buildpacks": [
     {
