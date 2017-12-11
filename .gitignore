@@ -38,3 +38,8 @@ ENV/
 
 #environmental variables
 config/
+
+# nodejs
+node_modules
+ersteops/static/bundles
+webpack-stats.json
