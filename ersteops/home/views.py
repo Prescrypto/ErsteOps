@@ -1,6 +1,7 @@
 import logging
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
@@ -24,7 +25,9 @@ def home(request):
 
     return render(request, login_template)
 
+@login_required
 def logout_page(request):
     ''' logout url '''
-    pass
+    logout(request)
+    return redirect('home')
 
