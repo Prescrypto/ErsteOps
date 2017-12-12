@@ -110,18 +110,8 @@ APPEND_SLASH=False
 # }
 
 # EVALUATE IF DATABESA IS LOCAL O REMOTE
-DATABASE_LOCAL =  ast.literal_eval(os.environ['DATABASE_LOCAL'])
 DATABASE_URL = os.environ['DATABASE_URL']
-DATABASE_REMOTE_URL = os.environ['DATABASE_REMOTE_URL']
-
-if DATABASE_LOCAL:
-    DATABASES = {
-                'default': dj_database_url.config(default=DATABASE_URL),
-                }
-else:
-    DATABASES = {
-                'default': dj_database_url.config(default=DATABASE_REMOTE_URL),
-                }
+DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
