@@ -6,6 +6,11 @@ from django.utils.encoding import python_2_unicode_compatible
 from datetime import datetime, timedelta
 from vehicle import models as models_vehicle
 
+import json
+from channels import Group
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+
 from core.utils import eventDuration
 # Create your models here.
 
@@ -127,6 +132,115 @@ class Emergency(models.Model):
     def patientTimer(self):
         # Calculate patient arrival
         return eventDuration(self.start_time,self.patient_arrival)
+    def save(self, **kwargs):
+        #Saves and checks whether the object is a candidate for notification
+        newEmerg=True if self.pk is None else False
+        try:
+            old_instance=False if newEmerg else Emergency.objects.get(pk=self.pk)
+        except Emergency.DoesNotExist:
+            return
+        
+        super(Emergency, self).save(**kwargs)
+
+        type_notif=""
+        if newEmerg:
+            if self.is_active:
+                #Is new and is active
+                type_notif="New"
+        elif not self.is_active and old_instance.is_active:
+            #Updated from is_active=True to is_active=False
+            type_notif="Deactivate"
+        elif self.is_active and not old_instance.is_active:
+            #Updated from is_active=False to is_active=True
+            type_notif="Activate"
+        elif self.is_active and old_instance.unit != self.unit:
+            #Update units in emergency
+            type_notif="Unid Update"
+        elif self.is_active:
+            #Update simple and is_active
+            type_notif="Update"
+        else:
+            #is not a candidate to notifications
+            return
+
+        emergDict=emergency_dictionary(self)
+        emergDict["type_notif"]=type_notif
+        emergDict["type_data"]="Emergency"
+        emergJson=json.dumps(emergDict)
+        
+
+        Group('notifications').send(
+                {"text": json.dumps(emergJson)}
+            )
+
+
+def emergency_dictionary(instance):
+
+    units=[]
+    for unit in instance.unit.all():
+        unitDict={
+            "pk":unit.pk,
+            "unit_id":unit.unit_id,
+            "model":unit.model,
+            "year":unit.year,
+            "license_plate":unit.license_plate,
+            "brand":str(unit.brand),
+            "unit_type":str(unit.unit_type),
+            "is_active":unit.is_active,
+            "assigned":unit.assigned,
+            "created_at":unit.created_at.strftime('%b %-d %-I:%M %p'),
+            "last_modified":unit.last_modified.strftime('%b %-d %-I:%M %p'),
+        }
+        units.append(unitDict)
+    emergDict={
+        "pk":instance.pk,
+        "odoo_client":instance.odoo_client,
+        "grade_type":str(instance.grade_type),
+        "zone":str(instance.zone),
+
+        "unit":units,
+
+        "start_time":instance.start_time.strftime('%b %-d %-I:%M %p'),
+        "end_time":instance.end_time.strftime('%b %-d %-I:%M %p'),
+        "created_at":instance.created_at.strftime('%b %-d %-I:%M %p'),
+        "last_modified":instance.last_modified.strftime('%b %-d %-I:%M %p'),
+        "unit_assigned_time":instance.unit_assigned_time.strftime('%b %-d %-I:%M %p'),
+        "unit_dispatched_time":instance.unit_dispatched_time.strftime('%b %-d %-I:%M %p'),
+        "arrival_time":instance.arrival_time.strftime('%b %-d %-I:%M %p'),
+        "attention_time":instance.attention_time.strftime('%b %-d %-I:%M %p'),
+        "derivation_time":instance.derivation_time.strftime('%b %-d %-I:%M %p'),
+        "hospital_arrival":instance.hospital_arrival.strftime('%b %-d %-I:%M %p'),
+        "patient_arrival":instance.patient_arrival.strftime('%b %-d %-I:%M %p'),
+        "final_emergency_time":instance.final_emergency_time.strftime('%b %-d %-I:%M %p'),
+
+        "is_active":instance.is_active,
+        "address_street":instance.address_street,
+        "address_extra":instance.address_extra,
+        "address_zip_code":instance.address_zip_code,
+        "address_county":instance.address_county,
+        "address_col":instance.address_col,
+        "address_between":instance.address_between,
+        "address_and_street":instance.address_and_street,
+        "address_ref":instance.address_ref,
+        "address_front":instance.address_front,
+        "address_instructions":instance.address_instructions,
+        "address_notes":instance.address_notes,
+        "caller_name":instance.caller_name,
+        "caller_relation":instance.caller_relation,
+        "patient_allergies":instance.patient_allergies,
+        "patient_illnesses":instance.patient_illnesses,
+        "patient_notes":instance.patient_notes,
+        "main_complaint":instance.main_complaint,
+        "complaint_descriprion":instance.complaint_descriprion,
+        "required_attention":instance.required_attention,
+        "subscription_type":instance.subscription_type,
+    }
+
+    return emergDict
+
+
+    
+
 
 # Emergency attention grade G1,G2,G3, etc.(Triage)
 @python_2_unicode_compatible
@@ -193,5 +307,40 @@ class AttentionDerivation(models.Model):
     def __str__(self):  
         return self.motive
 
+    def save(self, **kwargs):
+        newDerivation=True if self.pk is None else False
+        
+        super(AttentionDerivation, self).save(**kwargs)
+
+        type_notif=""
+        if newDerivation:
+            type_notif="New"
+        else:
+            type_notif="Update"
+
+        derivDict=derivation_dictionary(self)
+        derivDict["type_notif"]=type_notif
+        derivDict["type_data"]="Derivation"
+
+        derivJson=json.dumps(derivDict)
+        
+        Group('notifications').send(
+                {"text": json.dumps(derivJson)}
+            )
+
+def derivation_dictionary(instance):
+    derivDict={
+        "pk" : instance.pk,
+        "emergency" : str(instance.emergency),
+        "motive" : instance.motive,
+        "hospital" : str(instance.hospital),
+        "eventualities" : instance.eventualities,
+        "reception" : instance.reception,
+        "notes" : instance.notes,
+        "created_at" : instance.created_at.strftime('%b %-d %-I:%M %p'),
+        "last_modified" : instance.last_modified.strftime('%b %-d %-I:%M %p')
+    }
+
+    return derivDict
 
 #class EmergencyType(models.Model):

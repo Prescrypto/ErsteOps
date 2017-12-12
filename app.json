@@ -2,7 +2,7 @@
   "name": "Simple MVP ErstOps",
   "description": "Emergency App Manager",
   "scripts": {
-    "postdeploy": "bin/postdeploy.sh"
+    "postdeploy": "bin/post_deploy.sh"
   },
   "env": {
     "SECRET_KEY": {
@@ -16,12 +16,6 @@
     },
     "DJANGO_SETTINGS_MODULE": {
       "required": true
-    },
-    "DATABASE_LOCAL":{
-      "required": true
-    },
-    "DATABASE_REMOTE_URL":{
-      "value": ""
     },
    "BASE_URL": {
       "value": "https://"
@@ -42,11 +36,16 @@
   "formation": {
     "web": {
       "quantity": 1
+    },
+    "worker": {
+      "quantity": 1,
+      "size": "free"
     }
   },
   "addons": [
     "papertrail",
-    "heroku-postgresql"
+    "heroku-postgresql",
+    "heroku-redis"
   ],
   "buildpacks": [
     {
