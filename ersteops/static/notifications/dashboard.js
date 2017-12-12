@@ -18,6 +18,7 @@ $(function () {
         var dataTemp = JSON.parse(message.data);
         var data = JSON.parse(dataTemp);
         socket_data = data;
+        console.log(socket_data);
         /*
         var notifications = $("#notifications")
         var ele = $('<tr></tr>')
