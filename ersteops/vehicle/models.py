@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from datetime import datetime
@@ -30,7 +31,7 @@ class Unit(models.Model):
     )
     unit_id = models.IntegerField("id",primary_key=True,unique=True)
     model = models.CharField("modelo",max_length=50,default="")
-    year = models.CharField("año de fabricacion",max_length=4,default= 0,choices = MODEL_YEAR)
+    year = models.CharField(u"año de fabricacion",max_length=4,default= 0,choices = MODEL_YEAR)
     license_plate = models.CharField("placa",max_length=10,unique=True)
     brand = models.ForeignKey("Brand",
     related_name="brand_name",
