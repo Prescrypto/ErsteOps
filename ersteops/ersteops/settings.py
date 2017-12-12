@@ -34,14 +34,14 @@ DEBUG = ast.literal_eval(os.environ['DEBUG_STATE'])
 
 #ALLOWED_HOSTS = []
 
-# Check if we are in production
+# TODO fix production mode
 PRODUCTION = ast.literal_eval(os.environ['PRODUCTION'])
 # Change allowed hosts accordingly
 if PRODUCTION:
     ALLOWED_HOSTS = [os.environ['HEROKU_APP_NAME']+".herokuapp.com"]
 else:
-    # Correct way
-    #ALLOWED_HOSTS = [os.environ['ALLOWED_HOSTS']]
+    # TODO Correct way
+    # ALLOWED_HOSTS = [os.environ['ALLOWED_HOSTS']]
     ALLOWED_HOSTS = ['*']
 
 # Application definition
@@ -109,7 +109,7 @@ APPEND_SLASH=False
 #     }
 # }
 
-# EVALUATE IF DATABESA IS LOCAL O REMOTE
+# DATABASE CONFIG
 DATABASE_URL = os.environ['DATABASE_URL']
 DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
 
