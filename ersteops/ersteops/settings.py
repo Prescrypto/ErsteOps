@@ -195,6 +195,7 @@ LOGGING = {
 }
 
 
+
 #define channel layer
 """
 Django channels funciona un a wsgi, ahora todas las peticiones llegan a una nueva capa
