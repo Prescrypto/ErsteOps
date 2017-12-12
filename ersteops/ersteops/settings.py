@@ -198,7 +198,7 @@ LOGGING = {
 #define channel layer
 """
 Django channels funciona un a wsgi, ahora todas las peticiones llegan a una nueva capa
-asgi "channels", para pruevas simples se puede usar runserver, para iniciar las capas
+asgi "channels", para pruebas simples se puede usar runserver, para iniciar las capas
 por separado se usa lo siguiente.
 chanels(interface servers) ejemplo:
     daphne ersteops.asgi:channel_layer --port 8000 -b 0.0.0.0
