@@ -17,12 +17,6 @@
     "DJANGO_SETTINGS_MODULE": {
       "required": true
     },
-    "DATABASE_LOCAL":{
-      "required": true
-    },
-    "DATABASE_REMOTE_URL":{
-      "value": ""
-    },
    "BASE_URL": {
       "value": "https://"
     },
