@@ -1,4 +1,4 @@
-
+var socket_data = {};
 $(function () {
     // Correctly decide between ws:// and wss://
     var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
@@ -13,10 +13,13 @@ $(function () {
     socket.onclose = function () {
         console.log("Disconnected from notifications socket");
     };
-    
+
     socket.onmessage = function(message) {
         var dataTemp = JSON.parse(message.data);
         var data = JSON.parse(dataTemp);
+        socket_data = data;
+        console.log(socket_data);
+        /*
         var notifications = $("#notifications")
         var ele = $('<tr></tr>')
 
@@ -31,9 +34,8 @@ $(function () {
         ele.append(
             $("<td></td>").text(data)
         )
-        
-        notifications.append(ele)
-    };
-    
 
+        notifications.append(ele)
+        */
+    };
 });

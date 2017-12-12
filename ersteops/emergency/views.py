@@ -89,8 +89,11 @@ class EmergencyDashbordList(ListView):
     model = Emergency
     def get_context_data(self, **kwargs):
         context = super(EmergencyDashbordList, self).get_context_data(**kwargs)
-        context['now'] = timezone.now()
+        context.update({'now': timezone.now()})
         return context
+
+    def get_queryset(self):
+        return Emergency.objects.filter(is_active=True)
 
 
 class EmergencyDerivation(CreateView):

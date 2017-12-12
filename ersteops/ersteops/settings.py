@@ -34,14 +34,14 @@ DEBUG = ast.literal_eval(os.environ['DEBUG_STATE'])
 
 #ALLOWED_HOSTS = []
 
-# Check if we are in production
+# TODO fix production mode
 PRODUCTION = ast.literal_eval(os.environ['PRODUCTION'])
 # Change allowed hosts accordingly
 if PRODUCTION:
     ALLOWED_HOSTS = [os.environ['HEROKU_APP_NAME']+".herokuapp.com"]
 else:
-    # Correct way
-    #ALLOWED_HOSTS = [os.environ['ALLOWED_HOSTS']]
+    # TODO Correct way
+    # ALLOWED_HOSTS = [os.environ['ALLOWED_HOSTS']]
     ALLOWED_HOSTS = ['*']
 
 # Application definition
@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     #'minichat.apps.MinichatConfig',
     'notifications.apps.MinichatConfig',
     'channels',
+    'home.apps.HomeConfig',
 
 ]
 
@@ -108,19 +109,9 @@ APPEND_SLASH=False
 #     }
 # }
 
-# EVALUATE IF DATABESA IS LOCAL O REMOTE
-DATABASE_LOCAL =  ast.literal_eval(os.environ['DATABASE_LOCAL'])
+# DATABASE CONFIG
 DATABASE_URL = os.environ['DATABASE_URL']
-DATABASE_REMOTE_URL = os.environ['DATABASE_REMOTE_URL']
-
-if DATABASE_LOCAL:
-    DATABASES = {
-                'default': dj_database_url.config(default=DATABASE_URL),
-                }
-else:
-    DATABASES = {
-                'default': dj_database_url.config(default=DATABASE_REMOTE_URL),
-                }
+DATABASES = {'default': dj_database_url.config(default=DATABASE_URL)}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
