@@ -194,3 +194,4 @@ class AttentionDerivation(models.Model):
         return self.motive
 
 
+#class EmergencyType(models.Model):

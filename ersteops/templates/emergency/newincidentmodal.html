@@ -1,3 +1,4 @@
+{% load widget_tweaks %}
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">
 <div class="modal-dialog">
@@ -29,7 +30,7 @@
             <tr>
             {{ form.odoo_client.errors }}
             <td>{{ form.odoo_client.label_tag }}</td>
-            <td>{{ form.odoo_client }}</td>
+            <td>{{ form.odoo_client|add_class:'form-control' }}</td>
             </tr>
           </div>
 
@@ -37,7 +38,7 @@
             <tr>
             {{ form.patient_gender.errors }}
             <td>{{ form.patient_gender.label_tag }}</td>
-            <td>{{ form.patient_gender }}</td>
+            <td>{{ form.patient_gender|add_class:'form-control' }}</td>
             </tr>
           </div>
 
@@ -46,7 +47,7 @@
             {{ form.patient_age.errors }}
             <tr>
             <td>{{ form.patient_age.label_tag }}</td>
-            <td>{{ form.patient_age }}</td>
+            <td>{{ form.patient_age|add_class:'form-control' }}</td>
             </tr>
           </div>
 
@@ -54,7 +55,7 @@
             {{ form.grade_type.errors }}
             <tr>
             <td>{{ form.grade_type.label_tag }}</td>
-            <td>{{ form.grade_type }}</td>
+            <td>{{ form.grade_type|add_class:'form-control' }}</td>
             </tr>
           </div>
 
@@ -62,7 +63,7 @@
             {{ form.zone.errors }}
             <tr>
             <td>{{ form.zone.label_tag }}</td>
-            <td>{{ form.zone }}</td>
+            <td>{{ form.zone|add_class:'form-control' }}</td>
             </tr>
           </div>
 
@@ -70,7 +71,7 @@
             {{ form.caller_name.errors }}
             <tr>
             <td>{{ form.caller_name.label_tag }}</td>
-            <td>{{ form.caller_name }}</td>
+            <td>{{ form.caller_name|add_class:'form-control' }}</td>
             </tr>
           </div>
 
@@ -78,7 +79,7 @@
             {{ form.caller_relation.errors }}
             <tr>
             <td>{{ form.caller_relation.label_tag }}</td>
-            <td>{{ form.caller_relation }}</td>
+            <td>{{ form.caller_relation|add_class:'form-control' }}</td>
             </tr>
           </div>
 
@@ -86,7 +87,7 @@
             {{ form.patient_allergies.errors }}
             <tr>
             <td>{{ form.patient_allergies.label_tag }}</td>
-            <td>{{ form.patient_allergies }}</td>
+            <td>{{ form.patient_allergies|add_class:'form-control' }}</td>
             </tr>
           </div>
 
@@ -94,7 +95,7 @@
             {{ form.patient_illnesses.errors }}
             <tr>
             <td>{{ form.patient_illnesses.label_tag }}</td>
-            <td>{{ form.patient_illnesses }}</td>
+            <td>{{ form.patient_illnesses|add_class:'form-control' }}</td>
             </tr>
           </div>
 
@@ -102,7 +103,7 @@
             {{ form.patient_notes.errors }}
             <tr>
             <td>{{ form.patient_notes.label_tag }}</td>
-            <td>{{ form.patient_notes }}</td>
+            <td>{{ form.patient_notes|add_class:'form-control' }}</td>
             </tr>
           </div>
 
@@ -110,7 +111,7 @@
             {{ form.main_complaint.errors }}
             <tr>
             <td>{{ form.main_complaint.label_tag }}</td>
-            <td>{{ form.main_complaint }}</td>
+            <td>{{ form.main_complaint|add_class:'form-control' }}</td>
             </tr>
           </div>
 
@@ -118,7 +119,7 @@
             {{ form.complaint_descriprion.errors }}
             <tr>
             <td>{{ form.complaint_descriprion.label_tag }}</td>
-            <td>{{ form.complaint_descriprion }}</td>
+            <td>{{ form.complaint_descriprion|add_class:'form-control' }}</td>
             </tr>
           </div>
 
@@ -126,7 +127,7 @@
             {{ form.required_attention.errors }}
             <tr>
             <td>{{ form.required_attention.label_tag }}</td>
-            <td>{{ form.required_attention }}</td>
+            <td>{{ form.required_attention|add_class:'form-control' }}</td>
             </tr>
           </div>
         </tbody>
@@ -141,7 +142,7 @@
         {{ form.address_street.errors }}
         <tr>
         <td>{{ form.address_street.label_tag }}</td>
-        <td>{{ form.address_street }}</td>
+        <td>{{ form.address_street|add_class:'form-control' }}</td>
         </tr>
       </div>
 
@@ -149,7 +150,7 @@
         {{ form.address_extra.errors }}
         <tr>
         <td>{{ form.address_extra.label_tag }}</td>
-        <td>{{ form.address_extra }}</td>
+        <td>{{ form.address_extra|add_class:'form-control' }}</td>
         </tr>
       </div>
 
@@ -157,7 +158,7 @@
         {{ form.address_zip_code.errors }}
         <tr>
         <td>{{ form.address_zip_code.label_tag }}</td>
-        <td>{{ form.address_zip_code }}</td>
+        <td>{{ form.address_zip_code|add_class:'form-control' }}</td>
         </tr>
       </div>
 
@@ -166,7 +167,7 @@
         {{ form.address_county.errors }}
         <tr>
         <td>{{ form.address_county.label_tag }}</td>
-        <td>{{ form.address_county }}</td>
+        <td>{{ form.address_county|add_class:'form-control'}}</td>
         </tr>
       </div>
 
@@ -174,7 +175,7 @@
         {{ form.address_col.errors }}
         <tr>
         <td>{{ form.address_col.label_tag }}</td>
-        <td>{{ form.address_col }}</td>
+        <td>{{ form.address_col|add_class:'form-control' }}</td>
         </tr>
       </div>
 
@@ -182,7 +183,7 @@
         {{ form.address_between.errors }}
         <tr>
           <td>{{ form.address_between.label_tag }}</td>
-          <td>{{ form.address_between }}</td>
+          <td>{{ form.address_between|add_class:'form-control' }}</td>
         </tr>
       </div>
 
@@ -190,7 +191,7 @@
         {{ form.address_and_street.errors }}
         <tr>
         <td>{{ form.address_and_street.label_tag }}</td>
-        <td>{{ form.address_and_street }}</td>
+        <td>{{ form.address_and_street|add_class:'form-control' }}</td>
         </tr>
       </div>
 
@@ -198,7 +199,7 @@
         {{ form.address_ref.errors }}
         <tr>
         <td>{{ form.address_ref.label_tag }}</td>
-        <td>{{ form.address_ref }}</td>
+        <td>{{ form.address_ref|add_class:'form-control' }}</td>
         </tr>
       </div>
 
@@ -206,7 +207,7 @@
         {{ form.address_front.errors }}
         <tr>
         <td>{{ form.address_front.label_tag }}</td>
-        <td>{{ form.address_front }}</td>
+        <td>{{ form.address_front|add_class:'form-control' }}</td>
         </tr>
       </div>
 
@@ -214,14 +215,14 @@
         {{ form.address_instructions.errors }}
         <tr>
         <td>{{ form.address_instructions.label_tag }}</td>
-        <td>{{ form.address_instructions }}</td>
+        <td>{{ form.address_instructions|add_class:'form-control' }}</td>
         </tr>
       </div>
       <div class="fieldWrapper">
         {{ form.address_notes.errors }}
         <tr>
         <td>{{ form.address_notes.label_tag }}</td>
-        <td>{{ form.address_notes }}</td>
+        <td>{{ form.address_notes|add_class:'form-control' }}</td>
         </tr>
       </div>
             </tbody>
@@ -236,7 +237,7 @@
           {{ form.unit.errors }}
           <tr>
           <td>{{ form.unit.label_tag }}</td>
-          <td>{{ form.unit }}</td>
+          <td>{{ form.unit|add_class:'form-control' }}</td>
           </tr>
         </div>
         </tbody>
@@ -250,7 +251,7 @@
             {{ form.start_time.errors }}
             <tr>
             <td>{{ form.start_time.label_tag }}</td>
-            <td>{{ form.start_time }}</td>
+            <td>{{ form.start_time|add_class:'form-control' }}</td>
             </tr>
           </div>
 
@@ -258,7 +259,7 @@
         {{ form.end_time.errors }}
         <tr>
         <td>{{ form.end_time.label_tag }}</td>
-        <td>{{ form.end_time }}</td>
+        <td>{{ form.end_time|add_class:'form-control' }}</td>
         </tr>
       </div>
 
@@ -266,7 +267,7 @@
         {{ form.unit_assigned_time.errors }}
         <tr>
         <td>{{ form.unit_assigned_time.label_tag }}</td>
-        <td>{{ form.unit_assigned_time }}</td>
+        <td>{{ form.unit_assigned_time|add_class:'form-control' }}</td>
         </tr>
       </div>
 
@@ -274,7 +275,7 @@
         {{ form.unit_dispatched_time.errors }}
         <tr>
         <td>{{ form.unit_dispatched_time.label_tag }}</td>
-        <td>{{ form.unit_dispatched_time }}</td>
+        <td>{{ form.unit_dispatched_time|add_class:'form-control' }}</td>
         </tr>
       </div>
 
@@ -282,7 +283,7 @@
         {{ form.arrival_time.errors }}
         <tr>
         <td>{{ form.arrival_time.label_tag }}</td>
-        <td>{{ form.arrival_time }}</td>
+        <td>{{ form.arrival_time|add_class:'form-control' }}</td>
         </tr>
       </div>
 
@@ -290,7 +291,7 @@
         {{ form.attention_time.errors }}
         <tr>
         <td>{{ form.attention_time.label_tag }}</td>
-        <td>{{ form.attention_time }}</td>
+        <td>{{ form.attention_time|add_class:'form-control' }}</td>
         </tr>
       </div>
 
@@ -298,7 +299,7 @@
         {{ form.derivation_time.errors }}
         <tr>
         <td>{{ form.derivation_time.label_tag }}</td>
-        <td>{{ form.derivation_time }}</td>
+        <td>{{ form.derivation_time|add_class:'form-control' }}</td>
         </tr>
       </div>
 
@@ -306,7 +307,7 @@
         {{ form.hospital_arrival.errors }}
         <tr>
         <td>{{ form.hospital_arrival.label_tag }}</td>
-        <td>{{ form.hospital_arrival }}</td>
+        <td>{{ form.hospital_arrival|add_class:'form-control' }}</td>
         </tr>
       </div>
 
@@ -314,7 +315,7 @@
         {{ form.patient_arrival.errors }}
         <tr>
         <td>{{ form.patient_arrival.label_tag }}</td>
-        <td>{{ form.patient_arrival }}</td>
+        <td>{{ form.patient_arrival|add_class:'form-control' }}</td>
         </tr>
       </div>
 
@@ -322,14 +323,14 @@
         {{ form.final_emergency_time.errors }}
         <tr>
         <td>{{ form.final_emergency_time.label_tag }}</td>
-        <td>{{ form.final_emergency_time }}</td>
+        <td>{{ form.final_emergency_time|add_class:'form-control' }}</td>
         </tr>
       </div>
       <div class="fieldWrapper">
         {{ form.is_active.errors }}
         <tr>
         <td>{{ form.is_active.label_tag }}</td>
-        <td>{{ form.is_active }}</td>
+        <td>{{ form.is_active|add_class:'form-control' }}</td>
         </tr>
       </div>
       </tbody>

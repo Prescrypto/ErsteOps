@@ -277,6 +277,7 @@ class EmergencyNewModal(CreateView):
                 'patient_gender',
                 'patient_age',
                 ]
+    
     success_url = '/emergency/list/'
 
 
