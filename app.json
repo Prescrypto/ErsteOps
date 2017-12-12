@@ -2,7 +2,7 @@
   "name": "Simple MVP ErstOps",
   "description": "Emergency App Manager",
   "scripts": {
-    "postdeploy": "bin/postdeploy.sh"
+    "postdeploy": "bin/post_deploy.sh"
   },
   "env": {
     "SECRET_KEY": {
