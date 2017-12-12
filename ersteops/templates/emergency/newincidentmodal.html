@@ -22,203 +22,318 @@
     <div id="home" class="tab-pane fade in active">
       <h3>Paciente</h3>
       <h4>{{ request.session.patientrequest.name}}</h4>
-      <hr>
-      <div class="fieldWrapper">
-        {{ form.odoo_client.errors }}
-        {{ form.odoo_client.label_tag }}
-        {{ form.odoo_client }}
-      </div>
-      <div class="fieldWrapper">
-        {{ form.patient_gender.errors }}
-        {{ form.patient_gender.label_tag }}
-        {{ form.patient_gender }}
-      </div>
-      <div class="fieldWrapper">
-        {{ form.patient_age.errors }}
-        {{ form.patient_age.label_tag }}
-        {{ form.patient_age }}
-      </div>
-      <div class="fieldWrapper">
-        {{ form.grade_type.errors }}
-        {{ form.grade_type.label_tag }}
-        {{ form.grade_type }}
-      </div>
-      <div class="fieldWrapper">
-        {{ form.zone.errors }}
-        {{ form.zone.label_tag }}
-        {{ form.zone }}
-      </div>
-      <div class="fieldWrapper">
-        {{ form.caller_name.errors }}
-        {{ form.caller_name.label_tag }}
-        {{ form.caller_name }}
-      </div>
-      <div class="fieldWrapper">
-        {{ form.caller_relation.errors }}
-        {{ form.caller_relation.label_tag }}
-        {{ form.caller_relation }}
-      </div>
-      <div class="fieldWrapper">
-        {{ form.patient_allergies.errors }}
-        {{ form.patient_allergies.label_tag }}
-        {{ form.patient_allergies }}
-      </div>
-      <div class="fieldWrapper">
-        {{ form.patient_illnesses.errors }}
-        {{ form.patient_illnesses.label_tag }}
-        {{ form.patient_illnesses }}
-      </div>
 
-      <div class="fieldWrapper">
-        {{ form.patient_notes.errors }}
-        {{ form.patient_notes.label_tag }}
-        {{ form.patient_notes }}
-      </div>
-      <div class="fieldWrapper">
-        {{ form.main_complaint.errors }}
-        {{ form.main_complaint.label_tag }}
-        {{ form.main_complaint }}
-      </div>
-      <div class="fieldWrapper">
-        {{ form.complaint_descriprion.errors }}
-        {{ form.complaint_descriprion.label_tag }}
-        {{ form.complaint_descriprion }}
-      </div>
-      <div class="fieldWrapper">
-        {{ form.required_attention.errors }}
-        {{ form.required_attention.label_tag }}
-        {{ form.required_attention }}
-      </div>
+      <table class="table">
+        <tbody>
+          <div class="form-group fieldWrapper">
+            <tr>
+            {{ form.odoo_client.errors }}
+            <td>{{ form.odoo_client.label_tag }}</td>
+            <td>{{ form.odoo_client }}</td>
+            </tr>
+          </div>
 
+          <div class="fieldWrapper">
+            <tr>
+            {{ form.patient_gender.errors }}
+            <td>{{ form.patient_gender.label_tag }}</td>
+            <td>{{ form.patient_gender }}</td>
+            </tr>
+          </div>
+
+
+          <div class="fieldWrapper">
+            {{ form.patient_age.errors }}
+            <tr>
+            <td>{{ form.patient_age.label_tag }}</td>
+            <td>{{ form.patient_age }}</td>
+            </tr>
+          </div>
+
+          <div class="fieldWrapper">
+            {{ form.grade_type.errors }}
+            <tr>
+            <td>{{ form.grade_type.label_tag }}</td>
+            <td>{{ form.grade_type }}</td>
+            </tr>
+          </div>
+
+          <div class="fieldWrapper">
+            {{ form.zone.errors }}
+            <tr>
+            <td>{{ form.zone.label_tag }}</td>
+            <td>{{ form.zone }}</td>
+            </tr>
+          </div>
+
+          <div class="fieldWrapper">
+            {{ form.caller_name.errors }}
+            <tr>
+            <td>{{ form.caller_name.label_tag }}</td>
+            <td>{{ form.caller_name }}</td>
+            </tr>
+          </div>
+
+          <div class="fieldWrapper">
+            {{ form.caller_relation.errors }}
+            <tr>
+            <td>{{ form.caller_relation.label_tag }}</td>
+            <td>{{ form.caller_relation }}</td>
+            </tr>
+          </div>
+
+          <div class="fieldWrapper">
+            {{ form.patient_allergies.errors }}
+            <tr>
+            <td>{{ form.patient_allergies.label_tag }}</td>
+            <td>{{ form.patient_allergies }}</td>
+            </tr>
+          </div>
+
+          <div class="fieldWrapper">
+            {{ form.patient_illnesses.errors }}
+            <tr>
+            <td>{{ form.patient_illnesses.label_tag }}</td>
+            <td>{{ form.patient_illnesses }}</td>
+            </tr>
+          </div>
+
+          <div class="fieldWrapper">
+            {{ form.patient_notes.errors }}
+            <tr>
+            <td>{{ form.patient_notes.label_tag }}</td>
+            <td>{{ form.patient_notes }}</td>
+            </tr>
+          </div>
+
+          <div class="fieldWrapper">
+            {{ form.main_complaint.errors }}
+            <tr>
+            <td>{{ form.main_complaint.label_tag }}</td>
+            <td>{{ form.main_complaint }}</td>
+            </tr>
+          </div>
+
+          <div class="fieldWrapper">
+            {{ form.complaint_descriprion.errors }}
+            <tr>
+            <td>{{ form.complaint_descriprion.label_tag }}</td>
+            <td>{{ form.complaint_descriprion }}</td>
+            </tr>
+          </div>
+
+          <div class="fieldWrapper">
+            {{ form.required_attention.errors }}
+            <tr>
+            <td>{{ form.required_attention.label_tag }}</td>
+            <td>{{ form.required_attention }}</td>
+            </tr>
+          </div>
+        </tbody>
+      </table>
     </div>
+
     <div id="menu1" class="tab-pane fade">
       <h3>Dirección</h3>
-
+      <table class="table">
+        <tbody>
       <div class="fieldWrapper">
         {{ form.address_street.errors }}
-        {{ form.address_street.label_tag }}
-        {{ form.address_street }}
+        <tr>
+        <td>{{ form.address_street.label_tag }}</td>
+        <td>{{ form.address_street }}</td>
+        </tr>
       </div>
+
       <div class="fieldWrapper">
         {{ form.address_extra.errors }}
-        {{ form.address_extra.label_tag }}
-        {{ form.address_extra }}
+        <tr>
+        <td>{{ form.address_extra.label_tag }}</td>
+        <td>{{ form.address_extra }}</td>
+        </tr>
       </div>
+
       <div class="fieldWrapper">
         {{ form.address_zip_code.errors }}
-        {{ form.address_zip_code.label_tag }}
-        {{ form.address_zip_code }}
+        <tr>
+        <td>{{ form.address_zip_code.label_tag }}</td>
+        <td>{{ form.address_zip_code }}</td>
+        </tr>
       </div>
+
+
       <div class="fieldWrapper">
         {{ form.address_county.errors }}
-        {{ form.address_county.label_tag }}
-        {{ form.address_county }}
+        <tr>
+        <td>{{ form.address_county.label_tag }}</td>
+        <td>{{ form.address_county }}</td>
+        </tr>
       </div>
+
       <div class="fieldWrapper">
         {{ form.address_col.errors }}
-        {{ form.address_col.label_tag }}
-        {{ form.address_col }}
+        <tr>
+        <td>{{ form.address_col.label_tag }}</td>
+        <td>{{ form.address_col }}</td>
+        </tr>
       </div>
+
       <div class="fieldWrapper">
         {{ form.address_between.errors }}
-        {{ form.address_between.label_tag }}
-        {{ form.address_between }}
+        <tr>
+          <td>{{ form.address_between.label_tag }}</td>
+          <td>{{ form.address_between }}</td>
+        </tr>
       </div>
 
       <div class="fieldWrapper">
         {{ form.address_and_street.errors }}
-        {{ form.address_and_street.label_tag }}
-        {{ form.address_and_street }}
+        <tr>
+        <td>{{ form.address_and_street.label_tag }}</td>
+        <td>{{ form.address_and_street }}</td>
+        </tr>
       </div>
+
       <div class="fieldWrapper">
         {{ form.address_ref.errors }}
-        {{ form.address_ref.label_tag }}
-        {{ form.address_ref }}
+        <tr>
+        <td>{{ form.address_ref.label_tag }}</td>
+        <td>{{ form.address_ref }}</td>
+        </tr>
       </div>
+
       <div class="fieldWrapper">
         {{ form.address_front.errors }}
-        {{ form.address_front.label_tag }}
-        {{ form.address_front }}
+        <tr>
+        <td>{{ form.address_front.label_tag }}</td>
+        <td>{{ form.address_front }}</td>
+        </tr>
       </div>
+
       <div class="fieldWrapper">
         {{ form.address_instructions.errors }}
-        {{ form.address_instructions.label_tag }}
-        {{ form.address_instructions }}
+        <tr>
+        <td>{{ form.address_instructions.label_tag }}</td>
+        <td>{{ form.address_instructions }}</td>
+        </tr>
       </div>
       <div class="fieldWrapper">
         {{ form.address_notes.errors }}
-        {{ form.address_notes.label_tag }}
-        {{ form.address_notes }}
+        <tr>
+        <td>{{ form.address_notes.label_tag }}</td>
+        <td>{{ form.address_notes }}</td>
+        </tr>
       </div>
+            </tbody>
+      </table>
     </div>
     <div id="menu2" class="tab-pane fade">
       <h3>Unidad</h3>
-
-      {{ form.non_field_errors }}
-      <div class="fieldWrapper">
-        {{ form.unit.errors }}
-        {{ form.unit.label_tag }}
-        {{ form.unit }}
-      </div>
+      <table>
+        <tbody>
+        {{ form.non_field_errors }}
+        <div class="fieldWrapper">
+          {{ form.unit.errors }}
+          <tr>
+          <td>{{ form.unit.label_tag }}</td>
+          <td>{{ form.unit }}</td>
+          </tr>
+        </div>
+        </tbody>
+      </table>
     </div>
     <div id="menu3" class="tab-pane fade">
       <h3>Timers</h3>
+      <table>
+        <tbody>
+          <div class="fieldWrapper">
+            {{ form.start_time.errors }}
+            <tr>
+            <td>{{ form.start_time.label_tag }}</td>
+            <td>{{ form.start_time }}</td>
+            </tr>
+          </div>
 
       <div class="fieldWrapper">
-        {{ form.start_time.errors }}
-        {{ form.start_time.label_tag }}
-        {{ form.start_time }}
-      </div>
-      <div class="fieldWrapper">
         {{ form.end_time.errors }}
-        {{ form.end_time.label_tag }}
-        {{ form.end_time }}
+        <tr>
+        <td>{{ form.end_time.label_tag }}</td>
+        <td>{{ form.end_time }}</td>
+        </tr>
       </div>
+
       <div class="fieldWrapper">
         {{ form.unit_assigned_time.errors }}
-        {{ form.unit_assigned_time.label_tag }}
-        {{ form.unit_assigned_time }}
+        <tr>
+        <td>{{ form.unit_assigned_time.label_tag }}</td>
+        <td>{{ form.unit_assigned_time }}</td>
+        </tr>
       </div>
+
       <div class="fieldWrapper">
         {{ form.unit_dispatched_time.errors }}
-        {{ form.unit_dispatched_time.label_tag }}
-        {{ form.unit_dispatched_time }}
+        <tr>
+        <td>{{ form.unit_dispatched_time.label_tag }}</td>
+        <td>{{ form.unit_dispatched_time }}</td>
+        </tr>
       </div>
+
       <div class="fieldWrapper">
         {{ form.arrival_time.errors }}
-        {{ form.arrival_time.label_tag }}
-        {{ form.arrival_time }}
+        <tr>
+        <td>{{ form.arrival_time.label_tag }}</td>
+        <td>{{ form.arrival_time }}</td>
+        </tr>
       </div>
+
       <div class="fieldWrapper">
         {{ form.attention_time.errors }}
-        {{ form.attention_time.label_tag }}
-        {{ form.attention_time }}
+        <tr>
+        <td>{{ form.attention_time.label_tag }}</td>
+        <td>{{ form.attention_time }}</td>
+        </tr>
       </div>
+
       <div class="fieldWrapper">
         {{ form.derivation_time.errors }}
-        {{ form.derivation_time.label_tag }}
-        {{ form.derivation_time }}
+        <tr>
+        <td>{{ form.derivation_time.label_tag }}</td>
+        <td>{{ form.derivation_time }}</td>
+        </tr>
       </div>
+
       <div class="fieldWrapper">
         {{ form.hospital_arrival.errors }}
-        {{ form.hospital_arrival.label_tag }}
-        {{ form.hospital_arrival }}
+        <tr>
+        <td>{{ form.hospital_arrival.label_tag }}</td>
+        <td>{{ form.hospital_arrival }}</td>
+        </tr>
       </div>
+
       <div class="fieldWrapper">
         {{ form.patient_arrival.errors }}
-        {{ form.patient_arrival.label_tag }}
-        {{ form.patient_arrival }}
+        <tr>
+        <td>{{ form.patient_arrival.label_tag }}</td>
+        <td>{{ form.patient_arrival }}</td>
+        </tr>
       </div>
+
       <div class="fieldWrapper">
         {{ form.final_emergency_time.errors }}
-        {{ form.final_emergency_time.label_tag }}
-        {{ form.final_emergency_time }}
+        <tr>
+        <td>{{ form.final_emergency_time.label_tag }}</td>
+        <td>{{ form.final_emergency_time }}</td>
+        </tr>
       </div>
       <div class="fieldWrapper">
         {{ form.is_active.errors }}
-        {{ form.is_active.label_tag }}
-        {{ form.is_active }}
+        <tr>
+        <td>{{ form.is_active.label_tag }}</td>
+        <td>{{ form.is_active }}</td>
+        </tr>
       </div>
+      </tbody>
+      </table>
     </div>
 
     </div>
