@@ -61,8 +61,9 @@ INSTALLED_APPS = [
     'vehicle.apps.VehicleConfig',
     #'minichat.apps.MinichatConfig',
     'notifications.apps.MinichatConfig',
-    'channels',
     'home.apps.HomeConfig',
+    'channels',
+    'mptt',
 
 ]
 
@@ -255,3 +256,5 @@ BASE_URL = os.environ['BASE_URL']
 ODOO_URL = os.environ['ODOO_URL']
 ODOO_USERNAME = os.environ['ODOO_USERNAME']
 ODOO_PASSWORD = os.environ['ODOO_PASSWORD']
+
+MPTT_ADMIN_LEVEL_INDENT = 20

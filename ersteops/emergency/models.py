@@ -293,8 +293,8 @@ class AttentionDerivation(models.Model):
         )
     motive = models.CharField("Motivo",max_length=100,blank=True)
     hospital = models.ForeignKey("AttentionHospital",
-    related_name="attention_hospital_name",
-    verbose_name= "hospital"
+        related_name="attention_hospital_name",
+        verbose_name= "hospital"
         )
     eventualities = models.TextField("eventualidades",max_length=100,blank=True)
     reception = models.CharField("quien recibe en hospital",max_length=100,blank=True)
@@ -342,4 +342,23 @@ def derivation_dictionary(instance):
     }
 
     return derivDict
+
+
+from mptt.models import MPTTModel, TreeForeignKey
+@python_2_unicode_compatible
+class Symptom(MPTTModel):
+    clave=models.CharField(max_length=20, blank=True, null=True)
+    name = models.CharField(max_length=200)
+    grado = models.IntegerField(blank=True, null=True)
+    parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True)
+
+    class MPTTMeta:
+        order_insertion_by = ['name']
+
+    def __str__(self):
+        if not self.grado:
+            self.grado=""
+        return "{0.clave} {0.name} - {0.grado}".format(self)
+
+
 
