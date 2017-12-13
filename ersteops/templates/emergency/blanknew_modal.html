@@ -1,6 +1,15 @@
-{% extends 'base.html' %}
+{% extends 'home/base_ui.html' %}
 {% load staticfiles %}
 {% load widget_tweaks %}
+
+{% block header %}
+  {# Main Sidebar #}
+  {% include "ui_component/sidebar.html" %}
+
+{% endblock header %}
+
+
+
 
 {% block content %}
 
@@ -28,7 +37,7 @@
      //    	$('#abre').trigger('click');
      //    }
         $('#abre').trigger('click');
-        //$('#id_odoo_client').val('{{ request.session.patientrequest.id }}');
+        $('#id_odoo_client').val('{{ request.session.patientrequest.id }}');
     });
     //$("#myModal").dialog({modal: true});
 </script>

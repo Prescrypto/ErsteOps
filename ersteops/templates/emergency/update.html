@@ -1,5 +1,12 @@
-{% extends 'base.html' %}
+{% extends 'home/base_ui.html' %}
 {% load staticfiles %}
+
+{% block header %}
+  {# Main Sidebar #}
+  {% include "ui_component/sidebar.html" %}
+
+{% endblock header %}
+
 
 {% block content %}
   <h1 class="page-header">Edit Incident</h1>
