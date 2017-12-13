@@ -6,7 +6,7 @@ from mptt.admin import MPTTModelAdmin
 
 # Register your models here.
 from .models import (Emergency, AttentionKind, AttentionZone, AttentionHospital,
-	AttentionDerivation, Symptom)
+	AttentionDerivation, Symptom, Symptom2)
 
 
 admin.site.register(Emergency)
@@ -16,3 +16,4 @@ admin.site.register(AttentionHospital)
 admin.site.register(AttentionDerivation)
 
 admin.site.register(Symptom, MPTTModelAdmin)
+admin.site.register(Symptom2)

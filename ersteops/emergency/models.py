@@ -344,6 +344,11 @@ def derivation_dictionary(instance):
     return derivDict
 
 
+'''
+The implementation is very simple, but it is done the other way round, you have to
+register the children first and then the parents, it is not very comfortable in the
+income, even with scripts
+'''
 from mptt.models import MPTTModel, TreeForeignKey
 @python_2_unicode_compatible
 class Symptom(MPTTModel):
@@ -361,4 +366,26 @@ class Symptom(MPTTModel):
         return "{0.clave} {0.name} - {0.grado}".format(self)
 
 
+@python_2_unicode_compatible
+class Symptom2(models.Model):
+    clave=models.CharField(max_length=20, blank=True, null=True)
+    name = models.CharField(max_length=200)
+    grado = models.CharField(max_length=8, blank=True, null=True)
+    children=models.ManyToManyField("self", blank=True, null=True)
+    nivel = models.CharField(max_length=8, default="0", blank=True, null=True)
+    n1 = models.CharField(max_length=8, default="0", blank=True, null=True)
+    n2 = models.CharField(max_length=8, default="0", blank=True, null=True)
+    n3 = models.CharField(max_length=8, default="0", blank=True, null=True)
+    n4 = models.CharField(max_length=8, default="0", blank=True, null=True)
+    n5 = models.CharField(max_length=8, default="0", blank=True, null=True)
+    n6 = models.CharField(max_length=8, default="0", blank=True, null=True)
+    n7 = models.CharField(max_length=8, default="0", blank=True, null=True)
+
+    class Meta:
+        ordering = ['n1', "n2", "n3", "n4", "n5", "n6", "n7"]
+
+    def __str__(self):
+        if not self.grado:
+            self.grado=""
+        return "{0.clave} {0.name} - {0.grado}".format(self)
 
