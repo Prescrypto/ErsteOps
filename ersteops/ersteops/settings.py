@@ -59,8 +59,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'emergency.apps.EmergencyConfig',
     'vehicle.apps.VehicleConfig',
-    #'minichat.apps.MinichatConfig',
-    'notifications.apps.MinichatConfig',
+    'notifications.apps.NotificationConfig',
     'channels',
     'home.apps.HomeConfig',
 
