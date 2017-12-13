@@ -365,7 +365,10 @@ class Symptom(MPTTModel):
             self.grado=""
         return "{0.clave} {0.name} - {0.grado}".format(self)
 
-
+'''
+proposal, a model with a m2m field on itself, parents can be registered first and then
+their children in a more comfortable and logical way
+'''
 @python_2_unicode_compatible
 class Symptom2(models.Model):
     clave=models.CharField(max_length=20, blank=True, null=True)

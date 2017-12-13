@@ -1,0 +1,404 @@
+Clave,N1,N2,N3,N4,N5,N6,N7,Nivel,Descripción,Grado
+1,1,0,0,0,0,0,0,1,AHOGADOS POR INMERSION,
+1.1,1,1,0,0,0,0,0,2,    No está consciente,1
+1.2,1,2,0,0,0,0,0,2,    Está conciente,
+1.2.1,1,2,1,0,0,0,0,3,        Respira mal,1
+1.2.2,1,2,2,0,0,0,0,3,        Respira bien,2
+10,10,0,0,0,0,0,0,1,CONFUSION-OBNUBILACION,
+10.1,10,1,0,0,0,0,0,2,    Respira Mal,1
+10.2,10,2,0,0,0,0,0,2,    Respira Bien,
+10.2.1,10,2,1,0,0,0,0,3,        Está pálido o sudoroso,2
+10.2.2,10,2,2,0,0,0,0,3,        No está pálido ni sudoroso,
+10.2.2.1,10,2,2,1,0,0,0,4,            Cuanto tiempo hace que está con este cuadro,
+10.2.2.1.1,10,2,2,1,1,0,0,5,                Menos de seis horas,2
+10.2.2.1.2,10,2,2,1,2,0,0,5,                Entre seis y doce horas,3
+10.2.2.1.3,10,2,2,1,3,0,0,5,                Más de doce horas,3
+10.2.2.2,10,2,2,2,0,0,0,4,            Se desconoce el tiempo de evolución,3
+100,100,0,0,0,0,0,0,1,CONTROL DE AUSENTISMO,3
+101,101,0,0,0,0,0,0,1,PARESIA (DIFICULTAD MOV.DE 1 O MAS MIEMBROS O BOCA,
+101.1,101,1,0,0,0,0,0,2,    Menor de tres horas de evolución,2
+101.2,101,2,0,0,0,0,0,2,    Mayor de tres horas de evolución,
+101.2.1,101,2,1,0,0,0,0,3,        No moviliza bien el resto de los miembros.,2
+101.2.2,101,2,2,0,0,0,0,3,        Moviliza bien resto miembros,
+101.2.2.1,101,2,2,1,0,0,0,4,            Habla mal,2
+101.2.2.2,101,2,2,2,0,0,0,4,            Habla bien,
+101.2.2.2.1,101,2,2,2,1,0,0,5,                Antecedentes de enfermedad neurológica,3
+101.2.2.2.2,101,2,2,2,2,0,0,5,                Sin antecedentes de enfermedad neurológica,3
+102,102,0,0,0,0,0,0,1,CUERPO EXTRAÑO EN NARIZ,
+102.1,102,1,0,0,0,0,0,2,    Respira mal,2
+102.2,102,2,0,0,0,0,0,2,    Respira bien,
+102.2.1,102,2,1,0,0,0,0,3,        Está sangrando,2
+102.2.2,102,2,2,0,0,0,0,3,        No está sangrando,3
+103,103,0,0,0,0,0,0,1,CUERPO EXTRAÑO EN OIDO,
+103.1,103,1,0,0,0,0,0,2,    Está sangrando,2
+103.2,103,2,0,0,0,0,0,2,    No está sangrando,3P
+104,104,0,0,0,0,0,0,1,CUERPO EXTRAÑO EN OJO,
+104.1,104,1,0,0,0,0,0,2,    Está con mucho dolor o irritación,3P
+104.2,104,2,0,0,0,0,0,2,    Está solamente con molestias leves,3
+105,105,0,0,0,0,0,0,1,EDEMAS EN MIEMBROS INFERIORES,
+105.1,105,1,0,0,0,0,0,2,    En un solo miembro,
+105.1.1,105,1,1,0,0,0,0,3,        Está azul o blanco,2
+105.1.2,105,1,2,0,0,0,0,3,        No está azul ni blanco,3
+105.2,105,2,0,0,0,0,0,2,    En ambos miembros,
+105.2.1,105,2,1,0,0,0,0,3,        Respira mal,2
+105.2.2,105,2,2,0,0,0,0,3,        Respira bien,3
+106,106,0,0,0,0,0,0,1,IRRITACION OCULAR,
+106.1,106,1,0,0,0,0,0,2,    Tuvo traumatismo,2
+106.2,106,2,0,0,0,0,0,2,    No tuvo traumatismo,
+106.2.1,106,2,1,0,0,0,0,3,        Le ingreso alguna sustancia irritativa,2
+106.2.2,106,2,2,0,0,0,0,3,        No le ingreso sustancia irritativa,3
+107,107,0,0,0,0,0,0,1,DOLOR DE ESPALDA/DOLOR DORSAL,
+107.1,107,1,0,0,0,0,0,2,    Tiene dolor con el movimiento,3
+107.2,107,2,0,0,0,0,0,2,    No tiene dolor con el movimiento,3
+108,108,0,0,0,0,0,0,1,DOLOR DE MIEMBROS,
+108.1,108,1,0,0,0,0,0,2,    Presentó traumatismo,
+108.1.1,108,1,1,0,0,0,0,3,        Evidencia de fractura,2
+108.1.2,108,1,2,0,0,0,0,3,        Sin evidencias de fractura,
+108.1.2.1,108,1,2,1,0,0,0,4,            Está sangrando,2
+108.1.2.2,108,1,2,2,0,0,0,4,            No está sangrando,3
+108.2,108,2,0,0,0,0,0,2,    No presentó traumatismo,
+108.2.1,108,2,1,0,0,0,0,3,        Está el miembro azul o blanco,2
+108.2.2,108,2,2,0,0,0,0,3,        El miembro no está azul o blanco,3
+109,109,0,0,0,0,0,0,1,DOLOR TESTICULAR,
+109.1,109,1,0,0,0,0,0,2,    Presentó traumatismo,2
+109.2,109,2,0,0,0,0,0,2,    No presentó traumatismo,
+109.2.1,109,2,1,0,0,0,0,3,        Tiempo de evolución menor de 12 horas,2
+109.2.2,109,2,2,0,0,0,0,3,        Tiempo de evolución mayor de 12 horas,3
+11,11,0,0,0,0,0,0,1,CAIDA DE ALTURA,1
+110,110,0,0,0,0,0,0,1,DOLOR DE OIDOS,3
+111,111,0,0,0,0,0,0,1,DOLOR DE GARGANTA,3
+112,112,0,0,0,0,0,0,1,DOLOR CORPORAL,
+112.1,112,1,0,0,0,0,0,2,    Tiene fiebre,3
+112.2,112,2,0,0,0,0,0,2,    No tiene fiebre,3
+113,113,0,0,0,0,0,0,1,EMBARAZO PRIMER TRIMESTRE,
+113.1,113,1,0,0,0,0,0,2,    Tiene hemorragia genital o perdida de liquido,2
+113.2,113,2,0,0,0,0,0,2,    No tiene hemorragia genital ni pérdida de líquido,
+113.2.1,113,2,1,0,0,0,0,3,        Tiene dolor abdominal,2
+113.2.2,113,2,2,0,0,0,0,3,        No tiene dolor abdominal,3
+114,114,0,0,0,0,0,0,1,ATRAGANTAMIENTO,
+114.1,114,1,0,0,0,0,0,2,    No puede hablar ni toser,1
+114.2,114,2,0,0,0,0,0,2,    Puede hablar o toser,2
+115,115,0,0,0,0,0,0,1,CONTROL EVOLUTIVO,
+115.1,115,1,0,0,0,0,0,2,    CONTROL DE INFECCIÓN RESPIRATORIA,3
+115.2,115,2,0,0,0,0,0,2,    CONTROL DE DIARREA O GASTROENTERITIS,3
+115.3,115,3,0,0,0,0,0,2,    CONTROL DE ERUPTIVA,3
+115.4,115,4,0,0,0,0,0,2,    CONTROL DE HIPERTENSION ARTERIAL,3
+115.5,115,5,0,0,0,0,0,2,    CONTROL DE SINDROME FEBRIL,3
+115.6,115,6,0,0,0,0,0,2,    CONTROL DE OTRA ENFERMEDAD,3
+116,116,0,0,0,0,0,0,1,LLANTO EN NIÑO,
+116.1,116,1,0,0,0,0,0,2,    Se pone azul y luego se recupera,3
+116.2,116,2,0,0,0,0,0,2,    No se pone Azul,
+116.2.1,116,2,1,0,0,0,0,3,        Aparece Bruscamente y lo despierta,3
+116.2.2,116,2,2,0,0,0,0,3,        NO apareció bruscamente,
+116.2.2.1,116,2,2,1,0,0,0,4,            Se calma al estar en brazos,3
+116.2.2.2,116,2,2,2,0,0,0,4,            No se calma al estar en brazos,3
+14,14,0,0,0,0,0,0,1,CEFALEA,
+14.1,14,1,0,0,0,0,0,2,    Tuvo trauma de cráneo,2
+14.2,14,2,0,0,0,0,0,2,    No tuvo trauma de craneo,
+14.2.1,14,2,1,0,0,0,0,3,        Tiene cambios de conducta o alt conciencia,2
+14.2.2,14,2,2,0,0,0,0,3,        Sin cambios de conducta,
+14.2.2.1,14,2,2,1,0,0,0,4,            Tiene vómitos,3
+14.2.2.2,14,2,2,2,0,0,0,4,            No tiene vómitos,3
+15,15,0,0,0,0,0,0,1,DIARREA,3
+16,16,0,0,0,0,0,0,1,DEBILIDAD-DECAIMIENTO-PALIDEZ,
+16.1,16,1,0,0,0,0,0,2,    No está conciente,1
+16.2,16,2,0,0,0,0,0,2,    Está conciente,
+16.2.1,16,2,1,0,0,0,0,3,        Respira mal,2
+16.2.2,16,2,2,0,0,0,0,3,        Respira bien,
+16.2.2.1,16,2,2,1,0,0,0,4,            Hace menos de 60 minutos,3
+16.2.2.2,16,2,2,2,0,0,0,4,            Hace más de 60 minutos,
+16.2.2.2.1,16,2,2,2,1,0,0,5,                Tiene fiebre,3
+16.2.2.2.2,16,2,2,2,2,0,0,5,                No tiene fiebre,3
+18,18,0,0,0,0,0,0,1,DISNEA,
+18.1,18,1,0,0,0,0,0,2,    Respira mal ahora,
+18.1.1,18,1,1,0,0,0,0,3,        Tiene alt. de la conciencia,1
+18.1.2,18,1,2,0,0,0,0,3,"        No tiene alt, de la conciencia",
+18.1.2.1,18,1,2,1,0,0,0,4,            Esta azulado o morado,1
+18.1.2.2,18,1,2,2,0,0,0,4,            No está azul ni morado,
+18.1.2.2.1,18,1,2,2,1,0,0,5,                Tiene 2 años o más,
+18.1.2.2.1.1,18,1,2,2,1,1,0,6,                    Tiene dificultad para hablar por la disnea,2
+18.1.2.2.1.2,18,1,2,2,1,2,0,6,                    La disnea no le dificulta hablar,3P
+18.1.2.2.2,18,1,2,2,2,0,0,5,                Tiene menos de dos años,
+18.1.2.2.2.1,18,1,2,2,2,1,0,6,                    Tiene dificultad para dormir o alimentarse,2
+18.1.2.2.2.2,18,1,2,2,2,2,0,6,                    No tiene dificultad para dormir o alimentarse,3P
+18.2,18,2,0,0,0,0,0,2,    Respira bien ahora,
+18.2.1,18,2,1,0,0,0,0,3,        Tiene tos o fiebre,3
+18.2.2,18,2,2,0,0,0,0,3,        No tiene tos ni fiebre,3
+19,19,0,0,0,0,0,0,1,DOLOR ABDOMINAL,
+19.1,19,1,0,0,0,0,0,2,    El dolor es en la parte superior del abdomen,
+19.1.1,19,1,1,0,0,0,0,3,        Tiene antecedentes de enfermedad cardiaca,2
+19.1.2,19,1,2,0,0,0,0,3,        No tiene antecedentes de enfermedad cardiaca,3
+19.2,19,2,0,0,0,0,0,2,    El dolor no es en la parte superior del abdomen,
+19.2.1,19,2,1,0,0,0,0,3,        Tiene vómitos o diarrea,3
+19.2.2,19,2,2,0,0,0,0,3,        No tiene vómitos o diarrea,3
+2,2,0,0,0,0,0,0,1,ALTERACION DE LA AUDICION,3
+20,20,0,0,0,0,0,0,1,DOLOR DE TORAX,
+20.1,20,1,0,0,0,0,0,2,    Tiene antecedentes cardiacos,1
+20.2,20,2,0,0,0,0,0,2,    No tiene antecedentes de enfermedad cardiaca,
+20.2.1,20,2,1,0,0,0,0,3,        Tiene antecedentes de trauma de tórax,2
+20.2.2,20,2,2,0,0,0,0,3,        Sin antecedentes de trauma de torax,
+20.2.2.1,20,2,2,1,0,0,0,4,            Tiene fiebre o tos,3
+20.2.2.2,20,2,2,2,0,0,0,4,            No tiene fiebre ni tos,3
+21,21,0,0,0,0,0,0,1,DISARTRIA,
+21.1,21,1,0,0,0,0,0,2,    Comenzó hace menos de 6 hs o se desconoce el tiemp,2
+21.2,21,2,0,0,0,0,0,2,    Hace más de 6 horas que comenzó,
+21.2.1,21,2,1,0,0,0,0,3,        Tiene dificultad para movilizar un miembro,2
+21.2.2,21,2,2,0,0,0,0,3,        No tiene dificultad para movilizar un miembro,3
+22,22,0,0,0,0,0,0,1,TRANSTORNO EN LA MICCION,
+22.1,22,1,0,0,0,0,0,2,    Tiene sonda,
+22.1.1,22,1,1,0,0,0,0,3,        Está obstruída,3S
+22.1.2,22,1,2,0,0,0,0,3,        No está obstruída,
+22.1.2.1,22,1,2,1,0,0,0,4,            Tiene dolor abdominal,3
+22.1.2.2,22,1,2,2,0,0,0,4,            No tiene dolor abdominal,
+22.1.2.2.1,22,1,2,2,1,0,0,5,                Tiene ardor uretral,3
+22.1.2.2.2,22,1,2,2,2,0,0,5,                No tiene ardor uretral,3
+22.2,22,2,0,0,0,0,0,2,    No tiene sonda,
+22.2.1,22,2,1,0,0,0,0,3,        Tiene dolor abdominal,3
+22.2.2,22,2,2,0,0,0,0,3,        No tiene dolor abdominal,3
+23,23,0,0,0,0,0,0,1,ERUPCION CUTANEA,
+23.1,23,1,0,0,0,0,0,2,    Tiene dificultad para respirar,1
+23.2,23,2,0,0,0,0,0,2,    Sin dificultad respiratoria,
+23.2.1,23,2,1,0,0,0,0,3,        Tiene hinchada cara o lengua,2
+23.2.2,23,2,2,0,0,0,0,3,        NO hinchada cara ni lengua,
+23.2.2.1,23,2,2,1,0,0,0,4,            Tiene ronchas en la piel,3
+23.2.2.2,23,2,2,2,0,0,0,4,            No tiene ronchas en la piel,
+23.2.2.2.1,23,2,2,2,1,0,0,5,                Lo picó algún insecto,3
+23.2.2.2.2,23,2,2,2,2,0,0,5,                No lo picó ningún insecto,3
+24,24,0,0,0,0,0,0,1,ELECTROCUCION,
+24.1,24,1,0,0,0,0,0,2,    No está conciente,1
+24.2,24,2,0,0,0,0,0,2,    Está conciente,
+24.2.1,24,2,1,0,0,0,0,3,        Respira mal,1
+24.2.2,24,2,2,0,0,0,0,3,        Respira bien,2
+25,25,0,0,0,0,0,0,1,FIEBRE,3
+26,26,0,0,0,0,0,0,1,GRIPE,3
+27,27,0,0,0,0,0,0,1,HERIDA POR ARMA BLANCA O DE FUEGO,1
+28,28,0,0,0,0,0,0,1,HEMORRAGIAS,
+28.1,28,1,0,0,0,0,0,2,    No está conciente,1
+28.2,28,2,0,0,0,0,0,2,    Está conciente,
+28.2.1,28,2,1,0,0,0,0,3,        Respira mal,1
+28.2.2,28,2,2,0,0,0,0,3,        Respira bien,
+28.2.2.1,28,2,2,1,0,0,0,4,            Está sudoroso,2
+28.2.2.2,28,2,2,2,0,0,0,4,            No está sudoroso,
+28.2.2.2.1,28,2,2,2,1,0,0,5,                Vómitos con sangre,2
+28.2.2.2.2,28,2,2,2,2,0,0,5,                Materia fecal con sangre,
+28.2.2.2.2.1,28,2,2,2,2,1,0,6,                    Sangrado abundante,2
+28.2.2.2.2.2,28,2,2,2,2,2,0,6,                    Sangrado escaso,3
+28.2.2.2.3,28,2,2,2,3,0,0,5,                Orina con sangre,3
+28.2.2.2.4,28,2,2,2,4,0,0,5,                Sangrado ginecológico,
+28.2.2.2.4.1,28,2,2,2,4,1,0,6,                    Sin embarazo,3
+28.2.2.2.4.2,28,2,2,2,4,2,0,6,                    Con embarazo,
+28.2.2.2.4.2.1,28,2,2,2,4,2,1,7,                        Primer o segundo semestre,2
+28.2.2.2.4.2.2,28,2,2,2,4,2,2,7,                        Tercer trimestre,2
+28.2.2.2.5,28,2,2,2,5,0,0,5,                Tos con sangre,
+28.2.2.2.5.1,28,2,2,2,5,1,0,6,                    Tiene dificultad respiratoria,2
+28.2.2.2.5.2,28,2,2,2,5,2,0,6,                    No tiene dificultad respiratoria,3
+28.2.2.2.6,28,2,2,2,6,0,0,5,                Sangra por nariz,
+28.2.2.2.6.1,28,2,2,2,6,1,0,6,                    Tuvo traumatismo,2
+28.2.2.2.6.2,28,2,2,2,6,2,0,6,                    No tuvo traumatismo,3
+28.2.2.2.7,28,2,2,2,7,0,0,5,                Se desconoce por donde sangra,2
+29,29,0,0,0,0,0,0,1,HIPERTENSION ARTERIAL,
+29.1,29,1,0,0,0,0,0,2,    Dificultad para hablar,2
+29.2,29,2,0,0,0,0,0,2,    Sin dificultad para hablar,
+29.2.1,29,2,1,0,0,0,0,3,        Cefalea,3
+29.2.2,29,2,2,0,0,0,0,3,        Sin cefalea ni otros síntomas,3
+30,30,0,0,0,0,0,0,1,HIPOTENSION ARTERIAL (TA menor 90 mmHg),
+30.1,30,1,0,0,0,0,0,2,    Tiene dolor de pecho,2
+30.2,30,2,0,0,0,0,0,2,    No tiene dolor de pecho,
+30.2.1,30,2,1,0,0,0,0,3,        Esta sudoroso,3P
+30.2.2,30,2,2,0,0,0,0,3,        NO está sudoroso,
+30.2.2.1,30,2,2,1,0,0,0,4,            No tiene síntomas específicos,3
+31,31,0,0,0,0,0,0,1,INTENTO DE SUICIDIO,1
+32,32,0,0,0,0,0,0,1,INCONTINENCIA DE ESFINTERES,
+32.1,32,1,0,0,0,0,0,2,    Tuvo convulsiones,2
+32.2,32,2,0,0,0,0,0,2,    No tuvo convulsiones,3
+33,33,0,0,0,0,0,0,1,INTOXICACION POR GASES TOXICOS O DROGAS,
+33.1,33,1,0,0,0,0,0,2,    No está consciente,1
+33.2,33,2,0,0,0,0,0,2,    Está consciente,
+33.2.1,33,2,1,0,0,0,0,3,        Respira mal,1
+33.2.2,33,2,2,0,0,0,0,3,        Respira bien,
+33.2.2.1,33,2,2,1,0,0,0,4,            Ocurrió recién (menos de 2 horas),2
+33.2.2.2,33,2,2,2,0,0,0,4,            No ocurrió recién (más de 2 horas),
+33.2.2.2.1,33,2,2,2,1,0,0,5,"                Tiene náuseas, vómitos o cefalea",2
+33.2.2.2.2,33,2,2,2,2,0,0,5,"                No tiene náuseas, vómitos ni cefalea",3P
+34,34,0,0,0,0,0,0,1,LUMBALGIA,
+34.1,34,1,0,0,0,0,0,2,    Antecedentes de cólico renal,
+34.1.1,34,1,1,0,0,0,0,3,        Está cursando un cólico renal,2
+34.1.2,34,1,2,0,0,0,0,3,        No está cursando un cólico renal,3
+34.2,34,2,0,0,0,0,0,2,    No tiene antecedentes de cólico renal,3
+35,35,0,0,0,0,0,0,1,MAREOS,
+35.1,35,1,0,0,0,0,0,2,    Estuvo mucho tiempo parado,3
+35.2,35,2,0,0,0,0,0,2,    No estuvo mucho tiempo parado,
+35.2.1,35,2,1,0,0,0,0,3,        Está en ayunas,3
+35.2.2,35,2,2,0,0,0,0,3,        No está en ayunas,3
+36,36,0,0,0,0,0,0,1,MORDEDURA DE...,
+36.1,36,1,0,0,0,0,0,2,    Sangra mucho,1
+36.2,36,2,0,0,0,0,0,2,    No sangra mucho,
+36.2.1,36,2,1,0,0,0,0,3,        Lesiones múltiples y/o en cara,2
+36.2.2,36,2,2,0,0,0,0,3,        Sin lesiones múltiples o cara,3
+37,37,0,0,0,0,0,0,1,NAUSEAS-VOMITOS,
+37.1,37,1,0,0,0,0,0,2,    Tiene vómitos con sangre,2
+37.2,37,2,0,0,0,0,0,2,    No tiene vómitos con sangre,
+37.2.1,37,2,1,0,0,0,0,3,        Tuvo traumatismo de cráneo,2
+37.2.2,37,2,2,0,0,0,0,3,        No tuvo traumatismo de cráneo,
+37.2.2.1,37,2,2,1,0,0,0,4,            Tiene dolor abdominal,3
+37.2.2.2,37,2,2,2,0,0,0,4,            No tiene dolor abdominal,3
+38,38,0,0,0,0,0,0,1,POLITRAUMATISMO,
+38.1,38,1,0,0,0,0,0,2,    No está consciente,1
+38.2,38,2,0,0,0,0,0,2,    Está consciente,
+38.2.1,38,2,1,0,0,0,0,3,        No respira o respira mal,1
+38.2.2,38,2,2,0,0,0,0,3,        Respira bien,
+38.2.2.1,38,2,2,1,0,0,0,4,            Tiene hemorragia evidente,1
+38.2.2.2,38,2,2,2,0,0,0,4,            No tiene hemorragia evidente,
+38.2.2.2.1,38,2,2,2,1,0,0,5,                Está caído en el suelo,1
+38.2.2.2.2,38,2,2,2,2,0,0,5,                No está caído en el suelo,2
+39,39,0,0,0,0,0,0,1,PARESTESIAS (HORMIGUEOS),
+39.1,39,1,0,0,0,0,0,2,    Tiene dificultad para mover el miembro,3
+39.2,39,2,0,0,0,0,0,2,    No tiene dificultad para mover el miembro,3
+4,4,0,0,0,0,0,0,1,ACCIDENTE VEHICULAR,1
+41,41,0,0,0,0,0,0,1,PACIENTE VIOLENTO,2
+42,42,0,0,0,0,0,0,1,PROBLEMAS VINCULADOS CON LA DBT,
+42.1,42,1,0,0,0,0,0,2,    Tiene alteracion de la conciencia,2
+42.2,42,2,0,0,0,0,0,2,    No tiene alteración de la conciencia,
+42.2.1,42,2,1,0,0,0,0,3,        Esta sudoroso o pálido,2
+42.2.2,42,2,2,0,0,0,0,3,        No esta sudoroso ni pálido,
+42.2.2.1,42,2,2,1,0,0,0,4,            No se aplica insulina,3
+42.2.2.2,42,2,2,2,0,0,0,4,            Se aplica insulina,
+42.2.2.2.1,42,2,2,2,1,0,0,5,                Está hipoglucémico (menor a 70),1
+42.2.2.2.2,42,2,2,2,2,0,0,5,                No está hipoglucémico,
+42.2.2.2.2.1,42,2,2,2,2,1,0,6,                    Está hiperglucémico,
+42.2.2.2.2.1.1,42,2,2,2,2,1,1,7,                        Mayor a 300,2
+42.2.2.2.2.1.2,42,2,2,2,2,1,2,7,                        Menor a 300,3P
+42.2.2.2.2.2,42,2,2,2,2,2,0,6,                    No está hiperglucémico,3
+43,43,0,0,0,0,0,0,1,PICADURA DE...,
+43.1,43,1,0,0,0,0,0,2,    Respira mal,1
+43.2,43,2,0,0,0,0,0,2,    Respira bien,
+43.2.1,43,2,1,0,0,0,0,3,        Tiene hinchada la cara o lengua,2
+43.2.2,43,2,2,0,0,0,0,3,        No tiene hinchada cara ni lengua,
+43.2.2.1,43,2,2,1,0,0,0,4,            Antecedentes de edema de glotis,3P
+43.2.2.2,43,2,2,2,0,0,0,4,            Sin antecedentes de edema de glotis,3
+44,44,0,0,0,0,0,0,1,QUEMADURAS,
+44.1,44,1,0,0,0,0,0,2,    No está consciente,1
+44.2,44,2,0,0,0,0,0,2,    Está consciente,
+44.2.1,44,2,1,0,0,0,0,3,        Respira mal,1
+44.2.2,44,2,2,0,0,0,0,3,        Respira bien,
+44.2.2.1,44,2,2,1,0,0,0,4,            En cara-torso-abdomen o todo miembro,1
+44.2.2.2,44,2,2,2,0,0,0,4,            No cara-torso-abdomen o todo miembro,3P
+45,45,0,0,0,0,0,0,1,SIN DATOS,1
+46,46,0,0,0,0,0,0,1,TOS,3
+5,5,0,0,0,0,0,0,1,ARRITMIAS,
+5.1,5,1,0,0,0,0,0,2,    No está conciente,1
+5.2,5,2,0,0,0,0,0,2,    Está conciente,
+5.2.1,5,2,1,0,0,0,0,3,        Tiene dolor de pecho,1
+5.2.2,5,2,2,0,0,0,0,3,        No tiene dolor de pecho,2
+50,50,0,0,0,0,0,0,1,TRAUMA DE TORAX,
+50.1,50,1,0,0,0,0,0,2,    Respira mal,2
+50.2,50,2,0,0,0,0,0,2,    Respira bien,
+50.2.1,50,2,1,0,0,0,0,3,        Está sangrando,2
+50.2.2,50,2,2,0,0,0,0,3,        No está sangrando,
+50.2.2.1,50,2,2,1,0,0,0,4,            Tiene dolor en tórax,3P
+50.2.2.2,50,2,2,2,0,0,0,4,            No tiene dolor en tórax,3
+51,51,0,0,0,0,0,0,1,TRAUMA DORSO LUMBAR,
+51.1,51,1,0,0,0,0,0,2,    Respira mal,2
+51.2,51,2,0,0,0,0,0,2,    Respira bien,
+51.2.1,51,2,1,0,0,0,0,3,        Orinó con sangre,2
+51.2.2,51,2,2,0,0,0,0,3,        No orinó con sangre,
+51.2.2.1,51,2,2,1,0,0,0,4,            No mueve bien las piernas,2
+51.2.2.2,51,2,2,2,0,0,0,4,            Mueve bien las piernas,3
+52,52,0,0,0,0,0,0,1,TRAUMA DE ABDOMEN O PELVIS,
+52.1,52,1,0,0,0,0,0,2,    Está inconsciente,1
+52.2,52,2,0,0,0,0,0,2,    Está consciente,
+52.2.1,52,2,1,0,0,0,0,3,        Está sangrando o sudoroso,1
+52.2.2,52,2,2,0,0,0,0,3,        No está sangrando ni sudoroso,
+52.2.2.1,52,2,2,1,0,0,0,4,            No se moviliza,2
+52.2.2.2,52,2,2,2,0,0,0,4,            Se moviliza,
+52.2.2.2.1,52,2,2,2,1,0,0,5,                Tiene dolor abdominal,3P
+52.2.2.2.2,52,2,2,2,2,0,0,5,                No tiene dolor abdominal,3
+53,53,0,0,0,0,0,0,1,TRAUMATISMO FACIAL,
+53.1,53,1,0,0,0,0,0,2,    No está consciente,1
+53.2,53,2,0,0,0,0,0,2,    Está consciente,
+53.2.1,53,2,1,0,0,0,0,3,        Respira mal,2
+53.2.2,53,2,2,0,0,0,0,3,        Respira bien,
+53.2.2.1,53,2,2,1,0,0,0,4,            Está sangrando,3P
+53.2.2.2,53,2,2,2,0,0,0,4,            No está sangrando,3
+54,54,0,0,0,0,0,0,1,TRAUMATISMO DE MIEMBROS,
+54.1,54,1,0,0,0,0,0,2,    Tiene el miembro deformado o imposibilidad de move,2
+54.2,54,2,0,0,0,0,0,2,    No tiene el miembro deformado y puede moverlo,
+54.2.1,54,2,1,0,0,0,0,3,        Está sangrando,2
+54.2.2,54,2,2,0,0,0,0,3,        No está sangrando,
+54.2.2.1,54,2,2,1,0,0,0,4,            Tiene dolor,3P
+54.2.2.2,54,2,2,2,0,0,0,4,            No tiene dolor,3
+55,55,0,0,0,0,0,0,1,TRAUMATISMO DE CRANEO,
+55.1,55,1,0,0,0,0,0,2,    No esta consciente,1
+55.2,55,2,0,0,0,0,0,2,    Esta consciente actualmente,
+55.2.1,55,2,1,0,0,0,0,3,        Cuando se golpeó tuvo pérdida conocimiento,2
+55.2.2,55,2,2,0,0,0,0,3,        Cuando se golpeó no tuvo pérdida conocimiento,
+55.2.2.1,55,2,2,1,0,0,0,4,            Está sangrando,2
+55.2.2.2,55,2,2,2,0,0,0,4,            No está sangrando,
+55.2.2.2.1,55,2,2,2,1,0,0,5,                Tiene tendencia al sueño,2
+55.2.2.2.2,55,2,2,2,2,0,0,5,                No tiene tendencia al sueño,
+55.2.2.2.2.1,55,2,2,2,2,1,0,6,                    Tiene vómitos,2
+55.2.2.2.2.2,55,2,2,2,2,2,0,6,                    NO tiene vómitos,
+55.2.2.2.2.2.1,55,2,2,2,2,2,1,7,                        Tiene cambios de conducta,2
+55.2.2.2.2.2.2,55,2,2,2,2,2,2,7,                        No tiene cambios de conducta,3
+56,56,0,0,0,0,0,0,1,EMBARAZO A TERMINO,
+56.1,56,1,0,0,0,0,0,2,    El nino esta saliendo,1
+56.2,56,2,0,0,0,0,0,2,    No esta saliendo,
+56.2.1,56,2,1,0,0,0,0,3,        Perdió sangre,1
+56.2.2,56,2,2,0,0,0,0,3,        No perdió sangre,
+56.2.2.1,56,2,2,1,0,0,0,4,            Tiene contracciones,
+56.2.2.1.1,56,2,2,1,1,0,0,5,                Primer embrazo,
+56.2.2.1.1.1,56,2,2,1,1,1,0,6,                    Contracciones cada 2 minutos o menos,1
+56.2.2.1.1.2,56,2,2,1,1,2,0,6,                    Contracciones cada más de dos minutos,2
+56.2.2.1.2,56,2,2,1,2,0,0,5,                Embarazos previos,
+56.2.2.1.2.1,56,2,2,1,2,1,0,6,                    Contracciones cada 5 minutos o menos,1
+56.2.2.1.2.2,56,2,2,1,2,2,0,6,                    Contracciones cada más de 5 minutos,2
+56.2.2.2,56,2,2,2,0,0,0,4,            No tiene contracciones,
+56.2.2.2.1,56,2,2,2,1,0,0,5,                Perdió líquido o rompió bolsa,2
+56.2.2.2.2,56,2,2,2,2,0,0,5,                No perdió líquido ni rompió bolsa,3
+57,57,0,0,0,0,0,0,1,TEMBLOR,
+57.1,57,1,0,0,0,0,0,2,    No está lúcido,1
+57.2,57,2,0,0,0,0,0,2,    Está lúcido,
+57.2.1,57,2,1,0,0,0,0,3,        Tiene fiebre,3
+57.2.2,57,2,2,0,0,0,0,3,        No tiene fiebre,
+57.2.2.1,57,2,2,1,0,0,0,4,            Tiene antecedentes de enfermedad de tiroides,3
+57.2.2.2,57,2,2,2,0,0,0,4,            No tiene antecedentes de enfermedad de tiroides,3
+58,58,0,0,0,0,0,0,1,VICTIMAS MULTIPLES,1
+59,59,0,0,0,0,0,0,1,PALPITACIONES,
+59.1,59,1,0,0,0,0,0,2,    Tiene fiebre,3
+59.2,59,2,0,0,0,0,0,2,    No tiene fiebre,
+59.2.1,59,2,1,0,0,0,0,3,        Antecedentes de problemas en tiroides,3
+59.2.2,59,2,2,0,0,0,0,3,        Sin antecedentes de problemas en tiroides,
+59.2.2.1,59,2,2,1,0,0,0,4,            Antecedentes de enfermedad cardiaca,3
+59.2.2.2,59,2,2,2,0,0,0,4,            Sin antecedentes de enfermedad cardiaca,3
+60,60,0,0,0,0,0,0,1,VIA PUBLICA,1
+61,61,0,0,0,0,0,0,1,GALENO EN QTH,
+61.1,61,1,0,0,0,0,0,2,    Requiere grado 1,1
+61.2,61,2,0,0,0,0,0,2,    Requiere grado 2,2
+61.3,61,3,0,0,0,0,0,2,    Requiere grado 3,3
+62,62,0,0,0,0,0,0,1,HERIDA CORTANTE,
+62.1,62,1,0,0,0,0,0,2,    Con sangrado activo,2
+62.2,62,2,0,0,0,0,0,2,    Sin sangrado activo,3P
+7,7,0,0,0,0,0,0,1,CONSTIPACION,3
+8,8,0,0,0,0,0,0,1,CONVULSIONES,
+8.1,8,1,0,0,0,0,0,2,    Esta convulsionando ahora,1
+8.2,8,2,0,0,0,0,0,2,    No esta convulsionado ahora,
+8.2.1,8,2,1,0,0,0,0,3,        No está conciente,1
+8.2.2,8,2,2,0,0,0,0,3,        Está conciente,
+8.2.2.1,8,2,2,1,0,0,0,4,            Respira mal,2
+8.2.2.2,8,2,2,2,0,0,0,4,            Respira bien,3P
+9,9,0,0,0,0,0,0,1,TRASTORNOS DE CONDUCTA,
+9.1,9,1,0,0,0,0,0,2,    Está muy violento o agresivo,2
+9.2,9,2,0,0,0,0,0,2,    No está violento o agresivo,
+9.2.1,9,2,1,0,0,0,0,3,        Está alcoholizado o consumió drogas,2
+9.2.2,9,2,2,0,0,0,0,3,        No está alcoholizado ni consumió drogas,
+9.2.2.1,9,2,2,1,0,0,0,4,            Tuvo trauma de cráneo,2
+9.2.2.2,9,2,2,2,0,0,0,4,            No tuvo trauma de cráneo,3
+97,97,0,0,0,0,0,0,1,PERDIDA DE CONOCIMIENTO,
+97.1,97,1,0,0,0,0,0,2,    No se recuperó,1
+97.2,97,2,0,0,0,0,0,2,    Se recuperó,
+97.2.1,97,2,1,0,0,0,0,3,        Respira mal,2
+97.2.2,97,2,2,0,0,0,0,3,        Respira bien,
+97.2.2.1,97,2,2,1,0,0,0,4,            Habla con dificultad,2
+97.2.2.2,97,2,2,2,0,0,0,4,            Habla sin dificultad,
+97.2.2.2.1,97,2,2,2,1,0,0,5,                Tuvo traumatismo,1
+97.2.2.2.2,97,2,2,2,2,0,0,5,                No tuvo traumatismo,3P
