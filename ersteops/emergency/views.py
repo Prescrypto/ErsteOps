@@ -198,46 +198,68 @@ class EmergencyClientModal(View):
     template_name = "emergency/blank_modal.html"
     def get(self, request, *args, **kwargs):
         form = OdooClientForm
-        jq_openmodal = 'false'
+        feContext = {}
+        feContext['openmodal'] = 'false'
+        feContext['showMultiple'] = False
+        feContext['count'] = 0
+        find_data = []
+
+        #jq_openmodal = 'false'
+
         request.session['patientrequest'] = {}
-        return render(request, self.template_name,{"form": form, "openmodal": jq_openmodal})
+        return render(request, self.template_name,{"form": form, "find_data": find_data, "feContext": feContext})
 
     def post(self, request, *args, **kwargs):
         form = OdooClientForm(request.POST)
         find_data = []
+        patient_data = {}
+        feContext = {}
+        feContext['openmodal'] = 'true'
+        feContext['showMultiple'] =  True
+        feContext['count'] = 0
         if form.is_valid():
-            jq_openmodal = 'true'
             # Ini Odoo api
             _api_odoo = OdooApi()
             # Get Access token
             result = _api_odoo.get_token()
             logger.info('%s (%s)' % ('OdooApi',result))
             logger.info('%s (%s)' % ('Access-Token',result['access_token']))
+            find_data = []
+
             if form.cleaned_data['search_type'] == '1':
                 patient = form.cleaned_data['client_name']
                 patient_data = _api_odoo.get_by_patient_name( patient,result['access_token'])
-                logger.info('%s (%s)' % ('OdooApi',patient_data))
+                find_data = patient_data['results']
+                feContext['count'] = len(patient_data['results'])
+                logger.info('%s (%s)' % ('OdooApi_name',patient_data))
             if form.cleaned_data['search_type'] == '2':
                 patient = form.cleaned_data['client_name']
                 patient_data = _api_odoo.get_by_patient_street( patient,result['access_token'])
-                #print(patient_data)
-                find_data = json.dumps(patient_data['results'])
-                logger.info('%s (%s)' % ('OdooApi',patient_data))
+                find_data = patient_data['results']
+                feContext['count'] = len(patient_data['results'])
+                logger.info('%s (%s)' % ('OdooApi_street',patient_data))
             if form.cleaned_data['search_type'] == '3':
                 patient = form.cleaned_data['client_name']
                 patient_data = _api_odoo.get_by_patient_id( patient,result['access_token'])
-                #print(patient_data)
-                find_data = []
-                logger.info('%s (%s)' % ('OdooApi',patient_data))
+                find_data = patient_data
+                print("******** count *********")
+                print(find_data)
+                try: 
+                    if find_data.name:
+                        feContext['count'] = 1
+                except:
+                    feContext['count'] = 0
+                feContext['showMultiple'] = False
+                logger.info('%s (%s)' % ('OdooApi_id',patient_data))
             if form.cleaned_data['search_type'] == '5':
                 patient = form.cleaned_data['client_name']
                 patient_data = _api_odoo.get_by_all( patient,result['access_token'])
-                #print(patient_data)
-                find_data = json.dumps(patient_data['results'])
+                find_data = patient_data['results']
+                feContext['count'] = len(patient_data['results'])
                 logger.info('%s (%s)' % ('OdooApi',patient_data))
             else:
-                return render(request, self.template_name,{"form": form, "result": result, "openmodal": jq_openmodal, })
-        return render(request, self.template_name,{'form': form, 'result': result, 'patients': patient_data, 'openmodal': jq_openmodal})
+                return render(request, self.template_name,{"form": form, "result": result, "find_data": find_data, "feContext": feContext  })
+        return render(request, self.template_name,{'form': form, 'result': result,"find_data": find_data, "feContext": feContext })
 
 class EmergencyNewModal(CreateView):
     template_name = "emergency/blanknew_modal.html"
