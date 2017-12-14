@@ -10,7 +10,6 @@ logger = logging.getLogger('django_info')
 
 # Create your views here.
 def get_subscriptor(request):
-    my_session=request.session['resultodoo']
     if request.is_ajax():
         # Ini Odoo api
         _api_odoo = OdooApi()
