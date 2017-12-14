@@ -61,7 +61,6 @@ class EmergencyNew(CreateView):
                 'patient_notes',
                 'main_complaint',
                 'complaint_descriprion',
-                'required_attention',
                 'subscription_type'
                 ]
     success_url = '/emergency/list/'
@@ -144,7 +143,6 @@ class EmergencyUpdate(UpdateView):
                 'patient_notes',
                 'main_complaint',
                 'complaint_descriprion',
-                'required_attention',
                 'subscription_type'
                 ]
     success_url = '/emergency/list/'

@@ -82,7 +82,6 @@ class Emergency(models.Model):
     # Symptoms
     main_complaint = models.CharField('sintoma principal',max_length=100,default='',blank=True)
     complaint_descriprion = models.TextField('descripcion de los sintomas',default='',blank=True)
-    required_attention = models.CharField('Tipo de atencion requerida',default='',max_length=100,blank=True)
     subscription_type = models.CharField('subscripcion',max_length=100,default='',blank=True)
     # derivation = models.ManyToManyField('AttentionDerivation',
     #     related_name = 'derivation_issue',
@@ -232,7 +231,6 @@ def emergency_dictionary(instance):
         "patient_notes":instance.patient_notes,
         "main_complaint":instance.main_complaint,
         "complaint_descriprion":instance.complaint_descriprion,
-        "required_attention":instance.required_attention,
         "subscription_type":instance.subscription_type,
     }
 
