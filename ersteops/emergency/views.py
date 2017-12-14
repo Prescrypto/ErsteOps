@@ -8,7 +8,7 @@ from django.shortcuts import render,redirect
 from django.views.generic import View, CreateView, ListView, DetailView, UpdateView
 from emergency.models import Emergency,AttentionDerivation
 from django.utils import timezone
-from emergency.forms import OdooClientForm
+from emergency.forms import OdooClientForm, OdooClientAuto
 from core.utils import OdooApi
 import requests
 from requests.auth import HTTPBasicAuth
@@ -242,8 +242,6 @@ class EmergencyClientModal(View):
                 patient = form.cleaned_data['client_name']
                 patient_data = _api_odoo.get_by_patient_id( patient,result['access_token'])
                 find_data = patient_data
-                print("******** count *********")
-                print(find_data)
                 try: 
                     if find_data.name:
                         feContext['count'] = 1
@@ -316,3 +314,11 @@ class EmergencyGetPatient(View):
         patient_data = _api_odoo.get_by_patient_id( patient_id,result['access_token'])
         request.session['patientrequest'] = patient_data
         return redirect('/emergency/newmodal/')
+
+
+class OdooSubscription(View):
+    template_name = "emergency/search_odoo_auto.html"
+    def get(self, request, *args, **kwargs):
+        form = OdooClientAuto
+        return render(request, self.template_name,{"form": form})
+

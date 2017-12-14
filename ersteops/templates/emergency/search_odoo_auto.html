@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<h2></h2>
+
+  <h1 class="page-header">Buscar</h1>
+  <form action="/emergency/new/" method="post">
+    {% csrf_token %}
+  	<table>
+    {{ form.as_table }}
+    </table>
+    <input type="submit" value="Save" />
+  </form>
+
+
+{% endblock %}
+{% block javascript %}
+<link rel="stylesheet" href='{% static "bower_components/jquery-ui/themes/base/jquery-ui.css" %}'  type="text/css" media="all" />
+<script type="text/javascript" language="javascript">
+$(document).ready(function(){
+  $(function() {
+    $("#id_client_name").autocomplete({
+      source: "/ajaxapi/getsubscriptor/",
+      minLength: 2,
+      //Focus 
+      focus: function( event, ui ) {
+        $( "#id_client_name" ).val( ui.item.label );
+        return false;
+      },
+
+      select: function( event, ui ) {
+        //Assign existing values from Autocomplete 
+        $( "#id_client_id" ).val( ui.item.id );
+        $( "#id_client_name" ).val( ui.item.value );
+        // $( "#id_email" ).val( ui.item.email );
+        // $( "#id_client_gender" ).val( ui.item.gender );
+        // $( "#id_contact_phone" ).val( ui.item.contact_phone );
+        // $( "#id_pet_name" ).val( ui.item.pet_name );
+        // $( "#id_pet_species" ).val( ui.item.pet_species );
+        // $( "#id_pet_species_id" ).val( ui.item.pet_species_id );
+        // $( "#id_pet_breed" ).val( ui.item.pet_breed );
+        // $( "#id_pet_breed_id" ).val( ui.item.pet_breed_id );
+        // $( "#id_pet_gender" ).val( ui.item.pet_sex );
+        // $( "#id_pet_color" ).val( ui.item.pet_color );
+        // $( "#id_pet_id" ).val( ui.item.pet_id );
+        // $( "#id_pet_age" ).val( ui.item.pet_age );
+        // $( "#id_client_street" ).val( ui.item.client_street);
+        // $( "#id_client_street_2" ).val( ui.item.client_street_2);
+        // $( "#id_client_state" ).val( ui.item.client_state);
+        // $( "#id_client_city" ).val( ui.item.client_city);
+        // $( "#id_client_zip_code" ).val( ui.item.client_zip_code);
+        // $( "#my_pet_photo" ).attr( "src",ui.item.pet_photo );
+        // $( ".edit_selector").prop("readonly", true);
+        return false;
+      }
+    });
+
+  });
+});
+</script>
+{% endblock %}
