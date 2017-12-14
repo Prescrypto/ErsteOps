@@ -76,6 +76,7 @@ class Emergency(models.Model):
     # Paient Data
     # patient_gender = models.CharField('genero',max_length=9,default= '',blank=True,choices = GENDER)
     # patient_age = models.IntegerField('edad',default=0,blank=True)
+    patient_name = models.CharField('Name',max_length=255, default='', blank=True)
     patient_allergies = models.CharField('alergias',max_length=100,default='',blank=True)
     patient_illnesses = models.CharField('Enfermedades diagnosticadas',max_length=100,default='',blank=True)
     patient_notes = models.TextField('Notas paciente',blank=True,default='')
@@ -226,6 +227,7 @@ def emergency_dictionary(instance):
         "address_notes":instance.address_notes,
         "caller_name":instance.caller_name,
         "caller_relation":instance.caller_relation,
+        "patient_name":instance.patient_name,
         "patient_allergies":instance.patient_allergies,
         "patient_illnesses":instance.patient_illnesses,
         "patient_notes":instance.patient_notes,
