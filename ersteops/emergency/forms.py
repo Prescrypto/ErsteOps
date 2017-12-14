@@ -40,7 +40,7 @@ class OdooClientAuto(forms.Form):
     widget = forms.HiddenInput(attrs={'is_hidden': 'True'})
     )
   client_name = forms.CharField(
-    label='Cliente Odoo',
+    label='Nombre del cliente en Odoo',
     required=True,
     #help_text='Ingresa el nombre del cliente',
     widget=forms.TextInput(attrs={
