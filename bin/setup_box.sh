@@ -2,6 +2,7 @@
 
 echo "=> Start config box..."
 sudo apt-get update
+sudo apt-get upgrade
 sudo apt-get install -y build-essential libssl-dev wget python-pip python-dev libffi-dev
 sudo pip install -U pip
 
@@ -33,5 +34,20 @@ sudo pip3 install -r /vagrant/requirements.txt
 
 echo "setuptools"
 sudo pip3 install -vU setuptools
+
+echo "nodejs"
+sudo apt-get install -y curl
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+echo "yarn"
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E074D16EB6FF4DE3
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt-get install -y apt-transport-https
+sudo apt-get update && sudo apt-get install -y yarn
+
+echo "nodejs dependencies"
+cd /vagrant && yarn
 
 echo "=> End config box..."
