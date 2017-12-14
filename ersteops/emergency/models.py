@@ -84,7 +84,8 @@ class Emergency(models.Model):
     attention_final_grade = models.ForeignKey("AttentionKind",
     related_name="final_attention_kind_name",
     verbose_name= "Grado de atencion final",
-    blank=True
+    blank=True,
+    null=True
         )
     attention_justification = models.TextField(u'Justificación',blank=True,default='')
     # Symptoms
@@ -144,7 +145,7 @@ class Emergency(models.Model):
         #new object
         newEmerg=True if self.pk is None else False
         if newEmerg:
-            self.attention_final_grade=grade_type
+            self.attention_final_grade=self.grade_type
 
         try:
             old_instance=False if newEmerg else Emergency.objects.get(pk=self.pk)
