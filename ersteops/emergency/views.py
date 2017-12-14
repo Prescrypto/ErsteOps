@@ -29,6 +29,7 @@ class EmergencyNew(CreateView):
     template_name = "emergency/new.html"
     model = Emergency
     fields = ['odoo_client',
+                'service_categorie',
                 'grade_type',
                 'zone',
                 'start_time',
@@ -114,6 +115,7 @@ class EmergencyUpdate(UpdateView):
     template_name = "emergency/update.html"
     model = Emergency
     fields = ['id','odoo_client',
+                'service_categorie',
                 'grade_type',
                 'zone',
                 'start_time',
