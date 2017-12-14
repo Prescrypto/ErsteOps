@@ -29,6 +29,9 @@
      //    }
         $('#abre').trigger('click');
         $('#id_odoo_client').val('{{ request.session.patientrequest.id }}');
+        $('#id_address_street').val('{{ request.session.patientrequest.street }}');
+        $('#id_address_extra').val('{{ request.session.patientrequest.street2 }}');
+        $('#id_address_zip_code').val('{{ request.session.patientrequest.zip }}');
     });
     //$("#myModal").dialog({modal: true});
 </script>
