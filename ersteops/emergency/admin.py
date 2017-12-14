@@ -5,7 +5,7 @@ from django.contrib import admin
 
 # Register your models here.
 from .models import (Emergency, AttentionKind, AttentionZone, AttentionHospital,
-	AttentionDerivation, ServiceCategorie)
+	AttentionDerivation, ServiceCategory)
 
 
 admin.site.register(Emergency)
@@ -13,4 +13,4 @@ admin.site.register(AttentionKind)
 admin.site.register(AttentionZone)
 admin.site.register(AttentionHospital)
 admin.site.register(AttentionDerivation)
-admin.site.register(ServiceCategorie)
+admin.site.register(ServiceCategory)

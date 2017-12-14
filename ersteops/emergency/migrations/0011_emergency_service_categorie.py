@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='emergency',
-            name='service_categorie',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='service_categorie_name', to='emergency.ServiceCategorie', verbose_name='Categoria'),
+            name='service_category',
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='service_category_name', to='emergency.ServiceCategory', verbose_name='Categoria'),
         ),
     ]
