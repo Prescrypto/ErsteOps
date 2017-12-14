@@ -5,7 +5,7 @@
 <h2></h2>
 
   <h1 class="page-header">Buscar</h1>
-  <form action="/emergency/new/" method="post">
+  <form id="searchpatient" action="/emergency/getpatient/" method="post">
     {% csrf_token %}
   	<table>
     {{ form.as_table }}
@@ -52,6 +52,7 @@ $(document).ready(function(){
         // $( "#id_client_zip_code" ).val( ui.item.client_zip_code);
         // $( "#my_pet_photo" ).attr( "src",ui.item.pet_photo );
         // $( ".edit_selector").prop("readonly", true);
+        window.location.href="/emergency/getpatient/"+ ui.item.id +"/";
         return false;
       }
     });
