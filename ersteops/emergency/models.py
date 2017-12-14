@@ -141,7 +141,11 @@ class Emergency(models.Model):
         return eventDuration(self.start_time,self.patient_arrival)
     def save(self, **kwargs):
         #Saves and checks whether the object is a candidate for notification
+        #new object
         newEmerg=True if self.pk is None else False
+        if newEmerg:
+            self.attention_final_grade=grade_type
+
         try:
             old_instance=False if newEmerg else Emergency.objects.get(pk=self.pk)
         except Emergency.DoesNotExist:
