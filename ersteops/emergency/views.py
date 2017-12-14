@@ -60,6 +60,8 @@ class EmergencyNew(CreateView):
                 'patient_allergies',
                 'patient_illnesses',
                 'patient_notes',
+                'attention_final_grade',
+                'attention_justification',
                 'main_complaint',
                 'complaint_descriprion',
                 'subscription_type'
@@ -143,6 +145,8 @@ class EmergencyUpdate(UpdateView):
                 'patient_allergies',
                 'patient_illnesses',
                 'patient_notes',
+                'attention_final_grade',
+                'attention_justification',
                 'main_complaint',
                 'complaint_descriprion',
                 'subscription_type'

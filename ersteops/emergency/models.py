@@ -80,6 +80,13 @@ class Emergency(models.Model):
     patient_allergies = models.CharField('alergias',max_length=100,default='',blank=True)
     patient_illnesses = models.CharField('Enfermedades diagnosticadas',max_length=100,default='',blank=True)
     patient_notes = models.TextField('Notas paciente',blank=True,default='')
+    #Details of attention
+    attention_final_grade = models.ForeignKey("AttentionKind",
+    related_name="final_attention_kind_name",
+    verbose_name= "Grado de atencion final",
+    blank=True
+        )
+    attention_justification = models.TextField(u'Justificación',blank=True,default='')
     # Symptoms
     main_complaint = models.CharField('sintoma principal',max_length=100,default='',blank=True)
     complaint_descriprion = models.TextField('descripcion de los sintomas',default='',blank=True)
@@ -231,6 +238,8 @@ def emergency_dictionary(instance):
         "patient_allergies":instance.patient_allergies,
         "patient_illnesses":instance.patient_illnesses,
         "patient_notes":instance.patient_notes,
+        "attention_final_grade":str(instance.attention_final_grade),
+        "attention_justification":instance.attention_justification,
         "main_complaint":instance.main_complaint,
         "complaint_descriprion":instance.complaint_descriprion,
         "subscription_type":instance.subscription_type,
