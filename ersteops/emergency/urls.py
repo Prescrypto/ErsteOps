@@ -14,5 +14,5 @@ urlpatterns = [
     url(r'^dashboard/$',EmergencyDashbordList.as_view(),name="emergencydashbord"),
     url(r'^derivation/$',EmergencyDerivation.as_view(),name="emergencyderivation"),
     url(r'^(?P<pk>[0-9]+)/$', EmergencyDetailView.as_view(), name='emergencydetail'),
-    url(r'^getpatient/(?P<patient_id>\d+)/$', EmergencyGetPatient.as_view(), name='emergencyeeteatient'),
+    url(r'^getpatient/(?P<patient_id>\d+)/$', EmergencyGetPatient.as_view(), name='emergencypatient'),
 ]
