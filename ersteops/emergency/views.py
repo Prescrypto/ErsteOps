@@ -29,7 +29,7 @@ class EmergencyBlank(View):
 class EmergencyNew(CreateView):
     template_name = "emergency/new.html"
     model = Emergency
-    fields = ['odoo_client',
+    fields = ['id','odoo_client',
                 'service_category',
                 'grade_type',
                 'zone',
@@ -59,6 +59,8 @@ class EmergencyNew(CreateView):
                 'caller_name',
                 'caller_relation',
                 'patient_name',
+                'patient_gender',
+                'patient_age',
                 'patient_allergies',
                 'patient_illnesses',
                 'patient_notes',
@@ -145,6 +147,8 @@ class EmergencyUpdate(UpdateView):
                 'caller_name',
                 'caller_relation',
                 'patient_name',
+                'patient_gender',
+                'patient_age',
                 'patient_allergies',
                 'patient_illnesses',
                 'patient_notes',
@@ -255,7 +259,8 @@ class EmergencyClientModal(View):
 class EmergencyNewModal(CreateView):
     template_name = "emergency/blanknew_modal.html"
     model = Emergency
-    fields = ['odoo_client',
+    fields = ['id','odoo_client',
+                'service_category',
                 'grade_type',
                 'zone',
                 'start_time',
@@ -283,15 +288,17 @@ class EmergencyNewModal(CreateView):
                 'address_notes',
                 'caller_name',
                 'caller_relation',
+                'patient_name',
+                'patient_gender',
+                'patient_age',
                 'patient_allergies',
                 'patient_illnesses',
                 'patient_notes',
+                'attention_final_grade',
+                'attention_justification',
                 'main_complaint',
                 'complaint_descriprion',
-                'required_attention',
-                'subscription_type',
-                'patient_gender',
-                'patient_age',
+                'subscription_type'
                 ]
     
     success_url = '/emergency/list/'
