@@ -22,6 +22,14 @@ class Emergency(models.Model):
         ("Femenino","Femenino"),
         )
     odoo_client = models.CharField("cliente id",max_length=50,unique=False)
+    #
+    service_category=models.ForeignKey("ServiceCategory",
+        related_name="service_category_name",
+        verbose_name= "Tipos de emergencia",
+        #default=1,
+        blank=True,
+        null=True
+        )
     # Triage
     grade_type = models.ForeignKey("AttentionKind",
     related_name="attention_kind_name",
@@ -74,15 +82,23 @@ class Emergency(models.Model):
     caller_name = models.CharField('Persona que llama',max_length=100,blank=True)
     caller_relation = models.CharField('Relacion con el paciente',max_length=50,blank=True)
     # Paient Data
+    patient_name = models.CharField('Name',max_length=255, default='', blank=True)
     patient_gender = models.CharField('genero',max_length=9,default= '',blank=True,choices = GENDER)
     patient_age = models.IntegerField('edad',default=0,blank=True)
     patient_allergies = models.CharField('alergias',max_length=100,default='',blank=True)
     patient_illnesses = models.CharField('Enfermedades diagnosticadas',max_length=100,default='',blank=True)
     patient_notes = models.TextField('Notas paciente',blank=True,default='')
+    #Details of attention
+    attention_final_grade = models.ForeignKey("AttentionKind",
+    related_name="final_attention_kind_name",
+    verbose_name= "Grado de atencion final",
+    blank=True,
+    null=True
+        )
+    attention_justification = models.TextField(u'Justificación',blank=True,default='')
     # Symptoms
     main_complaint = models.CharField('sintoma principal',max_length=100,default='',blank=True)
     complaint_descriprion = models.TextField('descripcion de los sintomas',default='',blank=True)
-    required_attention = models.CharField('Tipo de atencion requerida',default='',max_length=100,blank=True)
     subscription_type = models.CharField('subscripcion',max_length=100,default='',blank=True)
     # derivation = models.ManyToManyField('AttentionDerivation',
     #     related_name = 'derivation_issue',
@@ -134,7 +150,11 @@ class Emergency(models.Model):
         return eventDuration(self.start_time,self.patient_arrival)
     def save(self, **kwargs):
         #Saves and checks whether the object is a candidate for notification
+        #new object
         newEmerg=True if self.pk is None else False
+        if newEmerg:
+            self.attention_final_grade=self.grade_type
+
         try:
             old_instance=False if newEmerg else Emergency.objects.get(pk=self.pk)
         except Emergency.DoesNotExist:
@@ -227,12 +247,14 @@ def emergency_dictionary(instance):
         "address_notes":instance.address_notes,
         "caller_name":instance.caller_name,
         "caller_relation":instance.caller_relation,
+        "patient_name":instance.patient_name,
         "patient_allergies":instance.patient_allergies,
         "patient_illnesses":instance.patient_illnesses,
         "patient_notes":instance.patient_notes,
+        "attention_final_grade":str(instance.attention_final_grade),
+        "attention_justification":instance.attention_justification,
         "main_complaint":instance.main_complaint,
         "complaint_descriprion":instance.complaint_descriprion,
-        "required_attention":instance.required_attention,
         "subscription_type":instance.subscription_type,
     }
 
@@ -342,5 +364,18 @@ def derivation_dictionary(instance):
     }
 
     return derivDict
+
+
+# service_category
+@python_2_unicode_compatible
+class ServiceCategory(models.Model):
+    categorie = models.CharField("Categoria", max_length=100, unique=True)
+    description = models.TextField("Descripcion", blank=True)
+    created_at = models.DateTimeField("Fecha de alta", auto_now_add=True, editable=False)
+    last_modified = models.DateTimeField("Ultima modificacion", auto_now=True, editable=False)
+    class Meta:
+        ordering = ['categorie']
+    def __str__(self):  
+        return self.categorie
 
 #class EmergencyType(models.Model):

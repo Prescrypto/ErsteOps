@@ -30,6 +30,7 @@ class EmergencyNew(CreateView):
     template_name = "emergency/new.html"
     model = Emergency
     fields = ['odoo_client',
+                'service_category',
                 'grade_type',
                 'zone',
                 'start_time',
@@ -57,12 +58,14 @@ class EmergencyNew(CreateView):
                 'address_notes',
                 'caller_name',
                 'caller_relation',
+                'patient_name',
                 'patient_allergies',
                 'patient_illnesses',
                 'patient_notes',
+                'attention_final_grade',
+                'attention_justification',
                 'main_complaint',
                 'complaint_descriprion',
-                'required_attention',
                 'subscription_type'
                 ]
     success_url = '/emergency/list/'
@@ -113,6 +116,7 @@ class EmergencyUpdate(UpdateView):
     template_name = "emergency/update.html"
     model = Emergency
     fields = ['id','odoo_client',
+                'service_category',
                 'grade_type',
                 'zone',
                 'start_time',
@@ -140,12 +144,14 @@ class EmergencyUpdate(UpdateView):
                 'address_notes',
                 'caller_name',
                 'caller_relation',
+                'patient_name',
                 'patient_allergies',
                 'patient_illnesses',
                 'patient_notes',
+                'attention_final_grade',
+                'attention_justification',
                 'main_complaint',
                 'complaint_descriprion',
-                'required_attention',
                 'subscription_type'
                 ]
     success_url = '/emergency/list/'
