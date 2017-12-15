@@ -82,9 +82,9 @@ class Emergency(models.Model):
     caller_name = models.CharField('Persona que llama',max_length=100,blank=True)
     caller_relation = models.CharField('Relacion con el paciente',max_length=50,blank=True)
     # Paient Data
-    # patient_gender = models.CharField('genero',max_length=9,default= '',blank=True,choices = GENDER)
-    # patient_age = models.IntegerField('edad',default=0,blank=True)
     patient_name = models.CharField('Name',max_length=255, default='', blank=True)
+    patient_gender = models.CharField('genero',max_length=9,default= '',blank=True,choices = GENDER)
+    patient_age = models.IntegerField('edad',default=0,blank=True)
     patient_allergies = models.CharField('alergias',max_length=100,default='',blank=True)
     patient_illnesses = models.CharField('Enfermedades diagnosticadas',max_length=100,default='',blank=True)
     patient_notes = models.TextField('Notas paciente',blank=True,default='')
@@ -365,6 +365,7 @@ def derivation_dictionary(instance):
 
     return derivDict
 
+
 # service_category
 @python_2_unicode_compatible
 class ServiceCategory(models.Model):
@@ -376,3 +377,5 @@ class ServiceCategory(models.Model):
         ordering = ['categorie']
     def __str__(self):  
         return self.categorie
+
+#class EmergencyType(models.Model):
