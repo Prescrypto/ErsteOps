@@ -22,10 +22,10 @@ class Emergency(models.Model):
         ("Femenino","Femenino"),
         )
     odoo_client = models.CharField("cliente id",max_length=50,unique=False)
-    #
+    # Service Category
     service_category=models.ForeignKey("ServiceCategory",
         related_name="service_category_name",
-        verbose_name= "Tipos de emergencia",
+        verbose_name= "Tipo de emergencia",
         #default=1,
         blank=True,
         null=True
@@ -82,7 +82,7 @@ class Emergency(models.Model):
     caller_name = models.CharField('Persona que llama',max_length=100,blank=True)
     caller_relation = models.CharField('Relacion con el paciente',max_length=50,blank=True)
     # Paient Data
-    patient_name = models.CharField('Name',max_length=255, default='', blank=True)
+    patient_name = models.CharField('Nombre del Paciente',max_length=255, default='', blank=True)
     patient_gender = models.CharField('genero',max_length=9,default= '',blank=True,choices = GENDER)
     patient_age = models.IntegerField('edad',default=0,blank=True)
     patient_allergies = models.CharField('alergias',max_length=100,default='',blank=True)
@@ -369,13 +369,13 @@ def derivation_dictionary(instance):
 # service_category
 @python_2_unicode_compatible
 class ServiceCategory(models.Model):
-    categorie = models.CharField("Categoria", max_length=100, unique=True)
+    name = models.CharField("Categoria", max_length=100, unique=True)
     description = models.TextField("Descripcion", blank=True)
     created_at = models.DateTimeField("Fecha de alta", auto_now_add=True, editable=False)
     last_modified = models.DateTimeField("Ultima modificacion", auto_now=True, editable=False)
     class Meta:
-        ordering = ['categorie']
+        ordering = ['name']
     def __str__(self):  
-        return self.categorie
+        return self.name
 
 #class EmergencyType(models.Model):
