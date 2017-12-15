@@ -6,6 +6,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 from django.conf import settings
 
+
 # Calculate event duration
 def eventDuration(start_duration,end_duration):
     return end_duration - start_duration
