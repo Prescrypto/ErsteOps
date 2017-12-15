@@ -22,10 +22,10 @@ class Emergency(models.Model):
         ("Femenino","Femenino"),
         )
     odoo_client = models.CharField("cliente id",max_length=50,unique=False)
-    #
+    # Service Category
     service_category=models.ForeignKey("ServiceCategory",
         related_name="service_category_name",
-        verbose_name= "Tipos de emergencia",
+        verbose_name= "Tipo de emergencia",
         #default=1,
         blank=True,
         null=True
@@ -369,13 +369,13 @@ def derivation_dictionary(instance):
 # service_category
 @python_2_unicode_compatible
 class ServiceCategory(models.Model):
-    categorie = models.CharField("Categoria", max_length=100, unique=True)
+    name = models.CharField("Categoria", max_length=100, unique=True)
     description = models.TextField("Descripcion", blank=True)
     created_at = models.DateTimeField("Fecha de alta", auto_now_add=True, editable=False)
     last_modified = models.DateTimeField("Ultima modificacion", auto_now=True, editable=False)
     class Meta:
-        ordering = ['categorie']
+        ordering = ['name']
     def __str__(self):  
-        return self.categorie
+        return self.name
 
 #class EmergencyType(models.Model):
