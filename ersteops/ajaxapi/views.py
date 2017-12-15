@@ -22,11 +22,11 @@ def get_subscriptor(request):
         #data = session['access_token']
         results = []
         for client in clients:
-            client_json = {}
-            client_json['id'] = client['id']
-            client_json["label"] = client['name']
-            client_json["value"] = client['name']
-            client_json['id_client_id'] = client['id']
+            client_json = {
+                "id": client['id'],
+                "label": client['name'],
+                "value": client['name'],
+            }
             results.append(client_json)
         data = json.dumps(results)
         logger.info('%s (%s)' % ('AjaxApiReturn',data))

@@ -191,21 +191,11 @@ class EmergencyClientOdoo(View):
         return render(request, self.template_name,{"form": form, "result": result, "patients": patient_data})
 
 class EmergencyClientModal(View):
-    # template_name = "emergency/blank_modal.html"
-    # def get(self, request, *args, **kwargs):
-    #     form=''
-    #     return render(request, self.template_name,{"form": form})
     template_name = "emergency/blank_modal.html"
     def get(self, request, *args, **kwargs):
         form = OdooClientForm
-        feContext = {}
-        feContext['openmodal'] = 'false'
-        feContext['showMultiple'] = False
-        feContext['count'] = 0
+        feContext = {"openmodal":'false',"showMultiple": False,"count": 0}
         find_data = []
-
-        #jq_openmodal = 'false'
-
         request.session['patientrequest'] = {}
         return render(request, self.template_name,{"form": form, "find_data": find_data, "feContext": feContext})
 
@@ -213,10 +203,7 @@ class EmergencyClientModal(View):
         form = OdooClientForm(request.POST)
         find_data = []
         patient_data = {}
-        feContext = {}
-        feContext['openmodal'] = 'true'
-        feContext['showMultiple'] =  True
-        feContext['count'] = 0
+        feContext = {"openmodal":'true',"showMultiple": True,"count": 0}
         if form.is_valid():
             # Ini Odoo api
             _api_odoo = OdooApi()
@@ -230,13 +217,13 @@ class EmergencyClientModal(View):
                 patient = form.cleaned_data['client_name']
                 patient_data = _api_odoo.get_by_patient_name( patient,result['access_token'])
                 find_data = patient_data['results']
-                feContext['count'] = len(patient_data['results'])
+                feContext.update({"count": len(patient_data['results'])})
                 logger.info('%s (%s)' % ('OdooApi_name',patient_data))
             if form.cleaned_data['search_type'] == '2':
                 patient = form.cleaned_data['client_name']
                 patient_data = _api_odoo.get_by_patient_street( patient,result['access_token'])
                 find_data = patient_data['results']
-                feContext['count'] = len(patient_data['results'])
+                feContext.update({"count": len(patient_data['results'])})
                 logger.info('%s (%s)' % ('OdooApi_street',patient_data))
             if form.cleaned_data['search_type'] == '3':
                 patient = form.cleaned_data['client_name']
@@ -244,16 +231,16 @@ class EmergencyClientModal(View):
                 find_data = patient_data
                 try: 
                     if find_data.name:
-                        feContext['count'] = 1
+                        feContext.update({"count": 1})
                 except:
-                    feContext['count'] = 0
-                feContext['showMultiple'] = False
+                    feContext.update({"count": 0})
+                feContext.update({"showMultiple": False})
                 logger.info('%s (%s)' % ('OdooApi_id',patient_data))
             if form.cleaned_data['search_type'] == '5':
                 patient = form.cleaned_data['client_name']
                 patient_data = _api_odoo.get_by_all( patient,result['access_token'])
                 find_data = patient_data['results']
-                feContext['count'] = len(patient_data['results'])
+                feContext.update({"count": len(patient_data['results'])})
                 logger.info('%s (%s)' % ('OdooApi',patient_data))
             else:
                 return render(request, self.template_name,{"form": form, "result": result, "find_data": find_data, "feContext": feContext  })
