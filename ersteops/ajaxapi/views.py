@@ -24,8 +24,8 @@ def get_subscriptor(request):
         for client in clients:
             client_json = {
                 "id": client['id'],
-                "label": client['name'],
-                "value": client['name'],
+                "label": client['name'] + ' - (' + client['client_type'] + ')',
+                "value": client['name'] + ' - (' + client['client_type'] + ')',
             }
             results.append(client_json)
         data = json.dumps(results)

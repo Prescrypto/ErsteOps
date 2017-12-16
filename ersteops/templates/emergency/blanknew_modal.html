@@ -28,7 +28,7 @@
      //    	$('#abre').trigger('click');
      //    }
         $('#abre').trigger('click');
-        $('#id_odoo_client').val('{{ request.session.patientrequest.id }}');
+        $('#id_odoo_client').val("{% if request.session.patientrequest.client_export_id != 'None'%}{{ request.session.patientrequest.client_export_id }}{% else %}{{ request.session.patientrequest.id }}{% endif %}");
         $('#id_address_street').val('{{ request.session.patientrequest.street }}');
         $('#id_address_extra').val('{{ request.session.patientrequest.street2 }}');
         $('#id_address_zip_code').val('{{ request.session.patientrequest.zip }}');
