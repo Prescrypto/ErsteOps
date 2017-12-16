@@ -13,6 +13,8 @@ from core.utils import OdooApi
 import requests
 from requests.auth import HTTPBasicAuth
 import json
+#from datetime import datetime, timedelta
+import datetime
 # Logging library
 import logging
 # Load Logging definition, this is defined in settings.py in the LOGGING section
@@ -315,6 +317,25 @@ class EmergencyGetPatient(View):
         request.session['patientrequest'] = patient_data
         return redirect('/emergency/newmodal/')
 
+class EmergencyActivate(View):
+    def get(self, request, *args, **kwargs):
+        patient_id = kwargs['patient_id']
+        emergency = Emergency.objects.get(id=patient_id)
+        if emergency.is_active:
+            emergency.is_active = False
+        else:
+            emergency.is_active = True
+        emergency.save()
+        return redirect('/emergency/list/')
+
+class EmergencyEnd(View):
+    def get(self, request, *args, **kwargs):
+        patient_id = kwargs['patient_id']
+        emergency = Emergency.objects.get(id=patient_id)
+        emergency.is_active = False
+        emergency.final_emergency_time = datetime.date.today()
+        emergency.save()
+        return redirect('/emergency/dashboard/')
 
 class OdooSubscription(View):
     template_name = "emergency/search_odoo_auto.html"
