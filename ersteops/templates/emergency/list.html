@@ -15,6 +15,7 @@
      <th>Status</th>
      <th>Timer</th>
      <th>Actualizar</th>
+     <th>Reactivar</th>
    </tr> 
   </thead>
   <tbody>
@@ -31,7 +32,14 @@
           <td>Inactiva</td>
         {% endif%}
         <td>{{ emergency.emergencyTimer }}</td>
-        <td><a href="/emergency/update/{{emergency.id}}/">Edit</a></td>
+        <td><a href="/emergency/update/{{emergency.id}}/">
+          <span class="fa fa-pencil"></span></a>
+        </td>
+        <td>
+          <a href="/emergency/activate/{{ emergency.id }}/">
+            <span class="fa fa-check-circle-o"></span>
+          </a>
+        </td>
       </tr>
     {% empty %}
     <li>No incidents yet.</li>
