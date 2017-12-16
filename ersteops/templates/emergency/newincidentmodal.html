@@ -22,7 +22,7 @@
     <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
       <h3>Paciente</h3>
-      <h4>{{ request.session.patientrequest.name}}</h4>
+      <h4>{{ request.session.patientrequest.name }}</h4>
 
       <table class="table">
         <tbody>
@@ -64,6 +64,14 @@
             <tr>
             <td>{{ form.zone.label_tag }}</td>
             <td>{{ form.zone|add_class:'form-control' }}</td>
+            </tr>
+          </div>
+
+          <div class="fieldWrapper">
+            {{ form.patient_name.errors }}
+            <tr>
+            <td>{{ form.patient_name.label_tag }}</td>
+            <td>{{ form.patient_name|add_class:'form-control' }}</td>
             </tr>
           </div>
 
