@@ -33,6 +33,9 @@ $(document).ready(function(){
         //Assign existing values from Autocomplete 
         $( "#id_client_id" ).val( ui.item.id );
         $( "#id_client_name" ).val( ui.item.value );
+        $( "#id_source_id" ).val( ui.item.source );
+        $( "#id_client_type_id" ).val( ui.item.client_type );
+        $( "#id_parent_id" ).val( ui.item.parent_id );
         window.location.href="/emergency/getpatient/"+ ui.item.id +"/";
         return false;
       }
