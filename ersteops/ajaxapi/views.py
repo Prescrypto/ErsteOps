@@ -43,6 +43,7 @@ def get_subscriptor(request):
                 "parent_id": client['id'],
                 "client_type": client['client_type'],
                 "source": 'res.partner',
+                "target": str(client['id']).zfill(6) + str(1).zfill(6) + str(client['id']).zfill(6)
             }
             results.append(client_json)
 
@@ -54,7 +55,8 @@ def get_subscriptor(request):
                 "value": client['name'] + ' - ( ' + str(client['id']) + ' - ' + 'Family Member' + ')',
                 "parent_id": client['parent_id']['id'],
                 "client_type": 'family_member',
-                "source": 'family.member'
+                "source": 'family.member',
+                "target": str(client['id']).zfill(6) + str(2).zfill(6) + str(client['parent_id']['id']).zfill(6)
             }
             results.append(client_json)
 
@@ -66,7 +68,8 @@ def get_subscriptor(request):
                 "value": client['name'] + ' - ( ' + str(client['id']) + ' - ' + 'Company Member' + ')',
                 "parent_id": client['parent_id']['id'],
                 "client_type": "company_member",
-                "source": 'company.member'
+                "source": 'company.member',
+                "target": str(client['id']).zfill(6) + str(3).zfill(6) + str(client['parent_id']['id']).zfill(6)
             }
             results.append(client_json)
 

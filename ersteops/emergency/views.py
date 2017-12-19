@@ -322,6 +322,14 @@ class EmergencyNewModal(CreateView):
 class EmergencyGetPatient(View):
     def get(self, request, *args, **kwargs):
         patient_id = kwargs['patient_id']
+        # source_id = kwargs['source_id']
+        # parent_id = kwargs['parent_id']
+        print("************ patient_id ************")
+        print(patient_id)
+        # print("************ source_id ************")
+        # print(source_id)
+        # print("************ parent_id ************")
+        # print(parent_id)
         # Ini Odoo api
         _api_odoo = OdooApi()
         result = _api_odoo.get_token()

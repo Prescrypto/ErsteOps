@@ -36,7 +36,8 @@ $(document).ready(function(){
         $( "#id_source_id" ).val( ui.item.source );
         $( "#id_client_type_id" ).val( ui.item.client_type );
         $( "#id_parent_id" ).val( ui.item.parent_id );
-        window.location.href="/emergency/getpatient/"+ ui.item.id +"/";
+        //window.location.href = "/emergency/getpatient/" + ui.item.id +"-"+ui.item.source + "-" + ui.item.parent_id + "/";
+        window.location.href = "/emergency/getpatient/" +  ui.item.target + "/";
         return false;
       }
     });
