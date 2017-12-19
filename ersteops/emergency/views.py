@@ -321,12 +321,99 @@ class EmergencyNewModal(CreateView):
 
 class EmergencyGetPatient(View):
     def get(self, request, *args, **kwargs):
-        patient_id = kwargs['patient_id']
+        # Read parameter
+        target_id = kwargs['patient_id']
+        # Extract patient_id
+        patient_id = int(target_id[:6])
+        # Extract where the patient been found
+        source_id = int(target_id[6:-6])
+        # Initialize Odoo api
         _api_odoo = OdooApi()
+        # Get Token
         result = _api_odoo.get_token()
-        patient_data = _api_odoo.get_by_patient_id( patient_id,result['access_token'])
-        request.session['patientrequest'] = patient_data
+        # Case when Patient in res.partner
+        if source_id == 1:
+            patient_data = _api_odoo.get_by_patient_id( str(patient_id),result['access_token'])
+            parent_data = {}
+        # Case when Patient in family.member
+        elif source_id == 2:
+            patient_data = _api_odoo.get_by_family_member_id( str(patient_id),result['access_token'])
+            parent_data = _api_odoo.get_by_patient_id( str(patient_data['parent_id']['id']),result['access_token'])
+        # Case when Patient in company.member
+        elif source_id == 3:
+            patient_data = _api_odoo.get_by_company_member_id( str(patient_id),result['access_token'])
+            parent_data = _api_odoo.get_by_patient_id( str(patient_data['parent_id']['id']),result['access_token'])
+
+        logger.info('%s (%s)' % ('OdooApi_patient_data',patient_data))
+        logger.info('%s (%s)' % ('OdooApi_parent_data',parent_data))
+        #request.session['patientrequest'] = patient_data
+        request.session['patientrequest'] = patient_json(source_id,patient_data,parent_data)
         return redirect('/emergency/newmodal/')
+
+# Resume and clean patient and partner data
+def patient_json(source_id,patient_data,parent_data):
+    patient_data_json = {}
+    if source_id == 1:
+        patient_data_json = {
+            "id_odoo_client":  str(patient_data['client_export_id']) + '-' + str(patient_data['id']) + '-' + str(patient_data['id']),
+            "id_patient_name":  patient_data['name'],
+            "id_patient_allergies" : '',
+            "id_patient_illnesses" : '',
+            "id_caller_relation": '',
+            "id_patient_age": 0,
+        }
+    else:
+        patient_data_json ={
+            "id_odoo_client":  str(parent_data['client_export_id']) + '-' + str(patient_data['parent_id']['id']) + '-' + str(patient_data['id']),
+            "id_patient_name":  patient_data['name'],
+            "id_patient_allergies" : patient_data['allergies'],
+            "id_patient_illnesses" : patient_data['prev_ailments'],
+            "id_caller_relation" : partner_relationship(source_id,patient_data['relationship']),
+            "id_patient_age": patient_age(patient_data['birthday']),
+        }
+    print("*************** patient_json ***************")
+    print(patient_data_json)
+    print("********************************************")
+    return patient_data_json
+
+def partner_relationship(source_id,patient_relation):
+    relationship = ""
+    if source_id == 2:
+        if patient_relation == "1":
+            relationship = "Padre"
+        elif patient_relation == "2":
+            relationship = "Madre"
+        elif patient_relation == "3":
+            relationship = "Esposo/a"
+        elif patient_relation == "4":
+            relationship = "Descendiente"
+        elif patient_relation == "5":
+            relationship = "Otro Familiar"
+        else:
+            relationship = "No clasificado"
+    elif source_id ==3:
+        if patient_relation == "1":
+            relationship = "Dueño"
+        elif patient_relation == "2":
+            relationship = "Director"
+        elif patient_relation == "3":
+            relationship = "Ejecutivo"
+        elif patient_relation == "4":
+            relationship = "Administrador"
+        elif patient_relation == "5":
+            relationship = "Empleado"
+        elif patient_relation == "6":
+            relationship = "Otro"
+        else:
+            relationship = "No clasificado"
+
+    return relationship
+
+def patient_age(birthday):
+    # dt = datetime.strptime(birthday,"%Y -%b-%d")
+    # age = datetime.date.today() - dt
+    #return age.year
+    return datetime.date.today().year - int(birthday[:4])
 
 class EmergencyActivate(View):
     def get(self, request, *args, **kwargs):
