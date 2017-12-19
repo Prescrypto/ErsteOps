@@ -322,15 +322,6 @@ class EmergencyNewModal(CreateView):
 class EmergencyGetPatient(View):
     def get(self, request, *args, **kwargs):
         patient_id = kwargs['patient_id']
-        # source_id = kwargs['source_id']
-        # parent_id = kwargs['parent_id']
-        print("************ patient_id ************")
-        print(patient_id)
-        # print("************ source_id ************")
-        # print(source_id)
-        # print("************ parent_id ************")
-        # print(parent_id)
-        # Ini Odoo api
         _api_odoo = OdooApi()
         result = _api_odoo.get_token()
         patient_data = _api_odoo.get_by_patient_id( patient_id,result['access_token'])
@@ -340,7 +331,10 @@ class EmergencyGetPatient(View):
 class EmergencyActivate(View):
     def get(self, request, *args, **kwargs):
         patient_id = kwargs['patient_id']
-        emergency = Emergency.objects.get(id=patient_id)
+        try:
+            emergency = Emergency.objects.get(id=patient_id)
+        except:
+            return redirect('/emergency/list/')
         if emergency.is_active:
             emergency.is_active = False
         else:
@@ -351,7 +345,10 @@ class EmergencyActivate(View):
 class EmergencyEnd(View):
     def get(self, request, *args, **kwargs):
         patient_id = kwargs['patient_id']
-        emergency = Emergency.objects.get(id=patient_id)
+        try:
+            emergency = Emergency.objects.get(id=patient_id)
+        except:
+            return redirect('/emergency/dashboard/')
         emergency.is_active = False
         emergency.final_emergency_time = datetime.date.today()
         emergency.save()
