@@ -254,6 +254,18 @@ class EmergencyClientModal(View):
                 find_data = patient_data['results']
                 feContext.update({"count": len(patient_data['results'])})
                 logger.info('%s (%s)' % ('OdooApi',patient_data))
+            if form.cleaned_data['search_type'] == '6':
+                patient = form.cleaned_data['client_name']
+                patient_data = _api_odoo.get_by_family_member( patient,result['access_token'])
+                find_data = patient_data['results']
+                feContext.update({"count": len(patient_data['results'])})
+                logger.info('%s (%s)' % ('OdooApi_name_family_member',patient_data))
+            if form.cleaned_data['search_type'] == '7':
+                patient = form.cleaned_data['client_name']
+                patient_data = _api_odoo.get_by_company_member( patient,result['access_token'])
+                find_data = patient_data['results']
+                feContext.update({"count": len(patient_data['results'])})
+                logger.info('%s (%s)' % ('OdooApi_name_company_member',patient_data))
             else:
                 return render(request, self.template_name,{"form": form, "result": result, "find_data": find_data, "feContext": feContext  })
         return render(request, self.template_name,{'form': form, 'result': result,"find_data": find_data, "feContext": feContext })
