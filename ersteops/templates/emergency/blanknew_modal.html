@@ -34,9 +34,9 @@
         $('#id_address_zip_code').val('{{ request.session.patientrequest.zip }}');
         $('#id_patient_name').val('{{ request.session.patientrequest.name }}');
         var str = '{{ request.session.patientrequest.zone }}';
-        //var str = 'plnco'
         var res = str.toUpperCase();
         $('#id_zone').val(res);
+        $('#id_address_col').val('{{ request.session.patientrequest.sat_colonia_id }}')
     });
     //$("#myModal").dialog({modal: true});
 </script>
