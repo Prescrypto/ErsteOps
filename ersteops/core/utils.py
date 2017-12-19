@@ -54,3 +54,16 @@ class OdooApi(object):
         response = requests.get(url,headers=header)
         return response.json()
 
+    def get_by_company_member(self,patient,access_token):
+        url = self.url + '/api/company.member/'
+        payload = {"filters": "[(\"name\", \"ilike\", \"{}\")]".format(patient)}
+        header = {"Access-Token": access_token,"Content-Type":"text/html"}
+        response = requests.get(url, json=payload, headers=header)
+        return response.json()
+
+    def get_by_family_member(self,patient,access_token):
+        url = self.url + '/api/family.member/'
+        payload = {"filters": "[(\"name\", \"ilike\", \"{}\")]".format(patient)}
+        header = {"Access-Token": access_token,"Content-Type":"text/html"}
+        response = requests.get(url, json=payload, headers=header)
+        return response.json()

@@ -13,6 +13,8 @@ from core.utils import OdooApi
 import requests
 from requests.auth import HTTPBasicAuth
 import json
+#from datetime import datetime, timedelta
+import datetime
 # Logging library
 import logging
 # Load Logging definition, this is defined in settings.py in the LOGGING section
@@ -252,6 +254,18 @@ class EmergencyClientModal(View):
                 find_data = patient_data['results']
                 feContext.update({"count": len(patient_data['results'])})
                 logger.info('%s (%s)' % ('OdooApi',patient_data))
+            if form.cleaned_data['search_type'] == '6':
+                patient = form.cleaned_data['client_name']
+                patient_data = _api_odoo.get_by_family_member( patient,result['access_token'])
+                find_data = patient_data['results']
+                feContext.update({"count": len(patient_data['results'])})
+                logger.info('%s (%s)' % ('OdooApi_name_family_member',patient_data))
+            if form.cleaned_data['search_type'] == '7':
+                patient = form.cleaned_data['client_name']
+                patient_data = _api_odoo.get_by_company_member( patient,result['access_token'])
+                find_data = patient_data['results']
+                feContext.update({"count": len(patient_data['results'])})
+                logger.info('%s (%s)' % ('OdooApi_name_company_member',patient_data))
             else:
                 return render(request, self.template_name,{"form": form, "result": result, "find_data": find_data, "feContext": feContext  })
         return render(request, self.template_name,{'form': form, 'result': result,"find_data": find_data, "feContext": feContext })
@@ -308,13 +322,37 @@ class EmergencyNewModal(CreateView):
 class EmergencyGetPatient(View):
     def get(self, request, *args, **kwargs):
         patient_id = kwargs['patient_id']
-        # Ini Odoo api
         _api_odoo = OdooApi()
         result = _api_odoo.get_token()
         patient_data = _api_odoo.get_by_patient_id( patient_id,result['access_token'])
         request.session['patientrequest'] = patient_data
         return redirect('/emergency/newmodal/')
 
+class EmergencyActivate(View):
+    def get(self, request, *args, **kwargs):
+        patient_id = kwargs['patient_id']
+        try:
+            emergency = Emergency.objects.get(id=patient_id)
+        except:
+            return redirect('/emergency/list/')
+        if emergency.is_active:
+            emergency.is_active = False
+        else:
+            emergency.is_active = True
+        emergency.save()
+        return redirect('/emergency/list/')
+
+class EmergencyEnd(View):
+    def get(self, request, *args, **kwargs):
+        patient_id = kwargs['patient_id']
+        try:
+            emergency = Emergency.objects.get(id=patient_id)
+        except:
+            return redirect('/emergency/dashboard/')
+        emergency.is_active = False
+        emergency.final_emergency_time = datetime.date.today()
+        emergency.save()
+        return redirect('/emergency/dashboard/')
 
 class OdooSubscription(View):
     template_name = "emergency/search_odoo_auto.html"

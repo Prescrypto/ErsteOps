@@ -82,7 +82,7 @@ class Emergency(models.Model):
     caller_name = models.CharField('Persona que llama',max_length=100,blank=True)
     caller_relation = models.CharField('Relacion con el paciente',max_length=50,blank=True)
     # Paient Data
-    patient_name = models.CharField('Nombre del Paciente',max_length=255, default='', blank=True)
+    patient_name = models.CharField('Nombre del Paciente',max_length=255, default='')
     patient_gender = models.CharField('genero',max_length=9,default= '',blank=True,choices = GENDER)
     patient_age = models.IntegerField('edad',default=0,blank=True)
     patient_allergies = models.CharField('alergias',max_length=100,default='',blank=True)
