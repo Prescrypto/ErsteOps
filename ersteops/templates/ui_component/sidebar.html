@@ -1,6 +1,7 @@
 {# Sidebar Component #}
 {% load staticfiles %}
-<div class="o-page__sidebar js-page-sidebar">
+
+<div id="v-nav" class="o-page__sidebar js-page-sidebar">
   <div class="c-sidebar">
     <a class="c-sidebar__brand" href="#">
       <img class="c-sidebar__brand-img" src="{% static "ui_kit/img/logo.png" %}" alt="Logo"> ErsteOps
@@ -16,7 +17,7 @@
       </li>
 
       <li class="c-sidebar__item">
-        <a class="c-sidebar__link" href="{% url 'subscriptormodal' %}">
+        <a class="c-sidebar__link" @click="showModal">
             <i class="fa fa-tachometer u-mr-xsmall"></i>Nuevo Incidente <span class="c-badge c-badge--success c-badge--xsmall u-ml-xsmall">New</span>
         </a>
       </li>
@@ -56,3 +57,8 @@
     </ul>
   </div><!-- // .c-sidebar -->
 </div><!-- // .o-page__sidebar -->
+
+{% block jsblock %}
+  {% load render_bundle from webpack_loader %}
+  {% render_bundle 'nav' 'js' %}
+{% endblock jsblock%}

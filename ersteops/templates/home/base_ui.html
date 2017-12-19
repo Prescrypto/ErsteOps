@@ -18,8 +18,10 @@
     <link rel="stylesheet" href="{% static "ui_kit/css/main.min.css" %}">
 
     {% block cssblock %}
-
     {% endblock cssblock %}
+
+    {% load render_bundle from webpack_loader %}
+    {% render_bundle 'common' 'js' %}
   </head>
   <body class="o-page">
     <!--[if lte IE 9]>

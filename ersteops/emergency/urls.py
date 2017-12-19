@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from . import views
-from emergency.views import EmergencyBlank, EmergencyNew, EmergencyListView, EmergencyDetailView, EmergencyDashbordList, EmergencyDerivation, EmergencyUpdate, EmergencyClientOdoo, EmergencyClientModal,EmergencyNewModal, EmergencyGetPatient, OdooSubscription, EmergencyActivate, EmergencyEnd
+from emergency.views import EmergencyBlank, EmergencyNew, EmergencyListView, EmergencyDetailView, EmergencyDashboardList, EmergencyDerivation, EmergencyUpdate, EmergencyClientOdoo, EmergencyClientModal,EmergencyNewModal, EmergencyGetPatient, OdooSubscription, EmergencyActivate, EmergencyEnd
 
 urlpatterns = [
     url(r'^$',EmergencyBlank.as_view(),name="emergencyblank"),

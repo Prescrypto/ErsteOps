@@ -22,7 +22,7 @@ socket.onmessage = message => {
 
 // Initialize Vue component from HTML
 const root = new Vue({
-  el: '#dashboard-root',
+  el: '#dashboard-log',
   delimiters: ['<%', '%>'],
   data: store,
 });

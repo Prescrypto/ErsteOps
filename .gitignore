@@ -43,3 +43,4 @@ config/
 node_modules
 ersteops/static/bundles
 webpack-stats.json
+/yarn-error.log

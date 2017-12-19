@@ -7,6 +7,8 @@ module.exports = {
 
   entry: {
     dashboard: './frontend/pages/dashboard',
+    modal: ['./frontend/utils/global', './frontend/components/modal'],
+    nav: ['./frontend/utils/global', './frontend/components/nav'],
   },
 
   output: {
@@ -14,7 +16,13 @@ module.exports = {
     filename: '[name]-[hash].js',
   },
 
-  plugins: [new BundleTracker({ filename: './webpack-stats.json' })],
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'common',
+      filename: 'common.js',
+    }),
+    new BundleTracker({ filename: 'ersteops/static/webpack-stats.json' }),
+  ],
 
   module: {
     loaders: [
@@ -33,6 +41,7 @@ module.exports = {
       utils: path.resolve(__dirname, './frontend/utils/'),
       filters: path.resolve(__dirname, './frontend/filters/'),
       pages: path.resolve(__dirname, './frontend/pages/'),
+      components: path.resolve(__dirname, './frontend/components/'),
     },
   },
 

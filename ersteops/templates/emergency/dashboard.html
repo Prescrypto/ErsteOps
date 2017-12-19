@@ -8,7 +8,7 @@
 {% endblock header %}
 
 {% block content %}
-  <main id="dashboard-root" class="o-page__content">
+  <main class="o-page__content">
     {# Main header #}
     {% include "ui_component/header.html" %}
 
@@ -25,7 +25,7 @@
               <h3 class="c-card__title">Incidentes</h3>
             </div>
 
-            <table class="c-table">
+            <table id="dashboard-log" class="c-table">
               <thead class="c-table__head c-table__head--slim">
                 <tr class="c-table__row">
                     <th class="c-table__cell c-table__cell--head">Cliente</th>
