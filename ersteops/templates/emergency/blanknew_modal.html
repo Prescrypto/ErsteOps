@@ -45,7 +45,48 @@
         //var res = str.toUpperCase();
         //$('#id_zone').val(res);
         //$('#id_address_col').val('{{ request.session.patientrequest.sat_colonia_id }}')
-    });
+        var addressList = {{ request.session.patientrequest.addresses|safe }};
+        $( "#addresscombobox" )
+          .change(function() {
+            var str = "";
+            $( "#addresscombobox option:selected" ).each(function() {
+              //str += $( this ).text() + " ";
+              str += $( this ).val() + "";
+              //optionValue = $(this).value();
+            });
+            //$( "div" ).text( str );
+            // console.log("Hola!");
+            // console.log(str);
+            // console.log(addressList.length);
+            //console.log(optionValue);
+            //$("#id_address_street").val(str);
+            //for
+            //begin lookup
+            //console.log("for cycle");
+            for(var i=0; i < addressList.length;i++)
+            {
+              if(str == addressList[i].id_address_id){
+                //console.log("lo encontre!");
+                $("#id_address_street").val(addressList[i].id_address_street);
+                $("#id_address_extra").val(addressList[i].id_address_extra);
+                $("#id_address_col").val(addressList[i].id_address_col);
+                $("#id_address_zip_code").val(addressList[i].id_address_zip_code);
+                $("#id_address_county").val(addressList[i].id_address_county);
+              }
+              // else{
+              //   console.log("no lo encontre!");
+              // }
+              // console.log("paso")
+              // console.log(addressList[i].id_address_id);
+              // console.log(addressList[i].id_address_street);
+              // console.log(addressList[i].id_address_extra);
+              // console.log(str)
+            }
+            //end lookup
+          })
+          .trigger( "change" );
+
+        });
     //$("#myModal").dialog({modal: true});
 </script>
 {% endblock %}
