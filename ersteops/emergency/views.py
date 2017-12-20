@@ -13,7 +13,6 @@ from core.utils import OdooApi
 import requests
 from requests.auth import HTTPBasicAuth
 import json
-#from datetime import datetime, timedelta
 import datetime
 # Logging library
 import logging
@@ -446,8 +445,7 @@ def address_json(parent_data,patient_data):
                     "id_address_col": '',
         }
         adress_list.append(adresses_json)
-    #data = json.dumps(adress_list)
-    data = adresses_json
+    data = json.dumps(adress_list)
     logger.info('%s (%s)' % ('AddressJSON',data))
     return data
 
