@@ -154,12 +154,13 @@
       <h3>Dirección</h3>
       <div class="ui-widget">
         <label>Direccion de atención: </label>
-        <select id="combobox">
+        <select id="addresscombobox">
           <option value="">Seleccione una direccion...</option>
           {% for address in request.session.patientrequest.min_addresses %}
             <option value="{{ address.id_address_id }}">{{ address.id_address_street }}</option>
           {% endfor %}
         </select>
+        <div></div>
       </div>
       <table class="table">
         <tbody>
