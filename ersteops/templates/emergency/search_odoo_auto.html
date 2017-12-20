@@ -10,7 +10,8 @@
   	<table>
     {{ form.as_table }}
     </table>
-    <input type="submit" value="Save" />
+
+    <input id="continuebutton" type="submit" value="Continuar" />
   </form>
 
 
@@ -20,6 +21,7 @@
 <script type="text/javascript" language="javascript">
 $(document).ready(function(){
   $( "#id_client_name" ).attr("autocomplete", "off");
+  $( "#continuebutton" ).prop("disabled",true);
   $(function() {
     $("#id_client_name").autocomplete({
       source: "/ajaxapi/getsubscriptor/",
