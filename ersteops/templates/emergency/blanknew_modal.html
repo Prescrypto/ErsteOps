@@ -28,7 +28,6 @@
      //    	$('#abre').trigger('click');
      //    }
         $('#abre').trigger('click');
-        // $('#id_odoo_client').val("{% if request.session.patientrequest.client_export_id != 'None'%}{{ request.session.patientrequest.client_export_id }}{% else %}{{ request.session.patientrequest.id }}{% endif %}");
         $('#id_odoo_client').val('{{ request.session.patientrequest.id_odoo_client }}');
         $('#id_patient_name').val('{{ request.session.patientrequest.id_patient_name }}');
         $('#id_patient_allergies').val('{{ request.session.patientrequest.id_patient_allergies }}');
@@ -37,14 +36,7 @@
         $('#id_patient_age').val('{{ request.session.patientrequest.id_patient_age }}');
         $('#id_zone').val('{{ request.session.patientrequest.id_zone }}');
         $('#id_subscription_type').val('{{ request.session.patientrequest.id_subscription_type }}');
-        //$('#id_address_street').val('{{ request.session.patientrequest.street }}');
-        //$('#id_address_extra').val('{{ request.session.patientrequest.street2 }}');
-        //$('#id_address_zip_code').val('{{ request.session.patientrequest.zip }}');
-        //$('#id_patient_name').val('{{ request.session.patientrequest.name }}');
-        //var str = '{{ request.session.patientrequest.zone }}';
-        //var res = str.toUpperCase();
-        //$('#id_zone').val(res);
-        //$('#id_address_col').val('{{ request.session.patientrequest.sat_colonia_id }}')
+        // Create addreslist var with aviable addresses
         var addressList = {{ request.session.patientrequest.addresses|safe }};
         $( "#addresscombobox" )
           .change(function() {
@@ -52,17 +44,9 @@
             $( "#addresscombobox option:selected" ).each(function() {
               //str += $( this ).text() + " ";
               str += $( this ).val() + "";
-              //optionValue = $(this).value();
             });
-            //$( "div" ).text( str );
-            // console.log("Hola!");
-            // console.log(str);
-            // console.log(addressList.length);
-            //console.log(optionValue);
-            //$("#id_address_street").val(str);
-            //for
-            //begin lookup
-            //console.log("for cycle");
+            // Find data when select change
+            // Begin lookup
             for(var i=0; i < addressList.length;i++)
             {
               if(str == addressList[i].id_address_id){
@@ -73,14 +57,7 @@
                 $("#id_address_zip_code").val(addressList[i].id_address_zip_code);
                 $("#id_address_county").val(addressList[i].id_address_county);
               }
-              // else{
-              //   console.log("no lo encontre!");
-              // }
-              // console.log("paso")
-              // console.log(addressList[i].id_address_id);
-              // console.log(addressList[i].id_address_street);
-              // console.log(addressList[i].id_address_extra);
-              // console.log(str)
+
             }
             //end lookup
           })
