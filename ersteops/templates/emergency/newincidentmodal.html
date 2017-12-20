@@ -152,6 +152,15 @@
 
     <div id="menu1" class="tab-pane fade">
       <h3>Dirección</h3>
+      <div class="ui-widget">
+        <label>Direccion de atención: </label>
+        <select id="combobox">
+          <option value="">Seleccione una direccion...</option>
+          {% for address in request.session.patientrequest.min_addresses %}
+            <option value="{{ address.id_address_id }}">{{ address.id_address_street }}</option>
+          {% endfor %}
+        </select>
+      </div>
       <table class="table">
         <tbody>
       <div class="fieldWrapper">
