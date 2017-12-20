@@ -19,6 +19,7 @@
 <link rel="stylesheet" href='{% static "bower_components/jquery-ui/themes/base/jquery-ui.css" %}'  type="text/css" media="all" />
 <script type="text/javascript" language="javascript">
 $(document).ready(function(){
+  $( "#id_client_name" ).attr("autocomplete", "off");
   $(function() {
     $("#id_client_name").autocomplete({
       source: "/ajaxapi/getsubscriptor/",
