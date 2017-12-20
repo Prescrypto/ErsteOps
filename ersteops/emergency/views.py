@@ -430,9 +430,15 @@ def address_json(parent_data,patient_data):
                     "id_address_id": address['id'],
                     "id_address_street": address['street'],
                     "id_address_extra": address['street2'],
-                    "id_address_zip_code": '',
+                    "id_address_zip_code": address['zip'],
                     "id_address_county": address['sat_municipio_id']['nombre_municipio'],
                     "id_address_col": address['sat_colonia_id']['nombre_colonia'],
+                    "id_address_between": address['cross_street'],
+                    "id_address_and_street": address['crosses_with'],
+                    "id_address_ref": address['references'],
+                    "id_address_front": address['exterior'],
+                    "id_address_instructions": address['details'],
+                    "id_address_notes": address['comment']
                 }
                 adress_list.append(adresses_json)
     if len(adress_list) == 0:
@@ -441,8 +447,14 @@ def address_json(parent_data,patient_data):
                     "id_address_street": parent_data['street'],
                     "id_address_extra": parent_data['street2'],
                     "id_address_zip_code": parent_data['zip'],
-                    "id_address_county": '',
-                    "id_address_col": '',
+                    "id_address_county": parent_data['zip'],
+                    "id_address_col": parent_data['sat_municipio_id']['nombre_municipio'],
+                    "id_address_between": parent_data['cross_street'],
+                    "id_address_and_street": parent_data['crosses_with'],
+                    "id_address_ref": parent_data['references'],
+                    "id_address_front": parent_data['exterior'],
+                    "id_address_instructions": parent_data['details'],
+                    "id_address_notes": parent_data['comment'],
         }
         adress_list.append(adresses_json)
     data = json.dumps(adress_list)
