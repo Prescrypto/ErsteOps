@@ -364,6 +364,7 @@ def patient_json(source_id,patient_data,parent_data):
             "id_zone": patient_data['zone'].upper(),
             "id_subscription_type": patient_data['client_type'],
             "addresses": address_json(patient_data,patient_data),
+            "min_addresses": min_address_json(patient_data,patient_data),
         }
     else:
         patient_data_json ={
@@ -376,10 +377,9 @@ def patient_json(source_id,patient_data,parent_data):
             "id_zone": parent_data['zone'].upper(),
             "id_subscription_type": parent_data['client_type'],
             "addresses": address_json(parent_data,patient_data),
+            "min_addresses": min_address_json(parent_data,patient_data),
         }
-    print("*************** patient_json ***************")
-    print(patient_data_json)
-    print("********************************************")
+    logger.info('%s (%s)' % ('PatientJSON',patient_data_json))
     return patient_data_json
 
 def partner_relationship(source_id,patient_relation):
@@ -428,6 +428,7 @@ def address_json(parent_data,patient_data):
         for address in parent_data['child_ids']:
             if address['type'] == 'coverage':
                 adresses_json = {
+                    "id_address_id": address['id'],
                     "id_address_street": address['street'],
                     "id_address_extra": address['street2'],
                     "id_address_zip_code": '',
@@ -436,8 +437,8 @@ def address_json(parent_data,patient_data):
                 }
                 adress_list.append(adresses_json)
     if len(adress_list) == 0:
-        print("*** por aqui ******")
         adresses_json = {
+                    "id_address_id": "1",
                     "id_address_street": parent_data['street'],
                     "id_address_extra": parent_data['street2'],
                     "id_address_zip_code": parent_data['zip'],
@@ -445,12 +446,31 @@ def address_json(parent_data,patient_data):
                     "id_address_col": '',
         }
         adress_list.append(adresses_json)
-    data = json.dumps(adress_list)
-    print(" **************** parent_data len ****************")
-    print(len(parent_data['child_ids']))
-    print(" **************** address_list len ****************")
-    print(len(adress_list))
+    #data = json.dumps(adress_list)
+    data = adresses_json
     logger.info('%s (%s)' % ('AddressJSON',data))
+    return data
+
+def min_address_json(parent_data,patient_data):
+    adress_list = []
+    #adresses_json = {}
+    if len(parent_data['child_ids']) >=1:
+        for address in parent_data['child_ids']:
+            if address['type'] == 'coverage':
+                adresses_json = {
+                    "id_address_id": address['id'],
+                    "id_address_street": address['street'],
+                }
+                adress_list.append(adresses_json)
+    if len(adress_list) == 0:
+        adresses_json = {
+                    "id_address_id": "1",
+                    "id_address_street": parent_data['street'],
+        }
+        adress_list.append(adresses_json)
+    #data = json.dumps(adress_list)
+    data = adress_list
+    logger.info('%s (%s)' % ('MinAddressJSON',data))
     return data
 
 class EmergencyActivate(View):
