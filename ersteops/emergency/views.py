@@ -323,6 +323,10 @@ class EmergencyGetPatient(View):
         # Read parameter
         target_id = kwargs['patient_id']
         # Extract patient_id
+        # Target 000129000001000129
+        # First 6 digits patient_id
+        # Second 6 digits source_id: 1 res.partner,2 family.member, 3 company.member
+        # Third 6 digits parent_id
         patient_id = int(target_id[:6])
         # Extract where the patient been found
         source_id = int(target_id[6:-6])
@@ -345,7 +349,6 @@ class EmergencyGetPatient(View):
 
         logger.info('%s (%s)' % ('OdooApi_patient_data',patient_data))
         logger.info('%s (%s)' % ('OdooApi_parent_data',parent_data))
-        #request.session['patientrequest'] = patient_data
         request.session['patientrequest'] = patient_json(source_id,patient_data,parent_data)
         return redirect('/emergency/newmodal/')
 
@@ -382,36 +385,26 @@ def patient_json(source_id,patient_data,parent_data):
     return patient_data_json
 
 def partner_relationship(source_id,patient_relation):
+    RELATIONSHIP_CODES_FAMILY = {
+        "1": "Padre",
+        "2": "Madre",
+        "3": "Esposo/a",
+        "4": "Descendiente",
+        "5": "Otro Familiar",
+    }
+    RELATIONSHIP_CODES_COMPANY = {
+        "1": "Dueño",
+        "2": "Director",
+        "3": "Ejecutivo",
+        "4": "Administrador",
+        "5": "Empleado",
+        "6": "Otro",
+    }
     relationship = ""
     if source_id == 2:
-        if patient_relation == "1":
-            relationship = "Padre"
-        elif patient_relation == "2":
-            relationship = "Madre"
-        elif patient_relation == "3":
-            relationship = "Esposo/a"
-        elif patient_relation == "4":
-            relationship = "Descendiente"
-        elif patient_relation == "5":
-            relationship = "Otro Familiar"
-        else:
-            relationship = "No clasificado"
+        relationship = RELATIONSHIP_CODES_FAMILY.get(patient_relation,"No clasificado")
     elif source_id ==3:
-        if patient_relation == "1":
-            relationship = "Dueño"
-        elif patient_relation == "2":
-            relationship = "Director"
-        elif patient_relation == "3":
-            relationship = "Ejecutivo"
-        elif patient_relation == "4":
-            relationship = "Administrador"
-        elif patient_relation == "5":
-            relationship = "Empleado"
-        elif patient_relation == "6":
-            relationship = "Otro"
-        else:
-            relationship = "No clasificado"
-
+        relationship = RELATIONSHIP_CODES_COMPANY.get(patient_relation,"No clasificado")
     return relationship
 
 def patient_age(birthday):
