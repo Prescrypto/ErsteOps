@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     # django-jet
     'jet.dashboard',
     'jet',
+    'widget_tweaks',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -59,8 +60,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'emergency.apps.EmergencyConfig',
     'vehicle.apps.VehicleConfig',
-    #'minichat.apps.MinichatConfig',
-    'notifications.apps.MinichatConfig',
+    'notifications.apps.NotificationConfig',
     'channels',
     'home.apps.HomeConfig',
 

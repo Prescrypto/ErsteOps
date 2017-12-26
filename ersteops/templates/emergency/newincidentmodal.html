@@ -1,0 +1,383 @@
+{% load widget_tweaks %}
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+<div class="modal-dialog">
+
+<!-- Modal content-->
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal">&times;</button>
+<h4 class="modal-title">Nuevo Incidente</h4>
+</div>
+<div class="modal-body">
+<p>Some text in the modal.dsfsdf </p>
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Paciente</a></li>
+    <li><a data-toggle="tab" href="#menu1">Dirección</a></li>
+    <li><a data-toggle="tab" href="#menu2">Unidad</a></li>
+    <li><a data-toggle="tab" href="#menu3">Timers</a></li>
+  </ul>
+  <form action="/emergency/new/" method="post">
+    {% csrf_token %}
+    <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <h3>Paciente</h3>
+
+      <table class="table">
+        <tbody>
+
+          <div class="form-group fieldWrapper">
+            <tr>
+            {{ form.odoo_client.errors }}
+            <td>{{ form.odoo_client.label_tag }}</td>
+            <td>{{ form.odoo_client|add_class:'form-control' }}</td>
+            </tr>
+          </div>
+
+          <div class="form-group fieldWrapper">
+            <tr>
+            {{ form.subscription_type.errors }}
+            <td>{{ form.subscription_type.label_tag }}</td>
+            <td>{{ form.subscription_type|add_class:'form-control' }}</td>
+            </tr>
+          </div>
+
+          <div class="form-group fieldWrapper">
+            <tr>
+            {{ form.service_category.errors }}
+            <td>{{ form.service_category.label_tag }}</td>
+            <td>{{ form.service_category|add_class:'form-control' }}</td>
+            </tr>
+          </div>
+
+          <div class="fieldWrapper">
+            {{ form.grade_type.errors }}
+            <tr>
+            <td>{{ form.grade_type.label_tag }}</td>
+            <td>{{ form.grade_type|add_class:'form-control' }}</td>
+            </tr>
+          </div>
+
+          <div class="fieldWrapper">
+            {{ form.zone.errors }}
+            <tr>
+            <td>{{ form.zone.label_tag }}</td>
+            <td>{{ form.zone|add_class:'form-control' }}</td>
+            </tr>
+          </div>
+
+          <div class="fieldWrapper">
+            {{ form.caller_name.errors }}
+            <tr>
+            <td>{{ form.caller_name.label_tag }}</td>
+            <td>{{ form.caller_name|add_class:'form-control' }}</td>
+            </tr>
+          </div>
+
+          <div class="fieldWrapper">
+            {{ form.caller_relation.errors }}
+            <tr>
+            <td>{{ form.caller_relation.label_tag }}</td>
+            <td>{{ form.caller_relation|add_class:'form-control' }}</td>
+            </tr>
+          </div>
+
+          <div class="fieldWrapper">
+            <tr>
+            {{ form.patient_gender.errors }}
+            <td>{{ form.patient_gender.label_tag }}</td>
+            <td>{{ form.patient_gender|add_class:'form-control' }}</td>
+            </tr>
+          </div>
+
+          <div class="fieldWrapper">
+            {{ form.patient_age.errors }}
+            <tr>
+            <td>{{ form.patient_age.label_tag }}</td>
+            <td>{{ form.patient_age|add_class:'form-control' }}</td>
+            </tr>
+          </div>
+
+          <div class="fieldWrapper">
+            {{ form.patient_name.errors }}
+            <tr>
+            <td>{{ form.patient_name.label_tag }}</td>
+            <td>{{ form.patient_name|add_class:'form-control' }}</td>
+            </tr>
+          </div>
+
+          <div class="fieldWrapper">
+            {{ form.patient_allergies.errors }}
+            <tr>
+            <td>{{ form.patient_allergies.label_tag }}</td>
+            <td>{{ form.patient_allergies|add_class:'form-control' }}</td>
+            </tr>
+          </div>
+
+          <div class="fieldWrapper">
+            {{ form.patient_illnesses.errors }}
+            <tr>
+            <td>{{ form.patient_illnesses.label_tag }}</td>
+            <td>{{ form.patient_illnesses|add_class:'form-control' }}</td>
+            </tr>
+          </div>
+
+          <div class="fieldWrapper">
+            {{ form.patient_notes.errors }}
+            <tr>
+            <td>{{ form.patient_notes.label_tag }}</td>
+            <td>{{ form.patient_notes|add_class:'form-control' }}</td>
+            </tr>
+          </div>
+
+          <div class="fieldWrapper">
+            {{ form.main_complaint.errors }}
+            <tr>
+            <td>{{ form.main_complaint.label_tag }}</td>
+            <td>{{ form.main_complaint|add_class:'form-control' }}</td>
+            </tr>
+          </div>
+
+          <div class="fieldWrapper">
+            {{ form.complaint_descriprion.errors }}
+            <tr>
+            <td>{{ form.complaint_descriprion.label_tag }}</td>
+            <td>{{ form.complaint_descriprion|add_class:'form-control' }}</td>
+            </tr>
+          </div>
+
+        </tbody>
+      </table>
+    </div>
+
+    <div id="menu1" class="tab-pane fade">
+      <h3>Dirección</h3>
+      <div class="ui-widget">
+        <label>Direccion de atención: </label>
+        <select id="addresscombobox">
+          <option value="">Seleccione una direccion...</option>
+          {% for address in request.session.patientrequest.min_addresses %}
+            <option value="{{ address.id_address_id }}">{{ address.id_address_street }}</option>
+          {% endfor %}
+        </select>
+        <div></div>
+      </div>
+      <table class="table">
+        <tbody>
+      <div class="fieldWrapper">
+        {{ form.address_street.errors }}
+        <tr>
+        <td>{{ form.address_street.label_tag }}</td>
+        <td>{{ form.address_street|add_class:'form-control' }}</td>
+        </tr>
+      </div>
+
+      <div class="fieldWrapper">
+        {{ form.address_extra.errors }}
+        <tr>
+        <td>{{ form.address_extra.label_tag }}</td>
+        <td>{{ form.address_extra|add_class:'form-control' }}</td>
+        </tr>
+      </div>
+
+      <div class="fieldWrapper">
+        {{ form.address_zip_code.errors }}
+        <tr>
+        <td>{{ form.address_zip_code.label_tag }}</td>
+        <td>{{ form.address_zip_code|add_class:'form-control' }}</td>
+        </tr>
+      </div>
+
+
+      <div class="fieldWrapper">
+        {{ form.address_county.errors }}
+        <tr>
+        <td>{{ form.address_county.label_tag }}</td>
+        <td>{{ form.address_county|add_class:'form-control'}}</td>
+        </tr>
+      </div>
+
+      <div class="fieldWrapper">
+        {{ form.address_col.errors }}
+        <tr>
+        <td>{{ form.address_col.label_tag }}</td>
+        <td>{{ form.address_col|add_class:'form-control' }}</td>
+        </tr>
+      </div>
+
+      <div class="fieldWrapper">
+        {{ form.address_between.errors }}
+        <tr>
+          <td>{{ form.address_between.label_tag }}</td>
+          <td>{{ form.address_between|add_class:'form-control' }}</td>
+        </tr>
+      </div>
+
+      <div class="fieldWrapper">
+        {{ form.address_and_street.errors }}
+        <tr>
+        <td>{{ form.address_and_street.label_tag }}</td>
+        <td>{{ form.address_and_street|add_class:'form-control' }}</td>
+        </tr>
+      </div>
+
+      <div class="fieldWrapper">
+        {{ form.address_ref.errors }}
+        <tr>
+        <td>{{ form.address_ref.label_tag }}</td>
+        <td>{{ form.address_ref|add_class:'form-control' }}</td>
+        </tr>
+      </div>
+
+      <div class="fieldWrapper">
+        {{ form.address_front.errors }}
+        <tr>
+        <td>{{ form.address_front.label_tag }}</td>
+        <td>{{ form.address_front|add_class:'form-control' }}</td>
+        </tr>
+      </div>
+
+      <div class="fieldWrapper">
+        {{ form.address_instructions.errors }}
+        <tr>
+        <td>{{ form.address_instructions.label_tag }}</td>
+        <td>{{ form.address_instructions|add_class:'form-control' }}</td>
+        </tr>
+      </div>
+      <div class="fieldWrapper">
+        {{ form.address_notes.errors }}
+        <tr>
+        <td>{{ form.address_notes.label_tag }}</td>
+        <td>{{ form.address_notes|add_class:'form-control' }}</td>
+        </tr>
+      </div>
+            </tbody>
+      </table>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <h3>Unidad</h3>
+      <table>
+        <tbody>
+        {{ form.non_field_errors }}
+        <div class="fieldWrapper">
+          {{ form.unit.errors }}
+          <tr>
+          <td>{{ form.unit.label_tag }}</td>
+          <td>{{ form.unit|add_class:'form-control' }}</td>
+          </tr>
+        </div>
+        </tbody>
+      </table>
+    </div>
+    <div id="menu3" class="tab-pane fade">
+      <h3>Timers</h3>
+      <table>
+        <tbody>
+          <div class="fieldWrapper">
+            {{ form.start_time.errors }}
+            <tr>
+            <td>{{ form.start_time.label_tag }}</td>
+            <td>{{ form.start_time|add_class:'form-control' }}</td>
+            </tr>
+          </div>
+
+      <div class="fieldWrapper">
+        {{ form.end_time.errors }}
+        <tr>
+        <td>{{ form.end_time.label_tag }}</td>
+        <td>{{ form.end_time|add_class:'form-control' }}</td>
+        </tr>
+      </div>
+
+      <div class="fieldWrapper">
+        {{ form.unit_assigned_time.errors }}
+        <tr>
+        <td>{{ form.unit_assigned_time.label_tag }}</td>
+        <td>{{ form.unit_assigned_time|add_class:'form-control' }}</td>
+        </tr>
+      </div>
+
+      <div class="fieldWrapper">
+        {{ form.unit_dispatched_time.errors }}
+        <tr>
+        <td>{{ form.unit_dispatched_time.label_tag }}</td>
+        <td>{{ form.unit_dispatched_time|add_class:'form-control' }}</td>
+        </tr>
+      </div>
+
+      <div class="fieldWrapper">
+        {{ form.arrival_time.errors }}
+        <tr>
+        <td>{{ form.arrival_time.label_tag }}</td>
+        <td>{{ form.arrival_time|add_class:'form-control' }}</td>
+        </tr>
+      </div>
+
+      <div class="fieldWrapper">
+        {{ form.attention_time.errors }}
+        <tr>
+        <td>{{ form.attention_time.label_tag }}</td>
+        <td>{{ form.attention_time|add_class:'form-control' }}</td>
+        </tr>
+      </div>
+
+      <div class="fieldWrapper">
+        {{ form.derivation_time.errors }}
+        <tr>
+        <td>{{ form.derivation_time.label_tag }}</td>
+        <td>{{ form.derivation_time|add_class:'form-control' }}</td>
+        </tr>
+      </div>
+
+      <div class="fieldWrapper">
+        {{ form.hospital_arrival.errors }}
+        <tr>
+        <td>{{ form.hospital_arrival.label_tag }}</td>
+        <td>{{ form.hospital_arrival|add_class:'form-control' }}</td>
+        </tr>
+      </div>
+
+      <div class="fieldWrapper">
+        {{ form.patient_arrival.errors }}
+        <tr>
+        <td>{{ form.patient_arrival.label_tag }}</td>
+        <td>{{ form.patient_arrival|add_class:'form-control' }}</td>
+        </tr>
+      </div>
+
+      <div class="fieldWrapper">
+        {{ form.final_emergency_time.errors }}
+        <tr>
+        <td>{{ form.final_emergency_time.label_tag }}</td>
+        <td>{{ form.final_emergency_time|add_class:'form-control' }}</td>
+        </tr>
+      </div>
+      <div class="fieldWrapper">
+        {{ form.is_active.errors }}
+        <tr>
+        <td>{{ form.is_active.label_tag }}</td>
+        <td>{{ form.is_active|add_class:'form-control' }}</td>
+        </tr>
+      </div>
+      </tbody>
+      </table>
+    </div>
+
+    </div>
+    <hr>
+    <input type="submit" value="Guardar" />
+  </form>
+
+</div>
+<!-- form -->
+<div class="row row-content">
+
+</div>
+<!-- endform -->
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+</div>
+
+</div>
+</div>

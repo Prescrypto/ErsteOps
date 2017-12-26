@@ -36,6 +36,9 @@
                     <th class="c-table__cell c-table__cell--head">
                         <span class="u-hidden-visually">Acciones</span>
                     </th>
+                    <th class="c-table__cell c-table__cell--head">
+                      
+                    </th>
                 </tr>
               </thead>
 
@@ -72,6 +75,11 @@
                           <a class="c-dropdown__item dropdown-item" href="#">Ver resumen</a>
                         </div>
                       </div>
+                    </td>
+                    <td class="c-table__cell u-text-center">
+                      <a href="/emergency/end/{{ emergency.id }}/">
+                        <span class="fa fa-stop-circle-o"></span>
+                      </a>
                     </td>
                   </tr><!-- // .table__row -->
                 {% endfor %}

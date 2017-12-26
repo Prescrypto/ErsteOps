@@ -6,6 +6,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 from django.conf import settings
 
+
 # Calculate event duration
 def eventDuration(start_duration,end_duration):
     return end_duration - start_duration
@@ -18,7 +19,7 @@ class OdooApi(object):
         self.url = settings.BASE_URL + settings.ODOO_URL
         self.headers = {"Content-Type": "text/html"}
 
-
+    # Get Token
     def get_token(self):
         url = self.url + '/api/auth/get_tokens'
         payload = {'username': settings.ODOO_USERNAME, 'password': settings.ODOO_PASSWORD}
@@ -26,6 +27,7 @@ class OdooApi(object):
 
         return response.json()
 
+    # Get patients matching string name
     def get_by_patient_name(self,patient,access_token):
         url = self.url + '/api/res.partner/'
         payload = {"filters": "[(\"name\", \"ilike\", \"{}\")]".format(patient)}
@@ -33,6 +35,7 @@ class OdooApi(object):
         response = requests.get(url, json=payload, headers=header)
         return response.json()
 
+    # Get patients matching string street
     def get_by_patient_street(self,patient,access_token):
         url = self.url + '/api/res.partner/'
         payload = {"filters": "[(\"street\", \"ilike\", \"{}\")]".format(patient)}
@@ -40,12 +43,14 @@ class OdooApi(object):
         response = requests.get(url, json=payload, headers=header)
         return response.json()
 
+    # Get patient by odoo id
     def get_by_patient_id(self,patient_id,access_token):
         url = self.url + '/api/res.partner/' + patient_id + '/'
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         response = requests.get(url,headers=header)
         return response.json()
 
+    # Get all odoo clients
     def get_by_all(self,patient_id,access_token):
         url = self.url + '/api/res.partner'
         #payload = {'id': patient_id}
@@ -53,3 +58,32 @@ class OdooApi(object):
         response = requests.get(url,headers=header)
         return response.json()
 
+    # Get company members by matching string name
+    def get_by_company_member(self,patient,access_token):
+        url = self.url + '/api/company.member/'
+        payload = {"filters": "[(\"name\", \"ilike\", \"{}\")]".format(patient)}
+        header = {"Access-Token": access_token,"Content-Type":"text/html"}
+        response = requests.get(url, json=payload, headers=header)
+        return response.json()
+
+    # Get family memberes by matching string name
+    def get_by_family_member(self,patient,access_token):
+        url = self.url + '/api/family.member/'
+        payload = {"filters": "[(\"name\", \"ilike\", \"{}\")]".format(patient)}
+        header = {"Access-Token": access_token,"Content-Type":"text/html"}
+        response = requests.get(url, json=payload, headers=header)
+        return response.json()
+
+    # Get company member by id
+    def get_by_company_member_id(self,patient_id,access_token):
+        url = self.url + '/api/company.member/' + patient_id + '/'
+        header = {"Access-Token": access_token,"Content-Type":"text/html"}
+        response = requests.get(url,headers=header)
+        return response.json()
+
+    # Get family member by id
+    def get_by_family_member_id(self,patient_id,access_token):
+        url = self.url + '/api/family.member/' + patient_id + '/'
+        header = {"Access-Token": access_token,"Content-Type":"text/html"}
+        response = requests.get(url,headers=header)
+        return response.json()
