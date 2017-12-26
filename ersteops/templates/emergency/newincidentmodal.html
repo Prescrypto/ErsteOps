@@ -22,10 +22,10 @@
     <div class="tab-content">
     <div id="home" class="tab-pane fade in active">
       <h3>Paciente</h3>
-      <h4>{{ request.session.patientrequest.name }}</h4>
 
       <table class="table">
         <tbody>
+
           <div class="form-group fieldWrapper">
             <tr>
             {{ form.odoo_client.errors }}
@@ -34,20 +34,19 @@
             </tr>
           </div>
 
-          <div class="fieldWrapper">
+          <div class="form-group fieldWrapper">
             <tr>
-            {{ form.patient_gender.errors }}
-            <td>{{ form.patient_gender.label_tag }}</td>
-            <td>{{ form.patient_gender|add_class:'form-control' }}</td>
+            {{ form.subscription_type.errors }}
+            <td>{{ form.subscription_type.label_tag }}</td>
+            <td>{{ form.subscription_type|add_class:'form-control' }}</td>
             </tr>
           </div>
 
-
-          <div class="fieldWrapper">
-            {{ form.patient_age.errors }}
+          <div class="form-group fieldWrapper">
             <tr>
-            <td>{{ form.patient_age.label_tag }}</td>
-            <td>{{ form.patient_age|add_class:'form-control' }}</td>
+            {{ form.service_category.errors }}
+            <td>{{ form.service_category.label_tag }}</td>
+            <td>{{ form.service_category|add_class:'form-control' }}</td>
             </tr>
           </div>
 
@@ -68,14 +67,6 @@
           </div>
 
           <div class="fieldWrapper">
-            {{ form.patient_name.errors }}
-            <tr>
-            <td>{{ form.patient_name.label_tag }}</td>
-            <td>{{ form.patient_name|add_class:'form-control' }}</td>
-            </tr>
-          </div>
-
-          <div class="fieldWrapper">
             {{ form.caller_name.errors }}
             <tr>
             <td>{{ form.caller_name.label_tag }}</td>
@@ -88,6 +79,30 @@
             <tr>
             <td>{{ form.caller_relation.label_tag }}</td>
             <td>{{ form.caller_relation|add_class:'form-control' }}</td>
+            </tr>
+          </div>
+
+          <div class="fieldWrapper">
+            <tr>
+            {{ form.patient_gender.errors }}
+            <td>{{ form.patient_gender.label_tag }}</td>
+            <td>{{ form.patient_gender|add_class:'form-control' }}</td>
+            </tr>
+          </div>
+
+          <div class="fieldWrapper">
+            {{ form.patient_age.errors }}
+            <tr>
+            <td>{{ form.patient_age.label_tag }}</td>
+            <td>{{ form.patient_age|add_class:'form-control' }}</td>
+            </tr>
+          </div>
+
+          <div class="fieldWrapper">
+            {{ form.patient_name.errors }}
+            <tr>
+            <td>{{ form.patient_name.label_tag }}</td>
+            <td>{{ form.patient_name|add_class:'form-control' }}</td>
             </tr>
           </div>
 
@@ -131,19 +146,22 @@
             </tr>
           </div>
 
-          <div class="fieldWrapper">
-            {{ form.required_attention.errors }}
-            <tr>
-            <td>{{ form.required_attention.label_tag }}</td>
-            <td>{{ form.required_attention|add_class:'form-control' }}</td>
-            </tr>
-          </div>
         </tbody>
       </table>
     </div>
 
     <div id="menu1" class="tab-pane fade">
       <h3>Dirección</h3>
+      <div class="ui-widget">
+        <label>Direccion de atención: </label>
+        <select id="addresscombobox">
+          <option value="">Seleccione una direccion...</option>
+          {% for address in request.session.patientrequest.min_addresses %}
+            <option value="{{ address.id_address_id }}">{{ address.id_address_street }}</option>
+          {% endfor %}
+        </select>
+        <div></div>
+      </div>
       <table class="table">
         <tbody>
       <div class="fieldWrapper">

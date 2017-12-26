@@ -28,16 +28,48 @@
      //    	$('#abre').trigger('click');
      //    }
         $('#abre').trigger('click');
-        $('#id_odoo_client').val("{% if request.session.patientrequest.client_export_id != 'None'%}{{ request.session.patientrequest.client_export_id }}{% else %}{{ request.session.patientrequest.id }}{% endif %}");
-        $('#id_address_street').val('{{ request.session.patientrequest.street }}');
-        $('#id_address_extra').val('{{ request.session.patientrequest.street2 }}');
-        $('#id_address_zip_code').val('{{ request.session.patientrequest.zip }}');
-        $('#id_patient_name').val('{{ request.session.patientrequest.name }}');
-        var str = '{{ request.session.patientrequest.zone }}';
-        var res = str.toUpperCase();
-        $('#id_zone').val(res);
-        $('#id_address_col').val('{{ request.session.patientrequest.sat_colonia_id }}')
-    });
+        $('#id_odoo_client').val('{{ request.session.patientrequest.id_odoo_client }}');
+        $('#id_patient_name').val('{{ request.session.patientrequest.id_patient_name }}');
+        $('#id_patient_allergies').val('{{ request.session.patientrequest.id_patient_allergies }}');
+        $('#id_patient_illnesses').val('{{ request.session.patientrequest.id_patient_illnesses }}');
+        $('#id_caller_relation').val('{{ request.session.patientrequest.id_caller_relation }}');
+        $('#id_patient_age').val('{{ request.session.patientrequest.id_patient_age }}');
+        $('#id_zone').val('{{ request.session.patientrequest.id_zone }}');
+        $('#id_subscription_type').val('{{ request.session.patientrequest.id_subscription_type }}');
+        // Create addreslist var with aviable addresses
+        var addressList = {{ request.session.patientrequest.addresses|safe }};
+        $( "#addresscombobox" )
+          .change(function() {
+            var str = "";
+            $( "#addresscombobox option:selected" ).each(function() {
+              //str += $( this ).text() + " ";
+              str += $( this ).val() + "";
+            });
+            // Find data when select change
+            // Begin lookup
+            for(var i=0; i < addressList.length;i++)
+            {
+              if(str == addressList[i].id_address_id){
+                //console.log("lo encontre!");
+                $("#id_address_street").val(addressList[i].id_address_street);
+                $("#id_address_extra").val(addressList[i].id_address_extra);
+                $("#id_address_col").val(addressList[i].id_address_col);
+                $("#id_address_zip_code").val(addressList[i].id_address_zip_code);
+                $("#id_address_county").val(addressList[i].id_address_county);
+                $("#id_address_between").val(addressList[i].id_address_between);
+                $("#id_address_and_street").val(addressList[i].id_address_and_street);
+                $("#id_address_ref").val(addressList[i].id_address_ref);
+                $("#id_address_front").val(addressList[i].id_address_front);
+                $("#id_address_instructions").val(addressList[i].id_address_instructions);
+                $("#id_address_notes").val(addressList[i].id_address_notes);
+              }
+
+            }
+            //end lookup
+          })
+          .trigger( "change" );
+
+        });
     //$("#myModal").dialog({modal: true});
 </script>
 {% endblock %}

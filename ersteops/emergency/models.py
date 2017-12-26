@@ -33,7 +33,7 @@ class Emergency(models.Model):
     # Triage
     grade_type = models.ForeignKey("AttentionKind",
     related_name="attention_kind_name",
-    verbose_name= "tipo"
+    verbose_name= "Grado Emergencia"
         )
     zone = models.ForeignKey("AttentionZone",
     related_name="zone_name",
@@ -84,7 +84,7 @@ class Emergency(models.Model):
     # Paient Data
     patient_name = models.CharField('Nombre del Paciente',max_length=255, default='')
     patient_gender = models.CharField('genero',max_length=9,default= '',blank=True,choices = GENDER)
-    patient_age = models.IntegerField('edad',default=0,blank=True)
+    patient_age = models.IntegerField('edad (años)',default=0,blank=True)
     patient_allergies = models.CharField('alergias',max_length=100,default='',blank=True)
     patient_illnesses = models.CharField('Enfermedades diagnosticadas',max_length=100,default='',blank=True)
     patient_notes = models.TextField('Notas paciente',blank=True,default='')

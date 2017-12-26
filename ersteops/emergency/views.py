@@ -13,7 +13,6 @@ from core.utils import OdooApi
 import requests
 from requests.auth import HTTPBasicAuth
 import json
-#from datetime import datetime, timedelta
 import datetime
 # Logging library
 import logging
@@ -321,12 +320,161 @@ class EmergencyNewModal(CreateView):
 
 class EmergencyGetPatient(View):
     def get(self, request, *args, **kwargs):
-        patient_id = kwargs['patient_id']
+        # Read parameter
+        target_id = kwargs['patient_id']
+        # Extract patient_id
+        # Target 000129000001000129
+        # First 6 digits patient_id
+        # Second 6 digits source_id: 1 res.partner,2 family.member, 3 company.member
+        # Third 6 digits parent_id
+        patient_id = int(target_id[:6])
+        # Extract where the patient been found
+        source_id = int(target_id[6:-6])
+        # Initialize Odoo api
         _api_odoo = OdooApi()
+        # Get Token
         result = _api_odoo.get_token()
-        patient_data = _api_odoo.get_by_patient_id( patient_id,result['access_token'])
-        request.session['patientrequest'] = patient_data
+        # Case when Patient in res.partner
+        if source_id == 1:
+            patient_data = _api_odoo.get_by_patient_id( str(patient_id),result['access_token'])
+            parent_data = {}
+        # Case when Patient in family.member
+        elif source_id == 2:
+            patient_data = _api_odoo.get_by_family_member_id( str(patient_id),result['access_token'])
+            parent_data = _api_odoo.get_by_patient_id( str(patient_data['parent_id']['id']),result['access_token'])
+        # Case when Patient in company.member
+        elif source_id == 3:
+            patient_data = _api_odoo.get_by_company_member_id( str(patient_id),result['access_token'])
+            parent_data = _api_odoo.get_by_patient_id( str(patient_data['parent_id']['id']),result['access_token'])
+
+        logger.info('%s (%s)' % ('OdooApi_patient_data',patient_data))
+        logger.info('%s (%s)' % ('OdooApi_parent_data',parent_data))
+        request.session['patientrequest'] = patient_json(source_id,patient_data,parent_data)
         return redirect('/emergency/newmodal/')
+
+# Resume and clean patient and partner data
+def patient_json(source_id,patient_data,parent_data):
+    patient_data_json = {}
+    if source_id == 1:
+        patient_data_json = {
+            "id_odoo_client":  str(patient_data['client_export_id']) + '-' + str(patient_data['id']) + '-' + str(patient_data['id']),
+            "id_patient_name":  patient_data['name'],
+            "id_patient_allergies" : '',
+            "id_patient_illnesses" : '',
+            "id_caller_relation": '',
+            "id_patient_age": 0,
+            "id_zone": patient_data['zone'].upper(),
+            "id_subscription_type": patient_data['client_type'],
+            "addresses": address_json(patient_data,patient_data),
+            "min_addresses": min_address_json(patient_data,patient_data),
+        }
+    else:
+        patient_data_json ={
+            "id_odoo_client":  str(parent_data['client_export_id']) + '-' + str(patient_data['parent_id']['id']) + '-' + str(patient_data['id']),
+            "id_patient_name":  patient_data['name'],
+            "id_patient_allergies" : patient_data['allergies'],
+            "id_patient_illnesses" : patient_data['prev_ailments'],
+            "id_caller_relation" : partner_relationship(source_id,patient_data['relationship']),
+            "id_patient_age": patient_age(patient_data['birthday']),
+            "id_zone": parent_data['zone'].upper(),
+            "id_subscription_type": parent_data['client_type'],
+            "addresses": address_json(parent_data,patient_data),
+            "min_addresses": min_address_json(parent_data,patient_data),
+        }
+    logger.info('%s (%s)' % ('PatientJSON',patient_data_json))
+    return patient_data_json
+
+def partner_relationship(source_id,patient_relation):
+    RELATIONSHIP_CODES_FAMILY = {
+        "1": "Padre",
+        "2": "Madre",
+        "3": "Esposo/a",
+        "4": "Descendiente",
+        "5": "Otro Familiar",
+    }
+    RELATIONSHIP_CODES_COMPANY = {
+        "1": "Dueño",
+        "2": "Director",
+        "3": "Ejecutivo",
+        "4": "Administrador",
+        "5": "Empleado",
+        "6": "Otro",
+    }
+    relationship = ""
+    if source_id == 2:
+        relationship = RELATIONSHIP_CODES_FAMILY.get(patient_relation,"No clasificado")
+    elif source_id ==3:
+        relationship = RELATIONSHIP_CODES_COMPANY.get(patient_relation,"No clasificado")
+    return relationship
+
+def patient_age(birthday):
+    # dt = datetime.strptime(birthday,"%Y -%b-%d")
+    # age = datetime.date.today() - dt
+    #return age.year
+    return datetime.date.today().year - int(birthday[:4])
+
+def address_json(parent_data,patient_data):
+    adress_list = []
+    #adresses_json = {}
+    if len(parent_data['child_ids']) >=1:
+        for address in parent_data['child_ids']:
+            if address['type'] == 'coverage':
+                adresses_json = {
+                    "id_address_id": address['id'],
+                    "id_address_street": address['street'],
+                    "id_address_extra": address['street2'],
+                    "id_address_zip_code": address['zip'],
+                    "id_address_county": address['sat_municipio_id']['nombre_municipio'],
+                    "id_address_col": address['sat_colonia_id']['nombre_colonia'],
+                    "id_address_between": address['cross_street'],
+                    "id_address_and_street": address['crosses_with'],
+                    "id_address_ref": address['references'],
+                    "id_address_front": address['exterior'],
+                    "id_address_instructions": address['details'],
+                    "id_address_notes": address['comment']
+                }
+                adress_list.append(adresses_json)
+    if len(adress_list) == 0:
+        adresses_json = {
+                    "id_address_id": "1",
+                    "id_address_street": parent_data['street'],
+                    "id_address_extra": parent_data['street2'],
+                    "id_address_zip_code": parent_data['zip'],
+                    "id_address_county": '',
+                    "id_address_col": '',
+                    "id_address_between": '',
+                    "id_address_and_street": '',
+                    "id_address_ref": '',
+                    "id_address_front": '',
+                    "id_address_instructions": '',
+                    "id_address_notes": '',
+        }
+        adress_list.append(adresses_json)
+    data = json.dumps(adress_list)
+    logger.info('%s (%s)' % ('AddressJSON',data))
+    return data
+
+def min_address_json(parent_data,patient_data):
+    adress_list = []
+    #adresses_json = {}
+    if len(parent_data['child_ids']) >=1:
+        for address in parent_data['child_ids']:
+            if address['type'] == 'coverage':
+                adresses_json = {
+                    "id_address_id": address['id'],
+                    "id_address_street": address['street'],
+                }
+                adress_list.append(adresses_json)
+    if len(adress_list) == 0:
+        adresses_json = {
+                    "id_address_id": "1",
+                    "id_address_street": parent_data['street'],
+        }
+        adress_list.append(adresses_json)
+    #data = json.dumps(adress_list)
+    data = adress_list
+    logger.info('%s (%s)' % ('MinAddressJSON',data))
+    return data
 
 class EmergencyActivate(View):
     def get(self, request, *args, **kwargs):
