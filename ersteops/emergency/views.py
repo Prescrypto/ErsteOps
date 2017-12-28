@@ -14,6 +14,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 import json
 import datetime
+from django.core import serializers
 # Logging library
 import logging
 # Load Logging definition, this is defined in settings.py in the LOGGING section
