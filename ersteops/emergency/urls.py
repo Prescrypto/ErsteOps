@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from . import views
-from emergency.views import EmergencyBlank, EmergencyNew, EmergencyListView, EmergencyDetailView, EmergencyDashbordList, EmergencyDerivation, EmergencyUpdate, EmergencyClientOdoo, EmergencyClientModal,EmergencyNewModal, EmergencyGetPatient, OdooSubscription, EmergencyActivate, EmergencyEnd
+from emergency.views import EmergencyBlank, EmergencyNew, EmergencyListView, EmergencyDetailView, EmergencyDashboardList, EmergencyDerivation, EmergencyUpdate, EmergencyClientOdoo, EmergencyClientModal,EmergencyNewModal, EmergencyGetPatient, OdooSubscription, EmergencyActivate, EmergencyEnd
 
 urlpatterns = [
     url(r'^$',EmergencyBlank.as_view(),name="emergencyblank"),
@@ -11,7 +11,7 @@ urlpatterns = [
     url(r'^subscriptor/$',OdooSubscription.as_view(),name="subscriptormodal"),
     url(r'^odooapi/$',EmergencyClientOdoo.as_view(),name="emergencyodoo"),
     url(r'^update/(?P<pk>[0-9]+)/$',EmergencyUpdate.as_view(),name="emergencyupdate"),
-    url(r'^dashboard/$',EmergencyDashbordList.as_view(),name="emergencydashbord"),
+    url(r'^dashboard/$',EmergencyDashboardList.as_view(),name="emergencydashboard"),
     url(r'^derivation/$',EmergencyDerivation.as_view(),name="emergencyderivation"),
     url(r'^(?P<pk>[0-9]+)/$', EmergencyDetailView.as_view(), name='emergencydetail'),
     url(r'^activate/(?P<patient_id>\d+)/$', EmergencyActivate.as_view(), name='emergencyactivate'),
