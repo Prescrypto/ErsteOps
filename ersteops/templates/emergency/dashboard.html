@@ -83,14 +83,14 @@
   </main><!-- // .o-page__content -->
 {% endblock %}
 
+{% block jsheadblock %}
+<script>
+  // reemplazar [] con json de django
+  window.erste.incidents = [];
+</script>
+{% endblock jsheadblock %}
+
 {% block jsblock %}
   {% load render_bundle from webpack_loader %}
   {% render_bundle 'dashboard' 'js' %}
-  
-  {# Vars | (incidentes desde el server serializados) #}
-  <script>
-    // window es el contexto global del server
-    // lo unico que se debe prever es que debe ser un arreglo no un objeto
-    window.seed = {{ object_list }} // {% incidentes desde el server serializados %}
-  </script>
 {% endblock jsblock%}
