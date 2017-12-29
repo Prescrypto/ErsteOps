@@ -84,7 +84,6 @@
 
 {% block jsheadblock %}
 <script>
-  // reemplazar [] con json de django
   var json_list = {{ object_list|safe }};
   window.erste.incidents = json_list;
 </script>
