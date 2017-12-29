@@ -17,7 +17,6 @@
         {# TODO add mini components of wireframe#}
         {% include "ui_component/analytics.html" %}
       </div>
-
       <div class="row">
         <div class="col-md-12">
           <div class="c-card u-mb-large">
@@ -82,6 +81,13 @@
     </div> <!-- // .container -->
   </main><!-- // .o-page__content -->
 {% endblock %}
+
+{% block jsheadblock %}
+<script>
+  var json_list = {{ object_list|safe }};
+  window.erste.incidents = json_list;
+</script>
+{% endblock jsheadblock %}
 
 {% block jsblock %}
   {% load render_bundle from webpack_loader %}

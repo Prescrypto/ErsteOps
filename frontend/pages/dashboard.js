@@ -10,7 +10,7 @@ init();
 const socket = new ReconnectingWebSocket(`${ws}/notify/emergency/`);
 
 // Initialize empty data store
-const emergencies = [];
+const emergencies = window.erste.incidents.map(i => i.fields) || [];
 const store = { emergencies };
 
 // Append to emergencies array when receiving new data
