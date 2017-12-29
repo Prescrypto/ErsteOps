@@ -14,6 +14,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 import json
 import datetime
+from django.core import serializers
 # Logging library
 import logging
 # Load Logging definition, this is defined in settings.py in the LOGGING section
@@ -91,16 +92,60 @@ class EmergencyDetailView(DetailView):
         return context
 
 
-class EmergencyDashbordList(ListView):
-    template_name = "emergency/dashbord.html"
+class EmergencyDashboardList(ListView):
+    template_name = "emergency/dashboard.html"
     model = Emergency
     def get_context_data(self, **kwargs):
-        context = super(EmergencyDashbordList, self).get_context_data(**kwargs)
+        context = super(EmergencyDashboardList, self).get_context_data(**kwargs)
         context.update({'now': timezone.now()})
         return context
 
     def get_queryset(self):
-        return Emergency.objects.filter(is_active=True)
+        fields = ('id','odoo_client',
+                'service_category',
+                'grade_type',
+                'zone',
+                'start_time',
+                'end_time',
+                'is_active',
+                'unit',
+                'unit_assigned_time',
+                'unit_dispatched_time',
+                'arrival_time',
+                'attention_time',
+                'derivation_time',
+                'hospital_arrival',
+                'patient_arrival',
+                'final_emergency_time',
+                'address_street',
+                'address_extra',
+                'address_zip_code',
+                'address_county',
+                'address_col',
+                'address_between',
+                'address_and_street',
+                'address_ref',
+                'address_front',
+                'address_instructions',
+                'address_notes',
+                'caller_name',
+                'caller_relation',
+                'patient_name',
+                'patient_gender',
+                'patient_age',
+                'patient_allergies',
+                'patient_illnesses',
+                'patient_notes',
+                'attention_final_grade',
+                'attention_justification',
+                'main_complaint',
+                'complaint_descriprion',
+                'subscription_type'
+                )
+        emm_list = Emergency.objects.filter(is_active=True)
+        data = serializers.serialize('json', list(emm_list), fields=fields)
+        # TEMP remove later
+        return data
 
 
 class EmergencyDerivation(CreateView):

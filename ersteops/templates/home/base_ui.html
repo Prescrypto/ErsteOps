@@ -17,9 +17,20 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="{% static "ui_kit/css/main.min.css" %}">
 
-    {% block cssblock %}
+    <!-- Initialize empty global state object -->
+    <script>window.erste = {}</script>
 
+    <!-- JS that must run before UI loads -->
+    {% block jsheadblock %}
+    {% endblock jsheadblock %}
+
+    <!-- Styles from views -->
+    {% block cssblock %}
     {% endblock cssblock %}
+
+    <!-- Load webpack common/shared bundle -->
+    {% load render_bundle from webpack_loader %}
+    {% render_bundle 'common' 'js' %}
   </head>
   <body class="o-page">
     <!--[if lte IE 9]>
@@ -36,6 +47,7 @@
 
     <script src="{% static "ui_kit/js/main.min.js" %}"></script>
 
+    <!-- Scripts from views -->
     {% block jsblock %}
     {% endblock jsblock %}
   </body>

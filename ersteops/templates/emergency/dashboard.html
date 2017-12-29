@@ -1,0 +1,95 @@
+{% extends 'home/base_ui.html' %}
+{% load staticfiles %}
+
+{% block header %}
+  {# Main Sidebar #}
+  {% include "ui_component/sidebar.html" %}
+
+{% endblock header %}
+
+{% block content %}
+  <main class="o-page__content">
+    {# Main header #}
+    {% include "ui_component/header.html" %}
+
+    <div class="container">
+      <div class="row">
+        {# TODO add mini components of wireframe#}
+        {% include "ui_component/analytics.html" %}
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="c-card u-mb-large">
+            <div class="c-card__head">
+              <h3 class="c-card__title">Incidentes</h3>
+            </div>
+
+            <table id="dashboard-log" class="c-table">
+              <thead class="c-table__head c-table__head--slim">
+                <tr class="c-table__row">
+                    <th class="c-table__cell c-table__cell--head">Cliente</th>
+                    <th class="c-table__cell c-table__cell--head">Grado</th>
+                    <th class="c-table__cell c-table__cell--head">Unidad</th>
+                    <th class="c-table__cell c-table__cell--head">Tiempo</th>
+                    <th class="c-table__cell c-table__cell--head">Estado</th>
+                    <th class="c-table__cell c-table__cell--head">
+                        <span class="u-hidden-visually">Acciones</span>
+                    </th>
+                    <th class="c-table__cell c-table__cell--head">
+
+                    </th>
+                </tr>
+              </thead>
+
+              <tbody id="root">
+                <tr  v-for="emergency in emergencies" id="emergency-{{emergency.id}}" class="c-table__row">
+                  <td class="c-table__cell"><span class="u-text-mute"><% emergency.odoo_client %></span></td>
+                  <td class="c-table__cell"><% emergency.grade_type %></td>
+                  <td class="c-table__cell">
+                    <span v-for="unit in emergency.unit.all" class="u-text-mute"><% unit %></span>
+                    <span v-if="!((emergency.unit || {}).all || {}).length">Sin Asignar</span>
+                  </td>
+                  <td class="c-table__cell">
+                    <span class="u-text-mute"><% emergency.start_time | datetime %></span>
+                  </td>
+                  <td class="c-table__cell">
+                    <span v-if="emergency.is_active" class="c-badge c-badge--small c-badge--success">En Camino</span>
+                    <span v-else class="c-badge c-badge--small c-badge--success">Terminado</span>
+                  </td>
+                  <td class="c-table__cell u-text-center">
+                    <div class="c-dropdown dropdown">
+                      <button class="c-btn c-btn--secondary has-dropdown dropdown-toggle" id="dropdownMenuButton10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
+
+                      <div class="c-dropdown__menu dropdown-menu" aria-labelledby="dropdownMenuButton10">
+                        <a class="c-dropdown__item dropdown-item" href="#">Servicio de Derivación</a>
+                        <a class="c-dropdown__item dropdown-item" href="#">Ver tiempos</a>
+                        <a class="c-dropdown__item dropdown-item" href="#">Ver resumen</a>
+                        <a class="c-dropdown__item dropdown-item" href="#">Ver resumen</a>
+                      </div>
+                    </td>
+                    <td class="c-table__cell u-text-center">
+                      <a href="/emergency/end/{{ emergency.id }}/">
+                        <span class="fa fa-stop-circle-o"></span>
+                      </a>
+                    </td>
+                  </tr><!-- // .table__row -->
+              </tbody>
+            </table>
+          </div><!-- // .c-card -->
+        </div>
+      </div><!-- // .row -->
+    </div> <!-- // .container -->
+  </main><!-- // .o-page__content -->
+{% endblock %}
+
+{% block jsheadblock %}
+<script>
+  var json_list = {{ object_list|safe }};
+  window.erste.incidents = json_list;
+</script>
+{% endblock jsheadblock %}
+
+{% block jsblock %}
+  {% load render_bundle from webpack_loader %}
+  {% render_bundle 'dashboard' 'js' %}
+{% endblock jsblock%}

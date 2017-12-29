@@ -1,52 +1,68 @@
-{% extends 'base.html' %}
+{% extends 'home/base_ui.html' %}
 {% load staticfiles %}
 
+{% block header %}
+  {# Main Sidebar #}
+  {% include "ui_component/sidebar.html" %}
+
+{% endblock header %}
+
 {% block content %}
-<h1>Incidents</h1>
+  <main class="o-page__content">
+    {# Main header #}
+    {% include "ui_component/header.html" %}
 
-<table class="table table-striped">
-	<thead>
-   <tr>
-     <th>Incident Id</th>
-     <th>Start Time</th>
-     <th>End Time</th>
-     <th>Type</th>
-     <th>Zone</th>
-     <th>Status</th>
-     <th>Timer</th>
-     <th>Actualizar</th>
-     <th>Reactivar</th>
-   </tr> 
-  </thead>
-  <tbody>
-    {% for emergency in object_list %}
-      <tr>
-        <td><a href="/emergency/{{emergency.id}}/">Id:{{emergency.id}}</td>
-        <td>{{ emergency.start_time }}</td>
-        <td>{{ emergency.end_time }}</td>
-        <td>{{ emergency.grade_type.name }}</td>
-        <td>{{ emergency.zone.name }}</td>
-        {% if emergency.is_active%}
-          <td>Activa</td>
-        {% else %}
-          <td>Inactiva</td>
-        {% endif%}
-        <td>{{ emergency.emergencyTimer }}</td>
-        <td><a href="/emergency/update/{{emergency.id}}/">
-          <span class="fa fa-pencil"></span></a>
-        </td>
-        <td>
-          <a href="/emergency/activate/{{ emergency.id }}/">
-            <span class="fa fa-check-circle-o"></span>
-          </a>
-        </td>
-      </tr>
-    {% empty %}
-    <li>No incidents yet.</li>
-    {% endfor %}
+    <div class="container">
 
-  </tbody>
-</table>
+      <table class="c-table">
+        <caption class="c-table__title">
+          Incidentes <small>Record de incidentes capturados</small>
+        </caption>
+        <thead class="c-table__head c-table__head--slim">
+          <tr class="c-table__row">
+            <th class="c-table__cell c-table__cell--head">ID de Incidente</th>
+            <th class="c-table__cell c-table__cell--head">Comienzo</th>
+            <th class="c-table__cell c-table__cell--head">Fin</th>
+            <th class="c-table__cell c-table__cell--head">Tipo</th>
+            <th class="c-table__cell c-table__cell--head">Zona</th>
+            <th class="c-table__cell c-table__cell--head">Estatus</th>
+            <th class="c-table__cell c-table__cell--head">Tiempos</th>
+            <th class="c-table__cell c-table__cell--head">Actualizar</th>
+            <th class="c-table__cell c-table__cell--head">Reactivar</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for emergency in object_list %}
+            <tr class="c-table__row">
+              <td class="c-table__cell"><a href="/emergency/{{emergency.id}}/">Id:{{emergency.id}}</td>
+              <td class="c-table__cell">{{ emergency.start_time }}</td>
+              <td class="c-table__cell">{{ emergency.end_time }}</td>
+              <td class="c-table__cell">{{ emergency.grade_type.name }}</td>
+              <td class="c-table__cell">{{ emergency.zone.name }}</td>
+              {% if emergency.is_active%}
+                <td class="c-table__cell">Activa</td>
+              {% else %}
+                <td class="c-table__cell">Inactiva</td>
+              {% endif%}
+              <td class="c-table__cell">{{ emergency.emergencyTimer }}</td>
+              <td class="c-table__cell">
+                <a href="/emergency/update/{{emergency.id}}/">
+                  <span class="fa fa-pencil"></span></a>
+                </a>
+              </td>
+              <td class="c-table__cell">
+                <a href="/emergency/activate/{{emergency.id}}/">
+                  <span class="fa fa-check-circle-o"></span>
+                </a>
+              </td>
+            </tr>
+          {% empty %}
+            <div class="c-alert c-alert--info">
+                <i class="c-alert__icon fa fa-check-circle"></i> No existen incidentes en el sistema.
+            </div>
+          {% endfor %}
+        </tbody>
+      </table>
 
-
+    </div>
 {% endblock %}
