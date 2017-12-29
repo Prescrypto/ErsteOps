@@ -145,7 +145,6 @@ class EmergencyDashboardList(ListView):
         emm_list = Emergency.objects.filter(is_active=True)
         data = serializers.serialize('json', list(emm_list), fields=fields)
         # TEMP remove later
-        print(data)
         return data
 
 
