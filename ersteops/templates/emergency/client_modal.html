@@ -20,6 +20,14 @@
     <div class="c-tabs__content tab-content" id="nav-tabContent">
       <div class="c-tabs__pane active" id="nav-search" role="tabpanel" aria-labelledby="nav-search-tab">
         Busqueda
+        <form id="searchpatient" action="/emergency/getpatient/" method="post">
+          {% csrf_token %}
+          <table>
+          {{ form.as_table }}
+          </table>
+
+          <input id="continuebutton" type="submit" value="Continuar" />
+        </form>
       </div>
 
       <div class="c-tabs__pane" id="nav-patient" role="tabpanel" aria-labelledby="nav-patient-tab">

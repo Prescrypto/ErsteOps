@@ -97,7 +97,11 @@ class EmergencyDashboardList(ListView):
     model = Emergency
     def get_context_data(self, **kwargs):
         context = super(EmergencyDashboardList, self).get_context_data(**kwargs)
-        context.update({'now': timezone.now()})
+        search_form = OdooClientAuto
+        context.update({
+            'now': timezone.now(),
+            'search_form': search_form
+        })
         return context
 
     def get_queryset(self):
@@ -285,7 +289,7 @@ class EmergencyClientModal(View):
                 patient = form.cleaned_data['client_name']
                 patient_data = _api_odoo.get_by_patient_id( patient,result['access_token'])
                 find_data = patient_data
-                try: 
+                try:
                     if find_data.name:
                         feContext.update({"count": 1})
                 except:
@@ -358,7 +362,7 @@ class EmergencyNewModal(CreateView):
                 'complaint_descriprion',
                 'subscription_type'
                 ]
-    
+
     success_url = '/emergency/list/'
 
 
