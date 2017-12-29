@@ -1,6 +1,7 @@
 <!-- Modal -->
+{% load widget_tweaks %}
 <modal ref="modal" name="incident-modal" resizable scrollable width="75%" height="auto">
-
+<form action="/emergency/new/" method="post">{% csrf_token %}
   <div class="c-toolbar">
     <h3 class="c-toolbar__title has-divider">Nuevo Incidente</h3>
     <h5 class="c-toolbar__meta">Captura de información de nuevos incidentes.</h5>
@@ -38,4 +39,5 @@
       </div>
     </div>
   </div>
+</form>
 </modal>
