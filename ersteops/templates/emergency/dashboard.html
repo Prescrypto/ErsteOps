@@ -17,7 +17,6 @@
         {# TODO add mini components of wireframe#}
         {% include "ui_component/analytics.html" %}
       </div>
-
       <div class="row">
         <div class="col-md-12">
           <div class="c-card u-mb-large">
@@ -86,7 +85,8 @@
 {% block jsheadblock %}
 <script>
   // reemplazar [] con json de django
-  window.erste.incidents = [];
+  var json_list = {{ object_list|safe }};
+  window.erste.incidents = json_list;
 </script>
 {% endblock jsheadblock %}
 
