@@ -8,7 +8,7 @@
   <form id="searchpatient" action="/emergency/getpatient/" method="post">
     {% csrf_token %}
   	<table>
-    {{ form.as_table }}
+    {{ search_form.as_table }}
     </table>
 
     <input id="continuebutton" type="submit" value="Continuar" />
@@ -26,14 +26,14 @@ $(document).ready(function(){
     $("#id_client_name").autocomplete({
       source: "/ajaxapi/getsubscriptor/",
       minLength: 2,
-      //Focus 
+      //Focus
       focus: function( event, ui ) {
         $( "#id_client_name" ).val( ui.item.label );
         return false;
       },
 
       select: function( event, ui ) {
-        //Assign existing values from Autocomplete 
+        //Assign existing values from Autocomplete
         $( "#id_client_id" ).val( ui.item.id );
         $( "#id_client_name" ).val( ui.item.value );
         $( "#id_source_id" ).val( ui.item.source );
