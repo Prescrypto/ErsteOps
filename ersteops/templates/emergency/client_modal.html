@@ -32,6 +32,97 @@
         <form action="/emergency/new/" method="post">
           {% csrf_token %}
           Paciente
+          <table class="table">
+            <tbody>
+              <tr>
+                <td><label for="id_odoo_client">Cliente id:</label></td>
+                <td><input type="text" name="odoo_client" required="" class="c-input" id="id_odoo_client" maxlength="50"></td>
+              </tr>
+              <tr>
+                <td><label for="id_subscription_type">Subscripcion:</label></td>
+                <td><input type="text" name="subscription_type" id="id_subscription_type" class="c-input" maxlength="100"></td>
+                </tr>
+              <tr>
+                <td><label for="id_service_category">Tipo de emergencia:</label></td>
+                <td><select name="service_category" id="id_service_category" class="c-input">
+                      <option value="" selected="">---------</option>
+                      <option value="4">Evento</option>
+                      <option value="7">Evento Programado</option>
+                      <option value="3">Servicio</option>
+                      <option value="6">Servicio Programado</option>
+                      <option value="5">Traslado</option>
+                      <option value="8">Traslado Programado</option>
+                    </select></td>
+                </tr>
+              <tr>
+                <td><label for="id_grade_type">Grado Emergencia:</label></td>
+                <td><select name="grade_type" required="" class="c-input" id="id_grade_type">
+                    <option value="" selected="">---------</option>
+                    <option value="G0">G0 - Por Definir</option>
+                    <option value="G1">G1 - G1</option>
+                    <option value="G2">G2 - G2</option>
+                    <option value="G3">G3 - G3</option>
+                  </select></td>
+                </tr>
+              <tr>
+                <td><label for="id_zone">Zone:</label></td>
+                <td><select name="zone" required="" class="c-input" id="id_zone">
+                      <option value="" selected="">---------</option>
+                      <option value="BQELMS">BQELMS - Bosque de las Lomas</option>
+                      <option value="ITRLMS">ITRLMS - Interlomas</option>
+                      <option value="LOMAS">LOMAS - Lomas de chapultepec</option>
+                      <option value="PLNCO">PLNCO - POLANCO</option>
+                      <option value="SFE">SFE - Santa Fe</option>
+                      <option value="TCMCHL">TCMCHL - Tecamachalco</option>
+                      <option value="UNICA">UNICA - Fuera de la zona de cobertura</option>
+                    </select></td>
+                </tr>
+              <tr>
+                <td><label for="id_caller_name">Persona que llama:</label></td>
+                <td><input type="text" name="caller_name" id="id_caller_name" class="c-input" maxlength="100"></td>
+                </tr>
+              <tr>
+                <td><label for="id_caller_relation">Relacion con el paciente:</label></td>
+                <td><input type="text" name="caller_relation" id="id_caller_relation" class="c-input" maxlength="50"></td>
+                </tr>
+              <tr>
+                <td><label for="id_patient_gender">Genero:</label></td>
+                <td><select name="patient_gender" id="id_patient_gender" class="c-input">
+                      <option value="" selected="">---------</option>
+                      <option value="Masculino">Masculino</option>
+                      <option value="Femenino">Femenino</option>
+                    </select></td>
+              </tr>
+              <tr>
+                <td><label for="id_patient_age">Edad (años):</label></td>
+                <td><input type="number" name="patient_age" value="0" id="id_patient_age" class="c-input"></td>
+              </tr>
+              <tr>
+                <td><label for="id_patient_name">Nombre del Paciente:</label></td>
+                <td><input type="text" name="patient_name" required="" class="c-input" id="id_patient_name" maxlength="255"></td>
+              </tr>
+              <tr>
+                <td><label for="id_patient_allergies">Alergias:</label></td>
+                <td><input type="text" name="patient_allergies" id="id_patient_allergies" class="c-input" maxlength="100"></td>
+              </tr>
+              <tr>
+                <td><label for="id_patient_illnesses">Enfermedades diagnosticadas:</label></td>
+                <td><input type="text" name="patient_illnesses" id="id_patient_illnesses" class="c-input" maxlength="100"></td>
+              </tr>
+              <tr>
+                <td><label for="id_patient_notes">Notas paciente:</label></td>
+                <td><textarea name="patient_notes" id="id_patient_notes" class="c-input" rows="10" cols="40"></textarea></td>
+              </tr>
+              <tr>
+                <td><label for="id_main_complaint">Sintoma principal:</label></td>
+                <td><input type="text" name="main_complaint" id="id_main_complaint" class="c-input" maxlength="100"></td>
+              </tr>
+              <tr>
+                <td><label for="id_complaint_descriprion">Descripcion de los sintomas:</label></td>
+                <td><textarea name="complaint_descriprion" id="id_complaint_descriprion" class="c-input" rows="10" cols="40"></textarea></td>
+              </tr>
+            </tbody>
+          </table>
       </div><!-- End Patient TAB -->
 
       <div class="c-tabs__pane" id="nav-address" role="tabpanel" aria-labelledby="nav-address-tab">
