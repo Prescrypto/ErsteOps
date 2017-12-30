@@ -127,6 +127,62 @@
 
       <div class="c-tabs__pane" id="nav-address" role="tabpanel" aria-labelledby="nav-address-tab">
         Dirección
+        <h3>Dirección</h3>
+        <div class="ui-widget">
+          <label>Direccion de atención: </label>
+          <select id="addresscombobox">
+            <option value="">Seleccione una direccion...</option>
+              <option value="1">Roma Sur 5897</option>
+          </select>
+        </div>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td><label for="id_address_street">Calle y numero:</label></td>
+              <td><input type="text" name="address_street" id="id_address_street" class="c-input" maxlength="100"></td>
+              </tr>
+            <tr>
+              <td><label for="id_address_extra">Calle:</label></td>
+              <td><input type="text" name="address_extra" id="id_address_extra" class="c-input" maxlength="100"></td>
+            </tr>
+            <tr>
+              <td><label for="id_address_zip_code">Codigo Postal:</label></td>
+              <td><input type="text" name="address_zip_code" id="id_address_zip_code" class="c-input" maxlength="5"></td>
+            </tr>
+            <tr>
+              <td><label for="id_address_county">Delegacion:</label></td>
+              <td><input type="text" name="address_county" id="id_address_county" class="c-input" maxlength="50"></td>
+            </tr>
+            <tr>
+              <td><label for="id_address_col">Colonia:</label></td>
+              <td><input type="text" name="address_col" id="id_address_col" class="c-input" maxlength="50"></td>
+            </tr>
+            <tr>
+              <td><label for="id_address_between">Entre la calle:</label></td>
+              <td><input type="text" name="address_between" id="id_address_between" class="c-input" maxlength="100"></td>
+            </tr>
+            <tr>
+              <td><label for="id_address_and_street">Y la calle:</label></td>
+              <td><input type="text" name="address_and_street" id="id_address_and_street" class="c-input" maxlength="100"></td>
+            </tr>
+            <tr>
+              <td><label for="id_address_ref">Referencias:</label></td>
+              <td><input type="text" name="address_ref" id="id_address_ref" class="c-input" maxlength="100"></td>
+              </tr>
+            <tr>
+              <td><label for="id_address_front">Fachada:</label></td>
+              <td><input type="text" name="address_front" id="id_address_front" class="c-input" maxlength="100"></td>
+            </tr>
+            <tr>
+              <td><label for="id_address_instructions">Instruccciones llegada:</label></td>
+              <td><input type="text" name="address_instructions" id="id_address_instructions" class="c-input" maxlength="100"></td>
+            </tr>
+            <tr>
+              <td><label for="id_address_notes">Notas:</label></td>
+              <td><textarea name="address_notes" id="id_address_notes" class="c-input" rows="10" cols="40"></textarea></td>
+            </tr>
+          </tbody>
+        </table>
       </div><!-- End Address TAB -->
 
       <div class="c-tabs__pane" id="nav-units" role="tabpanel" aria-labelledby="nav-units-tab">
