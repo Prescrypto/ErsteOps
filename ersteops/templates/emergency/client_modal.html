@@ -27,10 +27,11 @@
 
           <input id="continuebutton" type="submit" value="Continuar" />
         </form>
-      </div>
-
+      </div><!-- End Search TAB -->
       <div class="c-tabs__pane" id="nav-patient" role="tabpanel" aria-labelledby="nav-patient-tab">
-        Paciente
+        <form action="/emergency/new/" method="post">
+          {% csrf_token %}
+          Paciente
       </div><!-- End Patient TAB -->
 
       <div class="c-tabs__pane" id="nav-address" role="tabpanel" aria-labelledby="nav-address-tab">
@@ -43,6 +44,7 @@
 
       <div class="c-tabs__pane" id="nav-timers" role="tabpanel" aria-labelledby="nav-timers-tab">
         Tiempos
+        </form>
       </div><!-- End Timer TAB -->
     </div>
   </div>
