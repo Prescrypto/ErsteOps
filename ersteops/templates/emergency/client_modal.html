@@ -1,21 +1,14 @@
 <!-- Modal -->
 {% load widget_tweaks %}
-<modal ref="modal" name="incident-modal" resizable scrollable width="75%" height="auto">
-<form action="/emergency/new/" method="post">{% csrf_token %}
-  <div class="c-toolbar">
-    <h3 class="c-toolbar__title has-divider">Nuevo Incidente</h3>
-    <h5 class="c-toolbar__meta">Captura de información de nuevos incidentes.</h5>
-    <button class="c-close u-color-primary text u-ml-auto" type="button" @click="hide">×</button>
-  </div>
+<modal
+  ref="modal"
+  name="incident-modal"
+  resizable
+  scrollable
+  width="75%"
+  height="auto">
 
-  <div class="c-tabs">
-    <nav class="c-tabs__list nav nav-tabs" id="myTab" role="tablist">
-      <a class="c-tabs__link active" id="nav-home-tab" data-toggle="tab" href="#nav-search" role="tab" aria-controls="nav-search" aria-selected="true">Buscar</a>
-      <a class="c-tabs__link" id="nav-profile-tab" data-toggle="tab" href="#nav-patient" role="tab" aria-controls="nav-patient" aria-selected="false">Paciente</a>
-      <a class="c-tabs__link" id="nav-contact-tab" data-toggle="tab" href="#nav-address" role="tab" aria-controls="nav-address" aria-selected="false">Dirección</a>
-      <a class="c-tabs__link" id="nav-contact-tab" data-toggle="tab" href="#nav-units" role="tab" aria-controls="nav-units" aria-selected="false">Unidad</a>
-      <a class="c-tabs__link" id="nav-contact-tab" data-toggle="tab" href="#nav-timers" role="tab" aria-controls="nav-timers" aria-selected="false">Timers</a>
-    </nav>
+  <form action="/emergency/new/" method="post">{% csrf_token %}
 
     <div class="c-tabs__content tab-content" id="nav-tabContent">
       <div class="c-tabs__pane active" id="nav-search" role="tabpanel" aria-labelledby="nav-search-tab">
@@ -27,236 +20,250 @@
           <label class="c-field__label" for="id_client_name">Nombre:</label>
           <input class="c-input" type="text" id="id_client_name" name="client_name" placeholder="Alsea SA. de CV.">
 
-          <input id="continuebutton" type="submit" value="Continuar" />
-        </form>
-      </div><!-- End Search TAB -->
-      <div class="c-tabs__pane" id="nav-patient" role="tabpanel" aria-labelledby="nav-patient-tab">
-        <form action="/emergency/new/" method="post">
-          {% csrf_token %}
-          Paciente
+    <div class="c-tabs">
+      <nav class="c-tabs__list nav nav-tabs" id="myTab" role="tablist">
+        <a class="c-tabs__link active" id="nav-home-tab" data-toggle="tab" href="#nav-search" role="tab" aria-controls="nav-search" aria-selected="true">Buscar</a>
+        <a class="c-tabs__link" id="nav-profile-tab" data-toggle="tab" href="#nav-patient" role="tab" aria-controls="nav-patient" aria-selected="false">Paciente</a>
+        <a class="c-tabs__link" id="nav-contact-tab" data-toggle="tab" href="#nav-address" role="tab" aria-controls="nav-address" aria-selected="false">Dirección</a>
+        <a class="c-tabs__link" id="nav-contact-tab" data-toggle="tab" href="#nav-units" role="tab" aria-controls="nav-units" aria-selected="false">Unidad</a>
+        <a class="c-tabs__link" id="nav-contact-tab" data-toggle="tab" href="#nav-timers" role="tab" aria-controls="nav-timers" aria-selected="false">Timers</a>
+      </nav>
+
+      <div class="c-tabs__content tab-content" id="nav-tabContent">
+        <div class="c-tabs__pane active" id="nav-search" role="tabpanel" aria-labelledby="nav-search-tab">
+          {# Busqueda #}
+          <form id="searchpatient" action="/emergency/getpatient/" method="post">
+            <search />
+            <input id="continuebutton" type="submit" value="Continuar" />
+          </form>
+        </div><!-- End Search TAB -->
+        <div class="c-tabs__pane" id="nav-patient" role="tabpanel" aria-labelledby="nav-patient-tab">
+          <form action="/emergency/new/" method="post">
+            {% csrf_token %}
+            Paciente
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td><label for="id_odoo_client">Cliente id:</label></td>
+                  <td><input type="text" name="odoo_client" required="" class="c-input" id="id_odoo_client" maxlength="50"></td>
+                </tr>
+                <tr>
+                  <td><label for="id_subscription_type">Subscripcion:</label></td>
+                  <td><input type="text" name="subscription_type" id="id_subscription_type" class="c-input" maxlength="100"></td>
+                  </tr>
+                <tr>
+                  <td><label for="id_service_category">Tipo de emergencia:</label></td>
+                  <td><select name="service_category" id="id_service_category" class="c-input">
+                        <option value="" selected="">---------</option>
+                        <option value="4">Evento</option>
+                        <option value="7">Evento Programado</option>
+                        <option value="3">Servicio</option>
+                        <option value="6">Servicio Programado</option>
+                        <option value="5">Traslado</option>
+                        <option value="8">Traslado Programado</option>
+                      </select></td>
+                  </tr>
+                <tr>
+                  <td><label for="id_grade_type">Grado Emergencia:</label></td>
+                  <td><select name="grade_type" required="" class="c-input" id="id_grade_type">
+                      <option value="" selected="">---------</option>
+                      <option value="G0">G0 - Por Definir</option>
+                      <option value="G1">G1 - G1</option>
+                      <option value="G2">G2 - G2</option>
+                      <option value="G3">G3 - G3</option>
+                    </select></td>
+                  </tr>
+                <tr>
+                  <td><label for="id_zone">Zone:</label></td>
+                  <td><select name="zone" required="" class="c-input" id="id_zone">
+                        <option value="" selected="">---------</option>
+                        <option value="BQELMS">BQELMS - Bosque de las Lomas</option>
+                        <option value="ITRLMS">ITRLMS - Interlomas</option>
+                        <option value="LOMAS">LOMAS - Lomas de chapultepec</option>
+                        <option value="PLNCO">PLNCO - POLANCO</option>
+                        <option value="SFE">SFE - Santa Fe</option>
+                        <option value="TCMCHL">TCMCHL - Tecamachalco</option>
+                        <option value="UNICA">UNICA - Fuera de la zona de cobertura</option>
+                      </select></td>
+                  </tr>
+                <tr>
+                  <td><label for="id_caller_name">Persona que llama:</label></td>
+                  <td><input type="text" name="caller_name" id="id_caller_name" class="c-input" maxlength="100"></td>
+                  </tr>
+                <tr>
+                  <td><label for="id_caller_relation">Relacion con el paciente:</label></td>
+                  <td><input type="text" name="caller_relation" id="id_caller_relation" class="c-input" maxlength="50"></td>
+                  </tr>
+                <tr>
+                  <td><label for="id_patient_gender">Genero:</label></td>
+                  <td><select name="patient_gender" id="id_patient_gender" class="c-input">
+                        <option value="" selected="">---------</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                      </select></td>
+                </tr>
+                <tr>
+                  <td><label for="id_patient_age">Edad (años):</label></td>
+                  <td><input type="number" name="patient_age" value="0" id="id_patient_age" class="c-input"></td>
+                </tr>
+                <tr>
+                  <td><label for="id_patient_name">Nombre del Paciente:</label></td>
+                  <td><input type="text" name="patient_name" required="" class="c-input" id="id_patient_name" maxlength="255"></td>
+                </tr>
+                <tr>
+                  <td><label for="id_patient_allergies">Alergias:</label></td>
+                  <td><input type="text" name="patient_allergies" id="id_patient_allergies" class="c-input" maxlength="100"></td>
+                </tr>
+                <tr>
+                  <td><label for="id_patient_illnesses">Enfermedades diagnosticadas:</label></td>
+                  <td><input type="text" name="patient_illnesses" id="id_patient_illnesses" class="c-input" maxlength="100"></td>
+                </tr>
+                <tr>
+                  <td><label for="id_patient_notes">Notas paciente:</label></td>
+                  <td><textarea name="patient_notes" id="id_patient_notes" class="c-input" rows="10" cols="40"></textarea></td>
+                </tr>
+                <tr>
+                  <td><label for="id_main_complaint">Sintoma principal:</label></td>
+                  <td><input type="text" name="main_complaint" id="id_main_complaint" class="c-input" maxlength="100"></td>
+                </tr>
+                <tr>
+                  <td><label for="id_complaint_descriprion">Descripcion de los sintomas:</label></td>
+                  <td><textarea name="complaint_descriprion" id="id_complaint_descriprion" class="c-input" rows="10" cols="40"></textarea></td>
+                </tr>
+              </tbody>
+            </table>
+        </div><!-- End Patient TAB -->
+
+        <div class="c-tabs__pane" id="nav-address" role="tabpanel" aria-labelledby="nav-address-tab">
+          Dirección
+          <h3>Dirección</h3>
+          <div class="ui-widget">
+            <label>Direccion de atención: </label>
+            <select id="addresscombobox">
+              <option value="">Seleccione una direccion...</option>
+                <option value="1">Roma Sur 5897</option>
+            </select>
+          </div>
           <table class="table">
             <tbody>
               <tr>
-                <td><label for="id_odoo_client">Cliente id:</label></td>
-                <td><input type="text" name="odoo_client" required="" class="c-input" id="id_odoo_client" maxlength="50"></td>
-              </tr>
-              <tr>
-                <td><label for="id_subscription_type">Subscripcion:</label></td>
-                <td><input type="text" name="subscription_type" id="id_subscription_type" class="c-input" maxlength="100"></td>
+                <td><label for="id_address_street">Calle y numero:</label></td>
+                <td><input type="text" name="address_street" id="id_address_street" class="c-input" maxlength="100"></td>
                 </tr>
               <tr>
-                <td><label for="id_service_category">Tipo de emergencia:</label></td>
-                <td><select name="service_category" id="id_service_category" class="c-input">
-                      <option value="" selected="">---------</option>
-                      <option value="4">Evento</option>
-                      <option value="7">Evento Programado</option>
-                      <option value="3">Servicio</option>
-                      <option value="6">Servicio Programado</option>
-                      <option value="5">Traslado</option>
-                      <option value="8">Traslado Programado</option>
-                    </select></td>
+                <td><label for="id_address_extra">Calle:</label></td>
+                <td><input type="text" name="address_extra" id="id_address_extra" class="c-input" maxlength="100"></td>
+              </tr>
+              <tr>
+                <td><label for="id_address_zip_code">Codigo Postal:</label></td>
+                <td><input type="text" name="address_zip_code" id="id_address_zip_code" class="c-input" maxlength="5"></td>
+              </tr>
+              <tr>
+                <td><label for="id_address_county">Delegacion:</label></td>
+                <td><input type="text" name="address_county" id="id_address_county" class="c-input" maxlength="50"></td>
+              </tr>
+              <tr>
+                <td><label for="id_address_col">Colonia:</label></td>
+                <td><input type="text" name="address_col" id="id_address_col" class="c-input" maxlength="50"></td>
+              </tr>
+              <tr>
+                <td><label for="id_address_between">Entre la calle:</label></td>
+                <td><input type="text" name="address_between" id="id_address_between" class="c-input" maxlength="100"></td>
+              </tr>
+              <tr>
+                <td><label for="id_address_and_street">Y la calle:</label></td>
+                <td><input type="text" name="address_and_street" id="id_address_and_street" class="c-input" maxlength="100"></td>
+              </tr>
+              <tr>
+                <td><label for="id_address_ref">Referencias:</label></td>
+                <td><input type="text" name="address_ref" id="id_address_ref" class="c-input" maxlength="100"></td>
                 </tr>
               <tr>
-                <td><label for="id_grade_type">Grado Emergencia:</label></td>
-                <td><select name="grade_type" required="" class="c-input" id="id_grade_type">
-                    <option value="" selected="">---------</option>
-                    <option value="G0">G0 - Por Definir</option>
-                    <option value="G1">G1 - G1</option>
-                    <option value="G2">G2 - G2</option>
-                    <option value="G3">G3 - G3</option>
-                  </select></td>
-                </tr>
-              <tr>
-                <td><label for="id_zone">Zone:</label></td>
-                <td><select name="zone" required="" class="c-input" id="id_zone">
-                      <option value="" selected="">---------</option>
-                      <option value="BQELMS">BQELMS - Bosque de las Lomas</option>
-                      <option value="ITRLMS">ITRLMS - Interlomas</option>
-                      <option value="LOMAS">LOMAS - Lomas de chapultepec</option>
-                      <option value="PLNCO">PLNCO - POLANCO</option>
-                      <option value="SFE">SFE - Santa Fe</option>
-                      <option value="TCMCHL">TCMCHL - Tecamachalco</option>
-                      <option value="UNICA">UNICA - Fuera de la zona de cobertura</option>
-                    </select></td>
-                </tr>
-              <tr>
-                <td><label for="id_caller_name">Persona que llama:</label></td>
-                <td><input type="text" name="caller_name" id="id_caller_name" class="c-input" maxlength="100"></td>
-                </tr>
-              <tr>
-                <td><label for="id_caller_relation">Relacion con el paciente:</label></td>
-                <td><input type="text" name="caller_relation" id="id_caller_relation" class="c-input" maxlength="50"></td>
-                </tr>
-              <tr>
-                <td><label for="id_patient_gender">Genero:</label></td>
-                <td><select name="patient_gender" id="id_patient_gender" class="c-input">
-                      <option value="" selected="">---------</option>
-                      <option value="Masculino">Masculino</option>
-                      <option value="Femenino">Femenino</option>
-                    </select></td>
+                <td><label for="id_address_front">Fachada:</label></td>
+                <td><input type="text" name="address_front" id="id_address_front" class="c-input" maxlength="100"></td>
               </tr>
               <tr>
-                <td><label for="id_patient_age">Edad (años):</label></td>
-                <td><input type="number" name="patient_age" value="0" id="id_patient_age" class="c-input"></td>
+                <td><label for="id_address_instructions">Instruccciones llegada:</label></td>
+                <td><input type="text" name="address_instructions" id="id_address_instructions" class="c-input" maxlength="100"></td>
               </tr>
               <tr>
-                <td><label for="id_patient_name">Nombre del Paciente:</label></td>
-                <td><input type="text" name="patient_name" required="" class="c-input" id="id_patient_name" maxlength="255"></td>
-              </tr>
-              <tr>
-                <td><label for="id_patient_allergies">Alergias:</label></td>
-                <td><input type="text" name="patient_allergies" id="id_patient_allergies" class="c-input" maxlength="100"></td>
-              </tr>
-              <tr>
-                <td><label for="id_patient_illnesses">Enfermedades diagnosticadas:</label></td>
-                <td><input type="text" name="patient_illnesses" id="id_patient_illnesses" class="c-input" maxlength="100"></td>
-              </tr>
-              <tr>
-                <td><label for="id_patient_notes">Notas paciente:</label></td>
-                <td><textarea name="patient_notes" id="id_patient_notes" class="c-input" rows="10" cols="40"></textarea></td>
-              </tr>
-              <tr>
-                <td><label for="id_main_complaint">Sintoma principal:</label></td>
-                <td><input type="text" name="main_complaint" id="id_main_complaint" class="c-input" maxlength="100"></td>
-              </tr>
-              <tr>
-                <td><label for="id_complaint_descriprion">Descripcion de los sintomas:</label></td>
-                <td><textarea name="complaint_descriprion" id="id_complaint_descriprion" class="c-input" rows="10" cols="40"></textarea></td>
+                <td><label for="id_address_notes">Notas:</label></td>
+                <td><textarea name="address_notes" id="id_address_notes" class="c-input" rows="10" cols="40"></textarea></td>
               </tr>
             </tbody>
           </table>
-      </div><!-- End Patient TAB -->
+        </div><!-- End Address TAB -->
 
-      <div class="c-tabs__pane" id="nav-address" role="tabpanel" aria-labelledby="nav-address-tab">
-        Dirección
-        <h3>Dirección</h3>
-        <div class="ui-widget">
-          <label>Direccion de atención: </label>
-          <select id="addresscombobox">
-            <option value="">Seleccione una direccion...</option>
-              <option value="1">Roma Sur 5897</option>
-          </select>
-        </div>
-        <table class="table">
-          <tbody>
+        <div class="c-tabs__pane" id="nav-units" role="tabpanel" aria-labelledby="nav-units-tab">
+          Unidad
+          <table>
+            <tbody>
             <tr>
-              <td><label for="id_address_street">Calle y numero:</label></td>
-              <td><input type="text" name="address_street" id="id_address_street" class="c-input" maxlength="100"></td>
-              </tr>
-            <tr>
-              <td><label for="id_address_extra">Calle:</label></td>
-              <td><input type="text" name="address_extra" id="id_address_extra" class="c-input" maxlength="100"></td>
-            </tr>
-            <tr>
-              <td><label for="id_address_zip_code">Codigo Postal:</label></td>
-              <td><input type="text" name="address_zip_code" id="id_address_zip_code" class="c-input" maxlength="5"></td>
-            </tr>
-            <tr>
-              <td><label for="id_address_county">Delegacion:</label></td>
-              <td><input type="text" name="address_county" id="id_address_county" class="c-input" maxlength="50"></td>
-            </tr>
-            <tr>
-              <td><label for="id_address_col">Colonia:</label></td>
-              <td><input type="text" name="address_col" id="id_address_col" class="c-input" maxlength="50"></td>
-            </tr>
-            <tr>
-              <td><label for="id_address_between">Entre la calle:</label></td>
-              <td><input type="text" name="address_between" id="id_address_between" class="c-input" maxlength="100"></td>
-            </tr>
-            <tr>
-              <td><label for="id_address_and_street">Y la calle:</label></td>
-              <td><input type="text" name="address_and_street" id="id_address_and_street" class="c-input" maxlength="100"></td>
-            </tr>
-            <tr>
-              <td><label for="id_address_ref">Referencias:</label></td>
-              <td><input type="text" name="address_ref" id="id_address_ref" class="c-input" maxlength="100"></td>
-              </tr>
-            <tr>
-              <td><label for="id_address_front">Fachada:</label></td>
-              <td><input type="text" name="address_front" id="id_address_front" class="c-input" maxlength="100"></td>
-            </tr>
-            <tr>
-              <td><label for="id_address_instructions">Instruccciones llegada:</label></td>
-              <td><input type="text" name="address_instructions" id="id_address_instructions" class="c-input" maxlength="100"></td>
-            </tr>
-            <tr>
-              <td><label for="id_address_notes">Notas:</label></td>
-              <td><textarea name="address_notes" id="id_address_notes" class="c-input" rows="10" cols="40"></textarea></td>
-            </tr>
-          </tbody>
-        </table>
-      </div><!-- End Address TAB -->
-
-      <div class="c-tabs__pane" id="nav-units" role="tabpanel" aria-labelledby="nav-units-tab">
-        Unidad
-        <table>
-          <tbody>
-          <tr>
-            <td><label for="id_unit">Unidad:</label></td>
-            <td><select name="unit" id="id_unit" class="c-input" multiple="multiple">
-              </select></td>
-          </tr>
-          </tbody>
-        </table>
-      </div><!-- End Unit TAB -->
-
-      <div class="c-tabs__pane" id="nav-timers" role="tabpanel" aria-labelledby="nav-timers-tab">
-        Tiempos
-        <table>
-          <tbody>
-            <tr>
-              <td><label for="id_start_time">Inicio toma de datos:</label></td>
-              <td><input type="text" name="start_time" value="2017-12-29 15:31:02" class="c-input" id="id_start_time" required=""><input type="hidden" name="initial-start_time" value="2017-12-29 15:31:02" id="initial-id_start_time"></td>
-              </tr>
-            <tr>
-              <td><label for="id_end_time">Fin toma de datos:</label></td>
-              <td><input type="text" name="end_time" value="2017-12-29 15:31:02" class="c-input" id="id_end_time"><input type="hidden" name="initial-end_time" value="2017-12-29 15:31:02" id="initial-id_end_time"></td>
-            </tr>
-            <tr>
-              <td><label for="id_unit_assigned_time">Asignacion de unidad:</label></td>
-              <td><input type="text" name="unit_assigned_time" value="2017-12-29 15:31:02" class="c-input" id="id_unit_assigned_time"><input type="hidden" name="initial-unit_assigned_time" value="2017-12-29 15:31:02" id="initial-id_unit_assigned_time"></td>
-            </tr>
-            <tr>
-              <td><label for="id_unit_dispatched_time">Despacho de unidad:</label></td>
-              <td><input type="text" name="unit_dispatched_time" value="2017-12-29 15:31:02" class="c-input" id="id_unit_dispatched_time"><input type="hidden" name="initial-unit_dispatched_time" value="2017-12-29 15:31:02" id="initial-id_unit_dispatched_time"></td>
-              </tr>
-            <tr>
-              <td><label for="id_arrival_time">Arrivo de unidad:</label></td>
-              <td><input type="text" name="arrival_time" value="2017-12-29 15:31:02" class="c-input" id="id_arrival_time"><input type="hidden" name="initial-arrival_time" value="2017-12-29 15:31:02" id="initial-id_arrival_time"></td>
-            </tr>
-            <tr>
-              <td><label for="id_attention_time">Inicio de atencion:</label></td>
-              <td><input type="text" name="attention_time" value="2017-12-29 15:31:02" class="c-input" id="id_attention_time"><input type="hidden" name="initial-attention_time" value="2017-12-29 15:31:02" id="initial-id_attention_time"></td>
-            </tr>
-            <tr>
-              <td><label for="id_derivation_time">Inicio de derivacion:</label></td>
-              <td><input type="text" name="derivation_time" value="2017-12-29 15:31:02" class="c-input" id="id_derivation_time"><input type="hidden" name="initial-derivation_time" value="2017-12-29 15:31:02" id="initial-id_derivation_time"></td>
-            </tr>
-            <tr>
-              <td><label for="id_hospital_arrival">Llegada hopital:</label></td>
-              <td><input type="text" name="hospital_arrival" value="2017-12-29 15:31:02" class="c-input" id="id_hospital_arrival"><input type="hidden" name="initial-hospital_arrival" value="2017-12-29 15:31:02" id="initial-id_hospital_arrival"></td>
-            </tr>
-            <tr>
-              <td><label for="id_patient_arrival">Paciente atencion hopital:</label></td>
-              <td><input type="text" name="patient_arrival" value="2017-12-29 15:31:02" class="c-input" id="id_patient_arrival"><input type="hidden" name="initial-patient_arrival" value="2017-12-29 15:31:02" id="initial-id_patient_arrival"></td>
-            </tr>
-            <tr>
-              <td><label for="id_final_emergency_time">Fin emergencia:</label></td>
-              <td><input type="text" name="final_emergency_time" value="2017-12-29 15:31:02" class="c-input" id="id_final_emergency_time"><input type="hidden" name="initial-final_emergency_time" value="2017-12-29 15:31:02" id="initial-id_final_emergency_time"></td>
-            </tr>
-            <tr>
-              <td><label for="id_is_active">Activa:</label></td>
-              <td><select name="is_active" class="c-input" id="id_is_active">
-                    <option value="1" selected="">Unknown</option>
-                    <option value="2">Yes</option>
-                    <option value="3">No</option>
-                  </select></td>
+              <td><label for="id_unit">Unidad:</label></td>
+              <td><select name="unit" id="id_unit" class="c-input" multiple="multiple">
+                </select></td>
             </tr>
             </tbody>
           </table>
-        </form>
-      </div><!-- End Timer TAB -->
+        </div><!-- End Unit TAB -->
+
+        <div class="c-tabs__pane" id="nav-timers" role="tabpanel" aria-labelledby="nav-timers-tab">
+          Tiempos
+          <table>
+            <tbody>
+              <tr>
+                <td><label for="id_start_time">Inicio toma de datos:</label></td>
+                <td><input type="text" name="start_time" value="2017-12-29 15:31:02" class="c-input" id="id_start_time" required=""><input type="hidden" name="initial-start_time" value="2017-12-29 15:31:02" id="initial-id_start_time"></td>
+                </tr>
+              <tr>
+                <td><label for="id_end_time">Fin toma de datos:</label></td>
+                <td><input type="text" name="end_time" value="2017-12-29 15:31:02" class="c-input" id="id_end_time"><input type="hidden" name="initial-end_time" value="2017-12-29 15:31:02" id="initial-id_end_time"></td>
+              </tr>
+              <tr>
+                <td><label for="id_unit_assigned_time">Asignacion de unidad:</label></td>
+                <td><input type="text" name="unit_assigned_time" value="2017-12-29 15:31:02" class="c-input" id="id_unit_assigned_time"><input type="hidden" name="initial-unit_assigned_time" value="2017-12-29 15:31:02" id="initial-id_unit_assigned_time"></td>
+              </tr>
+              <tr>
+                <td><label for="id_unit_dispatched_time">Despacho de unidad:</label></td>
+                <td><input type="text" name="unit_dispatched_time" value="2017-12-29 15:31:02" class="c-input" id="id_unit_dispatched_time"><input type="hidden" name="initial-unit_dispatched_time" value="2017-12-29 15:31:02" id="initial-id_unit_dispatched_time"></td>
+                </tr>
+              <tr>
+                <td><label for="id_arrival_time">Arrivo de unidad:</label></td>
+                <td><input type="text" name="arrival_time" value="2017-12-29 15:31:02" class="c-input" id="id_arrival_time"><input type="hidden" name="initial-arrival_time" value="2017-12-29 15:31:02" id="initial-id_arrival_time"></td>
+              </tr>
+              <tr>
+                <td><label for="id_attention_time">Inicio de atencion:</label></td>
+                <td><input type="text" name="attention_time" value="2017-12-29 15:31:02" class="c-input" id="id_attention_time"><input type="hidden" name="initial-attention_time" value="2017-12-29 15:31:02" id="initial-id_attention_time"></td>
+              </tr>
+              <tr>
+                <td><label for="id_derivation_time">Inicio de derivacion:</label></td>
+                <td><input type="text" name="derivation_time" value="2017-12-29 15:31:02" class="c-input" id="id_derivation_time"><input type="hidden" name="initial-derivation_time" value="2017-12-29 15:31:02" id="initial-id_derivation_time"></td>
+              </tr>
+              <tr>
+                <td><label for="id_hospital_arrival">Llegada hopital:</label></td>
+                <td><input type="text" name="hospital_arrival" value="2017-12-29 15:31:02" class="c-input" id="id_hospital_arrival"><input type="hidden" name="initial-hospital_arrival" value="2017-12-29 15:31:02" id="initial-id_hospital_arrival"></td>
+              </tr>
+              <tr>
+                <td><label for="id_patient_arrival">Paciente atencion hopital:</label></td>
+                <td><input type="text" name="patient_arrival" value="2017-12-29 15:31:02" class="c-input" id="id_patient_arrival"><input type="hidden" name="initial-patient_arrival" value="2017-12-29 15:31:02" id="initial-id_patient_arrival"></td>
+              </tr>
+              <tr>
+                <td><label for="id_final_emergency_time">Fin emergencia:</label></td>
+                <td><input type="text" name="final_emergency_time" value="2017-12-29 15:31:02" class="c-input" id="id_final_emergency_time"><input type="hidden" name="initial-final_emergency_time" value="2017-12-29 15:31:02" id="initial-id_final_emergency_time"></td>
+              </tr>
+              <tr>
+                <td><label for="id_is_active">Activa:</label></td>
+                <td><select name="is_active" class="c-input" id="id_is_active">
+                      <option value="1" selected="">Unknown</option>
+                      <option value="2">Yes</option>
+                      <option value="3">No</option>
+                    </select></td>
+              </tr>
+              </tbody>
+            </table>
+          </form>
+        </div><!-- End Timer TAB -->
+      </div>
     </div>
-  </div>
-</form>
+  </form>
 </modal>

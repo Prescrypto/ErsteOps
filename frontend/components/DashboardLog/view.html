@@ -1,0 +1,53 @@
+<table id="dashboard-log" class="c-table">
+  <!-- <my&#45;app></my&#45;app> -->
+  <thead class="c-table__head c-table__head--slim">
+    <tr class="c-table__row">
+        <th class="c-table__cell c-table__cell--head">Cliente</th>
+        <th class="c-table__cell c-table__cell--head">Grado</th>
+        <th class="c-table__cell c-table__cell--head">Unidad</th>
+        <th class="c-table__cell c-table__cell--head">Tiempo</th>
+        <th class="c-table__cell c-table__cell--head">Estado</th>
+        <th class="c-table__cell c-table__cell--head">
+            <span class="u-hidden-visually">Acciones</span>
+        </th>
+        <th class="c-table__cell c-table__cell--head">
+
+        </th>
+    </tr>
+  </thead>
+
+  <tbody id="root">
+    <tr  v-for="emergency in emergencies" :id="`emergency-${emergency.id}`" class="c-table__row">
+      <td class="c-table__cell"><span class="u-text-mute">{{ emergency.odoo_client }}</span></td>
+      <td class="c-table__cell">{{ emergency.grade_type }}</td>
+      <td class="c-table__cell">
+        <span v-for="unit in emergency.unit.all" class="u-text-mute">{{ unit }}</span>
+        <span v-if="!((emergency.unit || {}).all || {}).length">Sin Asignar</span>
+      </td>
+      <td class="c-table__cell">
+        <span class="u-text-mute">{{ emergency.start_time | datetime }}</span>
+      </td>
+      <td class="c-table__cell">
+        <span v-if="emergency.is_active" class="c-badge c-badge--small c-badge--success">En Camino</span>
+        <span v-else class="c-badge c-badge--small c-badge--success">Terminado</span>
+      </td>
+      <td class="c-table__cell u-text-center">
+        <div class="c-dropdown dropdown">
+          <button class="c-btn c-btn--secondary has-dropdown dropdown-toggle" id="dropdownMenuButton10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
+
+          <div class="c-dropdown__menu dropdown-menu" aria-labelledby="dropdownMenuButton10">
+            <a class="c-dropdown__item dropdown-item" href="#">Servicio de Derivación</a>
+            <a class="c-dropdown__item dropdown-item" href="#">Ver tiempos</a>
+            <a class="c-dropdown__item dropdown-item" href="#">Ver resumen</a>
+            <a class="c-dropdown__item dropdown-item" href="#">Ver resumen</a>
+          </div>
+        </div>
+      </td>
+      <td class="c-table__cell u-text-center">
+        <a :href="`/emergency/end/${emergency.id}/`">
+          <span class="fa fa-stop-circle-o"></span>
+        </a>
+      </td>
+    </tr><!-- // .table__row -->
+  </tbody>
+</table>
