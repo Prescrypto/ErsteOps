@@ -97,10 +97,8 @@ class EmergencyDashboardList(ListView):
     model = Emergency
     def get_context_data(self, **kwargs):
         context = super(EmergencyDashboardList, self).get_context_data(**kwargs)
-        search_form = OdooClientAuto
         context.update({
             'now': timezone.now(),
-            'search_form': search_form
         })
         return context
 

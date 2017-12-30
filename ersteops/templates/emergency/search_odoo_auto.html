@@ -11,9 +11,8 @@
   <h1 class="page-header">Buscar</h1>
   <form id="searchpatient" action="/emergency/getpatient/" method="post">
     {% csrf_token %}
-  	<table>
-    {{ form.as_table }}
-    </table>
+  	<label class="c-field__label" for="id_client_name">Nombre:</label>
+    <input class="c-input" type="text" id="id_client_name" name="client_name" placeholder="Alsea SA. de CV.">
 
     <input id="continuebutton" type="submit" value="Continuar" />
   </form>
