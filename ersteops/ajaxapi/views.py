@@ -34,7 +34,7 @@ def get_subscriptor(request):
 
         # Init result list
         results = []
-        # Add res.partner data 
+        # Add res.partner data
         for client in clients:
             client_json = {
                 "id": client['id'],
@@ -76,6 +76,7 @@ def get_subscriptor(request):
         data = json.dumps(results)
         logger.info('%s (%s)' % ('AjaxApiReturn',data))
     else:
+      logger.error("[ERROR Subscriptor ajaxview] Request no Válido")
       data = 'fail!'
     mimetype = 'application/json'
     return HttpResponse(data, mimetype)

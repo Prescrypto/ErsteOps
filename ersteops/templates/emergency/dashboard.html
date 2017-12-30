@@ -94,15 +94,16 @@
 {% endblock jsheadblock %}
 
 {% block jsblock %}
-  <script src = {% static "/bower_components/jquery-ui/jquery-ui.min.js" %} ></script>
   {% load render_bundle from webpack_loader %}
   {% render_bundle 'dashboard' 'js' %}
-
+  <script src ="{% static "bower_components/jquery-ui/jquery-ui.min.js" %}" ></script>
   <script type="text/javascript" language="javascript">
     $(document).ready(function(){
       $("#id_client_name").attr("autocomplete", "off");
       $("#continuebutton").prop("disabled",true);
       $(function() {
+        console.log("Start autocomplete");
+
         $("#id_client_name").autocomplete({
           source: "/ajaxapi/getsubscriptor/",
           minLength: 2,
