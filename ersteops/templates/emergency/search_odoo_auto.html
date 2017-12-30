@@ -1,18 +1,13 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
-
-{% block cssblock %}
-  <link rel="stylesheet" href='{% static "bower_components/jquery-ui/themes/base/jquery-ui.css" %}'  type="text/css" media="all" />
-{% endblock cssblock %}
-
 {% block content %}
 <h2></h2>
-
   <h1 class="page-header">Buscar</h1>
   <form id="searchpatient" action="/emergency/getpatient/" method="post">
     {% csrf_token %}
-  	<label class="c-field__label" for="id_client_name">Nombre:</label>
-    <input class="c-input" type="text" id="id_client_name" name="client_name" placeholder="Alsea SA. de CV.">
+  	<table>
+    {{ form.as_table }}
+    </table>
 
     <input id="continuebutton" type="submit" value="Continuar" />
   </form>
@@ -20,6 +15,7 @@
 
 {% endblock %}
 {% block javascript %}
+<link rel="stylesheet" href='{% static "bower_components/jquery-ui/themes/base/jquery-ui.css" %}'  type="text/css" media="all" />
 <script type="text/javascript" language="javascript">
 $(document).ready(function(){
   $( "#id_client_name" ).attr("autocomplete", "off");
