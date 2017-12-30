@@ -1,0 +1,53 @@
+<div class="container completion_container">
+  <!-- search form -->
+  <form @submit.prevent="submit" class="row">
+    <label class="col" for="term">
+      <input
+        type="text"
+        name="term"
+        autocomplete="off"
+        v-model="query"
+        v-validate="'required'"
+        :class="{
+          'c-input': true,
+          'c-input--danger': errors.has('term')
+        }"
+        placeholder="Alsea SA de CV">
+    </label>
+
+    <button
+      type="submit"
+      :disabled="invalid"
+      class="col-2 c-btn c-btn--info">
+        Buscar
+    </button>
+  </form>
+
+  <!-- validation errors -->
+  <small v-show="errors.has('term')" class="c-field__message u-color-danger">
+    <i class="fa fa-times-circle"></i>{{ errors.first('term') }}
+  </small>
+
+  <!-- request loading indicator -->
+  <div v-if="loading">
+    <loader class="completion_loading" color="#2ea1f8" />
+    <small class="c-field__message u-color-info u-flex u-justify-center">
+      Buscando cliente...
+    </small>
+  </div>
+
+  <!-- suggestions list and fallback in case there are no suggestions -->
+  <aside v-if="hasSuggestions && !loading" class="completion__suggestions c-menu">
+    <ul v-for="suggestion in suggestions">
+      <li class="c-menu__item">
+        <a class="completion__link c-menu__link">
+          <i v-if="suggestion.client_type === 'company'" class="fa fa-building u-mr-xsmall" />
+          <i v-else-if="suggestion.client_type === 'family'" class="fa fa-users u-mr-xsmall" />
+          <i v-else class="fa fa-user u-mr-xsmall" />
+          {{suggestion.label}}
+        </a>
+      </li>
+    </ul>
+  </aside>
+
+</div>

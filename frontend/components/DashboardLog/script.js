@@ -1,7 +1,6 @@
-import Vue from 'vue';
+import init from 'utils/init';
 import ReconnectingWebSocket from 'reconnecting-websocket';
 import { ws } from 'utils/url';
-import init from 'utils/init';
 
 // Initialize Vue globals
 init();
@@ -20,11 +19,7 @@ socket.onmessage = message => {
   emergencies.push(data);
 };
 
-// Initialize Vue component from HTML
-const root = new Vue({
-  el: '#dashboard-log',
-  delimiters: ['<%', '%>'],
-  data: store,
-});
-
-export default root;
+export default {
+  name: 'dashboard-log',
+  data: () => store,
+};
