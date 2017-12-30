@@ -38,8 +38,8 @@ def get_subscriptor(request):
         for client in clients:
             client_json = {
                 "id": client['id'],
-                "label": client['name'] + ' - (' + client['client_type'] + ')',
-                "value": client['name'] + ' - (' + client['client_type'] + ')',
+                "label": client['name'] + ' - (' + str(client['client_type']) + ')',
+                "value": client['name'] + ' - (' + str(client['client_type']) + ')',
                 "parent_id": client['id'],
                 "client_type": client['client_type'],
                 "source": 'res.partner',
