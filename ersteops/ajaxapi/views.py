@@ -81,7 +81,7 @@ def get_subscriptor(request):
         data = json.dumps(results)
         logger.info('%s (%s)' % ('[Success] AjaxApiReturn: ', data))
     else:
-      logger.error("[ERROR Subscriptor ajaxview] Request no Válido")
+      logger.error("[ERROR Subscriptor ajaxview] Request no Valido")
       data = 'fail!'
     mimetype = 'application/json'
     return HttpResponse(data, mimetype)
