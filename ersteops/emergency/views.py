@@ -15,6 +15,7 @@ from requests.auth import HTTPBasicAuth
 import json
 import datetime
 from django.core import serializers
+from .utils import JSONResponseMixin
 # Logging library
 import logging
 # Load Logging definition, this is defined in settings.py in the LOGGING section
@@ -90,6 +91,12 @@ class EmergencyDetailView(DetailView):
         context = super(EmergencyDetailView, self).get_context_data(**kwargs)
         context['now'] = timezone.now()
         return context
+
+class EmergencyJSONView(JSONResponseMixin, DetailView):
+    ''' Custom Json View for Emergency details '''
+    model = Emergency
+    def render_to_response(self, context, **response_kwargs):
+        return self.render_to_json_response(context, **response_kwargs)
 
 
 class EmergencyDashboardList(ListView):
