@@ -1,21 +1,22 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
-from django.shortcuts import render
-
 # Create your views here.
-from django.shortcuts import render,redirect
-from django.views.generic import View, CreateView, ListView, DetailView, UpdateView
-from emergency.models import Emergency,AttentionDerivation
-from django.utils import timezone
-from emergency.forms import OdooClientForm, OdooClientAuto
-from core.utils import OdooApi
-import requests
-from requests.auth import HTTPBasicAuth
 import json
 import datetime
+import requests
+from requests.auth import HTTPBasicAuth
+# Django utils
+from django.shortcuts import render,redirect
+from django.views.generic import View, CreateView, ListView, DetailView, UpdateView
+from django.utils import timezone
 from django.core import serializers
+from django.http import JsonResponse
+# Our models
+from core.utils import OdooApi
 from .utils import JSONResponseMixin
+from .forms import OdooClientForm, OdooClientAuto
+from .models import Emergency,AttentionDerivation
+
 # Logging library
 import logging
 # Load Logging definition, this is defined in settings.py in the LOGGING section
@@ -378,10 +379,11 @@ class EmergencyGetPatient(View):
         request.session['patientrequest'] = handle_patient_data(kwargs['patient_id'])
         return redirect('/emergency/newmodal/')
 
-class PatientGETJSONData(View):
+class EmergencyJSONGetPatient(View):
     def get(self, request, *args, **kwargs):
         ''' Conenct to api and return json data'''
-        return handle_patient_data(kwargs['patient_id'])
+        data = handle_patient_data(kwargs['patient_id'])
+        return JsonResponse(data)
 
 
 def handle_patient_data(patient_id):
