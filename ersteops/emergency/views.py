@@ -231,25 +231,25 @@ class EmergencyClientOdoo(View):
             _api_odoo = OdooApi()
             # Get Access token
             result = _api_odoo.get_token()
-            logger.info('%s (%s)' % ('Access-Token',result['access_token']))
+            logger.info('%s (%s)' % ('Access-Token', result['access_token']))
             if form.cleaned_data['search_type'] == '1':
                 patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_patient_name( patient,result['access_token'])
+                patient_data = _api_odoo.get_by_patient_name(patient, result['access_token'])
                 #print(patient_data)
-                logger.info('%s (%s)' % ('OdooApi',patient_data))
+                logger.info('%s (%s)' % ('OdooApi: ', patient_data))
             if form.cleaned_data['search_type'] == '3':
                 patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_patient_id( patient,result['access_token'])
+                patient_data = _api_odoo.get_by_patient_id(patient, result['access_token'])
                 #print(patient_data)
-                logger.info('%s (%s)' % ('OdooApi',patient_data))
+                logger.info('%s (%s)' % ('OdooApi: ', patient_data))
             if form.cleaned_data['search_type'] == '2':
                 patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_patient_street( patient,result['access_token'])
+                patient_data = _api_odoo.get_by_patient_street(patient, result['access_token'])
                 #print(patient_data)
-                logger.info('%s (%s)' % ('OdooApi',patient_data))
+                logger.info('%s (%s)' % ('OdooApi: ', patient_data))
             if form.cleaned_data['search_type'] == '5':
                 patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_all( patient,result['access_token'])
+                patient_data = _api_odoo.get_by_all(patient, result['access_token'])
                 #print(patient_data)
                 logger.info('%s (%s)' % ('OdooApi',patient_data))
             else:
@@ -275,13 +275,13 @@ class EmergencyClientModal(View):
             _api_odoo = OdooApi()
             # Get Access token
             result = _api_odoo.get_token()
-            logger.info('%s (%s)' % ('OdooApi',result))
-            logger.info('%s (%s)' % ('Access-Token',result['access_token']))
+            logger.info('%s (%s)' % ('OdooApi', result))
+            logger.info('%s (%s)' % ('Access-Token', result['access_token']))
             find_data = []
 
             if form.cleaned_data['search_type'] == '1':
                 patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_patient_name( patient,result['access_token'])
+                patient_data = _api_odoo.get_by_patient_name(patient, result['access_token'])
                 find_data = patient_data['results']
                 feContext.update({"count": len(patient_data['results'])})
                 logger.info('%s (%s)' % ('OdooApi_name',patient_data))
@@ -414,9 +414,9 @@ def handle_patient_data(patient_id):
         patient_data = _api_odoo.get_by_company_member_id( str(patient_id),result['access_token'])
         parent_data = _api_odoo.get_by_patient_id( str(patient_data['parent_id']['id']),result['access_token'])
 
-    logger.info('%s (%s)' % ('OdooApi_patient_data',patient_data))
-    logger.info('%s (%s)' % ('OdooApi_parent_data',parent_data))
-    return patient_json(source_id,patient_data,parent_data)
+    logger.info('%s (%s)' % ('OdooApi_patient_data: ', patient_data))
+    logger.info('%s (%s)' % ('OdooApi_parent_data: ', parent_data))
+    return patient_json(source_id, patient_data, parent_data)
 
 
 # Resume and clean patient and partner data
