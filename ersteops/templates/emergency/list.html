@@ -20,7 +20,6 @@
         </caption>
         <thead class="c-table__head c-table__head--slim">
           <tr class="c-table__row">
-            <th class="c-table__cell c-table__cell--head">ID de Incidente</th>
             <th class="c-table__cell c-table__cell--head">Comienzo</th>
             <th class="c-table__cell c-table__cell--head">Fin</th>
             <th class="c-table__cell c-table__cell--head">Tipo</th>
@@ -34,7 +33,6 @@
         <tbody>
           {% for emergency in object_list %}
             <tr class="c-table__row">
-              <td class="c-table__cell"><a href="/emergency/{{emergency.id}}/">Id:{{emergency.id}}</td>
               <td class="c-table__cell">{{ emergency.start_time }}</td>
               <td class="c-table__cell">{{ emergency.end_time }}</td>
               <td class="c-table__cell">{{ emergency.grade_type.name }}</td>
