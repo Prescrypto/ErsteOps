@@ -22,6 +22,8 @@
         {# Busqueda #}
         <form id="searchpatient" action="/emergency/getpatient/" method="post">
           {% csrf_token %}
+          <!-- Ejemplo de usar csrf para enviarla en ajax post -->
+          <span style="display:none">CSRF_TOKEN: {{ csrf_token }}</span>
           <label class="c-field__label" for="id_client_name">Nombre:</label>
           <input class="c-input" type="text" id="id_client_name" name="client_name" placeholder="Alsea SA. de CV.">
 
