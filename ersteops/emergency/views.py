@@ -374,37 +374,48 @@ class EmergencyNewModal(CreateView):
 
 class EmergencyGetPatient(View):
     def get(self, request, *args, **kwargs):
-        # Read parameter
-        target_id = kwargs['patient_id']
-        # Extract patient_id
-        # Target 000129000001000129
-        # First 6 digits patient_id
-        # Second 6 digits source_id: 1 res.partner,2 family.member, 3 company.member
-        # Third 6 digits parent_id
-        patient_id = int(target_id[:6])
-        # Extract where the patient been found
-        source_id = int(target_id[6:-6])
-        # Initialize Odoo api
-        _api_odoo = OdooApi()
-        # Get Token
-        result = _api_odoo.get_token()
-        # Case when Patient in res.partner
-        if source_id == 1:
-            patient_data = _api_odoo.get_by_patient_id( str(patient_id),result['access_token'])
-            parent_data = {}
-        # Case when Patient in family.member
-        elif source_id == 2:
-            patient_data = _api_odoo.get_by_family_member_id( str(patient_id),result['access_token'])
-            parent_data = _api_odoo.get_by_patient_id( str(patient_data['parent_id']['id']),result['access_token'])
-        # Case when Patient in company.member
-        elif source_id == 3:
-            patient_data = _api_odoo.get_by_company_member_id( str(patient_id),result['access_token'])
-            parent_data = _api_odoo.get_by_patient_id( str(patient_data['parent_id']['id']),result['access_token'])
-
-        logger.info('%s (%s)' % ('OdooApi_patient_data',patient_data))
-        logger.info('%s (%s)' % ('OdooApi_parent_data',parent_data))
-        request.session['patientrequest'] = patient_json(source_id,patient_data,parent_data)
+        ''' LEgacy way to show modal with patient data'''
+        request.session['patientrequest'] = handle_patient_data(kwargs['patient_id'])
         return redirect('/emergency/newmodal/')
+
+class PatientGETJSONData(View):
+    def get(self, request, *args, **kwargs):
+        ''' Conenct to api and return json data'''
+        return handle_patient_data(kwargs['patient_id'])
+
+
+def handle_patient_data(patient_id):
+    ''' Method who handle patient data '''
+    target_id = patient_id
+    # Extract patient_id
+    # Target 000129000001000129
+    # First 6 digits patient_id
+    # Second 6 digits source_id: 1 res.partner,2 family.member, 3 company.member
+    # Third 6 digits parent_id
+    patient_id = int(target_id[:6])
+    # Extract where the patient been found
+    source_id = int(target_id[6:-6])
+    # Initialize Odoo api
+    _api_odoo = OdooApi()
+    # Get Token
+    result = _api_odoo.get_token()
+    # Case when Patient in res.partner
+    if source_id == 1:
+        patient_data = _api_odoo.get_by_patient_id( str(patient_id),result['access_token'])
+        parent_data = {}
+    # Case when Patient in family.member
+    elif source_id == 2:
+        patient_data = _api_odoo.get_by_family_member_id( str(patient_id),result['access_token'])
+        parent_data = _api_odoo.get_by_patient_id( str(patient_data['parent_id']['id']),result['access_token'])
+    # Case when Patient in company.member
+    elif source_id == 3:
+        patient_data = _api_odoo.get_by_company_member_id( str(patient_id),result['access_token'])
+        parent_data = _api_odoo.get_by_patient_id( str(patient_data['parent_id']['id']),result['access_token'])
+
+    logger.info('%s (%s)' % ('OdooApi_patient_data',patient_data))
+    logger.info('%s (%s)' % ('OdooApi_parent_data',parent_data))
+    return patient_json(source_id,patient_data,parent_data)
+
 
 # Resume and clean patient and partner data
 def patient_json(source_id,patient_data,parent_data):
