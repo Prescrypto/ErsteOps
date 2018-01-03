@@ -2,6 +2,9 @@
 
 def add_url_protocol(request):
     ''' add url protocol to context '''
+    uri = request.build_absolute_uri('/')[:-1]
+    protocol = uri.split("://")[0]
     return {
-        "HTTP_PROTOCOL" : 'https' if request.is_secure() else 'http',
+        "HTTP_ABSOLUTE_URI" : uri,
+        "HTTP_PROTOCOL" : protocol,
     }
