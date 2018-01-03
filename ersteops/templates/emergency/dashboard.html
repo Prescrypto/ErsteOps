@@ -99,6 +99,16 @@
   <script src ="{% static "bower_components/jquery-ui/jquery-ui.min.js" %}" ></script>
   <script type="text/javascript" language="javascript">
     $(document).ready(function(){
+      // Example of url's
+      console.log("URL's for ajaxRequest:");
+      console.log("{{ request.scheme }}");
+      console.log("{{ request.META.HTTP_HOST }}");
+      console.log("{{ request.path }}");
+      // este ejemplo puedes ver como agregar las urls de los diferentes endpoints en el archivo emergency/urls.py
+      console.log("{% url 'emergency_json_detail' pk=2 %}");
+      // url compuesta
+      console.log("{{ request.scheme }}://{{ request.META.HTTP_HOST }}{{ request.path }}")
+      // End urls examples
       $("#id_client_name").attr("autocomplete", "off");
       $("#continuebutton").prop("disabled",true);
       $(function() {

@@ -1,10 +1,15 @@
+
+# Python libs
+import json
+import logging
+# Django libs
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-import json
+# Our methods
 from core.utils import OdooApi
-# Logging library
-import logging
+
+
 # Load Logging definition, this is defined in settings.py in the LOGGING section
 logger = logging.getLogger('django_info')
 
@@ -18,19 +23,19 @@ def get_subscriptor(request):
         q = request.GET.get('term', '')
 
         # Get info from res.partner
-        patients = _api_odoo.get_by_patient_name( q,result['access_token'])
+        patients = _api_odoo.get_by_patient_name(q, result['access_token'])
         clients = patients['results']
-        logger.info('%s (%s)' % ('AjaxApi_partner',clients))
+        logger.info('%s (%s)' % ('AjaxApi_partner', clients))
 
         # get info from family.member
-        famiily_members = _api_odoo.get_by_family_member( q,result['access_token'])
+        famiily_members = _api_odoo.get_by_family_member(q, result['access_token'])
         clients_family = famiily_members['results']
         logger.info('%s (%s)' % ('AjaxApi_family',famiily_members))
 
         # get info from company.member
-        company_members = _api_odoo.get_by_company_member( q,result['access_token'])
+        company_members = _api_odoo.get_by_company_member(q, result['access_token'])
         clients_company = company_members['results']
-        logger.info('%s (%s)' % ('AjaxApi_company',company_members))
+        logger.info('%s (%s)' % ('AjaxApi_company', company_members))
 
         # Init result list
         results = []
@@ -74,7 +79,7 @@ def get_subscriptor(request):
             results.append(client_json)
 
         data = json.dumps(results)
-        logger.info('%s (%s)' % ('AjaxApiReturn',data))
+        logger.info('%s (%s)' % ('[Success] AjaxApiReturn: ', data))
     else:
       logger.error("[ERROR Subscriptor ajaxview] Request no Válido")
       data = 'fail!'
