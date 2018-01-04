@@ -34,7 +34,7 @@
     },
     "SECURE_SSL_REDIRECT": {
       "required": true
-    },
+    }
   },
   "formation": {
     "web": {

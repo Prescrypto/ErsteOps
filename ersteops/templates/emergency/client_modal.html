@@ -10,16 +10,6 @@
 
   <form action="/emergency/new/" method="post">{% csrf_token %}
 
-    <div class="c-tabs__content tab-content" id="nav-tabContent">
-      <div class="c-tabs__pane active" id="nav-search" role="tabpanel" aria-labelledby="nav-search-tab">
-        {# Busqueda #}
-        <form id="searchpatient" action="/emergency/getpatient/" method="post">
-          {% csrf_token %}
-          <!-- Ejemplo de usar csrf para enviarla en ajax post -->
-          <span style="display:none">CSRF_TOKEN: {{ csrf_token }}</span>
-          <label class="c-field__label" for="id_client_name">Nombre:</label>
-          <input class="c-input" type="text" id="id_client_name" name="client_name" placeholder="Alsea SA. de CV.">
-
     <div class="c-tabs">
       <nav class="c-tabs__list nav nav-tabs" id="myTab" role="tablist">
         <a class="c-tabs__link active" id="nav-home-tab" data-toggle="tab" href="#nav-search" role="tab" aria-controls="nav-search" aria-selected="true">Buscar</a>
@@ -263,6 +253,7 @@
             </table>
           </form>
         </div><!-- End Timer TAB -->
+
       </div>
     </div>
   </form>
