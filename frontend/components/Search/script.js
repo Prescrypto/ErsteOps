@@ -42,7 +42,12 @@ export default {
       });
     },
 
+    populate(target) {
+      this.patient(target);
+      window.$(`#nav-patient-tab`).tab('show');
+    },
+
     // maps the search action from the store to the component
-    ...mapActions(['search']),
+    ...mapActions(['search', 'patient']),
   },
 };

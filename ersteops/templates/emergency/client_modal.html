@@ -11,12 +11,20 @@
   <form action="/emergency/new/" method="post">{% csrf_token %}
 
     <div class="c-tabs">
-      <nav class="c-tabs__list nav nav-tabs" id="myTab" role="tablist">
-        <a class="c-tabs__link active" id="nav-home-tab" data-toggle="tab" href="#nav-search" role="tab" aria-controls="nav-search" aria-selected="true">Buscar</a>
-        <a class="c-tabs__link" id="nav-profile-tab" data-toggle="tab" href="#nav-patient" role="tab" aria-controls="nav-patient" aria-selected="false">Paciente</a>
-        <a class="c-tabs__link" id="nav-contact-tab" data-toggle="tab" href="#nav-address" role="tab" aria-controls="nav-address" aria-selected="false">Dirección</a>
-        <a class="c-tabs__link" id="nav-contact-tab" data-toggle="tab" href="#nav-units" role="tab" aria-controls="nav-units" aria-selected="false">Unidad</a>
-        <a class="c-tabs__link" id="nav-contact-tab" data-toggle="tab" href="#nav-timers" role="tab" aria-controls="nav-timers" aria-selected="false">Timers</a>
+      <nav class="c-tabs__list nav nav-tabs" id="modal-nav" role="tablist">
+        <a
+          v-for="{label, name} in tabs"
+          v-on:click="toggle"
+          :id="`nav-${name}-tab`"
+          :href="`#nav-${name}`"
+          :class="{ 'c-tabs__link': true, 'active': name === active }"
+          :data-name="name"
+          data-toggle="tab"
+          role="tab"
+          :aria-controls="`nav-${name}`"
+          :aria-selected="name === active">
+            <% label %>
+        </a>
       </nav>
 
       <div class="c-tabs__content tab-content" id="nav-tabContent">
@@ -24,7 +32,6 @@
           {# Busqueda #}
           <form id="searchpatient" action="/emergency/getpatient/" method="post">
             <search />
-            <input id="continuebutton" type="submit" value="Continuar" />
           </form>
         </div><!-- End Search TAB -->
         <div class="c-tabs__pane" id="nav-patient" role="tabpanel" aria-labelledby="nav-patient-tab">

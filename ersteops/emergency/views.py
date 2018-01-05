@@ -381,9 +381,10 @@ class EmergencyGetPatient(View):
 
 class EmergencyJSONGetPatient(View):
     def get(self, request, *args, **kwargs):
-        ''' Conenct to api and return json data'''
-        data = handle_patient_data(kwargs['patient_id'])
-        return JsonResponse(data)
+        if request.is_ajax():
+            ''' Connect to api and return json data'''
+            data = handle_patient_data(kwargs['patient_id'])
+            return JsonResponse(data)
 
 
 def handle_patient_data(patient_id):

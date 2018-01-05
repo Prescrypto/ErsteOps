@@ -40,7 +40,7 @@
   <aside v-if="hasSuggestions && !loading" class="completion__suggestions c-menu">
     <ul v-for="suggestion in suggestions">
       <li class="c-menu__item">
-        <a class="completion__link c-menu__link">
+        <a v-on:click="populate(suggestion.target)" class="completion__link c-menu__link">
           <i v-if="suggestion.client_type === 'company'" class="fa fa-building u-mr-xsmall" />
           <i v-else-if="suggestion.client_type === 'family'" class="fa fa-users u-mr-xsmall" />
           <i v-else class="fa fa-user u-mr-xsmall" />
