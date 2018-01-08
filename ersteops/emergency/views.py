@@ -11,6 +11,7 @@ from django.views.generic import View, CreateView, ListView, DetailView, UpdateV
 from django.utils import timezone
 from django.core import serializers
 from django.http import JsonResponse
+from django.http import HttpResponse
 # Our models
 from core.utils import OdooApi
 from .utils import JSONResponseMixin
@@ -98,6 +99,63 @@ class EmergencyJSONView(JSONResponseMixin, DetailView):
     model = Emergency
     def render_to_response(self, context, **response_kwargs):
         return self.render_to_json_response(context, **response_kwargs)
+
+
+class EmergencyListJSONView(ListView):
+    model = Emergency
+    def render_to_response(self, context, **response_kwargs):
+        return HttpResponse(
+            self.get_data(context),
+            content_type='application/json',
+            **response_kwargs
+        )
+
+    def get_data(self, context):
+        fields = ('id','odoo_client',
+                'service_category',
+                'grade_type',
+                'zone',
+                'start_time',
+                'end_time',
+                'is_active',
+                'unit',
+                'unit_assigned_time',
+                'unit_dispatched_time',
+                'arrival_time',
+                'attention_time',
+                'derivation_time',
+                'hospital_arrival',
+                'patient_arrival',
+                'final_emergency_time',
+                'address_street',
+                'address_extra',
+                'address_zip_code',
+                'address_county',
+                'address_col',
+                'address_between',
+                'address_and_street',
+                'address_ref',
+                'address_front',
+                'address_instructions',
+                'address_notes',
+                'caller_name',
+                'caller_relation',
+                'patient_name',
+                'patient_gender',
+                'patient_age',
+                'patient_allergies',
+                'patient_illnesses',
+                'patient_notes',
+                'attention_final_grade',
+                'attention_justification',
+                'main_complaint',
+                'complaint_descriprion',
+                'subscription_type'
+                )
+        emm_list = Emergency.objects.filter(is_active=True)
+        data = serializers.serialize('json', list(emm_list), fields=fields)
+        # TEMP remove later
+        return data
 
 
 class EmergencyDashboardList(ListView):
