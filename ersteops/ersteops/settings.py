@@ -32,9 +32,11 @@ SECRET_KEY = os.environ['SECRET_KEY']
 #DEBUG = True
 DEBUG = ast.literal_eval(os.environ['DEBUG_STATE'])
 
-#ALLOWED_HOSTS = []
-
+# DEFAULT LOGIN URL
 LOGIN_URL = '/'
+
+# Django JET config
+JET_SIDE_MENU_COMPACT = True
 
 # TODO fix production mode
 PRODUCTION = ast.literal_eval(os.environ['PRODUCTION'])
