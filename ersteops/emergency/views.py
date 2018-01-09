@@ -8,6 +8,8 @@ from requests.auth import HTTPBasicAuth
 # Django utils
 from django.shortcuts import render,redirect
 from django.views.generic import View, CreateView, ListView, DetailView, UpdateView
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.utils import timezone
 from django.core import serializers
 from django.http import JsonResponse
@@ -24,6 +26,7 @@ import logging
 # Load Logging definition, this is defined in settings.py in the LOGGING section
 logger = logging.getLogger('django_info')
 
+@method_decorator(login_required, name='dispatch')
 class EmergencyBlank(View):
     template_name = "emergency/blank.html"
     def get(self, request, *args, **kwargs):
@@ -31,13 +34,15 @@ class EmergencyBlank(View):
         return render(request, self.template_name,{"form": form})
 
 
-
+@method_decorator(login_required, name='dispatch')
 class EmergencyNew(CreateView):
     template_name = "emergency/new.html"
     model = Emergency
     fields = EMERGENCY_LIST_FIELDS
     success_url = '/emergency/list/'
 
+
+@method_decorator(login_required, name='dispatch')
 class EmergencyListView(ListView):
     template_name = "emergency/list.html"
     model = Emergency
@@ -47,6 +52,7 @@ class EmergencyListView(ListView):
         return context
 
 
+@method_decorator(login_required, name='dispatch')
 class EmergencyDetailView(DetailView):
     template_name = "emergency/detail.html"
     model = Emergency
@@ -54,6 +60,7 @@ class EmergencyDetailView(DetailView):
         context = super(EmergencyDetailView, self).get_context_data(**kwargs)
         context['now'] = timezone.now()
         return context
+
 
 class EmergencyJSONView(JSONResponseMixin, DetailView):
     ''' Custom Json View for Emergency details '''
@@ -78,6 +85,7 @@ class EmergencyListJSONView(ListView):
         return data
 
 
+@method_decorator(login_required, name='dispatch')
 class EmergencyDashboardList(ListView):
     template_name = "emergency/dashboard.html"
     model = Emergency
@@ -96,6 +104,7 @@ class EmergencyDashboardList(ListView):
         return data
 
 
+@method_decorator(login_required, name='dispatch')
 class EmergencyDerivation(CreateView):
     template_name = "emergency/derivation.html"
     model = AttentionDerivation
@@ -108,6 +117,8 @@ class EmergencyDerivation(CreateView):
         ]
     success_url = '/emergency/list/'
 
+
+@method_decorator(login_required, name='dispatch')
 class EmergencyUpdate(UpdateView):
     template_name = "emergency/update.html"
     model = Emergency
@@ -115,6 +126,7 @@ class EmergencyUpdate(UpdateView):
     success_url = '/emergency/list/'
 
 
+@method_decorator(login_required, name='dispatch')
 class EmergencyClientOdoo(View):
     template_name = "emergency/odooclient.html"
     def get(self, request, *args, **kwargs):
@@ -154,6 +166,8 @@ class EmergencyClientOdoo(View):
                 return render(request, self.template_name,{"form": form, "result": result})
         return render(request, self.template_name,{"form": form, "result": result, "patients": patient_data})
 
+
+@method_decorator(login_required, name='dispatch')
 class EmergencyClientModal(View):
     template_name = "emergency/blank_modal.html"
     def get(self, request, *args, **kwargs):
@@ -222,6 +236,8 @@ class EmergencyClientModal(View):
                 return render(request, self.template_name,{"form": form, "result": result, "find_data": find_data, "feContext": feContext  })
         return render(request, self.template_name,{'form': form, 'result': result,"find_data": find_data, "feContext": feContext })
 
+
+@method_decorator(login_required, name='dispatch')
 class EmergencyNewModal(CreateView):
     template_name = "emergency/blanknew_modal.html"
     model = Emergency
@@ -229,12 +245,13 @@ class EmergencyNewModal(CreateView):
     success_url = '/emergency/list/'
 
 
-
+@method_decorator(login_required, name='dispatch')
 class EmergencyGetPatient(View):
     def get(self, request, *args, **kwargs):
         ''' LEgacy way to show modal with patient data'''
         request.session['patientrequest'] = handle_patient_data(kwargs['patient_id'])
         return redirect('/emergency/newmodal/')
+
 
 class EmergencyJSONGetPatient(View):
     def get(self, request, *args, **kwargs):
@@ -401,6 +418,8 @@ def min_address_json(parent_data,patient_data):
     logger.info('%s (%s)' % ('MinAddressJSON',data))
     return data
 
+
+@method_decorator(login_required, name='dispatch')
 class EmergencyActivate(View):
     def get(self, request, *args, **kwargs):
         patient_id = kwargs['patient_id']
@@ -415,6 +434,8 @@ class EmergencyActivate(View):
         emergency.save()
         return redirect('/emergency/list/')
 
+
+@method_decorator(login_required, name='dispatch')
 class EmergencyEnd(View):
     def get(self, request, *args, **kwargs):
         patient_id = kwargs['patient_id']
@@ -444,6 +465,7 @@ class EmergencyJsonEnd(View):
         return HttpResponse(status=200)
 
 
+@method_decorator(login_required, name='dispatch')
 class OdooSubscription(View):
     template_name = "emergency/search_odoo_auto.html"
     def get(self, request, *args, **kwargs):
