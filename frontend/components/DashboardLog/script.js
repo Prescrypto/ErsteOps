@@ -1,5 +1,6 @@
 import init from 'utils/init';
 import ReconnectingWebSocket from 'reconnecting-websocket';
+import { mapState, mapActions } from 'vuex';
 import { ws } from 'utils/url';
 
 // Initialize Vue globals
@@ -9,7 +10,8 @@ init();
 const socket = new ReconnectingWebSocket(`${ws}/notify/emergency/`);
 
 // Initialize empty data store
-const emergencies = window.erste.incidents.map(i => i.fields) || [];
+const { incidents } = window.erste;
+const emergencies = incidents.map(i => ({ id: i.pk, ...i.fields })) || [];
 const store = { emergencies };
 
 // Append to emergencies array when receiving new data
@@ -21,5 +23,22 @@ socket.onmessage = message => {
 
 export default {
   name: 'dashboard-log',
+  // preload with data from backend
   data: () => store,
+  computed: {
+    ...mapState({
+      // for hiding the spinner
+      loading: 'loading',
+      // server results array
+      current: 'emergency',
+    }),
+  },
+  methods: {
+    // lookup emergency by id
+    populate(id) {
+      this.emergency(id);
+    },
+    // maps the search action from the store to the component
+    ...mapActions(['emergency']),
+  },
 };

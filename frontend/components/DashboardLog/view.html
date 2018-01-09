@@ -17,7 +17,7 @@
   </thead>
 
   <tbody id="root">
-    <tr  v-for="emergency in emergencies" :id="`emergency-${emergency.id}`" class="c-table__row">
+    <tr  v-for="emergency in emergencies" :id="`emergency-${emergency.id}`" @click="populate(emergency.id)" class="c-table__row">
       <td class="c-table__cell"><span class="u-text-mute">{{ emergency.odoo_client }}</span></td>
       <td class="c-table__cell">{{ emergency.grade_type }}</td>
       <td class="c-table__cell">

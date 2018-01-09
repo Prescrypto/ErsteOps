@@ -2,6 +2,8 @@ import Vue from 'vue';
 import VModal from 'vue-js-modal';
 import VeeValidate from 'vee-validate';
 import Search from 'components/Search';
+import Patient from 'components/Patient';
+import Addresses from 'components/Addresses';
 import store from 'store';
 
 // Instantiate Vue mixins
@@ -12,7 +14,7 @@ Vue.use(VeeValidate);
 window.Erste.modal = new Vue({
   el: '#v-header',
   delimiters: ['<%', '%>'],
-  components: { Search },
+  components: { Search, Patient, Addresses },
   data() {
     return {
       search: true,
