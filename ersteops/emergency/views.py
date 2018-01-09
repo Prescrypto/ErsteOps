@@ -75,7 +75,6 @@ class EmergencyListJSONView(ListView):
         fields = EMERGENCY_LIST_FIELDS
         emm_list = Emergency.objects.filter(is_active=True)
         data = serializers.serialize('json', list(emm_list), fields=fields)
-        # TEMP remove later
         return data
 
 
@@ -422,11 +421,28 @@ class EmergencyEnd(View):
         try:
             emergency = Emergency.objects.get(id=patient_id)
         except:
+            logger.error("[EmergencyEnd] Not found emergency with patient id")
             return redirect('/emergency/dashboard/')
         emergency.is_active = False
         emergency.final_emergency_time = datetime.date.today()
         emergency.save()
         return redirect('/emergency/dashboard/')
+
+
+class EmergencyJsonEnd(View):
+    def get(self, request, *args, **kwargs):
+        patient_id = kwargs['patient_id']
+        try:
+            emergency = Emergency.objects.get(id=patient_id)
+        except:
+            logger.error("[Error EmergencyJsonEnd] Not found emergency with patient id")
+            return HttpResponse(status=404)
+        emergency.is_active = False
+        emergency.final_emergency_time = datetime.date.today()
+        emergency.save()
+        logger.success("[Success EmergencyJsonEnd] Deactivate emergency with id: {}".format(emergency.id))
+        return HttpResponse(status=200)
+
 
 class OdooSubscription(View):
     template_name = "emergency/search_odoo_auto.html"
