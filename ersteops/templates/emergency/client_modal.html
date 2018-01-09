@@ -47,7 +47,6 @@
         </div><!-- End Address TAB -->
 
         <div class="c-tabs__pane" id="nav-units" role="tabpanel" aria-labelledby="nav-units-tab">
-          Unidad
           <table>
             <tbody>
             <tr>
@@ -55,10 +54,32 @@
               <td><select name="unit" id="id_unit" class="c-input" multiple="multiple">
                 </select></td>
             </tr>
+            <tr>
+              <td><label for="id_is_active">Es activa:</label></td>
+              <td>
+                  <div class="col-md-12">
+                    <div class="c-field">
+                        <div class="c-select">
+                            <select id="id_is_active" name="is_active">
+                                <option value="1">Desconocido</option>
+                                <option value="2">Sí</option>
+                                <option value="3">No</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <button class="c-btn c-btn--success" type="submit">Guardar Emergencia</button>
+              </td>
+            </tr>
             </tbody>
           </table>
         </div><!-- End Unit TAB -->
 
+        <!-- COMMENT THIS SECTION TEMPORALLY
         <div class="c-tabs__pane" id="nav-timers" role="tabpanel" aria-labelledby="nav-timers-tab">
           Tiempos
           <table>
@@ -114,8 +135,8 @@
               </tbody>
             </table>
           </form>
-        </div><!-- End Timer TAB -->
-
+        </div>  <!\-\- End Timer TAB \-\->
+              END COMMENT -->
       </div>
     </div>
   </form>
