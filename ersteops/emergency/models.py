@@ -215,6 +215,7 @@ def emergency_dictionary(instance):
         units.append(unitDict)
     emergDict={
         "pk":instance.pk,
+        "id":instance.pk,
         "odoo_client":instance.odoo_client,
         "grade_type":str(instance.grade_type),
         "zone":str(instance.zone),
