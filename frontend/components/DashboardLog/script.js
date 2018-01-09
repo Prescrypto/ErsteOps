@@ -1,7 +1,8 @@
 import init from 'utils/init';
 import ReconnectingWebSocket from 'reconnecting-websocket';
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapMutations } from 'vuex';
 import { ws } from 'utils/url';
+import { MODAL_CHANGE_TAB } from 'store/constants';
 
 // Initialize Vue globals
 init();
@@ -34,9 +35,14 @@ export default {
     }),
   },
   methods: {
+    ...mapMutations({
+      changeTab: MODAL_CHANGE_TAB,
+    }),
     // lookup emergency by id
     populate(id) {
       this.emergency(id);
+      this.changeTab('patient');
+      window.Erste.modal.show();
     },
     // maps the search action from the store to the component
     ...mapActions(['emergency']),

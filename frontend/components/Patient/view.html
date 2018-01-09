@@ -14,7 +14,7 @@
           ID del Cliente
         </label>
         <input
-          v-model="patient.id_odoo_client"
+          v-model="source.id_odoo_client || source.odoo_client"
           class="c-input"
           type="text"
           name="odoo_client"
@@ -46,6 +46,7 @@
           Tipo de emergencia
         </label>
         <select
+          v-model="source.service_category"
           name="service_category"
           id="id_service_category"
           class="c-input"
@@ -66,6 +67,7 @@
           Grado Emergencia
         </label>
         <select
+          v-model="source.grade_type"
           name="grade_type"
           required=""
           class="c-input" id="id_grade_type"
@@ -84,6 +86,7 @@
           Persona que llama
         </label>
         <input
+          v-model="source.caller_name"
           type="text"
           name="caller_name"
           id="id_caller_name"
@@ -98,7 +101,7 @@
           Relacion con el paciente
         </label>
         <input
-          v-model="patient.id_caller_relation"
+          v-model="source.id_caller_relation || source.caller_relation"
           type="text"
           name="caller_relation"
           id="id_caller_relation"
@@ -112,7 +115,7 @@
       <div class="c-field">
         <label class="c-field__label" for="id_zone">Zona</label>
         <select
-          v-model="patient.id_zone"
+          v-model="source.id_zone || source.zone"
           name="zone"
           class="c-input" 
           id="id_zone"
@@ -135,7 +138,7 @@
           Nombre del Paciente
         </label>
         <input
-          v-model="patient.id_patient_name"
+          v-model="source.id_patient_name || source.patient_name"
           type="text"
           name="patient_name"
           required=""
@@ -151,6 +154,7 @@
           Genero
         </label>
         <select
+          v-model="source.patient_gender"
           name="patient_gender"
           id="id_patient_gender"
           class="c-input"
@@ -167,7 +171,7 @@
           Edad (años)
         </label>
         <input
-          v-model="patient.id_patient_age"
+          v-model="source.id_patient_age || source.patient_age"
           type="number"
           name="patient_age"
           value="0"
@@ -182,7 +186,7 @@
           Alergias
         </label>
         <input
-          v-model="patient.id_patient_allergies"
+          v-model="source.id_patient_allergies || source.patient_allergies"
           type="text"
           name="patient_allergies"
           id="id_patient_allergies"
@@ -197,7 +201,7 @@
           Enfermedades diagnosticadas
         </label>
         <input
-          v-model="patient.id_patient_illnesses"
+          v-model="source.id_patient_illnesses || source.patient_illnesses"
           type="text"
           name="patient_illnesses"
           id="id_patient_illnesses"
@@ -216,6 +220,7 @@
           Sintoma principal
         </label>
         <input
+          v-model="source.main_complaint"
           type="text"
           name="main_complaint"
           id="id_main_complaint"
@@ -230,6 +235,7 @@
           Descripción de los sintomas
         </label>
         <textarea
+          v-model="source.complaint_descriprion"
           name="complaint_descriprion"
           id="id_complaint_descriprion"
           class="c-input"
@@ -244,6 +250,7 @@
           Notas paciente
         </label>
         <textarea
+          v-model="source.patient_notes"
           name="patient_notes"
           id="id_patient_notes"
           class="c-input"

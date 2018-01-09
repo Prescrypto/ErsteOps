@@ -19,14 +19,7 @@ export default {
     invalid() {
       return this.fields.term.invalid;
     },
-
-    // loading is for hiding the spinner
-    // suggestions is the server results array
-    ...mapState({
-      loading: 'loading',
-      suggestions: 'suggestions',
-    }),
-    // memoized computed property that indicates whether there are suggestions
+    ...mapState(['loading', 'suggestions']),
     ...mapGetters(['hasSuggestions']),
   },
 

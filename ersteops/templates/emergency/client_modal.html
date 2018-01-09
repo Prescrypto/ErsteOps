@@ -6,7 +6,9 @@
   resizable
   scrollable
   width="75%"
-  height="auto">
+  height="auto"
+  @opened="tab"
+  @closed="destroy">
 
   <form action="/emergency/new/" method="post">{% csrf_token %}
 
@@ -17,12 +19,11 @@
           v-on:click="toggle"
           :id="`nav-${name}-tab`"
           :href="`#nav-${name}`"
-          :class="{ 'c-tabs__link': true, 'active': name === active }"
+          class="c-tabs__link"
           :data-name="name"
           data-toggle="tab"
           role="tab"
-          :aria-controls="`nav-${name}`"
-          :aria-selected="name === active">
+          :aria-controls="`nav-${name}`">
             <% label %>
         </a>
       </nav>

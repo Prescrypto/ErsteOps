@@ -14,6 +14,8 @@ import {
   REQUEST_EMERGENCY_SUCCESS,
   REQUEST_EMERGENCY_ERROR,
   SELECT_ADDRESS,
+  MODAL_CHANGE_TAB,
+  MODAL_RESET,
 } from './constants';
 
 Vue.use(Vuex);
@@ -22,6 +24,7 @@ const store = new Vuex.Store({
   state: {
     error: false,
     loading: false,
+    modal: { active: 'search' },
     suggestions: [],
     patient: {},
     address: {},
@@ -119,6 +122,19 @@ const store = new Vuex.Store({
     // Select patient address
     [SELECT_ADDRESS](state, data) {
       state.address = data;
+    },
+
+    // Modal
+    [MODAL_CHANGE_TAB](state, data) {
+      state.modal.active = data;
+    },
+
+    [MODAL_RESET](state) {
+      state.suggestions = [];
+      state.patient = {};
+      state.address = {};
+      state.emergency = {};
+      state.modal.active = 'search';
     },
   },
 });

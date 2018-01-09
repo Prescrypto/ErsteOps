@@ -10,14 +10,11 @@ export default {
         company: 'Compañia',
         family: 'Familia',
         private: 'Privado',
-      }[this.patient.id_subscription_type];
+      }[this.patient.id_subscription_type || this.emergency.subscription_type];
     },
-
-    ...mapState({
-      // loading is for hiding the spinner
-      loading: 'loading',
-      // suggestions is the server results array
-      patient: 'patient',
-    }),
+    ...mapState(['loading', 'patient', 'emergency']),
+    source() {
+      return { ...this.patient, ...this.emergency };
+    },
   },
 };

@@ -1,10 +1,12 @@
 import Vue from 'vue';
+import { mapState, mapMutations } from 'vuex';
 import VModal from 'vue-js-modal';
 import VeeValidate from 'vee-validate';
 import Search from 'components/Search';
 import Patient from 'components/Patient';
 import Addresses from 'components/Addresses';
 import store from 'store';
+import { MODAL_CHANGE_TAB, MODAL_RESET } from 'store/constants';
 
 // Instantiate Vue mixins
 Vue.use(VModal);
@@ -17,7 +19,6 @@ window.Erste.modal = new Vue({
   components: { Search, Patient, Addresses },
   data() {
     return {
-      search: true,
       tabs: [
         { name: 'search', label: 'Buscar' },
         { name: 'patient', label: 'Paciente' },
@@ -25,11 +26,27 @@ window.Erste.modal = new Vue({
         { name: 'units', label: 'Unidad' },
         { name: 'timers', label: 'Timers' },
       ],
-      active: 'search',
     };
+  },
+  computed: {
+    ...mapState(['loading']),
+    ...mapState({
+      active: state => state.modal.active,
+      search: state => state.modal.search,
+    }),
   },
   store,
   methods: {
+    ...mapMutations({
+      changeTab: MODAL_CHANGE_TAB,
+      reset: MODAL_RESET,
+    }),
+    tab() {
+      window.$(`#nav-${this.active}-tab`).tab('show');
+    },
+    destroy() {
+      this.reset();
+    },
     show() {
       this.$modal.show('incident-modal');
     },
@@ -38,7 +55,7 @@ window.Erste.modal = new Vue({
     },
     toggle(e) {
       const { name } = e.currentTarget.dataset;
-      this.active = name;
+      this.changeTab(name);
     },
   },
 });
