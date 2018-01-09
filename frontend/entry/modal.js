@@ -24,7 +24,8 @@ window.Erste.modal = new Vue({
         { name: 'patient', label: 'Paciente' },
         { name: 'address', label: 'Dirección' },
         { name: 'units', label: 'Unidad' },
-        { name: 'timers', label: 'Timers' },
+        // temporally lock
+        //{ name: 'timers', label: 'Timers' },
       ],
     };
   },
