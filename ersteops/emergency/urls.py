@@ -6,7 +6,7 @@ from emergency.views import (
     EmergencyUpdate, EmergencyClientOdoo, EmergencyClientModal,
     EmergencyNewModal, EmergencyGetPatient, OdooSubscription,
     EmergencyActivate, EmergencyEnd, EmergencyJSONView,
-    EmergencyJSONGetPatient
+    EmergencyJSONGetPatient, EmergencyListJSONView, EmergencyJsonEnd
 )
 
 urlpatterns = [
@@ -25,6 +25,8 @@ urlpatterns = [
     url(r'^end/(?P<patient_id>\d+)/$', EmergencyEnd.as_view(), name='emergencend'),
     url(r'^getpatient/(?P<patient_id>\d+)/$', EmergencyGetPatient.as_view(), name='emergencypatient'),
     # Ajax Views for emergencies!
+    url(r'^ajax/list/$', EmergencyListJSONView.as_view(), name="emergency_json_list"),
+    url(r'^ajax/end/(?P<patient_id>\d+)/$', EmergencyJsonEnd.as_view(), name="emergency_json_end"),
     url(r'^ajax/detail/(?P<pk>[0-9]+)/$', EmergencyJSONView.as_view(), name="emergency_json_detail"),
     url(r'^ajax/patient/(?P<patient_id>[0-9]+)/$', EmergencyJSONGetPatient.as_view(), name="emergency_patient_json"),
 ]

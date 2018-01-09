@@ -11,11 +11,13 @@ from django.views.generic import View, CreateView, ListView, DetailView, UpdateV
 from django.utils import timezone
 from django.core import serializers
 from django.http import JsonResponse
+from django.http import HttpResponse
 # Our models
 from core.utils import OdooApi
 from .utils import JSONResponseMixin
 from .forms import OdooClientForm, OdooClientAuto
 from .models import Emergency,AttentionDerivation
+from .list_fields import EMERGENCY_LIST_FIELDS
 
 # Logging library
 import logging
@@ -33,47 +35,7 @@ class EmergencyBlank(View):
 class EmergencyNew(CreateView):
     template_name = "emergency/new.html"
     model = Emergency
-    fields = ['id','odoo_client',
-                'service_category',
-                'grade_type',
-                'zone',
-                'start_time',
-                'end_time',
-                'is_active',
-                'unit',
-                'unit_assigned_time',
-                'unit_dispatched_time',
-                'arrival_time',
-                'attention_time',
-                'derivation_time',
-                'hospital_arrival',
-                'patient_arrival',
-                'final_emergency_time',
-                'address_street',
-                'address_extra',
-                'address_zip_code',
-                'address_county',
-                'address_col',
-                'address_between',
-                'address_and_street',
-                'address_ref',
-                'address_front',
-                'address_instructions',
-                'address_notes',
-                'caller_name',
-                'caller_relation',
-                'patient_name',
-                'patient_gender',
-                'patient_age',
-                'patient_allergies',
-                'patient_illnesses',
-                'patient_notes',
-                'attention_final_grade',
-                'attention_justification',
-                'main_complaint',
-                'complaint_descriprion',
-                'subscription_type'
-                ]
+    fields = EMERGENCY_LIST_FIELDS
     success_url = '/emergency/list/'
 
 class EmergencyListView(ListView):
@@ -100,6 +62,22 @@ class EmergencyJSONView(JSONResponseMixin, DetailView):
         return self.render_to_json_response(context, **response_kwargs)
 
 
+class EmergencyListJSONView(ListView):
+    model = Emergency
+    def render_to_response(self, context, **response_kwargs):
+        return HttpResponse(
+            self.get_data(context),
+            content_type='application/json',
+            **response_kwargs
+        )
+
+    def get_data(self, context):
+        fields = EMERGENCY_LIST_FIELDS
+        emm_list = Emergency.objects.filter(is_active=True)
+        data = serializers.serialize('json', list(emm_list), fields=fields)
+        return data
+
+
 class EmergencyDashboardList(ListView):
     template_name = "emergency/dashboard.html"
     model = Emergency
@@ -111,47 +89,7 @@ class EmergencyDashboardList(ListView):
         return context
 
     def get_queryset(self):
-        fields = ('id','odoo_client',
-                'service_category',
-                'grade_type',
-                'zone',
-                'start_time',
-                'end_time',
-                'is_active',
-                'unit',
-                'unit_assigned_time',
-                'unit_dispatched_time',
-                'arrival_time',
-                'attention_time',
-                'derivation_time',
-                'hospital_arrival',
-                'patient_arrival',
-                'final_emergency_time',
-                'address_street',
-                'address_extra',
-                'address_zip_code',
-                'address_county',
-                'address_col',
-                'address_between',
-                'address_and_street',
-                'address_ref',
-                'address_front',
-                'address_instructions',
-                'address_notes',
-                'caller_name',
-                'caller_relation',
-                'patient_name',
-                'patient_gender',
-                'patient_age',
-                'patient_allergies',
-                'patient_illnesses',
-                'patient_notes',
-                'attention_final_grade',
-                'attention_justification',
-                'main_complaint',
-                'complaint_descriprion',
-                'subscription_type'
-                )
+        fields = EMERGENCY_LIST_FIELDS
         emm_list = Emergency.objects.filter(is_active=True)
         data = serializers.serialize('json', list(emm_list), fields=fields)
         # TEMP remove later
@@ -173,47 +111,7 @@ class EmergencyDerivation(CreateView):
 class EmergencyUpdate(UpdateView):
     template_name = "emergency/update.html"
     model = Emergency
-    fields = ['id','odoo_client',
-                'service_category',
-                'grade_type',
-                'zone',
-                'start_time',
-                'end_time',
-                'is_active',
-                'unit',
-                'unit_assigned_time',
-                'unit_dispatched_time',
-                'arrival_time',
-                'attention_time',
-                'derivation_time',
-                'hospital_arrival',
-                'patient_arrival',
-                'final_emergency_time',
-                'address_street',
-                'address_extra',
-                'address_zip_code',
-                'address_county',
-                'address_col',
-                'address_between',
-                'address_and_street',
-                'address_ref',
-                'address_front',
-                'address_instructions',
-                'address_notes',
-                'caller_name',
-                'caller_relation',
-                'patient_name',
-                'patient_gender',
-                'patient_age',
-                'patient_allergies',
-                'patient_illnesses',
-                'patient_notes',
-                'attention_final_grade',
-                'attention_justification',
-                'main_complaint',
-                'complaint_descriprion',
-                'subscription_type'
-                ]
+    fields = EMERGENCY_LIST_FIELDS
     success_url = '/emergency/list/'
 
 
@@ -327,48 +225,7 @@ class EmergencyClientModal(View):
 class EmergencyNewModal(CreateView):
     template_name = "emergency/blanknew_modal.html"
     model = Emergency
-    fields = ['id','odoo_client',
-                'service_category',
-                'grade_type',
-                'zone',
-                'start_time',
-                'end_time',
-                'is_active',
-                'unit',
-                'unit_assigned_time',
-                'unit_dispatched_time',
-                'arrival_time',
-                'attention_time',
-                'derivation_time',
-                'hospital_arrival',
-                'patient_arrival',
-                'final_emergency_time',
-                'address_street',
-                'address_extra',
-                'address_zip_code',
-                'address_county',
-                'address_col',
-                'address_between',
-                'address_and_street',
-                'address_ref',
-                'address_front',
-                'address_instructions',
-                'address_notes',
-                'caller_name',
-                'caller_relation',
-                'patient_name',
-                'patient_gender',
-                'patient_age',
-                'patient_allergies',
-                'patient_illnesses',
-                'patient_notes',
-                'attention_final_grade',
-                'attention_justification',
-                'main_complaint',
-                'complaint_descriprion',
-                'subscription_type'
-                ]
-
+    fields = EMERGENCY_LIST_FIELDS
     success_url = '/emergency/list/'
 
 
@@ -381,9 +238,10 @@ class EmergencyGetPatient(View):
 
 class EmergencyJSONGetPatient(View):
     def get(self, request, *args, **kwargs):
-        ''' Conenct to api and return json data'''
-        data = handle_patient_data(kwargs['patient_id'])
-        return JsonResponse(data)
+        if request.is_ajax():
+            ''' Connect to api and return json data'''
+            data = handle_patient_data(kwargs['patient_id'])
+            return JsonResponse(data)
 
 
 def handle_patient_data(patient_id):
@@ -563,11 +421,28 @@ class EmergencyEnd(View):
         try:
             emergency = Emergency.objects.get(id=patient_id)
         except:
+            logger.error("[EmergencyEnd] Not found emergency with patient id")
             return redirect('/emergency/dashboard/')
         emergency.is_active = False
         emergency.final_emergency_time = datetime.date.today()
         emergency.save()
         return redirect('/emergency/dashboard/')
+
+
+class EmergencyJsonEnd(View):
+    def get(self, request, *args, **kwargs):
+        patient_id = kwargs['patient_id']
+        try:
+            emergency = Emergency.objects.get(id=patient_id)
+        except:
+            logger.error("[Error EmergencyJsonEnd] Not found emergency with patient id")
+            return HttpResponse(status=404)
+        emergency.is_active = False
+        emergency.final_emergency_time = datetime.date.today()
+        emergency.save()
+        logger.success("[Success EmergencyJsonEnd] Deactivate emergency with id: {}".format(emergency.id))
+        return HttpResponse(status=200)
+
 
 class OdooSubscription(View):
     template_name = "emergency/search_odoo_auto.html"

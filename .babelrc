@@ -10,11 +10,11 @@
         },
         "useBuiltIns": true
       }
-    ]
+    ],
+    "stage-3"
   ],
   "plugins": [
     "syntax-dynamic-import",
-    "transform-object-rest-spread",
     [
       "transform-class-properties",
       {
@@ -27,7 +27,7 @@
       "plugins": ["date-fns", ["lodash", { "id": ["lodash"] }]]
     },
     "test": {
-      "presets": ["env"]
+      "presets": ["env", "stage-3"]
     }
   }
 }

@@ -27,58 +27,7 @@
             <div class="c-card__head">
               <h3 class="c-card__title">Incidentes</h3>
             </div>
-
-            <table id="dashboard-log" class="c-table">
-              <thead class="c-table__head c-table__head--slim">
-                <tr class="c-table__row">
-                    <th class="c-table__cell c-table__cell--head">Cliente</th>
-                    <th class="c-table__cell c-table__cell--head">Grado</th>
-                    <th class="c-table__cell c-table__cell--head">Unidad</th>
-                    <th class="c-table__cell c-table__cell--head">Tiempo</th>
-                    <th class="c-table__cell c-table__cell--head">Estado</th>
-                    <th class="c-table__cell c-table__cell--head">
-                        <span class="u-hidden-visually">Acciones</span>
-                    </th>
-                    <th class="c-table__cell c-table__cell--head">
-
-                    </th>
-                </tr>
-              </thead>
-
-              <tbody id="root">
-                <tr  v-for="emergency in emergencies" id="emergency-{{emergency.id}}" class="c-table__row">
-                  <td class="c-table__cell"><span class="u-text-mute"><% emergency.odoo_client %></span></td>
-                  <td class="c-table__cell"><% emergency.grade_type %></td>
-                  <td class="c-table__cell">
-                    <span v-for="unit in emergency.unit.all" class="u-text-mute"><% unit %></span>
-                    <span v-if="!((emergency.unit || {}).all || {}).length">Sin Asignar</span>
-                  </td>
-                  <td class="c-table__cell">
-                    <span class="u-text-mute"><% emergency.start_time | datetime %></span>
-                  </td>
-                  <td class="c-table__cell">
-                    <span v-if="emergency.is_active" class="c-badge c-badge--small c-badge--success">En Camino</span>
-                    <span v-else class="c-badge c-badge--small c-badge--success">Terminado</span>
-                  </td>
-                  <td class="c-table__cell u-text-center">
-                    <div class="c-dropdown dropdown">
-                      <button class="c-btn c-btn--secondary has-dropdown dropdown-toggle" id="dropdownMenuButton10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
-
-                      <div class="c-dropdown__menu dropdown-menu" aria-labelledby="dropdownMenuButton10">
-                        <a class="c-dropdown__item dropdown-item" href="#">Servicio de Derivación</a>
-                        <a class="c-dropdown__item dropdown-item" href="#">Ver tiempos</a>
-                        <a class="c-dropdown__item dropdown-item" href="#">Ver resumen</a>
-                        <a class="c-dropdown__item dropdown-item" href="#">Ver resumen</a>
-                      </div>
-                    </td>
-                    <td class="c-table__cell u-text-center">
-                      <a href="/emergency/end/{{ emergency.id }}/">
-                        <span class="fa fa-stop-circle-o"></span>
-                      </a>
-                    </td>
-                  </tr><!-- // .table__row -->
-              </tbody>
-            </table>
+            <div id="dashboard-log"></div>
           </div><!-- // .c-card -->
         </div>
       </div><!-- // .row -->
@@ -90,52 +39,12 @@
 <script>
   var json_list = {{ object_list|safe }};
   window.erste.incidents = json_list;
+  // example HTTP_PROTOCOL: {{ HTTP_PROTOCOL }}
+  // ie. ABSOLUTE_URI : {{ HTTP_ABSOLUTE_URI }}
 </script>
 {% endblock jsheadblock %}
 
 {% block jsblock %}
   {% load render_bundle from webpack_loader %}
   {% render_bundle 'dashboard' 'js' %}
-  <script src ="{% static "bower_components/jquery-ui/jquery-ui.min.js" %}" ></script>
-  <script type="text/javascript" language="javascript">
-    $(document).ready(function(){
-      // Example of url's
-      console.log("URL's for ajaxRequest:");
-      console.log("{{ request.scheme }}");
-      console.log("{{ request.META.HTTP_HOST }}");
-      console.log("{{ request.path }}");
-      // este ejemplo puedes ver como agregar las urls de los diferentes endpoints en el archivo emergency/urls.py
-      console.log("{% url 'emergency_json_detail' pk=2 %}");
-      // url compuesta
-      console.log("{{ request.scheme }}://{{ request.META.HTTP_HOST }}{{ request.path }}")
-      // End urls examples
-      $("#id_client_name").attr("autocomplete", "off");
-      $("#continuebutton").prop("disabled",true);
-      $(function() {
-        console.log("Start autocomplete");
-
-        $("#id_client_name").autocomplete({
-          source: "/ajaxapi/getsubscriptor/",
-          minLength: 2,
-          //Focus
-          focus: function( event, ui ) {
-            $( "#id_client_name" ).val( ui.item.label );
-            return false;
-          },
-          select: function( event, ui ) {
-            //Assign existing values from Autocomplete
-            $( "#id_client_id" ).val( ui.item.id );
-            $( "#id_client_name" ).val( ui.item.value );
-            $( "#id_source_id" ).val( ui.item.source );
-            $( "#id_client_type_id" ).val( ui.item.client_type );
-            $( "#id_parent_id" ).val( ui.item.parent_id );
-            //window.location.href = "/emergency/getpatient/" + ui.item.id +"-"+ui.item.source + "-" + ui.item.parent_id + "/";
-            window.location.href = "/emergency/getpatient/" +  ui.item.target + "/";
-            return false;
-          }
-        });
-
-      });
-    });
-  </script>
 {% endblock jsblock%}
