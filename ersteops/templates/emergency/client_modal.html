@@ -47,7 +47,6 @@
         </div><!-- End Address TAB -->
 
         <div class="c-tabs__pane" id="nav-units" role="tabpanel" aria-labelledby="nav-units-tab">
-          Unidad
           <table>
             <tbody>
             <tr>
@@ -56,23 +55,26 @@
                 </select></td>
             </tr>
             <tr>
-              <td><label for="id_is_active">Activa:</label></td>
+              <td><label for="id_is_active">Es activa:</label></td>
               <td>
-                <div class="c-select">
-                <select name="is_active" id="id_is_active">
-                    <option value="1" selected="">Unknown</option>
-                    <option value="2">Yes</option>
-                    <option value="3">No</option>
-                  </select></div>
+                  <div class="col-md-12">
+                    <div class="c-field">
+                        <div class="c-select">
+                            <select id="id_is_active" name="is_active">
+                                <option value="1">Desconocido</option>
+                                <option value="2">Sí</option>
+                                <option value="3">No</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
               </td>
             </tr>
             <tr>
               <td>
-                <button class="" type="submit">Guardar</button>
+                <button class="c-btn c-btn--success" type="submit">Guardar Emergencia</button>
               </td>
-              <td></td>
             </tr>
-
             </tbody>
           </table>
         </div><!-- End Unit TAB -->
