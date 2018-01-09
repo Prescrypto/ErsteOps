@@ -34,6 +34,8 @@ DEBUG = ast.literal_eval(os.environ['DEBUG_STATE'])
 
 #ALLOWED_HOSTS = []
 
+LOGIN_URL = '/'
+
 # TODO fix production mode
 PRODUCTION = ast.literal_eval(os.environ['PRODUCTION'])
 # Change allowed hosts accordingly
