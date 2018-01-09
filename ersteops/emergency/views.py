@@ -14,11 +14,13 @@ from django.utils import timezone
 from django.core import serializers
 from django.http import JsonResponse
 from django.http import HttpResponse
+from django.db.models import Q
 # Our models
 from core.utils import OdooApi
 from .utils import JSONResponseMixin
 from .forms import OdooClientForm, OdooClientAuto
 from .models import Emergency,AttentionDerivation
+from vehicle.models import Unit
 from .list_fields import EMERGENCY_LIST_FIELDS
 
 # Logging library
@@ -89,17 +91,23 @@ class EmergencyListJSONView(ListView):
 class EmergencyDashboardList(ListView):
     template_name = "emergency/dashboard.html"
     model = Emergency
+    emm_list = Emergency.objects.filter(is_active=True)
+
     def get_context_data(self, **kwargs):
+        active_emergencies = self.emm_list.count()
+        active_units = Unit.objects.filter(Q(is_active=True) & Q(assigned=False)).count()
         context = super(EmergencyDashboardList, self).get_context_data(**kwargs)
         context.update({
             'now': timezone.now(),
+            'active_emergencies': active_emergencies,
+            'active_units': active_units,
         })
         return context
 
     def get_queryset(self):
         fields = EMERGENCY_LIST_FIELDS
-        emm_list = Emergency.objects.filter(is_active=True)
-        data = serializers.serialize('json', list(emm_list), fields=fields)
+        # emm_list = Emergency.objects.filter(is_active=True)
+        data = serializers.serialize('json', list(self.emm_list), fields=fields)
         # TEMP remove later
         return data
 
