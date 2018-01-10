@@ -6,6 +6,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from datetime import datetime, timedelta
 from vehicle import models as models_vehicle
 
+import unicodedata
 import json
 from channels import Group
 from django.dispatch import receiver
@@ -193,6 +194,10 @@ class Emergency(models.Model):
         Group('notifications').send(
                 {"text": json.dumps(emergJson)}
             )
+    
+    # Returns a verbose name - adjusted for Python3
+    def __str__(self):
+        return "{}, {}, {}".format(unicodedata.normalize('NFKD', self.odoo_client), unicodedata.normalize('NFKD', self.patient_name), self.created_at)
 
 
 def emergency_dictionary(instance):
