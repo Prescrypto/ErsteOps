@@ -1,8 +1,10 @@
+import logging
 from django.http import JsonResponse
 from django.core import serializers
 from django.http import HttpResponse
 from .models import Emergency
 from .list_fields import EMERGENCY_LIST_FIELDS
+
 
 class JSONResponseMixin(object):
     """
@@ -33,8 +35,11 @@ class AjaxableResponseMixin(object):
     Mixin to add AJAX support to a form.
     Must be used with an object-based FormView (e.g. CreateView)
     """
+    logger = logging.getLogger('django_info')
+
     def form_invalid(self, form):
         response = super(AjaxableResponseMixin, self).form_invalid(form)
+        self.logger.info("[POST new Emergency] form: SUCCESS")
         if self.request.is_ajax():
             return JsonResponse(form.errors, status=400)
         else:
@@ -45,6 +50,7 @@ class AjaxableResponseMixin(object):
         # it might do some processing (in the case of CreateView, it will
         # call form.save() for example).
         response = super(AjaxableResponseMixin, self).form_valid(form)
+        self.logger.info("[POST new Emergency] form: ERROR")
         if self.request.is_ajax():
             data = {
                 'id': self.object.pk,
