@@ -14,3 +14,4 @@ feedparser==5.2.1
 requests==2.4.3
 django-widget-tweaks==1.4.1
 django-webpack-loader
+django-preventconcurrentlogins==0.8.1
