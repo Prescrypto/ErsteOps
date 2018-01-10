@@ -39,8 +39,10 @@ class EmergencyBlank(View):
 
 @method_decorator(csrf_exempt, name='dispatch')
 class EmergencyNew(AjaxableResponseMixin, CreateView):
+    template_name = "emergency/new.html"
     model = Emergency
     fields = EMERGENCY_LIST_FIELDS
+    success_url = 'emergencydashboard'
 
 
 @method_decorator(login_required, name='dispatch')

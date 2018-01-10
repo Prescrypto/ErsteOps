@@ -39,10 +39,11 @@ class AjaxableResponseMixin(object):
 
     def form_invalid(self, form):
         response = super(AjaxableResponseMixin, self).form_invalid(form)
-        self.logger.info("[POST new Emergency] form: SUCCESS")
         if self.request.is_ajax():
+            self.logger.info("[POST new Emergency] form: Error AJAX")
             return JsonResponse(form.errors, status=400)
         else:
+            self.logger.info("[POST new Emergency] form: Error Normal")
             return response
 
     def form_valid(self, form):
@@ -50,11 +51,13 @@ class AjaxableResponseMixin(object):
         # it might do some processing (in the case of CreateView, it will
         # call form.save() for example).
         response = super(AjaxableResponseMixin, self).form_valid(form)
-        self.logger.info("[POST new Emergency] form: ERROR")
         if self.request.is_ajax():
+            self.logger.info("[POST new Emergency] form: Success AJAX")
+            self.object = form.save()
             data = {
                 'id': self.object.pk,
             }
-            return JsonResponse(data)
+            return JsonResponse(data, status=200)
         else:
+            self.logger.info("[POST new Emergency] form: Success Normal")
             return response
