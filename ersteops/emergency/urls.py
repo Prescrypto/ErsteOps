@@ -1,6 +1,5 @@
 from django.conf.urls import url
 from . import views
-from django.contrib.auth.decorators import login_required
 from emergency.views import (
     EmergencyBlank, EmergencyNew, EmergencyListView,
     EmergencyDetailView, EmergencyDashboardList, EmergencyDerivation,
@@ -12,22 +11,22 @@ from emergency.views import (
 
 urlpatterns = [
     url(r'^$', EmergencyBlank.as_view(), name="emergencyblank"),
-    url(r'^new/$', login_required(EmergencyNew.as_view(), login_url='/'), name="emergencynew"),
-    url(r'^list/$', login_required(EmergencyListView.as_view(), login_url='/'), name="emergencylist"),
-    url(r'^modal/$', login_required(EmergencyClientModal.as_view(), login_url='/'), name="odoomodal"),
-    url(r'^newmodal/$', login_required(EmergencyNewModal.as_view(), login_url='/'), name="newincidentmodal"),
-    url(r'^subscriptor/$', login_required(OdooSubscription.as_view(), login_url='/'), name="subscriptormodal"),
-    url(r'^odooapi/$', login_required(EmergencyClientOdoo.as_view(), login_url='/'), name="emergencyodoo"),
-    url(r'^update/(?P<pk>[0-9]+)/$', login_required(EmergencyUpdate.as_view(), login_url='/'), name="emergencyupdate"),
-    url(r'^dashboard/$', login_required(EmergencyDashboardList.as_view(), login_url='/'), name="emergencydashboard"),
-    url(r'^derivation/$', login_required(EmergencyDerivation.as_view(), login_url='/'), name="emergencyderivation"),
-    url(r'^(?P<pk>[0-9]+)/$', login_required(EmergencyDetailView.as_view(), login_url='/'), name='emergencydetail'),
-    url(r'^activate/(?P<patient_id>\d+)/$', login_required(EmergencyActivate.as_view(), login_url='/'), name='emergencyactivate'),
-    url(r'^end/(?P<patient_id>\d+)/$', login_required(EmergencyEnd.as_view(), login_url='/'), name='emergencend'),
-    url(r'^getpatient/(?P<patient_id>\d+)/$', login_required(EmergencyGetPatient.as_view(), login_url='/'), name='emergencypatient'),
+    url(r'^new/$', EmergencyNew.as_view(), name="emergencynew"),
+    url(r'^list/$', EmergencyListView.as_view(), name="emergencylist"),
+    url(r'^modal/$', EmergencyClientModal.as_view(), name="odoomodal"),
+    url(r'^newmodal/$', EmergencyNewModal.as_view(), name="newincidentmodal"),
+    url(r'^subscriptor/$', OdooSubscription.as_view(), name="subscriptormodal"),
+    url(r'^odooapi/$', EmergencyClientOdoo.as_view(), name="emergencyodoo"),
+    url(r'^update/(?P<pk>[0-9]+)/$', EmergencyUpdate.as_view(), name="emergencyupdate"),
+    url(r'^dashboard/$', EmergencyDashboardList.as_view(), name="emergencydashboard"),
+    url(r'^derivation/$', EmergencyDerivation.as_view(), name="emergencyderivation"),
+    url(r'^(?P<pk>[0-9]+)/$', EmergencyDetailView.as_view(), name='emergencydetail'),
+    url(r'^activate/(?P<patient_id>\d+)/$', EmergencyActivate.as_view(), name='emergencyactivate'),
+    url(r'^end/(?P<patient_id>\d+)/$', EmergencyEnd.as_view(), name='emergencend'),
+    url(r'^getpatient/(?P<patient_id>\d+)/$', EmergencyGetPatient.as_view(), name='emergencypatient'),
     # Ajax Views for emergencies!
-    url(r'^ajax/list/$', login_required(EmergencyListJSONView.as_view(), login_url='/'), name="emergency_json_list"),
-    url(r'^ajax/end/(?P<patient_id>\d+)/$', login_required(EmergencyJsonEnd.as_view(), login_url='/'), name="emergency_json_end"),
-    url(r'^ajax/detail/(?P<pk>[0-9]+)/$', login_required(EmergencyJSONView.as_view(), login_url='/'), name="emergency_json_detail"),
-    url(r'^ajax/patient/(?P<patient_id>[0-9]+)/$', login_required(EmergencyJSONGetPatient.as_view(), login_url='/'), name="emergency_patient_json"),
+    url(r'^ajax/list/$', EmergencyListJSONView.as_view(), name="emergency_json_list"),
+    url(r'^ajax/end/(?P<patient_id>\d+)/$', EmergencyJsonEnd.as_view(), name="emergency_json_end"),
+    url(r'^ajax/detail/(?P<pk>[0-9]+)/$', EmergencyJSONView.as_view(), name="emergency_json_detail"),
+    url(r'^ajax/patient/(?P<patient_id>[0-9]+)/$', EmergencyJSONGetPatient.as_view(), name="emergency_patient_json"),
 ]
