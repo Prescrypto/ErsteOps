@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'emergency.apps.EmergencyConfig',
     'vehicle.apps.VehicleConfig',
     'notifications.apps.NotificationConfig',
+    'preventconcurrentlogins',
     'channels',
     'home.apps.HomeConfig',
     'webpack_loader',
@@ -79,6 +80,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'preventconcurrentlogins.middleware.PreventConcurrentLoginsMiddleware',
 ]
 
 ROOT_URLCONF = 'ersteops.urls'
