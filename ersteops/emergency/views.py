@@ -9,6 +9,7 @@ from requests.auth import HTTPBasicAuth
 from django.shortcuts import render,redirect
 from django.views.generic import View, CreateView, ListView, DetailView, UpdateView
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.utils import timezone
 from django.core import serializers
@@ -36,7 +37,7 @@ class EmergencyBlank(View):
         return render(request, self.template_name,{"form": form})
 
 
-@method_decorator(login_required, name='dispatch')
+@method_decorator(csrf_exempt, name='dispatch')
 class EmergencyNew(CreateView):
     template_name = "emergency/new.html"
     model = Emergency
