@@ -18,7 +18,7 @@ from django.http import HttpResponse
 from django.db.models import Q
 # Our models
 from core.utils import OdooApi
-from .utils import JSONResponseMixin
+from .utils import JSONResponseMixin, AjaxableResponseMixin
 from .forms import OdooClientForm, OdooClientAuto
 from .models import Emergency,AttentionDerivation
 from vehicle.models import Unit
@@ -38,7 +38,7 @@ class EmergencyBlank(View):
 
 
 @method_decorator(csrf_exempt, name='dispatch')
-class EmergencyNew(CreateView):
+class EmergencyNew(AjaxableResponseMixin, CreateView):
     template_name = "emergency/new.html"
     model = Emergency
     fields = EMERGENCY_LIST_FIELDS
