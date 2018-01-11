@@ -103,16 +103,16 @@ const store = new Vuex.Store({
     },
 
     // New Incident POST emergency/new/
-    [REQUEST_SUGGEST_START](state) {
+    [REQUEST_NEW_INCIDENT_START](state) {
       state.error = false;
       state.loading = true;
       state.post_data = state.patient + state.address
     },
-    [REQUEST_SUGGEST_SUCCESS](state, data) {
+    [REQUEST_NEW_INCIDENT_SUCCESS](state, data) {
       state.suggestions = data;
       state.loading = false;
     },
-    [REQUEST_SUGGEST_ERROR](state, err) {
+    [REQUEST_NEW_INCIDENT_ERROR](state, err) {
       state.error = err;
       state.loading = false;
     },
