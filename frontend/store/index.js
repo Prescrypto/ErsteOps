@@ -16,6 +16,10 @@ import {
   SELECT_ADDRESS,
   MODAL_CHANGE_TAB,
   MODAL_RESET,
+  REQUEST_NEW_INCIDENT_START,
+  REQUEST_NEW_INCIDENT_SUCCESS,
+  REQUEST_NEW_INCIDENT_ERROR,
+
 } from './constants';
 
 Vue.use(Vuex);
@@ -29,6 +33,7 @@ const store = new Vuex.Store({
     patient: {},
     address: {},
     emergency: {},
+    post_data : {}
   },
 
   actions: {
@@ -40,6 +45,15 @@ const store = new Vuex.Store({
           commit(REQUEST_SUGGEST_SUCCESS, response.data);
         })
         .catch(err => commit(REQUEST_SUGGEST_ERROR, err));
+    },
+    new_incident({ commit }, term) {
+      commit(REQUEST_NEW_INCIDENT_START);
+      http
+        .post('/emergency/new/', { params: { term } })
+        .then(response => {
+          commit(REQUEST_NEW_INCIDENT_SUCCESS, response.data);
+        })
+        .catch(err => commit(REQUEST_NEW_INCIDENT_ERROR, err));
     },
     patient({ commit }, target) {
       commit(REQUEST_PATIENT_START);
@@ -78,6 +92,21 @@ const store = new Vuex.Store({
       state.loading = true;
       state.patient = {};
       state.address = {};
+    },
+    [REQUEST_SUGGEST_SUCCESS](state, data) {
+      state.suggestions = data;
+      state.loading = false;
+    },
+    [REQUEST_SUGGEST_ERROR](state, err) {
+      state.error = err;
+      state.loading = false;
+    },
+
+    // New Incident POST emergency/new/
+    [REQUEST_SUGGEST_START](state) {
+      state.error = false;
+      state.loading = true;
+      state.post_data = state.patient + state.address
     },
     [REQUEST_SUGGEST_SUCCESS](state, data) {
       state.suggestions = data;
