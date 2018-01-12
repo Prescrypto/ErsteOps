@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
 import VModal from 'vue-js-modal';
 import VeeValidate from 'vee-validate';
 import Search from 'components/Search';
@@ -24,13 +24,13 @@ window.Erste.modal = new Vue({
         { name: 'patient', label: 'Paciente' },
         { name: 'address', label: 'Dirección' },
         { name: 'units', label: 'Unidad' },
-        // temporally lock
-        //{ name: 'timers', label: 'Timers' },
+        // temporarily lock
+        // { name: 'timers', label: 'Timers' },
       ],
     };
   },
   computed: {
-    ...mapState(['loading']),
+    ...mapState(['loading', 'emergency']),
     ...mapState({
       active: state => state.modal.active,
       search: state => state.modal.search,
@@ -58,5 +58,10 @@ window.Erste.modal = new Vue({
       const { name } = e.currentTarget.dataset;
       this.changeTab(name);
     },
+    submit(e) {
+      e.preventDefault();
+      this.newIncident(this.emergency);
+    },
+    ...mapActions(['newIncident']),
   },
 });

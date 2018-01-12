@@ -15,12 +15,13 @@ export default {
     };
   },
   computed: {
-    ...mapState(['loading', 'patient', 'address']),
+    ...mapState(['loading', 'emergency']),
+    ...mapState({ address: state => state.modal.address }),
   },
   methods: {
     choose() {
-      const address = find(a => a.id_address_id === this.current)(
-        this.patient.addresses
+      const address = find(a => a.address_id === this.current)(
+        this.emergency.addresses
       );
       this.selectAddress(address);
     },
