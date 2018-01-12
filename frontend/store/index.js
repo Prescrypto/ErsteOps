@@ -48,8 +48,9 @@ const store = new Vuex.Store({
     },
     newIncident({ commit }, data) {
       commit(REQUEST_NEW_INCIDENT_START);
+      object = {data}[0];
       http
-        .post('/emergency/new/', { data })
+        .post('/emergency/new/', object)
         .then(response => {
           commit(REQUEST_NEW_INCIDENT_SUCCESS, response.data);
         })

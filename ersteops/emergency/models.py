@@ -194,7 +194,7 @@ class Emergency(models.Model):
         Group('notifications').send(
                 {"text": json.dumps(emergJson)}
             )
-    
+
     # Returns a verbose name - adjusted for Python3
     def __str__(self):
         return "{}, {}, {}".format(unicodedata.normalize('NFKD', self.odoo_client), unicodedata.normalize('NFKD', self.patient_name), self.created_at)
