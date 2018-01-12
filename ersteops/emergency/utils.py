@@ -1,4 +1,5 @@
 import logging
+import json
 from django.http import JsonResponse
 from django.core import serializers
 from django.http import HttpResponse
@@ -36,6 +37,11 @@ class AjaxableResponseMixin(object):
     Must be used with an object-based FormView (e.g. CreateView)
     """
     logger = logging.getLogger('django_info')
+
+    def post(self, request, *args, **kwargs):
+        ''' Handles POST requests '''
+        self.object = None
+        return super(AjaxableResponseMixin, self).post(request, *args, **kwargs)
 
     def form_invalid(self, form):
         response = super(AjaxableResponseMixin, self).form_invalid(form)
