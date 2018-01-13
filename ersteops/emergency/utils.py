@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.core import serializers
 from django.http import HttpResponse
 from .models import Emergency
+from .forms import EmergencyForm
 from .list_fields import EMERGENCY_LIST_FIELDS
 
 
@@ -38,14 +39,24 @@ class AjaxableResponseMixin(object):
     """
     logger = logging.getLogger('django_info')
 
-    def post(self, request, *args, **kwargs):
-        ''' Handles POST requests '''
-        self.object = None
-        return super(AjaxableResponseMixin, self).post(request, *args, **kwargs)
-
     def form_invalid(self, form):
         response = super(AjaxableResponseMixin, self).form_invalid(form)
         if self.request.is_ajax():
+            data = json.loads(self.request.body.decode('utf-8'))
+            if data:
+                self.logger.info("Data: {}".format(data))
+                emergency_form = EmergencyForm(data)
+                if emergency_form.is_valid():
+                    self.object = emergency_form.save()
+                    data_object = {
+                        'id': self.object.pk,
+                    }
+                    self.logger.info("POST new Emergency] AJAX FORM SUCCESS")
+                    return JsonResponse(data_object, status=200)
+                else:
+                    self.logger.info("[POST new Emergency] AJAX FORM ERRORS:{}".format(emergency_form.errors))
+                    return JsonResponse(emergency_form.errors, status=400)
+
             self.logger.info("[POST new Emergency] form: Error AJAX")
             return JsonResponse(form.errors, status=400)
         else:
