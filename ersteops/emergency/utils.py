@@ -1,5 +1,6 @@
 import logging
 import json
+from django.utils import timezone
 from django.http import JsonResponse
 from django.core import serializers
 from django.http import HttpResponse
@@ -46,6 +47,7 @@ class AjaxableResponseMixin(object):
             if data:
                 self.logger.info("Data: {}".format(data))
                 emergency_form = EmergencyForm(data)
+                emergency_form.data.update({'start_time': timezone.now()})
                 if emergency_form.is_valid():
                     self.object = emergency_form.save()
                     data_object = {
