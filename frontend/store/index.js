@@ -3,6 +3,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import http from 'utils/http';
+import { removePrefix } from 'utils/normalize';
 import {
   REQUEST_SUGGEST_START,
   REQUEST_SUGGEST_SUCCESS,
@@ -16,6 +17,9 @@ import {
   SELECT_ADDRESS,
   MODAL_CHANGE_TAB,
   MODAL_RESET,
+  REQUEST_NEW_INCIDENT_START,
+  REQUEST_NEW_INCIDENT_SUCCESS,
+  REQUEST_NEW_INCIDENT_ERROR,
 } from './constants';
 
 Vue.use(Vuex);
@@ -24,10 +28,11 @@ const store = new Vuex.Store({
   state: {
     error: false,
     loading: false,
-    modal: { active: 'search' },
+    modal: {
+      active: 'search',
+      address: {},
+    },
     suggestions: [],
-    patient: {},
-    address: {},
     emergency: {},
   },
 
@@ -41,14 +46,26 @@ const store = new Vuex.Store({
         })
         .catch(err => commit(REQUEST_SUGGEST_ERROR, err));
     },
+    newIncident({ commit }, data) {
+      commit(REQUEST_NEW_INCIDENT_START);
+      http
+        .post('/emergency/new/', data)
+        .then(response => {
+          commit(REQUEST_NEW_INCIDENT_SUCCESS, response.data);
+        })
+        .catch(err => commit(REQUEST_NEW_INCIDENT_ERROR, err));
+    },
     patient({ commit }, target) {
       commit(REQUEST_PATIENT_START);
       http
         .get(`/emergency/ajax/patient/${target}/`)
         .then(response => {
           const { data } = response;
-          const addresses = JSON.parse(data.addresses);
-          commit(REQUEST_PATIENT_SUCCESS, { ...data, addresses });
+          const addresses = JSON.parse(data.addresses).map(address =>
+            removePrefix(address, /id_/)
+          );
+          const normalized = removePrefix({ ...data, addresses }, /id_/);
+          commit(REQUEST_PATIENT_SUCCESS, normalized);
         })
         .catch(err => commit(REQUEST_PATIENT_ERROR, err));
     },
@@ -76,8 +93,7 @@ const store = new Vuex.Store({
     [REQUEST_SUGGEST_START](state) {
       state.error = false;
       state.loading = true;
-      state.patient = {};
-      state.address = {};
+      state.emergency = {};
     },
     [REQUEST_SUGGEST_SUCCESS](state, data) {
       state.suggestions = data;
@@ -88,15 +104,28 @@ const store = new Vuex.Store({
       state.loading = false;
     },
 
+    // New Incident
+    [REQUEST_NEW_INCIDENT_START](state) {
+      state.error = false;
+      state.loading = true;
+    },
+    [REQUEST_NEW_INCIDENT_SUCCESS](state) {
+      state.emergency = {};
+      state.loading = false;
+    },
+    [REQUEST_NEW_INCIDENT_ERROR](state, err) {
+      state.error = err;
+      state.loading = false;
+    },
+
     // Patient
     [REQUEST_PATIENT_START](state) {
       state.error = false;
       state.loading = true;
-      state.patient = {};
-      state.address = {};
+      state.modal.address = {};
     },
     [REQUEST_PATIENT_SUCCESS](state, data) {
-      state.patient = data;
+      state.emergency = data;
       state.loading = false;
     },
     [REQUEST_PATIENT_ERROR](state, err) {
@@ -110,7 +139,6 @@ const store = new Vuex.Store({
       state.loading = true;
     },
     [REQUEST_EMERGENCY_SUCCESS](state, data) {
-      // eslint-disable-line jshint ignore:line
       state.emergency = data;
       state.loading = false;
     },
@@ -121,7 +149,7 @@ const store = new Vuex.Store({
 
     // Select patient address
     [SELECT_ADDRESS](state, data) {
-      state.address = data;
+      state.modal.address = data;
     },
 
     // Modal
@@ -131,8 +159,7 @@ const store = new Vuex.Store({
 
     [MODAL_RESET](state) {
       state.suggestions = [];
-      state.patient = {};
-      state.address = {};
+      state.modal.address = {};
       state.emergency = {};
       state.modal.active = 'search';
     },

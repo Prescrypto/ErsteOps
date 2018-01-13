@@ -8,39 +8,85 @@
 
 <form v-else>
   <div class="row">
-    <div class="col-6">
+    <div class="col-4">
       <div class="c-field">
-        <label class="c-field__label" for="id_odoo_client">
-          ID del Cliente
+        <label class="c-field__label" for="id_patient_name">
+          Nombre del Paciente
         </label>
         <input
-          v-model="source.id_odoo_client || source.odoo_client"
-          class="c-input"
+          v-model="source.patient_name"
           type="text"
-          name="odoo_client"
-          id="id_odoo_client"
-          maxlength="50"
-          readonly
-          required
+          name="patient_name"
+          required=""
+          class="c-input"
+          id="id_patient_name"
+          maxlength="255"
         />
       </div>
 
       <br />
       <div class="c-field">
-        <label class="c-field__label" for="id_subscription_type">
-          Subscripción
+        <label class="c-field__label" for="id_patient_gender">
+          Genero
+        </label>
+        <select
+          v-model="source.patient_gender"
+          name="patient_gender"
+          id="id_patient_gender"
+          class="c-input"
+        >
+          <option value="" selected=""></option>
+          <option value="Masculino">Masculino</option>
+          <option value="Femenino">Femenino</option>
+        </select>
+      </div>
+
+      <br />
+      <div class="c-field">
+        <label class="c-field__label" for="id_patient_age">
+          Edad (años)
         </label>
         <input
-          v-model="subscription"
+          v-model="source.patient_age"
+          type="number"
+          name="patient_age"
+          value="0"
+          id="id_patient_age"
           class="c-input"
+        />
+      </div>
+
+      <br />
+      <div class="c-field">
+        <label class="c-field__label" for="id_patient_allergies">
+          Alergias
+        </label>
+        <input
+          v-model="source.patient_allergies"
           type="text"
-          name="subscription_type"
-          id="id_subscription_type"
+          name="patient_allergies"
+          id="id_patient_allergies"
+          class="c-input"
           maxlength="100"
         />
       </div>
 
       <br />
+      <div class="c-field">
+        <label class="c-field__label" for="id_patient_illnesses">
+          Enfermedades diagnosticadas
+        </label>
+        <input
+          v-model="source.patient_illnesses"
+          type="text"
+          name="patient_illnesses"
+          id="id_patient_illnesses"
+          class="c-input"
+          maxlength="100"
+        />
+      </div>
+    </div>
+    <div class="col-4">
       <div class="c-field">
         <label class="c-field__label" for="id_service_category">
           Tipo de emergencia
@@ -101,7 +147,7 @@
           Relacion con el paciente
         </label>
         <input
-          v-model="source.id_caller_relation || source.caller_relation"
+          v-model="source.caller_relation"
           type="text"
           name="caller_relation"
           id="id_caller_relation"
@@ -110,14 +156,45 @@
         />
       </div>
     </div>
+    <div class="col-4">
+      <div class="c-field">
+        <label class="c-field__label" for="id_odoo_client">
+          ID del Cliente
+        </label>
+        <input
+          v-model="source.odoo_client"
+          class="c-input"
+          type="text"
+          name="odoo_client"
+          id="id_odoo_client"
+          maxlength="50"
+          readonly
+          required
+        />
+      </div>
 
-    <div class="col-6">
+      <br />
+      <div class="c-field">
+        <label class="c-field__label" for="id_subscription_type">
+          Subscripción
+        </label>
+        <input
+          v-model="subscription"
+          class="c-input"
+          type="text"
+          name="subscription_type"
+          id="id_subscription_type"
+          maxlength="100"
+        />
+      </div>
+
+      <br />
       <div class="c-field">
         <label class="c-field__label" for="id_zone">Zona</label>
         <select
-          v-model="source.id_zone || source.zone"
+          v-model="source.zone"
           name="zone"
-          class="c-input" 
+          class="c-input"
           id="id_zone"
           required
         >
@@ -131,84 +208,6 @@
           <option value="UNICA">UNICA - Fuera de la zona de cobertura</option>
         </select>
       </div>
-
-      <br />
-      <div class="c-field">
-        <label class="c-field__label" for="id_patient_name">
-          Nombre del Paciente
-        </label>
-        <input
-          v-model="source.id_patient_name || source.patient_name"
-          type="text"
-          name="patient_name"
-          required=""
-          class="c-input"
-          id="id_patient_name"
-          maxlength="255"
-        />
-      </div>
-
-      <br />
-      <div class="c-field">
-        <label class="c-field__label" for="id_patient_gender">
-          Genero
-        </label>
-        <select
-          v-model="source.patient_gender"
-          name="patient_gender"
-          id="id_patient_gender"
-          class="c-input"
-        >
-          <option value="" selected=""></option>
-          <option value="Masculino">Masculino</option>
-          <option value="Femenino">Femenino</option>
-        </select>
-      </div>
-
-      <br />
-      <div class="c-field">
-        <label class="c-field__label" for="id_patient_age">
-          Edad (años)
-        </label>
-        <input
-          v-model="source.id_patient_age || source.patient_age"
-          type="number"
-          name="patient_age"
-          value="0"
-          id="id_patient_age" 
-          class="c-input"
-        />
-      </div>
-
-      <br />
-      <div class="c-field">
-        <label class="c-field__label" for="id_patient_allergies">
-          Alergias
-        </label>
-        <input
-          v-model="source.id_patient_allergies || source.patient_allergies"
-          type="text"
-          name="patient_allergies"
-          id="id_patient_allergies"
-          class="c-input" 
-          maxlength="100"
-        />
-      </div>
-
-      <br />
-      <div class="c-field">
-        <label class="c-field__label" for="id_patient_illnesses">
-          Enfermedades diagnosticadas
-        </label>
-        <input
-          v-model="source.id_patient_illnesses || source.patient_illnesses"
-          type="text"
-          name="patient_illnesses"
-          id="id_patient_illnesses"
-          class="c-input" 
-          maxlength="100"
-        />
-      </div>
     </div>
   </div>
 
@@ -219,14 +218,15 @@
         <label class="c-field__label" for="id_main_complaint">
           Sintoma principal
         </label>
-        <input
+        <textarea
           v-model="source.main_complaint"
           type="text"
           name="main_complaint"
           id="id_main_complaint"
-          class="c-input" 
-          maxlength="100"
-        />
+          class="c-input"
+          rows="2"
+          cols="40"
+        ></textarea>
       </div>
 
       <br />
@@ -239,7 +239,7 @@
           name="complaint_descriprion"
           id="id_complaint_descriprion"
           class="c-input"
-          rows="10" 
+          rows="2"
           cols="40"
         ></textarea>
       </div>
@@ -254,7 +254,7 @@
           name="patient_notes"
           id="id_patient_notes"
           class="c-input"
-          rows="10" 
+          rows="2"
           cols="40"
         ></textarea>
       </div>

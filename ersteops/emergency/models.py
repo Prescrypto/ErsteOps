@@ -6,6 +6,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from datetime import datetime, timedelta
 from vehicle import models as models_vehicle
 
+import unicodedata
 import json
 from channels import Group
 from django.dispatch import receiver
@@ -14,9 +15,10 @@ from django.db.models.signals import post_save
 from core.utils import eventDuration
 # Create your models here.
 
-#Emergency incident table
+
 @python_2_unicode_compatible
 class Emergency(models.Model):
+    ''' Emergency incident model '''
     GENDER = (
         ("Masculino","Masculino"),
         ("Femenino","Femenino"),
@@ -110,7 +112,7 @@ class Emergency(models.Model):
     class Meta:
         verbose_name_plural = "Emergency"
         ordering = ['created_at']
-    def __str__(self):  
+    def __str__(self):
         return str(self.id)
     # Emergency Timer
     def emergencyTimer(self):
@@ -159,7 +161,7 @@ class Emergency(models.Model):
             old_instance=False if newEmerg else Emergency.objects.get(pk=self.pk)
         except Emergency.DoesNotExist:
             return
-        
+
         super(Emergency, self).save(**kwargs)
 
         type_notif=""
@@ -187,11 +189,15 @@ class Emergency(models.Model):
         emergDict["type_notif"]=type_notif
         emergDict["type_data"]="Emergency"
         emergJson=json.dumps(emergDict)
-        
+
 
         Group('notifications').send(
                 {"text": json.dumps(emergJson)}
             )
+
+    # Returns a verbose name - adjusted for Python3
+    def __str__(self):
+        return "{}, {}, {}".format(unicodedata.normalize('NFKD', self.odoo_client), unicodedata.normalize('NFKD', self.patient_name), self.created_at)
 
 
 def emergency_dictionary(instance):
@@ -214,6 +220,7 @@ def emergency_dictionary(instance):
         units.append(unitDict)
     emergDict={
         "pk":instance.pk,
+        "id":instance.pk,
         "odoo_client":instance.odoo_client,
         "grade_type":str(instance.grade_type),
         "zone":str(instance.zone),
@@ -261,7 +268,7 @@ def emergency_dictionary(instance):
     return emergDict
 
 
-    
+
 
 
 # Emergency attention grade G1,G2,G3, etc.(Triage)
@@ -275,7 +282,7 @@ class AttentionKind(models.Model):
     class Meta:
         verbose_name_plural = "Kind of Attention"
         ordering = ['created_at']
-    def __str__(self):  
+    def __str__(self):
         return self.grade_type + ' - ' +self.name
 
 # Emergency attention zone
@@ -288,7 +295,7 @@ class AttentionZone(models.Model):
     class Meta:
         verbose_name_plural = "zone"
         ordering = ['created_at']
-    def __str__(self):  
+    def __str__(self):
         return self.zone_id + ' - ' +self.name
 
 # Hospital model
@@ -302,7 +309,7 @@ class AttentionHospital(models.Model):
     class Meta:
         verbose_name_plural = "Hospital"
         ordering = ['name']
-    def __str__(self):  
+    def __str__(self):
         return self.name
 
 # Hospital
@@ -326,12 +333,12 @@ class AttentionDerivation(models.Model):
     class Meta:
         verbose_name_plural = "Derivacion"
         ordering = ['created_at']
-    def __str__(self):  
+    def __str__(self):
         return self.motive
 
     def save(self, **kwargs):
         newDerivation=True if self.pk is None else False
-        
+
         super(AttentionDerivation, self).save(**kwargs)
 
         type_notif=""
@@ -345,7 +352,7 @@ class AttentionDerivation(models.Model):
         derivDict["type_data"]="Derivation"
 
         derivJson=json.dumps(derivDict)
-        
+
         Group('notifications').send(
                 {"text": json.dumps(derivJson)}
             )
@@ -375,7 +382,7 @@ class ServiceCategory(models.Model):
     last_modified = models.DateTimeField("Ultima modificacion", auto_now=True, editable=False)
     class Meta:
         ordering = ['name']
-    def __str__(self):  
+    def __str__(self):
         return self.name
 
 #class EmergencyType(models.Model):
