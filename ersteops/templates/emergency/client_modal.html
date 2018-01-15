@@ -26,13 +26,19 @@
           :aria-controls="`nav-${name}`">
             <% label %>
         </a>
-        <button
-          @click="submit"
-          v-if="active !== 'search'"
-          class="c-btn c-btn--success"
-          style="float:right; position:relative; bottom:7px;">
-            Guardar Emergencia
-        </button>
+        <div v-if="active !== 'search'" class="modal-buttons">
+          <button
+            @click="toggleActive"
+            :class="{'c-btn': true, 'c-btn--success': !emergency.is_active, 'c-btn--danger': emergency.is_active}">
+              <span v-if="emergency.is_active">Desactivar</span>
+              <span v-else>Activar</span>
+          </button>
+          <button
+            @click="submit"
+            class="c-btn c-btn--info">
+              Guardar Emergencia
+          </button>
+        </div>
       </nav>
 
       <div class="c-tabs__content tab-content" id="nav-tabContent">

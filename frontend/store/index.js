@@ -20,6 +20,7 @@ import {
   REQUEST_NEW_INCIDENT_START,
   REQUEST_NEW_INCIDENT_SUCCESS,
   REQUEST_NEW_INCIDENT_ERROR,
+  EMERGENCY_TOGGLE_ACTIVE,
 } from './constants';
 
 Vue.use(Vuex);
@@ -33,7 +34,9 @@ const store = new Vuex.Store({
       address: {},
     },
     suggestions: [],
-    emergency: {},
+    emergency: {
+      active: false,
+    },
   },
 
   actions: {
@@ -162,6 +165,11 @@ const store = new Vuex.Store({
       state.modal.address = {};
       state.emergency = {};
       state.modal.active = 'search';
+    },
+
+    // Emergency
+    [EMERGENCY_TOGGLE_ACTIVE](state) {
+      state.emergency.is_active = !state.emergency.is_active;
     },
   },
 });

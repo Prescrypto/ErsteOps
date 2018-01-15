@@ -2,3 +2,14 @@
 .c-input {
   height: 40px;
 }
+
+// modal buttons
+.modal-buttons {
+  float: right;
+  position: relative;
+  bottom: 7px;
+}
+
+.modal-buttons:first-child > button {
+  margin-right: 10px;
+}

@@ -7,7 +7,11 @@ import Search from 'components/Search';
 import Patient from 'components/Patient';
 import Addresses from 'components/Addresses';
 import store from 'store';
-import { MODAL_CHANGE_TAB, MODAL_RESET } from 'store/constants';
+import {
+  MODAL_CHANGE_TAB,
+  MODAL_RESET,
+  EMERGENCY_TOGGLE_ACTIVE,
+} from 'store/constants';
 
 // Instantiate Vue mixins
 Vue.use(VModal);
@@ -40,6 +44,7 @@ window.Erste.modal = new Vue({
   store,
   methods: {
     ...mapMutations({
+      toggleEmergency: EMERGENCY_TOGGLE_ACTIVE,
       changeTab: MODAL_CHANGE_TAB,
       reset: MODAL_RESET,
     }),
@@ -58,6 +63,10 @@ window.Erste.modal = new Vue({
     toggle(e) {
       const { name } = e.currentTarget.dataset;
       this.changeTab(name);
+    },
+    toggleActive(e) {
+      e.preventDefault();
+      this.toggleEmergency();
     },
     submit(e) {
       e.preventDefault();
