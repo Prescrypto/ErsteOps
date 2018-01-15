@@ -1,3 +1,4 @@
+import 'styles/global.scss';
 import Vue from 'vue';
 import { mapState, mapMutations, mapActions } from 'vuex';
 import VModal from 'vue-js-modal';

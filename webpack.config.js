@@ -26,17 +26,23 @@ module.exports = {
 
   module: {
     rules: [
+      // javascript
       {
         test: /\.js?$/,
         exclude: [/node_modules/, /ersteops/],
         loader: 'babel-loader',
       },
+      // vue styles
       {
         test: /\.css$/,
         use: ['vue-style-loader', 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.scss$/,
+        exclude: [
+          /node_modules/,
+          path.resolve(__dirname, './frontend/styles/'),
+        ],
         use: [
           'vue-style-loader',
           'css-loader',
@@ -49,6 +55,13 @@ module.exports = {
         loader: 'vue-loader',
         options: {},
       },
+      // global styles
+      {
+        test: /\.scss$/,
+        include: [path.resolve(__dirname, './frontend/styles/')],
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
+      },
+      // images
       {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
@@ -67,6 +80,7 @@ module.exports = {
       entry: path.resolve(__dirname, './frontend/entry/'),
       components: path.resolve(__dirname, './frontend/components/'),
       store: path.resolve(__dirname, './frontend/store/'),
+      styles: path.resolve(__dirname, './frontend/styles/'),
     },
     extensions: ['*', '.js', '.vue', '.json'],
   },
