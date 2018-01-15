@@ -35,7 +35,7 @@ const store = new Vuex.Store({
     },
     suggestions: [],
     emergency: {
-      active: false,
+      is_active: false,
     },
   },
 

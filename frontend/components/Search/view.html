@@ -1,16 +1,18 @@
 <div class="container completion_container">
   <!-- search form -->
-  <form @submit.prevent="submit" class="row">
+  <form @submit.prevent="submit('search')" class="row">
     <label class="col" for="term">
       <input
         type="text"
         name="term"
+        data-vv-scope="search"
+        data-vv-name="term"
         autocomplete="off"
         v-model="query"
         v-validate="'required'"
         :class="{
           'c-input': true,
-          'c-input--danger': errors.has('term')
+          'c-input--danger': errors.has('search.term')
         }"
         placeholder="Alsea SA de CV">
     </label>
@@ -24,8 +26,8 @@
   </form>
 
   <!-- validation errors -->
-  <small v-show="errors.has('term')" class="c-field__message u-color-danger">
-    <i class="fa fa-times-circle"></i>{{ errors.first('term') }}
+  <small v-show="errors.has('search.term')" class="c-field__message u-color-danger">
+    <i class="fa fa-times-circle"></i>{{ errors.first('search.term') }}
   </small>
 
   <!-- request loading indicator -->

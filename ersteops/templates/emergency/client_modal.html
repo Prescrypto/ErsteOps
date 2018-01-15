@@ -10,8 +10,7 @@
   @opened="open"
   @closed="destroy">
 
-  <form action="/emergency/new/" method="post">{% csrf_token %}
-
+  <div>
     <div class="c-tabs">
       <nav class="c-tabs__list nav nav-tabs" id="modal-nav" role="tablist">
         <a
@@ -44,9 +43,7 @@
       <div class="c-tabs__content tab-content" id="nav-tabContent">
         <!-- Search TAB -->
         <div class="c-tabs__pane active" id="nav-search" role="tabpanel" aria-labelledby="nav-search-tab">
-          <form id="searchpatient" action="/emergency/getpatient/" method="post">
-            <search />
-          </form>
+          <search />
         </div><!-- End Search TAB -->
 
         <!-- Patient TAB -->
@@ -86,66 +83,7 @@
             </tbody>
           </table>
         </div><!-- End Unit TAB -->
-
-        <!-- COMMENT THIS SECTION TEMPORALLY
-        <div class="c-tabs__pane" id="nav-timers" role="tabpanel" aria-labelledby="nav-timers-tab">
-          Tiempos
-          <table>
-            <tbody>
-              <tr>
-                <td><label for="id_start_time">Inicio toma de datos:</label></td>
-                <td><input type="text" name="start_time" value="2017-12-29 15:31:02" class="c-input" id="id_start_time" required=""><input type="hidden" name="initial-start_time" value="2017-12-29 15:31:02" id="initial-id_start_time"></td>
-                </tr>
-              <tr>
-                <td><label for="id_end_time">Fin toma de datos:</label></td>
-                <td><input type="text" name="end_time" value="2017-12-29 15:31:02" class="c-input" id="id_end_time"><input type="hidden" name="initial-end_time" value="2017-12-29 15:31:02" id="initial-id_end_time"></td>
-              </tr>
-              <tr>
-                <td><label for="id_unit_assigned_time">Asignacion de unidad:</label></td>
-                <td><input type="text" name="unit_assigned_time" value="2017-12-29 15:31:02" class="c-input" id="id_unit_assigned_time"><input type="hidden" name="initial-unit_assigned_time" value="2017-12-29 15:31:02" id="initial-id_unit_assigned_time"></td>
-              </tr>
-              <tr>
-                <td><label for="id_unit_dispatched_time">Despacho de unidad:</label></td>
-                <td><input type="text" name="unit_dispatched_time" value="2017-12-29 15:31:02" class="c-input" id="id_unit_dispatched_time"><input type="hidden" name="initial-unit_dispatched_time" value="2017-12-29 15:31:02" id="initial-id_unit_dispatched_time"></td>
-                </tr>
-              <tr>
-                <td><label for="id_arrival_time">Arrivo de unidad:</label></td>
-                <td><input type="text" name="arrival_time" value="2017-12-29 15:31:02" class="c-input" id="id_arrival_time"><input type="hidden" name="initial-arrival_time" value="2017-12-29 15:31:02" id="initial-id_arrival_time"></td>
-              </tr>
-              <tr>
-                <td><label for="id_attention_time">Inicio de atencion:</label></td>
-                <td><input type="text" name="attention_time" value="2017-12-29 15:31:02" class="c-input" id="id_attention_time"><input type="hidden" name="initial-attention_time" value="2017-12-29 15:31:02" id="initial-id_attention_time"></td>
-              </tr>
-              <tr>
-                <td><label for="id_derivation_time">Inicio de derivacion:</label></td>
-                <td><input type="text" name="derivation_time" value="2017-12-29 15:31:02" class="c-input" id="id_derivation_time"><input type="hidden" name="initial-derivation_time" value="2017-12-29 15:31:02" id="initial-id_derivation_time"></td>
-              </tr>
-              <tr>
-                <td><label for="id_hospital_arrival">Llegada hopital:</label></td>
-                <td><input type="text" name="hospital_arrival" value="2017-12-29 15:31:02" class="c-input" id="id_hospital_arrival"><input type="hidden" name="initial-hospital_arrival" value="2017-12-29 15:31:02" id="initial-id_hospital_arrival"></td>
-              </tr>
-              <tr>
-                <td><label for="id_patient_arrival">Paciente atencion hopital:</label></td>
-                <td><input type="text" name="patient_arrival" value="2017-12-29 15:31:02" class="c-input" id="id_patient_arrival"><input type="hidden" name="initial-patient_arrival" value="2017-12-29 15:31:02" id="initial-id_patient_arrival"></td>
-              </tr>
-              <tr>
-                <td><label for="id_final_emergency_time">Fin emergencia:</label></td>
-                <td><input type="text" name="final_emergency_time" value="2017-12-29 15:31:02" class="c-input" id="id_final_emergency_time"><input type="hidden" name="initial-final_emergency_time" value="2017-12-29 15:31:02" id="initial-id_final_emergency_time"></td>
-              </tr>
-              <tr>
-                <td><label for="id_is_active">Activa:</label></td>
-                <td><select name="is_active" class="c-input" id="id_is_active">
-                      <option value="1" selected="">Unknown</option>
-                      <option value="2">Yes</option>
-                      <option value="3">No</option>
-                    </select></td>
-              </tr>
-              </tbody>
-            </table>
-          </form>
-        </div>  <!\-\- End Timer TAB \-\->
-              END COMMENT -->
       </div>
     </div>
-  </form>
+  </div>
 </modal>

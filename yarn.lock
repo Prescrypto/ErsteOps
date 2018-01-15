@@ -5553,9 +5553,9 @@ validate-npm-package-name@^3.0.0:
   dependencies:
     builtins "^1.0.3"
 
-vee-validate@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/vee-validate/-/vee-validate-2.0.0.tgz#754ac35f33e7f2ea416c8060c395c3a6683503c3"
+vee-validate@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/vee-validate/-/vee-validate-2.0.3.tgz#f17fa3d7d53a5344a0e794938346927abb252ef7"
 
 vendors@^1.0.0:
   version "1.0.1"

@@ -18,7 +18,7 @@ export default {
 
   computed: {
     invalid() {
-      return this.fields.term.invalid;
+      return (((this.fields || {}).$search || {}).term || {}).invalid;
     },
     ...mapState(['loading', 'suggestions']),
     ...mapGetters(['hasSuggestions']),
@@ -27,8 +27,8 @@ export default {
   methods: {
     // on submit, disable the default <form> submit, indicate the form is
     // dirty, and run the search action with the input value
-    submit() {
-      this.$validator.validateAll().then(valid => {
+    submit(scope) {
+      this.$validator.validateAll(scope).then(valid => {
         if (valid) {
           this.pristine = false;
           this.search(this.query);
