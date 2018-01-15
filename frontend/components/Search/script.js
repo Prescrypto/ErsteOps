@@ -1,5 +1,6 @@
-import { mapState, mapActions, mapGetters } from 'vuex';
+import { mapState, mapActions, mapGetters, mapMutations } from 'vuex';
 import Loader from 'vue-spinner/src/ScaleLoader.vue';
+import { MODAL_CHANGE_TAB } from 'store/constants';
 
 export default {
   name: 'search',
@@ -37,10 +38,12 @@ export default {
 
     populate(target) {
       this.patient(target);
+      this.changeTab('patient');
       window.$(`#nav-patient-tab`).tab('show');
     },
-
-    // maps the search action from the store to the component
+    ...mapMutations({
+      changeTab: MODAL_CHANGE_TAB,
+    }),
     ...mapActions(['search', 'patient']),
   },
 };

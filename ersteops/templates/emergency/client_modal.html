@@ -7,7 +7,7 @@
   scrollable
   width="75%"
   height="auto"
-  @opened="tab"
+  @opened="open"
   @closed="destroy">
 
   <form action="/emergency/new/" method="post">{% csrf_token %}

@@ -43,7 +43,7 @@ window.Erste.modal = new Vue({
       changeTab: MODAL_CHANGE_TAB,
       reset: MODAL_RESET,
     }),
-    tab() {
+    open() {
       window.$(`#nav-${this.active}-tab`).tab('show');
     },
     destroy() {
