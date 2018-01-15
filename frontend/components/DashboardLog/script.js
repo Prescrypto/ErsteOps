@@ -2,6 +2,7 @@ import 'filters/time-since';
 import ReconnectingWebSocket from 'reconnecting-websocket';
 import { mapState, mapActions, mapMutations } from 'vuex';
 import { ws } from 'utils/url';
+import http from 'utils/http';
 import { MODAL_CHANGE_TAB } from 'store/constants';
 
 // Connect to WebSocket
@@ -47,6 +48,13 @@ export default {
       this.emergency(id);
       this.changeTab('patient');
       window.Erste.modal.show();
+    },
+    // stops the timer
+    stop(e, id) {
+      // prevet modal from opening
+      e.stopPropagation();
+      // stop timer
+      http.get(`/emergency/ajax/end/${id}/`);
     },
     // maps the search action from the store to the component
     ...mapActions(['emergency']),

@@ -465,12 +465,12 @@ class EmergencyJsonEnd(View):
         try:
             emergency = Emergency.objects.get(id=patient_id)
         except:
-            logger.error("[Error EmergencyJsonEnd] Not found emergency with patient id")
+            # logger.error("[Error EmergencyJsonEnd] Not found emergency with patient id")
             return HttpResponse(status=404)
         emergency.is_active = False
         emergency.final_emergency_time = datetime.date.today()
         emergency.save()
-        logger.success("[Success EmergencyJsonEnd] Deactivate emergency with id: {}".format(emergency.id))
+        # logger.success("[Success EmergencyJsonEnd] Deactivate emergency with id: {}".format(emergency.id))
         return HttpResponse(status=200)
 
 

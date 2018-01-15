@@ -44,9 +44,7 @@
         </div>
       </td>
       <td class="c-table__cell u-text-center">
-        <a :href="`/emergency/end/${emergency.id}/`">
-          <span class="fa fa-stop-circle-o"></span>
-        </a>
+        <span @click="e => stop(e, emergency.id)" class="fa fa-stop-circle-o"></span>
       </td>
     </tr><!-- // .table__row -->
   </tbody>
