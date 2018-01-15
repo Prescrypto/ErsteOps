@@ -1,11 +1,8 @@
-import init from 'utils/init';
+import 'filters/time-since';
 import ReconnectingWebSocket from 'reconnecting-websocket';
 import { mapState, mapActions, mapMutations } from 'vuex';
 import { ws } from 'utils/url';
 import { MODAL_CHANGE_TAB } from 'store/constants';
-
-// Initialize Vue globals
-init();
 
 // Connect to WebSocket
 const socket = new ReconnectingWebSocket(`${ws}/notify/emergency/`);
@@ -24,8 +21,15 @@ socket.onmessage = message => {
 
 export default {
   name: 'dashboard-log',
-  // preload with data from backend
-  data: () => store,
+  data: () => ({
+    ...store,
+    now: Date.now(),
+  }),
+  mounted() {
+    setInterval(() => {
+      this.$data.now = Date.now();
+    }, 1000);
+  },
   computed: {
     ...mapState({
       // for hiding the spinner

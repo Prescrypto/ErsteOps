@@ -25,7 +25,7 @@
         <span v-if="!((emergency.unit || {}).all || {}).length">Sin Asignar</span>
       </td>
       <td class="c-table__cell">
-        <span class="u-text-mute">{{ emergency.start_time | datetime }}</span>
+        <span class="u-text-mute">{{ emergency.start_time | time-since(now) }}</span>
       </td>
       <td class="c-table__cell">
         <span v-if="emergency.is_active" class="c-badge c-badge--small c-badge--success">En Camino</span>
