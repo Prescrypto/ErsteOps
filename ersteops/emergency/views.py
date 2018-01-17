@@ -18,7 +18,7 @@ from django.http import HttpResponse
 from django.db.models import Q
 # Our models
 from core.utils import OdooApi
-from .utils import JSONResponseMixin, AjaxableResponseMixin
+from .utils import JSONResponseMixin, AjaxableResponseMixin, UpdateJsonResponseMixin
 from .forms import OdooClientForm, OdooClientAuto
 from .models import Emergency,AttentionDerivation
 from vehicle.models import Unit
@@ -32,6 +32,7 @@ logger = logging.getLogger('django_info')
 @method_decorator(login_required, name='dispatch')
 class EmergencyBlank(View):
     template_name = "emergency/blank.html"
+
     def get(self, request, *args, **kwargs):
         form=''
         return render(request, self.template_name,{"form": form})
@@ -49,6 +50,7 @@ class EmergencyNew(AjaxableResponseMixin, CreateView):
 class EmergencyListView(ListView):
     template_name = "emergency/list.html"
     model = Emergency
+
     def get_context_data(self, **kwargs):
         context = super(EmergencyListView, self).get_context_data(**kwargs)
         context['now'] = timezone.now()
@@ -59,6 +61,7 @@ class EmergencyListView(ListView):
 class EmergencyDetailView(DetailView):
     template_name = "emergency/detail.html"
     model = Emergency
+
     def get_context_data(self, **kwargs):
         context = super(EmergencyDetailView, self).get_context_data(**kwargs)
         context['now'] = timezone.now()
@@ -68,12 +71,14 @@ class EmergencyDetailView(DetailView):
 class EmergencyJSONView(JSONResponseMixin, DetailView):
     ''' Custom Json View for Emergency details '''
     model = Emergency
+
     def render_to_response(self, context, **response_kwargs):
         return self.render_to_json_response(context, **response_kwargs)
 
 
 class EmergencyListJSONView(ListView):
     model = Emergency
+
     def render_to_response(self, context, **response_kwargs):
         return HttpResponse(
             self.get_data(context),
@@ -133,6 +138,13 @@ class EmergencyUpdate(UpdateView):
     model = Emergency
     fields = EMERGENCY_LIST_FIELDS
     success_url = '/emergency/list/'
+
+
+class EmergencyJSONUpdate(UpdateJsonResponseMixin, UpdateView):
+    template_name = "emergency/update.html"
+    model = Emergency
+    fields = EMERGENCY_LIST_FIELDS
+    success_url = 'emergencydashboard'
 
 
 @method_decorator(login_required, name='dispatch')
@@ -444,7 +456,6 @@ class EmergencyActivate(View):
         return redirect('/emergency/list/')
 
 
-@method_decorator(login_required, name='dispatch')
 class EmergencyEnd(View):
     def get(self, request, *args, **kwargs):
         patient_id = kwargs['patient_id']

@@ -6,12 +6,14 @@ from emergency.views import (
     EmergencyUpdate, EmergencyClientOdoo, EmergencyClientModal,
     EmergencyNewModal, EmergencyGetPatient, OdooSubscription,
     EmergencyActivate, EmergencyEnd, EmergencyJSONView,
-    EmergencyJSONGetPatient, EmergencyListJSONView, EmergencyJsonEnd
+    EmergencyJSONGetPatient, EmergencyListJSONView, EmergencyJsonEnd,
+    EmergencyJSONUpdate
 )
 
 urlpatterns = [
     url(r'^$', EmergencyBlank.as_view(), name="emergencyblank"),
     url(r'^new/$', EmergencyNew.as_view(), name="emergencynew"),
+    url(r'^new/(?P<pk>[0-9]+)', EmergencyJSONUpdate.as_view(), name="emergency_json_update"),
     url(r'^list/$', EmergencyListView.as_view(), name="emergencylist"),
     url(r'^modal/$', EmergencyClientModal.as_view(), name="odoomodal"),
     url(r'^newmodal/$', EmergencyNewModal.as_view(), name="newincidentmodal"),
