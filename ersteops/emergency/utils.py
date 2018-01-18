@@ -43,7 +43,7 @@ class UpdateJsonResponseMixin(object):
             if data:
                 self.logger.info("POST Data: {}".format(data))
                 emergency_object = super(UpdateJsonResponseMixin, self).get_object()
-                emergency_form = EmergencyForm(data=data, instance=emergency_object)
+                emergency_form = EmergencyForm(data, instance=emergency_object)
                 # add new field
                 # emergency_form.data.update({'start_time': timezone.now()})
                 if emergency_form.is_valid():

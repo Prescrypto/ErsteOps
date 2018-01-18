@@ -140,6 +140,7 @@ class EmergencyUpdate(UpdateView):
     success_url = '/emergency/list/'
 
 
+@method_decorator(csrf_exempt, name='dispatch')
 class EmergencyJSONUpdate(UpdateJsonResponseMixin, UpdateView):
     template_name = "emergency/update.html"
     model = Emergency
