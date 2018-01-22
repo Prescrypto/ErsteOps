@@ -8,7 +8,13 @@ from .models import (Emergency, AttentionKind, AttentionZone, AttentionHospital,
 	AttentionDerivation, ServiceCategory)
 
 
-admin.site.register(Emergency)
+class EmergencyAdmin(admin.ModelAdmin):
+    ''' Custom Emergency Admin Panel '''
+    list_display = ("id", "odoo_client", "grade_type", "zone", "created_at", "is_active", )
+    list_filter = ("id", "odoo_client", "grade_type", "zone", "is_active", )
+
+
+admin.site.register(Emergency, EmergencyAdmin)
 admin.site.register(AttentionKind)
 admin.site.register(AttentionZone)
 admin.site.register(AttentionHospital)
