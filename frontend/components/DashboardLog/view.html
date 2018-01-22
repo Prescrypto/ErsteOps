@@ -18,8 +18,8 @@
 
   <tbody id="root">
     <tr v-for="emergency in emergencies" :id="`emergency-${emergency.id}`" class="c-table__row emergency">
-      <td class="c-table__cell"><span class="u-text-mute">{{ emergency.odoo_client }}</span></td>
-      <td class="c-table__cell">{{ emergency.grade_type }}</td>
+      <td class="c-table__cell" @click="populate(emergency.id)"><span class="u-text-mute">{{ emergency.odoo_client }}</span></td>
+      <td class="c-table__cell" @click="populate(emergency.id)">{{ emergency.grade_type }}</td>
       <td class="c-table__cell">
         <span v-for="unit in emergency.unit.all" class="u-text-mute">{{ unit }}</span>
         <span v-if="!((emergency.unit || {}).all || {}).length">Sin Asignar</span>
