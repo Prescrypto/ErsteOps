@@ -35,7 +35,7 @@ const store = new Vuex.Store({
     },
     suggestions: [],
     emergency: {
-      is_active: false,
+      is_active: true,
     },
   },
 
@@ -54,6 +54,7 @@ const store = new Vuex.Store({
       http
         .post('/emergency/new/', data)
         .then(response => {
+          console.log(`Add new emergency id: ${data.id}`);
           commit(REQUEST_NEW_INCIDENT_SUCCESS, response.data);
         })
         .catch(err => commit(REQUEST_NEW_INCIDENT_ERROR, err));
@@ -63,6 +64,7 @@ const store = new Vuex.Store({
       http
         .get(`/emergency/ajax/patient/${target}/`)
         .then(response => {
+          console.log(`Load patient detail id: ${target}`);
           const { data } = response;
           const addresses = JSON.parse(data.addresses).map(address =>
             removePrefix(address, /id_/)
@@ -77,6 +79,7 @@ const store = new Vuex.Store({
       http
         .get(`/emergency/ajax/detail/${id}/`)
         .then(response => {
+          console.log(`Load detail emergency id: ${id}`);
           const emergency = response.data[0];
           commit(REQUEST_EMERGENCY_SUCCESS, {
             id: emergency.pk,

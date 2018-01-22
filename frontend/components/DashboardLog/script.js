@@ -17,7 +17,11 @@ const store = { emergencies };
 socket.onmessage = message => {
   const dataTemp = JSON.parse(message.data);
   const data = JSON.parse(dataTemp);
-  emergencies.push(data);
+  if(data["is_active"]){
+    emergencies.push(data);
+  }else{
+    console.log(`New emergency notification but not is_active True`);
+  }
 };
 
 export default {
