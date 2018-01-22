@@ -112,9 +112,8 @@ class EmergencyDashboardList(ListView):
 
     def get_queryset(self):
         fields = EMERGENCY_LIST_FIELDS
-        # emm_list = Emergency.objects.filter(is_active=True)
         data = serializers.serialize('json', list(self.emm_list), fields=fields)
-        # TEMP remove later
+        logger.info('Dashboard List: {}'.format(data))
         return data
 
 
