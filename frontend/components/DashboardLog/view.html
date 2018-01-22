@@ -17,7 +17,7 @@
   </thead>
 
   <tbody id="root">
-    <tr v-for="emergency in emergencies" :id="`emergency-${emergency.id}`" @click="populate(emergency.id)" class="c-table__row emergency">
+    <tr v-for="emergency in emergencies" :id="`emergency-${emergency.id}`" class="c-table__row emergency">
       <td class="c-table__cell"><span class="u-text-mute">{{ emergency.odoo_client }}</span></td>
       <td class="c-table__cell">{{ emergency.grade_type }}</td>
       <td class="c-table__cell">
@@ -36,10 +36,8 @@
           <button class="c-btn c-btn--secondary has-dropdown dropdown-toggle" id="dropdownMenuButton10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
 
           <div class="c-dropdown__menu dropdown-menu" aria-labelledby="dropdownMenuButton10">
-            <a class="c-dropdown__item dropdown-item" href="#">Servicio de Derivación</a>
-            <a class="c-dropdown__item dropdown-item" href="#">Ver tiempos</a>
-            <a class="c-dropdown__item dropdown-item" href="#">Ver resumen</a>
-            <a class="c-dropdown__item dropdown-item" href="#">Ver resumen</a>
+            <a class="c-dropdown__item dropdown-item" @click="populate(emergency.id)">Editar</a>
+            <a class="c-dropdown__item dropdown-item" @click="e => stop(e, emergency.id)">Detener</a>
           </div>
         </div>
       </td>
