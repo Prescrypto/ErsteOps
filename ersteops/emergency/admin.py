@@ -9,13 +9,17 @@ from .models import (Emergency, AttentionKind, AttentionZone, AttentionHospital,
 
 def update_is_active(EmergencyAdmin, request, queryset):
     # action fuction to help change to plan to users
-    queryset.update(is_active=True)
+    for emergency in queryset:
+        emergency.is_active = True
+        emergency.save()
 
 update_is_active.short_description = "Cambiar Emergencias a estado Activo"
 
 def update_non_active(EmergencyAdmin, request, queryset):
     # action fuction to help change to plan to users
-    queryset.update(is_active=False)
+    for emergency in queryset:
+        emergency.is_active = False
+        emergency.save()
 
 update_non_active.short_description = "Cambiar Emergencias a estado Inactivo"
 
