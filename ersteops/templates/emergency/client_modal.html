@@ -57,31 +57,46 @@
         </div><!-- End Address TAB -->
 
         <div class="c-tabs__pane" id="nav-units" role="tabpanel" aria-labelledby="nav-units-tab">
-          <table>
-            <tbody>
-            <tr>
-              <td><label for="id_unit">Unidad:</label></td>
-              <td><select name="unit" id="id_unit" class="c-input" multiple="multiple">
-                </select></td>
-            </tr>
-            <tr>
-              <td><label for="id_is_active">Es activa:</label></td>
-              <td>
-                  <div class="col-md-12">
-                    <div class="c-field">
-                        <div class="c-select">
-                            <select id="id_is_active" name="is_active">
-                                <option value="1">Desconocido</option>
-                                <option value="2">Sí</option>
-                                <option value="3">No</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-              </td>
-            </tr>
-            </tbody>
-          </table>
+          <div class="row">
+            <div class="col-12">
+              <div class="c-field">
+                <label class="c-field__label" for="id_units">
+                  Unidades
+                </label>
+                <select
+                  {# v-model="" #}
+                  name="units"
+                  id="id_units"
+                  class="c-input"
+                >
+                  <option value="" selected=""></option>
+                  <option
+                    v-for="unit in units"
+                    value="{unit.pk}"
+                  >
+                    <% unit.fields.year %> <% unit.fields.model %>
+                  </option>
+                </select>
+              </div>
+
+              <br />
+              <div class="c-field">
+                <label class="c-field__label" for="id_is_active">
+                  Es activa
+                </label>
+                <select
+                  {# v-model="" #}
+                  name="is_active"
+                  id="id_is_active"
+                  class="c-input"
+                >
+                  <option value="" selected=""></option>
+                  <option value="2">Sí</option>
+                  <option value="3">No</option>
+                </select>
+              </div>
+            </div>
+          </div>
         </div><!-- End Unit TAB -->
       </div>
     </div>

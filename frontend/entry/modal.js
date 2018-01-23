@@ -24,6 +24,7 @@ window.Erste.modal = new Vue({
   components: { Search, Patient, Addresses },
   data() {
     return {
+      units: window.erste.units,
       tabs: [
         { name: 'search', label: 'Buscar' },
         { name: 'patient', label: 'Paciente' },

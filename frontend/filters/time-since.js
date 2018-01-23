@@ -8,6 +8,11 @@ import {
   addMinutes,
 } from 'date-fns';
 
+function pad(n, width = 2, z = 0) {
+  n = n + ''; // eslint-disable-line
+  return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+}
+
 /**
  * Show time since given date
  *
@@ -29,5 +34,5 @@ Vue.filter('timeSince', (timestamp, now) => {
   delta.seconds = differenceInSeconds(now, time);
 
   const { hours, minutes, seconds } = delta;
-  return `${hours}:${minutes}:${seconds}`;
+  return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
 });
