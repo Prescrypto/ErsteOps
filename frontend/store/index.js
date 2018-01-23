@@ -21,6 +21,7 @@ import {
   REQUEST_NEW_INCIDENT_SUCCESS,
   REQUEST_NEW_INCIDENT_ERROR,
   EMERGENCY_TOGGLE_ACTIVE,
+  REMOVE_INCIDENT_ON_NOTIFICATION
 } from './constants';
 
 Vue.use(Vuex);
@@ -40,6 +41,10 @@ const store = new Vuex.Store({
   },
 
   actions: {
+    removeIncident({ commit }, id){
+      commit(REMOVE_INCIDENT_ON_NOTIFICATION, id);
+      console.log("Remove press it II")
+    },
     search({ commit }, term) {
       commit(REQUEST_SUGGEST_START);
       http
@@ -92,6 +97,7 @@ const store = new Vuex.Store({
 
   getters: {
     hasSuggestions: state => !!state.suggestions.length,
+    whatEmergencies: state => state.emergencies,
   },
 
   mutations: {
@@ -108,6 +114,11 @@ const store = new Vuex.Store({
     [REQUEST_SUGGEST_ERROR](state, err) {
       state.error = err;
       state.loading = false;
+    },
+
+    // Remove incident
+    [REMOVE_INCIDENT_ON_NOTIFICATION](state, data) {
+      console.log("remove press it")
     },
 
     // New Incident
