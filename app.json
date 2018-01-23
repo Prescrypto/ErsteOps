@@ -31,6 +31,9 @@
     },
     "DISABLE_COLLECTSTATIC": {
       "value": "1"
+    },
+    "SECURE_SSL_REDIRECT": {
+      "required": true
     }
   },
   "formation": {

@@ -1,40 +1,103 @@
 <!-- Modal -->
-<modal ref="modal" name="incident-modal" resizable scrollable width="75%" height="auto">
+{% load widget_tweaks %}
+<modal
+  ref="modal"
+  name="incident-modal"
+  resizable
+  scrollable
+  width="75%"
+  height="auto"
+  @opened="open"
+  @closed="destroy">
 
-  <div class="c-toolbar">
-    <h3 class="c-toolbar__title has-divider">Nuevo Incidente</h3>
-    <h5 class="c-toolbar__meta">Captura de información de nuevos incidentes.</h5>
-    <button class="c-close u-color-primary text u-ml-auto" type="button" @click="hide">×</button>
-  </div>
+  <div>
+    <div class="c-tabs">
+      <nav class="c-tabs__list nav nav-tabs" id="modal-nav" role="tablist">
+        <a
+          v-for="{label, name} in tabs"
+          v-on:click="toggle"
+          :id="`nav-${name}-tab`"
+          :href="`#nav-${name}`"
+          class="c-tabs__link"
+          :data-name="name"
+          data-toggle="tab"
+          role="tab"
+          :aria-controls="`nav-${name}`">
+            <% label %>
+        </a>
+        <div v-if="active !== 'search'" class="modal-buttons">
+          <button
+            @click="toggleActive"
+            :class="{'c-btn': true, 'c-btn--success': !emergency.is_active, 'c-btn--danger': emergency.is_active}">
+              <span v-if="emergency.is_active">Desactivar</span>
+              <span v-else>Activar</span>
+          </button>
+          <button
+            @click="submit"
+            class="c-btn c-btn--info">
+              Guardar Emergencia
+          </button>
+        </div>
+      </nav>
 
-  <div class="c-tabs">
-    <nav class="c-tabs__list nav nav-tabs" id="myTab" role="tablist">
-      <a class="c-tabs__link active" id="nav-home-tab" data-toggle="tab" href="#nav-search" role="tab" aria-controls="nav-search" aria-selected="true">Buscar</a>
-      <a class="c-tabs__link" id="nav-profile-tab" data-toggle="tab" href="#nav-patient" role="tab" aria-controls="nav-patient" aria-selected="false">Paciente</a>
-      <a class="c-tabs__link" id="nav-contact-tab" data-toggle="tab" href="#nav-address" role="tab" aria-controls="nav-address" aria-selected="false">Dirección</a>
-      <a class="c-tabs__link" id="nav-contact-tab" data-toggle="tab" href="#nav-units" role="tab" aria-controls="nav-units" aria-selected="false">Unidad</a>
-      <a class="c-tabs__link" id="nav-contact-tab" data-toggle="tab" href="#nav-timers" role="tab" aria-controls="nav-timers" aria-selected="false">Timers</a>
-    </nav>
+      <div class="c-tabs__content tab-content" id="nav-tabContent">
+        <!-- Search TAB -->
+        <div class="c-tabs__pane active" id="nav-search" role="tabpanel" aria-labelledby="nav-search-tab">
+          <search />
+        </div><!-- End Search TAB -->
 
-    <div class="c-tabs__content tab-content" id="nav-tabContent">
-      <div class="c-tabs__pane active" id="nav-search" role="tabpanel" aria-labelledby="nav-search-tab">
-        Busqueda
-      </div>
+        <!-- Patient TAB -->
+        <div class="c-tabs__pane" id="nav-patient" role="tabpanel" aria-labelledby="nav-patient-tab">
+          <patient />
+        </div><!-- End Patient TAB -->
 
-      <div class="c-tabs__pane" id="nav-patient" role="tabpanel" aria-labelledby="nav-patient-tab">
-        Paciente
-      </div>
+        <!-- Address TAB -->
+        <div class="c-tabs__pane" id="nav-address" role="tabpanel" aria-labelledby="nav-address-tab">
+          <addresses />
+        </div><!-- End Address TAB -->
 
-      <div class="c-tabs__pane" id="nav-address" role="tabpanel" aria-labelledby="nav-address-tab">
-        Dirección
-      </div>
+        <div class="c-tabs__pane" id="nav-units" role="tabpanel" aria-labelledby="nav-units-tab">
+          <div class="row">
+            <div class="col-12">
+              <div class="c-field">
+                <label class="c-field__label" for="id_units">
+                  Unidades
+                </label>
+                <select
+                  {# v-model="" #}
+                  name="units"
+                  id="id_units"
+                  class="c-input"
+                >
+                  <option value="" selected=""></option>
+                  <option
+                    v-for="unit in units"
+                    value="{unit.pk}"
+                  >
+                    <% unit.fields.year %> <% unit.fields.model %>
+                  </option>
+                </select>
+              </div>
 
-      <div class="c-tabs__pane" id="nav-units" role="tabpanel" aria-labelledby="nav-units-tab">
-        Unidad
-      </div>
-
-      <div class="c-tabs__pane" id="nav-timers" role="tabpanel" aria-labelledby="nav-timers-tab">
-        Tiempos
+              <br />
+              <div class="c-field">
+                <label class="c-field__label" for="id_is_active">
+                  Es activa
+                </label>
+                <select
+                  {# v-model="" #}
+                  name="is_active"
+                  id="id_is_active"
+                  class="c-input"
+                >
+                  <option value="" selected=""></option>
+                  <option value="2">Sí</option>
+                  <option value="3">No</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div><!-- End Unit TAB -->
       </div>
     </div>
   </div>

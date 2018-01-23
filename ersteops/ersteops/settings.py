@@ -32,7 +32,11 @@ SECRET_KEY = os.environ['SECRET_KEY']
 #DEBUG = True
 DEBUG = ast.literal_eval(os.environ['DEBUG_STATE'])
 
-#ALLOWED_HOSTS = []
+# DEFAULT LOGIN URL
+LOGIN_URL = '/'
+
+# Django JET config
+JET_SIDE_MENU_COMPACT = True
 
 # TODO fix production mode
 PRODUCTION = ast.literal_eval(os.environ['PRODUCTION'])
@@ -61,6 +65,7 @@ INSTALLED_APPS = [
     'emergency.apps.EmergencyConfig',
     'vehicle.apps.VehicleConfig',
     'notifications.apps.NotificationConfig',
+    'preventconcurrentlogins',
     'channels',
     'home.apps.HomeConfig',
     'webpack_loader',
@@ -75,6 +80,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'preventconcurrentlogins.middleware.PreventConcurrentLoginsMiddleware',
 ]
 
 ROOT_URLCONF = 'ersteops.urls'
@@ -87,6 +93,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'ersteops.processors.add_url_protocol',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -151,6 +158,10 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+
+# Secure Options
+SECURE_SSL_REDIRECT = ast.literal_eval(os.environ['SECURE_SSL_REDIRECT'])
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = [

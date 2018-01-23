@@ -1,153 +1,125 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
-from django.shortcuts import render
-
 # Create your views here.
-from django.shortcuts import render,redirect
-from django.views.generic import View, CreateView, ListView, DetailView, UpdateView
-from emergency.models import Emergency,AttentionDerivation
-from django.utils import timezone
-from emergency.forms import OdooClientForm, OdooClientAuto
-from core.utils import OdooApi
-import requests
-from requests.auth import HTTPBasicAuth
 import json
 import datetime
+import requests
+from requests.auth import HTTPBasicAuth
+# Django utils
+from django.shortcuts import render,redirect
+from django.views.generic import View, CreateView, ListView, DetailView, UpdateView
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+from django.utils import timezone
 from django.core import serializers
+from django.http import JsonResponse
+from django.http import HttpResponse
+from django.db.models import Q
+# Our models
+from core.utils import OdooApi
+from .utils import JSONResponseMixin, AjaxableResponseMixin, UpdateJsonResponseMixin
+from .forms import OdooClientForm, OdooClientAuto
+from .models import Emergency,AttentionDerivation
+from vehicle.models import Unit
+from .list_fields import EMERGENCY_LIST_FIELDS
+
 # Logging library
 import logging
 # Load Logging definition, this is defined in settings.py in the LOGGING section
 logger = logging.getLogger('django_info')
 
+@method_decorator(login_required, name='dispatch')
 class EmergencyBlank(View):
     template_name = "emergency/blank.html"
+
     def get(self, request, *args, **kwargs):
         form=''
         return render(request, self.template_name,{"form": form})
 
 
-
-class EmergencyNew(CreateView):
+@method_decorator(csrf_exempt, name='dispatch')
+class EmergencyNew(AjaxableResponseMixin, CreateView):
     template_name = "emergency/new.html"
     model = Emergency
-    fields = ['id','odoo_client',
-                'service_category',
-                'grade_type',
-                'zone',
-                'start_time',
-                'end_time',
-                'is_active',
-                'unit',
-                'unit_assigned_time',
-                'unit_dispatched_time',
-                'arrival_time',
-                'attention_time',
-                'derivation_time',
-                'hospital_arrival',
-                'patient_arrival',
-                'final_emergency_time',
-                'address_street',
-                'address_extra',
-                'address_zip_code',
-                'address_county',
-                'address_col',
-                'address_between',
-                'address_and_street',
-                'address_ref',
-                'address_front',
-                'address_instructions',
-                'address_notes',
-                'caller_name',
-                'caller_relation',
-                'patient_name',
-                'patient_gender',
-                'patient_age',
-                'patient_allergies',
-                'patient_illnesses',
-                'patient_notes',
-                'attention_final_grade',
-                'attention_justification',
-                'main_complaint',
-                'complaint_descriprion',
-                'subscription_type'
-                ]
-    success_url = '/emergency/list/'
+    fields = EMERGENCY_LIST_FIELDS
+    success_url = 'emergencydashboard'
 
+
+@method_decorator(login_required, name='dispatch')
 class EmergencyListView(ListView):
     template_name = "emergency/list.html"
     model = Emergency
+
     def get_context_data(self, **kwargs):
         context = super(EmergencyListView, self).get_context_data(**kwargs)
         context['now'] = timezone.now()
         return context
 
 
+@method_decorator(login_required, name='dispatch')
 class EmergencyDetailView(DetailView):
     template_name = "emergency/detail.html"
     model = Emergency
+
     def get_context_data(self, **kwargs):
         context = super(EmergencyDetailView, self).get_context_data(**kwargs)
         context['now'] = timezone.now()
         return context
 
 
-class EmergencyDashboardList(ListView):
-    template_name = "emergency/dashboard.html"
+class EmergencyJSONView(JSONResponseMixin, DetailView):
+    ''' Custom Json View for Emergency details '''
     model = Emergency
-    def get_context_data(self, **kwargs):
-        context = super(EmergencyDashboardList, self).get_context_data(**kwargs)
-        context.update({'now': timezone.now()})
-        return context
 
-    def get_queryset(self):
-        fields = ('id','odoo_client',
-                'service_category',
-                'grade_type',
-                'zone',
-                'start_time',
-                'end_time',
-                'is_active',
-                'unit',
-                'unit_assigned_time',
-                'unit_dispatched_time',
-                'arrival_time',
-                'attention_time',
-                'derivation_time',
-                'hospital_arrival',
-                'patient_arrival',
-                'final_emergency_time',
-                'address_street',
-                'address_extra',
-                'address_zip_code',
-                'address_county',
-                'address_col',
-                'address_between',
-                'address_and_street',
-                'address_ref',
-                'address_front',
-                'address_instructions',
-                'address_notes',
-                'caller_name',
-                'caller_relation',
-                'patient_name',
-                'patient_gender',
-                'patient_age',
-                'patient_allergies',
-                'patient_illnesses',
-                'patient_notes',
-                'attention_final_grade',
-                'attention_justification',
-                'main_complaint',
-                'complaint_descriprion',
-                'subscription_type'
-                )
+    def render_to_response(self, context, **response_kwargs):
+        return self.render_to_json_response(context, **response_kwargs)
+
+
+class EmergencyListJSONView(ListView):
+    model = Emergency
+
+    def render_to_response(self, context, **response_kwargs):
+        return HttpResponse(
+            self.get_data(context),
+            content_type='application/json',
+            **response_kwargs
+        )
+
+    def get_data(self, context):
+        fields = EMERGENCY_LIST_FIELDS
         emm_list = Emergency.objects.filter(is_active=True)
         data = serializers.serialize('json', list(emm_list), fields=fields)
-        # TEMP remove later
         return data
 
 
+@method_decorator(login_required, name='dispatch')
+class EmergencyDashboardList(ListView):
+    template_name = "emergency/dashboard.html"
+    model = Emergency
+
+    def get_context_data(self, **kwargs):
+        active_emergencies = Emergency.objects.filter(is_active=True).count()
+        units = Unit.objects.filter(Q(is_active=True) & Q(assigned=False))
+        active_units = units.count()
+        units_list = serializers.serialize('json', list(units))
+        context = super(EmergencyDashboardList, self).get_context_data(**kwargs)
+        context.update({
+            'now': timezone.now(),
+            'active_emergencies': active_emergencies,
+            'active_units': active_units,
+            'units_list': units_list
+        })
+        return context
+
+    def get_queryset(self):
+        fields = EMERGENCY_LIST_FIELDS
+        data = serializers.serialize('json', list(Emergency.objects.filter(is_active=True)), fields=fields)
+        logger.info('Dashboard List: {}'.format(data))
+        return data
+
+
+@method_decorator(login_required, name='dispatch')
 class EmergencyDerivation(CreateView):
     template_name = "emergency/derivation.html"
     model = AttentionDerivation
@@ -160,53 +132,24 @@ class EmergencyDerivation(CreateView):
         ]
     success_url = '/emergency/list/'
 
+
+@method_decorator(login_required, name='dispatch')
 class EmergencyUpdate(UpdateView):
     template_name = "emergency/update.html"
     model = Emergency
-    fields = ['id','odoo_client',
-                'service_category',
-                'grade_type',
-                'zone',
-                'start_time',
-                'end_time',
-                'is_active',
-                'unit',
-                'unit_assigned_time',
-                'unit_dispatched_time',
-                'arrival_time',
-                'attention_time',
-                'derivation_time',
-                'hospital_arrival',
-                'patient_arrival',
-                'final_emergency_time',
-                'address_street',
-                'address_extra',
-                'address_zip_code',
-                'address_county',
-                'address_col',
-                'address_between',
-                'address_and_street',
-                'address_ref',
-                'address_front',
-                'address_instructions',
-                'address_notes',
-                'caller_name',
-                'caller_relation',
-                'patient_name',
-                'patient_gender',
-                'patient_age',
-                'patient_allergies',
-                'patient_illnesses',
-                'patient_notes',
-                'attention_final_grade',
-                'attention_justification',
-                'main_complaint',
-                'complaint_descriprion',
-                'subscription_type'
-                ]
+    fields = EMERGENCY_LIST_FIELDS
     success_url = '/emergency/list/'
 
 
+@method_decorator(csrf_exempt, name='dispatch')
+class EmergencyJSONUpdate(UpdateJsonResponseMixin, UpdateView):
+    template_name = "emergency/update.html"
+    model = Emergency
+    fields = EMERGENCY_LIST_FIELDS
+    success_url = 'emergencydashboard'
+
+
+@method_decorator(login_required, name='dispatch')
 class EmergencyClientOdoo(View):
     template_name = "emergency/odooclient.html"
     def get(self, request, *args, **kwargs):
@@ -221,31 +164,33 @@ class EmergencyClientOdoo(View):
             _api_odoo = OdooApi()
             # Get Access token
             result = _api_odoo.get_token()
-            logger.info('%s (%s)' % ('Access-Token',result['access_token']))
+            logger.info('%s (%s)' % ('Access-Token', result['access_token']))
             if form.cleaned_data['search_type'] == '1':
                 patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_patient_name( patient,result['access_token'])
+                patient_data = _api_odoo.get_by_patient_name(patient, result['access_token'])
                 #print(patient_data)
-                logger.info('%s (%s)' % ('OdooApi',patient_data))
+                logger.info('%s (%s)' % ('OdooApi: ', patient_data))
             if form.cleaned_data['search_type'] == '3':
                 patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_patient_id( patient,result['access_token'])
+                patient_data = _api_odoo.get_by_patient_id(patient, result['access_token'])
                 #print(patient_data)
-                logger.info('%s (%s)' % ('OdooApi',patient_data))
+                logger.info('%s (%s)' % ('OdooApi: ', patient_data))
             if form.cleaned_data['search_type'] == '2':
                 patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_patient_street( patient,result['access_token'])
+                patient_data = _api_odoo.get_by_patient_street(patient, result['access_token'])
                 #print(patient_data)
-                logger.info('%s (%s)' % ('OdooApi',patient_data))
+                logger.info('%s (%s)' % ('OdooApi: ', patient_data))
             if form.cleaned_data['search_type'] == '5':
                 patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_all( patient,result['access_token'])
+                patient_data = _api_odoo.get_by_all(patient, result['access_token'])
                 #print(patient_data)
                 logger.info('%s (%s)' % ('OdooApi',patient_data))
             else:
                 return render(request, self.template_name,{"form": form, "result": result})
         return render(request, self.template_name,{"form": form, "result": result, "patients": patient_data})
 
+
+@method_decorator(login_required, name='dispatch')
 class EmergencyClientModal(View):
     template_name = "emergency/blank_modal.html"
     def get(self, request, *args, **kwargs):
@@ -265,13 +210,13 @@ class EmergencyClientModal(View):
             _api_odoo = OdooApi()
             # Get Access token
             result = _api_odoo.get_token()
-            logger.info('%s (%s)' % ('OdooApi',result))
-            logger.info('%s (%s)' % ('Access-Token',result['access_token']))
+            logger.info('%s (%s)' % ('OdooApi', result))
+            logger.info('%s (%s)' % ('Access-Token', result['access_token']))
             find_data = []
 
             if form.cleaned_data['search_type'] == '1':
                 patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_patient_name( patient,result['access_token'])
+                patient_data = _api_odoo.get_by_patient_name(patient, result['access_token'])
                 find_data = patient_data['results']
                 feContext.update({"count": len(patient_data['results'])})
                 logger.info('%s (%s)' % ('OdooApi_name',patient_data))
@@ -285,7 +230,7 @@ class EmergencyClientModal(View):
                 patient = form.cleaned_data['client_name']
                 patient_data = _api_odoo.get_by_patient_id( patient,result['access_token'])
                 find_data = patient_data
-                try: 
+                try:
                     if find_data.name:
                         feContext.update({"count": 1})
                 except:
@@ -314,88 +259,63 @@ class EmergencyClientModal(View):
                 return render(request, self.template_name,{"form": form, "result": result, "find_data": find_data, "feContext": feContext  })
         return render(request, self.template_name,{'form': form, 'result': result,"find_data": find_data, "feContext": feContext })
 
+
+@method_decorator(login_required, name='dispatch')
 class EmergencyNewModal(CreateView):
     template_name = "emergency/blanknew_modal.html"
     model = Emergency
-    fields = ['id','odoo_client',
-                'service_category',
-                'grade_type',
-                'zone',
-                'start_time',
-                'end_time',
-                'is_active',
-                'unit',
-                'unit_assigned_time',
-                'unit_dispatched_time',
-                'arrival_time',
-                'attention_time',
-                'derivation_time',
-                'hospital_arrival',
-                'patient_arrival',
-                'final_emergency_time',
-                'address_street',
-                'address_extra',
-                'address_zip_code',
-                'address_county',
-                'address_col',
-                'address_between',
-                'address_and_street',
-                'address_ref',
-                'address_front',
-                'address_instructions',
-                'address_notes',
-                'caller_name',
-                'caller_relation',
-                'patient_name',
-                'patient_gender',
-                'patient_age',
-                'patient_allergies',
-                'patient_illnesses',
-                'patient_notes',
-                'attention_final_grade',
-                'attention_justification',
-                'main_complaint',
-                'complaint_descriprion',
-                'subscription_type'
-                ]
-    
+    fields = EMERGENCY_LIST_FIELDS
     success_url = '/emergency/list/'
 
 
-
+@method_decorator(login_required, name='dispatch')
 class EmergencyGetPatient(View):
     def get(self, request, *args, **kwargs):
-        # Read parameter
-        target_id = kwargs['patient_id']
-        # Extract patient_id
-        # Target 000129000001000129
-        # First 6 digits patient_id
-        # Second 6 digits source_id: 1 res.partner,2 family.member, 3 company.member
-        # Third 6 digits parent_id
-        patient_id = int(target_id[:6])
-        # Extract where the patient been found
-        source_id = int(target_id[6:-6])
-        # Initialize Odoo api
-        _api_odoo = OdooApi()
-        # Get Token
-        result = _api_odoo.get_token()
-        # Case when Patient in res.partner
-        if source_id == 1:
-            patient_data = _api_odoo.get_by_patient_id( str(patient_id),result['access_token'])
-            parent_data = {}
-        # Case when Patient in family.member
-        elif source_id == 2:
-            patient_data = _api_odoo.get_by_family_member_id( str(patient_id),result['access_token'])
-            parent_data = _api_odoo.get_by_patient_id( str(patient_data['parent_id']['id']),result['access_token'])
-        # Case when Patient in company.member
-        elif source_id == 3:
-            patient_data = _api_odoo.get_by_company_member_id( str(patient_id),result['access_token'])
-            parent_data = _api_odoo.get_by_patient_id( str(patient_data['parent_id']['id']),result['access_token'])
-
-        logger.info('%s (%s)' % ('OdooApi_patient_data',patient_data))
-        logger.info('%s (%s)' % ('OdooApi_parent_data',parent_data))
-        request.session['patientrequest'] = patient_json(source_id,patient_data,parent_data)
+        ''' LEgacy way to show modal with patient data'''
+        request.session['patientrequest'] = handle_patient_data(kwargs['patient_id'])
         return redirect('/emergency/newmodal/')
+
+
+class EmergencyJSONGetPatient(View):
+    def get(self, request, *args, **kwargs):
+        if request.is_ajax():
+            ''' Connect to api and return json data'''
+            data = handle_patient_data(kwargs['patient_id'])
+            return JsonResponse(data)
+
+
+def handle_patient_data(patient_id):
+    ''' Method who handle patient data '''
+    target_id = patient_id
+    # Extract patient_id
+    # Target 000129000001000129
+    # First 6 digits patient_id
+    # Second 6 digits source_id: 1 res.partner,2 family.member, 3 company.member
+    # Third 6 digits parent_id
+    patient_id = int(target_id[:6])
+    # Extract where the patient been found
+    source_id = int(target_id[6:-6])
+    # Initialize Odoo api
+    _api_odoo = OdooApi()
+    # Get Token
+    result = _api_odoo.get_token()
+    # Case when Patient in res.partner
+    if source_id == 1:
+        patient_data = _api_odoo.get_by_patient_id( str(patient_id),result['access_token'])
+        parent_data = {}
+    # Case when Patient in family.member
+    elif source_id == 2:
+        patient_data = _api_odoo.get_by_family_member_id( str(patient_id),result['access_token'])
+        parent_data = _api_odoo.get_by_patient_id( str(patient_data['parent_id']['id']),result['access_token'])
+    # Case when Patient in company.member
+    elif source_id == 3:
+        patient_data = _api_odoo.get_by_company_member_id( str(patient_id),result['access_token'])
+        parent_data = _api_odoo.get_by_patient_id( str(patient_data['parent_id']['id']),result['access_token'])
+
+    logger.info('%s (%s)' % ('OdooApi_patient_data: ', patient_data))
+    logger.info('%s (%s)' % ('OdooApi_parent_data: ', parent_data))
+    return patient_json(source_id, patient_data, parent_data)
+
 
 # Resume and clean patient and partner data
 def patient_json(source_id,patient_data,parent_data):
@@ -408,7 +328,7 @@ def patient_json(source_id,patient_data,parent_data):
             "id_patient_illnesses" : '',
             "id_caller_relation": '',
             "id_patient_age": 0,
-            "id_zone": patient_data['zone'].upper(),
+            "id_zone": str(patient_data['zone']).upper(),
             "id_subscription_type": patient_data['client_type'],
             "addresses": address_json(patient_data,patient_data),
             "min_addresses": min_address_json(patient_data,patient_data),
@@ -421,7 +341,7 @@ def patient_json(source_id,patient_data,parent_data):
             "id_patient_illnesses" : patient_data['prev_ailments'],
             "id_caller_relation" : partner_relationship(source_id,patient_data['relationship']),
             "id_patient_age": patient_age(patient_data['birthday']),
-            "id_zone": parent_data['zone'].upper(),
+            "id_zone": str(parent_data['zone']).upper(),
             "id_subscription_type": parent_data['client_type'],
             "addresses": address_json(parent_data,patient_data),
             "min_addresses": min_address_json(parent_data,patient_data),
@@ -521,6 +441,8 @@ def min_address_json(parent_data,patient_data):
     logger.info('%s (%s)' % ('MinAddressJSON',data))
     return data
 
+
+@method_decorator(login_required, name='dispatch')
 class EmergencyActivate(View):
     def get(self, request, *args, **kwargs):
         patient_id = kwargs['patient_id']
@@ -535,18 +457,38 @@ class EmergencyActivate(View):
         emergency.save()
         return redirect('/emergency/list/')
 
+
 class EmergencyEnd(View):
     def get(self, request, *args, **kwargs):
         patient_id = kwargs['patient_id']
         try:
             emergency = Emergency.objects.get(id=patient_id)
         except:
+            logger.error("[EmergencyEnd] Not found emergency with patient id")
             return redirect('/emergency/dashboard/')
         emergency.is_active = False
         emergency.final_emergency_time = datetime.date.today()
         emergency.save()
+        logger.info('Emergency Stop! ID:{}'.format(emergency.id))
         return redirect('/emergency/dashboard/')
 
+
+class EmergencyJsonEnd(View):
+    def get(self, request, *args, **kwargs):
+        patient_id = kwargs['patient_id']
+        try:
+            emergency = Emergency.objects.get(id=patient_id)
+        except:
+            logger.error("[Error EmergencyJsonEnd] Not found emergency with patient id")
+            return HttpResponse(status=404)
+        emergency.is_active = False
+        emergency.final_emergency_time = datetime.date.today()
+        emergency.save()
+        logger.info("[Success EmergencyJsonEnd] Deactivate emergency with id: {}".format(emergency.id))
+        return HttpResponse(status=200)
+
+
+@method_decorator(login_required, name='dispatch')
 class OdooSubscription(View):
     template_name = "emergency/search_odoo_auto.html"
     def get(self, request, *args, **kwargs):

@@ -17,8 +17,15 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="{% static "ui_kit/css/main.min.css" %}">
 
-    <!-- Initialize empty global state object -->
-    <script>window.erste = {}</script>
+    <script>
+      // Initialize empty global state object
+      window.erste = {
+        url: {
+          protocol: '{{ request.scheme }}',
+          host: '{{ request.META.HTTP_HOST }}',
+        },
+      };
+    </script>
 
     <!-- JS that must run before UI loads -->
     {% block jsheadblock %}
