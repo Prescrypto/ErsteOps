@@ -153,7 +153,7 @@ class Emergency(models.Model):
     def save(self, **kwargs):
         #Saves and checks whether the object is a candidate for notification
         #new object
-        newEmerg=True if self.pk is None else False
+        newEmerg = True if self.pk is None else False
         if newEmerg:
             self.attention_final_grade=self.grade_type
 
@@ -164,36 +164,38 @@ class Emergency(models.Model):
 
         super(Emergency, self).save(**kwargs)
 
-        type_notif=""
+        type_notif = ""
         if newEmerg:
             if self.is_active:
                 #Is new and is active
-                type_notif="New"
+                type_notif = "New"
         elif not self.is_active and old_instance.is_active:
             #Updated from is_active=True to is_active=False
-            type_notif="Deactivate"
+            type_notif = "Deactivate"
         elif self.is_active and not old_instance.is_active:
             #Updated from is_active=False to is_active=True
-            type_notif="Activate"
+            type_notif = "Activate"
         elif self.is_active and old_instance.unit != self.unit:
             #Update units in emergency
-            type_notif="Unid Update"
+            type_notif = "Unid Update"
         elif self.is_active:
             #Update simple and is_active
-            type_notif="Update"
+            type_notif = "Update"
         else:
             #is not a candidate to notifications
             return
 
-        emergDict=emergency_dictionary(self)
-        emergDict["type_notif"]=type_notif
-        emergDict["type_data"]="Emergency"
+        emergDict = emergency_dictionary(self)
+        emergDict.update({
+            "type_notif" : type_notif,
+            "type_data" : "Emergency",
+        })
         emergJson=json.dumps(emergDict)
 
-
-        Group('notifications').send(
-                {"text": json.dumps(emergJson)}
-            )
+        print("TypeNotification: {}".format(type_notif))
+        Group('notifications').send({
+            "text": json.dumps(emergJson),
+        })
 
     # Returns a verbose name - adjusted for Python3
     def __str__(self):
