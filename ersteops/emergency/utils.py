@@ -43,21 +43,31 @@ class UpdateJsonResponseMixin(object):
             if data:
                 self.logger.info("POST Data: {}".format(data))
                 emergency_object = super(UpdateJsonResponseMixin, self).get_object()
+
+                # del timers form form
+                entriesToRemove = ('attention_time', 'derivation_time', 'end_time', 'final_emergency_time', 'hospital_arrival',
+                                    'patient_arrival', 'start_time', 'unit_assigned_time', 'unit_dispatched_time',
+                                    'arrival_time', )
+                for item in entriesToRemove:
+                    data.pop(item, None)
+
+                data.update({'start_time': emergency_object.start_time })
+
                 emergency_form = EmergencyForm(data, instance=emergency_object)
-                # add new field
-                # emergency_form.data.update({'start_time': timezone.now()})
+
+                # import code; code.interact(local=locals())
                 if emergency_form.is_valid():
                     self.object = emergency_form.save()
                     data_object = {
                         'id': self.object.pk,
                     }
-                    self.logger.info("POST new Emergency] AJAX FORM SUCCESS")
+                    self.logger.info("[UPDATE new Emergency] AJAX FORM SUCCESS")
                     return JsonResponse(data_object, status=200)
                 else:
-                    self.logger.info("[POST new Emergency] AJAX FORM ERRORS:{}".format(emergency_form.errors))
+                    self.logger.info("[UPDATE new Emergency] AJAX FORM ERRORS:{}".format(emergency_form.errors))
                     return JsonResponse(emergency_form.errors, status=400)
 
-        self.logger.info("[POST new Emergency] form: Error AJAX")
+        self.logger.info("[UPDATE new Emergency] form: Error AJAX")
         return JsonResponse(form.errors, status=400)
 
 

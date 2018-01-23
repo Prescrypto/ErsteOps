@@ -44,24 +44,24 @@ class Emergency(models.Model):
     # Timers
     # Emergency statrt an end time: when the operator select new incident
     # Initial call time
-    start_time = models.DateTimeField("inicio toma de datos",default=datetime.now)
+    start_time = models.DateTimeField("Inicio toma de datos", default=datetime.now)
     # Records when the operator ends capture of basic emergency data
-    end_time = models.DateTimeField("fin toma de datos",default=datetime.now,blank=True)
+    end_time = models.DateTimeField("Fin toma de datos", default=datetime.now,blank=True)
     # Records when unit is assigned
-    unit_assigned_time = models.DateTimeField("asignacion de unidad",default=datetime.now,blank=True)
+    unit_assigned_time = models.DateTimeField("Asignacion de unidad", default=datetime.now,blank=True)
     # Records when unit is dispatched from current location to emergency address
-    unit_dispatched_time = models.DateTimeField("despacho de unidad",default=datetime.now,blank=True)
+    unit_dispatched_time = models.DateTimeField("Despacho de unidad", default=datetime.now,blank=True)
     # Records when unit arives to emergency adress
-    arrival_time = models.DateTimeField("arrivo de unidad",default=datetime.now,blank=True)
+    arrival_time = models.DateTimeField("Arrivo de unidad", default=datetime.now,blank=True)
     # Records when TUM begins attention
-    attention_time = models.DateTimeField("inicio de atencion",default=datetime.now,blank=True)
+    attention_time = models.DateTimeField("Inicio de atencion", default=datetime.now,blank=True)
     # Records when patient is derived
-    derivation_time = models.DateTimeField("inicio de derivacion",default=datetime.now,blank=True)
+    derivation_time = models.DateTimeField("Inicio de derivacion", default=datetime.now,blank=True)
     # Records when unit arrive to hospital
-    hospital_arrival = models.DateTimeField("llegada hopital",default=datetime.now,blank=True)
+    hospital_arrival = models.DateTimeField("Llegada hopital", default=datetime.now,blank=True)
     # Record when patient arrive to hopsital
-    patient_arrival = models.DateTimeField("paciente atencion hopital",default=datetime.now,blank=True)
-    final_emergency_time = models.DateTimeField("fin emergencia",default=datetime.now,blank=True)
+    patient_arrival = models.DateTimeField("Paciente atencion hopital", default=datetime.now,blank=True)
+    final_emergency_time = models.DateTimeField("Fin emergencia", default=datetime.now,blank=True)
     is_active = models.NullBooleanField("activa")
     unit = models.ManyToManyField(models_vehicle.Unit,
         related_name="unit_name",
