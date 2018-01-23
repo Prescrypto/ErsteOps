@@ -59,6 +59,7 @@ class EmergencyListView(ListView):
 
 @method_decorator(login_required, name='dispatch')
 class EmergencyDetailView(DetailView):
+    ''' Emergency Detail  '''
     template_name = "emergency/detail.html"
     model = Emergency
 
