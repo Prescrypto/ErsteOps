@@ -44,24 +44,24 @@ class Emergency(models.Model):
     # Timers
     # Emergency statrt an end time: when the operator select new incident
     # Initial call time
-    start_time = models.DateTimeField("inicio toma de datos",default=datetime.now)
+    start_time = models.DateTimeField("Inicio toma de datos", default=datetime.now)
     # Records when the operator ends capture of basic emergency data
-    end_time = models.DateTimeField("fin toma de datos",default=datetime.now,blank=True)
+    end_time = models.DateTimeField("Fin toma de datos", default=datetime.now,blank=True)
     # Records when unit is assigned
-    unit_assigned_time = models.DateTimeField("asignacion de unidad",default=datetime.now,blank=True)
+    unit_assigned_time = models.DateTimeField("Asignacion de unidad", default=datetime.now,blank=True)
     # Records when unit is dispatched from current location to emergency address
-    unit_dispatched_time = models.DateTimeField("despacho de unidad",default=datetime.now,blank=True)
+    unit_dispatched_time = models.DateTimeField("Despacho de unidad", default=datetime.now,blank=True)
     # Records when unit arives to emergency adress
-    arrival_time = models.DateTimeField("arrivo de unidad",default=datetime.now,blank=True)
+    arrival_time = models.DateTimeField("Arrivo de unidad", default=datetime.now,blank=True)
     # Records when TUM begins attention
-    attention_time = models.DateTimeField("inicio de atencion",default=datetime.now,blank=True)
+    attention_time = models.DateTimeField("Inicio de atencion", default=datetime.now,blank=True)
     # Records when patient is derived
-    derivation_time = models.DateTimeField("inicio de derivacion",default=datetime.now,blank=True)
+    derivation_time = models.DateTimeField("Inicio de derivacion", default=datetime.now,blank=True)
     # Records when unit arrive to hospital
-    hospital_arrival = models.DateTimeField("llegada hopital",default=datetime.now,blank=True)
+    hospital_arrival = models.DateTimeField("Llegada hopital", default=datetime.now,blank=True)
     # Record when patient arrive to hopsital
-    patient_arrival = models.DateTimeField("paciente atencion hopital",default=datetime.now,blank=True)
-    final_emergency_time = models.DateTimeField("fin emergencia",default=datetime.now,blank=True)
+    patient_arrival = models.DateTimeField("Paciente atencion hopital", default=datetime.now,blank=True)
+    final_emergency_time = models.DateTimeField("Fin emergencia", default=datetime.now,blank=True)
     is_active = models.NullBooleanField("activa")
     unit = models.ManyToManyField(models_vehicle.Unit,
         related_name="unit_name",
@@ -153,7 +153,7 @@ class Emergency(models.Model):
     def save(self, **kwargs):
         #Saves and checks whether the object is a candidate for notification
         #new object
-        newEmerg=True if self.pk is None else False
+        newEmerg = True if self.pk is None else False
         if newEmerg:
             self.attention_final_grade=self.grade_type
 
@@ -164,36 +164,38 @@ class Emergency(models.Model):
 
         super(Emergency, self).save(**kwargs)
 
-        type_notif=""
+        type_notif = ""
         if newEmerg:
             if self.is_active:
                 #Is new and is active
-                type_notif="New"
+                type_notif = "New"
         elif not self.is_active and old_instance.is_active:
             #Updated from is_active=True to is_active=False
-            type_notif="Deactivate"
+            type_notif = "Deactivate"
         elif self.is_active and not old_instance.is_active:
             #Updated from is_active=False to is_active=True
-            type_notif="Activate"
+            type_notif = "Activate"
         elif self.is_active and old_instance.unit != self.unit:
             #Update units in emergency
-            type_notif="Unid Update"
+            type_notif = "Unid Update"
         elif self.is_active:
             #Update simple and is_active
-            type_notif="Update"
+            type_notif = "Update"
         else:
             #is not a candidate to notifications
             return
 
-        emergDict=emergency_dictionary(self)
-        emergDict["type_notif"]=type_notif
-        emergDict["type_data"]="Emergency"
+        emergDict = emergency_dictionary(self)
+        emergDict.update({
+            "type_notif" : type_notif,
+            "type_data" : "Emergency",
+        })
         emergJson=json.dumps(emergDict)
 
-
-        Group('notifications').send(
-                {"text": json.dumps(emergJson)}
-            )
+        print("TypeNotification: {}".format(type_notif))
+        Group('notifications').send({
+            "text": json.dumps(emergJson),
+        })
 
     # Returns a verbose name - adjusted for Python3
     def __str__(self):

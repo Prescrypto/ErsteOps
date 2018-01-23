@@ -37,8 +37,12 @@
 
 {% block jsheadblock %}
 <script>
-  var json_list = {{ object_list|safe }};
-  window.erste.incidents = json_list;
+  var incidents_json_list = {{ object_list|safe }};
+  var units_json_list = {{ units_list|safe }};
+
+  window.erste.incidents = incidents_json_list;
+  window.erste.units = units_json_list;
+
   // example HTTP_PROTOCOL: {{ HTTP_PROTOCOL }}
   // ie. ABSOLUTE_URI : {{ HTTP_ABSOLUTE_URI }}
 </script>

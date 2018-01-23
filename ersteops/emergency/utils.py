@@ -32,6 +32,45 @@ class JSONResponseMixin(object):
         data = serializers.serialize('json', emergency, fields=fields)
         return data
 
+class UpdateJsonResponseMixin(object):
+    '''' Mixin to add on update emergency view '''
+    logger = logging.getLogger('django_info')
+
+    def form_invalid(self, form):
+        response = super(UpdateJsonResponseMixin, self).form_invalid(form)
+        if self.request.is_ajax():
+            data = json.loads(self.request.body.decode('utf-8'))
+            if data:
+                self.logger.info("POST Data: {}".format(data))
+                emergency_object = super(UpdateJsonResponseMixin, self).get_object()
+
+                # del timers form form
+                entriesToRemove = ('attention_time', 'derivation_time', 'end_time', 'final_emergency_time', 'hospital_arrival',
+                                    'patient_arrival', 'start_time', 'unit_assigned_time', 'unit_dispatched_time',
+                                    'arrival_time', )
+                for item in entriesToRemove:
+                    data.pop(item, None)
+
+                data.update({'start_time': emergency_object.start_time })
+
+                emergency_form = EmergencyForm(data, instance=emergency_object)
+
+                # import code; code.interact(local=locals())
+                if emergency_form.is_valid():
+                    self.object = emergency_form.save()
+                    data_object = {
+                        'id': self.object.pk,
+                    }
+                    self.logger.info("[UPDATE new Emergency] AJAX FORM SUCCESS")
+                    return JsonResponse(data_object, status=200)
+                else:
+                    self.logger.info("[UPDATE new Emergency] AJAX FORM ERRORS:{}".format(emergency_form.errors))
+                    return JsonResponse(emergency_form.errors, status=400)
+
+        self.logger.info("[UPDATE new Emergency] form: Error AJAX")
+        return JsonResponse(form.errors, status=400)
+
+
 
 class AjaxableResponseMixin(object):
     """

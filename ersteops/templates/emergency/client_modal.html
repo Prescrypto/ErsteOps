@@ -7,11 +7,10 @@
   scrollable
   width="75%"
   height="auto"
-  @opened="tab"
+  @opened="open"
   @closed="destroy">
 
-  <form action="/emergency/new/" method="post">{% csrf_token %}
-
+  <div>
     <div class="c-tabs">
       <nav class="c-tabs__list nav nav-tabs" id="modal-nav" role="tablist">
         <a
@@ -26,21 +25,25 @@
           :aria-controls="`nav-${name}`">
             <% label %>
         </a>
-        <button
-          @click="submit"
-          v-if="active !== 'search'"
-          class="c-btn c-btn--success"
-          style="float:right; position:relative; bottom:7px;">
-            Guardar Emergencia
-        </button>
+        <div v-if="active !== 'search'" class="modal-buttons">
+          <button
+            @click="toggleActive"
+            :class="{'c-btn': true, 'c-btn--success': !emergency.is_active, 'c-btn--danger': emergency.is_active}">
+              <span v-if="emergency.is_active">Desactivar</span>
+              <span v-else>Activar</span>
+          </button>
+          <button
+            @click="submit"
+            class="c-btn c-btn--info">
+              Guardar Emergencia
+          </button>
+        </div>
       </nav>
 
       <div class="c-tabs__content tab-content" id="nav-tabContent">
         <!-- Search TAB -->
         <div class="c-tabs__pane active" id="nav-search" role="tabpanel" aria-labelledby="nav-search-tab">
-          <form id="searchpatient" action="/emergency/getpatient/" method="post">
-            <search />
-          </form>
+          <search />
         </div><!-- End Search TAB -->
 
         <!-- Patient TAB -->
@@ -54,92 +57,48 @@
         </div><!-- End Address TAB -->
 
         <div class="c-tabs__pane" id="nav-units" role="tabpanel" aria-labelledby="nav-units-tab">
-          <table>
-            <tbody>
-            <tr>
-              <td><label for="id_unit">Unidad:</label></td>
-              <td><select name="unit" id="id_unit" class="c-input" multiple="multiple">
-                </select></td>
-            </tr>
-            <tr>
-              <td><label for="id_is_active">Es activa:</label></td>
-              <td>
-                  <div class="col-md-12">
-                    <div class="c-field">
-                        <div class="c-select">
-                            <select id="id_is_active" name="is_active">
-                                <option value="1">Desconocido</option>
-                                <option value="2">Sí</option>
-                                <option value="3">No</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-              </td>
-            </tr>
-            </tbody>
-          </table>
-        </div><!-- End Unit TAB -->
+          <div class="row">
+            <div class="col-12">
+              <div class="c-field">
+                <label class="c-field__label" for="id_units">
+                  Unidades
+                </label>
+                <select
+                  {# v-model="" #}
+                  name="units"
+                  id="id_units"
+                  class="c-input"
+                >
+                  <option value="" selected=""></option>
+                  <option
+                    v-for="unit in units"
+                    value="{unit.pk}"
+                  >
+                    <% unit.fields.year %> <% unit.fields.model %>
+                  </option>
+                </select>
+              </div>
 
-        <!-- COMMENT THIS SECTION TEMPORALLY
-        <div class="c-tabs__pane" id="nav-timers" role="tabpanel" aria-labelledby="nav-timers-tab">
-          Tiempos
-          <table>
-            <tbody>
-              <tr>
-                <td><label for="id_start_time">Inicio toma de datos:</label></td>
-                <td><input type="text" name="start_time" value="2017-12-29 15:31:02" class="c-input" id="id_start_time" required=""><input type="hidden" name="initial-start_time" value="2017-12-29 15:31:02" id="initial-id_start_time"></td>
-                </tr>
-              <tr>
-                <td><label for="id_end_time">Fin toma de datos:</label></td>
-                <td><input type="text" name="end_time" value="2017-12-29 15:31:02" class="c-input" id="id_end_time"><input type="hidden" name="initial-end_time" value="2017-12-29 15:31:02" id="initial-id_end_time"></td>
-              </tr>
-              <tr>
-                <td><label for="id_unit_assigned_time">Asignacion de unidad:</label></td>
-                <td><input type="text" name="unit_assigned_time" value="2017-12-29 15:31:02" class="c-input" id="id_unit_assigned_time"><input type="hidden" name="initial-unit_assigned_time" value="2017-12-29 15:31:02" id="initial-id_unit_assigned_time"></td>
-              </tr>
-              <tr>
-                <td><label for="id_unit_dispatched_time">Despacho de unidad:</label></td>
-                <td><input type="text" name="unit_dispatched_time" value="2017-12-29 15:31:02" class="c-input" id="id_unit_dispatched_time"><input type="hidden" name="initial-unit_dispatched_time" value="2017-12-29 15:31:02" id="initial-id_unit_dispatched_time"></td>
-                </tr>
-              <tr>
-                <td><label for="id_arrival_time">Arrivo de unidad:</label></td>
-                <td><input type="text" name="arrival_time" value="2017-12-29 15:31:02" class="c-input" id="id_arrival_time"><input type="hidden" name="initial-arrival_time" value="2017-12-29 15:31:02" id="initial-id_arrival_time"></td>
-              </tr>
-              <tr>
-                <td><label for="id_attention_time">Inicio de atencion:</label></td>
-                <td><input type="text" name="attention_time" value="2017-12-29 15:31:02" class="c-input" id="id_attention_time"><input type="hidden" name="initial-attention_time" value="2017-12-29 15:31:02" id="initial-id_attention_time"></td>
-              </tr>
-              <tr>
-                <td><label for="id_derivation_time">Inicio de derivacion:</label></td>
-                <td><input type="text" name="derivation_time" value="2017-12-29 15:31:02" class="c-input" id="id_derivation_time"><input type="hidden" name="initial-derivation_time" value="2017-12-29 15:31:02" id="initial-id_derivation_time"></td>
-              </tr>
-              <tr>
-                <td><label for="id_hospital_arrival">Llegada hopital:</label></td>
-                <td><input type="text" name="hospital_arrival" value="2017-12-29 15:31:02" class="c-input" id="id_hospital_arrival"><input type="hidden" name="initial-hospital_arrival" value="2017-12-29 15:31:02" id="initial-id_hospital_arrival"></td>
-              </tr>
-              <tr>
-                <td><label for="id_patient_arrival">Paciente atencion hopital:</label></td>
-                <td><input type="text" name="patient_arrival" value="2017-12-29 15:31:02" class="c-input" id="id_patient_arrival"><input type="hidden" name="initial-patient_arrival" value="2017-12-29 15:31:02" id="initial-id_patient_arrival"></td>
-              </tr>
-              <tr>
-                <td><label for="id_final_emergency_time">Fin emergencia:</label></td>
-                <td><input type="text" name="final_emergency_time" value="2017-12-29 15:31:02" class="c-input" id="id_final_emergency_time"><input type="hidden" name="initial-final_emergency_time" value="2017-12-29 15:31:02" id="initial-id_final_emergency_time"></td>
-              </tr>
-              <tr>
-                <td><label for="id_is_active">Activa:</label></td>
-                <td><select name="is_active" class="c-input" id="id_is_active">
-                      <option value="1" selected="">Unknown</option>
-                      <option value="2">Yes</option>
-                      <option value="3">No</option>
-                    </select></td>
-              </tr>
-              </tbody>
-            </table>
-          </form>
-        </div>  <!\-\- End Timer TAB \-\->
-              END COMMENT -->
+              <br />
+              <div class="c-field">
+                <label class="c-field__label" for="id_is_active">
+                  Es activa
+                </label>
+                <select
+                  {# v-model="" #}
+                  name="is_active"
+                  id="id_is_active"
+                  class="c-input"
+                >
+                  <option value="" selected=""></option>
+                  <option value="2">Sí</option>
+                  <option value="3">No</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div><!-- End Unit TAB -->
       </div>
     </div>
-  </form>
+  </div>
 </modal>

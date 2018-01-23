@@ -20,6 +20,7 @@ import {
   REQUEST_NEW_INCIDENT_START,
   REQUEST_NEW_INCIDENT_SUCCESS,
   REQUEST_NEW_INCIDENT_ERROR,
+  EMERGENCY_TOGGLE_ACTIVE,
 } from './constants';
 
 Vue.use(Vuex);
@@ -33,7 +34,9 @@ const store = new Vuex.Store({
       address: {},
     },
     suggestions: [],
-    emergency: {},
+    emergency: {
+      is_active: true,
+    },
   },
 
   actions: {
@@ -49,8 +52,9 @@ const store = new Vuex.Store({
     newIncident({ commit }, data) {
       commit(REQUEST_NEW_INCIDENT_START);
       http
-        .post('/emergency/new/', data)
+        .post(`/emergency/new/${data.id || ''}`, data)
         .then(response => {
+          console.log(`Add new emergency id: ${data.id}`);
           commit(REQUEST_NEW_INCIDENT_SUCCESS, response.data);
         })
         .catch(err => commit(REQUEST_NEW_INCIDENT_ERROR, err));
@@ -60,6 +64,7 @@ const store = new Vuex.Store({
       http
         .get(`/emergency/ajax/patient/${target}/`)
         .then(response => {
+          console.log(`Load patient detail id: ${target}`);
           const { data } = response;
           const addresses = JSON.parse(data.addresses).map(address =>
             removePrefix(address, /id_/)
@@ -86,6 +91,7 @@ const store = new Vuex.Store({
 
   getters: {
     hasSuggestions: state => !!state.suggestions.length,
+    whatEmergencies: state => state.emergencies,
   },
 
   mutations: {
@@ -162,6 +168,11 @@ const store = new Vuex.Store({
       state.modal.address = {};
       state.emergency = {};
       state.modal.active = 'search';
+    },
+
+    // Emergency
+    [EMERGENCY_TOGGLE_ACTIVE](state) {
+      state.emergency.is_active = !state.emergency.is_active;
     },
   },
 });

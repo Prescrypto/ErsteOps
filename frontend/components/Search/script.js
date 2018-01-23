@@ -1,5 +1,6 @@
-import { mapState, mapActions, mapGetters } from 'vuex';
+import { mapState, mapActions, mapGetters, mapMutations } from 'vuex';
 import Loader from 'vue-spinner/src/ScaleLoader.vue';
+import { MODAL_CHANGE_TAB } from 'store/constants';
 
 export default {
   name: 'search',
@@ -17,7 +18,7 @@ export default {
 
   computed: {
     invalid() {
-      return this.fields.term.invalid;
+      return (((this.fields || {}).$search || {}).term || {}).invalid;
     },
     ...mapState(['loading', 'suggestions']),
     ...mapGetters(['hasSuggestions']),
@@ -26,8 +27,8 @@ export default {
   methods: {
     // on submit, disable the default <form> submit, indicate the form is
     // dirty, and run the search action with the input value
-    submit() {
-      this.$validator.validateAll().then(valid => {
+    submit(scope) {
+      this.$validator.validateAll(scope).then(valid => {
         if (valid) {
           this.pristine = false;
           this.search(this.query);
@@ -37,10 +38,12 @@ export default {
 
     populate(target) {
       this.patient(target);
+      this.changeTab('patient');
       window.$(`#nav-patient-tab`).tab('show');
     },
-
-    // maps the search action from the store to the component
+    ...mapMutations({
+      changeTab: MODAL_CHANGE_TAB,
+    }),
     ...mapActions(['search', 'patient']),
   },
 };
