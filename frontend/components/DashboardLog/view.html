@@ -20,14 +20,14 @@
     <tr v-for="emergency in emergencies" :id="`emergency-${emergency.id}`" class="c-table__row emergency">
       <td class="c-table__cell" @click="populate(emergency.id)"><span class="u-text-mute">{{ emergency.odoo_client }}</span></td>
       <td class="c-table__cell" @click="populate(emergency.id)">{{ emergency.grade_type }}</td>
-      <td class="c-table__cell">
+      <td class="c-table__cell" @click="populate(emergency.id)">
         <span v-for="unit in emergency.unit.all" class="u-text-mute">{{ unit }}</span>
         <span v-if="!((emergency.unit || {}).all || {}).length">Sin Asignar</span>
       </td>
-      <td class="c-table__cell">
+      <td class="c-table__cell" @click="populate(emergency.id)">
         <span class="u-text-mute">{{ emergency.start_time | time-since(now) }}</span>
       </td>
-      <td class="c-table__cell">
+      <td class="c-table__cell" @click="populate(emergency.id)">
         <span v-if="emergency.is_active" class="c-badge c-badge--small c-badge--success">En Camino</span>
         <span v-else class="c-badge c-badge--small c-badge--success">Terminado</span>
       </td>
