@@ -100,12 +100,15 @@ class EmergencyDashboardList(ListView):
 
     def get_context_data(self, **kwargs):
         active_emergencies = Emergency.objects.filter(is_active=True).count()
-        active_units = Unit.objects.filter(Q(is_active=True) & Q(assigned=False)).count()
+        units = Unit.objects.filter(Q(is_active=True) & Q(assigned=False))
+        active_units = units.count()
+        units_list = serializers.serialize('json', list(units))
         context = super(EmergencyDashboardList, self).get_context_data(**kwargs)
         context.update({
             'now': timezone.now(),
             'active_emergencies': active_emergencies,
             'active_units': active_units,
+            'units_list': units_list
         })
         return context
 

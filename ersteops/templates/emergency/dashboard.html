@@ -39,6 +39,8 @@
 <script>
   var json_list = {{ object_list|safe }};
   window.erste.incidents = json_list;
+  var units_json_list = {{ units_list|safe }};
+
   // example HTTP_PROTOCOL: {{ HTTP_PROTOCOL }}
   // ie. ABSOLUTE_URI : {{ HTTP_ABSOLUTE_URI }}
 </script>
