@@ -97,10 +97,9 @@ class EmergencyListJSONView(ListView):
 class EmergencyDashboardList(ListView):
     template_name = "emergency/dashboard.html"
     model = Emergency
-    emm_list = Emergency.objects.filter(is_active=True)
 
     def get_context_data(self, **kwargs):
-        active_emergencies = self.emm_list.count()
+        active_emergencies = Emergency.objects.filter(is_active=True).count()
         active_units = Unit.objects.filter(Q(is_active=True) & Q(assigned=False)).count()
         context = super(EmergencyDashboardList, self).get_context_data(**kwargs)
         context.update({
@@ -112,7 +111,7 @@ class EmergencyDashboardList(ListView):
 
     def get_queryset(self):
         fields = EMERGENCY_LIST_FIELDS
-        data = serializers.serialize('json', list(self.emm_list), fields=fields)
+        data = serializers.serialize('json', list(Emergency.objects.filter(is_active=True)), fields=fields)
         logger.info('Dashboard List: {}'.format(data))
         return data
 
