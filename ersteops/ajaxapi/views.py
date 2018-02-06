@@ -25,17 +25,17 @@ def get_subscriptor(request):
         # Get info from res.partner
         patients = _api_odoo.get_by_patient_name(q, result['access_token'])
         clients = patients['results']
-        logger.info('%s (%s)' % ('AjaxApi_partner', clients))
+        logger.info('%s (%s)' % ('[SUCCESS GET Partner Members]', clients))
 
         # get info from family.member
-        famiily_members = _api_odoo.get_by_family_member(q, result['access_token'])
-        clients_family = famiily_members['results']
-        logger.info('%s (%s)' % ('AjaxApi_family',famiily_members))
+        family_members = _api_odoo.get_by_family_member(q, result['access_token'])
+        clients_family = family_members['results']
+        logger.info('%s (%s)' % ('[SUCCESS GET Family Members]', family_members))
 
         # get info from company.member
         company_members = _api_odoo.get_by_company_member(q, result['access_token'])
         clients_company = company_members['results']
-        logger.info('%s (%s)' % ('AjaxApi_company', company_members))
+        logger.info('%s (%s)' % ('[SUCCESS GET Company Members]', company_members))
 
         # Init result list
         results = []
@@ -43,11 +43,12 @@ def get_subscriptor(request):
         for client in clients:
             client_json = {
                 "id": client['id'],
-                "label": client['name'] + ' - (' + str(client['client_type']) + ')',
+                "label": "{} -({}) ID: {}".format(client['name'], str(client['client_type']), client['client_export_id']),
                 "value": client['name'] + ' - (' + str(client['client_type']) + ')',
                 "parent_id": client['id'],
                 "client_type": client['client_type'],
                 "source": 'res.partner',
+                "client_export_id": client['client_export_id'],
                 "target": str(client['id']).zfill(6) + str(1).zfill(6) + str(client['id']).zfill(6)
             }
             results.append(client_json)
@@ -59,6 +60,7 @@ def get_subscriptor(request):
                 "label": client['name'] + ' - ( ' + str(client['id']) + ' - ' + 'Family Member' + ')',
                 "value": client['name'] + ' - ( ' + str(client['id']) + ' - ' + 'Family Member' + ')',
                 "parent_id": client['parent_id']['id'],
+                "parent_name": client['parent_id']['name'], # Titular Name
                 "client_type": 'family_member',
                 "source": 'family.member',
                 "target": str(client['id']).zfill(6) + str(2).zfill(6) + str(client['parent_id']['id']).zfill(6)
@@ -72,6 +74,8 @@ def get_subscriptor(request):
                 "label": client['name'] + ' - ( ' + str(client['id']) + ' - ' + 'Company Member' + ')',
                 "value": client['name'] + ' - ( ' + str(client['id']) + ' - ' + 'Company Member' + ')',
                 "parent_id": client['parent_id']['id'],
+                "parent_name": client['parent_id']['name'], # Nombre de fantasia
+                "parent_legal_name": client['parent_id']['legal_name'], # Nombre Legal
                 "client_type": "company_member",
                 "source": 'company.member',
                 "target": str(client['id']).zfill(6) + str(3).zfill(6) + str(client['parent_id']['id']).zfill(6)
