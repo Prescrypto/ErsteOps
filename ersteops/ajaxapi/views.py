@@ -74,6 +74,8 @@ def get_subscriptor(request):
                 "label": client['name'] + ' - ( ' + str(client['id']) + ' - ' + 'Company Member' + ')',
                 "value": client['name'] + ' - ( ' + str(client['id']) + ' - ' + 'Company Member' + ')',
                 "parent_id": client['parent_id']['id'],
+                "parent_name": client['parent_id']['name'], # Nombre de fantasia
+                "parent_legal_name": client['parent_id']['legal_name'], # Nombre Legal
                 "client_type": "company_member",
                 "source": 'company.member',
                 "target": str(client['id']).zfill(6) + str(3).zfill(6) + str(client['parent_id']['id']).zfill(6)
