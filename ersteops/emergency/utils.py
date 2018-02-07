@@ -82,7 +82,6 @@ class AjaxableResponseMixin(object):
         if self.request.is_ajax():
             data = json.loads(self.request.body.decode('utf-8'))
             if data:
-                self.logger.info("Data: {}".format(data))
                 emergency_form = EmergencyForm(data)
                 emergency_form.data.update({'start_time': timezone.now()})
                 if emergency_form.is_valid():
@@ -93,7 +92,7 @@ class AjaxableResponseMixin(object):
                     self.logger.info("POST new Emergency] AJAX FORM SUCCESS")
                     return JsonResponse(data_object, status=200)
                 else:
-                    self.logger.info("[POST new Emergency] AJAX FORM ERRORS:{}".format(emergency_form.errors))
+                    self.logger.info("[POST new Emergency] AJAX FORM ERRORS")
                     return JsonResponse(emergency_form.errors, status=400)
 
             self.logger.info("[POST new Emergency] form: Error AJAX")

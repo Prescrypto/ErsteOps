@@ -115,7 +115,7 @@ class EmergencyDashboardList(ListView):
     def get_queryset(self):
         fields = EMERGENCY_LIST_FIELDS
         data = serializers.serialize('json', list(Emergency.objects.filter(is_active=True)), fields=fields)
-        logger.info('Dashboard List: {}'.format(data))
+        logger.info('[Dashboard List Sent SUCCESS')
         return data
 
 
