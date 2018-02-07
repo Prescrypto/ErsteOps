@@ -41,6 +41,9 @@ def get_subscriptor(request):
         results = []
         # Add res.partner data
         for client in clients:
+            if client.get('client_type', None) is None:
+                continue
+
             client_export_id_label= client['client_export_id'] if client.get('client_export_id', 'None') != 'None' else "Sin ID"
             client_json = {
                 "id": client['id'],
