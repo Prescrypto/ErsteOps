@@ -312,8 +312,6 @@ def handle_patient_data(patient_id):
         patient_data = _api_odoo.get_by_company_member_id( str(patient_id),result['access_token'])
         parent_data = _api_odoo.get_by_patient_id( str(patient_data['parent_id']['id']),result['access_token'])
 
-    logger.info('%s (%s)' % ('OdooApi_patient_data: ', patient_data))
-    logger.info('%s (%s)' % ('OdooApi_parent_data: ', parent_data))
     return patient_json(source_id, patient_data, parent_data)
 
 
@@ -322,8 +320,8 @@ def patient_json(source_id,patient_data,parent_data):
     patient_data_json = {}
     if source_id == 1:
         patient_data_json = {
-            "id_odoo_client":  str(patient_data['client_export_id']) + '-' + str(patient_data['id']) + '-' + str(patient_data['id']),
-            "id_patient_name":  patient_data['name'],
+            "id_odoo_client" : str(patient_data['client_export_id']),
+            "id_patient_name" : "{}".format(patient_data['name']),
             "id_patient_allergies" : '',
             "id_patient_illnesses" : '',
             "id_caller_relation": '',
@@ -335,8 +333,8 @@ def patient_json(source_id,patient_data,parent_data):
         }
     else:
         patient_data_json ={
-            "id_odoo_client":  str(parent_data['client_export_id']) + '-' + str(patient_data['parent_id']['id']) + '-' + str(patient_data['id']),
-            "id_patient_name":  patient_data['name'],
+            "id_odoo_client" : str(parent_data['client_export_id']),
+            "id_patient_name" : "{} ({})".format(patient_data['name'], parent_data['name']),
             "id_patient_allergies" : patient_data['allergies'],
             "id_patient_illnesses" : patient_data['prev_ailments'],
             "id_caller_relation" : partner_relationship(source_id,patient_data['relationship']),
@@ -346,7 +344,7 @@ def patient_json(source_id,patient_data,parent_data):
             "addresses": address_json(parent_data,patient_data),
             "min_addresses": min_address_json(parent_data,patient_data),
         }
-    logger.info('%s (%s)' % ('PatientJSON',patient_data_json))
+    logger.info('[ Patient JSON SUCCESS ] : {}'.format(patient_data_json))
     return patient_data_json
 
 def partner_relationship(source_id,patient_relation):
@@ -416,7 +414,6 @@ def address_json(parent_data,patient_data):
         }
         adress_list.append(adresses_json)
     data = json.dumps(adress_list)
-    logger.info('%s (%s)' % ('AddressJSON',data))
     return data
 
 def min_address_json(parent_data,patient_data):
