@@ -433,11 +433,8 @@ def min_address_json(parent_data,patient_data):
                     "id_address_street": parent_data['street'],
         }
         adress_list.append(adresses_json)
-    #data = json.dumps(adress_list)
-    data = adress_list
-    logger.info('%s (%s)' % ('MinAddressJSON',data))
-    return data
 
+    return adress_list
 
 @method_decorator(login_required, name='dispatch')
 class EmergencyActivate(View):

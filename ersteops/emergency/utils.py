@@ -41,9 +41,7 @@ class UpdateJsonResponseMixin(object):
         if self.request.is_ajax():
             data = json.loads(self.request.body.decode('utf-8'))
             if data:
-                self.logger.info("POST Data: {}".format(data))
                 emergency_object = super(UpdateJsonResponseMixin, self).get_object()
-
                 # del timers form form
                 entriesToRemove = ('attention_time', 'derivation_time', 'end_time', 'final_emergency_time', 'hospital_arrival',
                                     'patient_arrival', 'start_time', 'unit_assigned_time', 'unit_dispatched_time',
