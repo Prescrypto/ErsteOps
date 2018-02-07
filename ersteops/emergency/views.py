@@ -344,7 +344,7 @@ def patient_json(source_id,patient_data,parent_data):
             "addresses": address_json(parent_data,patient_data),
             "min_addresses": min_address_json(parent_data,patient_data),
         }
-    logger.info('[ Patient JSON SUCCESS ] : {}'.format(patient_data_json))
+    logger.info('[ GET PATIENTJSON FOR FILLUP EMERGENCY FORM SUCCESS ]')
     return patient_data_json
 
 def partner_relationship(source_id,patient_relation):

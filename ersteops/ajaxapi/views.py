@@ -25,17 +25,14 @@ def get_subscriptor(request):
         # Get info from res.partner
         patients = _api_odoo.get_by_patient_name(q, result['access_token'])
         clients = patients['results']
-        logger.info('%s (%s)' % ('[SUCCESS GET Partner Members]', clients))
 
         # get info from family.member
         family_members = _api_odoo.get_by_family_member(q, result['access_token'])
         clients_family = family_members['results']
-        logger.info('%s (%s)' % ('[SUCCESS GET Family Members]', family_members))
 
         # get info from company.member
         company_members = _api_odoo.get_by_company_member(q, result['access_token'])
         clients_company = company_members['results']
-        logger.info('%s (%s)' % ('[SUCCESS GET Company Members]', company_members))
 
         # Init result list
         results = []
@@ -93,7 +90,7 @@ def get_subscriptor(request):
             results.append(client_json)
 
         data = json.dumps(results)
-        logger.info('%s (%s)' % ('[Success] AjaxApiReturn: ', data))
+        logger.info('[SUCCESS AjaxApiReturn]')
     else:
       logger.error("[ERROR Subscriptor ajaxview] Request no Valido")
       data = 'fail!'
