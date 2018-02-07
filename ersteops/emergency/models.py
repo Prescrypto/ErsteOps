@@ -216,8 +216,8 @@ def emergency_dictionary(instance):
             "unit_type":str(unit.unit_type),
             "is_active":unit.is_active,
             "assigned":unit.assigned,
-            "created_at":unit.created_at.strftime('%b %-d %-I:%M %p'),
-            "last_modified":unit.last_modified.strftime('%b %-d %-I:%M %p'),
+            "created_at":unit.created_at.isoformat(),
+            "last_modified":unit.last_modified.isoformat(),
         }
         units.append(unitDict)
     emergDict={
@@ -282,7 +282,7 @@ class AttentionKind(models.Model):
     created_at = models.DateTimeField("fecha de alta",auto_now_add=True,editable=False)
     last_modified = models.DateTimeField("ultima modificacion",auto_now=True,editable=False)
     class Meta:
-        verbose_name_plural = "Kind of Attention"
+        verbose_name_plural = "Tipo de Atención"
         ordering = ['created_at']
     def __str__(self):
         return self.grade_type + ' - ' +self.name
@@ -295,7 +295,7 @@ class AttentionZone(models.Model):
     created_at = models.DateTimeField("fecha de alta",auto_now_add=True,editable=False)
     last_modified = models.DateTimeField("ultima modificacion",auto_now=True,editable=False)
     class Meta:
-        verbose_name_plural = "zone"
+        verbose_name_plural = "Zona"
         ordering = ['created_at']
     def __str__(self):
         return self.zone_id + ' - ' +self.name
@@ -368,8 +368,8 @@ def derivation_dictionary(instance):
         "eventualities" : instance.eventualities,
         "reception" : instance.reception,
         "notes" : instance.notes,
-        "created_at" : instance.created_at.strftime('%b %-d %-I:%M %p'),
-        "last_modified" : instance.last_modified.strftime('%b %-d %-I:%M %p')
+        "created_at" : instance.created_at.isoformat(),
+        "last_modified" : instance.last_modified.isoformat()
     }
 
     return derivDict
