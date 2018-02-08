@@ -57,7 +57,7 @@ class Unit(models.Model):
     created_at = models.DateTimeField("Fecha de alta", auto_now_add=True)
     last_modified = models.DateTimeField("Última modificación", auto_now=True)
 
-    objects = UnitManager
+    objects = UnitManager()
 
     class Meta:
         verbose_name_plural = "Unidades"

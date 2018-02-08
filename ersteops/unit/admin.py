@@ -3,6 +3,8 @@ from .models import Unit
 
 class UnitAdmin(admin.ModelAdmin):
     ''' Customize Unit Admin '''
-    pass
+    list_display = ("identifier", "unit_type", "is_active", "is_assigned", "is_alliance", "location", "operator", "phone")
+    list_filter = ("unit_type", "is_active", "is_assigned", "is_alliance", )
+    search_fields = ('identifier', 'location', )
 
 admin.site.register(Unit, UnitAdmin)
