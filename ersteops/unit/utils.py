@@ -1,3 +1,4 @@
+''' Utils functions to Unit model '''
 
 UNIT_TYPE_LIST = (
     ('terapia_intensiva' , 'Ambulancia de terapia intensiva'),

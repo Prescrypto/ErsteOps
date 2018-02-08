@@ -6,10 +6,12 @@ from .utils import UNIT_TYPE_LIST
 
 class Unit(models.Model):
     ''' Unit model for ErsteOps '''
+
+    # List of Unit type choices
     UNIT_TYPE_CHOICES = UNIT_TYPE_LIST
 
     # Required fields
-    identifier = models.CharField('Identificador', unique=True, max_length=255, default="", help_text='ID de Unidad o Nombre de Alianza')
+    identifier = models.CharField('Identificador', unique=True, max_length=255, default='', help_text='ID de Unidad o Nombre de Alianza')
     unit_type = models.CharField('Tipo de unidad', max_length=255, choices=UNIT_TYPE_CHOICES)
 
     # Logical fields
@@ -29,3 +31,9 @@ class Unit(models.Model):
     created_at = models.DateTimeField("Fecha de alta", auto_now_add=True)
     last_modified = models.DateTimeField("Última modificación", auto_now=True)
 
+    class Meta:
+        verbose_name_plural = "Unidades"
+
+    def __str__(self):
+        ''' Return identifier as name '''
+        return self.identifier
