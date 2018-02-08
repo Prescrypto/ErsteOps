@@ -12,7 +12,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('vehicle', '0001_initial'),
+
     ]
 
     operations = [
@@ -54,7 +54,6 @@ class Migration(migrations.Migration):
                 ('created_at', models.DateTimeField(auto_now_add=True, verbose_name='fecha de alta')),
                 ('last_modified', models.DateTimeField(auto_now=True, verbose_name='ultima modificacion')),
                 ('grade_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='attention_kind_name', to='emergency.AttentionKind', verbose_name='tipo')),
-                ('unit', models.ManyToManyField(related_name='Unidad', to='vehicle.Unit')),
                 ('zone', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='zone_name', to='emergency.AttentionZone', verbose_name='zone')),
             ],
             options={
