@@ -1,6 +1,8 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 from django.contrib import admin
+from .models import Unit
 
-# Register your models here.
+class UnitAdmin(admin.ModelAdmin):
+    ''' Customize Unit Admin '''
+    pass
+
+admin.site.register(Unit, UnitAdmin)
