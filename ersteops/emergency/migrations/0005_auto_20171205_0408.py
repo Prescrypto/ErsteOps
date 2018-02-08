@@ -163,9 +163,4 @@ class Migration(migrations.Migration):
             name='unit_dispatched_time',
             field=models.DateTimeField(blank=True, default=datetime.datetime.now, verbose_name='fin'),
         ),
-        migrations.AlterField(
-            model_name='emergency',
-            name='unit',
-            field=models.ManyToManyField(related_name='unit_name', to='vehicle.Unit', verbose_name='Unidad'),
-        ),
     ]
