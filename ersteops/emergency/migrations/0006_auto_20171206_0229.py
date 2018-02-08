@@ -115,11 +115,6 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterField(
             model_name='emergency',
-            name='unit',
-            field=models.ManyToManyField(blank=True, related_name='unit_name', to='vehicle.Unit', verbose_name='Unidad'),
-        ),
-        migrations.AlterField(
-            model_name='emergency',
             name='unit_assigned_time',
             field=models.DateTimeField(blank=True, default=datetime.datetime.now, verbose_name='asignacion de unidad'),
         ),
