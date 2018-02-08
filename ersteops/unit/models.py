@@ -2,7 +2,33 @@ from django.db import models
 
 from .utils import UNIT_TYPE_LIST
 
-# Create your models here.
+class UnitQueryset(models.QuerySet):
+    ''' Add custom querysets'''
+
+    def available_units(self):
+        return self.filter(is_active=True).filter(is_assigned=False).filter(is_alliance=False)
+
+    def available_alliance_units(self):
+        return self.filter(is_active=True).filter(is_alliance=True)
+
+
+class UnitManager(models.Manager):
+    ''' Manager for prescriptions '''
+
+    def get_queryset(self):
+        return UnitQueryset(self.model, using=self._db)
+
+    def available_units(self):
+        return self.get_queryset().available_units()
+
+    def available_alliance_units(self):
+        return self.get_queryset().available_alliance_units()
+
+
+# I.e. Return all units available
+# Unit.objects.available_units()
+# Return all alliance units available
+# Unit.objects.available_alliance_units()
 
 class Unit(models.Model):
     ''' Unit model for ErsteOps '''
@@ -30,6 +56,8 @@ class Unit(models.Model):
     # Helpers time fields
     created_at = models.DateTimeField("Fecha de alta", auto_now_add=True)
     last_modified = models.DateTimeField("Última modificación", auto_now=True)
+
+    objects = UnitManager
 
     class Meta:
         verbose_name_plural = "Unidades"
