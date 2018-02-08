@@ -21,7 +21,7 @@ from core.utils import OdooApi
 from .utils import JSONResponseMixin, AjaxableResponseMixin, UpdateJsonResponseMixin
 from .forms import OdooClientForm, OdooClientAuto
 from .models import Emergency,AttentionDerivation
-from vehicle.models import Unit
+# TODO add new Unit
 from .list_fields import EMERGENCY_LIST_FIELDS
 
 # Logging library
@@ -100,9 +100,9 @@ class EmergencyDashboardList(ListView):
 
     def get_context_data(self, **kwargs):
         active_emergencies = Emergency.objects.filter(is_active=True).count()
-        units = Unit.objects.filter(Q(is_active=True) & Q(assigned=False))
-        active_units = units.count()
-        units_list = serializers.serialize('json', list(units))
+        units = [] # TODO add new Unit
+        active_units = 0 # TODO add new Unit
+        units_list = [] # TODO add new Unit
         context = super(EmergencyDashboardList, self).get_context_data(**kwargs)
         context.update({
             'now': timezone.now(),

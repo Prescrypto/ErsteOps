@@ -63,7 +63,6 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'emergency.apps.EmergencyConfig',
-    'vehicle.apps.VehicleConfig',
     'notifications.apps.NotificationConfig',
     'preventconcurrentlogins',
     'channels',
