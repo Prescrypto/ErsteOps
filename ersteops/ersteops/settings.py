@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'channels',
     'home.apps.HomeConfig',
     'webpack_loader',
+    'unit.apps.UnitConfig',
 ]
 
 MIDDLEWARE = [
