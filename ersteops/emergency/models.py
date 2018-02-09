@@ -17,7 +17,7 @@ class Emergency(models.Model):
         ("Masculino","Masculino"),
         ("Femenino","Femenino"),
         )
-    odoo_client = models.CharField("cliente id", max_length=50,unique=False)
+    odoo_client = models.CharField("cliente id", max_length=50)
     # Service Category
     service_category=models.ForeignKey("ServiceCategory",
         related_name="service_category_name",
@@ -59,7 +59,8 @@ class Emergency(models.Model):
 
     is_active = models.NullBooleanField("Activa", default=True)
 
-    # TODO Add new Unit
+    # Units m2m relation
+    units = models.ManyToManyField('unit.Unit', related_name='units', blank=True)
 
     # Attention address
     address_street = models.CharField('Calle y numero', default='', max_length=100, blank=True)
@@ -85,11 +86,10 @@ class Emergency(models.Model):
     patient_notes = models.TextField('Notas paciente', blank=True, default='')
     #Details of attention
     attention_final_grade = models.ForeignKey("AttentionKind",
-    related_name="final_attention_kind_name",
-    verbose_name= "Grado de atencion final",
-    blank=True,
-    null=True
-        )
+                                            related_name="final_attention_kind_name",
+                                            verbose_name= "Grado de atencion final",
+                                            blank=True,
+                                            null=True)
     attention_justification = models.TextField(u'Justificación', blank=True, default='')
     # Symptoms
     main_complaint = models.CharField('sintoma principal', max_length=100, default='', blank=True)
@@ -151,7 +151,7 @@ class Emergency(models.Model):
     def save(self, **kwargs):
         ''' Saves and checks whether the object is a candidate for notification '''
 
-        is_new_emergency = True if self.pk else False
+        is_new_emergency = True if self.pk is None else False
 
         if is_new_emergency:
             self.attention_final_grade = self.grade_type
@@ -159,6 +159,7 @@ class Emergency(models.Model):
         try:
             old_instance = False if is_new_emergency else Emergency.objects.get(pk=self.pk)
         except Emergency.DoesNotExist:
+            print("check legacy")
             return
 
         super(Emergency, self).save(**kwargs)
@@ -204,21 +205,13 @@ class Emergency(models.Model):
 def emergency_dictionary(instance):
 
     units=[]
-    # for unit in instance.unit.all():
-    #     unitDict={
-    #         "pk":unit.pk,
-    #         "unit_id":unit.unit_id,
-    #         "model":unit.model,
-    #         "year":unit.year,
-    #         "license_plate":unit.license_plate,
-    #         "brand":str(unit.brand),
-    #         "unit_type":str(unit.unit_type),
-    #         "is_active":unit.is_active,
-    #         "assigned":unit.assigned,
-    #         "created_at":unit.created_at.isoformat(),
-    #         "last_modified":unit.last_modified.isoformat(),
-    #     }
-    #     units.append(unitDict)
+    for unit in instance.units.all():
+        continue
+        _unit_json = {
+            # TODO add fields of UNIT
+        }
+        units.append(_unit_json)
+
     emergDict={
         "pk":instance.pk,
         "id":instance.pk,
