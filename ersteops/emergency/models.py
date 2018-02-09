@@ -2,7 +2,6 @@ import json
 import unicodedata
 
 from django.db import models
-from datetime import datetime, timedelta
 from django.utils import timezone
 
 from channels import Group
@@ -270,53 +269,61 @@ def emergency_dictionary(instance):
     return emergDict
 
 
-
-
-
-# Emergency attention grade G1,G2,G3, etc.(Triage)
-@python_2_unicode_compatible
 class AttentionKind(models.Model):
+    ''' Attention Kind Model can be G1, G2, G3 '''
     grade_type = models.CharField("Grado", max_length=100,unique=True,primary_key=True)
     name = models.CharField("Tipo de Consulta", max_length=100,unique=True)
     description = models.TextField("Descripcion", default="")
+
+    #
     created_at = models.DateTimeField("fecha de alta",auto_now_add=True,editable=False)
     last_modified = models.DateTimeField("ultima modificacion",auto_now=True,editable=False)
+
     class Meta:
         verbose_name_plural = "Tipo de Atención"
         ordering = ['created_at']
+
     def __str__(self):
         return self.grade_type + ' - ' +self.name
 
-# Emergency attention zone
-@python_2_unicode_compatible
+
 class AttentionZone(models.Model):
+    ''' Zona de Atención '''
     zone_id = models.CharField("Zona id", max_length=100,unique=True,primary_key=True)
     name = models.CharField("Descripcion", max_length=100,unique=True)
+
+    # Datetime utils
     created_at = models.DateTimeField("fecha de alta",auto_now_add=True,editable=False)
     last_modified = models.DateTimeField("ultima modificacion",auto_now=True,editable=False)
+
     class Meta:
         verbose_name_plural = "Zona"
         ordering = ['created_at']
+
     def __str__(self):
         return self.zone_id + ' - ' +self.name
 
-# Hospital model
-@python_2_unicode_compatible
+
 class AttentionHospital(models.Model):
+    ''' Hospital Model for Derivation cases'''
     name = models.CharField("hospital", max_length=100,unique=True)
     address = models.TextField("direccion", max_length=100, blank=True)
     phone = models.CharField("telefono", max_length=15, default='', blank=True)
+
+    # Datetime utils
     created_at = models.DateTimeField("fecha de alta",auto_now_add=True,editable=False)
     last_modified = models.DateTimeField("ultima modificacion",auto_now=True,editable=False)
+
     class Meta:
         verbose_name_plural = "Hospital"
         ordering = ['name']
+
     def __str__(self):
         return self.name
 
-# Hospital
-@python_2_unicode_compatible
+
 class AttentionDerivation(models.Model):
+    '''  Service Derivation model'''
     emergency = models.ForeignKey('Emergency',
         related_name = "derivation_emergency_name",
         verbose_name = "emergencia",
@@ -330,11 +337,15 @@ class AttentionDerivation(models.Model):
     eventualities = models.TextField("eventualidades", max_length=100, blank=True)
     reception = models.CharField("quien recibe en hospital", max_length=100, blank=True)
     notes = models.TextField("notas", max_length=100, blank=True)
+
+    # Datetime utils
     created_at = models.DateTimeField("fecha de alta",auto_now_add=True,editable=False)
     last_modified = models.DateTimeField("ultima modificacion",auto_now=True,editable=False)
+
     class Meta:
         verbose_name_plural = "Derivacion"
         ordering = ['created_at']
+
     def __str__(self):
         return self.motive
 
@@ -375,16 +386,17 @@ def derivation_dictionary(instance):
     return derivDict
 
 
-# service_category
-@python_2_unicode_compatible
 class ServiceCategory(models.Model):
+    ''' Model of Service Category '''
+
     name = models.CharField("Categoria", max_length=100, unique=True)
     description = models.TextField("Descripcion", blank=True)
+
+    # Datetime utils
     created_at = models.DateTimeField("Fecha de alta", auto_now_add=True, editable=False)
     last_modified = models.DateTimeField("Ultima modificacion", auto_now=True, editable=False)
+
     class Meta:
         ordering = ['name']
     def __str__(self):
         return self.name
-
-#class EmergencyType(models.Model):
