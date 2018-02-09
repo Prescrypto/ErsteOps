@@ -6,3 +6,16 @@ UNIT_TYPE_LIST = (
     ('urgencias_basicas' , 'Ambulancia de urgencias básicas'),
     ('vehiculo_consulta_medica_domicilio' , 'Vehiculo consulta medica a domicilio'),
 )
+
+UNIT_LIST_FIELD = [
+    "id",
+    "identifier",
+    "unit_type",
+    "is_active",
+    "is_assigned",
+    "is_alliance",
+    "location",
+    "operator",
+    "phone",
+    "description"
+]
