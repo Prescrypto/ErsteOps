@@ -59,3 +59,16 @@ daphne ersteops.asgi:channel_layer --port 8000 -b 0.0.0.0
 
 python3 manage.py runworker
 
+# Drop Database if neccesary
+In vagrant box go to /vagrant/ersteops and type the follow:
+
+```
+$ sudo -i -u postgres psql -c "DROP DATABASE mydb"
+$ sudo -i -u postgres psql -c "CREATE DATABASE mydb"
+$ python3 manage.py migrate
+$ python3 manage.py ../fixtures/auth/initial_data.json
+$ python3 manage.py ../fixtures/auth/test_data.json
+
+```
+
+HINT: Use in case have a lot of test with db or have change migrations file missing references
