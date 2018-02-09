@@ -2,8 +2,13 @@
 
 import Vue from 'vue';
 import Vuex from 'vuex';
+import { sortBy, flow, reverse, filter, findIndex } from 'lodash/fp';
 import http from 'utils/http';
 import { removePrefix } from 'utils/normalize';
+import { emergencies } from 'utils/preload';
+import { ws } from 'utils/url';
+import createWebSocketPlugin from 'utils/websocket';
+import ReconnectingWebSocket from 'reconnecting-websocket';
 import {
   REQUEST_SUGGEST_START,
   REQUEST_SUGGEST_SUCCESS,
@@ -20,11 +25,18 @@ import {
   REQUEST_NEW_INCIDENT_START,
   REQUEST_NEW_INCIDENT_SUCCESS,
   REQUEST_NEW_INCIDENT_ERROR,
+  EMERGENCIES_ADD,
+  EMERGENCIES_UPDATE,
+  EMERGENCY_SET_INACTIVE_START,
+  EMERGENCY_SET_INACTIVE_SUCCESS,
+  EMERGENCY_SET_INACTIVE_ERROR,
   EMERGENCY_TOGGLE_ACTIVE,
 } from './constants';
 
+// Use VueX
 Vue.use(Vuex);
 
+// Create VueX store
 const store = new Vuex.Store({
   state: {
     error: false,
@@ -34,6 +46,7 @@ const store = new Vuex.Store({
       address: {},
     },
     suggestions: [],
+    emergencies,
     emergency: {
       is_active: true,
     },
@@ -87,11 +100,25 @@ const store = new Vuex.Store({
         })
         .catch(err => commit(REQUEST_EMERGENCY_ERROR, err));
     },
+    stopTimer({ commit }, id) {
+      commit(EMERGENCY_SET_INACTIVE_START);
+      http
+        .get(`/emergency/ajax/end/${id}/`)
+        .then(() => commit(EMERGENCY_SET_INACTIVE_SUCCESS, id))
+        .catch(err => commit(EMERGENCY_SET_INACTIVE_ERROR, err));
+    },
   },
 
   getters: {
     hasSuggestions: state => !!state.suggestions.length,
-    whatEmergencies: state => state.emergencies,
+    activeEmergencies: state =>
+      filter(emergency => emergency.is_active)(state.emergencies),
+    sortActiveEmergencies: (state, getters) =>
+      flow(
+        sortBy(emergency => new Date(emergency.start_time).getTime()),
+        reverse
+      )(getters.activeEmergencies),
+    activeEmergencyCount: (state, getters) => getters.activeEmergencies.length,
   },
 
   mutations: {
@@ -170,11 +197,39 @@ const store = new Vuex.Store({
       state.modal.active = 'search';
     },
 
-    // Emergency
+    // Emergency i.e. modal data
     [EMERGENCY_TOGGLE_ACTIVE](state) {
       state.emergency.is_active = !state.emergency.is_active;
     },
+
+    // Emergencies i.e. dashboard log data
+    [EMERGENCIES_ADD](state, data) {
+      state.emergencies.push(data);
+    },
+    [EMERGENCIES_UPDATE](state, { index, data }) {
+      Vue.set(state.emergencies, index, data);
+    },
+    [EMERGENCY_SET_INACTIVE_START](state) {
+      state.error = false;
+      state.loading = true;
+    },
+    [EMERGENCY_SET_INACTIVE_SUCCESS](state, id) {
+      const index = findIndex(e => e.id === id)(state.emergencies);
+      Vue.set(state.emergencies, index, {
+        ...state.emergencies[index],
+        is_active: false,
+      });
+      state.loading = false;
+    },
+    [EMERGENCY_SET_INACTIVE_ERROR](state, err) {
+      state.error = err;
+      state.loading = false;
+    },
   },
+
+  plugins: [
+    createWebSocketPlugin(new ReconnectingWebSocket(`${ws}/notify/emergency/`)),
+  ],
 });
 
 export default store;

@@ -63,12 +63,12 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'emergency.apps.EmergencyConfig',
-    'vehicle.apps.VehicleConfig',
     'notifications.apps.NotificationConfig',
     'preventconcurrentlogins',
     'channels',
     'home.apps.HomeConfig',
     'webpack_loader',
+    'unit.apps.UnitConfig',
 ]
 
 MIDDLEWARE = [
@@ -142,7 +142,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-MX'
 
 TIME_ZONE = 'UTC'
 

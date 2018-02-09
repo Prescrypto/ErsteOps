@@ -21,8 +21,11 @@
       <td class="c-table__cell" @click="populate(emergency.id)"><span class="u-text-mute">{{ emergency.odoo_client }}</span></td>
       <td class="c-table__cell" @click="populate(emergency.id)">{{ emergency.grade_type }}</td>
       <td class="c-table__cell" @click="populate(emergency.id)">
+        <span>Sin Asignar</span>
+        <!-- Add again with new unit
         <span v-for="unit in emergency.unit.all" class="u-text-mute">{{ unit }}</span>
         <span v-if="!((emergency.unit || {}).all || {}).length">Sin Asignar</span>
+        -->
       </td>
       <td class="c-table__cell" @click="populate(emergency.id)">
         <span class="u-text-mute">{{ emergency.start_time | time-since(now) }}</span>

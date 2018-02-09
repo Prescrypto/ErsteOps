@@ -1,29 +1,23 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+import json
+import unicodedata
 
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
-from datetime import datetime, timedelta
-from vehicle import models as models_vehicle
+from django.utils import timezone
 
-import unicodedata
-import json
 from channels import Group
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 
 from core.utils import eventDuration
-# Create your models here.
 
 
-@python_2_unicode_compatible
 class Emergency(models.Model):
     ''' Emergency incident model '''
     GENDER = (
         ("Masculino","Masculino"),
         ("Femenino","Femenino"),
         )
-    odoo_client = models.CharField("cliente id",max_length=50,unique=False)
+    odoo_client = models.CharField("cliente id", max_length=50)
     # Service Category
     service_category=models.ForeignKey("ServiceCategory",
         related_name="service_category_name",
@@ -44,64 +38,63 @@ class Emergency(models.Model):
     # Timers
     # Emergency statrt an end time: when the operator select new incident
     # Initial call time
-    start_time = models.DateTimeField("Inicio toma de datos", default=datetime.now)
+    start_time = models.DateTimeField("Inicio toma de datos", default=timezone.now)
     # Records when the operator ends capture of basic emergency data
-    end_time = models.DateTimeField("Fin toma de datos", default=datetime.now,blank=True)
+    end_time = models.DateTimeField("Fin toma de datos", default=timezone.now, blank=True)
     # Records when unit is assigned
-    unit_assigned_time = models.DateTimeField("Asignacion de unidad", default=datetime.now,blank=True)
+    unit_assigned_time = models.DateTimeField("Asignacion de unidad", default=timezone.now, blank=True)
     # Records when unit is dispatched from current location to emergency address
-    unit_dispatched_time = models.DateTimeField("Despacho de unidad", default=datetime.now,blank=True)
+    unit_dispatched_time = models.DateTimeField("Despacho de unidad", default=timezone.now, blank=True)
     # Records when unit arives to emergency adress
-    arrival_time = models.DateTimeField("Arrivo de unidad", default=datetime.now,blank=True)
+    arrival_time = models.DateTimeField("Arrivo de unidad", default=timezone.now, blank=True)
     # Records when TUM begins attention
-    attention_time = models.DateTimeField("Inicio de atencion", default=datetime.now,blank=True)
+    attention_time = models.DateTimeField("Inicio de atencion", default=timezone.now, blank=True)
     # Records when patient is derived
-    derivation_time = models.DateTimeField("Inicio de derivacion", default=datetime.now,blank=True)
+    derivation_time = models.DateTimeField("Inicio de derivacion", default=timezone.now, blank=True)
     # Records when unit arrive to hospital
-    hospital_arrival = models.DateTimeField("Llegada hopital", default=datetime.now,blank=True)
+    hospital_arrival = models.DateTimeField("Llegada hopital", default=timezone.now, blank=True)
     # Record when patient arrive to hopsital
-    patient_arrival = models.DateTimeField("Paciente atencion hopital", default=datetime.now,blank=True)
-    final_emergency_time = models.DateTimeField("Fin emergencia", default=datetime.now,blank=True)
-    is_active = models.NullBooleanField("activa")
-    unit = models.ManyToManyField(models_vehicle.Unit,
-        related_name="unit_name",
-        verbose_name="Unidad",
-        blank=True,
-    )
+    patient_arrival = models.DateTimeField("Paciente atencion hopital", default=timezone.now, blank=True)
+    final_emergency_time = models.DateTimeField("Fin emergencia", default=timezone.now, blank=True)
+
+    is_active = models.NullBooleanField("Activa", default=True)
+
+    # Units m2m relation
+    units = models.ManyToManyField('unit.Unit', related_name='units', blank=True)
+
     # Attention address
-    address_street = models.CharField('Calle y numero',default='', max_length=100,blank=True)
-    address_extra = models.CharField('Calle',default='',max_length=100,blank=True)
-    address_zip_code = models.CharField('Codigo Postal',default='',max_length=5,blank=True)
-    address_county = models.CharField('Delegacion',default='',max_length=50,blank=True)
-    address_col = models.CharField('Colonia',default='',max_length=50,blank=True)
-    address_between = models.CharField('entre la calle',default='',max_length=100,blank=True)
-    address_and_street = models.CharField('y la calle',default='',max_length=100,blank=True)
-    address_ref = models.CharField('referencias',default='',max_length=100,blank=True)
-    address_front = models.CharField('fachada',default='',max_length=100,blank=True)
-    address_instructions = models.CharField('Instruccciones llegada',default='',max_length=100, blank=True)
-    address_notes = models.TextField('Notas',default='',blank=True)
+    address_street = models.CharField('Calle y numero', default='', max_length=100, blank=True)
+    address_extra = models.CharField('Calle', default='', max_length=100, blank=True)
+    address_zip_code = models.CharField('Codigo Postal', default='', max_length=5, blank=True)
+    address_county = models.CharField('Delegacion', default='', max_length=50, blank=True)
+    address_col = models.CharField('Colonia', default='', max_length=50, blank=True)
+    address_between = models.CharField('entre la calle', default='', max_length=100, blank=True)
+    address_and_street = models.CharField('y la calle', default='', max_length=100, blank=True)
+    address_ref = models.CharField('referencias', default='', max_length=100, blank=True)
+    address_front = models.CharField('fachada', default='', max_length=100, blank=True)
+    address_instructions = models.CharField('Instruccciones llegada', default='', max_length=100, blank=True)
+    address_notes = models.TextField('Notas', default='', blank=True)
     # Caller Data
-    caller_name = models.CharField('Persona que llama',max_length=100,blank=True)
-    caller_relation = models.CharField('Relacion con el paciente',max_length=50,blank=True)
+    caller_name = models.CharField('Persona que llama', max_length=100, blank=True)
+    caller_relation = models.CharField('Relacion con el paciente', max_length=50, blank=True)
     # Paient Data
-    patient_name = models.CharField('Nombre del Paciente',max_length=255, default='')
-    patient_gender = models.CharField('genero',max_length=9,default= '',blank=True,choices = GENDER)
-    patient_age = models.IntegerField('edad (años)',default=0,blank=True)
-    patient_allergies = models.CharField('alergias',max_length=100,default='',blank=True)
-    patient_illnesses = models.CharField('Enfermedades diagnosticadas',max_length=100,default='',blank=True)
-    patient_notes = models.TextField('Notas paciente',blank=True,default='')
+    patient_name = models.CharField('Nombre del Paciente', max_length=255, default='')
+    patient_gender = models.CharField('genero', max_length=9, default= '', blank=True, choices=GENDER)
+    patient_age = models.IntegerField('edad (años)', default=0, blank=True)
+    patient_allergies = models.CharField('alergias', max_length=100, default='', blank=True)
+    patient_illnesses = models.CharField('Enfermedades diagnosticadas', max_length=100, default='', blank=True)
+    patient_notes = models.TextField('Notas paciente', blank=True, default='')
     #Details of attention
     attention_final_grade = models.ForeignKey("AttentionKind",
-    related_name="final_attention_kind_name",
-    verbose_name= "Grado de atencion final",
-    blank=True,
-    null=True
-        )
-    attention_justification = models.TextField(u'Justificación',blank=True,default='')
+                                            related_name="final_attention_kind_name",
+                                            verbose_name= "Grado de atencion final",
+                                            blank=True,
+                                            null=True)
+    attention_justification = models.TextField(u'Justificación', blank=True, default='')
     # Symptoms
-    main_complaint = models.CharField('sintoma principal',max_length=100,default='',blank=True)
-    complaint_descriprion = models.TextField('descripcion de los sintomas',default='',blank=True)
-    subscription_type = models.CharField('subscripcion',max_length=100,default='',blank=True)
+    main_complaint = models.CharField('sintoma principal', max_length=100, default='', blank=True)
+    complaint_descriprion = models.TextField('descripcion de los sintomas', default='', blank=True)
+    subscription_type = models.CharField('subscripcion', max_length=100, default='', blank=True)
     # derivation = models.ManyToManyField('AttentionDerivation',
     #     related_name = 'derivation_issue',
     #     verbose_name = 'Derivacion',
@@ -109,63 +102,70 @@ class Emergency(models.Model):
     #     )
     created_at = models.DateTimeField("fecha de alta",auto_now_add=True,editable=False)
     last_modified = models.DateTimeField("ultima modificacion",auto_now=True,editable=False)
+
     class Meta:
         verbose_name_plural = "Emergency"
         ordering = ['created_at']
+
     def __str__(self):
-        return str(self.id)
-    # Emergency Timer
+        ''' Return name of instance '''
+        return self.odoo_client
+
+
     def emergencyTimer(self):
         # Calculate emergency Timer
         return eventDuration(self.start_time,self.final_emergency_time)
-    # data Timer
+
     def dataTimer(self):
         # Calculate data timer
         return eventDuration(self.start_time,self.end_time)
-    # Unit Timer
+
     def unitTimer(self):
         # Calculate unit assigment timer
         return eventDuration(self.start_time,self.unit_assigned_time)
-    # Dispatch Timer
+
     def dispatchTimer(self):
         # Calculate Dispatch Timer
         return eventDuration(self.start_time,self.unit_dispatched_time)
-    #Arrival Timer
+
     def arrivalTimer(self):
         # Calculate Arrival Timer
         return eventDuration(self.start_time,self.arrival_time)
-    # Attention timer
+
     def attentionTimer(self):
         # Calculate Attention timer: time takes medic between arrive location and begin attend to patient
         return eventDuration(self.start_time,self.attention_time)
-    # Derivation Timer
+
     def derivationTimer(self):
         # Calculate derivation timer
         return eventDuration(self.start_time,self.derivation_time)
-    # Hospital timer
+
     def hospitalTimer(self):
         # Calculate hospital timer
         return eventDuration(self.start_time,self.hospital_arrival)
-    # Patient arival
+
     def patientTimer(self):
         # Calculate patient arrival
         return eventDuration(self.start_time,self.patient_arrival)
+
     def save(self, **kwargs):
-        #Saves and checks whether the object is a candidate for notification
-        #new object
-        newEmerg = True if self.pk is None else False
-        if newEmerg:
-            self.attention_final_grade=self.grade_type
+        ''' Saves and checks whether the object is a candidate for notification '''
+
+        is_new_emergency = True if self.pk is None else False
+
+        if is_new_emergency:
+            self.attention_final_grade = self.grade_type
 
         try:
-            old_instance=False if newEmerg else Emergency.objects.get(pk=self.pk)
+            old_instance = False if is_new_emergency else Emergency.objects.get(pk=self.pk)
         except Emergency.DoesNotExist:
+            print("check legacy")
             return
 
         super(Emergency, self).save(**kwargs)
 
         type_notif = ""
-        if newEmerg:
+        if is_new_emergency:
             if self.is_active:
                 #Is new and is active
                 type_notif = "New"
@@ -175,9 +175,9 @@ class Emergency(models.Model):
         elif self.is_active and not old_instance.is_active:
             #Updated from is_active=False to is_active=True
             type_notif = "Activate"
-        elif self.is_active and old_instance.unit != self.unit:
-            #Update units in emergency
-            type_notif = "Unid Update"
+        # elif self.is_active and old_instance.unit != self.unit:
+        #     #Update units in emergency
+        #     type_notif = "Unid Update" # TODO add new unit here
         elif self.is_active:
             #Update simple and is_active
             type_notif = "Update"
@@ -205,21 +205,13 @@ class Emergency(models.Model):
 def emergency_dictionary(instance):
 
     units=[]
-    for unit in instance.unit.all():
-        unitDict={
-            "pk":unit.pk,
-            "unit_id":unit.unit_id,
-            "model":unit.model,
-            "year":unit.year,
-            "license_plate":unit.license_plate,
-            "brand":str(unit.brand),
-            "unit_type":str(unit.unit_type),
-            "is_active":unit.is_active,
-            "assigned":unit.assigned,
-            "created_at":unit.created_at.strftime('%b %-d %-I:%M %p'),
-            "last_modified":unit.last_modified.strftime('%b %-d %-I:%M %p'),
+    for unit in instance.units.all():
+        continue
+        _unit_json = {
+            # TODO add fields of UNIT
         }
-        units.append(unitDict)
+        units.append(_unit_json)
+
     emergDict={
         "pk":instance.pk,
         "id":instance.pk,
@@ -229,18 +221,18 @@ def emergency_dictionary(instance):
 
         "unit":units,
 
-        "start_time":instance.start_time.strftime('%b %-d %-I:%M %p'),
-        "end_time":instance.end_time.strftime('%b %-d %-I:%M %p'),
-        "created_at":instance.created_at.strftime('%b %-d %-I:%M %p'),
-        "last_modified":instance.last_modified.strftime('%b %-d %-I:%M %p'),
-        "unit_assigned_time":instance.unit_assigned_time.strftime('%b %-d %-I:%M %p'),
-        "unit_dispatched_time":instance.unit_dispatched_time.strftime('%b %-d %-I:%M %p'),
-        "arrival_time":instance.arrival_time.strftime('%b %-d %-I:%M %p'),
-        "attention_time":instance.attention_time.strftime('%b %-d %-I:%M %p'),
-        "derivation_time":instance.derivation_time.strftime('%b %-d %-I:%M %p'),
-        "hospital_arrival":instance.hospital_arrival.strftime('%b %-d %-I:%M %p'),
-        "patient_arrival":instance.patient_arrival.strftime('%b %-d %-I:%M %p'),
-        "final_emergency_time":instance.final_emergency_time.strftime('%b %-d %-I:%M %p'),
+        "start_time":instance.start_time.isoformat(),
+        "end_time":instance.end_time.isoformat(),
+        "created_at":instance.created_at.isoformat(),
+        "last_modified":instance.last_modified.isoformat(),
+        "unit_assigned_time":instance.unit_assigned_time.isoformat(),
+        "unit_dispatched_time":instance.unit_dispatched_time.isoformat(),
+        "arrival_time":instance.arrival_time.isoformat(),
+        "attention_time":instance.attention_time.isoformat(),
+        "derivation_time":instance.derivation_time.isoformat(),
+        "hospital_arrival":instance.hospital_arrival.isoformat(),
+        "patient_arrival":instance.patient_arrival.isoformat(),
+        "final_emergency_time":instance.final_emergency_time.isoformat(),
 
         "is_active":instance.is_active,
         "address_street":instance.address_street,
@@ -270,71 +262,83 @@ def emergency_dictionary(instance):
     return emergDict
 
 
-
-
-
-# Emergency attention grade G1,G2,G3, etc.(Triage)
-@python_2_unicode_compatible
 class AttentionKind(models.Model):
-    grade_type = models.CharField("Grado",max_length=100,unique=True,primary_key=True)
-    name = models.CharField("Tipo de Consulta",max_length=100,unique=True)
-    description = models.TextField("Descripcion",default="")
+    ''' Attention Kind Model can be G1, G2, G3 '''
+    grade_type = models.CharField("Grado", max_length=100,unique=True,primary_key=True)
+    name = models.CharField("Tipo de Consulta", max_length=100,unique=True)
+    description = models.TextField("Descripcion", default="")
+
+    #
     created_at = models.DateTimeField("fecha de alta",auto_now_add=True,editable=False)
     last_modified = models.DateTimeField("ultima modificacion",auto_now=True,editable=False)
+
     class Meta:
-        verbose_name_plural = "Kind of Attention"
+        verbose_name_plural = "Tipo de Atención"
         ordering = ['created_at']
+
     def __str__(self):
         return self.grade_type + ' - ' +self.name
 
-# Emergency attention zone
-@python_2_unicode_compatible
+
 class AttentionZone(models.Model):
-    zone_id = models.CharField("Zona id",max_length=100,unique=True,primary_key=True)
-    name = models.CharField("Descripcion",max_length=100,unique=True)
+    ''' Zona de Atención '''
+    zone_id = models.CharField("Zona id", max_length=100,unique=True,primary_key=True)
+    name = models.CharField("Descripcion", max_length=100,unique=True)
+
+    # Datetime utils
     created_at = models.DateTimeField("fecha de alta",auto_now_add=True,editable=False)
     last_modified = models.DateTimeField("ultima modificacion",auto_now=True,editable=False)
+
     class Meta:
-        verbose_name_plural = "zone"
+        verbose_name_plural = "Zona"
         ordering = ['created_at']
+
     def __str__(self):
         return self.zone_id + ' - ' +self.name
 
-# Hospital model
-@python_2_unicode_compatible
+
 class AttentionHospital(models.Model):
-    name = models.CharField("hospital",max_length=100,unique=True)
-    address = models.TextField("direccion",max_length=100,blank=True)
-    phone = models.CharField("telefono",max_length=15,default='',blank=True)
+    ''' Hospital Model for Derivation cases'''
+    name = models.CharField("hospital", max_length=100,unique=True)
+    address = models.TextField("direccion", max_length=100, blank=True)
+    phone = models.CharField("telefono", max_length=15, default='', blank=True)
+
+    # Datetime utils
     created_at = models.DateTimeField("fecha de alta",auto_now_add=True,editable=False)
     last_modified = models.DateTimeField("ultima modificacion",auto_now=True,editable=False)
+
     class Meta:
         verbose_name_plural = "Hospital"
         ordering = ['name']
+
     def __str__(self):
         return self.name
 
-# Hospital
-@python_2_unicode_compatible
+
 class AttentionDerivation(models.Model):
+    '''  Service Derivation model'''
     emergency = models.ForeignKey('Emergency',
         related_name = "derivation_emergency_name",
         verbose_name = "emergencia",
         default=1,
         )
-    motive = models.CharField("Motivo",max_length=100,blank=True)
+    motive = models.CharField("Motivo", max_length=100, blank=True)
     hospital = models.ForeignKey("AttentionHospital",
     related_name="attention_hospital_name",
     verbose_name= "hospital"
         )
-    eventualities = models.TextField("eventualidades",max_length=100,blank=True)
-    reception = models.CharField("quien recibe en hospital",max_length=100,blank=True)
-    notes = models.TextField("notas",max_length=100,blank=True)
+    eventualities = models.TextField("eventualidades", max_length=100, blank=True)
+    reception = models.CharField("quien recibe en hospital", max_length=100, blank=True)
+    notes = models.TextField("notas", max_length=100, blank=True)
+
+    # Datetime utils
     created_at = models.DateTimeField("fecha de alta",auto_now_add=True,editable=False)
     last_modified = models.DateTimeField("ultima modificacion",auto_now=True,editable=False)
+
     class Meta:
         verbose_name_plural = "Derivacion"
         ordering = ['created_at']
+
     def __str__(self):
         return self.motive
 
@@ -368,23 +372,24 @@ def derivation_dictionary(instance):
         "eventualities" : instance.eventualities,
         "reception" : instance.reception,
         "notes" : instance.notes,
-        "created_at" : instance.created_at.strftime('%b %-d %-I:%M %p'),
-        "last_modified" : instance.last_modified.strftime('%b %-d %-I:%M %p')
+        "created_at" : instance.created_at.isoformat(),
+        "last_modified" : instance.last_modified.isoformat()
     }
 
     return derivDict
 
 
-# service_category
-@python_2_unicode_compatible
 class ServiceCategory(models.Model):
+    ''' Model of Service Category '''
+
     name = models.CharField("Categoria", max_length=100, unique=True)
     description = models.TextField("Descripcion", blank=True)
+
+    # Datetime utils
     created_at = models.DateTimeField("Fecha de alta", auto_now_add=True, editable=False)
     last_modified = models.DateTimeField("Ultima modificacion", auto_now=True, editable=False)
+
     class Meta:
         ordering = ['name']
     def __str__(self):
         return self.name
-
-#class EmergencyType(models.Model):
