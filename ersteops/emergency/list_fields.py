@@ -9,7 +9,7 @@ EMERGENCY_LIST_FIELDS = [
     'start_time',
     'end_time',
     'is_active',
-    'unit',
+    'units',
     'unit_assigned_time',
     'unit_dispatched_time',
     'arrival_time',

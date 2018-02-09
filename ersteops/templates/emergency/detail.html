@@ -9,10 +9,7 @@
 <p>Start Time: {{ object.start_time }}</p>
 <p>End Time: {{ object.end_time }}</p>
 
-<p>Unidad: 
-	{% for vehicle in object.unit.all%}
-		{{ vehicle }} ;
-	{% endfor %}
+<p>Unidad: <!-- Remove old vehicle # Add new one-->
 </p>
 
 {% endblock %}

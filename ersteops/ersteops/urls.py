@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('home.urls')),
     url(r'^emergency/', include('emergency.urls')),
+    url(r'^units/', include('unit.urls')),
     url(r'^notify/', include('notifications.urls')),
     url(r'^ajaxapi/getsubscriptor/',get_subscriptor, name="get_subscriptor"),
     # Jet Dashboard
