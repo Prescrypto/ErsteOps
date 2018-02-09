@@ -1,22 +1,17 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+import json
+import unicodedata
 
 from django.db import models
-from django.utils.encoding import python_2_unicode_compatible
 from datetime import datetime, timedelta
 from django.utils import timezone
 
-import unicodedata
-import json
 from channels import Group
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 
 from core.utils import eventDuration
-# Create your models here.
 
 
-@python_2_unicode_compatible
 class Emergency(models.Model):
     ''' Emergency incident model '''
     GENDER = (
@@ -65,8 +60,7 @@ class Emergency(models.Model):
 
     is_active = models.NullBooleanField("Activa", default=True)
 
-    # Delete unit
-    # TODO put new again
+    # TODO Add new Unit
 
     # Attention address
     address_street = models.CharField('Calle y numero', default='', max_length=100, blank=True)
@@ -109,63 +103,69 @@ class Emergency(models.Model):
     #     )
     created_at = models.DateTimeField("fecha de alta",auto_now_add=True,editable=False)
     last_modified = models.DateTimeField("ultima modificacion",auto_now=True,editable=False)
+
     class Meta:
         verbose_name_plural = "Emergency"
         ordering = ['created_at']
+
     def __str__(self):
-        return str(self.id)
-    # Emergency Timer
+        ''' Return name of instance '''
+        return self.odoo_client
+
+
     def emergencyTimer(self):
         # Calculate emergency Timer
         return eventDuration(self.start_time,self.final_emergency_time)
-    # data Timer
+
     def dataTimer(self):
         # Calculate data timer
         return eventDuration(self.start_time,self.end_time)
-    # Unit Timer
+
     def unitTimer(self):
         # Calculate unit assigment timer
         return eventDuration(self.start_time,self.unit_assigned_time)
-    # Dispatch Timer
+
     def dispatchTimer(self):
         # Calculate Dispatch Timer
         return eventDuration(self.start_time,self.unit_dispatched_time)
-    #Arrival Timer
+
     def arrivalTimer(self):
         # Calculate Arrival Timer
         return eventDuration(self.start_time,self.arrival_time)
-    # Attention timer
+
     def attentionTimer(self):
         # Calculate Attention timer: time takes medic between arrive location and begin attend to patient
         return eventDuration(self.start_time,self.attention_time)
-    # Derivation Timer
+
     def derivationTimer(self):
         # Calculate derivation timer
         return eventDuration(self.start_time,self.derivation_time)
-    # Hospital timer
+
     def hospitalTimer(self):
         # Calculate hospital timer
         return eventDuration(self.start_time,self.hospital_arrival)
-    # Patient arival
+
     def patientTimer(self):
         # Calculate patient arrival
         return eventDuration(self.start_time,self.patient_arrival)
+
     def save(self, **kwargs):
-        #Saves and checks whether the object is a candidate for notification
-        #new object
-        newEmerg = True if self.pk is None else False
-        if newEmerg:
-            self.attention_final_grade=self.grade_type
+        ''' Saves and checks whether the object is a candidate for notification '''
+
+        is_new_emergency = True if self.pk else False
+
+        if is_new_emergency:
+            self.attention_final_grade = self.grade_type
 
         try:
-            old_instance=False if newEmerg else Emergency.objects.get(pk=self.pk)
+            old_instance = False if is_new_emergency else Emergency.objects.get(pk=self.pk)
         except Emergency.DoesNotExist:
             return
 
         super(Emergency, self).save(**kwargs)
 
         type_notif = ""
-        if newEmerg:
+        if is_new_emergency:
             if self.is_active:
                 #Is new and is active
                 type_notif = "New"
