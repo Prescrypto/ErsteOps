@@ -113,7 +113,7 @@ class Emergency(models.Model):
     last_modified = models.DateTimeField("Última modificación",auto_now=True,editable=False)
 
     class Meta:
-        verbose_name_plural = "Emergency"
+        verbose_name_plural = "Lista de incidentes"
         ordering = ['created_at']
 
     def __str__(self):
@@ -282,7 +282,7 @@ class AttentionKind(models.Model):
     last_modified = models.DateTimeField("ultima modificacion",auto_now=True,editable=False)
 
     class Meta:
-        verbose_name_plural = "Tipo de Atención"
+        verbose_name_plural = "Tipos de Atención"
         ordering = ['created_at']
 
     def __str__(self):
@@ -299,7 +299,7 @@ class AttentionZone(models.Model):
     last_modified = models.DateTimeField("ultima modificacion",auto_now=True,editable=False)
 
     class Meta:
-        verbose_name_plural = "Zona"
+        verbose_name_plural = "Zonas"
         ordering = ['created_at']
 
     def __str__(self):
@@ -317,7 +317,7 @@ class AttentionHospital(models.Model):
     last_modified = models.DateTimeField("ultima modificacion",auto_now=True,editable=False)
 
     class Meta:
-        verbose_name_plural = "Hospital"
+        verbose_name_plural = "Hospitales"
         ordering = ['name']
 
     def __str__(self):
@@ -345,7 +345,7 @@ class AttentionDerivation(models.Model):
     last_modified = models.DateTimeField("ultima modificacion",auto_now=True,editable=False)
 
     class Meta:
-        verbose_name_plural = "Derivacion"
+        verbose_name_plural = "Servicios de Derivación"
         ordering = ['created_at']
 
     def __str__(self):
@@ -391,7 +391,7 @@ def derivation_dictionary(instance):
 class ServiceCategory(models.Model):
     ''' Model of Service Category '''
 
-    name = models.CharField("Categoria", max_length=100, unique=True)
+    name = models.CharField("Categoría", max_length=100, unique=True)
     description = models.TextField("Descripcion", blank=True)
 
     # Datetime utils
@@ -399,6 +399,8 @@ class ServiceCategory(models.Model):
     last_modified = models.DateTimeField("Ultima modificacion", auto_now=True, editable=False)
 
     class Meta:
+        verbose_name_plural = "Categoría de Servicio "
         ordering = ['name']
+
     def __str__(self):
         return self.name
