@@ -22,7 +22,6 @@ class Emergency(models.Model):
     service_category=models.ForeignKey("ServiceCategory",
         related_name="service_category_name",
         verbose_name= "Tipo de emergencia",
-        #default=1,
         blank=True,
         null=True
         )
