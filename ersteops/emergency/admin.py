@@ -30,6 +30,34 @@ class EmergencyAdmin(admin.ModelAdmin):
     list_filter = ("id", "odoo_client", "grade_type", "zone", "is_active", )
     search_fields = ('odoo_client', 'patient_name', )
 
+    fieldsets = (
+        ('Paciente', {
+            'fields': ('odoo_client','patient_name','patient_gender','patient_age',
+                    'patient_allergies', 'patient_illnesses',
+                    'caller_name','caller_relation','subscription_type',
+                    'service_category', 'grade_type', 'zone',
+                    'main_complaint', 'complaint_description',
+                    'is_active', 'attention_final_grade',
+                    'attention_justification','patient_notes',)
+        }),
+        ('Direccion', {
+            'classes': ('collapse',),
+            'fields': ('address_street', 'address_extra', 'address_zip_code', 'address_county',
+                    'address_col','address_between', 'address_and_street', 'address_ref',
+                    'address_front', 'address_instructions','address_notes',)
+        }),
+        ('Unidades', {
+            'classes': ('collapse',),
+            'fields': ('units', 'unit_assigned_time', 'unit_dispatched_time',
+                 )
+        }),
+        ('Timers', {
+            'classes': ('collapse',),
+            'fields': ('start_time', 'end_time', 'arrival_time', 'attention_time',
+                'derivation_time','hospital_arrival', 'patient_arrival', 'final_emergency_time')
+        }),
+    )
+
     actions = [update_is_active, update_non_active]
 
 

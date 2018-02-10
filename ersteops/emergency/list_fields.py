@@ -40,6 +40,6 @@ EMERGENCY_LIST_FIELDS = [
     'attention_final_grade',
     'attention_justification',
     'main_complaint',
-    'complaint_descriprion',
+    'complaint_description',
     'subscription_type',
 ]

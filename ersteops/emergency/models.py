@@ -93,7 +93,7 @@ class Emergency(models.Model):
     attention_justification = models.TextField(u'Justificación', blank=True, default='')
     # Symptoms
     main_complaint = models.CharField('sintoma principal', max_length=100, default='', blank=True)
-    complaint_descriprion = models.TextField('descripcion de los sintomas', default='', blank=True)
+    complaint_description = models.TextField('descripcion de los sintomas', default='', blank=True)
     subscription_type = models.CharField('subscripcion', max_length=100, default='', blank=True)
     # derivation = models.ManyToManyField('AttentionDerivation',
     #     related_name = 'derivation_issue',
