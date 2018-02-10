@@ -478,6 +478,9 @@ class EmergencyJsonEnd(View):
             return HttpResponse(status=404)
         emergency.is_active = False
         emergency.final_emergency_time = datetime.date.today()
+        for unit in emergency.units.all():
+            unit.is_assigned = False
+            unit.save()
         emergency.save()
         logger.info("[Success EmergencyJsonEnd] Deactivate emergency with id: {}".format(emergency.id))
         return HttpResponse(status=200)
