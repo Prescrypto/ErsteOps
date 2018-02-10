@@ -26,19 +26,18 @@ update_non_active.short_description = "Cambiar Emergencias a estado Inactivo"
 
 class EmergencyAdmin(admin.ModelAdmin):
     ''' Custom Emergency Admin Panel '''
-    list_display = ("odoo_client","patient_name", "grade_type", "zone", "created_at", "is_active", )
+    list_display = ("odoo_client", "patient_name", "grade_type", "zone", "created_at", "is_active", )
     list_filter = ("odoo_client", "grade_type", "zone", "is_active", )
     search_fields = ('odoo_client', 'patient_name', )
 
     fieldsets = (
         ('Paciente', {
-            'fields': ('odoo_client','patient_name','patient_gender','patient_age',
-                    'patient_allergies', 'patient_illnesses',
-                    'caller_name','caller_relation','subscription_type',
+            'fields': ('odoo_client', 'patient_name', 'patient_gender', 'patient_age',
+                    'is_active', 'caller_name', 'caller_relation', 'subscription_type',
                     'service_category', 'grade_type', 'zone',
                     'main_complaint', 'complaint_description',
-                    'is_active', 'attention_final_grade',
-                    'attention_justification','patient_notes',)
+                    'patient_allergies', 'patient_illnesses', 'attention_final_grade',
+                    'attention_justification', 'patient_notes',)
         }),
         ('Direccion', {
             'classes': ('collapse',),
