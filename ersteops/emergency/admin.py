@@ -29,6 +29,7 @@ class EmergencyAdmin(admin.ModelAdmin):
     list_display = ("odoo_client", "patient_name", "grade_type", "zone", "created_at", "is_active", )
     list_filter = ("odoo_client", "grade_type", "zone", "is_active", )
     search_fields = ('odoo_client', 'patient_name', )
+    ordering = ('-start_time',)
 
     fieldsets = (
         ('Paciente', {

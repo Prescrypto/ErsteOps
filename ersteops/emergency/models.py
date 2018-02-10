@@ -9,6 +9,7 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 
 from core.utils import eventDuration
+from unit.models import Unit
 
 
 class Emergency(models.Model):
@@ -184,23 +185,20 @@ class Emergency(models.Model):
         elif self.is_active and not old_instance.is_active:
             #Updated from is_active=False to is_active=True
             type_notif = "Activate"
-        # elif self.is_active and old_instance.unit != self.unit:
-        #     #Update units in emergency
-        #     type_notif = "Unid Update" # TODO add new unit here
         elif self.is_active:
             #Update simple and is_active
             type_notif = "Update"
         else:
-            #is not a candidate to notifications
+            print("Is not a candidate to notifications")
             return
 
         emergDict = emergency_dictionary(self)
+
         emergDict.update({
             "type_notif" : type_notif,
             "type_data" : "Emergency",
         })
         emergJson=json.dumps(emergDict)
-
         print("TypeNotification: {}".format(type_notif))
         Group('notifications').send({
             "text": json.dumps(emergJson),
@@ -212,24 +210,17 @@ class Emergency(models.Model):
 
 
 def emergency_dictionary(instance):
-
-    units=[]
+    ''' Make json dict of emergency '''
+    units = []
     for unit in instance.units.all():
-        continue
-        _unit_json = {
-            # TODO add fields of UNIT
-        }
-        units.append(_unit_json)
-
+        units.append(unit.id)
     emergDict={
         "pk":instance.pk,
         "id":instance.pk,
         "odoo_client":instance.odoo_client,
         "grade_type":str(instance.grade_type),
         "zone":str(instance.zone),
-
-        "unit":units,
-
+        "units": units,
         "start_time":instance.start_time.isoformat(),
         "end_time":instance.end_time.isoformat(),
         "created_at":instance.created_at.isoformat(),
@@ -264,7 +255,7 @@ def emergency_dictionary(instance):
         "attention_final_grade":str(instance.attention_final_grade),
         "attention_justification":instance.attention_justification,
         "main_complaint":instance.main_complaint,
-        "complaint_descriprion":instance.complaint_descriprion,
+        "complaint_description":instance.complaint_description,
         "subscription_type":instance.subscription_type,
     }
 
