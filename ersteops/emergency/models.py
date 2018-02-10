@@ -17,7 +17,8 @@ class Emergency(models.Model):
         ("Masculino","Masculino"),
         ("Femenino","Femenino"),
         )
-    odoo_client = models.CharField("cliente id", max_length=50)
+    odoo_client = models.CharField("Cliente id", max_length=50)
+
     # Service Category
     service_category=models.ForeignKey("ServiceCategory",
         related_name="service_category_name",
@@ -25,6 +26,7 @@ class Emergency(models.Model):
         blank=True,
         null=True
         )
+
     # Triage
     grade_type = models.ForeignKey("AttentionKind",
     related_name="attention_kind_name",
@@ -32,11 +34,10 @@ class Emergency(models.Model):
         )
     zone = models.ForeignKey("AttentionZone",
     related_name="zone_name",
-    verbose_name="zone"
+    verbose_name="Zona de Atención"
         )
+
     # Timers
-    # Emergency statrt an end time: when the operator select new incident
-    # Initial call time
     start_time = models.DateTimeField("Inicio toma de datos", default=timezone.now)
     # Records when the operator ends capture of basic emergency data
     end_time = models.DateTimeField("Fin toma de datos", default=timezone.now, blank=True)
@@ -52,6 +53,7 @@ class Emergency(models.Model):
     derivation_time = models.DateTimeField("Inicio de derivacion", default=timezone.now, blank=True)
     # Records when unit arrive to hospital
     hospital_arrival = models.DateTimeField("Llegada hopital", default=timezone.now, blank=True)
+
     # Record when patient arrive to hopsital
     patient_arrival = models.DateTimeField("Paciente atencion hopital", default=timezone.now, blank=True)
     final_emergency_time = models.DateTimeField("Fin emergencia", default=timezone.now, blank=True)
@@ -73,9 +75,11 @@ class Emergency(models.Model):
     address_front = models.CharField('fachada', default='', max_length=100, blank=True)
     address_instructions = models.CharField('Instruccciones llegada', default='', max_length=100, blank=True)
     address_notes = models.TextField('Notas', default='', blank=True)
+
     # Caller Data
     caller_name = models.CharField('Persona que llama', max_length=100, blank=True)
     caller_relation = models.CharField('Relacion con el paciente', max_length=50, blank=True)
+
     # Paient Data
     patient_name = models.CharField('Nombre del Paciente', max_length=255, default='')
     patient_gender = models.CharField('genero', max_length=9, default= '', blank=True, choices=GENDER)
@@ -83,24 +87,30 @@ class Emergency(models.Model):
     patient_allergies = models.CharField('alergias', max_length=100, default='', blank=True)
     patient_illnesses = models.CharField('Enfermedades diagnosticadas', max_length=100, default='', blank=True)
     patient_notes = models.TextField('Notas paciente', blank=True, default='')
+
     #Details of attention
     attention_final_grade = models.ForeignKey("AttentionKind",
                                             related_name="final_attention_kind_name",
-                                            verbose_name= "Grado de atencion final",
+                                            verbose_name= "Grado de atención final",
                                             blank=True,
                                             null=True)
     attention_justification = models.TextField(u'Justificación', blank=True, default='')
+
     # Symptoms
-    main_complaint = models.CharField('sintoma principal', max_length=100, default='', blank=True)
-    complaint_description = models.TextField('descripcion de los sintomas', default='', blank=True)
-    subscription_type = models.CharField('subscripcion', max_length=100, default='', blank=True)
+    main_complaint = models.CharField('Sintoma principal', max_length=100, default='', blank=True)
+    complaint_description = models.TextField('Descripción de los sintomas', default='', blank=True)
+    subscription_type = models.CharField('Subscripción', max_length=100, default='', blank=True)
+
+    # TODO when create derivation
     # derivation = models.ManyToManyField('AttentionDerivation',
     #     related_name = 'derivation_issue',
     #     verbose_name = 'Derivacion',
     #     blank=True,
     #     )
-    created_at = models.DateTimeField("fecha de alta",auto_now_add=True,editable=False)
-    last_modified = models.DateTimeField("ultima modificacion",auto_now=True,editable=False)
+
+    # Datetie utils
+    created_at = models.DateTimeField("Fecha de alta",auto_now_add=True,editable=False)
+    last_modified = models.DateTimeField("Última modificación",auto_now=True,editable=False)
 
     class Meta:
         verbose_name_plural = "Emergency"
