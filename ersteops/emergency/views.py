@@ -102,13 +102,13 @@ class EmergencyDashboardList(ListView):
     def get_context_data(self, **kwargs):
         active_emergencies = Emergency.objects.filter(is_active=True).count()
         units = Unit.objects.available_units()
-        active_units = units.count()
+        available_units_counter = units.count()
         units_list = serializers.serialize('json', list(units), fields=UNIT_LIST_FIELD)
         context = super(EmergencyDashboardList, self).get_context_data(**kwargs)
         context.update({
             'now': timezone.now(),
             'active_emergencies': active_emergencies,
-            'active_units': active_units,
+            'available_units_counter': available_units_counter,
             'units_list': units_list
         })
         return context
@@ -478,6 +478,9 @@ class EmergencyJsonEnd(View):
             return HttpResponse(status=404)
         emergency.is_active = False
         emergency.final_emergency_time = datetime.date.today()
+        for unit in emergency.units.all():
+            unit.is_assigned = False
+            unit.save()
         emergency.save()
         logger.info("[Success EmergencyJsonEnd] Deactivate emergency with id: {}".format(emergency.id))
         return HttpResponse(status=200)
