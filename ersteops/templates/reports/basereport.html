@@ -24,7 +24,13 @@
           <div class="c-card u-mb-large">
             <div class="c-card__head">
               <h3 class="c-card__title">Fechas</h3>
-            
+                <form action='/reports/' method="post" style='text-align: left;' >
+                  {% csrf_token %}
+                  {{ form.as_p }}
+                  <input class="btn btn-info btn-block" type="reset" value="Limpiar"/>
+                  <input class="btn btn-success btn-block" type="submit" value="Actualizar Gráfica"/>
+                  <input type="hidden" value="{{ template }}" name='template'>
+                </form>
             </div>
             <!-- <div id="dashboard-log"></div> -->
           </div><!-- // .c-card -->
