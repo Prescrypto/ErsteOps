@@ -31,3 +31,11 @@ def logout_page(request):
     logout(request)
     return redirect('home')
 
+
+@login_required
+def report_view(request):
+    ''' Simple reporting view with pivotablejs '''
+    template = 'home/repor_base.html'
+    context = {}
+
+    return render(request, template, context)
