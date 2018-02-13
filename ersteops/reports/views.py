@@ -61,12 +61,12 @@ def initialize_dates(months_before):
 # ********************
 
 class BaseReport(View):
-    template_name = "reports/basereport.html"
+    template_name = "reports/basereport_1.html"
     def get(self, request, *args, **kwargs):
         # Get basic data
         form = SimpleDateSelector()
         # Get initial dates
-        start_dates = initialize_dates(-1)
+        start_dates = initialize_dates(-6)
         start_date = start_dates[0]
         end_date = start_dates[1]
         print("********** dates *********")
@@ -76,8 +76,8 @@ class BaseReport(View):
         qs_json = serializers.serialize('json', qs)
         data = json.dumps(clean_data(qs))
         # data pivoting
-        #pivot_table = pivot(data,'zone_id','created_at','events')
-        return render(request, self.template_name,{"form": form,"data":qs_json,"clean_data":data})
+        #pivot_table = pivot(qs,'zone_id','created_at','events')
+        return render(request, self.template_name,{"form": form,"data":data,"clean_data":data,})
 
     def post(self, request, *args, **kwargs):
         form = SimpleDateSelector(request.POST)
@@ -85,7 +85,8 @@ class BaseReport(View):
             qs = Emergency.objects.filter(created_at__range=[form.cleaned_data['from_date'],form.cleaned_data['until_date']]).annotate(events=Value(1, IntegerField()))
             qs_json = serializers.serialize('json', qs)
             data = json.dumps(clean_data(qs))
-        return render(request, self.template_name,{"form": form,"data":qs_json,"clean_data":data})
+            #pivot_table = pivot(qs,'zone_id','created_at','events')
+        return render(request, self.template_name,{"form": form,"data":data,"clean_data":data,})
 
 
 def clean_data(qs):
