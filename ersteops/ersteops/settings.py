@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'webpack_loader',
     'unit.apps.UnitConfig',
+    'reports.apps.ReportsConfig',
 ]
 
 MIDDLEWARE = [
