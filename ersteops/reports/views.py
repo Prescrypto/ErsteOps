@@ -66,7 +66,7 @@ class BaseReport(View):
         # Get basic data
         form = SimpleDateSelector()
         # Get initial dates
-        start_dates = initialize_dates(-6)
+        start_dates = initialize_dates(-1)
         start_date = start_dates[0]
         end_date = start_dates[1]
         print("********** dates *********")
@@ -77,7 +77,6 @@ class BaseReport(View):
         data = json.dumps(clean_data(qs))
         # data pivoting
         #pivot_table = pivot(data,'zone_id','created_at','events')
-
         return render(request, self.template_name,{"form": form,"data":qs_json,"clean_data":data})
 
     def post(self, request, *args, **kwargs):
@@ -92,8 +91,8 @@ class BaseReport(View):
 def clean_data(qs):
     results = []
     for record in qs:
-        print(record.events)
-        print(record.created_at)
+        #print(record.events)
+        #print(record.created_at)
         emergency_json = {
             "zone_id": record.zone.name,
             "gender": record.patient_gender,
