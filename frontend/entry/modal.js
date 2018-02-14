@@ -7,6 +7,7 @@ import Search from 'components/Search';
 import Patient from 'components/Patient';
 import Addresses from 'components/Addresses';
 import Units from 'components/Units';
+import map from 'lodash/fp/map';
 import store from 'store';
 import {
   MODAL_CHANGE_TAB,
@@ -36,7 +37,7 @@ window.Erste.modal = new Vue({
     };
   },
   computed: {
-    ...mapState(['loading', 'emergency']),
+    ...mapState(['loading', 'emergency', 'selected']),
     ...mapState({
       active: state => state.modal.active,
       search: state => state.modal.search,
@@ -71,7 +72,11 @@ window.Erste.modal = new Vue({
     },
     submit(e) {
       e.preventDefault();
-      this.newIncident(this.emergency);
+      const emergency = {
+        ...this.emergency,
+        units: map(unit => unit.id)(this.selected),
+      };
+      this.newIncident(emergency);
     },
     ...mapActions(['newIncident']),
   },
