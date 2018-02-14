@@ -6,6 +6,7 @@ from django.views.generic import View
 #django-pivot stuff
 from django_pivot.pivot import pivot
 from emergency.models import Emergency
+from unit.models import Unit
 from django.db.models import Count
 
 from django.http import JsonResponse
@@ -76,10 +77,10 @@ class BaseReport(View):
         start_dates = initialize_dates(-6)
         start_date = start_dates[0]
         end_date = start_dates[1]
-        print("********** dates *********")
-        print(start_date)
-        print(end_date)
-        qs = Emergency.objects.filter(created_at__range=[start_date,end_date]).annotate(events=Value(1, IntegerField()))
+        # print("********** dates *********")
+        # print(start_date)
+        # print(end_date)
+        qs = Emergency.objects.filter(created_at__range=[start_date,end_date]).annotate(events=Value(1, IntegerField())).prefetch_related('units')
         #qs_json = serializers.serialize('json', qs)
         data = json.dumps(clean_data(qs),default=date_handler)
         # data pivoting
@@ -102,12 +103,13 @@ def clean_data(qs):
         #print(record.events)
         #print(record.created_at)
         #print(str(record.emergencyTimer))
+        print(record)
         emergency_json = {
             "Zona": record.zone.name,
             "Genero": record.patient_gender,
             "Grado": record.grade_type.name,
             "Tipo Subscripcion": record.subscription_type,
-            #"unit_type": record.units.unit_type[0],
+            #"Unit_type": record.units,
             #"attention_final_grade":record.attention_final_grade.name,
             "Fecha": record.created_at.strftime("%Y-%m-%d"),
             "Año": record.created_at.strftime("%Y"),
