@@ -2,10 +2,10 @@
 
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { sortBy, flow, reverse, filter, findIndex } from 'lodash/fp';
+import { map, sortBy, flow, reverse, filter, findIndex } from 'lodash/fp';
 import http from 'utils/http';
 import { removePrefix } from 'utils/normalize';
-import { emergencies } from 'utils/preload';
+import { emergencies, units } from 'utils/preload';
 import { ws } from 'utils/url';
 import createWebSocketPlugin from 'utils/websocket';
 import ReconnectingWebSocket from 'reconnecting-websocket';
@@ -16,6 +16,9 @@ import {
   REQUEST_PATIENT_START,
   REQUEST_PATIENT_SUCCESS,
   REQUEST_PATIENT_ERROR,
+  REQUEST_UNITS_START,
+  REQUEST_UNITS_SUCCESS,
+  REQUEST_UNITS_ERROR,
   REQUEST_EMERGENCY_START,
   REQUEST_EMERGENCY_SUCCESS,
   REQUEST_EMERGENCY_ERROR,
@@ -45,6 +48,7 @@ const store = new Vuex.Store({
       active: 'search',
       address: {},
     },
+    units,
     suggestions: [],
     emergencies,
     emergency: {
@@ -67,7 +71,6 @@ const store = new Vuex.Store({
       http
         .post(`/emergency/new/${data.id || ''}`, data)
         .then(response => {
-          console.log(`Add new emergency id: ${data.id}`);
           commit(REQUEST_NEW_INCIDENT_SUCCESS, response.data);
         })
         .catch(err => commit(REQUEST_NEW_INCIDENT_ERROR, err));
@@ -77,7 +80,6 @@ const store = new Vuex.Store({
       http
         .get(`/emergency/ajax/patient/${target}/`)
         .then(response => {
-          console.log(`Load patient detail id: ${target}`);
           const { data } = response;
           const addresses = JSON.parse(data.addresses).map(address =>
             removePrefix(address, /id_/)
@@ -86,6 +88,17 @@ const store = new Vuex.Store({
           commit(REQUEST_PATIENT_SUCCESS, normalized);
         })
         .catch(err => commit(REQUEST_PATIENT_ERROR, err));
+    },
+    units({ commit }) {
+      commit(REQUEST_UNITS_START);
+      http
+        .get('/units/ajax/local/')
+        .then(response => {
+          const { data } = response;
+          const flatUnits = map(u => ({ id: u.pk, ...u.fields }))(data);
+          commit(REQUEST_UNITS_SUCCESS, flatUnits);
+        })
+        .catch(err => commit(REQUEST_UNITS_ERROR, err));
     },
     emergency({ commit }, id) {
       commit(REQUEST_EMERGENCY_START);
@@ -111,6 +124,10 @@ const store = new Vuex.Store({
 
   getters: {
     hasSuggestions: state => !!state.suggestions.length,
+    // units
+    activeUnits: state => filter(unit => unit.is_active)(state.units),
+    activeUnitsCount: (state, getters) => getters.activeUnits.length,
+    // emergencies
     activeEmergencies: state =>
       filter(emergency => emergency.is_active)(state.emergencies),
     sortActiveEmergencies: (state, getters) =>
@@ -162,6 +179,20 @@ const store = new Vuex.Store({
       state.loading = false;
     },
     [REQUEST_PATIENT_ERROR](state, err) {
+      state.error = err;
+      state.loading = false;
+    },
+
+    // Units
+    [REQUEST_UNITS_START](state) {
+      state.error = false;
+      state.loading = true;
+    },
+    [REQUEST_UNITS_SUCCESS](state, data) {
+      state.units = data;
+      state.loading = false;
+    },
+    [REQUEST_UNITS_ERROR](state, err) {
       state.error = err;
       state.loading = false;
     },

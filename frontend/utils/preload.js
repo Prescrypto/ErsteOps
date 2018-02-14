@@ -3,9 +3,13 @@
 import { map } from 'lodash/fp';
 
 // Initialize empty data store
-const { incidents } = window.erste;
+const { incidents, units: onLoadUnits } = window.erste;
 
-// Add emergencies and sort by start time
+// Flatten emergencies
 export const emergencies =
   map(emergency => ({ id: emergency.pk, ...emergency.fields }))(incidents) ||
   [];
+
+// Flatten units
+export const units =
+  map(unit => ({ id: unit.pk, ...unit.fields }))(onLoadUnits) || [];
