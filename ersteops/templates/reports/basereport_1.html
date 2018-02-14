@@ -87,8 +87,8 @@ table.pvtTable tbody tr td {
 .pvtFilteredAttribute { font-style: italic }
 
 .pvtFilterBox{
-    z-index: 100;
-    width: 300px;
+    z-index: 200;
+    width: 500px;
     border: 1px solid gray;
     background-color: #fff;
     position: absolute;
@@ -108,7 +108,7 @@ table.pvtTable tbody tr td {
     white-space: nowrap;
     overflow-y: scroll;
     width: 100%;
-    max-height: 250px;
+    max-height: 350px;
     border-top: 1px solid lightgrey;
     border-bottom: 1px solid lightgrey;
 }
@@ -130,26 +130,31 @@ table.pvtTable tbody tr td {
       <!-- <div id="analytics"></div> -->
       {# TODO add mini components of wireframe#}
       <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-12">
           <div class="c-card u-mb-large">
             <div class="c-card__head">
-              <h3 class="c-card__title">Fechas</h3>
-                <form action='/reports/' method="post" style='text-align: left;' >
-                  {% csrf_token %}
-                  {{ form.as_p }}
-                  <input class="btn btn-info btn-block" type="reset" value="Limpiar"/>
-                  <input class="btn btn-success btn-block" type="submit" value="Actualizar Gráfica"/>
-                  <input type="hidden" value="{{ template }}" name='template'>
-                </form>
+              <h3 class="c-card__title">Filtro</h3>
             </div>
+            <form action='/reports/' method="post"  >
+              {% csrf_token %}
+              <div class="form-group">
+                {{ form.as_p }}
+              </div>
+              <input class="btn btn-info btn-block" type="reset" value="Limpiar"/>
+              <input class="btn btn-success btn-block" type="submit" value="Actualizar Gráfica"/>
+              <input type="hidden" value="{{ template }}" name='template'>
+            </form>
+
             <!-- <div id="dashboard-log"></div> -->
           </div><!-- // .c-card -->
         </div>
-        <div class="col-md-9">
-          <h2 class="u-text-left">PivotableJS example</h2>
-          <div id="pivotable_example" style="margin: 100px;"></div>
-        </div>
       </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="u-text-left">Reporte</h2>
+          <div id="pivotable_example" style="margin: 0px;"></div>
+        </div>
+        </div>
     </div> <!-- // .container -->
   </main><!-- // .o-page__content -->
 {% endblock content %}
@@ -159,6 +164,7 @@ table.pvtTable tbody tr td {
   <script rel="stylesheet" type="text/css" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.js"></script>
   <script rel="stylesheet" type="text/css" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.css"></script>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   <script>
     $( document ).ready(function() {
 
@@ -173,14 +179,15 @@ table.pvtTable tbody tr td {
       //       cols: ["shape"]
       //     }
       // );
-
+      //google.load("visualization", "1", {packages:["corechart", "charteditor"]});
       $("#pivotable_example").pivotUI(
           {{ data|safe}},
           {
-            rows: ["zone_id"],
-            cols: ["gender"]
+            rows: ["Año","Mes"],
+            cols: ["Zona"]
           }
       );
+      //$.pivotUtilities.gchart_renderers;
 
     });
   </script>
