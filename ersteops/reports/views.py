@@ -58,6 +58,13 @@ def initialize_dates(months_before):
     start_date = add_months(utc_mx, months_before)
     end_date = date(utc_mx.year,utc_mx.month,utc_mx.day)
     return [datetime.date(start_date.year,start_date.month,1), end_date]
+
+def date_handler(obj):
+    ''' Function to manage date and datetime objects in json '''
+    if hasattr(obj, 'isoformat'):
+        return obj.isoformat()
+    else:
+        raise TypeError ("Type %s not serializable" % type(obj))
 # ********************
 
 class BaseReport(View):
@@ -73,8 +80,8 @@ class BaseReport(View):
         print(start_date)
         print(end_date)
         qs = Emergency.objects.filter(created_at__range=[start_date,end_date]).annotate(events=Value(1, IntegerField()))
-        qs_json = serializers.serialize('json', qs)
-        data = json.dumps(clean_data(qs))
+        #qs_json = serializers.serialize('json', qs)
+        data = json.dumps(clean_data(qs),default=date_handler)
         # data pivoting
         #pivot_table = pivot(qs,'zone_id','created_at','events')
         return render(request, self.template_name,{"form": form,"data":data,"clean_data":data,})
@@ -83,8 +90,8 @@ class BaseReport(View):
         form = SimpleDateSelector(request.POST)
         if form.is_valid():
             qs = Emergency.objects.filter(created_at__range=[form.cleaned_data['from_date'],form.cleaned_data['until_date']]).annotate(events=Value(1, IntegerField()))
-            qs_json = serializers.serialize('json', qs)
-            data = json.dumps(clean_data(qs))
+            #qs_json = serializers.serialize('json', qs)
+            data = json.dumps(clean_data(qs),default=date_handler)
             #pivot_table = pivot(qs,'zone_id','created_at','events')
         return render(request, self.template_name,{"form": form,"data":data,"clean_data":data,})
 
@@ -94,13 +101,27 @@ def clean_data(qs):
     for record in qs:
         #print(record.events)
         #print(record.created_at)
+        #print(str(record.emergencyTimer))
         emergency_json = {
-            "zone_id": record.zone.name,
-            "gender": record.patient_gender,
-            "grade_type": record.grade_type.name,
-            "subscription_type": record.subscription_type,
-            "created_at": record.created_at.strftime("%Y-%m-%d"),
-            "events": record.events,
+            "Zona": record.zone.name,
+            "Genero": record.patient_gender,
+            "Grado": record.grade_type.name,
+            "Tipo Subscripcion": record.subscription_type,
+            #"unit_type": record.units.unit_type[0],
+            #"attention_final_grade":record.attention_final_grade.name,
+            "Fecha": record.created_at.strftime("%Y-%m-%d"),
+            "Año": record.created_at.strftime("%Y"),
+            "Mes": record.created_at.strftime("%m"),
+            "Semana": record.created_at.strftime("%W"),
+            #"created_at": record.created_at,
+            "Incidencias": record.events,
+            "Tipo Emergencia": record.service_category.name,
+            "Tiempo de Atención": str(record.final_emergency_time-record.start_time),
+            "Tiempo de Llegada": str(record.arrival_time-record.start_time),
+            "Tiempo de atención efectiva": str(record.attention_time-record.start_time),
+            "Tiempo de Asignación de Unidad": str(record.unit_assigned_time-record.start_time),
+            "Tiempo de Despacho de Unidad": str(record.unit_dispatched_time-record.start_time),
+
 
         }
         results.append(emergency_json)
