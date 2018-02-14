@@ -20,12 +20,12 @@ class SimpleDateSelector(forms.Form):
       label='Desde:',
       initial=date(utc_mx.year, 1, 1),
       widget=extras.SelectDateWidget(
-              years=range(2014, 2020),attrs={'class': 'form-control'}
+              years=range(2014, 2020),attrs={'class': 'form-control c-btn c-btn--secondary has-dropdown dropdown-toggle'}
           ))
   until_date = forms.DateField(
       required=True,
       label='Hasta:',
       initial=date(utc_mx.year,utc_mx.month,utc_mx.day),
       widget=extras.SelectDateWidget(
-              years=range(2014, 2020),attrs={'class': 'form-control'}
+              years=range(2014, 2020),attrs={'class': 'form-control c-btn c-btn--secondary has-dropdown dropdown-toggle'}
           ))

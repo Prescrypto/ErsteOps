@@ -135,13 +135,13 @@ table.pvtTable tbody tr td {
             <div class="c-card__head">
               <h3 class="c-card__title">Filtro</h3>
             </div>
-            <form action='/reports/' method="post"  >
+            <form  class="form-horizontal" action='/reports/' method="post"  >
               {% csrf_token %}
               <div class="form-group">
                 {{ form.as_p }}
               </div>
-              <input class="btn btn-info btn-block" type="reset" value="Limpiar"/>
-              <input class="btn btn-success btn-block" type="submit" value="Actualizar Gráfica"/>
+              <input class="btn btn-info btn-block c-btn c-btn--secondary" type="reset" value="Limpiar"/>
+              <input class="btn btn-success btn-block c-btn c-btn--secondary" type="submit" value="Actualizar Gráfica"/>
               <input type="hidden" value="{{ template }}" name='template'>
             </form>
 
