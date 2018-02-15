@@ -14,7 +14,7 @@ from django.core import serializers
 import json
 import datetime
 
-from django.db.models import Value, IntegerField
+from django.db.models import Value, IntegerField, DateTimeField, DateField, F
 from reports.forms import SimpleDateSelector
 #Date
 from datetime import date, timedelta, datetime
@@ -23,6 +23,10 @@ import calendar
 from django.utils import timezone
 import pytz
 from collections import defaultdict
+# database functions to use in queryset
+from django.db.models.functions import (ExtractDay, ExtractMonth, ExtractWeek,ExtractWeekDay, ExtractYear, Trunc)
+
+from django.core.serializers.json import DjangoJSONEncoder
 
 # Create your views here.
 # ********************
@@ -80,9 +84,20 @@ class BaseReport(View):
         # print("********** dates *********")
         # print(start_date)
         # print(end_date)
+        #qs2= Emergency.objects.filter(created_at__range=[start_date,end_date]).values()
+        qs2= Emergency.objects.filter(created_at__range=[start_date,end_date]).values('id','zone','patient_gender','units__unit_type','grade_type','subscription_type','created_at','service_category__name').annotate(year=ExtractYear('created_at'),start_day=Trunc('created_at', 'day', output_field=DateField()),duracion=F('final_emergency_time')-F('start_time'))
+        data2=clean_data2(qs2)
+        #data2 = json.dumps(qs2,default=date_handler)
+        data2 = json.dumps(qs2, cls=DjangoJSONEncoder)
+        #qs_json = serializers.serialize('json', qs2)
+        print(list(qs2))
+        print("*************************************")
+        print(data2)
+
         qs = Emergency.objects.filter(created_at__range=[start_date,end_date]).annotate(events=Value(1, IntegerField())).prefetch_related('units')
         #qs_json = serializers.serialize('json', qs)
         data = json.dumps(clean_data(qs),default=date_handler)
+
         # data pivoting
         #pivot_table = pivot(qs,'zone_id','created_at','events')
         return render(request, self.template_name,{"form": form,"data":data,"clean_data":data,})
@@ -103,7 +118,7 @@ def clean_data(qs):
         #print(record.events)
         #print(record.created_at)
         #print(str(record.emergencyTimer))
-        print(record)
+        #print(record)
         emergency_json = {
             "Zona": record.zone.name,
             "Genero": record.patient_gender,
@@ -130,4 +145,10 @@ def clean_data(qs):
     return results
 
 
-
+def clean_data2(qs):
+    for record in qs:
+        print("***********************************************")
+        print(record)
+        #print(record["service_category"])
+        print("***********************************************")
+    return 0
