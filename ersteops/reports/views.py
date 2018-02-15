@@ -14,7 +14,7 @@ from django.core import serializers
 import json
 import datetime
 
-from django.db.models import Value, IntegerField, DateTimeField, DateField, F
+from django.db.models import Value, IntegerField, DateTimeField, DateField, F, CharField
 from reports.forms import SimpleDateSelector
 #Date
 from datetime import date, timedelta, datetime
@@ -75,112 +75,47 @@ def date_handler(obj):
 class BaseReport(View):
     template_name = "reports/basereport_1.html"
     def get(self, request, *args, **kwargs):
-        # Get basic data
         form = SimpleDateSelector()
         # Get initial dates
         start_dates = initialize_dates(-6)
         start_date = start_dates[0]
         end_date = start_dates[1]
-        data2 = getBaseData(start_date,end_date)
-        # print("********** dates *********")
-        # print(start_date)
-        # print(end_date)
-        #qs2= Emergency.objects.filter(created_at__range=[start_date,end_date]).values()
-        # qs2= Emergency.objects.filter(created_at__range=[start_date,end_date]).values(
-        #             'id',
-        #             'zone',
-        #             'patient_gender',
-        #             'units__unit_type',
-        #             'grade_type',
-        #             'subscription_type',
-        #             'created_at',
-        #             'service_category__name'
-        #             ).annotate(
-        #             year=ExtractYear('created_at'),
-        #             start_day=Trunc('created_at', 'day', output_field=DateField()),
-        #             duracion=F('final_emergency_time')-F('start_time')
-        #             )
-        #data2=clean_data2(qs2)
-        #data2 = json.dumps(qs2,default=date_handler)
-        #data2 = json.dumps(list(qs2), cls=DjangoJSONEncoder)
-        #qs_json = serializers.serialize('json', qs2)
-        #print(list(qs2))
-        #print("*************************************")
-        #print(data2)
-
-        qs = Emergency.objects.filter(created_at__range=[start_date,end_date]).annotate(events=Value(1, IntegerField())).prefetch_related('units')
-        #qs_json = serializers.serialize('json', qs)
-        data = json.dumps(clean_data(qs),default=date_handler)
-
-        # data pivoting
-        #pivot_table = pivot(qs,'zone_id','created_at','events')
-        return render(request, self.template_name,{"form": form,"data":data,"clean_data":data2,})
+        # Get basic data
+        data = getBaseData(start_date,end_date)
+        print("******************************************")
+        print(data)
+        return render(request, self.template_name,{"form": form,"data":data,})
 
     def post(self, request, *args, **kwargs):
         form = SimpleDateSelector(request.POST)
         if form.is_valid():
-            qs = Emergency.objects.filter(created_at__range=[form.cleaned_data['from_date'],form.cleaned_data['until_date']]).annotate(events=Value(1, IntegerField()))
-            #qs_json = serializers.serialize('json', qs)
-            data = json.dumps(clean_data(qs),default=date_handler)
-            #pivot_table = pivot(qs,'zone_id','created_at','events')
-        return render(request, self.template_name,{"form": form,"data":data,"clean_data":data,})
+            data = getBaseData(form.cleaned_data['from_date'],form.cleaned_data['until_date'])
+        return render(request, self.template_name,{"form": form,"data":data,})
 
 
-def clean_data(qs):
-    results = []
-    for record in qs:
-        #print(record.events)
-        #print(record.created_at)
-        #print(str(record.emergencyTimer))
-        #print(record)
-        emergency_json = {
-            "Zona": record.zone.name,
-            "Genero": record.patient_gender,
-            "Grado": record.grade_type.name,
-            "Tipo Subscripcion": record.subscription_type,
-            #"Unit_type": record.units,
-            #"attention_final_grade":record.attention_final_grade.name,
-            "Fecha": record.created_at.strftime("%Y-%m-%d"),
-            "Año": record.created_at.strftime("%Y"),
-            "Mes": record.created_at.strftime("%m"),
-            "Semana": record.created_at.strftime("%W"),
-            #"created_at": record.created_at,
-            "Incidencias": record.events,
-            "Tipo Emergencia": record.service_category.name,
-            "Tiempo de Atención": str(record.final_emergency_time-record.start_time),
-            "Tiempo de Llegada": str(record.arrival_time-record.start_time),
-            "Tiempo de atención efectiva": str(record.attention_time-record.start_time),
-            "Tiempo de Asignación de Unidad": str(record.unit_assigned_time-record.start_time),
-            "Tiempo de Despacho de Unidad": str(record.unit_dispatched_time-record.start_time),
-
-
-        }
-        results.append(emergency_json)
-    return results
-
-
-def clean_data2(qs):
-    for record in qs:
-        print("***********************************************")
-        print(record)
-        #print(record["service_category"])
-        print("***********************************************")
-    return 0
-
-
+# Get queryset and return json
 def getBaseData(start_date,end_date):
     qs= Emergency.objects.filter(created_at__range=[start_date,end_date]).values(
             'id',
-            'zone',
-            'patient_gender',
-            'units__unit_type',
-            'grade_type',
-            'subscription_type',
-            'created_at',
-            'service_category__name'
+            #'zone',
+            #'patient_gender',
+            #'units__unit_type',
+            #'grade_type',
+            #'subscription_type',
+            #'created_at',
+            #'service_category__name'
             ).annotate(
-            year=ExtractYear('created_at'),
-            start_day=Trunc('created_at', 'day', output_field=DateField()),
-            duracion=F('final_emergency_time')-F('start_time')
+            Grado=F('grade_type'),
+            Zona=F('zone'),
+            Genero=F('patient_gender'),
+            Tipo_Unidad=F('units__unit_type'),
+            Categoria_Servicio=F('service_category__name'),
+            Tipo_Subscripcion=F('subscription_type'),
+            Año=ExtractYear('created_at'),
+            Semana=ExtractWeek('created_at'),
+            Mes=ExtractMonth('created_at'),
+            Fecha=Trunc('created_at', 'day', output_field=DateField('Hola')),
+            Duracion=F('final_emergency_time')-F('start_time'),
+            #duracion=(F('final_emergency_time')-F('start_time'),CharField()),
             )
     return json.dumps(list(qs), cls=DjangoJSONEncoder)
