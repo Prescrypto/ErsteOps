@@ -14,7 +14,7 @@ from django.core import serializers
 import json
 import datetime
 
-from django.db.models import Value, IntegerField, DateTimeField, DateField, F, CharField
+from django.db.models import Value, IntegerField, DateTimeField, DateField, F, CharField, DurationField, TimeField
 from reports.forms import SimpleDateSelector
 #Date
 from datetime import date, timedelta, datetime
@@ -24,7 +24,7 @@ from django.utils import timezone
 import pytz
 from collections import defaultdict
 # database functions to use in queryset
-from django.db.models.functions import (ExtractDay, ExtractMonth, ExtractWeek,ExtractWeekDay, ExtractYear, Trunc)
+from django.db.models.functions import (ExtractDay, ExtractMonth, ExtractWeek,ExtractWeekDay, ExtractYear, Trunc, Cast)
 
 from django.core.serializers.json import DjangoJSONEncoder
 
@@ -114,8 +114,14 @@ def getBaseData(start_date,end_date):
             Año=ExtractYear('created_at'),
             Semana=ExtractWeek('created_at'),
             Mes=ExtractMonth('created_at'),
-            Fecha=Trunc('created_at', 'day', output_field=DateField('Hola')),
-            Duracion=F('final_emergency_time')-F('start_time'),
+            Fecha=Trunc('created_at', 'day', output_field=DateField()),
+            #Tiempo_de_Atencion=F('final_emergency_time')-F('start_time'),
+            Tiempo_de_Atencion=Cast(F('final_emergency_time')-F('start_time'),TimeField()),
+            Tiempo_de_Llegada=Cast(F('arrival_time')-F('start_time'),TimeField()),
+            Tiempo_de_Atención_Efectiva=Cast(F('attention_time')-F('start_time'),TimeField()),
+            Tiempo_de_Asignación_de_Unidad=Cast(F('unit_assigned_time')-F('start_time'),TimeField()),
+            Tiempo_de_Despacho_de_Unidad=Cast(F('unit_dispatched_time')-F('start_time'),TimeField()),
             #duracion=(F('final_emergency_time')-F('start_time'),CharField()),
             )
+    print(qs)
     return json.dumps(list(qs), cls=DjangoJSONEncoder)
