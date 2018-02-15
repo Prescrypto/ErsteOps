@@ -181,7 +181,7 @@ table.pvtTable tbody tr td {
       // );
       //google.load("visualization", "1", {packages:["corechart", "charteditor"]});
       $("#pivotable_example").pivotUI(
-          {{ clean_data|safe}},
+          {{ data|safe}},
           {
             rows: ["Año","Mes"],
             cols: ["Zona"]
