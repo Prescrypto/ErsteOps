@@ -17,6 +17,9 @@ export default {
   computed: {
     ...mapState(['loading', 'emergency']),
     ...mapState({ address: state => state.modal.address }),
+    source() {
+      return this.emergency;
+    },
   },
   methods: {
     choose() {
