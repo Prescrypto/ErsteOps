@@ -81,18 +81,32 @@ class BaseReport(View):
         start_dates = initialize_dates(-6)
         start_date = start_dates[0]
         end_date = start_dates[1]
+        data2 = getBaseData(start_date,end_date)
         # print("********** dates *********")
         # print(start_date)
         # print(end_date)
         #qs2= Emergency.objects.filter(created_at__range=[start_date,end_date]).values()
-        qs2= Emergency.objects.filter(created_at__range=[start_date,end_date]).values('id','zone','patient_gender','units__unit_type','grade_type','subscription_type','created_at','service_category__name').annotate(year=ExtractYear('created_at'),start_day=Trunc('created_at', 'day', output_field=DateField()),duracion=F('final_emergency_time')-F('start_time'))
-        data2=clean_data2(qs2)
+        # qs2= Emergency.objects.filter(created_at__range=[start_date,end_date]).values(
+        #             'id',
+        #             'zone',
+        #             'patient_gender',
+        #             'units__unit_type',
+        #             'grade_type',
+        #             'subscription_type',
+        #             'created_at',
+        #             'service_category__name'
+        #             ).annotate(
+        #             year=ExtractYear('created_at'),
+        #             start_day=Trunc('created_at', 'day', output_field=DateField()),
+        #             duracion=F('final_emergency_time')-F('start_time')
+        #             )
+        #data2=clean_data2(qs2)
         #data2 = json.dumps(qs2,default=date_handler)
-        data2 = json.dumps(qs2, cls=DjangoJSONEncoder)
+        #data2 = json.dumps(list(qs2), cls=DjangoJSONEncoder)
         #qs_json = serializers.serialize('json', qs2)
-        print(list(qs2))
-        print("*************************************")
-        print(data2)
+        #print(list(qs2))
+        #print("*************************************")
+        #print(data2)
 
         qs = Emergency.objects.filter(created_at__range=[start_date,end_date]).annotate(events=Value(1, IntegerField())).prefetch_related('units')
         #qs_json = serializers.serialize('json', qs)
@@ -100,7 +114,7 @@ class BaseReport(View):
 
         # data pivoting
         #pivot_table = pivot(qs,'zone_id','created_at','events')
-        return render(request, self.template_name,{"form": form,"data":data,"clean_data":data,})
+        return render(request, self.template_name,{"form": form,"data":data,"clean_data":data2,})
 
     def post(self, request, *args, **kwargs):
         form = SimpleDateSelector(request.POST)
@@ -152,3 +166,21 @@ def clean_data2(qs):
         #print(record["service_category"])
         print("***********************************************")
     return 0
+
+
+def getBaseData(start_date,end_date):
+    qs= Emergency.objects.filter(created_at__range=[start_date,end_date]).values(
+            'id',
+            'zone',
+            'patient_gender',
+            'units__unit_type',
+            'grade_type',
+            'subscription_type',
+            'created_at',
+            'service_category__name'
+            ).annotate(
+            year=ExtractYear('created_at'),
+            start_day=Trunc('created_at', 'day', output_field=DateField()),
+            duracion=F('final_emergency_time')-F('start_time')
+            )
+    return json.dumps(list(qs), cls=DjangoJSONEncoder)
