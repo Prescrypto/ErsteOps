@@ -6,29 +6,56 @@
   </small>
 </div>
 
-<form v-else>
+<div v-else>
   <div class="row">
-
     <div class="col-12">
-      <div class="c-field">
-        <label class="c-field__label" for="patient_address">
-          Unidades Disponibles
-        </label>
-        <select
-          @change="choose"
-          v-model="current"
-          class="c-input"
-          id="id_units"
-          name="units"
-          required
+      <label class="c-field__label" for="input1">Unidades Asignadas</label>
+      <div
+        class="c-input selected-container"
+        v-bind:class="{ 'is-disabled': combinedUnits.length === 0 }"
+      >
+        <span
+          v-for="unit in combinedUnits"
+          class="c-badge c-badge--info selected"
         >
-          <option v-for="unit in units" v-bind:value="unit.id">
-            {{ unit.identifier }} - {{ unit.unit_type }}
-          </option>
-        </select>
+          {{unit.identifier}}
+          <i class="fa fa-close close-button"
+            @click="removeUnit({ id: unit.id })" />
+        </span>
       </div>
     </div>
-
   </div>
-</form>
+  <br>
+  <div v-if="units.length > 0 && units.length !== combinedUnits.length" class="row">
+    <div class="col-12">
+      <table class="c-table">
+        <thead class="c-table__head c-table__head--slim">
+          <tr class="c-table__row">
+            <th class="c-table__cell c-table__cell--head">Nombre</th>
+            <th class="c-table__cell c-table__cell--head">Tipo de Unidad</th>
+            <!-- <th class="c&#45;table__cell c&#45;table__cell&#45;&#45;head">Ubicación</th> -->
+            <!-- <th class="c&#45;table__cell c&#45;table__cell&#45;&#45;head">Telefono</th> -->
+            <th class="c-table__cell c-table__cell--head">
+                <span class="u-hidden-visually">Acciones</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="unit in units" v-if="!isSelected(unit.id)" class="c-table__row unit">
+            <td class="c-table__cell">{{unit.identifier}}</td>
+            <td class="c-table__cell">{{unit.unit_type | description}}</td>
+            <!-- <td class="c&#45;table__cell">{{unit.location}}</td> -->
+            <!-- <td class="c&#45;table__cell">{{unit.phone}}</td> -->
+            <td class="c-table__cell u-text-center">
+              <a @click="e => add(e, unit)" class="c-btn c-btn--success">
+                <i class="fa fa-plus u-mr-xsmall" />Asignar
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
 

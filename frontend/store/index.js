@@ -2,7 +2,17 @@
 
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { map, sortBy, flow, reverse, filter, findIndex } from 'lodash/fp';
+import {
+  map,
+  sortBy,
+  flow,
+  reverse,
+  filter,
+  findIndex,
+  uniq,
+  uniqBy,
+  includes,
+} from 'lodash/fp';
 import http from 'utils/http';
 import { removePrefix } from 'utils/normalize';
 import { emergencies, units } from 'utils/preload';
@@ -25,6 +35,9 @@ import {
   SELECT_ADDRESS,
   MODAL_CHANGE_TAB,
   MODAL_RESET,
+  MODAL_UNITS_ADD,
+  MODAL_UNITS_REMOVE,
+  MODAL_UNITS_SET,
   REQUEST_NEW_INCIDENT_START,
   REQUEST_NEW_INCIDENT_SUCCESS,
   REQUEST_NEW_INCIDENT_ERROR,
@@ -49,10 +62,12 @@ const store = new Vuex.Store({
       address: {},
     },
     units,
+    selected: [],
     suggestions: [],
     emergencies,
     emergency: {
       is_active: true,
+      units: [],
     },
   },
 
@@ -124,9 +139,19 @@ const store = new Vuex.Store({
 
   getters: {
     hasSuggestions: state => !!state.suggestions.length,
+
     // units
     activeUnits: state => filter(unit => unit.is_active)(state.units),
     activeUnitsCount: (state, getters) => getters.activeUnits.length,
+    selectedUnits: state => state.selected,
+    combinedUnits: (state, getters) =>
+      uniq([
+        ...filter(unit => includes(unit.id)(state.emergency.units))(
+          state.units
+        ),
+        ...getters.selectedUnits,
+      ]),
+
     // emergencies
     activeEmergencies: state =>
       filter(emergency => emergency.is_active)(state.emergencies),
@@ -143,7 +168,7 @@ const store = new Vuex.Store({
     [REQUEST_SUGGEST_START](state) {
       state.error = false;
       state.loading = true;
-      state.emergency = {};
+      state.emergency = { units: [] };
     },
     [REQUEST_SUGGEST_SUCCESS](state, data) {
       state.suggestions = data;
@@ -160,7 +185,6 @@ const store = new Vuex.Store({
       state.loading = true;
     },
     [REQUEST_NEW_INCIDENT_SUCCESS](state) {
-      state.emergency = {};
       state.loading = false;
     },
     [REQUEST_NEW_INCIDENT_ERROR](state, err) {
@@ -224,8 +248,35 @@ const store = new Vuex.Store({
     [MODAL_RESET](state) {
       state.suggestions = [];
       state.modal.address = {};
-      state.emergency = {};
+      state.selected = [];
+      state.emergency = { units: [] };
       state.modal.active = 'search';
+    },
+
+    [MODAL_UNITS_ADD](state, unit) {
+      state.selected.push(unit);
+      state.selected = uniqBy('id')(state.selected);
+
+      Vue.set(
+        state.emergency,
+        'units',
+        uniq([...state.emergency.units, ...map(u => u.id)(state.selected)])
+      );
+    },
+
+    [MODAL_UNITS_REMOVE](state, unit) {
+      state.selected = filter(u => unit.id !== u.id)(state.selected);
+
+      Vue.set(
+        state.emergency,
+        'units',
+        filter(u => unit.id !== u)(state.emergency.units)
+      );
+    },
+
+    [MODAL_UNITS_SET](state, all) {
+      state.selected = all;
+      Vue.set(state.emergencies, 'units', all);
     },
 
     // Emergency i.e. modal data
