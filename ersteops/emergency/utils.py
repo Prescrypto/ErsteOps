@@ -82,8 +82,23 @@ class AjaxableResponseMixin(object):
         if self.request.is_ajax():
             data = json.loads(self.request.body.decode('utf-8'))
             if data:
+                address = data["addresses"][0]
                 emergency_form = EmergencyForm(data)
-                emergency_form.data.update({'start_time': timezone.now()})
+                emergency_form.data.update({
+                    'start_time': timezone.now(),
+                    "adress_street" : address["address_street"],
+                    "address_extra" : address["address_extra"],
+                    "address_zip_code": address["address_zip_code"],
+                    "address_county" : address["address_county"],
+                    "address_col" : address["address_col"],
+                    "address_between" : address["address_between"],
+                    "address_and_street" : address["address_and_street"],
+                    "address_ref" : address["address_ref"],
+                    "address_front" : address["address_front"],
+                    "address_instructions" : address["address_instructions"],
+                    "address_notes" : address["address_notes"]
+
+                })
                 if emergency_form.is_valid():
                     self.object = emergency_form.save()
                     data_object = {
