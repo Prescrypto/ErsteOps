@@ -130,27 +130,23 @@ table.pvtTable tbody tr td {
       <!-- <div id="analytics"></div> -->
       {# TODO add mini components of wireframe#}
       <div class="row">
-        <div class="col-md-12">
-          <div class="c-card u-mb-large">
-            <div class="c-card__head">
-              <h3 class="c-card__title">Filtro</h3>
-            </div>
-            <form  class="form-horizontal" action='/reports/' method="post"  >
+        <div class="col-lg-12">
+
+            <form  class="uk-form" action='/reports/' method="post"  >
               {% csrf_token %}
               <div class="form-group">
-                {{ form.as_p }}
-              </div>
-              <input class="btn btn-info btn-block c-btn c-btn--secondary" type="reset" value="Limpiar"/>
+                {{ form.as_table }}
               <input class="btn btn-success btn-block c-btn c-btn--secondary" type="submit" value="Actualizar Gráfica"/>
               <input type="hidden" value="{{ template }}" name='template'>
+              </div>
             </form>
 
             <!-- <div id="dashboard-log"></div> -->
-          </div><!-- // .c-card -->
+
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-lg-12">
           <h2 class="u-text-left">Reporte</h2>
           <div id="pivotable_example" style="margin: 0px;"></div>
         </div>
@@ -165,6 +161,11 @@ table.pvtTable tbody tr td {
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.js"></script>
   <script rel="stylesheet" type="text/css" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.css"></script>
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <!-- Export CSV -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/export_renderers.min.js"></script>
+  <!-- Load in spanish-->
+  <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.es.min.js"></script> -->
+  <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script> -->
   <script>
     $( document ).ready(function() {
 
@@ -179,13 +180,18 @@ table.pvtTable tbody tr td {
       //       cols: ["shape"]
       //     }
       // );
+      var renderers = $.extend($.pivotUtilities.renderers,
+            $.pivotUtilities.export_renderers);
       //google.load("visualization", "1", {packages:["corechart", "charteditor"]});
       $("#pivotable_example").pivotUI(
           {{ data|safe}},
           {
+            renderers: renderers,
             rows: ["Año","Mes"],
-            cols: ["Zona"]
-          }
+            cols: ["Zona"],
+            //rendererName: "TSV Export",
+            //localeStrings: "es",
+          },
       );
       //$.pivotUtilities.gchart_renderers;
 
