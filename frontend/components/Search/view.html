@@ -5,15 +5,16 @@
       <input
         type="text"
         name="term"
-        data-vv-scope="search"
-        data-vv-name="term"
-        autocomplete="off"
         v-model="query"
         v-validate="'required'"
+        data-vv-scope="search"
+        data-vv-name="term"
+        data-vv-as="busqueda de paciente"
         :class="{
           'c-input': true,
           'c-input--danger': errors.has('search.term')
         }"
+        autocomplete="off"
         placeholder="Alsea SA de CV">
     </label>
 
