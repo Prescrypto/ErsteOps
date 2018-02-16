@@ -6,6 +6,7 @@ import VeeValidate from 'vee-validate';
 import Search from 'components/Search';
 import Patient from 'components/Patient';
 import Addresses from 'components/Addresses';
+import Units from 'components/Units';
 import store from 'store';
 import {
   MODAL_CHANGE_TAB,
@@ -21,10 +22,9 @@ Vue.use(VeeValidate);
 window.Erste.modal = new Vue({
   el: '#v-header',
   delimiters: ['<%', '%>'],
-  components: { Search, Patient, Addresses },
+  components: { Search, Patient, Addresses, Units },
   data() {
     return {
-      units: window.erste.units,
       tabs: [
         { name: 'search', label: 'Buscar' },
         { name: 'patient', label: 'Paciente' },
