@@ -82,8 +82,8 @@ class BaseReport(View):
         end_date = start_dates[1]
         # Get basic data
         data = getBaseData(start_date,end_date)
-        print("******************************************")
-        print(data)
+        #print("******************************************")
+        #print(data)
         return render(request, self.template_name,{"form": form,"data":data,})
 
     def post(self, request, *args, **kwargs):
@@ -123,5 +123,5 @@ def getBaseData(start_date,end_date):
             Tiempo_de_Despacho_de_Unidad=Cast(F('unit_dispatched_time')-F('start_time'),TimeField()),
             #duracion=(F('final_emergency_time')-F('start_time'),CharField()),
             )
-    print(qs)
+    #print(qs)
     return json.dumps(list(qs), cls=DjangoJSONEncoder)
