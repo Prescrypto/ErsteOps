@@ -30,7 +30,24 @@ class JSONResponseMixin(object):
         fields = EMERGENCY_LIST_FIELDS
         emergency = Emergency.objects.filter(id=context["object"].id)
         data = serializers.serialize('json', emergency, fields=fields)
-        return data
+        # Inyect to data addresses type
+        raw_data = json.loads(data)
+        raw_data[0]["fields"].update({
+            "addresses": [{
+                "adress_street" : raw_data[0]['fields']["address_street"],
+                "address_extra" : raw_data[0]['fields']["address_extra"],
+                "address_zip_code": raw_data[0]['fields']["address_zip_code"],
+                "address_county" : raw_data[0]['fields']["address_county"],
+                "address_col" : raw_data[0]['fields']["address_col"],
+                "address_between" : raw_data[0]['fields']["address_between"],
+                "address_and_street" : raw_data[0]['fields']["address_and_street"],
+                "address_ref" : raw_data[0]['fields']["address_ref"],
+                "address_front" : raw_data[0]['fields']["address_front"],
+                "address_instructions" : raw_data[0]['fields']["address_instructions"],
+                "address_notes" : raw_data[0]['fields']["address_notes"]
+            }]
+        })
+        return json.dumps(raw_data)
 
 class UpdateJsonResponseMixin(object):
     '''' Mixin to add on update emergency view '''
