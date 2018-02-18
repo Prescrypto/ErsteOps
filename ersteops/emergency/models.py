@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
-
+# coding=utf-8
+from __future__ import unicode_literals
 import json
 import unicodedata
 
@@ -12,6 +12,7 @@ from django.db.models.signals import post_save
 
 from core.utils import eventDuration
 from unit.models import Unit
+
 
 
 class Emergency(models.Model):
