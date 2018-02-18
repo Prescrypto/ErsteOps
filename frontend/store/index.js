@@ -2,10 +2,20 @@
 
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { sortBy, flow, reverse, filter, findIndex } from 'lodash/fp';
+import {
+  map,
+  sortBy,
+  flow,
+  reverse,
+  filter,
+  findIndex,
+  uniq,
+  uniqBy,
+  includes,
+} from 'lodash/fp';
 import http from 'utils/http';
 import { removePrefix } from 'utils/normalize';
-import { emergencies } from 'utils/preload';
+import { emergencies, units } from 'utils/preload';
 import { ws } from 'utils/url';
 import createWebSocketPlugin from 'utils/websocket';
 import ReconnectingWebSocket from 'reconnecting-websocket';
@@ -16,12 +26,18 @@ import {
   REQUEST_PATIENT_START,
   REQUEST_PATIENT_SUCCESS,
   REQUEST_PATIENT_ERROR,
+  REQUEST_UNITS_START,
+  REQUEST_UNITS_SUCCESS,
+  REQUEST_UNITS_ERROR,
   REQUEST_EMERGENCY_START,
   REQUEST_EMERGENCY_SUCCESS,
   REQUEST_EMERGENCY_ERROR,
   SELECT_ADDRESS,
   MODAL_CHANGE_TAB,
   MODAL_RESET,
+  MODAL_UNITS_ADD,
+  MODAL_UNITS_REMOVE,
+  MODAL_UNITS_SET,
   REQUEST_NEW_INCIDENT_START,
   REQUEST_NEW_INCIDENT_SUCCESS,
   REQUEST_NEW_INCIDENT_ERROR,
@@ -45,10 +61,13 @@ const store = new Vuex.Store({
       active: 'search',
       address: {},
     },
+    units,
+    selected: [],
     suggestions: [],
     emergencies,
     emergency: {
       is_active: true,
+      units: [],
     },
   },
 
@@ -67,7 +86,6 @@ const store = new Vuex.Store({
       http
         .post(`/emergency/new/${data.id || ''}`, data)
         .then(response => {
-          console.log(`Add new emergency id: ${data.id}`);
           commit(REQUEST_NEW_INCIDENT_SUCCESS, response.data);
         })
         .catch(err => commit(REQUEST_NEW_INCIDENT_ERROR, err));
@@ -77,7 +95,6 @@ const store = new Vuex.Store({
       http
         .get(`/emergency/ajax/patient/${target}/`)
         .then(response => {
-          console.log(`Load patient detail id: ${target}`);
           const { data } = response;
           const addresses = JSON.parse(data.addresses).map(address =>
             removePrefix(address, /id_/)
@@ -86,6 +103,17 @@ const store = new Vuex.Store({
           commit(REQUEST_PATIENT_SUCCESS, normalized);
         })
         .catch(err => commit(REQUEST_PATIENT_ERROR, err));
+    },
+    units({ commit }) {
+      commit(REQUEST_UNITS_START);
+      http
+        .get('/units/ajax/local/')
+        .then(response => {
+          const { data } = response;
+          const flatUnits = map(u => ({ id: u.pk, ...u.fields }))(data);
+          commit(REQUEST_UNITS_SUCCESS, flatUnits);
+        })
+        .catch(err => commit(REQUEST_UNITS_ERROR, err));
     },
     emergency({ commit }, id) {
       commit(REQUEST_EMERGENCY_START);
@@ -111,6 +139,20 @@ const store = new Vuex.Store({
 
   getters: {
     hasSuggestions: state => !!state.suggestions.length,
+
+    // units
+    activeUnits: state => filter(unit => unit.is_active)(state.units),
+    activeUnitsCount: (state, getters) => getters.activeUnits.length,
+    selectedUnits: state => state.selected,
+    combinedUnits: (state, getters) =>
+      uniq([
+        ...filter(unit => includes(unit.id)(state.emergency.units))(
+          state.units
+        ),
+        ...getters.selectedUnits,
+      ]),
+
+    // emergencies
     activeEmergencies: state =>
       filter(emergency => emergency.is_active)(state.emergencies),
     sortActiveEmergencies: (state, getters) =>
@@ -126,7 +168,7 @@ const store = new Vuex.Store({
     [REQUEST_SUGGEST_START](state) {
       state.error = false;
       state.loading = true;
-      state.emergency = {};
+      state.emergency = { units: [] };
     },
     [REQUEST_SUGGEST_SUCCESS](state, data) {
       state.suggestions = data;
@@ -143,7 +185,6 @@ const store = new Vuex.Store({
       state.loading = true;
     },
     [REQUEST_NEW_INCIDENT_SUCCESS](state) {
-      state.emergency = {};
       state.loading = false;
     },
     [REQUEST_NEW_INCIDENT_ERROR](state, err) {
@@ -162,6 +203,20 @@ const store = new Vuex.Store({
       state.loading = false;
     },
     [REQUEST_PATIENT_ERROR](state, err) {
+      state.error = err;
+      state.loading = false;
+    },
+
+    // Units
+    [REQUEST_UNITS_START](state) {
+      state.error = false;
+      state.loading = true;
+    },
+    [REQUEST_UNITS_SUCCESS](state, data) {
+      state.units = data;
+      state.loading = false;
+    },
+    [REQUEST_UNITS_ERROR](state, err) {
       state.error = err;
       state.loading = false;
     },
@@ -193,8 +248,35 @@ const store = new Vuex.Store({
     [MODAL_RESET](state) {
       state.suggestions = [];
       state.modal.address = {};
-      state.emergency = {};
+      state.selected = [];
+      state.emergency = { units: [] };
       state.modal.active = 'search';
+    },
+
+    [MODAL_UNITS_ADD](state, unit) {
+      state.selected.push(unit);
+      state.selected = uniqBy('id')(state.selected);
+
+      Vue.set(
+        state.emergency,
+        'units',
+        uniq([...state.emergency.units, ...map(u => u.id)(state.selected)])
+      );
+    },
+
+    [MODAL_UNITS_REMOVE](state, unit) {
+      state.selected = filter(u => unit.id !== u.id)(state.selected);
+
+      Vue.set(
+        state.emergency,
+        'units',
+        filter(u => unit.id !== u)(state.emergency.units)
+      );
+    },
+
+    [MODAL_UNITS_SET](state, all) {
+      state.selected = all;
+      Vue.set(state.emergencies, 'units', all);
     },
 
     // Emergency i.e. modal data
