@@ -102,13 +102,13 @@ class EmergencyDashboardList(ListView):
     def get_context_data(self, **kwargs):
         active_emergencies = Emergency.objects.filter(is_active=True).count()
         units = Unit.objects.available_units()
-        active_units = units.count()
+        available_units_counter = units.count()
         units_list = serializers.serialize('json', list(units), fields=UNIT_LIST_FIELD)
         context = super(EmergencyDashboardList, self).get_context_data(**kwargs)
         context.update({
             'now': timezone.now(),
             'active_emergencies': active_emergencies,
-            'active_units': active_units,
+            'available_units_counter': available_units_counter,
             'units_list': units_list
         })
         return context
@@ -452,6 +452,44 @@ class EmergencyActivate(View):
         emergency.save()
         return redirect('/emergency/list/')
 
+class EmergencyText(View):
+    def get(self, request, *args, **kwargs):
+        emergency_id = kwargs['emergency_id']
+        try:
+            emergency = Emergency.objects.get(id=emergency_id)
+            #content = str(emergency.id)
+            content_patient = "*Paciente:* _%s_, *Genero:* _%s_, *Edad:* _%s_, *Alergias:* _%s_, *Enfermedades:* _%s_, *Notas:* _%s_,"%(
+                emergency.patient_name,
+                emergency.patient_gender,
+                emergency.patient_age,
+                emergency.patient_allergies,
+                emergency.patient_illnesses,
+                emergency.patient_notes,
+                )
+
+            content_service = " *Categoria_Servicio:* _%s_, *Grado:* _%s_, *Zona:* _%s_."%(
+                emergency.service_category,
+                emergency.grade_type,
+                emergency.zone.name,
+
+                )
+            content_address = " *Direccion:* _%s_, _%s_, *C.P.:* _%s_, *Delegacion:* _%s_, *Colonia:* _%s_, *Entre la calle:* _%s_ *y* %s, *Referencias:* _%s_, *Fachada:* %s, *Instruccciones llegada:* _%s_" % (
+                emergency.address_street,
+                emergency.address_extra,
+                emergency.address_zip_code,
+                emergency.address_county,
+                emergency.address_col,
+                emergency.address_between,
+                emergency.address_and_street,
+                emergency.address_ref,
+                emergency.address_front,
+                emergency.address_instructions,
+                )
+            content = content_patient + content_address + content_service
+        except:
+            content = "Emergencia no encontrada!"
+
+        return HttpResponse(content, content_type='text/plain')
 
 class EmergencyEnd(View):
     def get(self, request, *args, **kwargs):
@@ -478,6 +516,9 @@ class EmergencyJsonEnd(View):
             return HttpResponse(status=404)
         emergency.is_active = False
         emergency.final_emergency_time = datetime.date.today()
+        for unit in emergency.units.all():
+            unit.is_assigned = False
+            unit.save()
         emergency.save()
         logger.info("[Success EmergencyJsonEnd] Deactivate emergency with id: {}".format(emergency.id))
         return HttpResponse(status=200)

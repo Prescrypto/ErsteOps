@@ -5,6 +5,7 @@ import { SELECT_ADDRESS } from 'store/constants';
 
 export default {
   name: 'addresses',
+  inject: ['$validator'],
   components: { Loader },
   beforeUpdate() {
     this.current = 0;
@@ -17,6 +18,9 @@ export default {
   computed: {
     ...mapState(['loading', 'emergency']),
     ...mapState({ address: state => state.modal.address }),
+    source() {
+      return this.emergency;
+    },
   },
   methods: {
     choose() {

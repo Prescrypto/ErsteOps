@@ -30,7 +30,24 @@ class JSONResponseMixin(object):
         fields = EMERGENCY_LIST_FIELDS
         emergency = Emergency.objects.filter(id=context["object"].id)
         data = serializers.serialize('json', emergency, fields=fields)
-        return data
+        # Inyect to data addresses type
+        raw_data = json.loads(data)
+        raw_data[0]["fields"].update({
+            "addresses": [{
+                "adress_street" : raw_data[0]['fields']["address_street"],
+                "address_extra" : raw_data[0]['fields']["address_extra"],
+                "address_zip_code": raw_data[0]['fields']["address_zip_code"],
+                "address_county" : raw_data[0]['fields']["address_county"],
+                "address_col" : raw_data[0]['fields']["address_col"],
+                "address_between" : raw_data[0]['fields']["address_between"],
+                "address_and_street" : raw_data[0]['fields']["address_and_street"],
+                "address_ref" : raw_data[0]['fields']["address_ref"],
+                "address_front" : raw_data[0]['fields']["address_front"],
+                "address_instructions" : raw_data[0]['fields']["address_instructions"],
+                "address_notes" : raw_data[0]['fields']["address_notes"]
+            }]
+        })
+        return json.dumps(raw_data)
 
 class UpdateJsonResponseMixin(object):
     '''' Mixin to add on update emergency view '''
@@ -41,6 +58,7 @@ class UpdateJsonResponseMixin(object):
         if self.request.is_ajax():
             data = json.loads(self.request.body.decode('utf-8'))
             if data:
+                address = data["addresses"][0]
                 emergency_object = super(UpdateJsonResponseMixin, self).get_object()
                 # del timers form form
                 entriesToRemove = ('attention_time', 'derivation_time', 'end_time', 'final_emergency_time', 'hospital_arrival',
@@ -48,8 +66,21 @@ class UpdateJsonResponseMixin(object):
                                     'arrival_time', )
                 for item in entriesToRemove:
                     data.pop(item, None)
-
-                data.update({'start_time': emergency_object.start_time })
+                # Accept update emergency with address
+                data.update({
+                    'start_time': emergency_object.start_time,
+                    "adress_street" : address["address_street"],
+                    "address_extra" : address["address_extra"],
+                    "address_zip_code": address["address_zip_code"],
+                    "address_county" : address["address_county"],
+                    "address_col" : address["address_col"],
+                    "address_between" : address["address_between"],
+                    "address_and_street" : address["address_and_street"],
+                    "address_ref" : address["address_ref"],
+                    "address_front" : address["address_front"],
+                    "address_instructions" : address["address_instructions"],
+                    "address_notes" : address["address_notes"]
+                })
 
                 emergency_form = EmergencyForm(data, instance=emergency_object)
 
@@ -82,8 +113,23 @@ class AjaxableResponseMixin(object):
         if self.request.is_ajax():
             data = json.loads(self.request.body.decode('utf-8'))
             if data:
+                address = data["addresses"][0]
                 emergency_form = EmergencyForm(data)
-                emergency_form.data.update({'start_time': timezone.now()})
+                emergency_form.data.update({
+                    'start_time': timezone.now(),
+                    "adress_street" : address["address_street"],
+                    "address_extra" : address["address_extra"],
+                    "address_zip_code": address["address_zip_code"],
+                    "address_county" : address["address_county"],
+                    "address_col" : address["address_col"],
+                    "address_between" : address["address_between"],
+                    "address_and_street" : address["address_and_street"],
+                    "address_ref" : address["address_ref"],
+                    "address_front" : address["address_front"],
+                    "address_instructions" : address["address_instructions"],
+                    "address_notes" : address["address_notes"]
+
+                })
                 if emergency_form.is_valid():
                     self.object = emergency_form.save()
                     data_object = {

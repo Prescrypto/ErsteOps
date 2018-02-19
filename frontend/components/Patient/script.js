@@ -3,6 +3,7 @@ import Loader from 'vue-spinner/src/ScaleLoader.vue';
 
 export default {
   name: 'patient',
+  inject: ['$validator'],
   components: { Loader },
   computed: {
     subscription() {

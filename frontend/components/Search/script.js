@@ -46,4 +46,7 @@ export default {
     }),
     ...mapActions(['search', 'patient']),
   },
+  $_veeValidate: {
+    validator: 'new',
+  },
 };

@@ -1,0 +1,25 @@
+.unit {
+  cursor: pointer;
+
+  & > td {
+    padding: 5px 0 5px 30px;
+  }
+}
+
+.unit:hover {
+  background: #eff3f6;
+}
+
+.selected-container {
+  height: 45px;
+}
+
+.selected {
+  margin-right: 10px;
+  padding-right: 5px;
+}
+
+.close-button {
+  padding-left: 10px;
+  cursor: pointer;
+}

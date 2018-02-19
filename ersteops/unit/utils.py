@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 ''' Utils functions to Unit model '''
 
 UNIT_TYPE_LIST = (

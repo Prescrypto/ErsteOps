@@ -56,49 +56,14 @@
           <addresses />
         </div><!-- End Address TAB -->
 
-        <div class="c-tabs__pane" id="nav-units" role="tabpanel" aria-labelledby="nav-units-tab">
-          <div class="row">
-            <div class="col-12">
-              <div class="c-field">
-                <label class="c-field__label" for="id_units">
-                  Unidades
-                </label>
-                <select
-                  {# v-model="" #}
-                  name="units"
-                  id="id_units"
-                  class="c-input"
-                >
-                  <option value="" selected=""></option>
-                  <option
-                    v-for="unit in units"
-                    value="{unit.pk}"
-                  >
-                    <% unit.fields.year %> <% unit.fields.model %>
-                  </option>
-                </select>
-              </div>
-
-              <br />
-              <div class="c-field">
-                <label class="c-field__label" for="id_is_active">
-                  Es activa
-                </label>
-                <select
-                  {# v-model="" #}
-                  name="is_active"
-                  id="id_is_active"
-                  class="c-input"
-                >
-                  <option value="" selected=""></option>
-                  <option value="2">Sí</option>
-                  <option value="3">No</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div><!-- End Unit TAB -->
+        <!-- Units TAB -->
+        <div class="c-tabs__pane" id="nav-units" role="tabpanel" aria-labelledby="nav-address-tab">
+          <units />
+        </div><!-- End Units TAB -->
       </div>
     </div>
   </div>
 </modal>
+<section>
+  <notifications position="bottom right" />
+</section>

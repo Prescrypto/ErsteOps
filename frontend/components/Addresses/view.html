@@ -8,13 +8,49 @@
 
 <form v-else>
   <div class="row">
-
     <div class="col-12">
+      <div class="c-field">
+        <label class="c-field__label" for="id_zone">Zona</label>
+        <select
+          autofocus
+          tabindex="1"
+          v-model="source.zone"
+          v-validate="'required'"
+          data-vv-scope="emergency"
+          data-vv-name="zone"
+          data-vv-as="zona"
+          :class="{
+            'c-input': true,
+            'c-input--danger': errors.has('emergency.zone')
+          }"
+          name="zone"
+          id="id_zone"
+        >
+          <option value="" selected=""></option>
+          <option value="BQELMS">BQELMS - Bosque de las Lomas</option>
+          <option value="ITRLMS">ITRLMS - Interlomas</option>
+          <option value="LOMAS">LOMAS - Lomas de chapultepec</option>
+          <option value="PLNCO">PLNCO - POLANCO</option>
+          <option value="SFE">SFE - Santa Fe</option>
+          <option value="TCMCHL">TCMCHL - Tecamachalco</option>
+          <option value="UNICA">UNICA - Fuera de la zona de cobertura</option>
+        </select>
+      </div>
+      <small v-show="errors.has('emergency.zone')" class="c-field__message u-color-danger">
+        <i class="fa fa-times-circle"></i>{{ errors.first('emergency.zone') }}
+      </small>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <br />
       <div class="c-field">
         <label class="c-field__label" for="patient_address">
           Direccion de atención
         </label>
         <select
+          tabindex="2"
           @change="choose"
           v-model="current"
           name="address"
@@ -36,6 +72,7 @@
           Calle y numero
         </label>
         <input
+          tabindex="3"
           v-model="address.address_street"
           type="text"
           name="address_street"
@@ -51,6 +88,7 @@
           Calle
         </label>
         <input
+          tabindex="4"
           v-model="address.address_extra"
           type="text"
           name="address_extra"
@@ -66,6 +104,7 @@
           Entre la calle
         </label>
         <input
+          tabindex="5"
           v-model="address.address_between"
           type="text"
           name="address_between"
@@ -81,6 +120,7 @@
           Y la calle
         </label>
         <input
+          tabindex="6"
           v-model="address.address_and_street"
           type="text"
           name="address_and_street"
@@ -98,6 +138,7 @@
           Referencias
         </label>
         <input
+          tabindex="7"
           v-model="address.address_ref"
           type="text"
           name="address_ref"
@@ -113,6 +154,7 @@
           Fachada
         </label>
         <input
+          tabindex="8"
           v-model="address.address_front"
           type="text"
           name="address_front"
@@ -128,6 +170,7 @@
           Instrucciones de llegada
         </label>
         <input
+          tabindex="9"
           v-model="address.address_instructions"
           type="text"
           name="address_instructions"
@@ -145,6 +188,7 @@
           Codigo Postal
         </label>
         <input
+          tabindex="10"
           v-model="address.address_zip_code"
           type="text"
           name="address_zip_code"
@@ -160,6 +204,7 @@
           Delegacion
         </label>
         <input
+          tabindex="11"
           v-model="address.address_county"
           type="text"
           name="address_county"
@@ -175,6 +220,7 @@
           Colonia
         </label>
         <input
+          tabindex="12"
           v-model="address.address_col"
           type="text"
           name="address_col"

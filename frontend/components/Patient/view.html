@@ -20,6 +20,7 @@
           v-validate="'required'"
           data-vv-scope="emergency"
           data-vv-name="patient_name"
+          data-vv-as="nombre del paciente"
           :class="{
             'c-input': true,
             'c-input--danger': errors.has('emergency.patient_name')
@@ -65,36 +66,6 @@
           maxlength="100"
         />
       </div>
-
-      <br />
-      <div class="c-field">
-        <label class="c-field__label" for="id_zone">Zona</label>
-        <select
-          tabindex="10"
-          v-model="source.zone"
-          v-validate="'required'"
-          data-vv-scope="emergency"
-          data-vv-name="zone"
-          :class="{
-            'c-input': true,
-            'c-input--danger': errors.has('emergency.zone')
-          }"
-          name="zone"
-          id="id_zone"
-        >
-          <option value="" selected=""></option>
-          <option value="BQELMS">BQELMS - Bosque de las Lomas</option>
-          <option value="ITRLMS">ITRLMS - Interlomas</option>
-          <option value="LOMAS">LOMAS - Lomas de chapultepec</option>
-          <option value="PLNCO">PLNCO - POLANCO</option>
-          <option value="SFE">SFE - Santa Fe</option>
-          <option value="TCMCHL">TCMCHL - Tecamachalco</option>
-          <option value="UNICA">UNICA - Fuera de la zona de cobertura</option>
-        </select>
-      </div>
-      <small v-show="errors.has('emergency.zone')" class="c-field__message u-color-danger">
-        <i class="fa fa-times-circle"></i>{{ errors.first('emergency.zone') }}
-      </small>
     </div>
     <div class="col-4">
       <div class="c-field">
@@ -107,6 +78,7 @@
           v-validate="'required'"
           data-vv-scope="emergency"
           data-vv-name="odoo_client"
+          data-vv-as="ID del cliente"
           :class="{
             'c-input': true,
             'c-input--danger': errors.has('emergency.odoo_client')
@@ -187,12 +159,28 @@
           maxlength="50"
         />
       </div>
+
+      <br />
+      <div class="c-field">
+        <label class="c-field__label" for="id_caller_name">
+          Persona que llama
+        </label>
+        <input
+          tabindex="11"
+          v-model="source.caller_name"
+          type="text"
+          name="caller_name"
+          id="id_caller_name"
+          class="c-input"
+          maxlength="100"
+        />
+      </div>
     </div>
   </div>
 
   <span class="c-divider u-mv-medium"></span>
   <div class="row">
-    <div class="col-12">
+    <div class="col-6">
       <div class="c-field">
         <label class="c-field__label" for="id_main_complaint">
           Sintoma principal
@@ -208,33 +196,17 @@
           cols="40"
         ></textarea>
       </div>
-
-      <br />
+    </div>
+    <div class="col-6">
       <div class="c-field">
         <label class="c-field__label" for="id_complaint_descriprion">
           Descripción de los sintomas
         </label>
         <textarea
-          tabindex="12"
+          tabindex="13"
           v-model="source.complaint_descriprion"
           name="complaint_descriprion"
           id="id_complaint_descriprion"
-          class="c-input"
-          rows="2"
-          cols="40"
-        ></textarea>
-      </div>
-
-      <br />
-      <div class="c-field">
-        <label class="c-field__label" for="id_patient_notes">
-          Notas paciente
-        </label>
-        <textarea
-          tabindex="13"
-          v-model="source.patient_notes"
-          name="patient_notes"
-          id="id_patient_notes"
           class="c-input"
           rows="2"
           cols="40"
@@ -244,8 +216,9 @@
   </div>
 
   <span class="c-divider u-mv-medium"></span>
+
   <div class="row">
-    <div class="col-4">
+    <div class="col-6">
       <div class="c-field">
         <label class="c-field__label" for="id_service_category">
           Tipo de emergencia
@@ -267,7 +240,7 @@
         </select>
       </div>
     </div>
-    <div class="col-4">
+    <div class="col-6">
       <div class="c-field">
         <label class="c-field__label" for="id_grade_type">
           Grado Emergencia
@@ -278,6 +251,7 @@
           v-validate="'required'"
           data-vv-scope="emergency"
           data-vv-name="grade_type"
+          data-vv-as="grado de emergencia"
           :class="{
             'c-input': true,
             'c-input--danger': errors.has('emergency.grade_type')
@@ -295,20 +269,24 @@
         <i class="fa fa-times-circle"></i>{{ errors.first('emergency.grade_type') }}
       </small>
     </div>
-    <div class="col-4">
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <br />
       <div class="c-field">
-        <label class="c-field__label" for="id_caller_name">
-          Persona que llama
+        <label class="c-field__label" for="id_patient_notes">
+          Notas paciente
         </label>
-        <input
+        <textarea
           tabindex="16"
-          v-model="source.caller_name"
-          type="text"
-          name="caller_name"
-          id="id_caller_name"
+          v-model="source.patient_notes"
+          name="patient_notes"
+          id="id_patient_notes"
           class="c-input"
-          maxlength="100"
-        />
+          rows="2"
+          cols="40"
+        ></textarea>
       </div>
     </div>
   </div>
