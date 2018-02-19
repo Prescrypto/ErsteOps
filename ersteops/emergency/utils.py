@@ -58,6 +58,7 @@ class UpdateJsonResponseMixin(object):
         if self.request.is_ajax():
             data = json.loads(self.request.body.decode('utf-8'))
             if data:
+                address = data["addresses"][0]
                 emergency_object = super(UpdateJsonResponseMixin, self).get_object()
                 # del timers form form
                 entriesToRemove = ('attention_time', 'derivation_time', 'end_time', 'final_emergency_time', 'hospital_arrival',
@@ -65,8 +66,21 @@ class UpdateJsonResponseMixin(object):
                                     'arrival_time', )
                 for item in entriesToRemove:
                     data.pop(item, None)
-
-                data.update({'start_time': emergency_object.start_time })
+                # Accept update emergency with address
+                data.update({
+                    'start_time': emergency_object.start_time,
+                    "adress_street" : address["address_street"],
+                    "address_extra" : address["address_extra"],
+                    "address_zip_code": address["address_zip_code"],
+                    "address_county" : address["address_county"],
+                    "address_col" : address["address_col"],
+                    "address_between" : address["address_between"],
+                    "address_and_street" : address["address_and_street"],
+                    "address_ref" : address["address_ref"],
+                    "address_front" : address["address_front"],
+                    "address_instructions" : address["address_instructions"],
+                    "address_notes" : address["address_notes"]
+                })
 
                 emergency_form = EmergencyForm(data, instance=emergency_object)
 

@@ -5,6 +5,7 @@ import { SELECT_ADDRESS } from 'store/constants';
 
 export default {
   name: 'addresses',
+  inject: ['$validator'],
   components: { Loader },
   beforeUpdate() {
     this.current = 0;

@@ -26,12 +26,26 @@
             <% label %>
         </a>
         <div v-if="active !== 'search'" class="modal-buttons">
-          <button
+          <div
             @click="toggleActive"
-            :class="{'c-btn': true, 'c-btn--success': !emergency.is_active, 'c-btn--danger': emergency.is_active}">
-              <span v-if="emergency.is_active">Desactivar</span>
-              <span v-else>Activar</span>
-          </button>
+            :class="{'c-switch': true, 'is-active': emergency.is_active }"
+            style="margin-right:60px"
+          >
+            <input
+              class="c-switch__input"
+              name="is_active"
+              id="is_active"
+              type="checkbox"
+              v-model="emergency.is_active"
+            />
+            <label v-if="emergency.is_active" class="c-switch__label" for="is_active">
+              Activo
+            </label>
+            <label v-else class="c-switch__label" for="is_active">
+              Inactivo
+            </label>
+          </div>
+
           <button
             @click="submit"
             class="c-btn c-btn--info">
@@ -64,3 +78,6 @@
     </div>
   </div>
 </modal>
+<section>
+  <notifications position="bottom right" />
+</section>

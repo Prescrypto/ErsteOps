@@ -33,7 +33,7 @@
           <tr class="c-table__row">
             <th class="c-table__cell c-table__cell--head">Nombre</th>
             <th class="c-table__cell c-table__cell--head">Tipo de Unidad</th>
-            <!-- <th class="c&#45;table__cell c&#45;table__cell&#45;&#45;head">Ubicación</th> -->
+            <th class="c-table__cell c-table__cell--head">Ubicación</th>
             <!-- <th class="c&#45;table__cell c&#45;table__cell&#45;&#45;head">Telefono</th> -->
             <th class="c-table__cell c-table__cell--head">
                 <span class="u-hidden-visually">Acciones</span>
@@ -42,9 +42,9 @@
         </thead>
         <tbody>
           <tr v-for="unit in units" v-if="!isSelected(unit.id)" class="c-table__row unit">
-            <td class="c-table__cell">{{unit.identifier}}</td>
+            <td class="c-table__cell" >{{unit.identifier}}</td>
             <td class="c-table__cell">{{unit.unit_type | description}}</td>
-            <!-- <td class="c&#45;table__cell">{{unit.location}}</td> -->
+            <td class="c-table__cell">{{unit.location}}</td>
             <!-- <td class="c&#45;table__cell">{{unit.phone}}</td> -->
             <td class="c-table__cell u-text-center">
               <a @click="e => add(e, unit)" class="c-btn c-btn--success">
