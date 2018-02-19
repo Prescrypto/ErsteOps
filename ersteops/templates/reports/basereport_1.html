@@ -1,122 +1,13 @@
 {% extends "home/base_ui.html" %}
+{% load staticfiles %}
 {% block title %}Reportes{% endblock title %}
 {% block cssblock %}
-  <style>
-    .pvtUi { color: #333; }
-
-
-table.pvtTable {
-    font-size: 8pt;
-    text-align: left;
-    border-collapse: collapse;
-}
-table.pvtTable thead tr th, table.pvtTable tbody tr th {
-    background-color: #e6EEEE;
-    border: 1px solid #CDCDCD;
-    font-size: 8pt;
-    padding: 5px;
-}
-
-table.pvtTable .pvtColLabel {text-align: center;}
-table.pvtTable .pvtTotalLabel {text-align: right;}
-
-table.pvtTable tbody tr td {
-    color: #3D3D3D;
-    padding: 5px;
-    background-color: #FFF;
-    border: 1px solid #CDCDCD;
-    vertical-align: top;
-    text-align: right;
-}
-
-.pvtTotal, .pvtGrandTotal { font-weight: bold; }
-
-.pvtVals { text-align: center; white-space: nowrap;}
-.pvtRowOrder, .pvtColOrder {
-    cursor:pointer;
-    width: 15px;
-    margin-left: 5px;
-    display: inline-block; }
-.pvtAggregator { margin-bottom: 5px ;}
-
-.pvtAxisContainer, .pvtVals {
-    border: 1px solid gray;
-    background: #EEE;
-    padding: 5px;
-    min-width: 20px;
-    min-height: 20px;
-
-    user-select: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -khtml-user-select: none;
-    -ms-user-select: none;
-}
-.pvtAxisContainer li {
-    padding: 8px 6px;
-    list-style-type: none;
-    cursor:move;
-}
-.pvtAxisContainer li.pvtPlaceholder {
-    -webkit-border-radius: 5px;
-    padding: 3px 15px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    border: 1px dashed #aaa;
-}
-
-.pvtAxisContainer li span.pvtAttr {
-    -webkit-text-size-adjust: 100%;
-    background: #F3F3F3;
-    border: 1px solid #DEDEDE;
-    padding: 2px 5px;
-    white-space:nowrap;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-}
-
-.pvtTriangle {
-    cursor:pointer;
-    color: grey;
-}
-
-.pvtHorizList li { display: inline; }
-.pvtVertList { vertical-align: top; }
-
-.pvtFilteredAttribute { font-style: italic }
-
-.pvtFilterBox{
-    z-index: 200;
-    width: 500px;
-    border: 1px solid gray;
-    background-color: #fff;
-    position: absolute;
-    text-align: center;
-}
-
-.pvtFilterBox h4{ margin: 15px; }
-.pvtFilterBox p { margin: 10px auto; }
-.pvtFilterBox label { font-weight: normal; }
-.pvtFilterBox input[type='checkbox'] { margin-right: 10px; margin-left: 10px; }
-.pvtFilterBox input[type='text'] { width: 230px; }
-.pvtFilterBox .count { color: gray; font-weight: normal; margin-left: 3px;}
-
-.pvtCheckContainer{
-    text-align: left;
-    font-size: 14px;
-    white-space: nowrap;
-    overflow-y: scroll;
-    width: 100%;
-    max-height: 350px;
-    border-top: 1px solid lightgrey;
-    border-bottom: 1px solid lightgrey;
-}
-
-.pvtCheckContainer p{ margin: 5px; }
-
-.pvtRendererArea { padding: 5px;}
-  </style>
+<script rel="stylesheet" type="text/css" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"></script>
+<script rel="stylesheet" type="text/css" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.css"></script>
+<!-- <script src={% static "NovixPivotJS/js/highstock.js" %}></script> -->
+    <link rel="stylesheet" media="screen" href={% static "NovixPivotJS/css/style.css" %} />
+    <link rel="stylesheet" media="screen" href={% static "NovixPivotJS/css/handsontable.full.min.css" %} />
+    <link rel="stylesheet" media="screen" href={% static "NovixPivotJS/css/pivot.css" %} />
 {% endblock cssblock %}
 {% block header %}
   {% include "ui_component/sidebar.html" %}
@@ -160,13 +51,26 @@ table.pvtTable tbody tr td {
 
 {% block jsblock %}
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
-  <script rel="stylesheet" type="text/css" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"></script>
+  <!-- <script rel="stylesheet" type="text/css" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"></script> -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.js"></script>
-  <script rel="stylesheet" type="text/css" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.css"></script>
+<!--   <script rel="stylesheet" type="text/css" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.css"></script> -->
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
   <!-- Export CSV -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/export_renderers.min.js"></script>
+  <!-- handontable -->
+<!--   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handsontable/0.36.0/handsontable.full.min.js"></script> -->
+  <!-- highcharts -->
+<!--   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.7/highcharts.js"></script> -->
+  <!-- load novix -->
+  <script src={% static "NovixPivotJS/js/highstock.js" %}></script>
+  <script src={% static "NovixPivotJS/js/highcharts-more.js" %}></script>
+  <script src={% static "NovixPivotJS/js/modules/treemap.js" %}></script>
+  <script src={% static "NovixPivotJS/js/pivot.js" %} type="text/javascript"></script>
+  <script src={% static "NovixPivotJS/js/handsontable.full.min.js" %} type="text/javascript"></script>
+  <script src = {% static "NovixPivotJS/novix.pivot.renderer.js" %} ></script>
+  <script src = {% static "NovixPivotJS/hightchart_renderers.js" %} ></script>
   <!-- Load in spanish-->
+
   <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.es.min.js"></script> -->
   <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script> -->
   <script>
@@ -185,6 +89,7 @@ table.pvtTable tbody tr td {
       // );
       var renderers = $.extend($.pivotUtilities.renderers,
             $.pivotUtilities.export_renderers);
+      var renderers = $.extend({},$.pivotUtilities.renderers,$.pivotUtilities.export_renderers,$.pivotUtilities.novix_renderers, $.pivotUtilities.highchart_renderers);
       //google.load("visualization", "1", {packages:["corechart", "charteditor"]});
       $("#pivotable_example").pivotUI(
           {{ data|safe}},
@@ -194,11 +99,16 @@ table.pvtTable tbody tr td {
             cols: ["Zona"],
             //rendererName: "TSV Export",
             //localeStrings: "es",
+            rendererName: "Input Table",
             rendererOptions: {
-   c3: {
-      size: { height:200, width:200}
-   }
-}
+              onEditValues: function (changes) {
+                        $(".changesOutput").html(JSON.stringify(changes));
+                    },
+              onDrawTable: function (htTable) {
+                        $(".changesOutput").empty();
+                    },
+
+            }
           },
       );
       //$.pivotUtilities.gchart_renderers;
