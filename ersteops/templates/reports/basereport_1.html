@@ -17,12 +17,9 @@
   <main class="o-page__content">
     {# Main header #}
     {% include "ui_component/header.html" %}
-    <div class="container">
-      <!-- <div id="analytics"></div> -->
-      {# TODO add mini components of wireframe#}
+    <div class="container-fluid">
       <div class="row">
         <div class="col-lg-12">
-
             <form  class="uk-form" action='/reports/' method="post"  >
               {% csrf_token %}
               <div class="form-group">
@@ -31,29 +28,19 @@
               <input type="hidden" value="{{ template }}" name='template'>
               </div>
             </form>
-
-            <!-- <div id="dashboard-log"></div> -->
-
         </div>
       </div>
+
       <div class="row">
-
-
         <div class="col-lg-12">
-<!--           <h2 class="u-text-left">Reporte</h2>
-          <div id="pivotable_example" style="margin: 0px; width: 100%; height: 100%;"></div> -->
-
-  <div class="diagramWrapper">
-    <div id="pivotable_example" class="pane"></div>
-  </div>
-  <span class="changesOutput" ></span>
-
+          <!-- PivotableJS is redered HERE-->
+          <div class="diagramWrapper">
+            <div id="pivotable_example" class="pane"></div>
+          </div>
+          <span class="changesOutput" ></span>
         </div>
+      </div>
 
-
-
-
-        </div>
     </div> <!-- // .container -->
   </main><!-- // .o-page__content -->
 {% endblock content %}
