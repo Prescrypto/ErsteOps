@@ -27,7 +27,7 @@
       <tr class="c-table__row">
           <th class="c-table__cell c-table__cell--head">Cliente</th>
           <th class="c-table__cell c-table__cell--head">Grado</th>
-          <th class="c-table__cell c-table__cell--head">Unidad</th>
+          <!-- <th class="c&#45;table__cell c&#45;table__cell&#45;&#45;head">Unidad</th> -->
           <th class="c-table__cell c-table__cell--head">Tiempo</th>
           <th class="c-table__cell c-table__cell--head">Estado</th>
           <th class="c-table__cell c-table__cell--head">
@@ -43,13 +43,12 @@
       <tr v-for="emergency in emergencies" :id="`emergency-${emergency.id}`" class="c-table__row emergency">
         <td class="c-table__cell" @click="populate(emergency.id)"><span class="u-text-mute">{{ emergency.odoo_client }}</span></td>
         <td class="c-table__cell" @click="populate(emergency.id)">{{ emergency.grade_type }}</td>
-        <td class="c-table__cell" @click="populate(emergency.id)">
-          <span>Sin Asignar</span>
+        <!-- <td class="c&#45;table__cell" @click="populate(emergency.id)"> -->
           <!-- Add again with new unit
           <span v-for="unit in emergency.unit.all" class="u-text-mute">{{ unit }}</span>
           <span v-if="!((emergency.unit || {}).all || {}).length">Sin Asignar</span>
           -->
-        </td>
+        <!-- </td> -->
         <td class="c-table__cell" @click="populate(emergency.id)">
           <span class="u-text-mute">{{ emergency.start_time | time-since(now) }}</span>
         </td>

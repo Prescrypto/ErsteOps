@@ -66,8 +66,8 @@ In vagrant box go to /vagrant/ersteops and type the follow:
 $ sudo -i -u postgres psql -c "DROP DATABASE mydb"
 $ sudo -i -u postgres psql -c "CREATE DATABASE mydb"
 $ python3 manage.py migrate
-$ python3 manage.py ../fixtures/auth/initial_data.json
-$ python3 manage.py ../fixtures/auth/test_data.json
+$ python3 manage.py loaddata ../fixtures/auth/initial_data.json
+$ python3 manage.py loaddata ../fixtures/auth/test_data.json
 
 ```
 
