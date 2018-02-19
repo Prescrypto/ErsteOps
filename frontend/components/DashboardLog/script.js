@@ -1,6 +1,6 @@
 import 'filters/time-since';
 import { mapState, mapActions, mapMutations, mapGetters } from 'vuex';
-import { MODAL_CHANGE_TAB } from 'store/constants';
+import { MODAL_CHANGE_TAB, EMERGENCY_TEXT_CLEAR } from 'store/constants';
 
 export default {
   name: 'dashboard-log',
@@ -18,6 +18,8 @@ export default {
       loading: 'loading',
       // server results array
       current: 'emergency',
+      // serialized emergency text
+      emergencyText: 'emergencyText',
     }),
     ...mapGetters({
       emergencies: 'sortActiveEmergencies',
@@ -26,6 +28,7 @@ export default {
   methods: {
     ...mapMutations({
       changeTab: MODAL_CHANGE_TAB,
+      clearEmergencyText: EMERGENCY_TEXT_CLEAR,
     }),
     // lookup emergency by id
     populate(id) {
@@ -35,12 +38,36 @@ export default {
     },
     // stops the timer
     stop(e, id) {
-      // prevet modal from opening
+      // prevent modal from opening
       e.stopPropagation();
       // stop timer
       this.stopTimer(id);
     },
+    // copy serialized emergency to clipboard
+    text(e, id) {
+      // prevent modal from opening
+      e.stopPropagation();
+      // fetch emergency text
+      this.emergencyDetails(id);
+    },
+    selectText(e) {
+      e.currentTarget.select();
+      e.currentTarget.setSelectionRange(0, e.currentTarget.value.length);
+    },
+    onCopy() {
+      this.clearEmergencyText();
+      this.$notify({
+        text: 'Se ha copiado el incidente al portapapeles.',
+        type: 'success',
+      });
+    },
+    onCopyError() {
+      this.$notify({
+        text: 'No se pudo copiar el incidente al portapapeles',
+        type: 'error',
+      });
+    },
     // maps the search action from the store to the component
-    ...mapActions(['emergency', 'stopTimer']),
+    ...mapActions(['emergency', 'stopTimer', 'emergencyDetails']),
   },
 };

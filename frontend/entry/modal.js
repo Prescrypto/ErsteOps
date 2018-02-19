@@ -2,7 +2,9 @@ import 'styles/global.scss';
 import Vue from 'vue';
 import { mapState, mapMutations, mapActions } from 'vuex';
 import VModal from 'vue-js-modal';
-import VeeValidate from 'vee-validate';
+import Notifications from 'vue-notification';
+import VeeValidate, { Validator } from 'vee-validate';
+import es from 'vee-validate/dist/locale/es';
 import Search from 'components/Search';
 import Patient from 'components/Patient';
 import Addresses from 'components/Addresses';
@@ -16,8 +18,10 @@ import {
 } from 'store/constants';
 
 // Instantiate Vue mixins
+Vue.use(Notifications);
 Vue.use(VModal);
-Vue.use(VeeValidate);
+Vue.use(VeeValidate, { inject: false });
+Validator.localize('es', es);
 
 // Initialize the Vue instance and assign to aforementioned global object
 window.Erste.modal = new Vue({
@@ -76,8 +80,30 @@ window.Erste.modal = new Vue({
         ...this.emergency,
         units: map(unit => unit.id)(this.selected),
       };
-      this.newIncident(emergency);
+      this.$validator
+        .validateAll('emergency')
+        .then(valid => {
+          if (valid) {
+            return this.newIncident(emergency);
+          }
+          throw new Error();
+        })
+        .then(() => {
+          this.$notify({
+            text: 'Se ha guardado el incidente en el sistema.',
+            type: 'success',
+          });
+        })
+        .catch(() => {
+          this.$notify({
+            text: 'Hubo un error al guardar el incidente, intente de nuevo.',
+            type: 'error',
+          });
+        });
     },
     ...mapActions(['newIncident']),
+  },
+  $_veeValidate: {
+    validator: 'new',
   },
 });
