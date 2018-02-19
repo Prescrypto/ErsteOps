@@ -12,7 +12,13 @@ def unit_json_list(request):
     if request.is_ajax():
         units = Unit.objects.available_units()
         data = serializers.serialize('json', list(units), fields=UNIT_LIST_FIELD)
-        return HttpResponse(data, content_type='application/json', status=200)
+        _raw_data = json.loads(data)
+        for unit in _raw_data:
+            if unit['fields']['is_alliance']:
+                unit['fields'].update({'identifier': '{}{}'.format(unit['fields']['identifier'],' (Alianza)')})
+            else:
+                continue
+        return HttpResponse(json.dumps(_raw_data), content_type='application/json', status=200)
     else:
         return BAD_REQUEST
 

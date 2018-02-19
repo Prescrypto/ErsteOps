@@ -8,7 +8,8 @@ class UnitQueryset(models.QuerySet):
     ''' Add custom querysets'''
 
     def available_units(self):
-        return self.filter(is_active=True).filter(is_assigned=False).filter(is_alliance=False)
+        # add alliances removing alliance filter
+        return self.filter(is_active=True).filter(is_assigned=False)
 
     def available_alliance_units(self):
         return self.filter(is_active=True).filter(is_alliance=True)
