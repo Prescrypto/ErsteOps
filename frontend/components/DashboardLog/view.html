@@ -1,52 +1,77 @@
-<table id="dashboard-log" class="c-table">
-  <!-- <my&#45;app></my&#45;app> -->
-  <thead class="c-table__head c-table__head--slim">
-    <tr class="c-table__row">
-        <th class="c-table__cell c-table__cell--head">Cliente</th>
-        <th class="c-table__cell c-table__cell--head">Grado</th>
-        <th class="c-table__cell c-table__cell--head">Unidad</th>
-        <th class="c-table__cell c-table__cell--head">Tiempo</th>
-        <th class="c-table__cell c-table__cell--head">Estado</th>
-        <th class="c-table__cell c-table__cell--head">
-            <span class="u-hidden-visually">Acciones</span>
-        </th>
-        <th class="c-table__cell c-table__cell--head">
+<div>
+  <div v-if="emergencyText" class="c-field has-addon-right serialized">
+    <i @click="clearEmergencyText()" class="fa fa-close close-button"></i>
+    <label class="c-field__label u-hidden-visually" for="serialized">Emergency Text</label>
+    <input
+      type="text"
+      class="c-input"
+      id="serialized"
+      name="serialized"
+      v-model="emergencyText"
+      @click="selectText"
+      readonly
+    >
+    <span
+      class="c-field__addon"
+      v-clipboard:copy="emergencyText"
+      v-clipboard:success="onCopy"
+      v-clipboard:error="onCopyError"
+    >
+      <i class="fa fa-clipboard"></i>
+    </span>
+  </div>
 
-        </th>
-    </tr>
-  </thead>
+  <table id="dashboard-log" class="c-table">
+    <!-- <my&#45;app></my&#45;app> -->
+    <thead class="c-table__head c-table__head--slim">
+      <tr class="c-table__row">
+          <th class="c-table__cell c-table__cell--head">Cliente</th>
+          <th class="c-table__cell c-table__cell--head">Grado</th>
+          <th class="c-table__cell c-table__cell--head">Unidad</th>
+          <th class="c-table__cell c-table__cell--head">Tiempo</th>
+          <th class="c-table__cell c-table__cell--head">Estado</th>
+          <th class="c-table__cell c-table__cell--head">
+              <span class="u-hidden-visually">Acciones</span>
+          </th>
+          <th class="c-table__cell c-table__cell--head">
 
-  <tbody id="root">
-    <tr v-for="emergency in emergencies" :id="`emergency-${emergency.id}`" class="c-table__row emergency">
-      <td class="c-table__cell" @click="populate(emergency.id)"><span class="u-text-mute">{{ emergency.odoo_client }}</span></td>
-      <td class="c-table__cell" @click="populate(emergency.id)">{{ emergency.grade_type }}</td>
-      <td class="c-table__cell" @click="populate(emergency.id)">
-        <span>Sin Asignar</span>
-        <!-- Add again with new unit
-        <span v-for="unit in emergency.unit.all" class="u-text-mute">{{ unit }}</span>
-        <span v-if="!((emergency.unit || {}).all || {}).length">Sin Asignar</span>
-        -->
-      </td>
-      <td class="c-table__cell" @click="populate(emergency.id)">
-        <span class="u-text-mute">{{ emergency.start_time | time-since(now) }}</span>
-      </td>
-      <td class="c-table__cell" @click="populate(emergency.id)">
-        <span v-if="emergency.is_active" class="c-badge c-badge--small c-badge--success">En Camino</span>
-        <span v-else class="c-badge c-badge--small c-badge--success">Terminado</span>
-      </td>
-      <td class="c-table__cell u-text-center">
-        <div class="c-dropdown dropdown">
-          <button class="c-btn c-btn--secondary has-dropdown dropdown-toggle" id="dropdownMenuButton10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
+          </th>
+      </tr>
+    </thead>
 
-          <div class="c-dropdown__menu dropdown-menu" aria-labelledby="dropdownMenuButton10">
-            <a class="c-dropdown__item dropdown-item" @click="populate(emergency.id)">Editar</a>
-            <a class="c-dropdown__item dropdown-item" @click="e => stop(e, emergency.id)">Detener</a>
+    <tbody id="root">
+      <tr v-for="emergency in emergencies" :id="`emergency-${emergency.id}`" class="c-table__row emergency">
+        <td class="c-table__cell" @click="populate(emergency.id)"><span class="u-text-mute">{{ emergency.odoo_client }}</span></td>
+        <td class="c-table__cell" @click="populate(emergency.id)">{{ emergency.grade_type }}</td>
+        <td class="c-table__cell" @click="populate(emergency.id)">
+          <span>Sin Asignar</span>
+          <!-- Add again with new unit
+          <span v-for="unit in emergency.unit.all" class="u-text-mute">{{ unit }}</span>
+          <span v-if="!((emergency.unit || {}).all || {}).length">Sin Asignar</span>
+          -->
+        </td>
+        <td class="c-table__cell" @click="populate(emergency.id)">
+          <span class="u-text-mute">{{ emergency.start_time | time-since(now) }}</span>
+        </td>
+        <td class="c-table__cell" @click="populate(emergency.id)">
+          <span v-if="emergency.is_active" class="c-badge c-badge--small c-badge--success">En Camino</span>
+          <span v-else class="c-badge c-badge--small c-badge--success">Terminado</span>
+        </td>
+        <td class="c-table__cell u-text-center">
+          <div class="c-dropdown dropdown">
+            <button class="c-btn c-btn--secondary has-dropdown dropdown-toggle" id="dropdownMenuButton10" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones</button>
+
+            <div class="c-dropdown__menu dropdown-menu" aria-labelledby="dropdownMenuButton10">
+              <a class="c-dropdown__item dropdown-item" @click="populate(emergency.id)">Editar</a>
+              <a class="c-dropdown__item dropdown-item" @click="e => stop(e, emergency.id)">Detener</a>
+              <a class="c-dropdown__item dropdown-item" @click="e => text(e, emergency.id)">Exportar</a>
+            </div>
           </div>
-        </div>
-      </td>
-      <td class="c-table__cell u-text-center">
-        <span @click="e => stop(e, emergency.id)" class="fa fa-stop-circle-o"></span>
-      </td>
-    </tr><!-- // .table__row -->
-  </tbody>
-</table>
+        </td>
+        <td class="c-table__cell u-text-center">
+          <span @click="e => stop(e, emergency.id)" class="fa fa-stop-circle-o"></span>
+        </td>
+      </tr><!-- // .table__row -->
+    </tbody>
+  </table>
+</div>

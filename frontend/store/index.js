@@ -32,6 +32,10 @@ import {
   REQUEST_EMERGENCY_START,
   REQUEST_EMERGENCY_SUCCESS,
   REQUEST_EMERGENCY_ERROR,
+  REQUEST_EMERGENCY_TEXT_START,
+  REQUEST_EMERGENCY_TEXT_SUCCESS,
+  REQUEST_EMERGENCY_TEXT_ERROR,
+  EMERGENCY_TEXT_CLEAR,
   SELECT_ADDRESS,
   MODAL_CHANGE_TAB,
   MODAL_RESET,
@@ -69,6 +73,7 @@ const store = new Vuex.Store({
       is_active: true,
       units: [],
     },
+    emergencyText: '',
   },
 
   actions: {
@@ -130,6 +135,13 @@ const store = new Vuex.Store({
           });
         })
         .catch(err => commit(REQUEST_EMERGENCY_ERROR, err));
+    },
+    emergencyDetails({ commit }, id) {
+      commit(REQUEST_EMERGENCY_TEXT_START);
+      return http
+        .get(`/emergency/detail_text/${id}/`)
+        .then(response => commit(REQUEST_EMERGENCY_TEXT_SUCCESS, response.data))
+        .catch(err => commit(REQUEST_EMERGENCY_TEXT_ERROR, err));
     },
     stopTimer({ commit }, id) {
       commit(EMERGENCY_SET_INACTIVE_START);
@@ -236,6 +248,24 @@ const store = new Vuex.Store({
     [REQUEST_EMERGENCY_ERROR](state, err) {
       state.error = err;
       state.loading = false;
+    },
+
+    // Emergency Text
+    [REQUEST_EMERGENCY_TEXT_START](state) {
+      state.error = false;
+      state.loading = true;
+    },
+    [REQUEST_EMERGENCY_TEXT_SUCCESS](state, data) {
+      state.emergencyText = data;
+      state.loading = false;
+    },
+    [REQUEST_EMERGENCY_TEXT_ERROR](state, err) {
+      state.error = err;
+      state.loading = false;
+    },
+    [EMERGENCY_TEXT_CLEAR](state) {
+      state.error = false;
+      state.emergencyText = '';
     },
 
     // Select patient address
