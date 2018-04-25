@@ -1,0 +1,55 @@
+{% load staticfiles %}
+<!-- Modal -->
+<div class="c-modal modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+  <div class="c-modal__dialog modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="c-onboard">
+        <header class="c-onboard__header">
+          <h1 class="c-onboard__title">Welcome To Our App</h1>
+          <button class="c-onboard__close c-close" data-dismiss="modal" aria-label="Close">
+          <i class="fa fa-close"></i>
+          </button>
+        </header>
+
+        <nav class="c-onboard__nav">
+          <p class="c-onboard__nav-title">Quick Tour</p>
+            <ul class="c-onboard__nav-list">
+              <li>
+                <a class="c-onboard__nav-link" href="#">
+                <span class="c-onboard__nav-counter">1</span>Setup your account</a>
+              </li>
+              <li>
+                <a class="c-onboard__nav-link is-active" href="#">
+                <span class="c-onboard__nav-counter">2</span>Start Your first board</a>
+              </li>
+              <li>
+                <a class="c-onboard__nav-link" href="#">
+                <span class="c-onboard__nav-counter">3</span>Organize
+              </li>
+              <li>
+                <a class="c-onboard__nav-link" href="#">
+                <span class="c-onboard__nav-counter">4</span>Share
+              <li>
+          </ul>
+        </nav>
+
+        <div class="c-onboard__body">
+          <h2 class="u-h5 u-mb-small">Start your first board</h2>
+          <p class="u-text-mute u-nosapce">Click on the right panel and start your first board. Boards are our core feature for helping you keep your work in order and easy to manage.</p>
+        </div>
+
+        <div class="c-onboard__img">
+          <img src={% static "ui_kit/img/onboard-img.png" %} alt="About image">
+        </div>
+
+        <span class="c-onboard__skip">
+          <a class="u-text-mute" href="#">Skip</a>
+        </span>
+
+        <span class="c-onboard__next">
+          <a class="c-btn c-btn--green" href="#">Next</a>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,12 +2,10 @@
 {% load staticfiles %}
 {% block title %}Reportes{% endblock title %}
 {% block cssblock %}
-<script rel="stylesheet" type="text/css" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"></script>
-<script rel="stylesheet" type="text/css" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.css"></script>
-<!-- <script src={% static "NovixPivotJS/js/highstock.js" %}></script> -->
-    <link rel="stylesheet" media="screen" href={% static "NovixPivotJS/css/style.css" %} />
-    <link rel="stylesheet" media="screen" href={% static "NovixPivotJS/css/handsontable.full.min.css" %} />
-    <link rel="stylesheet" media="screen" href={% static "NovixPivotJS/css/pivot.css" %} />
+  <link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"/>
+  <link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.css"/>
+  <link rel="stylesheet" media="screen" href={% static "NovixPivotJS/css/style.css" %} />
+  <link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/handsontable/0.36.0/handsontable.full.min.css" />
 {% endblock cssblock %}
 {% block header %}
   {% include "ui_component/sidebar.html" %}
@@ -35,10 +33,7 @@
         <div class="col-lg-12">
           <!-- PivotableJS is redered HERE-->
           <h2 class="u-text-left">Reporte</h2>
-          <div class="diagramWrapper">
-            <div id="pivotable_example" class="pane"></div>
-          </div>
-          <span class="changesOutput" ></span>
+          <div id="pivotable_example"></div>
         </div>
       </div>
 
@@ -47,29 +42,23 @@
 {% endblock content %}
 
 {% block jsblock %}
+  <!-- jquery -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
-  <!-- <script rel="stylesheet" type="text/css" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"></script> -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.js"></script>
-<!--   <script rel="stylesheet" type="text/css" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.css"></script> -->
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-  <!-- Export CSV -->
+  <!-- PivotTable basic -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.js"></script>
+  <!-- PivotTable Export CSV -->
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/export_renderers.min.js"></script>
   <!-- handontable -->
-<!--   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handsontable/0.36.0/handsontable.full.min.js"></script> -->
-  <!-- highcharts -->
-<!--   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/6.0.7/highcharts.js"></script> -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handsontable/0.36.0/handsontable.full.min.js"></script>
   <!-- load novix -->
   <script src={% static "NovixPivotJS/js/highstock.js" %}></script>
   <script src={% static "NovixPivotJS/js/highcharts-more.js" %}></script>
   <script src={% static "NovixPivotJS/js/modules/treemap.js" %}></script>
-<!--   <script src={% static "NovixPivotJS/js/pivot.js" %} type="text/javascript"></script> -->
-  <script src={% static "NovixPivotJS/js/handsontable.full.min.js" %} type="text/javascript"></script>
   <script src = {% static "NovixPivotJS/novix.pivot.renderer.js" %} ></script>
   <script src = {% static "NovixPivotJS/hightchart_renderers.js" %} ></script>
-  <!-- Load in spanish-->
-
-  <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.es.min.js"></script> -->
-  <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script> -->
+  <!-- Movil support-->
+<!--   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script> -->
   <script>
     $( document ).ready(function() {
 
