@@ -1,0 +1,16 @@
+<ul>
+  <li v-for="grade in grades" @mouseover="setHover(grade.weight)" @mouseout="unsetHover">
+    <button
+      @click="e => setGrade(e, grade)"
+      v-bind:class="[
+        { hover: hover > 0 },
+        { active: isActive(grade) },
+        { low: grade.name === 'G3'  },
+        { medium: grade.name === 'G2' },
+        { high: grade.name === 'G1' }
+      ]">
+      {{grade.name}}
+    </button>
+  </li>
+</ul>
+

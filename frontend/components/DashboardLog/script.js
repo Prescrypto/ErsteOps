@@ -1,12 +1,14 @@
 import 'filters/time-since';
 import { mapState, mapActions, mapMutations, mapGetters } from 'vuex';
 import { MODAL_CHANGE_TAB, EMERGENCY_TEXT_CLEAR } from 'store/constants';
+import EmergencyGrade from 'components/EmergencyGrade';
 
 export default {
   name: 'dashboard-log',
   data: () => ({
     now: Date.now(),
   }),
+  components: { EmergencyGrade },
   mounted() {
     setInterval(() => {
       this.$data.now = Date.now();

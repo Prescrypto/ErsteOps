@@ -42,7 +42,9 @@
     <tbody id="root">
       <tr v-for="emergency in emergencies" :id="`emergency-${emergency.id}`" class="c-table__row emergency">
         <td class="c-table__cell" @click="populate(emergency.id)"><span class="u-text-mute">{{ emergency.odoo_client }}</span></td>
-        <td class="c-table__cell" @click="populate(emergency.id)">{{ emergency.grade_type }}</td>
+        <td class="c-table__cell" @click="populate(emergency.id)">
+          <emergency-grade v-bind:emergency="emergency" />
+        </td>
         <!-- <td class="c&#45;table__cell" @click="populate(emergency.id)"> -->
           <!-- Add again with new unit
           <span v-for="unit in emergency.unit.all" class="u-text-mute">{{ unit }}</span>
