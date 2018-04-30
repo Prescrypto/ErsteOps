@@ -142,7 +142,7 @@ const store = new Vuex.Store({
         .get(`/emergency/detail_text/${id}/`)
         .then(response => commit(REQUEST_EMERGENCY_TEXT_SUCCESS, response.data))
         .catch(err => {
-          commit(REQUEST_EMERGENCY_TEXT_ERROR, err)
+          commit(REQUEST_EMERGENCY_TEXT_ERROR, err);
           throw err;
         });
     },

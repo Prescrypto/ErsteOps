@@ -66,7 +66,7 @@ export default {
         }
       }
     },
-    graded(id/* , data */) {
+    graded(id /* , data */) {
       this.stopTimer(id);
     },
     gradedError() {
