@@ -43,7 +43,7 @@
       <tr v-for="emergency in emergencies" :id="`emergency-${emergency.id}`" class="c-table__row emergency">
         <td class="c-table__cell" @click="populate(emergency.id)"><span class="u-text-mute">{{ emergency.odoo_client }}</span></td>
         <td class="c-table__cell" @click="populate(emergency.id)">
-          <emergency-grade v-bind:emergency="emergency" />
+          <emergency-grade :emergency="emergency" />
         </td>
         <!-- <td class="c&#45;table__cell" @click="populate(emergency.id)"> -->
           <!-- Add again with new unit
@@ -70,6 +70,32 @@
           </div>
         </td>
         <td class="c-table__cell u-text-center">
+          <v-popover
+            trigger="manual"
+            :open="showGradeTooltip(emergency.id)"
+            offset="20"
+            :auto-hide="false"
+            popoverClass="grade"
+            defaultInnerClass="grade__inner"
+            defaultArrowClass="grade__rrrow"
+          >
+            <template slot="popover">
+              <button
+                @click="stopped = null"
+                type="button"
+                class="grid__close c-close u-color-primary">×</button>
+              <div class="grade__wrapper">
+                <h1 class="tooltip__heading u-h6 u-text-center">
+                  Grado Final
+                </h1>
+                <emergency-grade
+                  :emergency="emergency"
+                  @graded="d => graded(emergency.id, d)"
+                  @error="gradedError"
+                />
+              </div>
+            </template>
+          </v-popover>
           <span @click="e => stop(e, emergency.id)" class="fa fa-stop-circle-o"></span>
         </td>
       </tr><!-- // .table__row -->

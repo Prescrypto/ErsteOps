@@ -31,9 +31,26 @@ export default {
 
       return isCurrent || isBelowCurrent || isBelowHovered;
     },
-    setGrade(e, { name }) {
-      e.stopPropagation();
-      this.newIncident({ ...this.emergency, grade_type: name });
+    async setGrade(e, { name }) {
+      try {
+        e.stopPropagation();
+        const response = await this.newIncident({
+          ...this.emergency,
+          grade_type: name,
+        });
+        this.$emit('graded', response);
+
+        this.$notify({
+          text: 'Se cambio el grado de la emergencia existosamente',
+          type: 'success',
+        });
+      } catch (err) {
+        this.$emit('error', err);
+        this.$notify({
+          text: 'No se pudo cambiar el grado de la emergencia',
+          type: 'error',
+        });
+      }
     },
     setHover(weight) {
       this.hover = weight;

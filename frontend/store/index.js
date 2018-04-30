@@ -141,7 +141,10 @@ const store = new Vuex.Store({
       return http
         .get(`/emergency/detail_text/${id}/`)
         .then(response => commit(REQUEST_EMERGENCY_TEXT_SUCCESS, response.data))
-        .catch(err => commit(REQUEST_EMERGENCY_TEXT_ERROR, err));
+        .catch(err => {
+          commit(REQUEST_EMERGENCY_TEXT_ERROR, err)
+          throw err;
+        });
     },
     stopTimer({ commit }, id) {
       commit(EMERGENCY_SET_INACTIVE_START);

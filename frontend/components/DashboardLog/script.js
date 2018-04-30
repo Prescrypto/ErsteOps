@@ -1,4 +1,5 @@
 import 'filters/time-since';
+import find from 'lodash/fp/find';
 import { mapState, mapActions, mapMutations, mapGetters } from 'vuex';
 import { MODAL_CHANGE_TAB, EMERGENCY_TEXT_CLEAR } from 'store/constants';
 import EmergencyGrade from 'components/EmergencyGrade';
@@ -7,6 +8,7 @@ export default {
   name: 'dashboard-log',
   data: () => ({
     now: Date.now(),
+    stopped: null,
   }),
   components: { EmergencyGrade },
   mounted() {
@@ -39,11 +41,36 @@ export default {
       window.Erste.modal.show();
     },
     // stops the timer
-    stop(e, id) {
+    async stop(e, id) {
       // prevent modal from opening
       e.stopPropagation();
-      // stop timer
+
+      // set stop semaphore
+      this.stopped = id;
+
+      // stop timer and reset semaphore is tooltip skipped
+      if (!this.showGradeTooltip(id)) {
+        try {
+          await this.stopTimer(id);
+          this.stopped = null;
+
+          this.$notify({
+            text: 'Se ha finalizado la emergencia exitosamente.',
+            type: 'success',
+          });
+        } catch (err) {
+          this.$notify({
+            text: 'Hubo un error al finalizar la emergencia.',
+            type: 'error',
+          });
+        }
+      }
+    },
+    graded(id/* , data */) {
       this.stopTimer(id);
+    },
+    gradedError() {
+      this.stopped = null;
     },
     // copy serialized emergency to clipboard
     text(e, id) {
@@ -68,6 +95,14 @@ export default {
         text: 'No se pudo copiar el incidente al portapapeles',
         type: 'error',
       });
+    },
+    showGradeTooltip(id) {
+      const isStopped = id === this.stopped;
+
+      const emergency = find(e => id === e.id)(this.emergencies);
+      const isNotMostSevere = emergency.grade_type !== 'G1';
+
+      return isStopped && isNotMostSevere;
     },
     // maps the search action from the store to the component
     ...mapActions(['emergency', 'stopTimer', 'emergencyDetails']),
