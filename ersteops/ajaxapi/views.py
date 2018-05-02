@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 # Our methods
 from core.utils import OdooApi
+from decisiontree.models import SymptomDataDetail
 
 
 # Load Logging definition, this is defined in settings.py in the LOGGING section
@@ -96,3 +97,24 @@ def get_subscriptor(request):
       data = 'fail!'
     mimetype = 'application/json'
     return HttpResponse(data, mimetype)
+
+def get_symptom_zero(request):
+  if request.is_ajax():
+      q = request.GET.get('term', '')
+      # Search Symptom matches where Level = 0
+      symptoms = SymptomDataDetail.objects.filter(name__icontains = q,level='0' )[:20]
+      results = []
+      for symptom in symptoms:
+          symptom_json = {}
+          symptom_json['id'] = symptom.idx
+          # This label is what autocomplete display
+          symptom_json["label"] = symptom.name
+          symptom_json["value"] = symptom.name
+          results.append(symptom_json)
+
+      data = json.dumps(results)
+      print (data)
+  else:
+      data = 'fail'
+  mimetype = 'application/json'
+  return HttpResponse(data, mimetype)
