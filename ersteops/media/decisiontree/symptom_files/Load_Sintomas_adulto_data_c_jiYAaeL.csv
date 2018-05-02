@@ -1,0 +1,383 @@
+Clave,N1,N2,N3,N4,N5,N6,N7,Nivel,Sintoma,Grado,symptom_id,symptom_type
+1,1,0,0,0,0,0,0,0,AHOGADOS POR INMERSION,,1000000,1
+"1,1",1,1,0,0,0,0,0,1,    No esta consciente [Grado : 1],[Grado : 1],1100000,1
+"1,2",1,2,0,0,0,0,0,1,    Esta consciente,,1200000,1
+"1,2,1",1,2,1,0,0,0,0,2,        Respira bien [Grado : 2],[Grado : 2],1210000,1
+"1,2,2",1,2,2,0,0,0,0,2,        No Respira bien [Grado : 1],[Grado : 1],1220000,1
+2,2,0,0,0,0,0,0,0,ALTERACION DE LA AUDICION [Grado : 3],[Grado : 3],2000000,1
+4,4,0,0,0,0,0,0,0,ACCIDENTE VEHICULAR [Grado : 1],[Grado : 1],4000000,1
+5,5,0,0,0,0,0,0,0,ARRITMIAS [Nota : (REALIZAR ECG)],,5000000,1
+"5,1",5,1,0,0,0,0,0,1,    No esta consciente [Grado : 1],[Grado : 1],5100000,1
+"5,2",5,2,0,0,0,0,0,1,    Esta consciente,,5200000,1
+"5,2,1",5,2,1,0,0,0,0,2,        Tiene dolor de pecho [Grado : 1],[Grado : 1],5210000,1
+"5,2,2",5,2,2,0,0,0,0,2,        No tiene dolor de pecho [Grado : 2],[Grado : 2],5220000,1
+7,7,0,0,0,0,0,0,0,CONSTIPACION [Grado : 3],[Grado : 3],7000000,1
+8,8,0,0,0,0,0,0,0,CONVULSIONES,,8000000,1
+"8,1",8,1,0,0,0,0,0,1,    Esta convulsionando ahora [Grado : 1],[Grado : 1],8100000,1
+"8,2",8,2,0,0,0,0,0,1,    No esta convulsionado ahora,,8200000,1
+"8,2,1",8,2,1,0,0,0,0,2,        No está conciente [Grado : 1],[Grado : 1],8210000,1
+"8,2,2",8,2,2,0,0,0,0,2,        Está conciente,,8220000,1
+"8,2,2,1",8,2,2,1,0,0,0,3,            Respira Mal [Grado : 2],[Grado : 2],8221000,1
+"8,2,2,2",8,2,2,2,0,0,0,3,            Respira bien [Grado : 3P],[Grado : 3P],8222000,1
+9,9,0,0,0,0,0,0,0,TRASTORNOS DE CONDUCTA,,9000000,1
+"9,1",9,1,0,0,0,0,0,1,    Esta muy violento o agresivo [Grado : 2],[Grado : 2],9100000,1
+"9,2",9,2,0,0,0,0,0,1,    No esta violento o agresivo,,9200000,1
+"9,2,1",9,2,1,0,0,0,0,2,        Está alcoholizado o consumió drogas [Grado : 2],[Grado : 2],9210000,1
+"9,2,2",9,2,2,0,0,0,0,2,        No está alcoholizado ni consumió drogas,,9220000,1
+"9,2,2,1",9,2,2,1,0,0,0,3,            Tuvo trauma de cráneo [Grado : 2],[Grado : 2],9221000,1
+"9,2,2,2",9,2,2,2,0,0,0,3,            No tuvo trama de cráneo [Grado : 3],[Grado : 3],9222000,1
+10,10,0,0,0,0,0,0,0,CONFUSION-OBNUBILACION,,10000000,1
+"10,1",10,1,0,0,0,0,0,1,    Respira Mal [Grado : 1],[Grado : 1],10100000,1
+"10,2",10,2,0,0,0,0,0,1,    Respira Bien,,10200000,1
+"10,2,1",10,2,1,0,0,0,0,2,        Está pálido o sudoroso [Grado : 2],[Grado : 2],10210000,1
+"10,2,2",10,2,2,0,0,0,0,2,        No está pálido ni sudoroso,,10220000,1
+"10,2,2,1",10,2,2,1,0,0,0,3,            Cuanto tiempo hace que está con este cuadro,,10221000,1
+"10,2,2,1,1",10,2,2,1,1,0,0,4,                Menos de seis horas [Grado : 2],[Grado : 2],10221100,1
+"10,2,2,1,2",10,2,2,1,2,0,0,4,                Entre seis y doce horas [Grado : 3],[Grado : 3],10221200,1
+"10,2,2,1,3",10,2,2,1,3,0,0,4,                Más de doce horas [Grado : 3],[Grado : 3],10221300,1
+"10,2,2,2",10,2,2,2,0,0,0,3,            Se desconoce el tiempo de evolución [Grado : 3],[Grado : 3],10222000,1
+11,11,0,0,0,0,0,0,0,CAIDA DE ALTURA [Grado : 1],[Grado : 1],11000000,1
+14,14,0,0,0,0,0,0,0,CEFALEA,,14000000,1
+"14,1",14,1,0,0,0,0,0,1,    Habla con dificultad [Grado : 2],[Grado : 2],14100000,1
+"14,2",14,2,0,0,0,0,0,1,    No Habla con dificultad,,14200000,1
+"14,2,1",14,2,1,0,0,0,0,2,        Presenta vómitos [Grado : 3],[Grado : 3],14210000,1
+"14,2,2",14,2,2,0,0,0,0,2,        No presenta vómitos [Grado : 3],[Grado : 3],14220000,1
+15,15,0,0,0,0,0,0,0,DIARREA [Grado : 3],[Grado : 3],15000000,1
+16,16,0,0,0,0,0,0,0,DEBILIDAD – DECAIMIENTO - PALIDEZ,,16000000,1
+"16,1",16,1,0,0,0,0,0,1,    No está conciente [Grado : 1],[Grado : 1],16100000,1
+"16,2",16,2,0,0,0,0,0,1,    Está conciente,,16200000,1
+"16,2,1",16,2,1,0,0,0,0,2,        Respira mal [Grado : 2],[Grado : 2],16210000,1
+"16,2,2",16,2,2,0,0,0,0,2,        Respira bien,,16220000,1
+"16,2,2,1",16,2,2,1,0,0,0,3,            Hace menos de 60 minutos [Grado : 3],[Grado : 3],16221000,1
+"16,2,2,2",16,2,2,2,0,0,0,3,            Hace más de 60 minutos,,16222000,1
+"16,2,2,2,2,1",16,2,2,2,2,1,0,5,                    Tiene fiebre [Grado : 3],[Grado : 3],16222210,1
+"16,2,2,2,2,2",16,2,2,2,2,2,0,5,                    No tiene fiebre [Grado : 3],[Grado : 3],16222220,1
+18.,18,0,0,0,0,0,0,0,DISNEA,,18000000,1
+"18,1",18,1,0,0,0,0,0,1,    Respira mal ahora,,18100000,1
+"18,1,1",18,1,1,0,0,0,0,2,        Tiene alt. de la conciencia [Grado : 1],[Grado : 1],18110000,1
+"18,1,2",18,1,2,0,0,0,0,2,        No tiene alt. de la conciencia,,18120000,1
+"18,1,2,1",18,1,2,1,0,0,0,3,            Esta azulado o morado [Grado : 1],[Grado : 1],18121000,1
+"18,1,2,2",18,1,2,2,0,0,0,3,            No está azul ni morado,,18122000,1
+"18.1,2,2,1",18,1,2,2,1,0,0,4,                Tiene dificultad para hablar x la disnea [Grado: 2],[Grado: 2],18122100,1
+"18,1,2,2,2",18,1,2,2,2,0,0,4,                No tiene dificultad para hablar [Grado : 3P],[Grado : 3P],18122200,1
+"18,2",18,2,0,0,0,0,0,1,    Respira bien ahora,,18200000,1
+18.2.1,18,2,1,0,0,0,0,2,        Tiene tos o fiebre [Grado : 3],[Grado : 3],18210000,1
+18.2.2,18,2,2,0,0,0,0,2,        No tiene tos ni fiebre [Grado : 3],[Grado : 3],18220000,1
+19,19,0,0,0,0,0,0,0,DOLOR ABDOMINAL,,19000000,1
+"19,1",19,1,0,0,0,0,0,1,    El dolor es en la parte superior del abdomen,,19100000,1
+"19,1,1",19,1,1,0,0,0,0,2,        Tiene antecedentes de enfermedad cardíaca [Grado : 2],[Grado : 2],19110000,1
+"19,1,2",19,1,2,0,0,0,0,2,        No tiene antecedentes de enfermedad cardíaca [Grado:3],[Grado:3],19120000,1
+"19,2",19,2,0,0,0,0,0,1,    El dolor no es en la parte superior del abdomen,,19200000,1
+"19,2,1",19,2,1,0,0,0,0,2,        Tiene vómitos o diarrea [Grado : 3],[Grado : 3],19210000,1
+"19,2,2",19,2,2,0,0,0,0,2,        No tiene vómitos o diarrea [Grado : 3],[Grado : 3],19220000,1
+20,20,0,0,0,0,0,0,0,DOLOR DE TORAX [Nota : (REALIZAR ECG)],,20000000,1
+"20,1",20,1,0,0,0,0,0,1,    Respira mal,,20100000,1
+"20,1,1",20,1,1,0,0,0,0,2,        No está sudoroso ni pálido [Grado : 3P],[Grado : 3P],20110000,1
+"20,1,2",20,1,2,0,0,0,0,2,        Está sudoroso o pálido [Grado : 1],[Grado : 1],20120000,1
+"20,2",20,2,0,0,0,0,0,1,    Respira bien,,20200000,1
+"20,2,1",20,2,1,0,0,0,0,2,        Esta sudoroso o pálido [Grado : 1],[Grado : 1],20210000,1
+"20,2,2",20,2,2,0,0,0,0,2,        No está sudoroso ni pálido,,20220000,1
+"20,2,2,1",20,2,2,1,0,0,0,3,            Tiene antecedentes cardiacos [Grado : 3P],[Grado : 3P],20221000,1
+"20,2,2,2",20,2,2,2,0,0,0,3,            No tiene antecedentes cardiacos,,20222000,1
+"20,2,2,2,1",20,2,2,2,1,0,0,4,                Menos de 12 hs de evolución [Grado : 2],[Grado : 2],20222100,1
+"20,2,2,2,2",20,2,2,2,2,0,0,4,                Más de 12 hs de evolución,,20222200,1
+"20,2,2,2,2,1",20,2,2,2,2,1,0,5,                    Tiene tos [Grado : 3],[Grado : 3],20222210,1
+"20,2,2,2,2,2",20,2,2,2,2,2,0,5,                    No tiene fiebre o tos [Grado : 3],[Grado : 3],20222220,1
+21,21,0,0,0,0,0,0,0,DISARTRIA (Dificultad para hablar),,21000000,1
+"21,1",21,1,0,0,0,0,0,1,    Comenzó hace menos de 6 horas o se desconoce [Grado : 2],[Grado : 2],21100000,1
+"21,2",21,2,0,0,0,0,0,1,    Hace más de 6 horas que comenzó,,21200000,1
+"21,2,1",21,2,1,0,0,0,0,2,        Tiene dificultad para movilizar un miembro [Grado : 2],[Grado : 2],21210000,1
+"21,2,2",21,2,2,0,0,0,0,2,        No tiene dificultad para movilizar un miembro [Grado : 3],[Grado : 3],21220000,1
+22,22,0,0,0,0,0,0,0,TRANSTORNO EN LA MICCION,,22000000,1
+"22,1",22,1,0,0,0,0,0,1,    Tiene sonda,,22100000,1
+"22,1,1",22,1,1,0,0,0,0,2,        Está obstruida [Grado : 3P],[Grado : 3P],22110000,1
+"22,1,2",22,1,2,0,0,0,0,2,        No está obstruida,,22120000,1
+"22,1,2,1",22,1,2,1,0,0,0,3,            Tiene dolor abdominal [Grado : 3],[Grado : 3],22121000,1
+"22,1,2,2",22,1,2,2,0,0,0,3,            No tiene dolor abdominal,,22122000,1
+"22,1,2,2,1",22,1,2,2,1,0,0,4,                Tiene ardor uretral [Grado : 3],[Grado : 3],22122100,1
+"22,1,2,2,2",22,1,2,2,2,0,0,4,                No tiene ardor uretral [Grado : 3],[Grado : 3],22122200,1
+"22,2",22,2,0,0,0,0,0,1,    No tiene sonda,,22200000,1
+"22,2,1",22,2,1,0,0,0,0,2,        Tiene dolor abdominal [Grado : 3],[Grado : 3],22210000,1
+"22,2,2",22,2,2,0,0,0,0,2,        No tiene dolor abdominal,,22220000,1
+23,23,0,0,0,0,0,0,0,ERUPCION CUTANEA,,23000000,1
+"23,1",23,1,0,0,0,0,0,1,    Antecedentes de edema de glotis [Grado : 2],[Grado : 2],23100000,1
+"23,2",23,2,0,0,0,0,0,1,    Sin antecedentes de edema de glotis,,23200000,1
+"23,2,1",23,2,1,0,0,0,0,2,        Tiene ronchas en la piel [Grado : 3],[Grado : 3],23210000,1
+"23,2,2",23,2,2,0,0,0,0,2,        Sin ronchas pero otras lesiones [Grado : 3],[Grado : 3],23220000,1
+24,24,0,0,0,0,0,0,0,ELECTROCUCION,,24000000,1
+"24,1",24,1,0,0,0,0,0,1,    No esta consciente [Grado : 1],[Grado : 1],24100000,1
+"24,2",24,2,0,0,0,0,0,1,    Esta consciente,,24200000,1
+"24,2,1",24,2,1,0,0,0,0,2,        Respira bien [Grado : 2],[Grado : 2],24210000,1
+"24,2,1,2",24,2,1,2,0,0,0,3,            No Respira bien [Grado : 1],[Grado : 1],24212000,1
+25,25,0,0,0,0,0,0,0,FIEBRE [Grado: 3],[Grado: 3],25000000,1
+26,26,0,0,0,0,0,0,0,GRIPE [Grado : 3],[Grado : 3],26000000,1
+27,27,0,0,0,0,0,0,0,HERIDA POR ARMA BLANCA O DE FUEGO [Nota : (EVALUAR APOYO POLICIAL)] [Grado : 1],[Grado : 1],27000000,1
+28,28,0,0,0,0,0,0,0,HEMORRAGIAS (EVIDENCIA DE SANGRADO),,28000000,1
+"28,1",28,1,0,0,0,0,0,1,    No está consciente [Grado : 1],[Grado : 1],28100000,1
+"28,2",28,2,0,0,0,0,0,1,    Esta consciente,,28200000,1
+"28,2,1",28,2,1,0,0,0,0,2,        Respira mal [Grado : 2],[Grado : 2],28210000,1
+"28,2,2",28,2,2,0,0,0,0,2,        Respira bien,,28220000,1
+"28,2,2,1",28,2,2,1,0,0,0,3,            Está sudoroso [Grado : 2],[Grado : 2],28221000,1
+"28,2,2,2",28,2,2,2,0,0,0,3,            No está sudoroso,,28222000,1
+"28,2,2,2,1",28,2,2,2,1,0,0,4,                Vómitos con sangre [Grado : 2],[Grado : 2],28222100,1
+"28,2,2,2,2",28,2,2,2,2,0,0,4,                Materia fecal con sangre [Grado : 3],[Grado : 3],28222200,1
+"28,2,2,2,2,1",28,2,2,2,2,1,0,5,                    Abundante [Grado : 2],[Grado : 2],28222210,1
+"28,2,2,2,2,2",28,2,2,2,2,2,0,5,                    Escaso [Grado : 3],[Grado : 3],28222220,1
+"28,2,2,2,3",28,2,2,2,3,0,0,4,                Orina con sangre [Grado : 3],[Grado : 3],28222300,1
+"28,2,2,2,4",28,2,2,2,4,0,0,4,                Sangrado ginecológico,,28222400,1
+"28,2,2,2,4,1",28,2,2,2,4,1,0,5,                    Sin embarazo [Grado : 3],[Grado : 3],28222410,1
+"28,2,2,2,4,2",28,2,2,2,4,2,0,5,                    Con embarazo,,28222420,1
+"28,2,2,2,4,2,1",28,2,2,2,4,2,1,6,                        Primer o segundo trimestre [Grado : 2],[Grado : 2],28222421,1
+"28,2,2,2,4,2,2",28,2,2,2,4,2,2,6,                        Tercer trimestre [Grado : 1],[Grado : 1],28222422,1
+"28,2,2,2,5",28,2,2,2,5,0,0,4,                Tos con sangre,,28222500,1
+"28,2,2,2,5,1",28,2,2,2,5,1,0,5,                    Tiene dificultad respiratoria [Grado: 2],[Grado: 2],28222510,1
+"28,2,2,2,5,2",28,2,2,2,5,2,0,5,                    No tiene dificultad respiratoria [Grado: 3],[Grado: 3],28222520,1
+"28,2,2,2,6",28,2,2,2,6,0,0,4,                Sangra por nariz,,28222600,1
+"28,2,2,2,6,1",28,2,2,2,6,1,0,5,                    Tuvo traumatismo [Grado : 2],[Grado : 2],28222610,1
+"28,2,2,2,6,2",28,2,2,2,6,2,0,5,                    No tuvo traumatismo [Grado : 3] (Indicaciones prearribo y si no cede en 15 minutos [Grado : 2],[Grado : 3] (Indicaciones prearribo y si no cede en 15 minutos [Grado : 2],28222620,1
+"28,2,2,2,7",28,2,2,2,7,0,0,4,                Se desconoce por donde sangra [Grado : 2],[Grado : 2],28222700,1
+29,29,0,0,0,0,0,0,0,HIPERTENSION ARTERIAL,,29000000,1
+"29,1",29,1,0,0,0,0,0,1,    Dificultad para hablar [Grado : 2],[Grado : 2],29100000,1
+"29,2",29,2,0,0,0,0,0,1,    Sin Dificultad para hablar,,29200000,1
+"29,2,1",29,2,1,0,0,0,0,2,        Cefalea [Grado : 3],[Grado : 3],29210000,1
+"29,2,2",29,2,2,0,0,0,0,2,        Sin cefaleas ni otros síntomas [Grado : 3],[Grado : 3],29220000,1
+30,30,0,0,0,0,0,0,0,HIPOTENSION ARTERIAL (TA menor de 90 mmHg),,30000000,1
+"30,1",30,1,0,0,0,0,0,1,    Tiene dolor de pecho [Grado : 2],[Grado : 2],30100000,1
+"30,2",30,2,0,0,0,0,0,1,    No tiene dolor de pecho,,30200000,1
+"30,2,1",30,2,1,0,0,0,0,2,        Esta sudoroso [Grado : 3P],[Grado : 3P],30210000,1
+"30,2,2",30,2,2,0,0,0,0,2,        No esta sudoroso,,30220000,1
+"30,2,2,1",30,2,2,1,0,0,0,3,            No tiene síntomas específicos [Grado : 3],[Grado : 3],30221000,1
+31,31,0,0,0,0,0,0,0,INTENTO DE SUICIDIO [Grado : 1] Evaluar apoyo policial y psiquiátrico,[Grado : 1] Evaluar apoyo policial y psiquiátrico,31000000,1
+32,32,0,0,0,0,0,0,0,INCONTINENCIA DE ESFINTERES,,32000000,1
+"32,1",32,1,0,0,0,0,0,1,    Tuvo convulsiones [Deriva : CONVULSIONES],,32100000,1
+"32,2",32,2,0,0,0,0,0,1,    No tuvo convulsiones [Grado : 3],[Grado : 3],32200000,1
+33,33,0,0,0,0,0,0,0,INTOXICACION POR GASES TOXICOS O DROGAS [Nota : (ALERTAR A LA TRIPULACION)],,33000000,1
+"33,1",33,1,0,0,0,0,0,1,    No esta consciente [Grado : 1],[Grado : 1],33100000,1
+"33,2",33,2,0,0,0,0,0,1,    Esta consciente,,33200000,1
+"33,2,1",33,2,1,0,0,0,0,2,        Respira mal [Grado : 1],[Grado : 1],33210000,1
+"33,2,2",33,2,2,0,0,0,0,2,        Respira bien,,33220000,1
+"33,2,2,1",33,2,2,1,0,0,0,3,            Ocurrió recién (menos de 2 horas) [Grado : 2],[Grado : 2],33221000,1
+"33,2,2,2",33,2,2,2,0,0,0,3,            No ocurrió recién (más de 2 horas),,33222000,1
+"33,2,2,2,1",33,2,2,2,1,0,0,4,                Tiene nauseas vómitos o cefalea[Grado : 2],[Grado : 2],33222100,1
+"33,2,2,2,2",33,2,2,2,2,0,0,4,"                No tiene nauseas, vómitos ni cefalea[Grado : 3P]",[Grado : 3P],33222200,1
+34,34,0,0,0,0,0,0,0,LUMBALGIA,,34000000,1
+"34,1",34,1,0,0,0,0,0,1,    Antecedentes de cólico renal,,34100000,1
+"34,1,1",34,1,1,0,0,0,0,2,        Esta cursando un cólico renal [Grado : 2],[Grado : 2],34110000,1
+"34,1,2",34,1,2,0,0,0,0,2,        No está cursando un cólico renal [Grado : 3],[Grado : 3],34120000,1
+"34,2",34,2,0,0,0,0,0,1,    No tiene ant. cólico renal(único síntoma) [Grado : 3],[Grado : 3],34200000,1
+35,35,0,0,0,0,0,0,0,MAREOS,,35000000,1
+"35,1",35,1,0,0,0,0,0,1,    Tiene vómitos [Grado : 3],[Grado : 3],35100000,1
+"35,2",35,2,0,0,0,0,0,1,    No tiene vómitos,,35200000,1
+"35,2,1",35,2,1,0,0,0,0,2,        Tiene Dolor de cabeza [Grado : 3],[Grado : 3],35210000,1
+"35,2,2",35,2,2,0,0,0,0,2,        No tiene Dolor de cabeza,,35220000,1
+"35,2,2,1",35,2,2,1,0,0,0,3,            Tiene zumbidos en los oídos [Grado : 3],[Grado : 3],35221000,1
+"35,2,2,2",35,2,2,2,0,0,0,3,            No tiene zumbidos en los oídos [Grado : 3],[Grado : 3],35222000,1
+36,36,0,0,0,0,0,0,0,MORDEDURA DE...,,36000000,1
+"36,1",36,1,0,0,0,0,0,1,    Sangra mucho [Grado: 1],[Grado: 1],36100000,1
+"36,2",36,2,0,0,0,0,0,1,    No sangra mucho [Grado: 2],[Grado: 2],36200000,1
+"36,2,1",36,2,1,0,0,0,0,2,        Lesión múltiples y/o en cara [Grado : 2],[Grado : 2],36210000,1
+"36,2,2",36,2,2,0,0,0,0,2,        Sin Lesión múltiples y/o en cara [Grado : 3],[Grado : 3],36220000,1
+37,37,0,0,0,0,0,0,0,NAUSEAS-VOMITOS,,37000000,1
+"37,1",37,1,0,0,0,0,0,1,    Tiene vómitos con sangre [Grado: 2],[Grado: 2],37100000,1
+"37,2",37,2,0,0,0,0,0,1,    No tiene vómitos con sangre,,37200000,1
+"37,2,1",37,2,1,0,0,0,0,2,        Tuvo traumatismo de cráneo [Grado : 2],[Grado : 2],37210000,1
+"37,2,2",37,2,2,0,0,0,0,2,        No tuvo traumatismo de cráneo,,37220000,1
+"37,2,2,1",37,2,2,1,0,0,0,3,            Tiene dolor abdominal [Grado : 3],[Grado : 3],37221000,1
+"37,2,2,2",37,2,2,2,0,0,0,3,            No tiene dolor abdominal [Grado : 3],[Grado : 3],37222000,1
+38,38,0,0,0,0,0,0,0,POLITRAUMATISMO,,38000000,1
+"38,1",38,1,0,0,0,0,0,1,    No esta consciente [Grado : 1],[Grado : 1],38100000,1
+"38,2",38,2,0,0,0,0,0,1,    Esta consciente,,38200000,1
+"38,2,1",38,2,1,0,0,0,0,2,        No respira o respira mal [Grado : 1],[Grado : 1],38210000,1
+"38,2,2",38,2,2,0,0,0,0,2,        Respira bien,,38220000,1
+"38,2,2,1",38,2,2,1,0,0,0,3,            Tiene hemorragia evidente [Grado : 1],[Grado : 1],38221000,1
+"38,2,2,2",38,2,2,2,0,0,0,3,            No tiene hemorragia evidente,,38222000,1
+"38,2,2,2,1",38,2,2,2,1,0,0,4,                Esta caído en el suelo [Grado : 1],[Grado : 1],38222100,1
+"38,2,2,2,2",38,2,2,2,2,0,0,4,                No esta caído en el suelo [Grado : 2],[Grado : 2],38222200,1
+39,39,0,0,0,0,0,0,0,PARESTESIAS (HORMIGUEOS) [Grado : 3],[Grado : 3],39000000,1
+"39,1",39,1,0,0,0,0,0,1,    Tiene dificultad para mover el miembro [Grado: 3],[Grado: 3],39100000,1
+"39,2",39,2,0,0,0,0,0,1,    No tiene dificultad para mover el miembro [Grado: 3],[Grado: 3],39200000,1
+41,41,0,0,0,0,0,0,0,PACIENTE VIOLENTO[Nota:(EVALUAR APOYO POLICIAL)][Grado : 2],[Grado : 2],41000000,1
+42,42,0,0,0,0,0,0,0,PROBLEMAS VINCULADOS CON LA DBT,,42000000,1
+"42,1",42,1,0,0,0,0,0,1,    Está hipoglucémico (menor de 70) [Grado: 1],[Grado: 1],42100000,1
+"42,2",42,2,0,0,0,0,0,1,    No está hipoglucémico (mayor de 70),,42200000,1
+"42,2,1",42,2,1,0,0,0,0,2,        Está hiperglucémico,,42210000,1
+"42,2,1,1",42,2,1,1,0,0,0,3,            Glucemia mayor a 300 [Grado : 2],[Grado : 2],42211000,1
+"42,2,1,2",42,2,1,2,0,0,0,3,            Glucemia menor a 300 [Grado : 3P],[Grado : 3P],42212000,1
+"42,2,2",42,2,2,0,0,0,0,2,        No está hiperglucémico [Grado: 3],[Grado: 3],42220000,1
+43,43,0,0,0,0,0,0,0,PICADURA DE...,,43000000,1
+"43,1",43,1,0,0,0,0,0,1,    Respira mal [Grado : 1],[Grado : 1],43100000,1
+"43,2",43,2,0,0,0,0,0,1,    Respira bien,,43200000,1
+"43,2,1",43,2,1,0,0,0,0,2,        Tiene hinchada la cara o lengua [Grado : 2],[Grado : 2],43210000,1
+"43,2,2",43,2,2,0,0,0,0,2,        No tiene hinchada cara o lengua,,43220000,1
+"43,2,2,1",43,2,2,1,0,0,0,3,            Antecedentes de edema de glotis [Grado : 3P],[Grado : 3P],43221000,1
+"43,2,2,2",43,2,2,2,0,0,0,3,            Sin antecedentes de edema de glotis [Grado : 3],[Grado : 3],43222000,1
+44,44,0,0,0,0,0,0,0,QUEMADURAS,,44000000,1
+"44,1",44,1,0,0,0,0,0,1,    No esta consciente [Grado : 1],[Grado : 1],44100000,1
+"44,2",44,2,0,0,0,0,0,1,    Esta consciente,,44200000,1
+"44,2,1",44,2,1,0,0,0,0,2,        Respira mal [Grado : 1],[Grado : 1],44210000,1
+"44,2,2",44,2,2,0,0,0,0,2,        Respira bien,,44220000,1
+"44,2,2,1",44,2,2,1,0,0,0,3,            En cara-torso-abdomen o todo miembro [Grado : 1],[Grado : 1],44221000,1
+"44,2,2,2",44,2,2,2,0,0,0,3,            No en cara-torso-abdomen o todo miembro [Grado : 3P],[Grado : 3P],44222000,1
+45,45,0,0,0,0,0,0,0,SIN DATOS [Grado : 1],[Grado : 1],45000000,1
+46,46,0,0,0,0,0,0,0,TOS [Grado : 3],[Grado : 3],46000000,1
+50,50,0,0,0,0,0,0,0,TRAUMA DE TORAX,,50000000,1
+"50,1",50,1,0,0,0,0,0,1,    Respira mal [Grado : 2],[Grado : 2],50100000,1
+"50,2",50,2,0,0,0,0,0,1,    Respira bien,,50200000,1
+"50,2,1",50,2,1,0,0,0,0,2,        Está sangrando [Grado : 2],[Grado : 2],50210000,1
+"50,2,2",50,2,2,0,0,0,0,2,        No está sangrando,,50220000,1
+"50,2,2,1",50,2,2,1,0,0,0,3,            Tiene dolor en el tórax [Grado : 3P],[Grado : 3P],50221000,1
+"50,2,2,2",50,2,2,2,0,0,0,3,            No tiene dolor en el tórax [Grado : 3],[Grado : 3],50222000,1
+51,51,0,0,0,0,0,0,0,TRAUMA DORSO LUMBAR,,51000000,1
+"51,1",51,1,0,0,0,0,0,1,    Tiene dificultad para respirar [Grado : 2],[Grado : 2],51100000,1
+"51,2",51,2,0,0,0,0,0,1,    No tiene dificultad para respirar,,51200000,1
+"51,2,1",51,2,1,0,0,0,0,2,        Orinó con sangre [Grado : 2],[Grado : 2],51210000,1
+"51,2,2",51,2,2,0,0,0,0,2,        No orinó con sangre,,51220000,1
+"51,2,2,1",51,2,2,1,0,0,0,3,            No mueve bien las piernas [Grado : 2],[Grado : 2],51221000,1
+"51,2,2,2",51,2,2,2,0,0,0,3,            Mueve bien las piernas [Grado : 3],[Grado : 3],51222000,1
+52,52,0,0,0,0,0,0,0,TRAUMA DE ABDOMEN O PELVIS,,52000000,1
+"52,1",52,1,0,0,0,0,0,1,    Está inconciente [Grado : 1],[Grado : 1],52100000,1
+"52,2",52,2,0,0,0,0,0,1,    Está conciente,,52200000,1
+"52,2,1",52,2,1,0,0,0,0,2,        Esta sangrando o sudoroso [Grado : 1],[Grado : 1],52210000,1
+"52,3,2",52,3,2,0,0,0,0,2,        No esta sangrando o sudoroso,,52320000,1
+"52,3,2,1",52,3,2,1,0,0,0,3,            No se moviliza [Grado : 2],[Grado : 2],52321000,1
+"52,3,2,2",52,3,2,2,0,0,0,3,            Se moviliza,,52322000,1
+"52,3,2,2,1",52,3,2,2,1,0,0,4,                Tiene dolor abdominal [Grado : 3P],[Grado : 3P],52322100,1
+"52,3,2,2,2",52,3,2,2,2,0,0,4,                No tiene dolor abdominal [Grado : 3],[Grado : 3],52322200,1
+53,53,0,0,0,0,0,0,0,TRAUMATISMO FACIAL,,53000000,1
+"53,1",53,1,0,0,0,0,0,1,    No está conciente [Grado : 1],[Grado : 1],53100000,1
+"53,2",53,2,0,0,0,0,0,1,    Está conciente,,53200000,1
+"53,2,1",53,2,1,0,0,0,0,2,        Respira mal [Grado : 2],[Grado : 2],53210000,1
+"53,2,2",53,2,2,0,0,0,0,2,        Respira bien,,53220000,1
+"53,2,2,1",53,2,2,1,0,0,0,3,            Esta sangrando [Grado : 3P],[Grado : 3P],53221000,1
+"53,2,2,2",53,2,2,2,0,0,0,3,            No esta sangrando [Grado : 3],[Grado : 3],53222000,1
+54,54,0,0,0,0,0,0,0,TRAUMATISMO DE MIEMBROS,,54000000,1
+"54,1",54,1,0,0,0,0,0,1,    Evidencia de fractura (deformación miembro-imp. Mo) [Grado : 2],[Grado : 2],54100000,1
+"54,2",54,2,0,0,0,0,0,1,    No tiene evidencia de fractura,,54200000,1
+"54,2,1",54,2,1,0,0,0,0,2,        Está sangrando [Grado : 2],[Grado : 2],54210000,1
+"54,2,2",54,2,2,0,0,0,0,2,        No está sangrando,,54220000,1
+"54,2,2,1",54,2,2,1,0,0,0,3,            Tiene dolor [Grado : 3P],[Grado : 3P],54221000,1
+"54,2,2,2",54,2,2,2,0,0,0,3,            No tiene dolor [Grado : 3],[Grado : 3],54222000,1
+55,55,0,0,0,0,0,0,0,TRAUMATISMO DE CRANEO,,55000000,1
+"55,1",55,1,0,0,0,0,0,1,    No está consciente [Grado : 1],[Grado : 1],55100000,1
+"55,2",55,2,0,0,0,0,0,1,    Esta consciente actualmente,,55200000,1
+"55,2,1",55,2,1,0,0,0,0,2,        Cuando se golpeó tuvo pérdida de conocimiento [Grado : 1],[Grado : 1],55210000,1
+"55,2,2",55,2,2,0,0,0,0,2,        Cuando se golpeó no tuvo pérdida de conocimiento,,55220000,1
+"55,2,2,1",55,2,2,1,0,0,0,3,            Tiene dificultad para hablar [Grado : 1],[Grado : 1],55221000,1
+"55,2,2,2",55,2,2,2,0,0,0,3,            No tiene dificultad para hablar,,55222000,1
+"55,2,2,2,1",55,2,2,2,1,0,0,4,                Tiene herida que sangra [Grado : 2],[Grado : 2],55222100,1
+"55,2,2,2,2",55,2,2,2,2,0,0,4,                No tiene herida que sangra [Grado : 3],[Grado : 3],55222200,1
+56,56,0,0,0,0,0,0,0,EMBARAZO A TERMINO,,56000000,1
+"56,1",56,1,0,0,0,0,0,1,    El niño está saliendo [Grado: 1],[Grado: 1],56100000,1
+"56,2",56,2,0,0,0,0,0,1,    No está saliendo,,56200000,1
+"56,2,1",56,2,1,0,0,0,0,2,        Perdió sangre [Grado: 1],[Grado: 1],56210000,1
+"56,2,2",56,2,2,0,0,0,0,2,        No perdió sangre,,56220000,1
+"56,2,2,1",56,2,2,1,0,0,0,3,            Tiene contracciones,,56221000,1
+"56,2,2,1,1",56,2,2,1,1,0,0,4,                Primer embarazo,,56221100,1
+"56,2,2,1,1,1",56,2,2,1,1,1,0,5,                    Contracciones cada 2 minutos o menos [Grado : 1],[Grado : 1],56221110,1
+"56,2,2,1,1,2",56,2,2,1,1,2,0,5,                    Contracciones cada más de 2 minutos [Grado : 2],[Grado : 2],56221120,1
+"56,2,2,1,2",56,2,2,1,2,0,0,4,                Embarazos previos,,56221200,1
+"56,2,2,1,2,1",56,2,2,1,2,1,0,5,                    Contracciones cada 5 minutos o menos [Grado : 1],[Grado : 1],56221210,1
+"56,2,2,1,2,2",56,2,2,1,2,2,0,5,                    Contracciones cada más de 5 minutos [Grado : 2],[Grado : 2],56221220,1
+"56,2,2,2",56,2,2,2,0,0,0,3,            No tiene contracciones,,56222000,1
+"56,2,2,2,1",56,2,2,2,1,0,0,4,                Perdió líquido o rompió bolsa [Grado : 2],[Grado : 2],56222100,1
+"56,2,2,2,2",56,2,2,2,2,0,0,4,                No Perdió líquido ni rompió bolsa [Grado:3],[Grado:3],56222200,1
+57,57,0,0,0,0,0,0,0,TEMBLOR,,57000000,1
+"57,1",57,1,0,0,0,0,0,1,    No se mantiene parado [Grado : 3],[Grado : 3],57100000,1
+"57,2",57,2,0,0,0,0,0,1,    Se mantiene parado,,57200000,1
+"57,2,1",57,2,1,0,0,0,0,2,        Tiene Fiebre [Grado : 3],[Grado : 3],57210000,1
+"57,2,2",57,2,2,0,0,0,0,2,        No tiene fiebre [Grado : 3],[Grado : 3],57220000,1
+58,58,0,0,0,0,0,0,0,VICTIMAS MULTIPLES [Grado : 1],[Grado : 1],58000000,1
+59,59,0,0,0,0,0,0,0,PALPITACIONES [Nota : (REALIZAR ECG)] Igual que en arritmias,,59000000,1
+"59,1",59,1,0,0,0,0,0,1,    Tiene alteración de la conciencia [Grado : 2],[Grado : 2],59100000,1
+"59,2",59,2,0,0,0,0,0,1,    No tiene alteración de la conciencia,,59200000,1
+"59,2,1",59,2,1,0,0,0,0,2,        Respira Mal [Grado : 2],[Grado : 2],59210000,1
+"59,2,2",59,2,2,0,0,0,0,2,        No respira Mal,,59220000,1
+"59,2,2,1",59,2,2,1,0,0,0,3,            Tiene dolor de pecho [Grado : 2],[Grado : 2],59221000,1
+"59,2,2,2",59,2,2,2,0,0,0,3,            No tiene dolor de pecho [Grado : 3],[Grado : 3],59222000,1
+60,60,0,0,0,0,0,0,0,VIA PUBLICA [Grado : 1],[Grado : 1],60000000,1
+61,61,0,0,0,0,0,0,0,GALENO EN QTH,,61000000,1
+"61,1",61,1,0,0,0,0,0,1,    Requiere grado 1 [Grado : 1],[Grado : 1],61100000,1
+"61,2",61,2,0,0,0,0,0,1,    Requiere grado 2 [Grado : 2],[Grado : 2],61200000,1
+"61,3",61,3,0,0,0,0,0,1,    Requiere grado 3 [Grado : 3],[Grado : 3],61300000,1
+62,62,0,0,0,0,0,0,0,HERIDA CORTANTE,,62000000,1
+"62,1",62,1,0,0,0,0,0,1,    Con sangrado activo [Grado : 2],[Grado : 2],62100000,1
+"62,2",62,2,0,0,0,0,0,1,    Sin sangrado activo [Grado : 3P],[Grado : 3P],62200000,1
+97,97,0,0,0,0,0,0,0,PERDIDA DE CONOCIMIENTO [Nota : (REALIZAR ECG)],,97000000,1
+"97,1",97,1,0,0,0,0,0,1,    No se recupero [Grado : 1],[Grado : 1],97100000,1
+"97,2",97,2,0,0,0,0,0,1,    Se Recupero,,97200000,1
+"97,2,1",97,2,1,0,0,0,0,2,        Respira mal [Grado : 2],[Grado : 2],97210000,1
+"97,2,2",97,2,2,0,0,0,0,2,        Respira bien,,97220000,1
+"97,2,2,1",97,2,2,1,0,0,0,3,            Habla con dificultad [Grado : 2],[Grado : 2],97221000,1
+"97,2,2,2",97,2,2,2,0,0,0,3,            Habla sin dificultad,,97222000,1
+"97,2,2,2,1",97,2,2,2,1,0,0,4,                Tuvo traumatismo [Grado : 2],[Grado : 2],97222100,1
+"97,2,2,2,2",97,2,2,2,2,0,0,4,                No tuvo traumatismo [Grado : 3P],[Grado : 3P],97222200,1
+100,100,0,0,0,0,0,0,0,CONTROL DE AUSENTISMO [Grado : 3],[Grado : 3],100000000,1
+101,101,0,0,0,0,0,0,0,PARESIA (DIFICULTAD MOV. DE 1 O MAS MIEMBROS O BOCA [Nota : No confundir c/PARESTESIA],,101000000,1
+"101,1",101,1,0,0,0,0,0,1,    Menor de tres horas de evolución [Grado : 2],[Grado : 2],101100000,1
+"101,2",101,2,0,0,0,0,0,1,    Mayor de tres horas de evolución,,101200000,1
+"101,2,1",101,2,1,0,0,0,0,2,        No moviliza bien resto miembros [Grado: 2],[Grado: 2],101210000,1
+"101,2,2",101,2,2,0,0,0,0,2,        Moviliza bien el resto de los miembros.,,101220000,1
+"101,2,2,1",101,2,2,1,0,0,0,3,            Habla mal [Grado : 2],[Grado : 2],101221000,1
+"101,2,2,1",101,2,2,1,0,0,0,3,            Tiene antecedentes de enfermedad neurológica [Grado : 3],[Grado : 3],101221000,1
+"101,2,2,2",101,2,2,2,0,0,0,3,            Habla bien,,101222000,1
+"101,2,2,2",101,2,2,2,0,0,0,3,            No tiene antecedentes de enfermedad neurológica [Grado:3],[Grado:3],101222000,1
+102,102,0,0,0,0,0,0,0,CUERPO EXTRAÑO EN NARIZ,,102000000,1
+"102,1",102,1,0,0,0,0,0,1,    Respira mal [Grado : 2],[Grado : 2],102100000,1
+"102,2",102,2,0,0,0,0,0,1,    Respira bien,,102200000,1
+"102,2,1",102,2,1,0,0,0,0,2,        Está sangrando [Grado : 2],[Grado : 2],102210000,1
+"102,2,2",102,2,2,0,0,0,0,2,        No está sangrando [Grado : 3],[Grado : 3],102220000,1
+103,103,0,0,0,0,0,0,0,CUERPO EXTRAÑO EN OIDO,,103000000,1
+"103,1",103,1,0,0,0,0,0,1,    Está sangrando [Grado : 2],[Grado : 2],103100000,1
+"103,2",103,2,0,0,0,0,0,1,    No está sangrando [Grado : 3P],[Grado : 3P],103200000,1
+104,104,0,0,0,0,0,0,0,CUERPO EXTRAÑO EN OJO,,104000000,1
+"104,1",104,1,0,0,0,0,0,1,    Está con mucho dolor o irritación [Grado : 3P],[Grado : 3P],104100000,1
+"104,2",104,2,0,0,0,0,0,1,    Está solamente con molestias leves [Grado : 3],[Grado : 3],104200000,1
+105,105,0,0,0,0,0,0,0,EDEMAS EN MI,,105000000,1
+"105,1",105,1,0,0,0,0,0,1,    En un solo miembro,,105100000,1
+"105,1,1",105,1,1,0,0,0,0,2,        Está azul o blanco [Grado : 2],[Grado : 2],105110000,1
+"105,1,2",105,1,2,0,0,0,0,2,        No está azul ni blanco [Grado : 3],[Grado : 3],105120000,1
+"105,2",105,2,0,0,0,0,0,1,    En ambos miembros,,105200000,1
+"105,2,1",105,2,1,0,0,0,0,2,        Respirar mal [Grado : 2],[Grado : 2],105210000,1
+"105,2,2",105,2,2,0,0,0,0,2,        No le ingreso ninguna sustancia irritativa [Grado : 3],[Grado : 3],105220000,1
+"105,2,2",105,2,2,0,0,0,0,2,        Respira bien [Grado : 3],[Grado : 3],105220000,1
+106,106,0,0,0,0,0,0,0,IRRITACIÓN OCULAR,,106000000,1
+"106,1",106,1,0,0,0,0,0,1,    Tuvo un traumatismo [Grado : 2],[Grado : 2],106100000,1
+"106,2",106,2,0,0,0,0,0,1,    No tuvo traumatismo,,106200000,1
+"106,2,1",106,2,1,0,0,0,0,2,        Le ingreso alguna sustancia irritativa [Grado : 2],[Grado : 2],106210000,1
+107,107,0,0,0,0,0,0,0,DOLOR DE ESPALDA/DORSAL,,107000000,1
+"107,1",107,1,0,0,0,0,0,1,    Tiene dolor con el movimiento [Grado : 3],[Grado : 3],107100000,1
+"107,2",107,2,0,0,0,0,0,1,    No tiene dolor con el movimiento [Grado : 3],[Grado : 3],107200000,1
+108,108,0,0,0,0,0,0,0,DOLOR DE MIEMBROS,,108000000,1
+"108,1",108,1,0,0,0,0,0,1,    Presentó traumatismo,,108100000,1
+"108,1,1",108,1,1,0,0,0,0,2,        Evidencia de fractura [Grado : 2],[Grado : 2],108110000,1
+"108,1,2",108,1,2,0,0,0,0,2,        No tiene evidencia de fractura,,108120000,1
+"108,1,2,1",108,1,2,1,0,0,0,3,            Está sangrando [Grado : 2],[Grado : 2],108121000,1
+"108,1,2,2",108,1,2,2,0,0,0,3,            No está sangrando [Grado : 3],[Grado : 3],108122000,1
+"108,2",108,2,0,0,0,0,0,1,    No presentó traumatismo,,108200000,1
+"108,2,1",108,2,1,0,0,0,0,2,        Está el miembro azul o blanco [Grado : 2],[Grado : 2],108210000,1
+"108,2,2",108,2,2,0,0,0,0,2,        No está azul o blanco [Grado : 3],[Grado : 3],108220000,1
+109,109,0,0,0,0,0,0,0,DOLOR TESTICULAR,,109000000,1
+"109,1",109,1,0,0,0,0,0,1,    Presentó traumatismo [Grado : 2],[Grado : 2],109100000,1
+"109,2",109,2,0,0,0,0,0,1,    No presentó traumatismo [Grado : 2],[Grado : 2],109200000,1
+"109,2,1",109,2,1,0,0,0,0,2,        Tiempo de evolución < 12 hs [Grado : 2],[Grado : 2],109210000,1
+"109,2,2",109,2,2,0,0,0,0,2,        Tiempo de evolución > 12 hs [Grado : 3],[Grado : 3],109220000,1
+110,110,0,0,0,0,0,0,0,DOLOR DE OIDOS [Grado : 3],[Grado : 3],110000000,1
+111,111,0,0,0,0,0,0,0,DOLOR DE GARGANTA [Grado : 3],[Grado : 3],111000000,1
+112,112,0,0,0,0,0,0,0,DOLOR CORPORAL,,112000000,1
+"112,1",112,1,0,0,0,0,0,1,    Tiene fiebre [Grado : 3],[Grado : 3],112100000,1
+"112,2",112,2,0,0,0,0,0,1,    No tiene fiebre [Grado : 3],[Grado : 3],112200000,1
+113,113,0,0,0,0,0,0,0,EMBARAZO PRIMER TRIMESTRE,,113000000,1
+"113,1",113,1,0,0,0,0,0,1,    Tiene hemorragia genital o pérdida de líquido [Grado: 2],[Grado: 2],113100000,1
+"113,2",113,2,0,0,0,0,0,1,    No tiene hemorragia genital ni pérdida de líquido,,113200000,1
+"113,2,1",113,2,1,0,0,0,0,2,        Tiene dolor abdominal [Grado: 2],[Grado: 2],113210000,1
+"113,2,2",113,2,2,0,0,0,0,2,        No tiene dolor abdominal,,113220000,1
+114,114,0,0,0,0,0,0,0,ATRAGANTAMIENTO,,114000000,1
+"114,1",114,1,0,0,0,0,0,1,    No puede hablar o toser [Grado : 1],[Grado : 1],114100000,1
+"114,2",114,2,0,0,0,0,0,1,    Puede hablar o toser [Grado : 2],[Grado : 2],114200000,1
+115,115,0,0,0,0,0,0,0,CONTROL EVOLUTIVO,,115000000,1
+"115,1",115,1,0,0,0,0,0,1,    Control de infección respiratoria [Grado: 3],[Grado: 3],115100000,1
+"115,2",115,2,0,0,0,0,0,1,    Control de diarrea/gastroenteritis [Grado: 3],[Grado: 3],115200000,1
+"115,3",115,3,0,0,0,0,0,1,    Control de Eruptiva [Grado: 3],[Grado: 3],115300000,1
+"115,4",115,4,0,0,0,0,0,1,    Control de hipertensión arterial [Grado: 3],[Grado: 3],115400000,1
+"115,5",115,5,0,0,0,0,0,1,    Control de síndrome febril [Grado: 3],[Grado: 3],115500000,1
+"115,6",115,6,0,0,0,0,0,1,    Control de otras enfermedades [Grado: 3],[Grado: 3],115600000,1

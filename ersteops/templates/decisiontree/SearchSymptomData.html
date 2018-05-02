@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+	<div style="padding-top:55px">
+		<h1> Decision Tree</h1>
+
+		{% if messages %}
+      <div class="row">
+        <ul class="messages">
+          {% for message in messages %}
+            <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+              {{ message }}
+            </div>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    <div id="dataform" class="row">
+  		<form action="" method="POST" enctype="multipart/form-data" id="uploadform">
+  			{% csrf_token %}
+      	{{ form.as_p }}
+        {% if data.show_buttons %}
+        <div class="btn-group">
+          <input class="btn btn-success" type="reset" value="Limpiar">
+        	<input class="btn btn-primary" type="button" value="Enviar" id="mysubmit">
+        </div>
+        {% endif %}
+  		</form>
+    </div>
+
+    <div id="tree_row" class="row">
+      <p>
+        {{ data.symptom_name}}
+      </p>
+      <p>{{ data.symptom_tree}}</p>
+    </div>
+
+    <div id="using_json"></div>
+
+	</div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<link rel="stylesheet" href="{% static 'bower_components/jstree/dist/themes/default/style.min.css' %}" />
+<script src="{% static 'bower_components/jstree/dist/jstree.min.js' %}"></script>
+<script type="text/javascript">
+
+// $(function() {
+//   $('#using_json').jstree({
+//     'core' : {
+//       'data' : [
+//         { "text" : "Root node", "children" : [
+//             { "text" : "Child node 1" },
+//             { "text" : "Child node 2" }
+//           ]
+//         }
+//       ]
+//     }
+//   });
+// });
+
+// $(function() {
+//   $('#container1').jstree();
+// });
+
+// $(function() {
+//   $('#using_json').jstree({
+//     'core' : {
+//       'data' : [
+//         { "text" : "Root node", "children" : [
+//             { "text" : "Child node 1" },
+//             { "text" : "Child node 2" }
+//           ]
+//         }
+//       ]
+//     }
+//   });
+// });
+
+$(document).ready(function() {
+//   $('#tree_row').hide();
+  // First find main symptom with autocomplete
+  $(function() {
+    $("#id_symptom_name").autocomplete({
+      source: "/ajaxapi/get_symptom/",
+      minLength: 2,
+      //Focus 
+      focus: function( event, ui ) {
+        $( "#id_symptom_name" ).val( ui.item.label );
+        return false;
+      },
+
+      select: function( event, ui ) {
+        //Assign existing values from Autocomplete 
+        $( "#id_symptom_id" ).val( ui.item.id );
+        $( "#id_symptom_name" ).val( ui.item.value );
+        $('#uploadform').submit();
+        return false;
+      }
+    }); // end autocomplete
+  }); // end function
+// javascript version
+// build tree
+  // $(function() {
+  //   var symptom_data = "Root node"
+  //   $('#using_json').jstree({
+  //     'core' : {
+  //       'data' : [
+  //         { "text" : symptom_data, "children" : [
+  //             { "text" : "Child node 1" },
+  //             { "text" : "Child node 2" }
+  //           ]
+  //         }
+  //       ]
+  //     }
+  //   });
+  // });
+
+// with django data
+  $(function() {
+    var symptom_data = "Root node"
+    $('#using_json').jstree({
+      'core' : {
+        'data' : {{ data.symptom_tree |safe }}
+      }
+    });
+    $('#using_json').on("changed.jstree", function (e, data) {
+      console.log("The selected nodes are:");
+      console.log(data.selected);
+    });
+  });
+// $('#mysubmit').click(function(){
+//   //enable_patient_edit(); {# This seems weak and error prone #}
+//   console.log("test")
+//   $('#dataform').hide();
+//   $('#progress_bar').show();
+//   $('#uploadform').submit();
+// });
+}); // end document ready
+
+</script>
+{% endblock %}
