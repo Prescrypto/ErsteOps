@@ -272,8 +272,8 @@ def get_symptom_tree(symptom_id):
                                 symptom_json_n5['text'] = child_rows_4.name
                                 symptom_json_n5['id'] = child_rows_4.idx
                                 result_child_n5.append(symptom_json_n5)
-                                #qs_5 = SymptomDataDetail.objects.filter(n1=child_rows_4.n1,n2=child_rows_4.n2,n3=child_rows_4.n3,n4=child_rows_4.n4,n5=child_rows_4.n5,n6=child_rows_4.n6,level=5).exclude(n6=0)
-                                qs_5 = SymptomDataDetail.objects.filter(n1=child_rows_4.n1,level=5).exclude(n6=0)
+                                qs_5 = SymptomDataDetail.objects.filter(n1=child_rows_4.n1,n2=child_rows_4.n2,n3=child_rows_4.n3,n4=child_rows_4.n4,n5=child_rows_4.n5,n6=child_rows_4.n6,level=5).exclude(n6=0)
+                                #qs_5 = SymptomDataDetail.objects.filter(n1=child_rows_4.n1,level=5).exclude(n6=0)
                                 print('************** level 5')
                                 print(qs_5.count())
                                 print('************** end level 5')
@@ -284,6 +284,18 @@ def get_symptom_tree(symptom_id):
                                         symptom_json_n6['text'] = child_rows_5.name
                                         symptom_json_n6['id'] = child_rows_5.idx
                                         result_child_n6.append(symptom_json_n6)
+                                        qs_6 = SymptomDataDetail.objects.filter(n1=child_rows_5.n1,n2=child_rows_5.n2,n3=child_rows_5.n3,n4=child_rows_5.n4,n5=child_rows_5.n5,n6=child_rows_5.n6,n7=child_rows_5.n7,level=6).exclude(n7=0)
+                                        print('************** level 6')
+                                        print(qs_6.count())
+                                        print('************** end level 6')
+                                        result_child_n7 = []
+                                        if(qs_6.count() != 0):
+                                            for child_rows_6 in qs_6:
+                                                symptom_json_n7 = {}
+                                                symptom_json_n7['text'] = child_rows_6.name
+                                                symptom_json_n7['id'] = child_rows_6.idx
+                                                result_child_n7.append(symptom_json_n7)
+                                            symptom_json_n6['children'] = result_child_n7
                                     symptom_json_n5['children'] = result_child_n6
                             symptom_json_n4['children'] = result_child_n5
                     symptom_json_n3['children'] = result_child_n4
