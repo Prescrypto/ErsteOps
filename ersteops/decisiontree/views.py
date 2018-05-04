@@ -212,13 +212,60 @@ def get_symptom_tree(symptom_id):
     #result.append(qs.name)
     print(result)
     result_child = []
+    result_child_n3 = []
     for row in qs_1:
         symptom_json = {}
         symptom_json['text']=row.name
         symptom_json['id']=row.idx
+        symptom_json['opened']= 'true'
+        # # prueba nivel 3
+        result_child_n3 = []
+        result_child_n4 = []
+        #symptom_json_n3 = {}
+        # symptom_json_n3['text'] = 'Otro Nivel'
+        # symptom_json_n3['id']= '000000'
+        # symptom_json_n3['opened'] = 'true'
+        qs_2 = SymptomDataDetail.objects.filter(n1=row.n1,n2=row.n2,level=2).exclude(n3=0)
+        print('************ Contained ***********')
+        print(qs_2)
+        print('************ count contained')
+        print(qs_2.count())
+        print('************ End Contained *********')
+        #result_child_n3.append(symptom_json_n3)
+        # fin prueba 3
+        if(qs_2.count() != 0):
+            for child_rows in qs_2:
+                symptom_json_n3 = {}
+                symptom_json_n3['text'] = child_rows.name
+                symptom_json_n3['id']= child_rows.idx
+                #symptom_json_n3['opened'] = 'true'
+                level_state = {}
+                level_state['opened'] = 'true'
+                symptom_json_n3['state'] = level_state
+                qs_3 = SymptomDataDetail.objects.filter(n1=child_rows.n1,n2=child_rows.n2,n3=child_rows.n3,level=3).exclude(n4=0)
+                print('************* content 3 ***********')
+                print(qs_3.count())
+                print('************* end content 3 ***********')
+                # if(qs_3.count() != 0):
+                #     for child_child_rows in qs_3:
+                #         symptom_json_n4 = {}
+                #         symptom_json_n4['text'] = child_rows.name
+                #         symptom_json_n4['id'] = child_rows.idx
+                #         result_child_n4.append(symptom_json_n4)
+                if(qs_3.count() != 0):
+                    for child_child_rows in qs_3:
+                        symptom_json_n4 = {}
+                        symptom_json_n4['text'] = child_child_rows.name
+                        symptom_json_n4['id'] = child_child_rows.idx
+                        result_child_n4.append(symptom_json_n4)
+                    symptom_json_n3['children'] = result_child_n4
+                result_child_n3.append(symptom_json_n3)
+            symptom_json['children'] = result_child_n3
         result_child.append(symptom_json)
     level_dict['children'] = result_child
     print(level_dict)
     result.append(level_dict)
+    print('*************** Final *****************')
     print(result)
+    print('*************** end Final ****************')
     return result
