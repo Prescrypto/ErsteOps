@@ -221,6 +221,7 @@ def get_symptom_tree(symptom_id):
         # # prueba nivel 3
         result_child_n3 = []
         result_child_n4 = []
+        result_child_n5 = []
         #symptom_json_n3 = {}
         # symptom_json_n3['text'] = 'Otro Nivel'
         # symptom_json_n3['id']= '000000'
@@ -242,6 +243,7 @@ def get_symptom_tree(symptom_id):
                 level_state = {}
                 level_state['opened'] = 'true'
                 symptom_json_n3['state'] = level_state
+                # Search level 3 symptoms
                 qs_3 = SymptomDataDetail.objects.filter(n1=child_rows.n1,n2=child_rows.n2,n3=child_rows.n3,level=3).exclude(n4=0)
                 print('************* content 3 ***********')
                 print(qs_3.count())
@@ -258,6 +260,18 @@ def get_symptom_tree(symptom_id):
                         symptom_json_n4['text'] = child_child_rows.name
                         symptom_json_n4['id'] = child_child_rows.idx
                         result_child_n4.append(symptom_json_n4)
+                        # Search level 4 symptoms
+                        qs_4 = SymptomDataDetail.objects.filter(n1=child_child_rows.n1,n2=child_child_rows.n2,n3=child_child_rows.n3,n4=child_child_rows.n4,level=4).exclude(n5=0)
+                        print('************** level 4')
+                        print(qs_4.count())
+                        print('************** end level 4')
+                        if(qs_4.count() != 0):
+                            for child_rows_4 in qs_4:
+                                symptom_json_n5 = {}
+                                symptom_json_n5['text'] = child_rows_4.name
+                                symptom_json_n5['id'] = child_rows_4.idx
+                                result_child_n5.append(symptom_json_n5)
+                            symptom_json_n4['children'] = result_child_n5
                     symptom_json_n3['children'] = result_child_n4
                 result_child_n3.append(symptom_json_n3)
             symptom_json['children'] = result_child_n3
