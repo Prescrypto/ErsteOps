@@ -20,7 +20,7 @@ from django.db.models import Q
 from core.utils import OdooApi
 from .utils import JSONResponseMixin, AjaxableResponseMixin, UpdateJsonResponseMixin
 from .forms import OdooClientForm, OdooClientAuto
-from .models import Emergency,AttentionDerivation
+from .models import Emergency,AttentionDerivation, AttentionKind
 from unit.models import Unit
 from unit.utils import UNIT_LIST_FIELD
 from .list_fields import EMERGENCY_LIST_FIELDS
@@ -42,8 +42,23 @@ def grade_view(request):
         return bad_response
 
     data = json.loads(request.body.decode('utf-8'))
-    return JsonResponse(data)
+    if 'id' in data and 'attention_final_grade' in data and 'attention_justification' in data:
+        try:
+            emergency = Emergency.objects.get(id=data['id'])
+            attention_kind = AttentionKind.objects.get(grade_type=data['attention_final_grade'])
+            emergency.attention_final_grade = attention_kind
+            emergency.attention_justification = data['attention_justification']
+            emergency.save()
+            data.update({'status': 'success', 'client_id':emergency.odooclient})
+            response = JsonResponse(data)
+            response.status_code = 202
+            return response
+        except Exception as e:
+            logger.error("[Grade View ERROR]: {}, type: {}".format(e, type(e)))
+            return bad_response
 
+    else:
+        return bad_response
 
 
 @method_decorator(login_required, name='dispatch')
