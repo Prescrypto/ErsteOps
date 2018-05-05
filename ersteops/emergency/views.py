@@ -30,6 +30,22 @@ import logging
 # Load Logging definition, this is defined in settings.py in the LOGGING section
 logger = logging.getLogger('django_info')
 
+@csrf_exempt
+def grade_view(request):
+    ''' '''
+    bad_response = JsonResponse({'status':'bad request'})
+    bad_response.status_code = 400
+
+    if not request.is_ajax():
+        return bad_response
+    if not request.body:
+        return bad_response
+
+    data = json.loads(request.body.decode('utf-8'))
+    return JsonResponse(data)
+
+
+
 @method_decorator(login_required, name='dispatch')
 class EmergencyBlank(View):
     template_name = "emergency/blank.html"
