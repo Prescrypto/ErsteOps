@@ -28,6 +28,7 @@ sudo apt-get install -y python3-dev
 
 echo "Install pip3"
 sudo apt-get install -y python3-pip
+sudo python3 -m pip install -U pip
 
 echo "Install pip3 requirements"
 sudo pip3 install -r /vagrant/requirements.txt
