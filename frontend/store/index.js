@@ -48,6 +48,7 @@ import {
   EMERGENCY_TOGGLE_ACTIVE,
 } from './constants';
 import search from './modules/search';
+import finalGrade from './modules/final-grade';
 
 // Use VueX
 Vue.use(Vuex);
@@ -55,7 +56,7 @@ Vue.use(Vuex);
 // Create VueX store
 const store = new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
-  modules: { search },
+  modules: { search, finalGrade },
   state: {
     error: false,
     loading: false,

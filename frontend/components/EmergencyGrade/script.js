@@ -5,6 +5,7 @@ export default {
   name: 'emergency-grade',
   data: () => ({
     hover: 0,
+    justification: '',
     grades: [
       {
         name: 'G3',
@@ -21,7 +22,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['newIncident']),
+    ...mapActions('finalGrade', ['setFinalGrade']),
     isActive({ name, weight }) {
       const isCurrent = name === this.type;
 
@@ -34,9 +35,10 @@ export default {
     async setGrade(e, { name }) {
       try {
         e.stopPropagation();
-        const response = await this.newIncident({
-          ...this.emergency,
-          grade_type: name,
+        const response = await this.setFinalGrade({
+          id: this.emergency.id,
+          attention_final_grade: name,
+          attention_justification: this.justification,
         });
         this.$emit('graded', response);
 
