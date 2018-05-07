@@ -2093,12 +2093,13 @@ eslint@^4.0.0, eslint@^4.9.0:
     table "^4.0.1"
     text-table "~0.2.0"
 
-eslint_d@^5.2.0:
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/eslint_d/-/eslint_d-5.2.1.tgz#f1f36652c2d95afbae456c8c8b24eeb99de2885a"
+eslint_d@^5.3.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/eslint_d/-/eslint_d-5.3.0.tgz#3cc166903b5fbe8043e8d06e409043a76f84b4fd"
   dependencies:
     chalk "^1.1.1"
     eslint "^4.0.0"
+    nanolru "^1.0.0"
     optionator "^0.8.1"
     resolve "^1.1.7"
     supports-color "^3.1.2"
@@ -3736,6 +3737,10 @@ mute-stream@0.0.7:
 nan@^2.3.0, nan@^2.3.2:
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.8.0.tgz#ed715f3fe9de02b57a5e6252d90a96675e1f085a"
+
+nanolru@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/nanolru/-/nanolru-1.0.0.tgz#0a5679cd4e4578c4ca3741e610b71c4c9b5afaf8"
 
 natural-compare@^1.4.0:
   version "1.4.0"
