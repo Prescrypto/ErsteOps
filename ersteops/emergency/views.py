@@ -49,7 +49,7 @@ def grade_view(request):
             emergency.attention_final_grade = attention_kind
             emergency.attention_justification = data['attention_justification']
             emergency.save()
-            data.update({'status': 'success', 'client_id':emergency.odooclient})
+            data.update({'status': 'success', 'client_id':emergency.odoo_client})
             response = JsonResponse(data)
             response.status_code = 202
             return response
