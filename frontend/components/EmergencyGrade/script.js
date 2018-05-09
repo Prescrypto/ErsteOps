@@ -5,7 +5,9 @@ export default {
   name: 'emergency-grade',
   data: () => ({
     hover: 0,
-    justification: '',
+    finalGrade: null,
+    finalGradeError: null,
+    justification: null,
     grades: [
       {
         name: 'G3',
@@ -14,30 +16,51 @@ export default {
       },
       { name: 'G2', weight: 2, description: 'Urgencia Médica' },
       { name: 'G1', weight: 3, description: 'Emergencia Médica' },
+      { name: 'G0', weight: 0, description: 'Sin Definir' },
     ],
   }),
   computed: {
     type() {
       return this.emergency.grade_type;
     },
+    isValid() {
+      return this.finalGrade && this.justification;
+    },
   },
   methods: {
     ...mapActions('finalGrade', ['setFinalGrade']),
     isActive({ name, weight }) {
       const isCurrent = name === this.type;
+      const isGraded = name === (this.finalGrade || {}).name;
 
-      const grade = find(g => this.type === g.name)(this.grades) || {};
+      const grade =
+        this.finalGrade || find(g => this.type === g.name)(this.grades) || {};
       const isBelowCurrent = grade.weight > weight;
       const isBelowHovered = this.hover > weight;
 
-      return isCurrent || isBelowCurrent || isBelowHovered;
+      return isGraded || isCurrent || isBelowCurrent || isBelowHovered;
     },
-    async setGrade(e, { name }) {
+    setGrade(e, grade) {
+      e.stopPropagation();
+      e.preventDefault();
+
+      const current = find(g => this.type === g.name)(this.grades);
+
+      if (current.weight <= grade.weight) {
+        this.finalGrade = grade;
+        this.finalGradeError = null;
+      } else {
+        this.finalGrade = null;
+        this.finalGradeError = 'El grado debe ser de igual o mayor urgencia';
+      }
+    },
+    async submit(e) {
       try {
         e.stopPropagation();
+        e.preventDefault();
         const response = await this.setFinalGrade({
           id: this.emergency.id,
-          attention_final_grade: name,
+          attention_final_grade: this.finalGrade.name,
           attention_justification: this.justification,
         });
         this.$emit('graded', response);
@@ -62,4 +85,7 @@ export default {
     },
   },
   props: ['emergency'],
+  $_veeValidate: {
+    validator: 'new',
+  },
 };

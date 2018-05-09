@@ -69,6 +69,7 @@
         </td>
         <td class="c-table__cell u-text-center">
           <v-popover
+            v-if="showGradeTooltip(emergency.id)"
             trigger="manual"
             :open="showGradeTooltip(emergency.id)"
             offset="20"
