@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 # Our methods
 from core.utils import OdooApi
 from decisiontree.models import SymptomDataDetail
+import re
 
 
 # Load Logging definition, this is defined in settings.py in the LOGGING section
@@ -102,13 +103,18 @@ def get_symptom_zero(request):
   if request.is_ajax():
       q = request.GET.get('term', '')
       # Search Symptom matches where Level = 0
-      symptoms = SymptomDataDetail.objects.filter(name__icontains = q,level='0' )[:20]
+      #symptoms = SymptomDataDetail.objects.filter(name__icontains = q,level='0' )|SymptomDataDetail.objects.filter(name__icontains = q,grade='',level='1' )[:20]
+      #symptoms = SymptomDataDetail.objects.filter(name__icontains = q,level='0',symptom_type='1' )[:20]
+      symptoms = SymptomDataDetail.objects.filter(name__icontains = q,level='0',symptom_type='1' ) | SymptomDataDetail.objects.filter(name__icontains = q,grade='',level='1',symptom_type='2' )[:20]
       results = []
       for symptom in symptoms:
           symptom_json = {}
           symptom_json['id'] = symptom.idx
           # This label is what autocomplete display
-          symptom_json["label"] = symptom.name
+          if(symptom.idx[0] == '1'):
+            symptom_json["label"] = '(Adulto) - ' + symptom.name
+          else:
+            symptom_json["label"] = '(Pedriatico) - ' + symptom.name
           symptom_json["value"] = symptom.name
           results.append(symptom_json)
 
@@ -118,3 +124,36 @@ def get_symptom_zero(request):
       data = 'fail'
   mimetype = 'application/json'
   return HttpResponse(data, mimetype)
+
+def get_emergency_grade(request):
+  if request.is_ajax():
+    q = request.GET.get('term', '')
+    print('*********** data *************')
+    print(q)
+    results = []
+    symptom_json = {}
+    try:
+      symptoms = SymptomDataDetail.objects.get(idx=q)
+      symptom_json['id'] = symptoms.idx
+      symptom_json['label'] = symptoms.grade
+      symptom_json['value'] = 'G'+ str(int(re.sub(r'[^\d-]+', '', symptoms.grade)))
+    except:
+      symptom_json['id'] = '0'
+      symptom_json['label'] = 'Selecione el sintoma correcto'
+      symptom_json['value'] = '-1'
+    results.append(symptom_json)
+    data = json.dumps(results)
+  else:
+      data = 'fail'
+  mimetype = 'application/json'
+  return HttpResponse(data, mimetype)
+
+# def get_breadcrumbs(request):
+#     try:
+#       symptoms = SymptomDataDetail.objects.get(idx=q)
+#       for level in xrange(symptoms.level):
+#     except:
+
+#   return  0
+
+
