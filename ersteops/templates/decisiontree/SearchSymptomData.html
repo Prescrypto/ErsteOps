@@ -39,6 +39,11 @@
     </div>
 
     <div id="using_json"></div>
+    <div>
+    <div id="breadcrumbs"></div>
+    <label for="usr">Grado:</label>
+    <input type="text" class="form-control" id="id_grado">
+    </div>
 
 	</div>
 </div>
@@ -132,11 +137,23 @@ $(document).ready(function() {
     $('#using_json').jstree({
       'core' : {
         'data' : {{ data.symptom_tree |safe }}
-      }
+      },
+      "plugins" : ["checkbox"],
     });
     $('#using_json').on("changed.jstree", function (e, data) {
       console.log("The selected nodes are:");
       console.log(data.selected);
+      //get grade
+      var search_id =''
+      search_id = data.selected[0];
+      console.log('search_id');
+      console.log(search_id);
+      $.ajax({url: "/ajaxapi/get_emergency_grade/",data: {'term': data.selected[0]} ,dataType: 'json' , success: function(result){
+        $("#id_grado").val(result[0].value);
+        console.log(result);
+        console.log(result[0].value); 
+      }});
+      // end get grade
     });
   });
 // $('#mysubmit').click(function(){
