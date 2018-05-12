@@ -32,10 +32,6 @@
     </div>
 
     <div id="tree_row" class="row">
-<!--       <p>
-        {{ data.symptom_name}}
-      </p>
-      <p>{{ data.symptom_tree}}</p> -->
     </div>
 
     <div id="using_json"></div>
@@ -51,46 +47,14 @@
 {% endblock %}
 
 {% block javascript %}
-<!-- <link rel="stylesheet" href="{% static 'bower_components/jstree/dist/themes/default/style.min.css' %}" />
-<script src="{% static 'bower_components/jstree/dist/jstree.min.js' %}"></script> -->
+<link rel="stylesheet" href="{% static 'bower_components/jstree/dist/themes/default/style.min.css' %}" />
+<script src="{% static 'bower_components/jstree/dist/jstree.min.js' %}"></script>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.5/themes/default/style.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.5/jstree.min.js"></script>
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.5/themes/default/style.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.5/jstree.min.js"></script> -->
 
 
 <script type="text/javascript">
-
-// $(function() {
-//   $('#using_json').jstree({
-//     'core' : {
-//       'data' : [
-//         { "text" : "Root node", "children" : [
-//             { "text" : "Child node 1" },
-//             { "text" : "Child node 2" }
-//           ]
-//         }
-//       ]
-//     }
-//   });
-// });
-
-// $(function() {
-//   $('#container1').jstree();
-// });
-
-// $(function() {
-//   $('#using_json').jstree({
-//     'core' : {
-//       'data' : [
-//         { "text" : "Root node", "children" : [
-//             { "text" : "Child node 1" },
-//             { "text" : "Child node 2" }
-//           ]
-//         }
-//       ]
-//     }
-//   });
-// });
 
 $(document).ready(function() {
 //   $('#tree_row').hide();
@@ -114,25 +78,11 @@ $(document).ready(function() {
       }
     }); // end autocomplete
   }); // end function
-// javascript version
-// build tree
-  // $(function() {
-  //   var symptom_data = "Root node"
-  //   $('#using_json').jstree({
-  //     'core' : {
-  //       'data' : [
-  //         { "text" : symptom_data, "children" : [
-  //             { "text" : "Child node 1" },
-  //             { "text" : "Child node 2" }
-  //           ]
-  //         }
-  //       ]
-  //     }
-  //   });
-  // });
 
-// with django data
+  // Get tree data
   $(function() {
+    var tree_data = {{ data.symptom_tree |safe }}
+    //console.log(tree_data);
     var symptom_data = "Root node"
     $('#using_json').jstree({
       'core' : {
@@ -141,28 +91,45 @@ $(document).ready(function() {
       "plugins" : ["checkbox"],
     });
     $('#using_json').on("changed.jstree", function (e, data) {
-      console.log("The selected nodes are:");
-      console.log(data.selected);
-      //get grade
-      var search_id =''
-      search_id = data.selected[0];
-      console.log('search_id');
-      console.log(search_id);
+      // Get parent nodes
+      var loMainSelected = data;
+      uiGetParents(loMainSelected);
+      // Get Correct grade
+      var search_id = data.selected[0];
       $.ajax({url: "/ajaxapi/get_emergency_grade/",data: {'term': data.selected[0]} ,dataType: 'json' , success: function(result){
         $("#id_grado").val(result[0].value);
-        console.log(result);
-        console.log(result[0].value); 
       }});
       // end get grade
     });
   });
-// $('#mysubmit').click(function(){
-//   //enable_patient_edit(); {# This seems weak and error prone #}
-//   console.log("test")
-//   $('#dataform').hide();
-//   $('#progress_bar').show();
-//   $('#uploadform').submit();
-// });
+
+  // Get all parents
+  function uiGetParents(loSelectedNode) {
+      try {
+          var lnLevel = loSelectedNode.node.parents.length;
+          var lsSelectedID = loSelectedNode.node.id;
+          var loParent = $("#" + lsSelectedID);
+          var lsParents =  loSelectedNode.node.text + ' >';
+          for (var ln = 0; ln <= lnLevel -1 ; ln++) {
+              var loParent = loParent.parent().parent();
+              if (loParent.children()[1] != undefined) {
+                  lsParents += loParent.children()[1].text + " > ";
+              }
+          }
+          if (lsParents.length > 0) {
+              lsParents = lsParents.substring(0, lsParents.length - 1);
+          }
+          //alert(lsParents);
+          var final_output = lsParents.split(">");
+          //final_output.reverse();
+          //console.log(final_output.reverse().join('>'));
+          $("#breadcrumbs").text(final_output.reverse().join('>'));
+      }
+      catch (err) {
+          console.log('Error in uiGetParents');
+      }
+  }
+
 }); // end document ready
 
 </script>
