@@ -33,6 +33,35 @@ class UnitManager(models.Manager):
 # Return all alliance units available
 # Unit.objects.available_alliance_units()
 
+# Crew type ej Medic, First Responder, Pilot
+class CrewRoll(models.Model):
+    name = models.CharField('Tipo de integrante',max_length=255, default='',unique=True)
+    created_at = models.DateTimeField("Fecha de alta", auto_now_add=True)
+    last_modified = models.DateTimeField("Última modificación", auto_now=True)
+    class Meta:
+        verbose_name_plural = "Tipo de Tripulacion"
+
+    def __str__(self):
+        ''' Return identifier as name '''
+        return self.name
+
+# Crew members, each unit can have one or many crew members
+class CrewMembers(models.Model):
+    crewroll = models.ForeignKey("CrewRoll",
+        related_name="crew_roll_name",
+        verbose_name= "tipo de tripulacion"
+        )
+    name = models.CharField('Nombre del medico', unique=True, max_length=255, default='')
+    created_at = models.DateTimeField("Fecha de alta", auto_now_add=True)
+    last_modified = models.DateTimeField("Última modificación", auto_now=True)
+    class Meta:
+        verbose_name_plural = "Tripulacion"
+
+    def __str__(self):
+        ''' Return identifier as name '''
+        return self.crewroll + ' - '+self.name
+
+
 class Unit(models.Model):
     ''' Unit model for ErsteOps '''
 
@@ -62,9 +91,14 @@ class Unit(models.Model):
 
     objects = UnitManager()
 
+    # Crew
+    crew = models.ManyToManyField(CrewMembers, related_name='Tripulacion', blank=True)
+
     class Meta:
         verbose_name_plural = "Unidades"
 
     def __str__(self):
         ''' Return identifier as name '''
         return self.identifier
+
+
