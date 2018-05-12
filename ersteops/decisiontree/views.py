@@ -442,7 +442,11 @@ def get_symptom_tree_zero(symptom_id):
                 level_dict_1['children'] = result_level_2
             # End Search Next Level
         level_dict_0['children'] = result_level_1
+
     result_0.append(level_dict_0)
+    print('*************** Final Tree *****************')
+    print(result_0)
+    print('*************** end Final ****************')
     return result_0
 
 def get_symtom_tree_level(qs):
