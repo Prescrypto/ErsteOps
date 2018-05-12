@@ -137,6 +137,7 @@ def get_emergency_grade(request):
       symptom_json['id'] = symptoms.idx
       symptom_json['label'] = symptoms.grade
       symptom_json['value'] = 'G'+ str(int(re.sub(r'[^\d-]+', '', symptoms.grade)))
+      #get_breadcrumbs(symptoms.idx)
     except:
       symptom_json['id'] = '0'
       symptom_json['label'] = 'Selecione el sintoma correcto'
@@ -148,12 +149,5 @@ def get_emergency_grade(request):
   mimetype = 'application/json'
   return HttpResponse(data, mimetype)
 
-# def get_breadcrumbs(request):
-#     try:
-#       symptoms = SymptomDataDetail.objects.get(idx=q)
-#       for level in xrange(symptoms.level):
-#     except:
-
-#   return  0
 
 
