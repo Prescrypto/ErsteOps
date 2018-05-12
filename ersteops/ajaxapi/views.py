@@ -141,7 +141,7 @@ def get_emergency_grade(request):
     except:
       symptom_json['id'] = '0'
       symptom_json['label'] = 'Selecione el sintoma correcto'
-      symptom_json['value'] = '-1'
+      symptom_json['value'] = 'Selecione el sintoma correcto'
     results.append(symptom_json)
     data = json.dumps(results)
   else:
