@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     # django-jet
     'jet.dashboard',
     'jet',
+    'rangefilter',
     'widget_tweaks',
     'django.contrib.admin',
     'django.contrib.auth',
