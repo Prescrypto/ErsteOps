@@ -280,7 +280,7 @@ class AttentionKind(models.Model):
         ordering = ['created_at']
 
     def __str__(self):
-        return self.grade_type + ' - ' +self.name
+        return self.grade_type
 
 
 class AttentionZone(models.Model):
