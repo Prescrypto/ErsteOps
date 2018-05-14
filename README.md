@@ -79,31 +79,15 @@ Requirments:
 
 Add variable MEDIA_LOCAL=True to your env var
 
-Use the end point:
-
-https://<app>.herokuapp.com/decisiontree/upload/
-
-to Upload decision tree from files located on:
-
-Adult Symptoms:
-https://github.com/Prescrypto/ErsteOps/blob/feature/decision_tree/tree_upload/adult_symptom_tree_2.csv
-
-Pedriatic Symptoms
-https://github.com/Prescrypto/ErsteOps/blob/feature/decision_tree/tree_upload/pedriatic_symptom_tree.csv
-
-
-Create migrations(Here teh instruction jus as reference):
-
-python3 manage.py dumpdata --format=json decisiontree > /vagrant/fixtures/decisiontree/initial_data.json
-
-
-
-load migrations
-
+Load migrations
+Vagrant:
 python3 manage.py loaddata --database=default fixtures/decisiontree/initial_data.json
 
+Heroku:
+python3 manage.py loaddata --database=default /app/fixtures/decisiontree/initial_data.json
 
 Check baisc functionality on vagrant:
+http://127.0.0.1:8000/decisiontree/searchsymptom/
 
 
 In heroku:
