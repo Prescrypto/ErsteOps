@@ -33,7 +33,7 @@ class JSONResponseMixin(object):
         # Inyect to data addresses type
         raw_data = json.loads(data)
         raw_data[0]["fields"].update({
-            "addresses": [{
+            "final_address": [{
                 "adress_street" : raw_data[0]['fields']["address_street"],
                 "address_extra" : raw_data[0]['fields']["address_extra"],
                 "address_zip_code": raw_data[0]['fields']["address_zip_code"],
@@ -58,7 +58,7 @@ class UpdateJsonResponseMixin(object):
         if self.request.is_ajax():
             data = json.loads(self.request.body.decode('utf-8'))
             if data:
-                address = data["addresses"][0]
+                address = data["final_address"]
                 emergency_object = super(UpdateJsonResponseMixin, self).get_object()
                 # del timers form form
                 entriesToRemove = ('attention_time', 'derivation_time', 'end_time', 'final_emergency_time', 'hospital_arrival',
@@ -113,7 +113,7 @@ class AjaxableResponseMixin(object):
         if self.request.is_ajax():
             data = json.loads(self.request.body.decode('utf-8'))
             if data:
-                address = data["addresses"][0]
+                address = data["final_address"]
                 emergency_form = EmergencyForm(data)
                 emergency_form.data.update({
                     'start_time': timezone.now(),
