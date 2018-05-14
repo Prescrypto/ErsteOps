@@ -72,3 +72,40 @@ $ python3 manage.py loaddata ../fixtures/auth/test_data.json
 ```
 
 HINT: Use in case have a lot of test with db or have change migrations file missing references
+
+# Decision tree
+
+Requirments:
+
+Add variable MEDIA_LOCAL=True to your env var
+
+Use the end point:
+
+https://<app>.herokuapp.com/decisiontree/upload/
+
+to Upload decision tree from files located on:
+
+Adult Symptoms:
+https://github.com/Prescrypto/ErsteOps/blob/feature/decision_tree/tree_upload/adult_symptom_tree_2.csv
+
+Pedriatic Symptoms
+https://github.com/Prescrypto/ErsteOps/blob/feature/decision_tree/tree_upload/pedriatic_symptom_tree.csv
+
+
+Create migrations(Here teh instruction jus as reference):
+
+python3 manage.py dumpdata --format=json decisiontree > /vagrant/fixtures/decisiontree/initial_data.json
+
+
+
+load migrations
+
+python3 manage.py loaddata --database=default fixtures/decisiontree/initial_data.json
+
+
+Check baisc functionality on vagrant:
+
+
+In heroku:
+https://<app>.herokuapp.com/decisiontree/searchsymptom/
+
