@@ -33,7 +33,7 @@ class JSONResponseMixin(object):
         # Inyect to data addresses type
         raw_data = json.loads(data)
         raw_data[0]["fields"].update({
-            "final_address": [{
+            "final_address": {
                 "adress_street" : raw_data[0]['fields']["address_street"],
                 "address_extra" : raw_data[0]['fields']["address_extra"],
                 "address_zip_code": raw_data[0]['fields']["address_zip_code"],
@@ -45,7 +45,7 @@ class JSONResponseMixin(object):
                 "address_front" : raw_data[0]['fields']["address_front"],
                 "address_instructions" : raw_data[0]['fields']["address_instructions"],
                 "address_notes" : raw_data[0]['fields']["address_notes"]
-            }]
+            }
         })
         return json.dumps(raw_data)
 
