@@ -77,19 +77,24 @@ HINT: Use in case have a lot of test with db or have change migrations file miss
 
 Requirments:
 
-Add variable MEDIA_LOCAL=True to your env var
+Add variable MEDIA_LOCAL=True to your env
 
 Load migrations
+
 Vagrant:
+
 python3 manage.py loaddata --database=default fixtures/decisiontree/initial_data.json
 
 Heroku:
+
 python3 manage.py loaddata --database=default /app/fixtures/decisiontree/initial_data.json
 
 Check baisc functionality on vagrant:
+
 http://127.0.0.1:8000/decisiontree/searchsymptom/
 
 
 In heroku:
+
 https://<app>.herokuapp.com/decisiontree/searchsymptom/
 
