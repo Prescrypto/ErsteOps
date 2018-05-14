@@ -57,13 +57,13 @@ export default {
     onCopy() {
       this.clearEmergencyText();
       this.$notify({
-        text: 'Se ha copiado el incidente al portapapeles.',
+        text: 'Se ha copiado el auxilio al portapapeles.',
         type: 'success',
       });
     },
     onCopyError() {
       this.$notify({
-        text: 'No se pudo copiar el incidente al portapapeles',
+        text: 'No se pudo copiar el auxilio al portapapeles',
         type: 'error',
       });
     },
