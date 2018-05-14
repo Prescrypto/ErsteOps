@@ -34,6 +34,9 @@
     },
     "SECURE_SSL_REDIRECT": {
       "required": true
+    },
+    "MEDIA_LOCAL": {
+      "required": true
     }
   },
   "formation": {
