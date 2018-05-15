@@ -20,7 +20,7 @@ from django.db.models import Q
 from core.utils import OdooApi
 from .utils import JSONResponseMixin, AjaxableResponseMixin, UpdateJsonResponseMixin
 from .forms import OdooClientForm, OdooClientAuto
-from .models import Emergency,AttentionDerivation
+from .models import Emergency,AttentionDerivation, AttentionKind
 from unit.models import Unit
 from unit.utils import UNIT_LIST_FIELD
 from .list_fields import EMERGENCY_LIST_FIELDS
@@ -29,6 +29,37 @@ from .list_fields import EMERGENCY_LIST_FIELDS
 import logging
 # Load Logging definition, this is defined in settings.py in the LOGGING section
 logger = logging.getLogger('django_info')
+
+@csrf_exempt
+def grade_view(request):
+    ''' '''
+    bad_response = JsonResponse({'status':'bad request'})
+    bad_response.status_code = 400
+
+    if not request.is_ajax():
+        return bad_response
+    if not request.body:
+        return bad_response
+
+    data = json.loads(request.body.decode('utf-8'))
+    if 'id' in data and 'attention_final_grade' in data and 'attention_justification' in data:
+        try:
+            emergency = Emergency.objects.get(id=data['id'])
+            attention_kind = AttentionKind.objects.get(grade_type=data['attention_final_grade'])
+            emergency.attention_final_grade = attention_kind
+            emergency.attention_justification = data['attention_justification']
+            emergency.save()
+            data.update({'status': 'success', 'client_id':emergency.odoo_client})
+            response = JsonResponse(data)
+            response.status_code = 202
+            return response
+        except Exception as e:
+            logger.error("[Grade View ERROR]: {}, type: {}".format(e, type(e)))
+            return bad_response
+
+    else:
+        return bad_response
+
 
 @method_decorator(login_required, name='dispatch')
 class EmergencyBlank(View):

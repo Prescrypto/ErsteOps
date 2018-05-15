@@ -1,0 +1,19 @@
+.tooltip.popover.grade {
+  display: none;
+
+  & .tooltip-arrow.popover-arrow {
+    border-color: #222c3c;
+  }
+
+  & .tooltip-inner.popover-inner {
+    background: #222c3c;
+    padding: 0;
+
+    & .grid__close {
+      position: absolute;
+      top: 1px;
+      left: 8px;
+      color: white !important;
+    }
+  }
+}

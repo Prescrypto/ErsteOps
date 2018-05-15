@@ -1,0 +1,64 @@
+$radius: 3px;
+$low: #f9e604;
+$medium: #fd9a18;
+$high: #ed1c24;
+
+ul {
+  display: flex;
+}
+
+button {
+  background: none;
+  border: 1px solid #b3b3b3;
+  width: 30px;
+  text-align: center;
+  color: #888;
+  transition:all 350ms ease-in-out;
+
+  &.active {
+    &.low {
+      background: lighten($low, 15);
+      border: 1px solid darken($low, 5);
+      color: darken($low, 30);
+    }
+    &.medium {
+      background: lighten($medium, 15);
+      border: 1px solid darken($medium, 0);
+      color: darken($medium, 30);
+    }
+    &.high {
+      background: lighten($high, 15);
+      border: 1px solid darken($high, 0);
+      color: darken($high, 30);
+    }
+  }
+
+  &:hover {
+    color: #333;
+
+    &.low {
+      background: $low;
+      border: 1px solid darken($low, 10);
+    }
+    &.medium {
+      background: $medium;
+      border: 1px solid darken($medium, 10);
+    }
+    &.high {
+      background: $high;
+      border: 1px solid darken($high, 15);
+    }
+  }
+}
+
+li {
+  padding-right: 2px;
+
+  &:first-child > button {
+    border-radius: $radius 0 0 $radius;
+  }
+
+  &:last-child > button {
+    border-radius: 0 $radius $radius 0;
+  }
+}

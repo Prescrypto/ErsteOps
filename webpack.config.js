@@ -6,7 +6,7 @@ module.exports = {
   context: __dirname,
 
   entry: {
-    dashboard: './frontend/entry/dashboard',
+    dashboard: ['babel-polyfill', './frontend/entry/dashboard'],
     modal: ['./frontend/utils/global', './frontend/entry/modal'],
     nav: ['./frontend/utils/global', './frontend/entry/nav'],
   },
