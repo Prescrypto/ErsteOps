@@ -67,7 +67,7 @@ class CrewMember(models.Model):
 
     def __str__(self):
         ''' Return identifier as name '''
-        return self.crewroll + ' - '+self.name
+        return "{} - {}".format(self.crewroll.name, self.name)
 
 
 class Unit(models.Model):
