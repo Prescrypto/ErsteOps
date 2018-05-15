@@ -1,0 +1,26 @@
+[
+{
+  "model": "unit.crewroll",
+  "pk": 1,
+  "fields": {
+    "name": "Medico",
+    "description": "Medico general"
+  }
+},
+{
+  "model": "unit.crewroll",
+  "pk": 2,
+  "fields": {
+    "name": "Piloto",
+    "description": "Piloto de la Unidad"
+  }
+},
+{
+  "model": "unit.crewroll",
+  "pk": 3,
+  "fields": {
+    "name": "Auxiliar Medico",
+    "description": "Auxiliar de Medico"
+  }
+}
+]
