@@ -33,29 +33,35 @@ class UnitManager(models.Manager):
 # Return all alliance units available
 # Unit.objects.available_alliance_units()
 
-# Crew type ej Medic, First Responder, Pilot
+
 class CrewRoll(models.Model):
-    name = models.CharField('Tipo de integrante',max_length=255, default='',unique=True)
-    created_at = models.DateTimeField("Fecha de alta", auto_now_add=True)
-    last_modified = models.DateTimeField("Última modificación", auto_now=True)
+    ''' Crew type ej Medic, First Responder, Pilot '''
+    name = models.CharField('Tipo de integrante',max_length=255, default='', unique=True)
+    description = models.TextField('Descripción del Rol', blank=True)
+
     class Meta:
-        verbose_name_plural = "Tipo de Tripulacion"
+        verbose_name_plural = "Tipo de Tripulación"
 
     def __str__(self):
         ''' Return identifier as name '''
         return self.name
 
-# Crew members, each unit can have one or many crew members
-class CrewMembers(models.Model):
+
+class CrewMember(models.Model):
+    ''' Crew members, each unit can have one or many crew members '''
+    name = models.CharField('Nombre del medico', max_length=255, default='')
     crewroll = models.ForeignKey("CrewRoll",
-        related_name="crew_roll_name",
-        verbose_name= "tipo de tripulacion"
+        related_name="crew_members",
+        verbose_name= "Tipo de tripulación"
         )
-    name = models.CharField('Nombre del medico', unique=True, max_length=255, default='')
+    more_info = models.TextField("Más Información acerca del miembro", blank=True)
+
+    # Datetime utils
     created_at = models.DateTimeField("Fecha de alta", auto_now_add=True)
     last_modified = models.DateTimeField("Última modificación", auto_now=True)
+
     class Meta:
-        verbose_name_plural = "Tripulacion"
+        verbose_name_plural = "Tripulación"
 
     def __str__(self):
         ''' Return identifier as name '''
@@ -92,7 +98,7 @@ class Unit(models.Model):
     objects = UnitManager()
 
     # Crew
-    crew = models.ManyToManyField(CrewMembers, related_name='Tripulacion', blank=True)
+    crew = models.ManyToManyField('CrewMember', related_name='units', verbose_name= "Miembros de Tripulación", blank=True)
 
     class Meta:
         verbose_name_plural = "Unidades"

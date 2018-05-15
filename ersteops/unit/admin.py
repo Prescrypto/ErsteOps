@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Unit, CrewRoll, CrewMembers
+from .models import Unit, CrewRoll, CrewMember
 
 class UnitAdmin(admin.ModelAdmin):
     ''' Customize Unit Admin '''
@@ -9,4 +9,4 @@ class UnitAdmin(admin.ModelAdmin):
 
 admin.site.register(Unit, UnitAdmin)
 admin.site.register(CrewRoll)
-admin.site.register(CrewMembers)
+admin.site.register(CrewMember)
