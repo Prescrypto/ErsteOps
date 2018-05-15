@@ -40,7 +40,8 @@ class CrewRoll(models.Model):
     description = models.TextField('Descripción del Rol', blank=True)
 
     class Meta:
-        verbose_name_plural = "Tipo de Tripulación"
+        ordering = ['name']
+        verbose_name_plural = "Tipos de Tripulación"
 
     def __str__(self):
         ''' Return identifier as name '''
@@ -49,19 +50,20 @@ class CrewRoll(models.Model):
 
 class CrewMember(models.Model):
     ''' Crew members, each unit can have one or many crew members '''
-    name = models.CharField('Nombre del medico', max_length=255, default='')
+    name = models.CharField('Nombre del miembro tripulante', max_length=255, default='')
     crewroll = models.ForeignKey("CrewRoll",
         related_name="crew_members",
         verbose_name= "Tipo de tripulación"
         )
-    more_info = models.TextField("Más Información acerca del miembro", blank=True)
+    more_info = models.TextField("Más Información acerca del miembro tripulante", blank=True)
 
     # Datetime utils
     created_at = models.DateTimeField("Fecha de alta", auto_now_add=True)
     last_modified = models.DateTimeField("Última modificación", auto_now=True)
 
     class Meta:
-        verbose_name_plural = "Tripulación"
+        ordering = ['created_at']
+        verbose_name_plural = "Miembros de Tripulación"
 
     def __str__(self):
         ''' Return identifier as name '''
