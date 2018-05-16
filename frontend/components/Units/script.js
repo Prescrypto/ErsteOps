@@ -1,6 +1,7 @@
 import find from 'lodash/fp/find';
 import { mapState, mapActions, mapMutations, mapGetters } from 'vuex';
 import Loader from 'vue-spinner/src/ScaleLoader.vue';
+import UnitDetails from 'components/UnitDetails';
 import {
   MODAL_UNITS_ADD,
   MODAL_UNITS_REMOVE,
@@ -9,7 +10,7 @@ import {
 
 export default {
   name: 'units',
-  components: { Loader },
+  components: { Loader, UnitDetails },
   mounted() {
     this.getUnits();
   },
@@ -20,7 +21,7 @@ export default {
   filters: {
     description: type =>
       ({
-        undefined : 'Indefinido',
+        undefined: 'Indefinido',
         terapia_intensiva: 'Ambulancia de terapia intensiva económico',
         vehiculo_consulta_medica_domicilio:
           'Vehículos de consulta médica a domicilio, Económico',
