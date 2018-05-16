@@ -1,14 +1,10 @@
 import { mapActions } from 'vuex';
 
 export default {
-  name: 'unit-details',
-  data: () => ({
-    unitId: 1,
-  }),
-  mounted() {
-    this.details(this.unitId);
-  },
+  name: 'units',
+  // this.details(this.current);
   methods: {
     ...mapActions('unit', ['details']),
   },
+  props: ['current'],
 };

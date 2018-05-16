@@ -11,6 +11,9 @@ import {
 export default {
   name: 'units',
   components: { Loader, UnitDetails },
+  data: () => ({
+    hover: null,
+  }),
   mounted() {
     this.getUnits();
   },
@@ -40,6 +43,12 @@ export default {
     },
     isSelected(id) {
       return find(u => id === u.id)(this.combinedUnits);
+    },
+    setHover(id) {
+      this.hover = id;
+    },
+    unsetHover() {
+      this.hover = null;
     },
     ...mapMutations({
       addUnit: MODAL_UNITS_ADD,
