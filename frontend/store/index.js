@@ -1,3 +1,5 @@
+/* eslint-disable import/no-named-default */
+
 import Vue from 'vue';
 import Vuex from 'vuex';
 import {
@@ -48,6 +50,7 @@ import {
 } from './constants';
 import search from './modules/search';
 import finalGrade from './modules/final-grade';
+import { default as unitModule } from './modules/unit';
 
 // Use VueX
 Vue.use(Vuex);
@@ -55,7 +58,7 @@ Vue.use(Vuex);
 // Create VueX store
 const store = new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
-  modules: { search, finalGrade },
+  modules: { search, finalGrade, unit: unitModule },
   state: {
     error: false,
     loading: false,
