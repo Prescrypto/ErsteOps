@@ -43,7 +43,11 @@
         </thead>
         <tbody>
           <tr v-for="unit in units" v-if="!isSelected(unit.id)" class="c-table__row unit">
-            <td class="c-table__cell" >{{unit.identifier}}</td>
+            <td class="c-table__cell">
+              <span class="c-badge c-badge--info">
+                {{unit.identifier}}
+              </span>
+            </td>
             <td class="c-table__cell">{{unit.unit_type | description}}</td>
             <td class="c-table__cell">{{unit.location}}</td>
             <!-- <td class="c&#45;table__cell">{{unit.phone}}</td> -->
