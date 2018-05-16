@@ -31,7 +31,12 @@ def detail_unit_json(request, id_unit):
             return HttpResponse(json.dumps({'error': 'Unidad no encontrada'}), status=404, content_type='application/json')
 
         data = serializers.serialize('json', unit, fields=UNIT_LIST_FIELD)
-        return HttpResponse(data, content_type='application/json', status=200)
+        # Add crew list
+        _raw_data = json.loads(data)
+        _raw_data[0]['fields'].update({
+            'crew_list' : unit.first().get_crew_list
+        })
+        return HttpResponse(json.dumps(_raw_data), content_type='application/json', status=200)
     else:
         return BAD_REQUEST
 
