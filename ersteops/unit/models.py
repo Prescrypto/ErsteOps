@@ -109,4 +109,15 @@ class Unit(models.Model):
         ''' Return identifier as name '''
         return self.identifier
 
+    @property
+    def get_crew_list(self):
+        ''' get list of crew '''
+        if self.crew.all().count() > 0:
+            member_list = []
+            for member in self.crew.all():
+                member_list.append(member.__str__())
+                return member_list
+        else:
+            return []
+
 
