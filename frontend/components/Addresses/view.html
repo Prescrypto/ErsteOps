@@ -14,7 +14,7 @@
         <select
           autofocus
           tabindex="1"
-          v-model="source.zone"
+          v-model="emergency.zone"
           v-validate="'required'"
           data-vv-scope="emergency"
           data-vv-name="zone"
@@ -43,28 +43,6 @@
   </div>
 
   <div class="row">
-    <div class="col-12">
-      <br />
-      <div class="c-field">
-        <label class="c-field__label" for="patient_address">
-          Direccion de atención
-        </label>
-        <select
-          tabindex="2"
-          @change="choose"
-          v-model="current"
-          name="address"
-          class="c-input"
-          id="patient_address"
-          required
-        >
-          <option v-for="address in emergency.addresses" v-bind:value="address.address_id">
-            {{ address.address_street }}
-          </option>
-        </select>
-      </div>
-    </div>
-
     <div class="col-4">
       <br />
       <div class="c-field">
@@ -73,7 +51,7 @@
         </label>
         <input
           tabindex="3"
-          v-model="address.address_street"
+          v-model="emergency.address_street"
           type="text"
           name="address_street"
           id="id_address_street"
@@ -89,7 +67,7 @@
         </label>
         <input
           tabindex="4"
-          v-model="address.address_extra"
+          v-model="emergency.address_extra"
           type="text"
           name="address_extra"
           id="id_address_extra"
@@ -105,7 +83,7 @@
         </label>
         <input
           tabindex="5"
-          v-model="address.address_between"
+          v-model="emergency.address_between"
           type="text"
           name="address_between"
           id="id_address_between"
@@ -121,7 +99,7 @@
         </label>
         <input
           tabindex="6"
-          v-model="address.address_and_street"
+          v-model="emergency.address_and_street"
           type="text"
           name="address_and_street"
           id="id_address_and_street"
@@ -139,7 +117,7 @@
         </label>
         <input
           tabindex="7"
-          v-model="address.address_ref"
+          v-model="emergency.address_ref"
           type="text"
           name="address_ref"
           id="id_address_ref"
@@ -155,7 +133,7 @@
         </label>
         <input
           tabindex="8"
-          v-model="address.address_front"
+          v-model="emergency.address_front"
           type="text"
           name="address_front"
           id="id_address_front"
@@ -171,7 +149,7 @@
         </label>
         <input
           tabindex="9"
-          v-model="address.address_instructions"
+          v-model="emergency.address_instructions"
           type="text"
           name="address_instructions"
           id="id_address_instructions"
@@ -189,7 +167,7 @@
         </label>
         <input
           tabindex="10"
-          v-model="address.address_zip_code"
+          v-model="emergency.address_zip_code"
           type="text"
           name="address_zip_code"
           id="id_address_zip_code"
@@ -205,7 +183,7 @@
         </label>
         <input
           tabindex="11"
-          v-model="address.address_county"
+          v-model="emergency.address_county"
           type="text"
           name="address_county"
           id="id_address_county"
@@ -221,7 +199,7 @@
         </label>
         <input
           tabindex="12"
-          v-model="address.address_col"
+          v-model="emergency.address_col"
           type="text"
           name="address_col"
           id="id_address_col"
@@ -239,7 +217,7 @@
           Notas
         </label>
         <textarea
-          v-model="address.id_address_notes"
+          v-model="emergency.id_address_notes"
           name="address_notes"
           id="id_address_notes"
           class="c-input"
