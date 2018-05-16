@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+	<div style="padding-top:55px">
+		<h1> Decision Tree</h1>
+
+		{% if messages %}
+      <div class="row">
+        <ul class="messages">
+          {% for message in messages %}
+            <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+              {{ message }}
+            </div>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    <div id="dataform" class="row">
+  		<form action="" method="POST" enctype="multipart/form-data" id="uploadform">
+  			{% csrf_token %}
+      	{{ form.as_p }}
+        {% if data.show_buttons %}
+        <div class="btn-group">
+          <input class="btn btn-success" type="reset" value="Limpiar">
+        	<input class="btn btn-primary" type="button" value="Enviar" id="mysubmit">
+        </div>
+        {% endif %}
+  		</form>
+    </div>
+
+    <div id="tree_row" class="row">
+    </div>
+
+    <div id="using_json"></div>
+    <div>
+    <div id="breadcrumbs"></div>
+    <label for="usr">Grado:</label>
+    <input type="text" class="form-control" id="id_grado">
+    </div>
+
+	</div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<!-- <link rel="stylesheet" href="{% static 'bower_components/jstree/dist/themes/default/style.min.css' %}" />
+<script src="{% static 'bower_components/jstree/dist/jstree.min.js' %}"></script> -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.5/themes/default/style.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.5/jstree.min.js"></script>
+
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+//   $('#tree_row').hide();
+  // First find main symptom with autocomplete
+  $(function() {
+    $("#id_symptom_name").autocomplete({
+      source: "/ajaxapi/get_symptom/",
+      minLength: 2,
+      //Focus 
+      focus: function( event, ui ) {
+        $( "#id_symptom_name" ).val( ui.item.label );
+        return false;
+      },
+
+      select: function( event, ui ) {
+        //Assign existing values from Autocomplete 
+        $( "#id_symptom_id" ).val( ui.item.id );
+        $( "#id_symptom_name" ).val( ui.item.value );
+        $('#uploadform').submit();
+        return false;
+      }
+    }); // end autocomplete
+  }); // end function
+
+  // Get tree data
+  $(function() {
+    var tree_data = {{ data.symptom_tree |safe }}
+    //console.log(tree_data);
+    var symptom_data = "Root node"
+    $('#using_json').jstree({
+      'core' : {
+        'data' : {{ data.symptom_tree |safe }}
+      },
+      "plugins" : ["checkbox"],
+    });
+    $('#using_json').on("changed.jstree", function (e, data) {
+      // Get parent nodes
+      var loMainSelected = data;
+      uiGetParents(loMainSelected);
+      // Get Correct grade
+      var search_id = data.selected[0];
+      $.ajax({url: "/ajaxapi/get_emergency_grade/",data: {'term': data.selected[0]} ,dataType: 'json' , success: function(result){
+        $("#id_grado").val(result[0].value);
+      }});
+      // end get grade
+    });
+  });
+
+  // Get all parents
+  function uiGetParents(loSelectedNode) {
+      try {
+          var lnLevel = loSelectedNode.node.parents.length;
+          var lsSelectedID = loSelectedNode.node.id;
+          var loParent = $("#" + lsSelectedID);
+          var lsParents =  loSelectedNode.node.text + ' >';
+          for (var ln = 0; ln <= lnLevel -1 ; ln++) {
+              var loParent = loParent.parent().parent();
+              if (loParent.children()[1] != undefined) {
+                  lsParents += loParent.children()[1].text + " > ";
+              }
+          }
+          if (lsParents.length > 0) {
+              lsParents = lsParents.substring(0, lsParents.length - 1);
+          }
+          //alert(lsParents);
+          var final_output = lsParents.split(">");
+          //final_output.reverse();
+          //console.log(final_output.reverse().join('>'));
+          $("#breadcrumbs").text(final_output.reverse().join('>'));
+      }
+      catch (err) {
+          console.log('Error in uiGetParents');
+      }
+  }
+
+}); // end document ready
+
+</script>
+{% endblock %}
