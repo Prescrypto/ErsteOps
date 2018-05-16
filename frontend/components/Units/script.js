@@ -1,7 +1,7 @@
 import find from 'lodash/fp/find';
 import { mapState, mapActions, mapMutations, mapGetters } from 'vuex';
 import Loader from 'vue-spinner/src/ScaleLoader.vue';
-import UnitDetails from 'components/UnitDetails';
+import Unit from 'components/Unit';
 import {
   MODAL_UNITS_ADD,
   MODAL_UNITS_REMOVE,
@@ -10,10 +10,7 @@ import {
 
 export default {
   name: 'units',
-  components: { Loader, UnitDetails },
-  data: () => ({
-    hover: null,
-  }),
+  components: { Loader, Unit },
   mounted() {
     this.getUnits();
   },
@@ -43,12 +40,6 @@ export default {
     },
     isSelected(id) {
       return find(u => id === u.id)(this.combinedUnits);
-    },
-    setHover(id) {
-      this.hover = id;
-    },
-    unsetHover() {
-      this.hover = null;
     },
     ...mapMutations({
       addUnit: MODAL_UNITS_ADD,

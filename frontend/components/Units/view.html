@@ -9,7 +9,6 @@
 <div v-else>
   <div class="row">
     <div class="col-12">
-      <unit-details :current="hover" />
       <label class="c-field__label" for="input1">Unidades Asignadas</label>
       <div
         class="c-input selected-container"
@@ -44,15 +43,7 @@
         </thead>
         <tbody>
           <tr v-for="unit in units" v-if="!isSelected(unit.id)" class="c-table__row unit">
-            <td class="c-table__cell">
-              <span
-                class="c-badge c-badge--info"
-                @mouseover="setHover(unit.id)"
-                @mouseout="unsetHover"
-              >
-                {{unit.identifier}}
-              </span>
-            </td>
+            <td class="c-table__cell"><unit :data="unit" /></td>
             <td class="c-table__cell">{{unit.unit_type | description}}</td>
             <td class="c-table__cell">{{unit.location}}</td>
             <!-- <td class="c&#45;table__cell">{{unit.phone}}</td> -->
