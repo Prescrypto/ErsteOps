@@ -34,7 +34,7 @@ class JSONResponseMixin(object):
         raw_data = json.loads(data)
         raw_data[0]["fields"].update({
             "final_address": {
-                "adress_street" : raw_data[0]['fields']["address_street"],
+                "address_street" : raw_data[0]['fields']["address_street"],
                 "address_extra" : raw_data[0]['fields']["address_extra"],
                 "address_zip_code": raw_data[0]['fields']["address_zip_code"],
                 "address_county" : raw_data[0]['fields']["address_county"],
@@ -69,7 +69,7 @@ class UpdateJsonResponseMixin(object):
                 # Accept update emergency with address
                 data.update({
                     'start_time': emergency_object.start_time,
-                    "adress_street" : address["address_street"],
+                    "address_street" : address["address_street"],
                     "address_extra" : address["address_extra"],
                     "address_zip_code": address["address_zip_code"],
                     "address_county" : address["address_county"],
@@ -117,7 +117,7 @@ class AjaxableResponseMixin(object):
                 emergency_form = EmergencyForm(data)
                 emergency_form.data.update({
                     'start_time': timezone.now(),
-                    "adress_street" : address["address_street"],
+                    "address_street" : address["address_street"],
                     "address_extra" : address["address_extra"],
                     "address_zip_code": address["address_zip_code"],
                     "address_county" : address["address_county"],
