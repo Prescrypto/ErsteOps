@@ -239,6 +239,7 @@ def emergency_dictionary(instance):
         "final_emergency_time":instance.final_emergency_time.isoformat(),
 
         "is_active":instance.is_active,
+        "copago_amount": instance.copago_amount,
         "address_street":instance.address_street,
         "address_extra":instance.address_extra,
         "address_zip_code":instance.address_zip_code,
