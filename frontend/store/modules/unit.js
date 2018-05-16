@@ -1,4 +1,5 @@
 import reduce from 'lodash/fp/reduce';
+import { units } from 'utils/preload';
 import http from 'utils/http';
 import {
   UNIT_DETAILS_START,
@@ -6,11 +7,15 @@ import {
   UNIT_DETAILS_ERROR,
 } from 'store/constants';
 
+const createCollection = data =>
+  reduce((collection, unit) => {
+    collection[unit.pk] = { id: unit.pk, ...unit.fields };
+    return collection;
+  }, {})(data);
+
 export default {
   namespaced: true,
-  state: {
-    unit: {},
-  },
+  state: { units },
   actions: {
     details({ commit }, id) {
       commit(UNIT_DETAILS_START);
@@ -30,10 +35,7 @@ export default {
     },
     [UNIT_DETAILS_SUCCESS](state, data) {
       state.loading = false;
-      state.unit = reduce((collection, unit) => {
-        collection[unit.pk] = { ...unit.pk, ...unit.fields };
-        return collection;
-      }, {})(data);
+      state.units = { ...state.units, ...createCollection(data) };
     },
     [UNIT_DETAILS_ERROR](state, err) {
       state.error = err;

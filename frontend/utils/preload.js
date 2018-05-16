@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 
-import { map } from 'lodash/fp';
+import map from 'lodash/fp/map';
+import reduce from 'lodash/fp/reduce';
 
 // Initialize empty data store
 const { incidents, units: onLoadUnits } = window.erste;
@@ -11,5 +12,7 @@ export const emergencies =
   [];
 
 // Flatten units
-export const units =
-  map(unit => ({ id: unit.pk, ...unit.fields }))(onLoadUnits) || [];
+export const units = reduce((collection, unit) => {
+  collection[unit.pk] = { id: unit.pk, ...unit.fields };
+  return collection;
+}, {})(onLoadUnits);
