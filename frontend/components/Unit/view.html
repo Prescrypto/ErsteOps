@@ -3,6 +3,8 @@
   :placement="tooltip"
   offset="5"
   popoverClass="details"
+  @show="handleShow"
+  @hide="handleHide"
 >
   <span
     class="unit-badge c-badge c-badge--info"
@@ -15,6 +17,6 @@
   </span>
 
   <template slot="popover">
-    <unit-details :current="data" />
+    <unit-details v-if="hover" :id="data.id" />
   </template>
 </v-popover>
