@@ -15,7 +15,7 @@
         v-bind:class="{ 'is-disabled': combinedUnits.length === 0 }"
       >
         <span v-for="unit in combinedUnits">
-          <unit :data="unit">
+          <unit :data="unit" tooltip="bottom">
             <template slot="after">
               <i class="fa fa-close close-button"
                 @click="removeUnit({ id: unit.id })"
@@ -44,7 +44,7 @@
         <tbody>
           <tr v-for="unit in units" v-if="!isSelected(unit.id)" class="c-table__row unit">
             <td class="c-table__cell">
-              <unit :data="unit">
+              <unit :data="unit" tooltip="top">
                 <template slot="before">
                   <i class="fa fa-info-circle" />
                 </template>

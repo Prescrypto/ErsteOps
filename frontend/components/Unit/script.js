@@ -3,21 +3,19 @@ import UnitDetails from 'components/UnitDetails';
 export default {
   name: 'unit',
   components: { UnitDetails },
-  data: () => ({
-    hover: false,
-  }),
   computed: {
     label() {
       return this.data.identifier;
     },
   },
-  methods: {
-    setHover() {
-      this.hover = true;
+  props: {
+    data: {
+      default: {},
+      type: Object,
     },
-    unsetHover() {
-      this.hover = false;
+    tooltip: {
+      default: 'top',
+      type: String,
     },
   },
-  props: ['data'],
 };

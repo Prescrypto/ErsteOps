@@ -1,9 +1,20 @@
-<span
-  class="unit-badge c-badge c-badge--info"
-  :class="{ selected: $slots.after }"
-  @mouseover="setHover" @mouseout="unsetHover"
+<v-popover
+  trigger="click"
+  :placement="tooltip"
+  offset="5"
+  popoverClass="details"
 >
-  <slot name="before" />
-  {{label}}
-  <slot name="after" />
-</span>
+  <span
+    class="unit-badge c-badge c-badge--info"
+    :class="{ selected: $slots.after }"
+  >
+
+    <slot name="before" />
+    {{label}}
+    <slot name="after" />
+  </span>
+
+  <template slot="popover">
+    <unit-details :current="data" />
+  </template>
+</v-popover>
