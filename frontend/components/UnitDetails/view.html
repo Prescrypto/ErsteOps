@@ -1,1 +1,49 @@
-<h1>{{id}}</h1>
+<div ref="unit" class="c-project">
+  <h3 class="c-project__title u-h4">
+    <i class="fa fa-ambulance u-mr-xsmall u-opacity-medium" />{{ unit.identifier }}
+    <span class="c-project__status u-mb-xsmall content-type">
+      {{ type }}
+    </span>
+  </h3>
+
+
+  <section class="c-project-content">
+    <div class="u-block">
+      <p class="u-flex u-align-items-center content-text">
+        <i class="fa fa-info-circle content-icon u-opacity-medium" />{{ unit.description || 'Sin descripción' }}
+      </p>
+      <p class="u-flex u-align-items-center content-text">
+        <i class="fa fa-phone content-icon u-opacity-medium" />{{ unit.phone || 'Sin telefono registrado' }}
+      </p>
+      <p class="u-flex u-align-items-center content-text">
+        <i class="fa fa-map-marker content-icon u-opacity-medium" />{{ unit.location || 'Ubicación desconocida' }}
+      </p>
+    </div>
+
+    <div class="u-block u-mt-xsmall">
+      <div class="c-switch content-switch" :class="{ 'is-active': unit.is_active }">
+        <input class="c-switch__input" id="switch1" type="checkbox">
+        <label class="c-switch__label" for="switch1">Activo</label>
+      </div>
+    </div>
+
+    <div class="u-block">
+      <div class="c-switch content-switch" :class="{ 'is-active': unit.is_alliance }">
+        <input class="c-switch__input" id="switch1" type="checkbox">
+        <label class="c-switch__label" for="switch1">Alianza</label>
+      </div>
+    </div>
+  </section>
+
+  <h6 class="c-project__title u-h6 u-mt-small">Tripulación</h6>
+  <div class="c-project__team u-mt-xsmall">
+
+    <a v-for="crew in unit.crew_list" class="c-tooltip c-tooltip--top" :aria-label="crew.label" :href="`/admin/unit/crewmember/${crew.id}/change/`" target="_blank">
+      <avatar :username="crew.name" :size="30" />
+    </a>
+
+    <a class="c-project__profile c-project__profile--btn c-tooltip c-tooltip--top" aria-label="Agregar nuevo tripulante" href="/admin/unit/crewmember/add/" target="_blank">
+      <i class="fa fa-plus" />
+    </a>
+  </div>
+</div>
