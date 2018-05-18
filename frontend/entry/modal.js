@@ -105,13 +105,13 @@ window.Erste.modal = new Vue({
         })
         .then(() => {
           this.$notify({
-            text: 'Se ha guardado el incidente en el sistema.',
+            text: 'Se ha guardado el auxilio en el sistema.',
             type: 'success',
           });
         })
         .catch(() => {
           this.$notify({
-            text: 'Hubo un error al guardar el incidente, intente de nuevo.',
+            text: 'Hubo un error al guardar el auxilio, intente de nuevo.',
             type: 'error',
           });
         });
