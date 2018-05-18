@@ -116,10 +116,12 @@ class Unit(models.Model):
         if self.crew.all().count() > 0:
             member_list = []
             for member in self.crew.all():
+                # Serialize crew members
                 crew = model_to_dict(member)
                 crew.update({'label': member.__str__()})
                 member_list.append(crew)
-                return member_list
+
+            return member_list
         else:
             return []
 

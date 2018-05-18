@@ -9,6 +9,7 @@ EMERGENCY_LIST_FIELDS = [
     'start_time',
     'end_time',
     'is_active',
+    'copago_amount',
     'units',
     'unit_assigned_time',
     'unit_dispatched_time',
