@@ -3,17 +3,24 @@ $low: #f9e604;
 $medium: #fd9a18;
 $high: #ed1c24;
 
-ul {
+form {
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-button {
+ul {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+li > button {
   background: none;
   border: 1px solid #b3b3b3;
   width: 30px;
   text-align: center;
   color: #888;
-  transition:all 350ms ease-in-out;
+  transition: all 350ms ease-in-out;
 
   &.active {
     &.low {
@@ -61,4 +68,23 @@ li {
   &:last-child > button {
     border-radius: 0 $radius $radius 0;
   }
+}
+
+textarea {
+  height: auto;
+  margin-bottom: 20px;
+}
+
+
+small {
+  margin-top: -15px;
+  margin-bottom: 10px;
+}
+
+ul + small {
+  margin-top: auto;
+}
+
+.c-field__label {
+  text-align: center;
 }

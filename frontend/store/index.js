@@ -1,5 +1,3 @@
-/* eslint-disable no-param-reassign */
-
 import Vue from 'vue';
 import Vuex from 'vuex';
 import {
@@ -20,9 +18,6 @@ import { ws } from 'utils/url';
 import createWebSocketPlugin from 'utils/websocket';
 import ReconnectingWebSocket from 'reconnecting-websocket';
 import {
-  REQUEST_SUGGEST_START,
-  REQUEST_SUGGEST_SUCCESS,
-  REQUEST_SUGGEST_ERROR,
   REQUEST_PATIENT_START,
   REQUEST_PATIENT_SUCCESS,
   REQUEST_PATIENT_ERROR,
@@ -52,12 +47,16 @@ import {
   EMERGENCY_SET_INACTIVE_ERROR,
   EMERGENCY_TOGGLE_ACTIVE,
 } from './constants';
+import search from './modules/search';
+import finalGrade from './modules/final-grade';
 
 // Use VueX
 Vue.use(Vuex);
 
 // Create VueX store
 const store = new Vuex.Store({
+  strict: process.env.NODE_ENV !== 'production',
+  modules: { search, finalGrade },
   state: {
     error: false,
     loading: false,
@@ -67,7 +66,6 @@ const store = new Vuex.Store({
     },
     units,
     selected: [],
-    suggestions: [],
     emergencies,
     emergency: {
       is_active: true,
@@ -77,15 +75,6 @@ const store = new Vuex.Store({
   },
 
   actions: {
-    search({ commit }, term) {
-      commit(REQUEST_SUGGEST_START);
-      http
-        .get('/ajaxapi/getsubscriptor/', { params: { term } })
-        .then(response => {
-          commit(REQUEST_SUGGEST_SUCCESS, response.data);
-        })
-        .catch(err => commit(REQUEST_SUGGEST_ERROR, err));
-    },
     newIncident({ commit }, data) {
       commit(REQUEST_NEW_INCIDENT_START);
       return http
@@ -142,7 +131,7 @@ const store = new Vuex.Store({
         .get(`/emergency/detail_text/${id}/`)
         .then(response => commit(REQUEST_EMERGENCY_TEXT_SUCCESS, response.data))
         .catch(err => {
-          commit(REQUEST_EMERGENCY_TEXT_ERROR, err)
+          commit(REQUEST_EMERGENCY_TEXT_ERROR, err);
           throw err;
         });
     },
@@ -156,8 +145,6 @@ const store = new Vuex.Store({
   },
 
   getters: {
-    hasSuggestions: state => !!state.suggestions.length,
-
     // units
     activeUnits: state => filter(unit => unit.is_active)(state.units),
     activeUnitsCount: (state, getters) => getters.activeUnits.length,
@@ -182,21 +169,6 @@ const store = new Vuex.Store({
   },
 
   mutations: {
-    // Suggestions
-    [REQUEST_SUGGEST_START](state) {
-      state.error = false;
-      state.loading = true;
-      state.emergency = { units: [] };
-    },
-    [REQUEST_SUGGEST_SUCCESS](state, data) {
-      state.suggestions = data;
-      state.loading = false;
-    },
-    [REQUEST_SUGGEST_ERROR](state, err) {
-      state.error = err;
-      state.loading = false;
-    },
-
     // New Incident
     [REQUEST_NEW_INCIDENT_START](state) {
       state.error = false;
