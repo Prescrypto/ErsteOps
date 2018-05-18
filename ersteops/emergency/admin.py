@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
+from rangefilter.filter import DateRangeFilter, DateTimeRangeFilter
 
 # Register your models here.
 from .models import (Emergency, AttentionKind, AttentionZone, AttentionHospital,
@@ -27,14 +28,17 @@ update_non_active.short_description = "Cambiar Emergencias a estado Inactivo"
 class EmergencyAdmin(admin.ModelAdmin):
     ''' Custom Emergency Admin Panel '''
     list_display = ("odoo_client", "patient_name", "grade_type", "zone", "created_at", "is_active", )
-    list_filter = ("odoo_client", "grade_type", "zone", "is_active", )
+    list_filter = (
+                "odoo_client", "grade_type", "zone", "is_active",
+                ('start_time', DateRangeFilter),
+    )
     search_fields = ('odoo_client', 'patient_name', )
     ordering = ('-start_time',)
 
     fieldsets = (
         ('Paciente', {
             'fields': ('odoo_client', 'patient_name', 'patient_gender', 'patient_age',
-                    'is_active', 'caller_name', 'caller_relation', 'subscription_type',
+                    'is_active', 'copago_amount','caller_name', 'caller_relation', 'subscription_type',
                     'service_category', 'grade_type', 'zone',
                     'main_complaint', 'complaint_description',
                     'patient_allergies', 'patient_illnesses', 'attention_final_grade',

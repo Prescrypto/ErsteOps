@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
+from django.forms.models import model_to_dict
 
 from .utils import UNIT_TYPE_LIST
 
@@ -8,7 +9,8 @@ class UnitQueryset(models.QuerySet):
     ''' Add custom querysets'''
 
     def available_units(self):
-        return self.filter(is_active=True).filter(is_assigned=False).filter(is_alliance=False)
+        # add alliances removing alliance filter
+        return self.filter(is_active=True).filter(is_assigned=False)
 
     def available_alliance_units(self):
         return self.filter(is_active=True).filter(is_alliance=True)
@@ -31,6 +33,43 @@ class UnitManager(models.Manager):
 # Unit.objects.available_units()
 # Return all alliance units available
 # Unit.objects.available_alliance_units()
+
+
+class CrewRoll(models.Model):
+    ''' Crew type ej Medic, First Responder, Pilot '''
+    name = models.CharField('Tipo de integrante',max_length=255, default='', unique=True)
+    description = models.TextField('Descripción del Rol', blank=True)
+
+    class Meta:
+        ordering = ['name']
+        verbose_name_plural = "Tipos de Tripulación"
+
+    def __str__(self):
+        ''' Return identifier as name '''
+        return self.name
+
+
+class CrewMember(models.Model):
+    ''' Crew members, each unit can have one or many crew members '''
+    name = models.CharField('Nombre del miembro tripulante', max_length=255, default='')
+    crewroll = models.ForeignKey("CrewRoll",
+        related_name="crew_members",
+        verbose_name= "Tipo de tripulación"
+        )
+    more_info = models.TextField("Más Información acerca del miembro tripulante", blank=True)
+
+    # Datetime utils
+    created_at = models.DateTimeField("Fecha de alta", auto_now_add=True)
+    last_modified = models.DateTimeField("Última modificación", auto_now=True)
+
+    class Meta:
+        ordering = ['created_at']
+        verbose_name_plural = "Miembros de Tripulación"
+
+    def __str__(self):
+        ''' Return identifier as name '''
+        return "{} - {}".format(self.crewroll.name, self.name)
+
 
 class Unit(models.Model):
     ''' Unit model for ErsteOps '''
@@ -61,9 +100,29 @@ class Unit(models.Model):
 
     objects = UnitManager()
 
+    # Crew
+    crew = models.ManyToManyField('CrewMember', related_name='units', verbose_name= "Miembros de Tripulación", blank=True)
+
     class Meta:
         verbose_name_plural = "Unidades"
 
     def __str__(self):
         ''' Return identifier as name '''
         return self.identifier
+
+    @property
+    def get_crew_list(self):
+        ''' get list of crew '''
+        if self.crew.all().count() > 0:
+            member_list = []
+            for member in self.crew.all():
+                # Serialize crew members
+                crew = model_to_dict(member)
+                crew.update({'label': member.__str__()})
+                member_list.append(crew)
+
+            return member_list
+        else:
+            return []
+
+

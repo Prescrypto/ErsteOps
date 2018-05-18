@@ -1,0 +1,51 @@
+<form>
+  <ul>
+    <li v-for="grade in grades" @mouseover="setHover(grade.weight)" @mouseout="unsetHover">
+      <button
+        v-if="grade.weight > 0"
+        @click="e => setGrade(e, grade)"
+        v-bind:class="[
+          { hover: hover > 0 },
+          { active: isActive(grade) },
+          { low: grade.name === 'G3'  },
+          { medium: grade.name === 'G2' },
+          { high: grade.name === 'G1' }
+        ]">
+        {{grade.name}}
+      </button>
+    </li>
+  </ul>
+  <small v-show="finalGradeError" class="c-field__message u-color-danger">
+    <i class="fa fa-times-circle"></i>{{  finalGradeError }}
+  </small>
+
+  <div class="c-field">
+    <label class="c-field__label" for="id_justification">
+      Justificación
+    </label>
+    <textarea
+      rows="6"
+      autofocus
+      tabindex="1"
+      name="justification"
+      v-model="justification"
+      v-validate="'required'"
+      data-vv-scope="grade"
+      data-vv-name="justification"
+      data-vv-as="de justificación"
+      :class="{
+        'c-input': true,
+      }"
+      type="textarea"
+      id="id_justification"
+      maxlength="255"
+    />
+  </div>
+  <small v-show="errors.has('grade.justification')" class="c-field__message u-color-danger">
+    <i class="fa fa-times-circle"></i>{{ errors.first('grade.justification') }}
+  </small>
+
+  <button @click="submit" :disabled="!isValid" class="c-btn c-btn--info">
+    Guardar Grado Final
+  </button>
+</form>

@@ -1,0 +1,43 @@
+{% extends 'home/base_ui.html' %}
+{% load staticfiles %}
+
+{% block header %}
+  {# Main Sidebar #}
+  {% include "ui_component/sidebar.html" %}
+
+{% endblock header %}
+
+{% block content %}
+
+<main class="o-page__content">
+  {# Main header #}
+  {% include "ui_component/header.html" %}
+  <div class="container">
+    <div class="row">
+      hola Mundo!
+      <!-- Button trigger modal -->
+      <button type="button" id="abre" class="c-btn c-btn--success" data-toggle="modal" data-target="#myModal">
+        Launch Onboard modal
+      </button>
+      {% include "emergency/client_modal.html" %}
+    </div>
+  </div>
+</main>
+
+
+{% endblock %}
+
+{% block javascript %}
+<script type="text/javascript" language="javascript">
+    $(document).ready(function(){
+      var openmodal = 'true;'
+      if( openmodal == {{ openmodal }} ){
+          $("#myModal").dialog({modal: true});
+          //$("#myModal").click();
+          $('#abre').trigger('click');
+        }
+        $('#abre').trigger('click');
+    });
+    $("#myModal").dialog({modal: true});
+</script>
+{% endblock %}

@@ -1,0 +1,22 @@
+<v-popover
+  trigger="click"
+  :placement="tooltip"
+  offset="5"
+  popoverClass="details"
+  @show="handleShow"
+  @hide="handleHide"
+>
+  <span
+    class="unit-badge c-badge c-badge--info"
+    :class="{ selected: $slots.after }"
+  >
+
+    <slot name="before" />
+    {{label}}
+    <slot name="after" />
+  </span>
+
+  <template slot="popover">
+    <unit-details v-if="hover" :id="data.id" />
+  </template>
+</v-popover>

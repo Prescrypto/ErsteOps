@@ -25,9 +25,11 @@
     <!-- <my&#45;app></my&#45;app> -->
     <thead class="c-table__head c-table__head--slim">
       <tr class="c-table__row">
-          <th class="c-table__cell c-table__cell--head">Cliente</th>
+          <th class="c-table__cell c-table__cell--head">ID</th>
+          <th class="c-table__cell c-table__cell--head">ID Externo</th>
           <th class="c-table__cell c-table__cell--head">Grado</th>
-          <th class="c-table__cell c-table__cell--head">Unidad</th>
+          <!-- <th class="c&#45;table__cell c&#45;table__cell&#45;&#45;head">Unidad</th> -->
+          <th class="c-table__cell c-table__cell--head">Co-pago</th>
           <th class="c-table__cell c-table__cell--head">Tiempo</th>
           <th class="c-table__cell c-table__cell--head">Estado</th>
           <th class="c-table__cell c-table__cell--head">
@@ -41,14 +43,20 @@
 
     <tbody id="root">
       <tr v-for="emergency in emergencies" :id="`emergency-${emergency.id}`" class="c-table__row emergency">
+        <td class="c-table__cell" @click="populate(emergency.id)"><span class="u-text-mute">{{ emergency.id }}</span></td>
         <td class="c-table__cell" @click="populate(emergency.id)"><span class="u-text-mute">{{ emergency.odoo_client }}</span></td>
         <td class="c-table__cell" @click="populate(emergency.id)">{{ emergency.grade_type }}</td>
-        <td class="c-table__cell" @click="populate(emergency.id)">
-          <span>Sin Asignar</span>
+        <!-- <td class="c&#45;table__cell" @click="populate(emergency.id)"> -->
           <!-- Add again with new unit
           <span v-for="unit in emergency.unit.all" class="u-text-mute">{{ unit }}</span>
           <span v-if="!((emergency.unit || {}).all || {}).length">Sin Asignar</span>
           -->
+        <!-- </td> -->
+        <td class="c-table__cell" @click="populate(emergency.id)">
+          <span v-if="emergency.copago_amount && emergency.copago_amount !== '0.00'" class="u-text-mute">
+            ${{ emergency.copago_amount }}
+          </span>
+          <span v-else class="u-text-mute">N/A</span>
         </td>
         <td class="c-table__cell" @click="populate(emergency.id)">
           <span class="u-text-mute">{{ emergency.start_time | time-since(now) }}</span>
@@ -69,6 +77,33 @@
           </div>
         </td>
         <td class="c-table__cell u-text-center">
+          <v-popover
+            v-if="showGradeTooltip(emergency.id)"
+            trigger="manual"
+            :open="showGradeTooltip(emergency.id)"
+            offset="20"
+            :auto-hide="false"
+            popoverClass="grade"
+            defaultInnerClass="grade__inner"
+            defaultArrowClass="grade__rrrow"
+          >
+            <template slot="popover">
+              <button
+                @click="stopped = null"
+                type="button"
+                class="grid__close c-close u-color-primary">×</button>
+              <div class="grade__wrapper">
+                <h1 class="tooltip__heading u-h6 u-text-center">
+                  Grado Final
+                </h1>
+                <emergency-grade
+                  :emergency="emergency"
+                  @graded="d => graded(emergency.id, d)"
+                  @error="gradedError"
+                />
+              </div>
+            </template>
+          </v-popover>
           <span @click="e => stop(e, emergency.id)" class="fa fa-stop-circle-o"></span>
         </td>
       </tr><!-- // .table__row -->

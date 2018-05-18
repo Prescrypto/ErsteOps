@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Unit
+from .models import Unit, CrewRoll, CrewMember
 
 class UnitAdmin(admin.ModelAdmin):
     ''' Customize Unit Admin '''
@@ -8,3 +8,5 @@ class UnitAdmin(admin.ModelAdmin):
     search_fields = ('identifier', 'location', 'phone', )
 
 admin.site.register(Unit, UnitAdmin)
+admin.site.register(CrewRoll)
+admin.site.register(CrewMember)

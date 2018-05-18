@@ -20,8 +20,8 @@ export default {
     invalid() {
       return (((this.fields || {}).$search || {}).term || {}).invalid;
     },
-    ...mapState(['loading', 'suggestions']),
-    ...mapGetters(['hasSuggestions']),
+    ...mapState('search', ['loading', 'suggestions']),
+    ...mapGetters('search', ['hasSuggestions']),
   },
 
   methods: {
@@ -44,7 +44,8 @@ export default {
     ...mapMutations({
       changeTab: MODAL_CHANGE_TAB,
     }),
-    ...mapActions(['search', 'patient']),
+    ...mapActions('search', ['search']),
+    ...mapActions(['patient']),
   },
   $_veeValidate: {
     validator: 'new',
