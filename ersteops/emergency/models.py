@@ -104,6 +104,7 @@ class Emergency(models.Model):
     main_complaint = models.CharField('Sintoma principal', max_length=100, default='', blank=True)
     complaint_description = models.TextField('Descripción de los sintomas', default='', blank=True)
     subscription_type = models.CharField('Subscripción', max_length=100, default='', blank=True)
+    copago_amount = models.DecimalField("Monto de Copago", max_digits=20, decimal_places=2, blank=True, default=0)
 
     # TODO when create derivation
     # derivation = models.ManyToManyField('AttentionDerivation',
@@ -238,6 +239,7 @@ def emergency_dictionary(instance):
         "final_emergency_time":instance.final_emergency_time.isoformat(),
 
         "is_active":instance.is_active,
+        "copago_amount": instance.copago_amount,
         "address_street":instance.address_street,
         "address_extra":instance.address_extra,
         "address_zip_code":instance.address_zip_code,

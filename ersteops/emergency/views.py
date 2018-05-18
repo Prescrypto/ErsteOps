@@ -362,6 +362,7 @@ def patient_json(source_id,patient_data,parent_data):
             "id_subscription_type": patient_data['client_type'],
             "addresses": address_json(patient_data,patient_data),
             "min_addresses": min_address_json(patient_data,patient_data),
+            "copago_amount": patient_data.get('copago_amount', 0),
         }
     else:
         patient_data_json ={
@@ -375,6 +376,7 @@ def patient_json(source_id,patient_data,parent_data):
             "id_subscription_type": parent_data['client_type'],
             "addresses": address_json(parent_data,patient_data),
             "min_addresses": min_address_json(parent_data,patient_data),
+            "copago_amount": parent_data.get('copago_amount', 0),
         }
     logger.info('[ GET PATIENTJSON FOR FILLUP EMERGENCY FORM SUCCESS ]')
     return patient_data_json
