@@ -218,7 +218,7 @@
   <span class="c-divider u-mv-medium"></span>
 
   <div class="row">
-    <div class="col-6">
+    <div class="col-4">
       <div class="c-field">
         <label class="c-field__label" for="id_service_category">
           Tipo de emergencia
@@ -240,7 +240,7 @@
         </select>
       </div>
     </div>
-    <div class="col-6">
+    <div class="col-4">
       <div class="c-field">
         <label class="c-field__label" for="id_grade_type">
           Grado Emergencia
@@ -269,7 +269,37 @@
         <i class="fa fa-times-circle"></i>{{ errors.first('emergency.grade_type') }}
       </small>
     </div>
+    <div class="col-4">
+      <div class="c-field">
+        <label class="c-field__label" for="id_copago_amount">
+          Co-pago
+        </label>
+        <input
+          tabindex="16"
+          v-model="source.copago_amount"
+          v-validate="'required|decimal:2'"
+          :class="{
+            'c-input': true,
+            'c-input--danger': errors.has('emergency.copago_amount')
+          }"
+          data-vv-scope="emergency"
+          data-vv-name="copago_amount"
+          data-vv-as="copago"
+          type="number"
+          min="0.01"
+          step="0.01"
+          name="copago_amount"
+          id="id_copago_amount"
+          class="c-input"
+          maxlength="100"
+        />
+      </div>
+      <small v-show="errors.has('emergency.copago_amount')" class="c-field__message u-color-danger">
+        <i class="fa fa-times-circle"></i>{{ errors.first('emergency.copago_amount') }}
+      </small>
+    </div>
   </div>
+
 
   <div class="row">
     <div class="col-12">
@@ -279,7 +309,7 @@
           Notas paciente
         </label>
         <textarea
-          tabindex="16"
+          tabindex="17"
           v-model="source.patient_notes"
           name="patient_notes"
           id="id_patient_notes"

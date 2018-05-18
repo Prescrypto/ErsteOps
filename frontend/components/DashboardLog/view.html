@@ -28,6 +28,7 @@
           <th class="c-table__cell c-table__cell--head">Cliente</th>
           <th class="c-table__cell c-table__cell--head">Grado</th>
           <!-- <th class="c&#45;table__cell c&#45;table__cell&#45;&#45;head">Unidad</th> -->
+          <th class="c-table__cell c-table__cell--head">Co-pago</th>
           <th class="c-table__cell c-table__cell--head">Tiempo</th>
           <th class="c-table__cell c-table__cell--head">Estado</th>
           <th class="c-table__cell c-table__cell--head">
@@ -49,6 +50,12 @@
           <span v-if="!((emergency.unit || {}).all || {}).length">Sin Asignar</span>
           -->
         <!-- </td> -->
+        <td class="c-table__cell" @click="populate(emergency.id)">
+          <span v-if="emergency.copago_amount && emergency.copago_amount !== '0.00'" class="u-text-mute">
+            ${{ emergency.copago_amount }}
+          </span>
+          <span v-else class="u-text-mute">N/A</span>
+        </td>
         <td class="c-table__cell" @click="populate(emergency.id)">
           <span class="u-text-mute">{{ emergency.start_time | time-since(now) }}</span>
         </td>
