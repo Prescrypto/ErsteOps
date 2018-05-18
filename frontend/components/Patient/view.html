@@ -68,31 +68,56 @@
       </div>
     </div>
     <div class="col-4">
-      <div class="c-field">
-        <label class="c-field__label" for="id_odoo_client">
-          ID del Cliente
-        </label>
-        <input
-          tabindex="2"
-          v-model="source.odoo_client"
-          v-validate="'required'"
-          data-vv-scope="emergency"
-          data-vv-name="odoo_client"
-          data-vv-as="ID del cliente"
-          :class="{
-            'c-input': true,
-            'c-input--danger': errors.has('emergency.odoo_client')
-          }"
-          type="text"
-          name="odoo_client"
-          id="id_odoo_client"
-          maxlength="50"
-          readonly
-        />
+      <div class="row">
+        <div class="col-6">
+          <div class="c-field">
+            <label class="c-field__label" for="id_id">
+              ID
+            </label>
+            <input
+              tabindex="2"
+              v-model="source.id"
+              v-validate="'required'"
+              data-vv-scope="emergency"
+              data-vv-name="id"
+              data-vv-as="ID del cliente"
+              :class="{
+                'c-input': true,
+                'c-input--danger': errors.has('emergency.id')
+              }"
+              type="text"
+              name="id"
+              id="id_id"
+              maxlength="50"
+              readonly
+            />
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="c-field">
+            <label class="c-field__label" for="id_odoo_client">
+              ID Externo
+            </label>
+            <input
+              tabindex="2"
+              v-model="source.odoo_client"
+              v-validate="'required'"
+              data-vv-scope="emergency"
+              data-vv-name="odoo_client"
+              data-vv-as="ID del cliente"
+              :class="{
+                'c-input': true,
+                'c-input--danger': errors.has('emergency.odoo_client')
+              }"
+              type="text"
+              name="odoo_client"
+              id="id_odoo_client"
+              maxlength="50"
+              readonly
+            />
+          </div>
+        </div>
       </div>
-      <small v-show="errors.has('emergency.odoo_client')" class="c-field__message u-color-danger">
-        <i class="fa fa-times-circle"></i>{{ errors.first('emergency.odoo_client') }}
-      </small>
 
       <br />
       <div class="c-field">
