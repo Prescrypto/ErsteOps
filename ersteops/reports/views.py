@@ -11,7 +11,7 @@ from django.db.models import Count
 
 from django.http import JsonResponse
 from django.core import serializers
-import json
+import simplejson as json
 import datetime
 
 from django.db.models import Value, IntegerField, DateTimeField, DateField, F, CharField, DurationField, TimeField

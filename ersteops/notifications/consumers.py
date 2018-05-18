@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import json
+import simplejson as json
 from channels import Group
 from channels.sessions import channel_session
 
