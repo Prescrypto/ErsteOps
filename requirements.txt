@@ -17,4 +17,3 @@ django-webpack-loader==0.5.0
 django-preventconcurrentlogins==0.8.1
 django-pivot==1.6.1
 django-admin-rangefilter==0.3.6
-simplejson==3.15.0

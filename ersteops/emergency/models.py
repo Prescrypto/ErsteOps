@@ -1,6 +1,6 @@
 # coding=utf-8
 from __future__ import unicode_literals
-import simplejson as json
+import json
 import unicodedata
 
 from django.db import models

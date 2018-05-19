@@ -1,6 +1,6 @@
 
 # Python libs
-import simplejson as json
+import json
 import logging
 # Django libs
 from django.shortcuts import render

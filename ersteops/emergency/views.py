@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 # Create your views here.
-import simplejson as json
+import json
 import datetime
 import requests
 from requests.auth import HTTPBasicAuth
