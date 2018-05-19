@@ -363,6 +363,8 @@ def patient_json(source_id,patient_data,parent_data):
             "addresses": address_json(patient_data,patient_data),
             "min_addresses": min_address_json(patient_data,patient_data),
             "copago_amount": patient_data.get('copago_amount', 0),
+            "has_paid" : patient_data.get('outstanding', False),
+            "erste_code": patient_data.get('group_code','Sin Id'),
         }
     else:
         patient_data_json ={
@@ -377,6 +379,8 @@ def patient_json(source_id,patient_data,parent_data):
             "addresses": address_json(parent_data,patient_data),
             "min_addresses": min_address_json(parent_data,patient_data),
             "copago_amount": parent_data.get('copago_amount', 0),
+            "has_paid" : parent_data.get('outstanding', False),
+            "erste_code": parent_data.get('group_code','Sin Id'),
         }
     logger.info('[ GET PATIENTJSON FOR FILLUP EMERGENCY FORM SUCCESS ]')
     return patient_data_json
