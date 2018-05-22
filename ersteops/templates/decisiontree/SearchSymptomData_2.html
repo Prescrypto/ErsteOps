@@ -67,7 +67,14 @@
       <div class="row" >
         <div id="app3">
           <h1>Vue Tree</h1>
-          <treeselect v-model="value" :multiple="false" :options="options" :show-count="true" v-on:select="showGrade"/>
+          <treeselect v-model="value" 
+            :multiple="false" 
+            :options="options" 
+            :show-count="true" 
+            v-on:click="llamala" 
+            v-on:select="showGrade"
+            />
+
           <pre class="result">{{ value }}</pre>
         </div>
       </div>
@@ -88,6 +95,8 @@
 
 <script src="https://unpkg.com/vue-select@latest"></script>
 
+<script src="https://unpkg.com/vuex"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/@riophae/vue-treeselect@0.0.28/dist/vue-treeselect.min.js"></script>
 
 
@@ -97,9 +106,38 @@
 // Vue test
 
 // end Vue test
+// const store = new Vuex.Store({
+//   state: {
+//     count: 0,
+//     tree_data: [{label:'hola'}],
+//   },
+
+//   // mutations: {
+//   //   increment (state) {
+//   //     state.count++
+//   //   }
+//   // }
+// })
+var store = {
+  debug: true,
+  state: {
+    message: [{label:'hola'}],
+  },
+  setMessageAction (newValue) {
+    if (this.debug) console.log('setMessageAction triggered with', newValue)
+    this.state.message = newValue
+  },
+  clearMessageAction () {
+    if (this.debug) console.log('clearMessageAction triggered')
+    this.state.message = ''
+  }
+}
 
 // Tree Select
 Vue.component('treeselect', VueTreeselect.Treeselect)
+
+
+//var tree_data = [{label:'hola'}];
 
 new Vue({
   el: '#app3',
@@ -124,14 +162,19 @@ new Vue({
     //   id: 'c',
     //   label: 'c',
     // } ],
-    options: {{ data.vue_symptom_tree |safe }},
+    options: store.state.message,
   },
   methods: {
     showGrade: function () {
       console.log('Selected!')
       console.log(this.value)
       //console.log(this.$emit(value))
-    }
+    },
+    llamala: function () {
+      console.log('Selected!')
+      console.log(this.value)
+      //console.log(this.$emit(value))
+    },
   },
 })
 // End Tree Select
@@ -213,9 +256,15 @@ new Vue({
                 // var row_values = []
                 // for rows in result
                 //console.log(result[0].value)
-                console.log('tree');
-                console.log(result);
-                $("#app3").val(result);
+                // console.log('tree');
+                // console.log(result);
+                // this.tree_data = result;
+                // console.log(tree_data);
+                // return tree_data;
+                console.log(app3); // = result
+                store.setMessageAction(result);
+                //$("#app3").options(result);
+                //app3.options = result;
                 //return vm.options = result;
                 //return vm.options = cars;
                 //self.options = ['uno','dos'];
@@ -226,10 +275,11 @@ new Vue({
           }
         }
       catch{ console.log('sin seleccion!'); }
-
+      console.log('Exit!')
+      console.log( store.state.message);
 
     },
-  }
+  },
 });
 
 
