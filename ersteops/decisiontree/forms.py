@@ -48,7 +48,7 @@ class SymptomSearchForm(forms.Form):
     label = '* Sintoma principal:',
     required = True,
     widget=forms.TextInput(attrs={
-      'class': 'form-control ui-widget',
+      'class': 'form-control ui-widget uk-width-1-2',
       'placeholder': 'sintoma p.ejem. ahogado',
       'max_length': '100'
       })
