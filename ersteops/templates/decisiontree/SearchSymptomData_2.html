@@ -202,6 +202,27 @@ new Vue({
         if(val.id){
           console.log('seleccionado get tree');
           console.log(val.id);
+          $.ajax({url: "/ajaxapi/get_tree_zero/",data: {'term': val.id} ,dataType: 'json', success: function(result){
+                //$("#id_grado").val(result[0].value);
+                //return vm.options = json.items;
+                //console.log(result);
+                //return 
+                //console.log(result);
+                //cars = result;
+                //return vm.options = ["Saab 1", "Volvo 1", "BMW 1"];
+                // var row_values = []
+                // for rows in result
+                //console.log(result[0].value)
+                console.log('tree');
+                console.log(result);
+                $("#app3").val(result);
+                //return vm.options = result;
+                //return vm.options = cars;
+                //self.options = ['uno','dos'];
+                //return vm.options = result;
+                //console.log('options')
+              }});
+
           }
         }
       catch{ console.log('sin seleccion!'); }
