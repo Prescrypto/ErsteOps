@@ -1,0 +1,216 @@
+{% extends 'home/base_ui.html' %}
+{% load staticfiles %}
+{% block title %}Sintomas{% endblock title %}
+
+{% block cssblock %}
+<!--   <link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"/>
+  <link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.css"/>
+  <link rel="stylesheet" media="screen" href={% static "NovixPivotJS/css/style.css" %} />
+  <link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/handsontable/0.36.0/handsontable.full.min.css" /> -->
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.5/themes/default/style.min.css" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@riophae/vue-treeselect@0.0.28/dist/vue-treeselect.min.css">
+
+<style type="text/css">
+  #app3 {
+    max-width: 30em;
+    margin: 1em auto;
+  }
+  #app5 {
+    max-width: 30em;
+    margin: 1em auto;
+  }
+
+</style>
+
+{% endblock cssblock %}
+
+{% block header %}
+  {% include "ui_component/sidebar.html" %}
+{% endblock header %}
+
+{% block content %}
+<main class="o-page__content">
+  {# Main header #}
+  {% include "ui_component/header.html" %}
+  <div class="container">
+  	<div style="padding-top:55px">
+  		<h1> Decision Tree</h1>
+
+  		{% if messages %}
+        <div class="row">
+          <ul class="messages">
+            {% for message in messages %}
+              <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                {{ message }}
+              </div>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+
+
+
+
+      <!-- VUE -->
+
+
+      <div class=row>
+        <div id="app5">
+          <h1>Vue Select ajax</h1>
+          <v-select label="label" :filterable="false" :options="options" @search="onSearch" @input="getTree"></v-select>
+        </div>
+      </div>
+
+      <div class="row" >
+        <div id="app3">
+          <h1>Vue Tree</h1>
+          <treeselect v-model="value" :multiple="false" :options="options" :show-count="true" v-on:select="showGrade"/>
+          <pre class="result">{{ value }}</pre>
+        </div>
+      </div>
+
+  	</div>
+  </div>
+</main>
+{% endblock content %}
+
+{% block jsblock %}
+<!-- <link rel="stylesheet" href="{% static 'bower_components/jstree/dist/themes/default/style.min.css' %}" />
+<script src="{% static 'bower_components/jstree/dist/jstree.min.js' %}"></script> -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.5/themes/default/style.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.5/jstree.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script src="https://unpkg.com/vue-select@latest"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@riophae/vue-treeselect@0.0.28/dist/vue-treeselect.min.js"></script>
+
+
+<script type="text/javascript">
+
+
+// Vue test
+
+// end Vue test
+
+// Tree Select
+Vue.component('treeselect', VueTreeselect.Treeselect)
+
+new Vue({
+  el: '#app3',
+  data: {
+    // define default value
+    value: null,
+    // define options
+    // options: [ {
+    //   id: 'a',
+    //   label: 'a',
+    //   children: [ {
+    //     id: 'aa',
+    //     label: 'aa',
+    //   }, {
+    //     id: 'ab',
+    //     label: 'ab',
+    //   } ],
+    // }, {
+    //   id: 'b',
+    //   label: 'b',
+    // }, {
+    //   id: 'c',
+    //   label: 'c',
+    // } ],
+    options: {{ data.vue_symptom_tree |safe }},
+  },
+  methods: {
+    showGrade: function () {
+      console.log('Selected!')
+      console.log(this.value)
+      //console.log(this.$emit(value))
+    }
+  },
+})
+// End Tree Select
+// Vue select
+Vue.component('v-select', VueSelect.VueSelect)
+
+// new Vue({
+//   el: '#app4',
+//   data: {
+//     options: [
+//       'foo',
+//       'bar',
+//       'baz'
+//     ]
+//   }
+// })
+
+// Vue Select ajax
+new Vue({
+  el: "#app5",
+  data: {
+    options: []
+  },
+  methods: {
+    onSearch: function onSearch(search, loading) {
+      loading(true);
+      this.search2(loading, search, this);
+    },
+
+    search: _.debounce(function (loading, search, vm) {
+      fetch("http://localhost:8000/ajaxapi/get_symptom/?q=" + escape(search)).then(function (res) {
+        res.json().then(function (json) {
+          return vm.options = json.items;
+        });
+        loading(false);
+      });
+    }, 350),
+
+    search2: _.debounce(function (loading, search, vm){
+              var self = vm;
+              var cars = ["Saab", "Volvo", "BMW"];
+
+              //var temp = 
+              $.ajax({url: "/ajaxapi/get_symptom/",data: {'term': search} ,dataType: 'json', success: function(result){
+                //$("#id_grado").val(result[0].value);
+                //return vm.options = json.items;
+                //console.log(result);
+                //return 
+                //console.log(result);
+                //cars = result;
+                //return vm.options = ["Saab 1", "Volvo 1", "BMW 1"];
+                // var row_values = []
+                // for rows in result
+                //console.log(result[0].value)
+                return vm.options = result;
+                //return vm.options = cars;
+                //self.options = ['uno','dos'];
+                //return vm.options = result;
+                //console.log('options')
+              }});
+              loading(false);
+              console.log(vm.options);
+              return vm.options;
+            },350),
+
+    getTree: function(val){
+      try {
+        if(val.id){
+          console.log('seleccionado get tree');
+          console.log(val.id);
+          }
+        }
+      catch{ console.log('sin seleccion!'); }
+
+
+    },
+  }
+});
+
+
+</script>
+{% endblock jsblock %}
