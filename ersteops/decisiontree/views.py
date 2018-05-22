@@ -195,6 +195,39 @@ class SearchSymptomData(View):
       data['show_buttons']=True
     return render(request, self.template_name,{"form": form,'data':data})
 
+class SearchSymptomData2(View):
+  template_name = "decisiontree/SearchSymptomData_2.html"
+  def get(self, request, *args, **kwargs):
+    form = SymptomSearchForm()
+    data = {}
+    data['symptom_name']=""
+    data['symptom_tree'] = []
+    data['vue_symptom_tree'] = []
+    #data['show_progress_bar']=False
+    #data['show_form']=True
+    #data['show_buttons']=True
+    #data['show_final_progress_bar']=False
+    return render(request, self.template_name,{"form": form,'data':data})
+
+  def post(self, request, *args, **kwargs):
+    form = SymptomSearchForm(request.POST)
+    if form.is_valid():
+      #form_object = form.save()
+      #print(form_object)
+      data={}
+      data['symptom_name']=form.cleaned_data['symptom_name']
+      #data['symptom_tree']=get_symptom_tree(form.cleaned_data['symptom_id'])
+      data['symptom_tree']=get_symptom_tree_zero(form.cleaned_data['symptom_id'])
+      data['vue_symptom_tree']=get_vue_symptom_tree_zero(form.cleaned_data['symptom_id'])
+      #data['symptom_name']=
+      #messages.success(request, "Los datos de sintomas fueron actualizados exitosamente.")
+      return render(request, self.template_name,{"form": form,'data':data})
+      #return HttpResponseRedirect('/decisiontree/upload/'+str(form_object.id)+'/')
+    else:
+      data = {}
+      data['show_buttons']=True
+    return render(request, self.template_name,{"form": form,'data':data})
+
 def get_symptom_tree(symptom_id):
     qs = SymptomDataDetail.objects.get(idx=symptom_id)
     print("************* q1 *************")
@@ -345,7 +378,7 @@ def get_symptom_tree_zero(symptom_id):
             print(tree_level)
             qs_02 = SymptomDataDetail.objects.filter(n1=child_rows_01.n1 ,n2=child_rows_01.n2, level=tree_level,symptom_type=child_rows_01.symptom_type).exclude(n3='0')
             print('**************** QS2 ******************')
-            print(qs_02)
+            #print(qs_02)
 
             if(qs_02.count() != 0):
                 result_level_2 = []
@@ -363,7 +396,7 @@ def get_symptom_tree_zero(symptom_id):
                     print(tree_level)
                     qs_03 = SymptomDataDetail.objects.filter(n1=child_rows_2.n1 ,n2=child_rows_2.n2,n3=child_rows_2.n3, level=tree_level,symptom_type=child_rows_2.symptom_type).exclude(n4=0)
                     print('**************** QS3 ******************')
-                    print(qs_03)
+                    #print(qs_03)
                     if(qs_03.count() != 0):
                         result_level_3 = []
                         for child_rows_3 in qs_03:
@@ -381,7 +414,7 @@ def get_symptom_tree_zero(symptom_id):
                             print(tree_level)
                             qs_04 = SymptomDataDetail.objects.filter(n1=child_rows_3.n1 ,n2=child_rows_3.n2,n3=child_rows_3.n3,n4=child_rows_3.n4, level=tree_level,symptom_type=child_rows_3.symptom_type).exclude(n5='0')
                             print('**************** QS4 ******************')
-                            print(qs_04)
+                            #print(qs_04)
                             if(qs_04.count() != 0):
                                 result_level_4 = []
                                 for child_rows_4 in qs_04:
@@ -445,7 +478,145 @@ def get_symptom_tree_zero(symptom_id):
 
     result_0.append(level_dict_0)
     print('*************** Final Tree *****************')
-    print(result_0)
+    #print(result_0)
+    print('*************** end Final ****************')
+    return result_0
+
+def get_vue_symptom_tree_zero(symptom_id):
+    # Get Symptom Zero data
+    qs_0 = SymptomDataDetail.objects.get(idx=symptom_id)
+    # Begin fill level zero
+    result_0 = []
+    level_dict_0 = {}
+    level_dict_0['label'] = '('+ qs_0.symptom_type.name +') ' + qs_0.name
+    level_dict_0['id'] = qs_0.idx
+    level_state_0 = {}
+    level_state_0['opened'] = 'true'
+    level_dict_0['state'] = level_state_0
+    # Level one query set
+    tree_level = get_correct_symtom_type(qs_0.symptom_type,qs_0.level)
+    qs_01 = SymptomDataDetail.objects.filter(n1=qs_0.key,level=tree_level,symptom_type=qs_0.symptom_type) #.exclude(n2=0)
+
+    result_level_1 = []
+    #result_level_2 = []
+    if(qs_01.count() != 0):
+        for child_rows_01 in qs_01:
+            level_dict_1 = {}
+            level_dict_1['label'] = child_rows_01.name
+            level_dict_1['id'] = child_rows_01.idx
+            result_level_1.append(level_dict_1)
+            #result_level_1.append(get_symtom_tree_format(child_rows_01))
+            # Begin Search Next Level
+            print('##############################################')
+            print('**************** Parent Tree Level ***********')
+            print(child_rows_01.level)
+            tree_level = get_correct_symtom_type(child_rows_01.symptom_type,child_rows_01.level)
+            get_print_parameters(child_rows_01,tree_level)
+            print('**************** Next Tree Level *************')
+            print(tree_level)
+            qs_02 = SymptomDataDetail.objects.filter(n1=child_rows_01.n1 ,n2=child_rows_01.n2, level=tree_level,symptom_type=child_rows_01.symptom_type).exclude(n3='0')
+            print('**************** QS2 ******************')
+            #print(qs_02)
+
+            if(qs_02.count() != 0):
+                result_level_2 = []
+                for child_rows_2 in qs_02:
+                    level_dict_2 = {}
+                    level_dict_2['label'] = child_rows_2.name
+                    level_dict_2['id'] = child_rows_2.idx
+                    result_level_2.append(level_dict_2)
+                    # Begin Search Next Level
+                    print('**************** Parent Tree Level ***********')
+                    print(child_rows_2.level)
+                    tree_level = get_correct_symtom_type(child_rows_2.symptom_type,child_rows_2.level)
+                    get_print_parameters(child_rows_2,tree_level)
+                    print('**************** Next Tree Level *************')
+                    print(tree_level)
+                    qs_03 = SymptomDataDetail.objects.filter(n1=child_rows_2.n1 ,n2=child_rows_2.n2,n3=child_rows_2.n3, level=tree_level,symptom_type=child_rows_2.symptom_type).exclude(n4=0)
+                    print('**************** QS3 ******************')
+                    #print(qs_03)
+                    if(qs_03.count() != 0):
+                        result_level_3 = []
+                        for child_rows_3 in qs_03:
+                            level_dict_3 = {}
+                            level_dict_3['label'] = child_rows_3.name
+                            level_dict_3['id'] = child_rows_3.idx
+                            result_level_3.append(level_dict_3)
+
+                            # Begin Search Next Level
+                            print('**************** Parent Tree Level ***********')
+                            print(child_rows_3.level)
+                            tree_level = get_correct_symtom_type(child_rows_3.symptom_type,child_rows_3.level)
+                            get_print_parameters(child_rows_3,tree_level)
+                            print('**************** Next Tree Level *************')
+                            print(tree_level)
+                            qs_04 = SymptomDataDetail.objects.filter(n1=child_rows_3.n1 ,n2=child_rows_3.n2,n3=child_rows_3.n3,n4=child_rows_3.n4, level=tree_level,symptom_type=child_rows_3.symptom_type).exclude(n5='0')
+                            print('**************** QS4 ******************')
+                            #print(qs_04)
+                            if(qs_04.count() != 0):
+                                result_level_4 = []
+                                for child_rows_4 in qs_04:
+                                    level_dict_4 = {}
+                                    level_dict_4['label'] = '4-'+ child_rows_4.name
+                                    level_dict_4['id'] = child_rows_4.idx
+                                    result_level_4.append(level_dict_4)
+
+                                    # # Begin Search Next Level
+                                    print('**************** Parent Tree Level ***********')
+                                    print(child_rows_4.level)
+                                    tree_level = get_correct_symtom_type(child_rows_4.symptom_type,child_rows_4.level)
+                                    get_print_parameters(child_rows_4,tree_level)
+                                    print('**************** Next Tree Level *************')
+                                    print(tree_level)
+                                    qs_05 = SymptomDataDetail.objects.filter(n1=child_rows_4.n1 ,n2=child_rows_4.n2,n3=child_rows_4.n3,n4=child_rows_4.n4,n5=child_rows_4.n5, level=tree_level,symptom_type=child_rows_4.symptom_type).exclude(n6='0')
+                                    print('**************** QS5 ******************')
+                                    print(qs_05)
+                                    if(qs_05.count() != 0):
+                                        result_level_5 = []
+                                        for child_rows_5 in qs_05:
+                                            level_dict_5 = {}
+                                            level_dict_5['label'] = child_rows_5.name
+                                            level_dict_5['id'] = child_rows_5.idx
+                                            result_level_5.append(level_dict_5)
+
+                                            # # Begin Search Next Level
+                                            print('**************** Parent Tree Level ***********')
+                                            print(child_rows_5.level)
+                                            tree_level = get_correct_symtom_type(child_rows_5.symptom_type,child_rows_5.level)
+                                            get_print_parameters(child_rows_5,tree_level)
+                                            print('**************** Next Tree Level *************')
+                                            print(tree_level)
+                                            qs_06 = SymptomDataDetail.objects.filter(n1=child_rows_5.n1 ,n2=child_rows_5.n2,n3=child_rows_5.n3,n4=child_rows_5.n4,n5=child_rows_5.n5, n6=child_rows_5.n6,level=tree_level,symptom_type=child_rows_5.symptom_type).exclude(n7='0')
+                                            print('**************** QS6 ******************')
+                                            print(qs_06)
+                                            if(qs_06.count() != 0):
+                                                result_level_6 = []
+                                                for child_rows_6 in qs_06:
+                                                    level_dict_6 = {}
+                                                    level_dict_6['label'] = child_rows_6.name
+                                                    level_dict_6['id'] = child_rows_6.idx
+                                                    result_level_6.append(level_dict_6)
+
+
+
+                                                level_dict_5['children'] = result_level_6
+                                            # # End Search Next Level
+
+                                        level_dict_4['children'] = result_level_5
+                                    # # End Search Next Level
+
+                                level_dict_3['children'] = result_level_4
+                            # End Search Next Level
+
+                        level_dict_2['children'] = result_level_3
+                    # End Search Next Level
+                level_dict_1['children'] = result_level_2
+            # End Search Next Level
+        level_dict_0['children'] = result_level_1
+
+    result_0.append(level_dict_0)
+    print('*************** Final Tree *****************')
+    #print(result_0)
     print('*************** end Final ****************')
     return result_0
 
@@ -495,7 +666,7 @@ def get_print_parameters(row,current_level):
     print(string_val)
     print(string_val + '*********** Data Level ' + current_level +' *************')
     print(string_val + '- idx:         ',row.idx)
-    print(string_val + '- name:        ',row.name)
+    print(string_val + '- name:        ',row.name.encode('utf-8'))
     print(string_val + '- n1:          ',row.n1)
     print(string_val + '- n2:          ',row.n2)
     print(string_val + '- n3:          ',row.n3)
