@@ -4,6 +4,7 @@ EMERGENCY_LIST_FIELDS = [
     'id',
     'odoo_client',
     'erste_code',
+    'has_paid',
     'service_category',
     'grade_type',
     'zone',

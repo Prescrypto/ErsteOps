@@ -23,6 +23,7 @@ class Emergency(models.Model):
         )
     odoo_client = models.CharField("Cliente id(Legacy)", max_length=50)
     erste_code = models.CharField("ID Code", max_length=50, blank=True, default="")
+    has_paid = models.BooleanField("Estatus de Pago", blank=True, default=False)
 
     # Service Category
     service_category=models.ForeignKey("ServiceCategory",
