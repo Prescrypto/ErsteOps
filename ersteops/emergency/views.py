@@ -24,6 +24,7 @@ from .models import Emergency,AttentionDerivation, AttentionKind
 from unit.models import Unit
 from unit.utils import UNIT_LIST_FIELD
 from .list_fields import EMERGENCY_LIST_FIELDS
+from .helpers import get_copago
 
 # Logging library
 import logging
@@ -362,7 +363,7 @@ def patient_json(source_id,patient_data,parent_data):
             "id_subscription_type": patient_data['client_type'],
             "addresses": address_json(patient_data,patient_data),
             "min_addresses": min_address_json(patient_data,patient_data),
-            "copago_amount": patient_data.get('copago_amount', 0),
+            "copago_amount": get_copago(patient_data.get('copago_amount', 0)),
             "has_paid" : patient_data.get('outstanding', False),
             "erste_code": patient_data.get('group_code','Sin Id'),
         }
@@ -378,7 +379,7 @@ def patient_json(source_id,patient_data,parent_data):
             "id_subscription_type": parent_data['client_type'],
             "addresses": address_json(parent_data,patient_data),
             "min_addresses": min_address_json(parent_data,patient_data),
-            "copago_amount": parent_data.get('copago_amount', 0),
+            "copago_amount": get_copago(parent_data.get('copago_amount', 0)),
             "has_paid" : parent_data.get('outstanding', False),
             "erste_code": parent_data.get('group_code','Sin Id'),
         }
