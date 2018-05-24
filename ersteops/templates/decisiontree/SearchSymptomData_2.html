@@ -3,21 +3,17 @@
 {% block title %}Sintomas{% endblock title %}
 
 {% block cssblock %}
-<!--   <link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css"/>
-  <link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.19.0/pivot.min.css"/>
-  <link rel="stylesheet" media="screen" href={% static "NovixPivotJS/css/style.css" %} />
-  <link rel="stylesheet" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/handsontable/0.36.0/handsontable.full.min.css" /> -->
 
-<!--   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.5/themes/default/style.min.css" /> -->
-
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@riophae/vue-treeselect@0.0.28/dist/vue-treeselect.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@riophae/vue-treeselect@0.0.28/dist/vue-treeselect.min.css">
 
 <style type="text/css">
+
   #app3 {
     max-width: 30em;
     margin: 1em auto;
     height: 350px;
   }
+
   #app5 {
     max-width: 30em;
     margin: 1em auto;
@@ -52,35 +48,28 @@
         </div>
       {% endif %}
 
-
-
-
-
-      <!-- VUE -->
-
+      <!-- VUE Components -->
 
       <div class=row>
+
         <div id="app5">
-          <h1>Vue Select ajax</h1>
+          <h1>Sintoma Principal</h1>
           <v-select label="label" :filterable="false" :options="options" @search="onSearch" @input="getTree"></v-select>
         </div>
-<!--       </div>
 
-      <div class="row" > -->
         <div id="app3">
-          <h1>Vue Tree</h1>
+          <h1>Arbol</h1>
           <treeselect v-model="value" 
             :multiple="false" 
             :options="options" 
             :show-count="true" 
             v-on:select="showGrade"
             v-on:open="loadOpen"
-            @click="llamala"
             />
-
-          <!-- <pre class="result">{{ value }}</pre> -->
         </div>
+
       </div>
+      <!-- End VUE Components -->
 
   	</div>
   </div>
@@ -88,40 +77,25 @@
 {% endblock content %}
 
 {% block jsblock %}
-<!-- <link rel="stylesheet" href="{% static 'bower_components/jstree/dist/themes/default/style.min.css' %}" />
-<script src="{% static 'bower_components/jstree/dist/jstree.min.js' %}"></script> -->
-<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.5/themes/default/style.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.5/jstree.min.js"></script> -->
+<!-- loadsh library -->
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/0.10.0/lodash.min.js"></script>
 
+<!-- Vue -->
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
+<!-- Vue Select -->
 <script src="https://unpkg.com/vue-select@latest"></script>
 
+<!-- Vuex -->
 <script src="https://unpkg.com/vuex"></script>
 
+<!-- Vue-treeselect -->
 <script src="https://cdn.jsdelivr.net/npm/@riophae/vue-treeselect@0.0.28/dist/vue-treeselect.min.js"></script>
 
 
 <script type="text/javascript">
 
-
-// Vue test
-
-// end Vue test
-// const store = new Vuex.Store({
-//   state: {
-//     tree_data: [{label:'hola'}],
-//   },
-
-//   // mutations: {
-//   //   increment (state) {
-//   //     state.count++
-//   //   }
-//   // }
-// })
-//var myData = [{label:'hola'}];
+// Vue Store
 
 var store = {
   debug: true,
@@ -138,12 +112,11 @@ var store = {
   }
 }
 
+// Sleep function for async ajax api
+const sleep = d => new Promise(r => setTimeout(r, d))
+
 // Tree Select
 Vue.component('treeselect', VueTreeselect.Treeselect)
-
-//
-const sleep = d => new Promise(r => setTimeout(r, d))
-//var tree_data = [{label:'hola'}];
 
 new Vue({
   el: '#app3',
@@ -151,98 +124,28 @@ new Vue({
   data: {
     // define default value
     value: null,
-    // define options
-    // options: [ {
-    //   id: 'a',
-    //   label: 'a',
-    //   children: [ {
-    //     id: 'aa',
-    //     label: 'aa',
-    //   }, {
-    //     id: 'ab',
-    //     label: 'ab',
-    //   } ],
-    // }, {
-    //   id: 'b',
-    //   label: 'b',
-    // }, {
-    //   id: 'c',
-    //   label: 'c',
-    // } ],
     options: null,
   },
-  //data: () => ({ options: store.state.message}),
   methods: {
+    // Use to asign vali when correct symptom selected from Decision tree
     showGrade: function (vm) {
       console.log('Selected!')
-      // this.options = [ 'a1', 'b1', 'c1', 'd1', 'e1' ].map(id => ({
-      //       id,
-      //       label: `option-${id}`,
-      //     }))
-      // console.log(vm)
-      // //console.log(this.$emit(value))
-      // var self = vm;
-      // var my_result = []
-      // $.ajax({url: "/ajaxapi/get_tree_zero/",data: {'term': store.state.message} ,dataType: 'json', success: function(result){
-      //      return this.my_result = [ 'a1', 'b1', 'c1', 'd1', 'e1' ].map(id => ({
-      //           id,
-      //           label: `option-${id}`,
-      //         }))
-      // }});
-      // return vm.options = this.my_result;
-
     },
-    llamala: function () {
-      console.log('llamala!')
-      //console.log(this.value)
-      //console.log(this.$emit(value))
-    },
+    // Called when user click on component, load tree data based on main symptom selection
     async loadOpen (vm){
-      console.log('loadOpen');
-      // this.options = [ 'a2', 'b2', 'c2', 'd2', 'e2' ].map(id => ({
-      //       id,
-      //       label: `option-${id}`,
-      //     }))
+      //console.log('loadOpen');
       var my_result = []
       $.ajax({url: "/ajaxapi/get_tree_zero/",data: {'term': store.state.message} ,dataType: 'json', success: function(result){
-              console.log('call ajax');
-              console.log(result);
+              //console.log('call ajax');
+              //console.log(result);
               return my_result=result;
               }}).responseJSON;
       await sleep(1000);
-      //console.log('temp');
-      //console.log(temp);
-      console.log('after_ajax');
-      console.log(my_result);
-      //this.options = temp;
       this.options = my_result;
     },
-    // loadOptions({ action, parentNode, callback/*, id */ })
-    // //async loadOptions({ action/*, callback, id */ })
-    // {
-    //   //console.log(parentNode.id);
-    //   console.log('call ajax');
-    //   //return vm.options = [{label:'hola mundo load',value:'22'}];
-    //   this.options = [ 'a', 'b', 'c', 'd', 'e' ].map(id => ({
-    //         id,
-    //         label: `option-${id}`,
-    //       }))
-    //   // console.log('call ajax');
-    //   //this.options = store.state.message;
-    //   //var self = vm;
-    //   // $.ajax({url: "/ajaxapi/get_tree_zero/",data: {'term': store.state.message} ,dataType: 'json', success: function(result){
-    //   //         console.log('ajax call')
-    //   //         return parentNode.children = result;
-    //   //         }});
-    //   //return vm.options;
-    // },
   },
 })
 // End Tree Select
-// Vue select
-
-
-
 
 // Vue Select ajax
 Vue.component('v-select', VueSelect.VueSelect);
@@ -253,89 +156,38 @@ new Vue({
     options: []
   },
   methods: {
+    // Use when user beigin typing on main symptom field
     onSearch: function onSearch(search, loading) {
       loading(true);
       this.search2(loading, search, this);
     },
 
-    search: _.debounce(function (loading, search, vm) {
-      fetch("http://localhost:8000/ajaxapi/get_symptom/?q=" + escape(search)).then(function (res) {
-        res.json().then(function (json) {
-          return vm.options = json.items;
-        });
-        loading(false);
-      });
-    }, 350),
+    // search: _.debounce(function (loading, search, vm) {
+    //   fetch("http://localhost:8000/ajaxapi/get_symptom/?q=" + escape(search)).then(function (res) {
+    //     res.json().then(function (json) {
+    //       return vm.options = json.items;
+    //     });
+    //     loading(false);
+    //   });
+    // }, 350),
 
     search2: _.debounce(function (loading, search, vm){
               var self = vm;
-              var cars = ["Saab", "Volvo", "BMW"];
-
-              //var temp = 
+              //Call ajax end point to get Main symptom list
               $.ajax({url: "/ajaxapi/get_symptom/",data: {'term': search} ,dataType: 'json', success: function(result){
-                //$("#id_grado").val(result[0].value);
-                //return vm.options = json.items;
-                //console.log(result);
-                //return 
-                //console.log(result);
-                //cars = result;
-                //return vm.options = ["Saab 1", "Volvo 1", "BMW 1"];
-                // var row_values = []
-                // for rows in result
-                //console.log(result[0].value)
                 return vm.options = result;
-                //return vm.options = cars;
-                //self.options = ['uno','dos'];
-                //return vm.options = result;
-                //console.log('options')
               }});
               loading(false);
-              console.log(vm.options);
               return vm.options;
             },350),
-
+    // Use when user select a symptom form list
     getTree: function(val){
       try {
         if(val.id){
-          console.log('seleccionado get tree');
-          console.log(val.id);
           store.setMessageAction(val.id)
-          // $.ajax({url: "/ajaxapi/get_tree_zero/",data: {'term': val.id} ,dataType: 'json', success: function(result){
-          //       //$("#id_grado").val(result[0].value);
-          //       //return vm.options = json.items;
-          //       //console.log(result);
-          //       //return 
-          //       //console.log(result);
-          //       //cars = result;
-          //       //return vm.options = ["Saab 1", "Volvo 1", "BMW 1"];
-          //       // var row_values = []
-          //       // for rows in result
-          //       //console.log(result[0].value)
-          //       // console.log('tree');
-          //       // console.log(result);
-          //       // this.tree_data = result;
-          //       // console.log(tree_data);
-          //       // return tree_data;
-          //       //console.log(app3); // = result
-          //       //this.myData = result
-          //       store.setMessageAction(result)
-          //       //store.replaceState(result);
-          //       //$("#app3").options(result);
-          //       //app3.options = result;
-          //       //return vm.options = result;
-          //       //return vm.options = cars;
-          //       //self.options = ['uno','dos'];
-          //       //return vm.options = result;
-          //       //console.log('options')
-          //       //this.myData = result;
-          //     }});
-
           }
         }
       catch{ console.log('sin seleccion!'); }
-      console.log('Exit!')
-      console.log( store.state.message);
-
     },
   },
 });
