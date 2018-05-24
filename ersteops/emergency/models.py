@@ -21,7 +21,8 @@ class Emergency(models.Model):
         ("Masculino","Masculino"),
         ("Femenino","Femenino"),
         )
-    odoo_client = models.CharField("Cliente id", max_length=50)
+    odoo_client = models.CharField("Cliente id(Legacy)", max_length=50)
+    erste_code = models.CharField("ID Code", max_length=50, blank=True, default="")
 
     # Service Category
     service_category=models.ForeignKey("ServiceCategory",
@@ -226,6 +227,7 @@ def emergency_dictionary(instance):
         "pk":instance.pk,
         "id":instance.pk,
         "odoo_client":instance.odoo_client,
+        "erste_code": instance.erste_code,
         "grade_type":str(instance.grade_type),
         "zone":str(instance.zone),
         "units": units,
