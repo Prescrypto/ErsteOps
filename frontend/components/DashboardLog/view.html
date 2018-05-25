@@ -25,7 +25,7 @@
     <!-- <my&#45;app></my&#45;app> -->
     <thead class="c-table__head c-table__head--slim">
       <tr class="c-table__row">
-          <th class="c-table__cell c-table__cell--head">ID</th>
+          <th class="c-table__cell c-table__cell--head">ID Erste</th>
           <th class="c-table__cell c-table__cell--head">ID Externo</th>
           <th class="c-table__cell c-table__cell--head">Grado</th>
           <!-- <th class="c&#45;table__cell c&#45;table__cell&#45;&#45;head">Unidad</th> -->
@@ -43,7 +43,7 @@
 
     <tbody id="root">
       <tr v-for="emergency in emergencies" :id="`emergency-${emergency.id}`" class="c-table__row emergency">
-        <td class="c-table__cell" @click="populate(emergency.id)"><span class="u-text-mute">{{ emergency.id }}</span></td>
+        <td class="c-table__cell" @click="populate(emergency.id)"><span class="u-text-mute">{{ emergency.erste_code }}</span></td>
         <td class="c-table__cell" @click="populate(emergency.id)"><span class="u-text-mute">{{ emergency.odoo_client }}</span></td>
         <td class="c-table__cell" @click="populate(emergency.id)">{{ emergency.grade_type }}</td>
         <!-- <td class="c&#45;table__cell" @click="populate(emergency.id)"> -->

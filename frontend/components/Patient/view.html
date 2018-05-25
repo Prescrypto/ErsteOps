@@ -72,21 +72,21 @@
         <div class="col-6">
           <div class="c-field">
             <label class="c-field__label" for="id_id">
-              ID
+              ID Erste
             </label>
             <input
               tabindex="2"
-              v-model="source.id"
+              v-model="source.erste_code"
               data-vv-scope="emergency"
-              data-vv-name="id"
-              data-vv-as="ID del cliente"
+              data-vv-name="erste_code"
+              data-vv-as="ID Erste del cliente"
               :class="{
                 'c-input': true,
-                'c-input--danger': errors.has('emergency.id')
+                'c-input--danger': errors.has('emergency.erste_code')
               }"
               type="text"
-              name="id"
-              id="id_id"
+              name="erste_code"
+              id="id_erste_code"
               maxlength="50"
               readonly
             />
