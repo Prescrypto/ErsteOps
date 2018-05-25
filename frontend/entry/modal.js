@@ -46,19 +46,7 @@ window.Erste.modal = new Vue({
     form() {
       return {
         ...this.emergency,
-        final_address: {
-          address_and_street: this.emergency.address_and_street,
-          address_between: this.emergency.address_between,
-          address_col: this.emergency.address_col,
-          address_county: this.emergency.address_county,
-          address_extra: this.emergency.address_extra,
-          address_front: this.emergency.address_front,
-          address_instructions: this.emergency.address_instructions,
-          address_notes: this.emergency.address_notes,
-          address_ref: this.emergency.address_ref,
-          address_street: this.emergency.address_street,
-          address_zip_code: this.emergency.address_zip_code,
-        },
+        final_address: this.address,
         units: map(unit => unit.id)(this.selected),
       };
     },
@@ -66,6 +54,7 @@ window.Erste.modal = new Vue({
     ...mapState({
       active: state => state.modal.active,
       search: state => state.modal.search,
+      address: state => state.modal.address,
     }),
   },
   store,

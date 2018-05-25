@@ -8,6 +8,30 @@
 
 <form v-else>
   <div class="row">
+    <div class="col-12">
+      <br />
+      <div class="c-field">
+        <label class="c-field__label" for="patient_address">
+          Direccion de atención
+        </label>
+        <select
+          tabindex="2"
+          @change="choose"
+          v-model="current"
+          name="address"
+          class="c-input"
+          id="patient_address"
+          required
+        >
+          <option v-for="address in emergency.addresses" v-bind:value="address.address_id">
+            {{ address.address_street }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
     <div class="col-4">
       <br />
       <div class="c-field">
@@ -16,7 +40,7 @@
         </label>
         <input
           tabindex="3"
-          v-model="emergency.address_street"
+          v-model="address.address_street"
           type="text"
           name="address_street"
           id="id_address_street"
@@ -32,7 +56,7 @@
         </label>
         <input
           tabindex="4"
-          v-model="emergency.address_extra"
+          v-model="address.address_extra"
           type="text"
           name="address_extra"
           id="id_address_extra"
@@ -48,7 +72,7 @@
         </label>
         <input
           tabindex="5"
-          v-model="emergency.address_between"
+          v-model="address.address_between"
           type="text"
           name="address_between"
           id="id_address_between"
@@ -64,7 +88,7 @@
         </label>
         <input
           tabindex="6"
-          v-model="emergency.address_and_street"
+          v-model="address.address_and_street"
           type="text"
           name="address_and_street"
           id="id_address_and_street"
@@ -82,7 +106,7 @@
         </label>
         <input
           tabindex="7"
-          v-model="emergency.address_ref"
+          v-model="address.address_ref"
           type="text"
           name="address_ref"
           id="id_address_ref"
@@ -98,7 +122,7 @@
         </label>
         <input
           tabindex="8"
-          v-model="emergency.address_front"
+          v-model="address.address_front"
           type="text"
           name="address_front"
           id="id_address_front"
@@ -114,7 +138,7 @@
         </label>
         <input
           tabindex="9"
-          v-model="emergency.address_instructions"
+          v-model="address.address_instructions"
           type="text"
           name="address_instructions"
           id="id_address_instructions"
@@ -129,14 +153,13 @@
         <select
           autofocus
           tabindex="1"
-          v-model="emergency.zone"
-          v-validate="'required'"
+          v-model="address.zone"
           data-vv-scope="emergency"
           data-vv-name="zone"
           data-vv-as="zona"
           :class="{
             'c-input': true,
-            'c-input--danger': errors.has('emergency.zone')
+            'c-input--danger': errors.has('address.zone')
           }"
           name="zone"
           id="id_zone"
@@ -151,8 +174,8 @@
           <option value="UNICA">UNICA - Fuera de la zona de cobertura</option>
         </select>
       </div>
-      <small v-show="errors.has('emergency.zone')" class="c-field__message u-color-danger">
-        <i class="fa fa-times-circle"></i>{{ errors.first('emergency.zone') }}
+      <small v-show="errors.has('address.zone')" class="c-field__message u-color-danger">
+        <i class="fa fa-times-circle"></i>{{ errors.first('address.zone') }}
       </small>
     </div>
 
@@ -164,7 +187,7 @@
         </label>
         <input
           tabindex="10"
-          v-model="emergency.address_zip_code"
+          v-model="address.address_zip_code"
           type="text"
           name="address_zip_code"
           id="id_address_zip_code"
@@ -180,7 +203,7 @@
         </label>
         <input
           tabindex="11"
-          v-model="emergency.address_county"
+          v-model="address.address_county"
           type="text"
           name="address_county"
           id="id_address_county"
@@ -196,7 +219,7 @@
         </label>
         <input
           tabindex="12"
-          v-model="emergency.address_col"
+          v-model="address.address_col"
           type="text"
           name="address_col"
           id="id_address_col"

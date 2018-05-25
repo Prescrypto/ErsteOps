@@ -33,6 +33,7 @@ import {
   REQUEST_EMERGENCY_TEXT_SUCCESS,
   REQUEST_EMERGENCY_TEXT_ERROR,
   EMERGENCY_TEXT_CLEAR,
+  SELECT_ADDRESS,
   MODAL_CHANGE_TAB,
   MODAL_RESET,
   MODAL_UNITS_ADD,
@@ -243,6 +244,11 @@ const store = new Vuex.Store({
     [EMERGENCY_TEXT_CLEAR](state) {
       state.error = false;
       state.emergencyText = '';
+    },
+
+    // Select patient address
+    [SELECT_ADDRESS](state, data) {
+      state.modal.address = data;
     },
 
     // Modal
