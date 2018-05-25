@@ -44,11 +44,16 @@ window.Erste.modal = new Vue({
   },
   computed: {
     form() {
-      return {
+      const emergency = {
         ...this.emergency,
+        copago_amount: this.emergency.copago_amount * 100,
         final_address: this.address,
         units: map(unit => unit.id)(this.selected),
       };
+
+      delete emergency.erste_code;
+
+      return emergency;
     },
     ...mapState(['loading', 'emergency', 'selected']),
     ...mapState({
