@@ -54,7 +54,7 @@
         <!-- </td> -->
         <td class="c-table__cell" @click="populate(emergency.id)">
           <span v-if="emergency.copago_amount && emergency.copago_amount !== '0.00'" class="u-text-mute">
-            ${{ emergency.copago_amount }}
+            ${{ emergency.copago_amount | currency }}
           </span>
           <span v-else class="u-text-mute">N/A</span>
         </td>

@@ -9,6 +9,7 @@ import store from 'store';
 Vue.use(VTooltip);
 Vue.use(Notifications);
 Vue.use(VueClipboard);
+Vue.filter('currency', cents => cents / 100);
 
 // Initialize Vue component from HTML
 const dashboard = new Vue({
