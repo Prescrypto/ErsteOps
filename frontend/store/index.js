@@ -48,6 +48,7 @@ import {
   EMERGENCY_SET_INACTIVE_SUCCESS,
   EMERGENCY_SET_INACTIVE_ERROR,
   EMERGENCY_TOGGLE_ACTIVE,
+  UPDATE_COPAGO_AMOUNT,
 } from './constants';
 import search from './modules/search';
 import finalGrade from './modules/final-grade';
@@ -317,6 +318,9 @@ const store = new Vuex.Store({
     [EMERGENCY_SET_INACTIVE_ERROR](state, err) {
       state.error = err;
       state.loading = false;
+    },
+    [UPDATE_COPAGO_AMOUNT](state, value) {
+      state.emergency.copago_amount = value * 100;
     },
   },
 
