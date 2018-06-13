@@ -147,7 +147,7 @@
       <br />
       <div class="c-field">
         <label class="c-field__label" for="id_caller_relation">
-          Relacion con el titularrrrrrrr
+          Relacion con el titular
         </label>
         <input
           tabindex="7"
@@ -264,7 +264,7 @@
           <option value="G2">G2 - G2</option>
           <option value="G3">G3 - G3</option>
         </select>
-        <a href="/decisiontree/searchsymptom2/">Selecionarrrrrr</a>
+        <a href="/decisiontree/searchsymptom2/">Selecionar</a>
         <!-- template for the modal component -->
 <script type="text/x-template" id="modal-template">
   <transition name="modal">
@@ -300,14 +300,14 @@
 
 <!-- app -->
 <div id="app5">
-  <button id="show-modal2" @click="showModal2 = true">Show Modal</button>
+  <button id="show-modal" @click="showModal = true">Abrir Árbol de Decisión de Síntomas</button>
   <!-- use the modal component, pass in the prop -->
-  <modal v-if="showModal2" @close="showModal2 = false">
+  <modal v-if="showModal" @close="showModal = false">
     <!--
       you can use custom content here to overwrite
       default content
     -->
-    <h3 slot="header">custom header</h3>
+    <h3 slot="header">Árbol de Síntomas</h3>
   </modal>
 </div>
       </div>
@@ -346,7 +346,7 @@
 new Vue({
   el: '#app5',
   data: {
-    showModal2: false
+    showModal: false
   }
 })
 </script>
