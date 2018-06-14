@@ -271,6 +271,24 @@
       </small>
     </div>
   </div>
+  
+  <div class="row">
+    <div id="app5" class="col-6">
+      <h1>Sintoma Principal</h1>
+      <v-select label="label" :filterable="false" :options="options" @search="onSearch" @input="getTree"></v-select>
+    </div>
+
+    <div id="app3" class="col-6">
+      <h1>Arbol</h1>
+      <treeselect v-model="value" 
+        :multiple="false" 
+        :options="options" 
+        :show-count="true" 
+        v-on:select="showGrade"
+        v-on:open="loadOpen"
+        />
+    </div>  
+  </div>
 
   <div class="row">
     <div class="col-12">
