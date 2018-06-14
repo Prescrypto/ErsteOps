@@ -21,7 +21,9 @@ class Emergency(models.Model):
         ("Masculino","Masculino"),
         ("Femenino","Femenino"),
         )
-    odoo_client = models.CharField("Cliente id", max_length=50)
+    odoo_client = models.CharField("Cliente id(Legacy)", max_length=50)
+    erste_code = models.CharField("ID Code", max_length=50, blank=True, default="")
+    has_paid = models.BooleanField("Estatus de Pago", blank=True, default=False)
 
     # Service Category
     service_category=models.ForeignKey("ServiceCategory",
@@ -104,7 +106,7 @@ class Emergency(models.Model):
     main_complaint = models.CharField('Sintoma principal', max_length=100, default='', blank=True)
     complaint_description = models.TextField('Descripción de los sintomas', default='', blank=True)
     subscription_type = models.CharField('Subscripción', max_length=100, default='', blank=True)
-    copago_amount = models.DecimalField("Monto de Copago", max_digits=20, decimal_places=2, blank=True, default=0)
+    copago_amount = models.IntegerField("Monto de Copago", blank=True, null=True, default=0)
 
     # TODO when create derivation
     # derivation = models.ManyToManyField('AttentionDerivation',
@@ -116,6 +118,10 @@ class Emergency(models.Model):
     # Datetie utils
     created_at = models.DateTimeField("Fecha de alta",auto_now_add=True,editable=False)
     last_modified = models.DateTimeField("Última modificación",auto_now=True,editable=False)
+
+    def get_copago_amount(self):
+        ''' Get decimal representatio of copago '''
+        return self.copago_amount / 100
 
     class Meta:
         verbose_name_plural = "Lista de incidentes"
@@ -222,6 +228,7 @@ def emergency_dictionary(instance):
         "pk":instance.pk,
         "id":instance.pk,
         "odoo_client":instance.odoo_client,
+        "erste_code": instance.erste_code,
         "grade_type":str(instance.grade_type),
         "zone":str(instance.zone),
         "units": units,

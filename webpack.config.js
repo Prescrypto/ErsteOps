@@ -1,8 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const BundleTracker = require('webpack-bundle-tracker');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   context: __dirname,
@@ -19,47 +17,25 @@ module.exports = {
   },
 
   plugins: [
-    new VueLoaderPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'common',
+      filename: 'common.js',
+    }),
     new BundleTracker({ filename: 'ersteops/static/webpack-stats.json' }),
   ],
-
-  optimization: {
-    splitChunks: {
-      cacheGroups: {
-        commons: {
-          name: 'common',
-          chunks: 'initial',
-          minChunks: 2,
-        },
-      },
-    },
-  },
 
   module: {
     rules: [
       // javascript
       {
         test: /\.js?$/,
-        use: 'babel-loader',
-        exclude: [
-          /ersteops/,
-          file => /node_modules/.test(file) && !/\.vue\.js/.test(file),
-        ],
+        exclude: [/node_modules/, /ersteops/],
+        loader: 'babel-loader',
       },
       // vue styles
       {
         test: /\.css$/,
-        use: [
-          { loader: 'vue-style-loader' },
-          {
-            loader: 'css-loader',
-            query: {
-              modules: true,
-              localIdentName: '[local]_[hash:base64:8]',
-            },
-          },
-          { loader: 'postcss-loader', query: { sourceMap: true } },
-        ],
+        use: ['vue-style-loader', 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.scss$/,
@@ -76,19 +52,20 @@ module.exports = {
       },
       {
         test: /\.vue$/,
-        use: 'vue-loader',
+        loader: 'vue-loader',
+        options: {},
       },
       // global styles
       {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
         include: [path.resolve(__dirname, './frontend/styles/')],
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
       },
       // images
       {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
-        query: {
+        options: {
           name: '[name].[ext]?[hash]',
         },
       },
@@ -129,19 +106,14 @@ if (process.env.NODE_ENV === 'production') {
         NODE_ENV: JSON.stringify('production'),
       },
     }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      compress: {
+        warnings: false,
+      },
+    }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+    }),
   ]);
-
-  module.exports.optimization = {
-    ...module.exports.optimization,
-    minimize: true,
-    minimizer: [
-      new UglifyJSPlugin({
-        sourceMap: true,
-        uglifyOptions: {
-          compress: { warnings: false },
-        },
-      }),
-    ],
-    concatenateModules: true,
-  };
 }

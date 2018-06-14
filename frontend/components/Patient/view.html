@@ -72,22 +72,21 @@
         <div class="col-6">
           <div class="c-field">
             <label class="c-field__label" for="id_id">
-              ID
+              ID Erste
             </label>
             <input
               tabindex="2"
-              v-model="source.id"
-              v-validate="'required'"
+              v-model="source.erste_code"
               data-vv-scope="emergency"
-              data-vv-name="id"
-              data-vv-as="ID del cliente"
+              data-vv-name="erste_code"
+              data-vv-as="ID Erste del cliente"
               :class="{
                 'c-input': true,
-                'c-input--danger': errors.has('emergency.id')
+                'c-input--danger': errors.has('emergency.erste_code')
               }"
               type="text"
-              name="id"
-              id="id_id"
+              name="erste_code"
+              id="id_erste_code"
               maxlength="50"
               readonly
             />
@@ -154,6 +153,26 @@
       </div>
     </div>
     <div class="col-4">
+      <div
+        @click="() => emergency.has_paid = !emergency.has_paid"
+        class="subscription_switch"
+        :class="{'c-switch': true, 'is-active': source.has_paid }"
+      >
+        <input
+          class="c-switch__input"
+          name="has_paid"
+          id="has_paid"
+          type="checkbox"
+          v-model="source.has_paid"
+        />
+        <label v-if="source.has_paid" class="c-switch__label" for="has_paid">
+          Pagado
+        </label>
+        <label v-else class="c-switch__label" for="has_paid">
+          Pago Pendiente
+        </label>
+      </div>
+
       <div class="c-field">
         <label class="c-field__label" for="id_subscription_type">
           Subscripción
@@ -224,14 +243,14 @@
     </div>
     <div class="col-6">
       <div class="c-field">
-        <label class="c-field__label" for="id_complaint_descriprion">
+        <label class="c-field__label" for="id_complaint_description">
           Descripción de los sintomas
         </label>
         <textarea
           tabindex="13"
-          v-model="source.complaint_descriprion"
-          name="complaint_descriprion"
-          id="id_complaint_descriprion"
+          v-model="source.complaint_description"
+          name="complaint_description"
+          id="id_complaint_description"
           class="c-input"
           rows="2"
           cols="40"
@@ -301,7 +320,7 @@
         </label>
         <input
           tabindex="16"
-          v-model="source.copago_amount"
+          v-model="copago"
           v-validate="'required|decimal:2'"
           :class="{
             'c-input': true,
@@ -313,14 +332,14 @@
           type="number"
           min="0.01"
           step="0.01"
-          name="copago_amount"
-          id="id_copago_amount"
+          name="copago"
+          id="id_copago"
           class="c-input"
           maxlength="100"
         />
       </div>
-      <small v-show="errors.has('emergency.copago_amount')" class="c-field__message u-color-danger">
-        <i class="fa fa-times-circle"></i>{{ errors.first('emergency.copago_amount') }}
+      <small v-show="errors.has('copago')" class="c-field__message u-color-danger">
+        <i class="fa fa-times-circle"></i>{{ errors.first('copago') }}
       </small>
     </div>
   </div>

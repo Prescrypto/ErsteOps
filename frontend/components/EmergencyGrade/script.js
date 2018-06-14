@@ -46,12 +46,12 @@ export default {
 
       const current = find(g => this.type === g.name)(this.grades);
 
-      if (current.weight <= grade.weight) {
+      if (current.weight === 0 || current.weight >= grade.weight) {
         this.finalGrade = grade;
         this.finalGradeError = null;
       } else {
         this.finalGrade = null;
-        this.finalGradeError = 'El grado debe ser de igual o mayor urgencia';
+        this.finalGradeError = 'El grado debe ser de igual o menor urgencia';
       }
     },
     async submit(e) {

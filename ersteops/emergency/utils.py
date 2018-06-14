@@ -69,17 +69,17 @@ class UpdateJsonResponseMixin(object):
                 # Accept update emergency with address
                 data.update({
                     'start_time': emergency_object.start_time,
-                    "address_street" : address["address_street"],
-                    "address_extra" : address["address_extra"],
-                    "address_zip_code": address["address_zip_code"],
-                    "address_county" : address["address_county"],
-                    "address_col" : address["address_col"],
-                    "address_between" : address["address_between"],
-                    "address_and_street" : address["address_and_street"],
-                    "address_ref" : address["address_ref"],
-                    "address_front" : address["address_front"],
-                    "address_instructions" : address["address_instructions"],
-                    "address_notes" : address["address_notes"]
+                    "address_street" : address.get("address_street", ""),
+                    "address_extra" : address.get("address_extra", ""),
+                    "address_zip_code": address.get("address_zip_code", ""),
+                    "address_county" : address.get("address_county", ""),
+                    "address_col" : address.get("address_col", ""),
+                    "address_between" : address.get("address_between", ""),
+                    "address_and_street" : address.get("address_and_street", ""),
+                    "address_ref" : address.get("address_ref", ""),
+                    "address_front" : address.get("address_front", ""),
+                    "address_instructions" : address.get("address_instructions", ""),
+                    "address_notes" : address.get("address_notes", ""),
                 })
 
                 emergency_form = EmergencyForm(data, instance=emergency_object)
@@ -117,17 +117,17 @@ class AjaxableResponseMixin(object):
                 emergency_form = EmergencyForm(data)
                 emergency_form.data.update({
                     'start_time': timezone.now(),
-                    "address_street" : address["address_street"],
-                    "address_extra" : address["address_extra"],
-                    "address_zip_code": address["address_zip_code"],
-                    "address_county" : address["address_county"],
-                    "address_col" : address["address_col"],
-                    "address_between" : address["address_between"],
-                    "address_and_street" : address["address_and_street"],
-                    "address_ref" : address["address_ref"],
-                    "address_front" : address["address_front"],
-                    "address_instructions" : address["address_instructions"],
-                    "address_notes" : address["address_notes"]
+                    "address_street" : address.get("address_street", ""),
+                    "address_extra" : address.get("address_extra", ""),
+                    "address_zip_code": address.get("address_zip_code", ""),
+                    "address_county" : address.get("address_county", ""),
+                    "address_col" : address.get("address_col", ""),
+                    "address_between" : address.get("address_between", ""),
+                    "address_and_street" : address.get("address_and_street", ""),
+                    "address_ref" : address.get("address_ref", ""),
+                    "address_front" : address.get("address_front", ""),
+                    "address_instructions" : address.get("address_instructions", ""),
+                    "address_notes" : address.get("address_notes", "")
 
                 })
                 if emergency_form.is_valid():

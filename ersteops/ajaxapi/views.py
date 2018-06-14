@@ -41,7 +41,7 @@ def get_subscriptor(request):
             if client.get('client_type', None) is None:
                 continue
 
-            client_export_id_label= client['client_export_id'] if client.get('client_export_id', 'None') != 'None' else "Sin ID"
+            client_export_id_label= client['reference_id'] if client.get('reference_id', 'None') != 'None' else "Sin ID"
             client_json = {
                 "id": client['id'],
                 "label": "{} -({}) Id: {}".format(client['name'], str(client["client_type"]), client_export_id_label),
@@ -49,14 +49,14 @@ def get_subscriptor(request):
                 "parent_id": client['id'],
                 "client_type": client['client_type'],
                 "source": 'res.partner',
-                "client_export_id": client['client_export_id'],
+                "client_export_id": client['reference_id'],
                 "target": str(client['id']).zfill(6) + str(1).zfill(6) + str(client['id']).zfill(6)
             }
             results.append(client_json)
 
         # Add family.member
         for client in clients_family:
-            client_export_id_label = client['parent_id']['client_export_id'] if client['parent_id'].get('client_export_id', 'None') != 'None' else "Sin ID"
+            client_export_id_label = client['parent_id']['reference_id'] if client['parent_id'].get('reference_id', 'None') != 'None' else "Sin ID"
             parent_name =  client['parent_id']['name']
             client_json = {
                 "id": client['id'],
@@ -64,7 +64,7 @@ def get_subscriptor(request):
                 "value": "{} -(Miembro Familiar - Titular: {}) Id: {}".format(client['name'], parent_name, client_export_id_label),
                 "parent_id": client['parent_id']['id'],
                 "parent_name": parent_name, # Titular Name
-                "client_export_id": client['parent_id']['client_export_id'],
+                "client_export_id": client['parent_id']['reference_id'],
                 "client_type": 'family_member',
                 "source": 'family.member',
                 "target": str(client['id']).zfill(6) + str(2).zfill(6) + str(client['parent_id']['id']).zfill(6)
@@ -73,7 +73,7 @@ def get_subscriptor(request):
 
         # Add company.member
         for client in clients_company:
-            client_export_id_label = client['parent_id']['client_export_id'] if client['parent_id'].get('client_export_id', 'None') != 'None' else "Sin ID"
+            client_export_id_label = client['parent_id']['reference_id'] if client['parent_id'].get('reference_id', 'None') != 'None' else "Sin ID"
             parent_name_label = client['parent_id']['name'] if client['parent_id']['name'] != "" else client['parent_id'].get('legal_name', "No Asignado")
             client_json = {
                 "id": client['id'],
@@ -82,7 +82,7 @@ def get_subscriptor(request):
                 "parent_id": client['parent_id']['id'],
                 "parent_name": client['parent_id']['name'], # Nombre de fantasia
                 "parent_legal_name": client['parent_id']['legal_name'], # Nombre Legal
-                "client_export_id": client['parent_id']['client_export_id'],
+                "client_export_id": client['parent_id']['reference_id'],
                 "client_type": "company_member",
                 "source": 'company.member',
                 "target": str(client['id']).zfill(6) + str(3).zfill(6) + str(client['parent_id']['id']).zfill(6)

@@ -24,6 +24,7 @@ from .models import Emergency,AttentionDerivation, AttentionKind
 from unit.models import Unit
 from unit.utils import UNIT_LIST_FIELD
 from .list_fields import EMERGENCY_LIST_FIELDS
+from .helpers import get_copago
 
 # Logging library
 import logging
@@ -352,7 +353,7 @@ def patient_json(source_id,patient_data,parent_data):
     patient_data_json = {}
     if source_id == 1:
         patient_data_json = {
-            "id_odoo_client" : patient_data['client_export_id'] if patient_data.get('client_export_id', 'None') != 'None' else "Sin ID",
+            "id_odoo_client" : patient_data['reference_id'] if patient_data.get('reference_id', 'None') != 'None' else "Sin ID",
             "id_patient_name" : "{}".format(patient_data['name']),
             "id_patient_allergies" : '',
             "id_patient_illnesses" : '',
@@ -362,11 +363,13 @@ def patient_json(source_id,patient_data,parent_data):
             "id_subscription_type": patient_data['client_type'],
             "addresses": address_json(patient_data,patient_data),
             "min_addresses": min_address_json(patient_data,patient_data),
-            "copago_amount": patient_data.get('copago_amount', 0),
+            "copago_amount": get_copago(patient_data.get('copago_amount', 0)),
+            "has_paid" : patient_data.get('outstanding', False),
+            "erste_code": patient_data.get('group_code','Sin Id'),
         }
     else:
         patient_data_json ={
-            "id_odoo_client" : parent_data['client_export_id'] if parent_data.get('client_export_id', 'None') != 'None' else "Sin ID",
+            "id_odoo_client" : parent_data['reference_id'] if parent_data.get('reference_id', 'None') != 'None' else "Sin ID",
             "id_patient_name" : "{} ({})".format(patient_data['name'], parent_data['name']),
             "id_patient_allergies" : patient_data['allergies'],
             "id_patient_illnesses" : patient_data['prev_ailments'],
@@ -376,7 +379,9 @@ def patient_json(source_id,patient_data,parent_data):
             "id_subscription_type": parent_data['client_type'],
             "addresses": address_json(parent_data,patient_data),
             "min_addresses": min_address_json(parent_data,patient_data),
-            "copago_amount": parent_data.get('copago_amount', 0),
+            "copago_amount": get_copago(parent_data.get('copago_amount', 0)),
+            "has_paid" : parent_data.get('outstanding', False),
+            "erste_code": parent_data.get('group_code','Sin Id'),
         }
     logger.info('[ GET PATIENTJSON FOR FILLUP EMERGENCY FORM SUCCESS ]')
     return patient_data_json

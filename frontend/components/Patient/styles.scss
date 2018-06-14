@@ -1,0 +1,12 @@
+.subscription_switch {
+  position: absolute;
+  top: -2px;
+  right: 160px;
+  transform: scale(0.75);
+  z-index: 1000;
+
+  & > label {
+    display: block;
+    width: 100px;
+  }
+}
