@@ -1,0 +1,45 @@
+<main class="o-page__content">
+  {# Main header #}
+  {% include "ui_component/header.html" %}
+  <div class="container">
+  	<div style="padding-top:55px">
+  		<h1> Decision Tree</h1>
+
+  		{% if messages %}
+        <div class="row">
+          <ul class="messages">
+            {% for message in messages %}
+              <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                {{ message }}
+              </div>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      <!-- VUE Components -->
+
+      <div class=row>
+
+        <div id="app5">
+          <h1>Sintoma Principal</h1>
+          <v-select label="label" :filterable="false" :options="options" @search="onSearch" @input="getTree"></v-select>
+        </div>
+
+        <div id="app3">
+          <h1>Arbol</h1>
+          <treeselect v-model="value" 
+            :multiple="false" 
+            :options="options" 
+            :show-count="true" 
+            v-on:select="showGrade"
+            v-on:open="loadOpen"
+            />
+        </div>
+
+      </div>
+      <!-- End VUE Components -->
+
+  	</div>
+  </div>
+</main>
