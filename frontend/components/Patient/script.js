@@ -1,11 +1,37 @@
 import { mapState, mapMutations } from 'vuex';
 import Loader from 'vue-spinner/src/ScaleLoader.vue';
 import { UPDATE_COPAGO_AMOUNT } from 'store/constants';
+import Treeselect from '@riophae/vue-treeselect';
 
 export default {
   name: 'patient',
   inject: ['$validator'],
-  components: { Loader },
+  components: { Loader, Treeselect },
+  data() {
+    return {
+      multiple: true,
+      clearable: true,
+      searchable: true,
+      openOnClick: true,
+      clearOnSelect: true,
+      options: [
+        {
+          id: 'bikes',
+          label: 'Bikes',
+          children: [
+            // // array of bike objss
+          ],
+        },
+        {
+          id: 'Cars',
+          label: 'Cars',
+          children: [
+            // array of car objs
+          ],
+        },
+      ],
+    };
+  },
   computed: {
     subscription() {
       return {

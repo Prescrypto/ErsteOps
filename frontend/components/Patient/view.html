@@ -309,6 +309,20 @@
           <option value="G3">G3 - G3</option>
         </select>
       </div>
+      <template>
+<div>
+    <treeselect
+    :multiple="multiple"
+    :clearable="clearable"
+    :searchable="searchable"
+    :open-on-click="openOnClick"
+    :clear-on-select="clearOnSelect"
+    :options="options"
+    :limit="5"
+    :max-height="300"
+    />
+</div>
+</template>
       <small v-show="errors.has('emergency.grade_type')" class="c-field__message u-color-danger">
         <i class="fa fa-times-circle"></i>{{ errors.first('emergency.grade_type') }}
       </small>
