@@ -304,9 +304,9 @@
         >
           <option value="" selected=""></option>
           <option value="G0">G0 - Por Definir</option>
-          <option value="G1">G1 - G1</option>
-          <option value="G2">G2 - G2</option>
-          <option value="G3">G3 - G3</option>
+          <option value="G1">G1 - Emergencia Médica</option>
+          <option value="G2">G2 - Urgencia Médica</option>
+          <option value="G3">G3 - Consulta Médica de Primer Contacto</option>
         </select>
       </div>
       <template>
@@ -320,6 +320,7 @@
           :options="options"
           :limit="5"
           :max-height="300"
+          :disable-branch-nodes="disableBranchNodes"
           />
         </div>
       </template>
