@@ -311,6 +311,7 @@
       </div>
       <template>
         <div>
+          <v-select label="label" :filterable="false" :options="options" @search="onSearch" @input="getTree"></v-select>
           <treeselect
           :multiple="multiple"
           :clearable="clearable"
