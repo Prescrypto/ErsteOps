@@ -12,21 +12,76 @@ export default {
       multiple: true,
       clearable: true,
       searchable: true,
-      openOnClick: true,
+      openOnClick: false,
       clearOnSelect: true,
+      disableBranchNodes: true,
       options: [
         {
-          id: 'bikes',
-          label: 'Bikes',
+          id: 'Convulsiones',
+          label: 'Convulsiones',
           children: [
-            // // array of bike objss
+            {
+              id: 'Esta convulsionando ahora',
+              label: 'Esta convulsionando ahora',
+              children: [
+                {
+                  id: 'G1',
+                  label: 'Grado 1',
+                },
+              ],
+            },
+            {
+              id: 'No esta convulsionando ahora',
+              label: 'No esta convulsionando ahora',
+              children: [
+                {
+                  id: 'No esta conciente',
+                  label: 'No esta conciente',
+                  children: [
+                    {
+                      id: 'G1',
+                      label: 'Grado 1',
+                    },
+                  ],
+                },
+                {
+                  id: 'Esta consciente',
+                  label: 'Esta consciente',
+                  children: [
+                    {
+                      id: 'Respira mal',
+                      label: 'Respira mal',
+                      children: [
+                        {
+                          id: 'G2',
+                          label: 'Grado 2',
+                        },
+                      ],
+                    },
+                    {
+                      id: 'Respira bien',
+                      label: 'Respira bien',
+                      children: [
+                        {
+                          id: 'G3',
+                          label: 'Grado 3',
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
           ],
         },
         {
-          id: 'Cars',
-          label: 'Cars',
+          id: 'Accidente Vehicular',
+          label: 'Accidente Vehicular',
           children: [
-            // array of car objs
+            {
+              id: 'G1',
+              label: 'Grado 1',
+            },
           ],
         },
       ],
