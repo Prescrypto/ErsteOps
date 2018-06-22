@@ -68,8 +68,25 @@
             />
         </div>
 
+
+
       </div>
       <!-- End VUE Components -->
+
+      <!-- All Tree -->
+<!--       <div class="row">
+        <div id="app7">
+          <h1>Arbol</h1>
+          <treeselectall v-model="value" 
+            :multiple="false" 
+            :options="options" 
+            :show-count="true" 
+            v-on:select="showGrade"
+            v-on:open="loadOpen"
+            />
+        </div>
+      </div> -->
+      <!-- /All Tree -->
 
   	</div>
   </div>
@@ -135,13 +152,18 @@ new Vue({
     async loadOpen (vm){
       //console.log('loadOpen');
       var my_result = []
-      $.ajax({url: "/ajaxapi/get_tree_zero/",data: {'term': store.state.message} ,dataType: 'json', success: function(result){
+      //use url get_tree_zero to work with vselect or get_full_tree to get all tree
+      $.ajax({url: "/ajaxapi/get_full_tree/",data: {'term': store.state.message} ,dataType: 'json', success: function(result){
               //console.log('call ajax');
               //console.log(result);
               return my_result=result;
               }}).responseJSON;
-      await sleep(1000);
-      this.options = my_result;
+      // Use 1000 for single element and 3000 for full tree
+      await sleep(3000);
+      // Use this to return a single element based on v-select
+      //this.options = my_result;
+      // Use this to return single element
+      this.options = my_result[0];
     },
   },
 })
@@ -191,6 +213,40 @@ new Vue({
     },
   },
 });
+// /Vue Select ajax
+
+// Tree Select
+// Vue.component('treeselectall', VueTreeselect.Treeselect)
+
+// new Vue({
+//   el: '#app7',
+//   store,
+//   data: {
+//     // define default value
+//     value: null,
+//     options: null,
+//   },
+//   methods: {
+//     // Use to asign vali when correct symptom selected from Decision tree
+//     showGrade: function (vm) {
+//       console.log('Full tree Selected!')
+//     },
+//     // Called when user click on component, load tree data based on main symptom selection
+//     async loadOpen (vm){
+//       //console.log('loadOpen');
+//       var my_result = [];
+//       $.ajax({url: "/ajaxapi/get_full_tree/",data: {'term': store.state.message} ,dataType: 'json', success: function(result){
+//               //console.log('call ajax');
+//               console.log(result);
+//               return my_result=result;
+//               }}).responseJSON;
+//       await sleep(3000);
+//       this.options = my_result;
+//     },
+//   },
+// })
+// End Tree Select
+
 
 
 </script>

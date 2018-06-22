@@ -507,15 +507,15 @@ def get_vue_symptom_tree_zero(symptom_id):
             result_level_1.append(level_dict_1)
             #result_level_1.append(get_symtom_tree_format(child_rows_01))
             # Begin Search Next Level
-            print('##############################################')
-            print('**************** Parent Tree Level ***********')
-            print(child_rows_01.level)
+            #print('##############################################')
+            #print('**************** Parent Tree Level ***********')
+            #print(child_rows_01.level)
             tree_level = get_correct_symtom_type(child_rows_01.symptom_type,child_rows_01.level)
-            get_print_parameters(child_rows_01,tree_level)
-            print('**************** Next Tree Level *************')
-            print(tree_level)
+            #get_print_parameters(child_rows_01,tree_level)
+            #print('**************** Next Tree Level *************')
+            #print(tree_level)
             qs_02 = SymptomDataDetail.objects.filter(n1=child_rows_01.n1 ,n2=child_rows_01.n2, level=tree_level,symptom_type=child_rows_01.symptom_type).exclude(n3='0')
-            print('**************** QS2 ******************')
+            #print('**************** QS2 ******************')
             #print(qs_02)
 
             if(qs_02.count() != 0):
@@ -526,14 +526,14 @@ def get_vue_symptom_tree_zero(symptom_id):
                     level_dict_2['id'] = child_rows_2.idx
                     result_level_2.append(level_dict_2)
                     # Begin Search Next Level
-                    print('**************** Parent Tree Level ***********')
-                    print(child_rows_2.level)
+                    #print('**************** Parent Tree Level ***********')
+                    #print(child_rows_2.level)
                     tree_level = get_correct_symtom_type(child_rows_2.symptom_type,child_rows_2.level)
-                    get_print_parameters(child_rows_2,tree_level)
-                    print('**************** Next Tree Level *************')
-                    print(tree_level)
+                    #get_print_parameters(child_rows_2,tree_level)
+                    #print('**************** Next Tree Level *************')
+                    #print(tree_level)
                     qs_03 = SymptomDataDetail.objects.filter(n1=child_rows_2.n1 ,n2=child_rows_2.n2,n3=child_rows_2.n3, level=tree_level,symptom_type=child_rows_2.symptom_type).exclude(n4=0)
-                    print('**************** QS3 ******************')
+                    #print('**************** QS3 ******************')
                     #print(qs_03)
                     if(qs_03.count() != 0):
                         result_level_3 = []
@@ -544,14 +544,14 @@ def get_vue_symptom_tree_zero(symptom_id):
                             result_level_3.append(level_dict_3)
 
                             # Begin Search Next Level
-                            print('**************** Parent Tree Level ***********')
-                            print(child_rows_3.level)
+                            #print('**************** Parent Tree Level ***********')
+                            #print(child_rows_3.level)
                             tree_level = get_correct_symtom_type(child_rows_3.symptom_type,child_rows_3.level)
-                            get_print_parameters(child_rows_3,tree_level)
-                            print('**************** Next Tree Level *************')
-                            print(tree_level)
+                            #get_print_parameters(child_rows_3,tree_level)
+                            #print('**************** Next Tree Level *************')
+                            #print(tree_level)
                             qs_04 = SymptomDataDetail.objects.filter(n1=child_rows_3.n1 ,n2=child_rows_3.n2,n3=child_rows_3.n3,n4=child_rows_3.n4, level=tree_level,symptom_type=child_rows_3.symptom_type).exclude(n5='0')
-                            print('**************** QS4 ******************')
+                            #print('**************** QS4 ******************')
                             #print(qs_04)
                             if(qs_04.count() != 0):
                                 result_level_4 = []
@@ -562,15 +562,15 @@ def get_vue_symptom_tree_zero(symptom_id):
                                     result_level_4.append(level_dict_4)
 
                                     # # Begin Search Next Level
-                                    print('**************** Parent Tree Level ***********')
-                                    print(child_rows_4.level)
+                                    #print('**************** Parent Tree Level ***********')
+                                    #print(child_rows_4.level)
                                     tree_level = get_correct_symtom_type(child_rows_4.symptom_type,child_rows_4.level)
-                                    get_print_parameters(child_rows_4,tree_level)
-                                    print('**************** Next Tree Level *************')
-                                    print(tree_level)
+                                    #get_print_parameters(child_rows_4,tree_level)
+                                    #print('**************** Next Tree Level *************')
+                                    #print(tree_level)
                                     qs_05 = SymptomDataDetail.objects.filter(n1=child_rows_4.n1 ,n2=child_rows_4.n2,n3=child_rows_4.n3,n4=child_rows_4.n4,n5=child_rows_4.n5, level=tree_level,symptom_type=child_rows_4.symptom_type).exclude(n6='0')
-                                    print('**************** QS5 ******************')
-                                    print(qs_05)
+                                    #print('**************** QS5 ******************')
+                                    #print(qs_05)
                                     if(qs_05.count() != 0):
                                         result_level_5 = []
                                         for child_rows_5 in qs_05:
@@ -580,15 +580,15 @@ def get_vue_symptom_tree_zero(symptom_id):
                                             result_level_5.append(level_dict_5)
 
                                             # # Begin Search Next Level
-                                            print('**************** Parent Tree Level ***********')
-                                            print(child_rows_5.level)
+                                            #print('**************** Parent Tree Level ***********')
+                                            #print(child_rows_5.level)
                                             tree_level = get_correct_symtom_type(child_rows_5.symptom_type,child_rows_5.level)
-                                            get_print_parameters(child_rows_5,tree_level)
-                                            print('**************** Next Tree Level *************')
-                                            print(tree_level)
+                                            #get_print_parameters(child_rows_5,tree_level)
+                                            #print('**************** Next Tree Level *************')
+                                            #print(tree_level)
                                             qs_06 = SymptomDataDetail.objects.filter(n1=child_rows_5.n1 ,n2=child_rows_5.n2,n3=child_rows_5.n3,n4=child_rows_5.n4,n5=child_rows_5.n5, n6=child_rows_5.n6,level=tree_level,symptom_type=child_rows_5.symptom_type).exclude(n7='0')
-                                            print('**************** QS6 ******************')
-                                            print(qs_06)
+                                            #print('**************** QS6 ******************')
+                                            #print(qs_06)
                                             if(qs_06.count() != 0):
                                                 result_level_6 = []
                                                 for child_rows_6 in qs_06:
@@ -615,9 +615,9 @@ def get_vue_symptom_tree_zero(symptom_id):
         level_dict_0['children'] = result_level_1
 
     result_0.append(level_dict_0)
-    print('*************** Final Tree *****************')
+    #print('*************** Final Tree *****************')
     #print(result_0)
-    print('*************** end Final ****************')
+    #print('*************** end Final ****************')
     return result_0
 
 def get_symtom_tree_level(qs):
