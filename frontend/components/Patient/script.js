@@ -17,72 +17,79 @@ export default {
       disableBranchNodes: true,
       options: [
         {
-          id: 'Convulsiones',
-          label: 'Convulsiones',
+          label: '(Adulto) AHOGADOS POR INMERSION',
+          state: {
+            opened: 'true',
+          },
+          id: '1-1000000',
           children: [
             {
-              id: 'Esta convulsionando ahora',
-              label: 'Esta convulsionando ahora',
-              children: [
-                {
-                  id: 'G1',
-                  label: 'Grado 1',
-                },
-              ],
+              label: '    No esta consciente [Grado : 1]',
+              id: '1-1100000',
             },
             {
-              id: 'No esta convulsionando ahora',
-              label: 'No esta convulsionando ahora',
+              label: '    Esta consciente',
               children: [
                 {
-                  id: 'No esta conciente',
-                  label: 'No esta conciente',
-                  children: [
-                    {
-                      id: 'G1',
-                      label: 'Grado 1',
-                    },
-                  ],
+                  label: '        Respira bien [Grado : 2]',
+                  id: '1-1210000',
                 },
                 {
-                  id: 'Esta consciente',
-                  label: 'Esta consciente',
-                  children: [
-                    {
-                      id: 'Respira mal',
-                      label: 'Respira mal',
-                      children: [
-                        {
-                          id: 'G2',
-                          label: 'Grado 2',
-                        },
-                      ],
-                    },
-                    {
-                      id: 'Respira bien',
-                      label: 'Respira bien',
-                      children: [
-                        {
-                          id: 'G3',
-                          label: 'Grado 3',
-                        },
-                      ],
-                    },
-                  ],
+                  label: '        No Respira bien [Grado : 1]',
+                  id: '1-1220000',
                 },
               ],
+              id: '1-1200000',
             },
           ],
         },
         {
-          id: 'Accidente Vehicular',
-          label: 'Accidente Vehicular',
+          label: '(Adulto) ALTERACION DE LA AUDICION [Grado : 3]',
+          state: {
+            opened: 'true',
+          },
+          id: '1-2000000',
+        },
+        {
+          label: '(Adulto) ACCIDENTE VEHICULAR [Grado : 1]',
+          state: {
+            opened: 'true',
+          },
+          id: '1-4000000',
+        },
+        {
+          label: '(Adulto) ARRITMIAS [Nota : (REALIZAR ECG)]',
+          state: {
+            opened: 'true',
+          },
+          id: '1-5000000',
           children: [
             {
-              id: 'G1',
-              label: 'Grado 1',
+              label: '    No esta consciente [Grado : 1]',
+              id: '1-5100000',
+            },
+            {
+              label: '    Esta consciente',
+              children: [
+                {
+                  label: '        Tiene dolor de pecho [Grado : 1]',
+                  id: '1-5210000',
+                },
+                {
+                  label: '        No tiene dolor de pecho [Grado : 2]',
+                  id: '1-5220000',
+                },
+              ],
+              id: '1-5200000',
             },
           ],
+        },
+        {
+          label: '(Adulto) CONSTIPACION [Grado : 3]',
+          state: {
+            opened: 'true',
+          },
+          id: '1-7000000',
         },
       ],
     };
