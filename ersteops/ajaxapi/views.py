@@ -180,12 +180,11 @@ def get_tree_zero(request):
 def get_full_tree(request):
   if request.is_ajax():
       q = request.GET.get('term', '')
-      q = "1-1000000"
       # Get Adult Full Tree
-      queryset_tree = SymptomDataDetail.objects.filter(level='0',symptom_type='1' )| SymptomDataDetail.objects.filter(grade='',level='1',symptom_type='2' )[:1]
+      queryset_tree = SymptomDataDetail.objects.filter(level='0',symptom_type='1' )| SymptomDataDetail.objects.filter(grade='',level='1',symptom_type='2' )
       #queryset_tree = SymptomDataDetail.objects.filter(level='0',symptom_type='1' ) #| SymptomDataDetail.objects.filter(grade='',level='1',symptom_type='2' )
-      print ("******************** count")
-      print (queryset_tree.count())
+      #print ("******************** count")
+      #print (queryset_tree.count())
       #results = get_vue_symptom_tree_zero(q)
       results = []
       for symptom in queryset_tree:
@@ -196,9 +195,9 @@ def get_full_tree(request):
         #print(results)
         #results += get_vue_symptom_tree_zero(symptom.idx)
       data = json.dumps(results)
-      print("******************* Data *******************")
-      print (data)
-      print("******************* Results *******************")
+      #print("******************* Data *******************")
+      #print (data)
+      #print("******************* Results *******************")
       #print(str(results))
 
   else:
