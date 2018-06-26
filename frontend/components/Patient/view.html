@@ -289,6 +289,21 @@
         <label class="c-field__label" for="id_grade_type">
           Grado Emergencia
         </label>
+        <template>
+          <div>
+            <treeselect
+            :multiple="multiple"
+            :clearable="clearable"
+            :searchable="searchable"
+            :open-on-click="openOnClick"
+            :clear-on-select="clearOnSelect"
+            :options="options"
+            :limit="5"
+            :max-height="300"
+            :disable-branch-nodes="disableBranchNodes"
+            />
+          </div>
+        </template>
         <select
           tabindex="15"
           v-model="source.grade_type"
@@ -309,21 +324,6 @@
           <option value="G3">G3 - Consulta Médica de Primer Contacto</option>
         </select>
       </div>
-      <template>
-        <div>
-          <treeselect
-          :multiple="multiple"
-          :clearable="clearable"
-          :searchable="searchable"
-          :open-on-click="openOnClick"
-          :clear-on-select="clearOnSelect"
-          :options="options"
-          :limit="5"
-          :max-height="300"
-          :disable-branch-nodes="disableBranchNodes"
-          />
-        </div>
-      </template>
       <small v-show="errors.has('emergency.grade_type')" class="c-field__message u-color-danger">
         <i class="fa fa-times-circle"></i>{{ errors.first('emergency.grade_type') }}
       </small>
