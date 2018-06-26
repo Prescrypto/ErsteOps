@@ -160,43 +160,20 @@ new Vue({
               }}).responseJSON;
       // Use 1000 for single element and 3000 for full tree
       await sleep(3000);
-      // Use this to return a single element based on v-select
-      //this.options = my_result;
-      var tree_dict = {};
+      // Clean Tree
       var tree_array = [];
-      console.log("*************")
-      console.log(my_result[0][0]);
-      var one_element = my_result[0][0];
-      console.log("************* first element");
-      console.log(one_element["id"]);
-      tree_dict["id"]=one_element["id"];
-      tree_dict["label"]=one_element["label"];
-      tree_dict["children"]=one_element["children"];
-      console.log("************* tree array 1");
-      tree_array.push(tree_dict);
-      console.log(tree_dict);
-      // console.log("************* second element");
-      var one_element = my_result[3][0];
-      var tree_dict_2 = {};
-      tree_dict_2["id"]=one_element["id"];
-      tree_dict_2["label"] =one_element["label"];
-      tree_dict_2["children"] =one_element["children"];
-      console.log("************* tree array 2");
-      tree_array.push(tree_dict_2);
-      // console.log(tree_dict);
-      
-      // console.log(tree_array);
+      for( i = 0 ; i < my_result.length; i++){
+        var tree_dict = {};
+        var one_element = my_result[i][0];
+        tree_dict["id"] = one_element["id"];
+        tree_dict["label"] = one_element["label"];
+        tree_dict["children"] = one_element["children"];
+        tree_array.push(tree_dict);
+      }
+      // /Clean Tree
+      // Return tree to vue-tree
       this.options = tree_array;
-      // Use this to return single element
-      //this.options = my_result[0];
-      // Test Array
-      // my_array = [];
-      // for(i=0;i<10;i++){
-      //   my_array.push(my_result[1]);
-      // }
-      // console.log(my_array);
-      // this.options = my_array;
-      // /Test Array
+
     },
   },
 })
