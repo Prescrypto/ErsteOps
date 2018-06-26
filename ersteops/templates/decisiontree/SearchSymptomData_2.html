@@ -68,7 +68,9 @@
             />
         </div>
 
-
+        <div class="row">
+          <div id="FinalResult">Resultado</div>
+        </div>
 
       </div>
       <!-- End VUE Components -->
@@ -172,6 +174,9 @@ new Vue({
       }
       // /Clean Tree
       // Return tree to vue-tree
+      console.log(tree_array);
+      // Uncomment this to show tree data on page
+      //$('#FinalResult').html( JSON.stringify(tree_array) );
       this.options = tree_array;
 
     },
