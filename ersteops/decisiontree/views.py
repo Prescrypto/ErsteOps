@@ -503,7 +503,7 @@ def get_vue_symptom_tree_zero(symptom_id):
         for child_rows_01 in qs_01:
             level_dict_1 = {}
             #level_dict_1['label'] = child_rows_01.name
-            level_dict_1['label'] = (child_rows_01.name + '[Grado: ' + child_rows_01.grade + ']') if ((child_rows_01.symptom_type.symptom_id == 2) ) else child_rows_01.name
+            level_dict_1['label'] = (child_rows_01.name + ' [Grado: ' + child_rows_01.grade + ']') if ((child_rows_01.symptom_type.symptom_id == 2) & (child_rows_01.grade.isdigit()) ) else child_rows_01.name
             level_dict_1['id'] = child_rows_01.idx
             result_level_1.append(level_dict_1)
             #result_level_1.append(get_symtom_tree_format(child_rows_01))
@@ -524,7 +524,7 @@ def get_vue_symptom_tree_zero(symptom_id):
                 for child_rows_2 in qs_02:
                     level_dict_2 = {}
                     #level_dict_2['label'] = child_rows_2.name
-                    level_dict_2['label'] = (child_rows_2.name + '[Grado: ' + child_rows_2.grade + ']') if ((child_rows_2.symptom_type.symptom_id == 2))  else child_rows_2.name
+                    level_dict_2['label'] = (child_rows_2.name + ' [Grado: ' + child_rows_2.grade + ']') if ((child_rows_2.symptom_type.symptom_id == 2)& (child_rows_2.grade.isdigit()))  else child_rows_2.name
                     level_dict_2['id'] = child_rows_2.idx
                     result_level_2.append(level_dict_2)
                     # Begin Search Next Level
@@ -542,7 +542,7 @@ def get_vue_symptom_tree_zero(symptom_id):
                         for child_rows_3 in qs_03:
                             level_dict_3 = {}
                             #level_dict_3['label'] = child_rows_3.name
-                            level_dict_3['label'] = (child_rows_3.name + '[Grado: ' + child_rows_3.grade + ']') if ((child_rows_3.symptom_type.symptom_id == 2) ) else child_rows_3.name
+                            level_dict_3['label'] = (child_rows_3.name + ' [Grado: ' + child_rows_3.grade + ']') if ((child_rows_3.symptom_type.symptom_id == 2)& (child_rows_3.grade.isdigit()) ) else child_rows_3.name
                             level_dict_3['id'] = child_rows_3.idx
                             result_level_3.append(level_dict_3)
 
@@ -561,7 +561,7 @@ def get_vue_symptom_tree_zero(symptom_id):
                                 for child_rows_4 in qs_04:
                                     level_dict_4 = {}
                                     #level_dict_4['label'] = child_rows_4.name
-                                    level_dict_4['label'] = (child_rows_4.name + '[Grado: ' + child_rows_4.grade + ']') if ((child_rows_4.symptom_type.symptom_id == 2) ) else child_rows_4.name
+                                    level_dict_4['label'] = (child_rows_4.name + ' [Grado: ' + child_rows_4.grade + ']') if ((child_rows_4.symptom_type.symptom_id == 2) & (child_rows_4.grade.isdigit())) else child_rows_4.name
                                     level_dict_4['id'] = child_rows_4.idx
                                     result_level_4.append(level_dict_4)
 
@@ -580,7 +580,7 @@ def get_vue_symptom_tree_zero(symptom_id):
                                         for child_rows_5 in qs_05:
                                             level_dict_5 = {}
                                             #level_dict_5['label'] = child_rows_5.name
-                                            level_dict_5['label'] = (child_rows_5.name + '[Grado: ' + child_rows_5.grade + ']') if ((child_rows_5.symptom_type.symptom_id == 2) ) else child_rows_5.name
+                                            level_dict_5['label'] = (child_rows_5.name + ' [Grado: ' + child_rows_5.grade + ']') if ((child_rows_5.symptom_type.symptom_id == 2)& (child_rows_5.grade.isdigit()) ) else child_rows_5.name
                                             level_dict_5['id'] = child_rows_5.idx
                                             result_level_5.append(level_dict_5)
 
@@ -599,7 +599,7 @@ def get_vue_symptom_tree_zero(symptom_id):
                                                 for child_rows_6 in qs_06:
                                                     level_dict_6 = {}
                                                     #level_dict_6['label'] = child_rows_6.name
-                                                    level_dict_6['label'] = (child_rows_6.name + '[Grado: ' + child_rows_6.grade + ']') if ((child_rows_6.symptom_type.symptom_id == 2) ) else child_rows_6.name
+                                                    level_dict_6['label'] = (child_rows_6.name + ' [Grado: ' + child_rows_6.grade + ']') if ((child_rows_6.symptom_type.symptom_id == 2)& (child_rows_6.grade.isdigit()) ) else child_rows_6.name
                                                     level_dict_6['id'] = child_rows_6.idx
                                                     result_level_6.append(level_dict_6)
 
