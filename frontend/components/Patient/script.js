@@ -170,15 +170,15 @@ export default {
                       children: [
                         {
                           id: '1-10221100',
-                          label: '4- Menos de seis horas [Grado : 2]',
+                          label: ' Menos de seis horas [Grado : 2]',
                         },
                         {
                           id: '1-10221200',
-                          label: '4- Entre seis y doce horas [Grado : 3]',
+                          label: ' Entre seis y doce horas [Grado : 3]',
                         },
                         {
                           id: '1-10221300',
-                          label: '4- Más de doce horas [Grado : 3]',
+                          label: ' Más de doce horas [Grado : 3]',
                         },
                       ],
                     },
@@ -338,7 +338,7 @@ export default {
                       children: [
                         {
                           id: '1-20222100',
-                          label: '4- Menos de 12 hs de evolución [Grado : 2]',
+                          label: ' Menos de 12 hs de evolución [Grado : 2]',
                           children: [
                             {
                               id: '1-20222210',
@@ -352,7 +352,7 @@ export default {
                         },
                         {
                           id: '1-20222200',
-                          label: '4- Más de 12 hs de evolución',
+                          label: ' Más de 12 hs de evolución',
                           children: [
                             {
                               id: '1-20222210',
@@ -425,11 +425,11 @@ export default {
                       children: [
                         {
                           id: '1-22122100',
-                          label: '4- Tiene ardor uretral [Grado : 3]',
+                          label: ' Tiene ardor uretral [Grado : 3]',
                         },
                         {
                           id: '1-22122200',
-                          label: '4- No tiene ardor uretral [Grado : 3]',
+                          label: ' No tiene ardor uretral [Grado : 3]',
                         },
                       ],
                     },
@@ -546,7 +546,7 @@ export default {
                       children: [
                         {
                           id: '1-28222100',
-                          label: '4- Vómitos con sangre [Grado : 2]',
+                          label: ' Vómitos con sangre [Grado : 2]',
                           children: [
                             {
                               id: '1-28222210',
@@ -659,7 +659,7 @@ export default {
                         },
                         {
                           id: '1-28222200',
-                          label: '4- Materia fecal con sangre [Grado : 3]',
+                          label: ' Materia fecal con sangre [Grado : 3]',
                           children: [
                             {
                               id: '1-28222210',
@@ -772,7 +772,7 @@ export default {
                         },
                         {
                           id: '1-28222300',
-                          label: '4- Orina con sangre [Grado : 3]',
+                          label: ' Orina con sangre [Grado : 3]',
                           children: [
                             {
                               id: '1-28222210',
@@ -885,7 +885,7 @@ export default {
                         },
                         {
                           id: '1-28222400',
-                          label: '4- Sangrado ginecológico',
+                          label: ' Sangrado ginecológico',
                           children: [
                             {
                               id: '1-28222210',
@@ -998,7 +998,7 @@ export default {
                         },
                         {
                           id: '1-28222500',
-                          label: '4- Tos con sangre',
+                          label: ' Tos con sangre',
                           children: [
                             {
                               id: '1-28222210',
@@ -1111,7 +1111,7 @@ export default {
                         },
                         {
                           id: '1-28222600',
-                          label: '4- Sangra por nariz',
+                          label: ' Sangra por nariz',
                           children: [
                             {
                               id: '1-28222210',
@@ -1224,7 +1224,7 @@ export default {
                         },
                         {
                           id: '1-28222700',
-                          label: '4- Se desconoce por donde sangra [Grado : 2]',
+                          label: ' Se desconoce por donde sangra [Grado : 2]',
                           children: [
                             {
                               id: '1-28222210',
@@ -1447,13 +1447,12 @@ export default {
                       children: [
                         {
                           id: '1-33222100',
-                          label:
-                            '4- Tiene nauseas vómitos o cefalea[Grado : 2]',
+                          label: ' Tiene nauseas vómitos o cefalea[Grado : 2]',
                         },
                         {
                           id: '1-33222200',
                           label:
-                            '4- No tiene nauseas, vómitos ni cefalea[Grado : 3P]',
+                            ' No tiene nauseas, vómitos ni cefalea[Grado : 3P]',
                         },
                       ],
                     },
@@ -1609,11 +1608,11 @@ export default {
                       children: [
                         {
                           id: '1-38222100',
-                          label: '4- Esta caído en el suelo [Grado : 1]',
+                          label: ' Esta caído en el suelo [Grado : 1]',
                         },
                         {
                           id: '1-38222200',
-                          label: '4- No esta caído en el suelo [Grado : 2]',
+                          label: ' No esta caído en el suelo [Grado : 2]',
                         },
                       ],
                     },
@@ -1942,11 +1941,11 @@ export default {
                       children: [
                         {
                           id: '1-55222100',
-                          label: '4- Tiene herida que sangra [Grado : 2]',
+                          label: ' Tiene herida que sangra [Grado : 2]',
                         },
                         {
                           id: '1-55222200',
-                          label: '4- No tiene herida que sangra [Grado : 3]',
+                          label: ' No tiene herida que sangra [Grado : 3]',
                         },
                       ],
                     },
@@ -1982,7 +1981,7 @@ export default {
                       children: [
                         {
                           id: '1-56221100',
-                          label: '4- Primer embarazo',
+                          label: ' Primer embarazo',
                           children: [
                             {
                               id: '1-56221110',
@@ -2008,7 +2007,7 @@ export default {
                         },
                         {
                           id: '1-56221200',
-                          label: '4- Embarazos previos',
+                          label: ' Embarazos previos',
                           children: [
                             {
                               id: '1-56221110',
@@ -2040,12 +2039,11 @@ export default {
                       children: [
                         {
                           id: '1-56222100',
-                          label: '4- Perdió líquido o rompió bolsa [Grado : 2]',
+                          label: ' Perdió líquido o rompió bolsa [Grado : 2]',
                         },
                         {
                           id: '1-56222200',
-                          label:
-                            '4- No Perdió líquido ni rompió bolsa [Grado:3]',
+                          label: ' No Perdió líquido ni rompió bolsa [Grado:3]',
                         },
                       ],
                     },
@@ -2184,11 +2182,11 @@ export default {
                       children: [
                         {
                           id: '1-97222100',
-                          label: '4- Tuvo traumatismo [Grado : 2]',
+                          label: ' Tuvo traumatismo [Grado : 2]',
                         },
                         {
                           id: '1-97222200',
-                          label: '4- No tuvo traumatismo [Grado : 3P]',
+                          label: ' No tuvo traumatismo [Grado : 3P]',
                         },
                       ],
                     },
@@ -2524,7 +2522,7 @@ export default {
           children: [
             {
               id: '2-1100000',
-              label: ' No está consciente',
+              label: ' No está consciente [Grado: 1]',
             },
             {
               id: '2-1200000',
@@ -2532,11 +2530,11 @@ export default {
               children: [
                 {
                   id: '2-1210000',
-                  label: ' Respira mal',
+                  label: ' Respira mal [Grado: 1]',
                 },
                 {
                   id: '2-1220000',
-                  label: ' Respira bien',
+                  label: ' Respira bien [Grado: 2]',
                 },
               ],
             },
@@ -2548,7 +2546,7 @@ export default {
           children: [
             {
               id: '2-10100000',
-              label: ' Respira Mal',
+              label: ' Respira Mal [Grado: 1]',
             },
             {
               id: '2-10200000',
@@ -2556,7 +2554,7 @@ export default {
               children: [
                 {
                   id: '2-10210000',
-                  label: ' Está pálido o sudoroso',
+                  label: ' Está pálido o sudoroso [Grado: 2]',
                 },
                 {
                   id: '2-10220000',
@@ -2568,21 +2566,21 @@ export default {
                       children: [
                         {
                           id: '2-10221100',
-                          label: '4- Menos de seis horas',
+                          label: ' Menos de seis horas [Grado: 2]',
                         },
                         {
                           id: '2-10221200',
-                          label: '4- Entre seis y doce horas',
+                          label: ' Entre seis y doce horas [Grado: 3]',
                         },
                         {
                           id: '2-10221300',
-                          label: '4- Más de doce horas',
+                          label: ' Más de doce horas [Grado: 3]',
                         },
                       ],
                     },
                     {
                       id: '2-10222000',
-                      label: ' Se desconoce el tiempo de evolución',
+                      label: ' Se desconoce el tiempo de evolución [Grado: 3]',
                     },
                   ],
                 },
@@ -2597,7 +2595,7 @@ export default {
           children: [
             {
               id: '2-101100000',
-              label: ' Menor de tres horas de evolución',
+              label: ' Menor de tres horas de evolución [Grado: 2]',
             },
             {
               id: '2-101200000',
@@ -2605,7 +2603,8 @@ export default {
               children: [
                 {
                   id: '2-101210000',
-                  label: ' No moviliza bien el resto de los miembros.',
+                  label:
+                    ' No moviliza bien el resto de los miembros. [Grado: 2]',
                 },
                 {
                   id: '2-101220000',
@@ -2613,7 +2612,7 @@ export default {
                   children: [
                     {
                       id: '2-101221000',
-                      label: ' Habla mal',
+                      label: ' Habla mal [Grado: 2]',
                     },
                     {
                       id: '2-101222000',
@@ -2621,12 +2620,13 @@ export default {
                       children: [
                         {
                           id: '2-101222100',
-                          label: '4- Antecedentes de enfermedad neurológica',
+                          label:
+                            ' Antecedentes de enfermedad neurológica [Grado: 3]',
                         },
                         {
                           id: '2-101222200',
                           label:
-                            '4- Sin antecedentes de enfermedad neurológica',
+                            ' Sin antecedentes de enfermedad neurológica [Grado: 3]',
                         },
                       ],
                     },
@@ -2642,7 +2642,7 @@ export default {
           children: [
             {
               id: '2-102100000',
-              label: ' Respira mal',
+              label: ' Respira mal [Grado: 2]',
             },
             {
               id: '2-102200000',
@@ -2650,11 +2650,11 @@ export default {
               children: [
                 {
                   id: '2-102210000',
-                  label: ' Está sangrando',
+                  label: ' Está sangrando [Grado: 2]',
                 },
                 {
                   id: '2-102220000',
-                  label: ' No está sangrando',
+                  label: ' No está sangrando [Grado: 3]',
                 },
               ],
             },
@@ -2666,7 +2666,7 @@ export default {
           children: [
             {
               id: '2-103100000',
-              label: ' Está sangrando',
+              label: ' Está sangrando [Grado: 2]',
             },
             {
               id: '2-103200000',
@@ -2684,7 +2684,7 @@ export default {
             },
             {
               id: '2-104200000',
-              label: ' Está solamente con molestias leves',
+              label: ' Está solamente con molestias leves [Grado: 3]',
             },
           ],
         },
@@ -2698,11 +2698,11 @@ export default {
               children: [
                 {
                   id: '2-105110000',
-                  label: ' Está azul o blanco',
+                  label: ' Está azul o blanco [Grado: 2]',
                 },
                 {
                   id: '2-105120000',
-                  label: ' No está azul ni blanco',
+                  label: ' No está azul ni blanco [Grado: 3]',
                 },
               ],
             },
@@ -2712,11 +2712,11 @@ export default {
               children: [
                 {
                   id: '2-105210000',
-                  label: ' Respira mal',
+                  label: ' Respira mal [Grado: 2]',
                 },
                 {
                   id: '2-105220000',
-                  label: ' Respira bien',
+                  label: ' Respira bien [Grado: 3]',
                 },
               ],
             },
@@ -2728,7 +2728,7 @@ export default {
           children: [
             {
               id: '2-106100000',
-              label: ' Tuvo traumatismo',
+              label: ' Tuvo traumatismo [Grado: 2]',
             },
             {
               id: '2-106200000',
@@ -2736,11 +2736,11 @@ export default {
               children: [
                 {
                   id: '2-106210000',
-                  label: ' Le ingreso alguna sustancia irritativa',
+                  label: ' Le ingreso alguna sustancia irritativa [Grado: 2]',
                 },
                 {
                   id: '2-106220000',
-                  label: ' No le ingreso sustancia irritativa',
+                  label: ' No le ingreso sustancia irritativa [Grado: 3]',
                 },
               ],
             },
@@ -2752,11 +2752,11 @@ export default {
           children: [
             {
               id: '2-107100000',
-              label: ' Tiene dolor con el movimiento',
+              label: ' Tiene dolor con el movimiento [Grado: 3]',
             },
             {
               id: '2-107200000',
-              label: ' No tiene dolor con el movimiento',
+              label: ' No tiene dolor con el movimiento [Grado: 3]',
             },
           ],
         },
@@ -2770,7 +2770,7 @@ export default {
               children: [
                 {
                   id: '2-108110000',
-                  label: ' Evidencia de fractura',
+                  label: ' Evidencia de fractura [Grado: 2]',
                 },
                 {
                   id: '2-108120000',
@@ -2778,11 +2778,11 @@ export default {
                   children: [
                     {
                       id: '2-108121000',
-                      label: ' Está sangrando',
+                      label: ' Está sangrando [Grado: 2]',
                     },
                     {
                       id: '2-108122000',
-                      label: ' No está sangrando',
+                      label: ' No está sangrando [Grado: 3]',
                     },
                   ],
                 },
@@ -2794,11 +2794,11 @@ export default {
               children: [
                 {
                   id: '2-108210000',
-                  label: ' Está el miembro azul o blanco',
+                  label: ' Está el miembro azul o blanco [Grado: 2]',
                 },
                 {
                   id: '2-108220000',
-                  label: ' El miembro no está azul o blanco',
+                  label: ' El miembro no está azul o blanco [Grado: 3]',
                 },
               ],
             },
@@ -2810,7 +2810,7 @@ export default {
           children: [
             {
               id: '2-109100000',
-              label: ' Presentó traumatismo',
+              label: ' Presentó traumatismo [Grado: 2]',
             },
             {
               id: '2-109200000',
@@ -2818,11 +2818,11 @@ export default {
               children: [
                 {
                   id: '2-109210000',
-                  label: ' Tiempo de evolución menor de 12 horas',
+                  label: ' Tiempo de evolución menor de 12 horas [Grado: 2]',
                 },
                 {
                   id: '2-109220000',
-                  label: ' Tiempo de evolución mayor de 12 horas',
+                  label: ' Tiempo de evolución mayor de 12 horas [Grado: 3]',
                 },
               ],
             },
@@ -2834,11 +2834,11 @@ export default {
           children: [
             {
               id: '2-112100000',
-              label: ' Tiene fiebre',
+              label: ' Tiene fiebre [Grado: 3]',
             },
             {
               id: '2-112200000',
-              label: ' No tiene fiebre',
+              label: ' No tiene fiebre [Grado: 3]',
             },
           ],
         },
@@ -2848,7 +2848,8 @@ export default {
           children: [
             {
               id: '2-113100000',
-              label: ' Tiene hemorragia genital o perdida de liquido',
+              label:
+                ' Tiene hemorragia genital o perdida de liquido [Grado: 2]',
             },
             {
               id: '2-113200000',
@@ -2856,11 +2857,11 @@ export default {
               children: [
                 {
                   id: '2-113210000',
-                  label: ' Tiene dolor abdominal',
+                  label: ' Tiene dolor abdominal [Grado: 2]',
                 },
                 {
                   id: '2-113220000',
-                  label: ' No tiene dolor abdominal',
+                  label: ' No tiene dolor abdominal [Grado: 3]',
                 },
               ],
             },
@@ -2872,11 +2873,11 @@ export default {
           children: [
             {
               id: '2-114100000',
-              label: ' No puede hablar ni toser',
+              label: ' No puede hablar ni toser [Grado: 1]',
             },
             {
               id: '2-114200000',
-              label: ' Puede hablar o toser',
+              label: ' Puede hablar o toser [Grado: 2]',
             },
           ],
         },
@@ -2886,27 +2887,27 @@ export default {
           children: [
             {
               id: '2-115100000',
-              label: ' CONTROL DE INFECCIÓN RESPIRATORIA',
+              label: ' CONTROL DE INFECCIÓN RESPIRATORIA [Grado: 3]',
             },
             {
               id: '2-115200000',
-              label: ' CONTROL DE DIARREA O GASTROENTERITIS',
+              label: ' CONTROL DE DIARREA O GASTROENTERITIS [Grado: 3]',
             },
             {
               id: '2-115300000',
-              label: ' CONTROL DE ERUPTIVA',
+              label: ' CONTROL DE ERUPTIVA [Grado: 3]',
             },
             {
               id: '2-115400000',
-              label: ' CONTROL DE HIPERTENSION ARTERIAL',
+              label: ' CONTROL DE HIPERTENSION ARTERIAL [Grado: 3]',
             },
             {
               id: '2-115500000',
-              label: ' CONTROL DE SINDROME FEBRIL',
+              label: ' CONTROL DE SINDROME FEBRIL [Grado: 3]',
             },
             {
               id: '2-115600000',
-              label: ' CONTROL DE OTRA ENFERMEDAD',
+              label: ' CONTROL DE OTRA ENFERMEDAD [Grado: 3]',
             },
           ],
         },
@@ -2916,7 +2917,7 @@ export default {
           children: [
             {
               id: '2-116100000',
-              label: ' Se pone azul y luego se recupera',
+              label: ' Se pone azul y luego se recupera [Grado: 3]',
             },
             {
               id: '2-116200000',
@@ -2924,7 +2925,7 @@ export default {
               children: [
                 {
                   id: '2-116210000',
-                  label: ' Aparece Bruscamente y lo despierta',
+                  label: ' Aparece Bruscamente y lo despierta [Grado: 3]',
                 },
                 {
                   id: '2-116220000',
@@ -2932,11 +2933,11 @@ export default {
                   children: [
                     {
                       id: '2-116221000',
-                      label: ' Se calma al estar en brazos',
+                      label: ' Se calma al estar en brazos [Grado: 3]',
                     },
                     {
                       id: '2-116222000',
-                      label: ' No se calma al estar en brazos',
+                      label: ' No se calma al estar en brazos [Grado: 3]',
                     },
                   ],
                 },
@@ -2950,7 +2951,7 @@ export default {
           children: [
             {
               id: '2-14100000',
-              label: ' Tuvo trauma de cráneo',
+              label: ' Tuvo trauma de cráneo [Grado: 2]',
             },
             {
               id: '2-14200000',
@@ -2958,7 +2959,8 @@ export default {
               children: [
                 {
                   id: '2-14210000',
-                  label: ' Tiene cambios de conducta o alt conciencia',
+                  label:
+                    ' Tiene cambios de conducta o alt conciencia [Grado: 2]',
                 },
                 {
                   id: '2-14220000',
@@ -2966,11 +2968,11 @@ export default {
                   children: [
                     {
                       id: '2-14221000',
-                      label: ' Tiene vómitos',
+                      label: ' Tiene vómitos [Grado: 3]',
                     },
                     {
                       id: '2-14222000',
-                      label: ' No tiene vómitos',
+                      label: ' No tiene vómitos [Grado: 3]',
                     },
                   ],
                 },
@@ -2984,7 +2986,7 @@ export default {
           children: [
             {
               id: '2-16100000',
-              label: ' No está conciente',
+              label: ' No está conciente [Grado: 1]',
             },
             {
               id: '2-16200000',
@@ -2992,7 +2994,7 @@ export default {
               children: [
                 {
                   id: '2-16210000',
-                  label: ' Respira mal',
+                  label: ' Respira mal [Grado: 2]',
                 },
                 {
                   id: '2-16220000',
@@ -3000,7 +3002,7 @@ export default {
                   children: [
                     {
                       id: '2-16221000',
-                      label: ' Hace menos de 60 minutos',
+                      label: ' Hace menos de 60 minutos [Grado: 3]',
                     },
                     {
                       id: '2-16222000',
@@ -3008,11 +3010,11 @@ export default {
                       children: [
                         {
                           id: '2-16222100',
-                          label: '4- Tiene fiebre',
+                          label: ' Tiene fiebre [Grado: 3]',
                         },
                         {
                           id: '2-16222200',
-                          label: '4- No tiene fiebre',
+                          label: ' No tiene fiebre [Grado: 3]',
                         },
                       ],
                     },
@@ -3032,7 +3034,7 @@ export default {
               children: [
                 {
                   id: '2-18110000',
-                  label: ' Tiene alt. de la conciencia',
+                  label: ' Tiene alt. de la conciencia [Grado: 1]',
                 },
                 {
                   id: '2-18120000',
@@ -3040,7 +3042,7 @@ export default {
                   children: [
                     {
                       id: '2-18121000',
-                      label: ' Esta azulado o morado',
+                      label: ' Esta azulado o morado [Grado: 1]',
                     },
                     {
                       id: '2-18122000',
@@ -3048,12 +3050,12 @@ export default {
                       children: [
                         {
                           id: '2-18122100',
-                          label: '4- Tiene 2 años o más',
+                          label: ' Tiene 2 años o más',
                           children: [
                             {
                               id: '2-18122110',
                               label:
-                                ' Tiene dificultad para hablar por la disnea',
+                                ' Tiene dificultad para hablar por la disnea [Grado: 2]',
                             },
                             {
                               id: '2-18122120',
@@ -3062,7 +3064,7 @@ export default {
                             {
                               id: '2-18122210',
                               label:
-                                ' Tiene dificultad para dormir o alimentarse',
+                                ' Tiene dificultad para dormir o alimentarse [Grado: 2]',
                             },
                             {
                               id: '2-18122220',
@@ -3073,12 +3075,12 @@ export default {
                         },
                         {
                           id: '2-18122200',
-                          label: '4- Tiene menos de dos años',
+                          label: ' Tiene menos de dos años',
                           children: [
                             {
                               id: '2-18122110',
                               label:
-                                ' Tiene dificultad para hablar por la disnea',
+                                ' Tiene dificultad para hablar por la disnea [Grado: 2]',
                             },
                             {
                               id: '2-18122120',
@@ -3087,7 +3089,7 @@ export default {
                             {
                               id: '2-18122210',
                               label:
-                                ' Tiene dificultad para dormir o alimentarse',
+                                ' Tiene dificultad para dormir o alimentarse [Grado: 2]',
                             },
                             {
                               id: '2-18122220',
@@ -3108,11 +3110,11 @@ export default {
               children: [
                 {
                   id: '2-18210000',
-                  label: ' Tiene tos o fiebre',
+                  label: ' Tiene tos o fiebre [Grado: 3]',
                 },
                 {
                   id: '2-18220000',
-                  label: ' No tiene tos ni fiebre',
+                  label: ' No tiene tos ni fiebre [Grado: 3]',
                 },
               ],
             },
@@ -3128,11 +3130,13 @@ export default {
               children: [
                 {
                   id: '2-19110000',
-                  label: ' Tiene antecedentes de enfermedad cardiaca',
+                  label:
+                    ' Tiene antecedentes de enfermedad cardiaca [Grado: 2]',
                 },
                 {
                   id: '2-19120000',
-                  label: ' No tiene antecedentes de enfermedad cardiaca',
+                  label:
+                    ' No tiene antecedentes de enfermedad cardiaca [Grado: 3]',
                 },
               ],
             },
@@ -3142,11 +3146,11 @@ export default {
               children: [
                 {
                   id: '2-19210000',
-                  label: ' Tiene vómitos o diarrea',
+                  label: ' Tiene vómitos o diarrea [Grado: 3]',
                 },
                 {
                   id: '2-19220000',
-                  label: ' No tiene vómitos o diarrea',
+                  label: ' No tiene vómitos o diarrea [Grado: 3]',
                 },
               ],
             },
@@ -3158,7 +3162,7 @@ export default {
           children: [
             {
               id: '2-20100000',
-              label: ' Tiene antecedentes cardiacos',
+              label: ' Tiene antecedentes cardiacos [Grado: 1]',
             },
             {
               id: '2-20200000',
@@ -3166,7 +3170,7 @@ export default {
               children: [
                 {
                   id: '2-20210000',
-                  label: ' Tiene antecedentes de trauma de tórax',
+                  label: ' Tiene antecedentes de trauma de tórax [Grado: 2]',
                 },
                 {
                   id: '2-20220000',
@@ -3174,11 +3178,11 @@ export default {
                   children: [
                     {
                       id: '2-20221000',
-                      label: ' Tiene fiebre o tos',
+                      label: ' Tiene fiebre o tos [Grado: 3]',
                     },
                     {
                       id: '2-20222000',
-                      label: ' No tiene fiebre ni tos',
+                      label: ' No tiene fiebre ni tos [Grado: 3]',
                     },
                   ],
                 },
@@ -3192,7 +3196,8 @@ export default {
           children: [
             {
               id: '2-21100000',
-              label: ' Comenzó hace menos de 6 hs o se desconoce el tiemp',
+              label:
+                ' Comenzó hace menos de 6 hs o se desconoce el tiemp [Grado: 2]',
             },
             {
               id: '2-21200000',
@@ -3200,11 +3205,13 @@ export default {
               children: [
                 {
                   id: '2-21210000',
-                  label: ' Tiene dificultad para movilizar un miembro',
+                  label:
+                    ' Tiene dificultad para movilizar un miembro [Grado: 2]',
                 },
                 {
                   id: '2-21220000',
-                  label: ' No tiene dificultad para movilizar un miembro',
+                  label:
+                    ' No tiene dificultad para movilizar un miembro [Grado: 3]',
                 },
               ],
             },
@@ -3228,7 +3235,7 @@ export default {
                   children: [
                     {
                       id: '2-22121000',
-                      label: ' Tiene dolor abdominal',
+                      label: ' Tiene dolor abdominal [Grado: 3]',
                     },
                     {
                       id: '2-22122000',
@@ -3236,11 +3243,11 @@ export default {
                       children: [
                         {
                           id: '2-22122100',
-                          label: '4- Tiene ardor uretral',
+                          label: ' Tiene ardor uretral [Grado: 3]',
                         },
                         {
                           id: '2-22122200',
-                          label: '4- No tiene ardor uretral',
+                          label: ' No tiene ardor uretral [Grado: 3]',
                         },
                       ],
                     },
@@ -3254,11 +3261,11 @@ export default {
               children: [
                 {
                   id: '2-22210000',
-                  label: ' Tiene dolor abdominal',
+                  label: ' Tiene dolor abdominal [Grado: 3]',
                 },
                 {
                   id: '2-22220000',
-                  label: ' No tiene dolor abdominal',
+                  label: ' No tiene dolor abdominal [Grado: 3]',
                 },
               ],
             },
@@ -3270,7 +3277,7 @@ export default {
           children: [
             {
               id: '2-23100000',
-              label: ' Tiene dificultad para respirar',
+              label: ' Tiene dificultad para respirar [Grado: 1]',
             },
             {
               id: '2-23200000',
@@ -3278,7 +3285,7 @@ export default {
               children: [
                 {
                   id: '2-23210000',
-                  label: ' Tiene hinchada cara o lengua',
+                  label: ' Tiene hinchada cara o lengua [Grado: 2]',
                 },
                 {
                   id: '2-23220000',
@@ -3286,7 +3293,7 @@ export default {
                   children: [
                     {
                       id: '2-23221000',
-                      label: ' Tiene ronchas en la piel',
+                      label: ' Tiene ronchas en la piel [Grado: 3]',
                     },
                     {
                       id: '2-23222000',
@@ -3294,11 +3301,11 @@ export default {
                       children: [
                         {
                           id: '2-23222100',
-                          label: '4- Lo picó algún insecto',
+                          label: ' Lo picó algún insecto [Grado: 3]',
                         },
                         {
                           id: '2-23222200',
-                          label: '4- No lo picó ningún insecto',
+                          label: ' No lo picó ningún insecto [Grado: 3]',
                         },
                       ],
                     },
@@ -3314,7 +3321,7 @@ export default {
           children: [
             {
               id: '2-24100000',
-              label: ' No está conciente',
+              label: ' No está conciente [Grado: 1]',
             },
             {
               id: '2-24200000',
@@ -3322,11 +3329,11 @@ export default {
               children: [
                 {
                   id: '2-24210000',
-                  label: ' Respira mal',
+                  label: ' Respira mal [Grado: 1]',
                 },
                 {
                   id: '2-24220000',
-                  label: ' Respira bien',
+                  label: ' Respira bien [Grado: 2]',
                 },
               ],
             },
@@ -3338,7 +3345,7 @@ export default {
           children: [
             {
               id: '2-28100000',
-              label: ' No está conciente',
+              label: ' No está conciente [Grado: 1]',
             },
             {
               id: '2-28200000',
@@ -3346,7 +3353,7 @@ export default {
               children: [
                 {
                   id: '2-28210000',
-                  label: ' Respira mal',
+                  label: ' Respira mal [Grado: 1]',
                 },
                 {
                   id: '2-28220000',
@@ -3354,7 +3361,7 @@ export default {
                   children: [
                     {
                       id: '2-28221000',
-                      label: ' Está sudoroso',
+                      label: ' Está sudoroso [Grado: 2]',
                     },
                     {
                       id: '2-28222000',
@@ -3362,47 +3369,50 @@ export default {
                       children: [
                         {
                           id: '2-28222100',
-                          label: '4- Vómitos con sangre',
+                          label: ' Vómitos con sangre [Grado: 2]',
                           children: [
                             {
                               id: '2-28222210',
-                              label: ' Sangrado abundante',
+                              label: ' Sangrado abundante [Grado: 2]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222220',
-                              label: ' Sangrado escaso',
+                              label: ' Sangrado escaso [Grado: 3]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222410',
-                              label: ' Sin embarazo',
+                              label: ' Sin embarazo [Grado: 3]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
@@ -3412,67 +3422,74 @@ export default {
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222510',
-                              label: ' Tiene dificultad respiratoria',
+                              label:
+                                ' Tiene dificultad respiratoria [Grado: 2]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222520',
-                              label: ' No tiene dificultad respiratoria',
+                              label:
+                                ' No tiene dificultad respiratoria [Grado: 3]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222610',
-                              label: ' Tuvo traumatismo',
+                              label: ' Tuvo traumatismo [Grado: 2]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222620',
-                              label: ' No tuvo traumatismo',
+                              label: ' No tuvo traumatismo [Grado: 3]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
@@ -3480,47 +3497,50 @@ export default {
                         },
                         {
                           id: '2-28222200',
-                          label: '4- Materia fecal con sangre',
+                          label: ' Materia fecal con sangre',
                           children: [
                             {
                               id: '2-28222210',
-                              label: ' Sangrado abundante',
+                              label: ' Sangrado abundante [Grado: 2]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222220',
-                              label: ' Sangrado escaso',
+                              label: ' Sangrado escaso [Grado: 3]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222410',
-                              label: ' Sin embarazo',
+                              label: ' Sin embarazo [Grado: 3]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
@@ -3530,67 +3550,74 @@ export default {
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222510',
-                              label: ' Tiene dificultad respiratoria',
+                              label:
+                                ' Tiene dificultad respiratoria [Grado: 2]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222520',
-                              label: ' No tiene dificultad respiratoria',
+                              label:
+                                ' No tiene dificultad respiratoria [Grado: 3]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222610',
-                              label: ' Tuvo traumatismo',
+                              label: ' Tuvo traumatismo [Grado: 2]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222620',
-                              label: ' No tuvo traumatismo',
+                              label: ' No tuvo traumatismo [Grado: 3]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
@@ -3598,47 +3625,50 @@ export default {
                         },
                         {
                           id: '2-28222300',
-                          label: '4- Orina con sangre',
+                          label: ' Orina con sangre [Grado: 3]',
                           children: [
                             {
                               id: '2-28222210',
-                              label: ' Sangrado abundante',
+                              label: ' Sangrado abundante [Grado: 2]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222220',
-                              label: ' Sangrado escaso',
+                              label: ' Sangrado escaso [Grado: 3]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222410',
-                              label: ' Sin embarazo',
+                              label: ' Sin embarazo [Grado: 3]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
@@ -3648,67 +3678,74 @@ export default {
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222510',
-                              label: ' Tiene dificultad respiratoria',
+                              label:
+                                ' Tiene dificultad respiratoria [Grado: 2]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222520',
-                              label: ' No tiene dificultad respiratoria',
+                              label:
+                                ' No tiene dificultad respiratoria [Grado: 3]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222610',
-                              label: ' Tuvo traumatismo',
+                              label: ' Tuvo traumatismo [Grado: 2]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222620',
-                              label: ' No tuvo traumatismo',
+                              label: ' No tuvo traumatismo [Grado: 3]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
@@ -3716,47 +3753,50 @@ export default {
                         },
                         {
                           id: '2-28222400',
-                          label: '4- Sangrado ginecológico',
+                          label: ' Sangrado ginecológico',
                           children: [
                             {
                               id: '2-28222210',
-                              label: ' Sangrado abundante',
+                              label: ' Sangrado abundante [Grado: 2]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222220',
-                              label: ' Sangrado escaso',
+                              label: ' Sangrado escaso [Grado: 3]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222410',
-                              label: ' Sin embarazo',
+                              label: ' Sin embarazo [Grado: 3]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
@@ -3766,67 +3806,74 @@ export default {
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222510',
-                              label: ' Tiene dificultad respiratoria',
+                              label:
+                                ' Tiene dificultad respiratoria [Grado: 2]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222520',
-                              label: ' No tiene dificultad respiratoria',
+                              label:
+                                ' No tiene dificultad respiratoria [Grado: 3]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222610',
-                              label: ' Tuvo traumatismo',
+                              label: ' Tuvo traumatismo [Grado: 2]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222620',
-                              label: ' No tuvo traumatismo',
+                              label: ' No tuvo traumatismo [Grado: 3]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
@@ -3834,47 +3881,50 @@ export default {
                         },
                         {
                           id: '2-28222500',
-                          label: '4- Tos con sangre',
+                          label: ' Tos con sangre',
                           children: [
                             {
                               id: '2-28222210',
-                              label: ' Sangrado abundante',
+                              label: ' Sangrado abundante [Grado: 2]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222220',
-                              label: ' Sangrado escaso',
+                              label: ' Sangrado escaso [Grado: 3]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222410',
-                              label: ' Sin embarazo',
+                              label: ' Sin embarazo [Grado: 3]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
@@ -3884,67 +3934,74 @@ export default {
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222510',
-                              label: ' Tiene dificultad respiratoria',
+                              label:
+                                ' Tiene dificultad respiratoria [Grado: 2]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222520',
-                              label: ' No tiene dificultad respiratoria',
+                              label:
+                                ' No tiene dificultad respiratoria [Grado: 3]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222610',
-                              label: ' Tuvo traumatismo',
+                              label: ' Tuvo traumatismo [Grado: 2]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222620',
-                              label: ' No tuvo traumatismo',
+                              label: ' No tuvo traumatismo [Grado: 3]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
@@ -3952,47 +4009,50 @@ export default {
                         },
                         {
                           id: '2-28222600',
-                          label: '4- Sangra por nariz',
+                          label: ' Sangra por nariz',
                           children: [
                             {
                               id: '2-28222210',
-                              label: ' Sangrado abundante',
+                              label: ' Sangrado abundante [Grado: 2]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222220',
-                              label: ' Sangrado escaso',
+                              label: ' Sangrado escaso [Grado: 3]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222410',
-                              label: ' Sin embarazo',
+                              label: ' Sin embarazo [Grado: 3]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
@@ -4002,67 +4062,74 @@ export default {
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222510',
-                              label: ' Tiene dificultad respiratoria',
+                              label:
+                                ' Tiene dificultad respiratoria [Grado: 2]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222520',
-                              label: ' No tiene dificultad respiratoria',
+                              label:
+                                ' No tiene dificultad respiratoria [Grado: 3]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222610',
-                              label: ' Tuvo traumatismo',
+                              label: ' Tuvo traumatismo [Grado: 2]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222620',
-                              label: ' No tuvo traumatismo',
+                              label: ' No tuvo traumatismo [Grado: 3]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
@@ -4070,47 +4137,50 @@ export default {
                         },
                         {
                           id: '2-28222700',
-                          label: '4- Se desconoce por donde sangra',
+                          label: ' Se desconoce por donde sangra [Grado: 2]',
                           children: [
                             {
                               id: '2-28222210',
-                              label: ' Sangrado abundante',
+                              label: ' Sangrado abundante [Grado: 2]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222220',
-                              label: ' Sangrado escaso',
+                              label: ' Sangrado escaso [Grado: 3]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222410',
-                              label: ' Sin embarazo',
+                              label: ' Sin embarazo [Grado: 3]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
@@ -4120,67 +4190,74 @@ export default {
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222510',
-                              label: ' Tiene dificultad respiratoria',
+                              label:
+                                ' Tiene dificultad respiratoria [Grado: 2]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222520',
-                              label: ' No tiene dificultad respiratoria',
+                              label:
+                                ' No tiene dificultad respiratoria [Grado: 3]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222610',
-                              label: ' Tuvo traumatismo',
+                              label: ' Tuvo traumatismo [Grado: 2]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
                             {
                               id: '2-28222620',
-                              label: ' No tuvo traumatismo',
+                              label: ' No tuvo traumatismo [Grado: 3]',
                               children: [
                                 {
                                   id: '2-28222421',
-                                  label: ' Primer o segundo semestre',
+                                  label:
+                                    ' Primer o segundo semestre [Grado: 2]',
                                 },
                                 {
                                   id: '2-28222422',
-                                  label: ' Tercer trimestre',
+                                  label: ' Tercer trimestre [Grado: 2]',
                                 },
                               ],
                             },
@@ -4200,7 +4277,7 @@ export default {
           children: [
             {
               id: '2-29100000',
-              label: ' Dificultad para hablar',
+              label: ' Dificultad para hablar [Grado: 2]',
             },
             {
               id: '2-29200000',
@@ -4208,11 +4285,11 @@ export default {
               children: [
                 {
                   id: '2-29210000',
-                  label: ' Cefalea',
+                  label: ' Cefalea [Grado: 3]',
                 },
                 {
                   id: '2-29220000',
-                  label: ' Sin cefalea ni otros síntomas',
+                  label: ' Sin cefalea ni otros síntomas [Grado: 3]',
                 },
               ],
             },
@@ -4224,7 +4301,7 @@ export default {
           children: [
             {
               id: '2-30100000',
-              label: ' Tiene dolor de pecho',
+              label: ' Tiene dolor de pecho [Grado: 2]',
             },
             {
               id: '2-30200000',
@@ -4240,7 +4317,7 @@ export default {
                   children: [
                     {
                       id: '2-30221000',
-                      label: ' No tiene síntomas específicos',
+                      label: ' No tiene síntomas específicos [Grado: 3]',
                     },
                   ],
                 },
@@ -4254,11 +4331,11 @@ export default {
           children: [
             {
               id: '2-32100000',
-              label: ' Tuvo convulsiones',
+              label: ' Tuvo convulsiones [Grado: 2]',
             },
             {
               id: '2-32200000',
-              label: ' No tuvo convulsiones',
+              label: ' No tuvo convulsiones [Grado: 3]',
             },
           ],
         },
@@ -4268,7 +4345,7 @@ export default {
           children: [
             {
               id: '2-33100000',
-              label: ' No está consciente',
+              label: ' No está consciente [Grado: 1]',
             },
             {
               id: '2-33200000',
@@ -4276,7 +4353,7 @@ export default {
               children: [
                 {
                   id: '2-33210000',
-                  label: ' Respira mal',
+                  label: ' Respira mal [Grado: 1]',
                 },
                 {
                   id: '2-33220000',
@@ -4284,7 +4361,7 @@ export default {
                   children: [
                     {
                       id: '2-33221000',
-                      label: ' Ocurrió recién (menos de 2 horas)',
+                      label: ' Ocurrió recién (menos de 2 horas) [Grado: 2]',
                     },
                     {
                       id: '2-33222000',
@@ -4292,11 +4369,11 @@ export default {
                       children: [
                         {
                           id: '2-33222100',
-                          label: '4- Tiene náuseas, vómitos o cefalea',
+                          label: ' Tiene náuseas, vómitos o cefalea [Grado: 2]',
                         },
                         {
                           id: '2-33222200',
-                          label: '4- No tiene náuseas, vómitos ni cefalea',
+                          label: ' No tiene náuseas, vómitos ni cefalea',
                         },
                       ],
                     },
@@ -4316,17 +4393,17 @@ export default {
               children: [
                 {
                   id: '2-34110000',
-                  label: ' Está cursando un cólico renal',
+                  label: ' Está cursando un cólico renal [Grado: 2]',
                 },
                 {
                   id: '2-34120000',
-                  label: ' No está cursando un cólico renal',
+                  label: ' No está cursando un cólico renal [Grado: 3]',
                 },
               ],
             },
             {
               id: '2-34200000',
-              label: ' No tiene antecedentes de cólico renal',
+              label: ' No tiene antecedentes de cólico renal [Grado: 3]',
             },
           ],
         },
@@ -4336,7 +4413,7 @@ export default {
           children: [
             {
               id: '2-35100000',
-              label: ' Estuvo mucho tiempo parado',
+              label: ' Estuvo mucho tiempo parado [Grado: 3]',
             },
             {
               id: '2-35200000',
@@ -4344,11 +4421,11 @@ export default {
               children: [
                 {
                   id: '2-35210000',
-                  label: ' Está en ayunas',
+                  label: ' Está en ayunas [Grado: 3]',
                 },
                 {
                   id: '2-35220000',
-                  label: ' No está en ayunas',
+                  label: ' No está en ayunas [Grado: 3]',
                 },
               ],
             },
@@ -4360,7 +4437,7 @@ export default {
           children: [
             {
               id: '2-36100000',
-              label: ' Sangra mucho',
+              label: ' Sangra mucho [Grado: 1]',
             },
             {
               id: '2-36200000',
@@ -4368,11 +4445,11 @@ export default {
               children: [
                 {
                   id: '2-36210000',
-                  label: ' Lesiones múltiples y/o en cara',
+                  label: ' Lesiones múltiples y/o en cara [Grado: 2]',
                 },
                 {
                   id: '2-36220000',
-                  label: ' Sin lesiones múltiples o cara',
+                  label: ' Sin lesiones múltiples o cara [Grado: 3]',
                 },
               ],
             },
@@ -4384,7 +4461,7 @@ export default {
           children: [
             {
               id: '2-37100000',
-              label: ' Tiene vómitos con sangre',
+              label: ' Tiene vómitos con sangre [Grado: 2]',
             },
             {
               id: '2-37200000',
@@ -4392,7 +4469,7 @@ export default {
               children: [
                 {
                   id: '2-37210000',
-                  label: ' Tuvo traumatismo de cráneo',
+                  label: ' Tuvo traumatismo de cráneo [Grado: 2]',
                 },
                 {
                   id: '2-37220000',
@@ -4400,11 +4477,11 @@ export default {
                   children: [
                     {
                       id: '2-37221000',
-                      label: ' Tiene dolor abdominal',
+                      label: ' Tiene dolor abdominal [Grado: 3]',
                     },
                     {
                       id: '2-37222000',
-                      label: ' No tiene dolor abdominal',
+                      label: ' No tiene dolor abdominal [Grado: 3]',
                     },
                   ],
                 },
@@ -4418,7 +4495,7 @@ export default {
           children: [
             {
               id: '2-38100000',
-              label: ' No está consciente',
+              label: ' No está consciente [Grado: 1]',
             },
             {
               id: '2-38200000',
@@ -4426,7 +4503,7 @@ export default {
               children: [
                 {
                   id: '2-38210000',
-                  label: ' No respira o respira mal',
+                  label: ' No respira o respira mal [Grado: 1]',
                 },
                 {
                   id: '2-38220000',
@@ -4434,7 +4511,7 @@ export default {
                   children: [
                     {
                       id: '2-38221000',
-                      label: ' Tiene hemorragia evidente',
+                      label: ' Tiene hemorragia evidente [Grado: 1]',
                     },
                     {
                       id: '2-38222000',
@@ -4442,11 +4519,11 @@ export default {
                       children: [
                         {
                           id: '2-38222100',
-                          label: '4- Está caído en el suelo',
+                          label: ' Está caído en el suelo [Grado: 1]',
                         },
                         {
                           id: '2-38222200',
-                          label: '4- No está caído en el suelo',
+                          label: ' No está caído en el suelo [Grado: 2]',
                         },
                       ],
                     },
@@ -4462,11 +4539,11 @@ export default {
           children: [
             {
               id: '2-39100000',
-              label: ' Tiene dificultad para mover el miembro',
+              label: ' Tiene dificultad para mover el miembro [Grado: 3]',
             },
             {
               id: '2-39200000',
-              label: ' No tiene dificultad para mover el miembro',
+              label: ' No tiene dificultad para mover el miembro [Grado: 3]',
             },
           ],
         },
@@ -4476,7 +4553,7 @@ export default {
           children: [
             {
               id: '2-42100000',
-              label: ' Tiene alteracion de la conciencia',
+              label: ' Tiene alteracion de la conciencia [Grado: 2]',
             },
             {
               id: '2-42200000',
@@ -4484,7 +4561,7 @@ export default {
               children: [
                 {
                   id: '2-42210000',
-                  label: ' Esta sudoroso o pálido',
+                  label: ' Esta sudoroso o pálido [Grado: 2]',
                 },
                 {
                   id: '2-42220000',
@@ -4492,7 +4569,7 @@ export default {
                   children: [
                     {
                       id: '2-42221000',
-                      label: ' No se aplica insulina',
+                      label: ' No se aplica insulina [Grado: 3]',
                     },
                     {
                       id: '2-42222000',
@@ -4500,7 +4577,7 @@ export default {
                       children: [
                         {
                           id: '2-42222100',
-                          label: '4- Está hipoglucémico (menor a 70)',
+                          label: ' Está hipoglucémico (menor a 70) [Grado: 1]',
                           children: [
                             {
                               id: '2-42222210',
@@ -4508,7 +4585,7 @@ export default {
                               children: [
                                 {
                                   id: '2-42222211',
-                                  label: ' Mayor a 300',
+                                  label: ' Mayor a 300 [Grado: 2]',
                                 },
                                 {
                                   id: '2-42222212',
@@ -4518,11 +4595,11 @@ export default {
                             },
                             {
                               id: '2-42222220',
-                              label: ' No está hiperglucémico',
+                              label: ' No está hiperglucémico [Grado: 3]',
                               children: [
                                 {
                                   id: '2-42222211',
-                                  label: ' Mayor a 300',
+                                  label: ' Mayor a 300 [Grado: 2]',
                                 },
                                 {
                                   id: '2-42222212',
@@ -4534,7 +4611,7 @@ export default {
                         },
                         {
                           id: '2-42222200',
-                          label: '4- No está hipoglucémico',
+                          label: ' No está hipoglucémico',
                           children: [
                             {
                               id: '2-42222210',
@@ -4542,7 +4619,7 @@ export default {
                               children: [
                                 {
                                   id: '2-42222211',
-                                  label: ' Mayor a 300',
+                                  label: ' Mayor a 300 [Grado: 2]',
                                 },
                                 {
                                   id: '2-42222212',
@@ -4552,11 +4629,11 @@ export default {
                             },
                             {
                               id: '2-42222220',
-                              label: ' No está hiperglucémico',
+                              label: ' No está hiperglucémico [Grado: 3]',
                               children: [
                                 {
                                   id: '2-42222211',
-                                  label: ' Mayor a 300',
+                                  label: ' Mayor a 300 [Grado: 2]',
                                 },
                                 {
                                   id: '2-42222212',
@@ -4580,7 +4657,7 @@ export default {
           children: [
             {
               id: '2-43100000',
-              label: ' Respira mal',
+              label: ' Respira mal [Grado: 1]',
             },
             {
               id: '2-43200000',
@@ -4588,7 +4665,7 @@ export default {
               children: [
                 {
                   id: '2-43210000',
-                  label: ' Tiene hinchada la cara o lengua',
+                  label: ' Tiene hinchada la cara o lengua [Grado: 2]',
                 },
                 {
                   id: '2-43220000',
@@ -4600,7 +4677,7 @@ export default {
                     },
                     {
                       id: '2-43222000',
-                      label: ' Sin antecedentes de edema de glotis',
+                      label: ' Sin antecedentes de edema de glotis [Grado: 3]',
                     },
                   ],
                 },
@@ -4614,7 +4691,7 @@ export default {
           children: [
             {
               id: '2-44100000',
-              label: ' No está consciente',
+              label: ' No está consciente [Grado: 1]',
             },
             {
               id: '2-44200000',
@@ -4622,7 +4699,7 @@ export default {
               children: [
                 {
                   id: '2-44210000',
-                  label: ' Respira mal',
+                  label: ' Respira mal [Grado: 1]',
                 },
                 {
                   id: '2-44220000',
@@ -4630,7 +4707,7 @@ export default {
                   children: [
                     {
                       id: '2-44221000',
-                      label: ' En cara-torso-abdomen o todo miembro',
+                      label: ' En cara-torso-abdomen o todo miembro [Grado: 1]',
                     },
                     {
                       id: '2-44222000',
@@ -4648,7 +4725,7 @@ export default {
           children: [
             {
               id: '2-5100000',
-              label: ' No está conciente',
+              label: ' No está conciente [Grado: 1]',
             },
             {
               id: '2-5200000',
@@ -4656,11 +4733,11 @@ export default {
               children: [
                 {
                   id: '2-5210000',
-                  label: ' Tiene dolor de pecho',
+                  label: ' Tiene dolor de pecho [Grado: 1]',
                 },
                 {
                   id: '2-5220000',
-                  label: ' No tiene dolor de pecho',
+                  label: ' No tiene dolor de pecho [Grado: 2]',
                 },
               ],
             },
@@ -4672,7 +4749,7 @@ export default {
           children: [
             {
               id: '2-50100000',
-              label: ' Respira mal',
+              label: ' Respira mal [Grado: 2]',
             },
             {
               id: '2-50200000',
@@ -4680,7 +4757,7 @@ export default {
               children: [
                 {
                   id: '2-50210000',
-                  label: ' Está sangrando',
+                  label: ' Está sangrando [Grado: 2]',
                 },
                 {
                   id: '2-50220000',
@@ -4692,7 +4769,7 @@ export default {
                     },
                     {
                       id: '2-50222000',
-                      label: ' No tiene dolor en tórax',
+                      label: ' No tiene dolor en tórax [Grado: 3]',
                     },
                   ],
                 },
@@ -4706,7 +4783,7 @@ export default {
           children: [
             {
               id: '2-51100000',
-              label: ' Respira mal',
+              label: ' Respira mal [Grado: 2]',
             },
             {
               id: '2-51200000',
@@ -4714,7 +4791,7 @@ export default {
               children: [
                 {
                   id: '2-51210000',
-                  label: ' Orinó con sangre',
+                  label: ' Orinó con sangre [Grado: 2]',
                 },
                 {
                   id: '2-51220000',
@@ -4722,11 +4799,11 @@ export default {
                   children: [
                     {
                       id: '2-51221000',
-                      label: ' No mueve bien las piernas',
+                      label: ' No mueve bien las piernas [Grado: 2]',
                     },
                     {
                       id: '2-51222000',
-                      label: ' Mueve bien las piernas',
+                      label: ' Mueve bien las piernas [Grado: 3]',
                     },
                   ],
                 },
@@ -4740,7 +4817,7 @@ export default {
           children: [
             {
               id: '2-52100000',
-              label: ' Está inconsciente',
+              label: ' Está inconsciente [Grado: 1]',
             },
             {
               id: '2-52200000',
@@ -4748,7 +4825,7 @@ export default {
               children: [
                 {
                   id: '2-52210000',
-                  label: ' Está sangrando o sudoroso',
+                  label: ' Está sangrando o sudoroso [Grado: 1]',
                 },
                 {
                   id: '2-52220000',
@@ -4756,7 +4833,7 @@ export default {
                   children: [
                     {
                       id: '2-52221000',
-                      label: ' No se moviliza',
+                      label: ' No se moviliza [Grado: 2]',
                     },
                     {
                       id: '2-52222000',
@@ -4764,11 +4841,11 @@ export default {
                       children: [
                         {
                           id: '2-52222100',
-                          label: '4- Tiene dolor abdominal',
+                          label: ' Tiene dolor abdominal',
                         },
                         {
                           id: '2-52222200',
-                          label: '4- No tiene dolor abdominal',
+                          label: ' No tiene dolor abdominal [Grado: 3]',
                         },
                       ],
                     },
@@ -4784,7 +4861,7 @@ export default {
           children: [
             {
               id: '2-53100000',
-              label: ' No está consciente',
+              label: ' No está consciente [Grado: 1]',
             },
             {
               id: '2-53200000',
@@ -4792,7 +4869,7 @@ export default {
               children: [
                 {
                   id: '2-53210000',
-                  label: ' Respira mal',
+                  label: ' Respira mal [Grado: 2]',
                 },
                 {
                   id: '2-53220000',
@@ -4804,7 +4881,7 @@ export default {
                     },
                     {
                       id: '2-53222000',
-                      label: ' No está sangrando',
+                      label: ' No está sangrando [Grado: 3]',
                     },
                   ],
                 },
@@ -4818,7 +4895,8 @@ export default {
           children: [
             {
               id: '2-54100000',
-              label: ' Tiene el miembro deformado o imposibilidad de move',
+              label:
+                ' Tiene el miembro deformado o imposibilidad de move [Grado: 2]',
             },
             {
               id: '2-54200000',
@@ -4826,7 +4904,7 @@ export default {
               children: [
                 {
                   id: '2-54210000',
-                  label: ' Está sangrando',
+                  label: ' Está sangrando [Grado: 2]',
                 },
                 {
                   id: '2-54220000',
@@ -4838,7 +4916,7 @@ export default {
                     },
                     {
                       id: '2-54222000',
-                      label: ' No tiene dolor',
+                      label: ' No tiene dolor [Grado: 3]',
                     },
                   ],
                 },
@@ -4852,7 +4930,7 @@ export default {
           children: [
             {
               id: '2-55100000',
-              label: ' No esta consciente',
+              label: ' No esta consciente [Grado: 1]',
             },
             {
               id: '2-55200000',
@@ -4860,7 +4938,8 @@ export default {
               children: [
                 {
                   id: '2-55210000',
-                  label: ' Cuando se golpeó tuvo pérdida conocimiento',
+                  label:
+                    ' Cuando se golpeó tuvo pérdida conocimiento [Grado: 2]',
                 },
                 {
                   id: '2-55220000',
@@ -4868,7 +4947,7 @@ export default {
                   children: [
                     {
                       id: '2-55221000',
-                      label: ' Está sangrando',
+                      label: ' Está sangrando [Grado: 2]',
                     },
                     {
                       id: '2-55222000',
@@ -4876,19 +4955,21 @@ export default {
                       children: [
                         {
                           id: '2-55222100',
-                          label: '4- Tiene tendencia al sueño',
+                          label: ' Tiene tendencia al sueño [Grado: 2]',
                           children: [
                             {
                               id: '2-55222210',
-                              label: ' Tiene vómitos',
+                              label: ' Tiene vómitos [Grado: 2]',
                               children: [
                                 {
                                   id: '2-55222221',
-                                  label: ' Tiene cambios de conducta',
+                                  label:
+                                    ' Tiene cambios de conducta [Grado: 2]',
                                 },
                                 {
                                   id: '2-55222222',
-                                  label: ' No tiene cambios de conducta',
+                                  label:
+                                    ' No tiene cambios de conducta [Grado: 3]',
                                 },
                               ],
                             },
@@ -4898,11 +4979,13 @@ export default {
                               children: [
                                 {
                                   id: '2-55222221',
-                                  label: ' Tiene cambios de conducta',
+                                  label:
+                                    ' Tiene cambios de conducta [Grado: 2]',
                                 },
                                 {
                                   id: '2-55222222',
-                                  label: ' No tiene cambios de conducta',
+                                  label:
+                                    ' No tiene cambios de conducta [Grado: 3]',
                                 },
                               ],
                             },
@@ -4910,19 +4993,21 @@ export default {
                         },
                         {
                           id: '2-55222200',
-                          label: '4- No tiene tendencia al sueño',
+                          label: ' No tiene tendencia al sueño',
                           children: [
                             {
                               id: '2-55222210',
-                              label: ' Tiene vómitos',
+                              label: ' Tiene vómitos [Grado: 2]',
                               children: [
                                 {
                                   id: '2-55222221',
-                                  label: ' Tiene cambios de conducta',
+                                  label:
+                                    ' Tiene cambios de conducta [Grado: 2]',
                                 },
                                 {
                                   id: '2-55222222',
-                                  label: ' No tiene cambios de conducta',
+                                  label:
+                                    ' No tiene cambios de conducta [Grado: 3]',
                                 },
                               ],
                             },
@@ -4932,11 +5017,13 @@ export default {
                               children: [
                                 {
                                   id: '2-55222221',
-                                  label: ' Tiene cambios de conducta',
+                                  label:
+                                    ' Tiene cambios de conducta [Grado: 2]',
                                 },
                                 {
                                   id: '2-55222222',
-                                  label: ' No tiene cambios de conducta',
+                                  label:
+                                    ' No tiene cambios de conducta [Grado: 3]',
                                 },
                               ],
                             },
@@ -4956,7 +5043,7 @@ export default {
           children: [
             {
               id: '2-56100000',
-              label: ' El nino esta saliendo',
+              label: ' El nino esta saliendo [Grado: 1]',
             },
             {
               id: '2-56200000',
@@ -4964,7 +5051,7 @@ export default {
               children: [
                 {
                   id: '2-56210000',
-                  label: ' Perdió sangre',
+                  label: ' Perdió sangre [Grado: 1]',
                 },
                 {
                   id: '2-56220000',
@@ -4976,45 +5063,53 @@ export default {
                       children: [
                         {
                           id: '2-56221100',
-                          label: '4- Primer embrazo',
+                          label: ' Primer embrazo',
                           children: [
                             {
                               id: '2-56221110',
-                              label: ' Contracciones cada 2 minutos o menos',
+                              label:
+                                ' Contracciones cada 2 minutos o menos [Grado: 1]',
                             },
                             {
                               id: '2-56221120',
-                              label: ' Contracciones cada más de dos minutos',
+                              label:
+                                ' Contracciones cada más de dos minutos [Grado: 2]',
                             },
                             {
                               id: '2-56221210',
-                              label: ' Contracciones cada 5 minutos o menos',
+                              label:
+                                ' Contracciones cada 5 minutos o menos [Grado: 1]',
                             },
                             {
                               id: '2-56221220',
-                              label: ' Contracciones cada más de 5 minutos',
+                              label:
+                                ' Contracciones cada más de 5 minutos [Grado: 2]',
                             },
                           ],
                         },
                         {
                           id: '2-56221200',
-                          label: '4- Embarazos previos',
+                          label: ' Embarazos previos',
                           children: [
                             {
                               id: '2-56221110',
-                              label: ' Contracciones cada 2 minutos o menos',
+                              label:
+                                ' Contracciones cada 2 minutos o menos [Grado: 1]',
                             },
                             {
                               id: '2-56221120',
-                              label: ' Contracciones cada más de dos minutos',
+                              label:
+                                ' Contracciones cada más de dos minutos [Grado: 2]',
                             },
                             {
                               id: '2-56221210',
-                              label: ' Contracciones cada 5 minutos o menos',
+                              label:
+                                ' Contracciones cada 5 minutos o menos [Grado: 1]',
                             },
                             {
                               id: '2-56221220',
-                              label: ' Contracciones cada más de 5 minutos',
+                              label:
+                                ' Contracciones cada más de 5 minutos [Grado: 2]',
                             },
                           ],
                         },
@@ -5026,11 +5121,12 @@ export default {
                       children: [
                         {
                           id: '2-56222100',
-                          label: '4- Perdió líquido o rompió bolsa',
+                          label: ' Perdió líquido o rompió bolsa [Grado: 2]',
                         },
                         {
                           id: '2-56222200',
-                          label: '4- No perdió líquido ni rompió bolsa',
+                          label:
+                            ' No perdió líquido ni rompió bolsa [Grado: 3]',
                         },
                       ],
                     },
@@ -5046,7 +5142,7 @@ export default {
           children: [
             {
               id: '2-57100000',
-              label: ' No está lúcido',
+              label: ' No está lúcido [Grado: 1]',
             },
             {
               id: '2-57200000',
@@ -5054,7 +5150,7 @@ export default {
               children: [
                 {
                   id: '2-57210000',
-                  label: ' Tiene fiebre',
+                  label: ' Tiene fiebre [Grado: 3]',
                 },
                 {
                   id: '2-57220000',
@@ -5062,11 +5158,13 @@ export default {
                   children: [
                     {
                       id: '2-57221000',
-                      label: ' Tiene antecedentes de enfermedad de tiroides',
+                      label:
+                        ' Tiene antecedentes de enfermedad de tiroides [Grado: 3]',
                     },
                     {
                       id: '2-57222000',
-                      label: ' No tiene antecedentes de enfermedad de tiroides',
+                      label:
+                        ' No tiene antecedentes de enfermedad de tiroides [Grado: 3]',
                     },
                   ],
                 },
@@ -5080,7 +5178,7 @@ export default {
           children: [
             {
               id: '2-59100000',
-              label: ' Tiene fiebre',
+              label: ' Tiene fiebre [Grado: 3]',
             },
             {
               id: '2-59200000',
@@ -5088,7 +5186,7 @@ export default {
               children: [
                 {
                   id: '2-59210000',
-                  label: ' Antecedentes de problemas en tiroides',
+                  label: ' Antecedentes de problemas en tiroides [Grado: 3]',
                 },
                 {
                   id: '2-59220000',
@@ -5096,11 +5194,12 @@ export default {
                   children: [
                     {
                       id: '2-59221000',
-                      label: ' Antecedentes de enfermedad cardiaca',
+                      label: ' Antecedentes de enfermedad cardiaca [Grado: 3]',
                     },
                     {
                       id: '2-59222000',
-                      label: ' Sin antecedentes de enfermedad cardiaca',
+                      label:
+                        ' Sin antecedentes de enfermedad cardiaca [Grado: 3]',
                     },
                   ],
                 },
@@ -5114,15 +5213,15 @@ export default {
           children: [
             {
               id: '2-61100000',
-              label: ' Requiere grado 1',
+              label: ' Requiere grado 1 [Grado: 1]',
             },
             {
               id: '2-61200000',
-              label: ' Requiere grado 2',
+              label: ' Requiere grado 2 [Grado: 2]',
             },
             {
               id: '2-61300000',
-              label: ' Requiere grado 3',
+              label: ' Requiere grado 3 [Grado: 3]',
             },
           ],
         },
@@ -5132,7 +5231,7 @@ export default {
           children: [
             {
               id: '2-62100000',
-              label: ' Con sangrado activo',
+              label: ' Con sangrado activo [Grado: 2]',
             },
             {
               id: '2-62200000',
@@ -5146,7 +5245,7 @@ export default {
           children: [
             {
               id: '2-8100000',
-              label: ' Esta convulsionando ahora',
+              label: ' Esta convulsionando ahora [Grado: 1]',
             },
             {
               id: '2-8200000',
@@ -5154,7 +5253,7 @@ export default {
               children: [
                 {
                   id: '2-8210000',
-                  label: ' No está conciente',
+                  label: ' No está conciente [Grado: 1]',
                 },
                 {
                   id: '2-8220000',
@@ -5162,7 +5261,7 @@ export default {
                   children: [
                     {
                       id: '2-8221000',
-                      label: ' Respira mal',
+                      label: ' Respira mal [Grado: 2]',
                     },
                     {
                       id: '2-8222000',
@@ -5180,7 +5279,7 @@ export default {
           children: [
             {
               id: '2-9100000',
-              label: ' Está muy violento o agresivo',
+              label: ' Está muy violento o agresivo [Grado: 2]',
             },
             {
               id: '2-9200000',
@@ -5188,7 +5287,7 @@ export default {
               children: [
                 {
                   id: '2-9210000',
-                  label: ' Está alcoholizado o consumió drogas',
+                  label: ' Está alcoholizado o consumió drogas [Grado: 2]',
                 },
                 {
                   id: '2-9220000',
@@ -5196,11 +5295,11 @@ export default {
                   children: [
                     {
                       id: '2-9221000',
-                      label: ' Tuvo trauma de cráneo',
+                      label: ' Tuvo trauma de cráneo [Grado: 2]',
                     },
                     {
                       id: '2-9222000',
-                      label: ' No tuvo trauma de cráneo',
+                      label: ' No tuvo trauma de cráneo [Grado: 3]',
                     },
                   ],
                 },
@@ -5214,7 +5313,7 @@ export default {
           children: [
             {
               id: '2-97100000',
-              label: ' No se recuperó',
+              label: ' No se recuperó [Grado: 1]',
             },
             {
               id: '2-97200000',
@@ -5222,7 +5321,7 @@ export default {
               children: [
                 {
                   id: '2-97210000',
-                  label: ' Respira mal',
+                  label: ' Respira mal [Grado: 2]',
                 },
                 {
                   id: '2-97220000',
@@ -5230,7 +5329,7 @@ export default {
                   children: [
                     {
                       id: '2-97221000',
-                      label: ' Habla con dificultad',
+                      label: ' Habla con dificultad [Grado: 2]',
                     },
                     {
                       id: '2-97222000',
@@ -5238,11 +5337,11 @@ export default {
                       children: [
                         {
                           id: '2-97222100',
-                          label: '4- Tuvo traumatismo',
+                          label: ' Tuvo traumatismo [Grado: 1]',
                         },
                         {
                           id: '2-97222200',
-                          label: '4- No tuvo traumatismo',
+                          label: ' No tuvo traumatismo',
                         },
                       ],
                     },
