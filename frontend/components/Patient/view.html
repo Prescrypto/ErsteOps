@@ -259,6 +259,32 @@
     </div>
   </div>
 
+  <div class="row">
+    <div class="col-12">
+      <br />
+      <div class="c-field">
+        <label class="c-field__label" for="symptom_tree">
+          Árbol de Síntomas
+        </label>
+        <template>
+          <div>
+            <treeselect
+            :multiple="false"
+            :clearable="clearable"
+            :searchable="searchable"
+            :open-on-click="openOnClick"
+            :clear-on-select="clearOnSelect"
+            :options="options"
+            :limit="5"
+            :max-height="300"
+            :disable-branch-nodes="disableBranchNodes"
+            />
+          </div>
+        </template>
+      </div>
+    </div>
+  </div>
+
   <span class="c-divider u-mv-medium"></span>
 
   <div class="row">
@@ -289,21 +315,6 @@
         <label class="c-field__label" for="id_grade_type">
           Grado de Auxilio
         </label>
-        <template>
-          <div>
-            <treeselect
-            :multiple="false"
-            :clearable="clearable"
-            :searchable="searchable"
-            :open-on-click="openOnClick"
-            :clear-on-select="clearOnSelect"
-            :options="options"
-            :limit="5"
-            :max-height="300"
-            :disable-branch-nodes="disableBranchNodes"
-            />
-          </div>
-        </template>
         <select
           tabindex="15"
           v-model="source.grade_type"
@@ -358,7 +369,6 @@
       </small>
     </div>
   </div>
-
 
   <div class="row">
     <div class="col-12">
