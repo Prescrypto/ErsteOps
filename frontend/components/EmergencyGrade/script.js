@@ -66,13 +66,13 @@ export default {
         this.$emit('graded', response);
 
         this.$notify({
-          text: 'Se cambio el grado de la emergencia existosamente',
+          text: 'Se cambio el grado del auxilio existosamente',
           type: 'success',
         });
       } catch (err) {
         this.$emit('error', err);
         this.$notify({
-          text: 'No se pudo cambiar el grado de la emergencia',
+          text: 'No se pudo cambiar el grado del auxilio',
           type: 'error',
         });
       }
