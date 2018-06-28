@@ -259,13 +259,40 @@
     </div>
   </div>
 
+  <div class="row">
+    <div class="col-12">
+      <br />
+      <div class="c-field">
+        <label class="c-field__label" for="symptom_tree">
+          Árbol de Síntomas
+        </label>
+        <template>
+          <div>
+            <treeselect
+            v-model="source.tree_selection"
+            :multiple="false"
+            :clearable="clearable"
+            :searchable="searchable"
+            :open-on-click="openOnClick"
+            :clear-on-select="clearOnSelect"
+            :options="options"
+            :limit="5"
+            :max-height="300"
+            :disable-branch-nodes="disableBranchNodes"
+            />
+          </div>
+        </template>
+      </div>
+    </div>
+  </div>
+
   <span class="c-divider u-mv-medium"></span>
 
   <div class="row">
     <div class="col-4">
       <div class="c-field">
         <label class="c-field__label" for="id_service_category">
-          Tipo de emergencia
+          Tipo de Auxilio
         </label>
         <select
           tabindex="14"
@@ -287,7 +314,7 @@
     <div class="col-4">
       <div class="c-field">
         <label class="c-field__label" for="id_grade_type">
-          Grado Emergencia
+          Grado de Auxilio
         </label>
         <select
           tabindex="15"
@@ -304,9 +331,9 @@
         >
           <option value="" selected=""></option>
           <option value="G0">G0 - Por Definir</option>
-          <option value="G1">G1 - G1</option>
-          <option value="G2">G2 - G2</option>
-          <option value="G3">G3 - G3</option>
+          <option value="G1">G1 - Emergencia Médica</option>
+          <option value="G2">G2 - Urgencia Médica</option>
+          <option value="G3">G3 - Consulta Médica de Primer Contacto</option>
         </select>
       </div>
       <small v-show="errors.has('emergency.grade_type')" class="c-field__message u-color-danger">
@@ -343,7 +370,6 @@
       </small>
     </div>
   </div>
-
 
   <div class="row">
     <div class="col-12">

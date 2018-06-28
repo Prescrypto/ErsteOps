@@ -4,6 +4,7 @@ import { mapState, mapMutations, mapActions } from 'vuex';
 import VModal from 'vue-js-modal';
 import Notifications from 'vue-notification';
 import VTooltip from 'v-tooltip';
+import Treeselect from '@riophae/vue-treeselect';
 import VeeValidate, { Validator } from 'vee-validate';
 import es from 'vee-validate/dist/locale/es';
 import Search from 'components/Search';
@@ -22,6 +23,7 @@ import {
 Vue.use(VTooltip);
 Vue.use(Notifications);
 Vue.use(VModal);
+Vue.use(Treeselect);
 Vue.use(VeeValidate, { inject: false });
 Validator.localize('es', es);
 

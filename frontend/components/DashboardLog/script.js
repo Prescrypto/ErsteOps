@@ -55,12 +55,12 @@ export default {
           this.stopped = null;
 
           this.$notify({
-            text: 'Se ha finalizado la emergencia exitosamente.',
+            text: 'Se ha finalizado el auxilio exitosamente.',
             type: 'success',
           });
         } catch (err) {
           this.$notify({
-            text: 'Hubo un error al finalizar la emergencia.',
+            text: 'Hubo un error al finalizar el auxilio.',
             type: 'error',
           });
         }
