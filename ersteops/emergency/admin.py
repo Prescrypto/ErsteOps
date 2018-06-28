@@ -14,7 +14,7 @@ def update_is_active(EmergencyAdmin, request, queryset):
         emergency.is_active = True
         emergency.save()
 
-update_is_active.short_description = "Cambiar Auxilio a estado Activo"
+update_is_active.short_description = "Cambiar Emergencias a estado Activo"
 
 def update_non_active(EmergencyAdmin, request, queryset):
     # action fuction to help change to plan to users
@@ -22,7 +22,7 @@ def update_non_active(EmergencyAdmin, request, queryset):
         emergency.is_active = False
         emergency.save()
 
-update_non_active.short_description = "Cambiar Auxilios a estado Inactivo"
+update_non_active.short_description = "Cambiar Emergencias a estado Inactivo"
 
 
 class EmergencyAdmin(admin.ModelAdmin):
