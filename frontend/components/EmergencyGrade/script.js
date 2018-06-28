@@ -11,11 +11,11 @@ export default {
     grades: [
       {
         name: 'G3',
-        weight: 3,
+        weight: 1,
         description: 'Consulta Médica de Primer Contacto',
       },
       { name: 'G2', weight: 2, description: 'Urgencia Médica' },
-      { name: 'G1', weight: 1, description: 'Emergencia Médica' },
+      { name: 'G1', weight: 3, description: 'Emergencia Médica' },
       { name: 'G0', weight: 0, description: 'Sin Definir' },
     ],
   }),
@@ -66,13 +66,13 @@ export default {
         this.$emit('graded', response);
 
         this.$notify({
-          text: 'Se cambio el grado del auxilio existosamente',
+          text: 'Se cambio el grado de la emergencia existosamente',
           type: 'success',
         });
       } catch (err) {
         this.$emit('error', err);
         this.$notify({
-          text: 'No se pudo cambiar el grado del auxilio',
+          text: 'No se pudo cambiar el grado de la emergencia',
           type: 'error',
         });
       }
