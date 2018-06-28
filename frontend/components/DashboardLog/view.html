@@ -31,6 +31,7 @@
           <!-- <th class="c&#45;table__cell c&#45;table__cell&#45;&#45;head">Unidad</th> -->
           <th class="c-table__cell c-table__cell--head">Co-pago</th>
           <th class="c-table__cell c-table__cell--head">Tiempo</th>
+          <th class="c-table__cell c-table__cell--head">Estado</th>
           <th class="c-table__cell c-table__cell--head">
               <span class="u-hidden-visually">Acciones</span>
           </th>
@@ -59,6 +60,10 @@
         </td>
         <td class="c-table__cell" @click="populate(emergency.id)">
           <span class="u-text-mute">{{ emergency.start_time | time-since(now) }}</span>
+        </td>
+        <td class="c-table__cell" @click="populate(emergency.id)">
+          <span v-if="emergency.is_active" class="c-badge c-badge--small c-badge--success">En Camino</span>
+          <span v-else class="c-badge c-badge--small c-badge--success">Terminado</span>
         </td>
         <td class="c-table__cell u-text-center">
           <div class="c-dropdown dropdown">
