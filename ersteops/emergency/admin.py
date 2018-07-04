@@ -39,7 +39,7 @@ class EmergencyAdmin(admin.ModelAdmin):
         ('Paciente', {
             'fields': ('odoo_client', 'erste_code','has_paid', 'patient_name', 'patient_gender', 'patient_age',
                     'is_active', 'copago_amount','caller_name', 'caller_relation', 'subscription_type',
-                    'service_category', 'grade_type', 'zone',
+                    'tree_selection','service_category', 'grade_type', 'zone',
                     'main_complaint', 'complaint_description',
                     'patient_allergies', 'patient_illnesses', 'attention_final_grade',
                     'attention_justification', 'patient_notes',)

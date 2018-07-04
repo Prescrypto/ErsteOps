@@ -45,4 +45,5 @@ EMERGENCY_LIST_FIELDS = [
     'main_complaint',
     'complaint_description',
     'subscription_type',
+    'tree_selection',
 ]
