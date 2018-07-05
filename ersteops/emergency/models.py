@@ -43,6 +43,8 @@ class Emergency(models.Model):
     verbose_name="Zona de Atención"
         )
 
+    tree_selection = models.CharField("Internal Code for tree selection", blank=True, max_length=255, default="")
+
     # Timers
     start_time = models.DateTimeField("Inicio toma de datos", default=timezone.now)
     # Records when the operator ends capture of basic emergency data
@@ -231,6 +233,7 @@ def emergency_dictionary(instance):
         "erste_code": instance.erste_code,
         "grade_type":str(instance.grade_type),
         "zone":str(instance.zone),
+        "tree_selection": instance.tree_selection,
         "units": units,
         "start_time":instance.start_time.isoformat(),
         "end_time":instance.end_time.isoformat(),
