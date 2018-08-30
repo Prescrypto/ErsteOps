@@ -128,7 +128,7 @@ def getBaseData(start_date,end_date):
             Año=ExtractYear('created_at'),
             Semana=ExtractWeek('created_at'),
             Mes=ExtractMonth('created_at'),
-            #Fecha=Trunc('created_at', 'day', output_field=DateField()),
+            Fecha=Trunc('created_at', 'day', output_field=DateField()),
             Tiempo_de_Atencion=F('final_emergency_time')-F('start_time'),
             #Tiempo_de_Atencion=Cast(F('final_emergency_time')-F('start_time'),TimeField()),
             Tiempo_de_Llegada=Cast(F('arrival_time')-F('start_time'),TimeField()),
