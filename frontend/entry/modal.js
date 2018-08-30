@@ -103,6 +103,8 @@ window.Erste.modal = new Vue({
             text: 'Se ha guardado el auxilio en el sistema.',
             type: 'success',
           });
+          // close modal after submit if no errors
+          this.$modal.hide('incident-modal');
         })
         .catch(() => {
           this.$notify({
