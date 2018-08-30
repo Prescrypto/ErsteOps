@@ -27,7 +27,7 @@ class OdooApi(object):
 
         return response.json()
 
-    # Get patients matching string name
+    # Get patients matching string name (* in use)
     def get_by_patient_name(self,patient,access_token):
         url = self.url + '/api/res.partner/'
         payload = {"filters": "[(\"name\", \"ilike\", \"{}\")]".format(patient)}
@@ -58,7 +58,7 @@ class OdooApi(object):
         response = requests.get(url,headers=header)
         return response.json()
 
-    # Get company members by matching string name
+    # Get company members by matching string name (* in use)
     def get_by_company_member(self,patient,access_token):
         url = self.url + '/api/company.member/'
         payload = {"filters": "[(\"name\", \"ilike\", \"{}\")]".format(patient)}
@@ -66,7 +66,7 @@ class OdooApi(object):
         response = requests.get(url, json=payload, headers=header)
         return response.json()
 
-    # Get family memberes by matching string name
+    # Get family memberes by matching string name (* in use)
     def get_by_family_member(self,patient,access_token):
         url = self.url + '/api/family.member/'
         payload = {"filters": "[(\"name\", \"ilike\", \"{}\")]".format(patient)}
