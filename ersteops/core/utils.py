@@ -31,8 +31,13 @@ class OdooApi(object):
     def get_by_patient_name(self,patient,access_token):
         url = self.url + '/api/res.partner/'
         payload = {"filters": "[(\"name\", \"ilike\", \"{}\")]".format(patient)}
+        #payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\",\"=\",\"1\")]".format(patient)}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         response = requests.get(url, json=payload, headers=header)
+        print("**************************")
+        print("Get by active patient name")
+        print (response)
+        print("**************************")
         return response.json()
 
     # Get patients matching string street
@@ -61,17 +66,28 @@ class OdooApi(object):
     # Get company members by matching string name (* in use)
     def get_by_company_member(self,patient,access_token):
         url = self.url + '/api/company.member/'
-        payload = {"filters": "[(\"name\", \"ilike\", \"{}\")]".format(patient)}
+        #payload = {"filters": "[(\"name\", \"ilike\", \"{}\")]".format(patient)}
+        payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\" ,\"=\",1)]".format(patient)}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         response = requests.get(url, json=payload, headers=header)
+        print("**************************")
+        print("Get by active company member name")
+        print (response)
+        print("**************************")
         return response.json()
 
     # Get family memberes by matching string name (* in use)
     def get_by_family_member(self,patient,access_token):
         url = self.url + '/api/family.member/'
-        payload = {"filters": "[(\"name\", \"ilike\", \"{}\")]".format(patient)}
+        #payload = {"filters": "[(\"name\", \"ilike\", \"{}\")]".format(patient)}
+        #payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\",\"=\",true)]".format(patient)}
+        payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\" ,\"=\",1)]".format(patient)}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         response = requests.get(url, json=payload, headers=header)
+        print("**************************")
+        print("Get by active family member name")
+        print (response)
+        print("**************************")
         return response.json()
 
     # Get company member by id
