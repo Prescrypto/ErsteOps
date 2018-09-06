@@ -25,14 +25,23 @@ def get_subscriptor(request):
         # Get info from res.partner
         patients = _api_odoo.get_by_patient_name(q, result['access_token'])
         clients = patients['results']
+        # print("******** Find in Clients ********")
+        # print(clients)
+        # print("********")
 
         # get info from family.member
         family_members = _api_odoo.get_by_family_member(q, result['access_token'])
         clients_family = family_members['results']
+        # print("******** Find in Family Members ********")
+        # print(clients_family)
+        # print("********")
 
         # get info from company.member
         company_members = _api_odoo.get_by_company_member(q, result['access_token'])
         clients_company = company_members['results']
+        # print("******** Find in Company Members ********")
+        # print(clients_family)
+        # print("********")
 
         # Init result list
         results = []
