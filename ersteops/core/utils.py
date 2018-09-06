@@ -34,10 +34,10 @@ class OdooApi(object):
         #payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\",\"=\",\"1\")]".format(patient)}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         response = requests.get(url, json=payload, headers=header)
-        print("**************************")
-        print("Get by active patient name")
-        print (response)
-        print("**************************")
+        # print("**************************")
+        # print("Get by active patient name")
+        # print (response)
+        # print("**************************")
         return response.json()
 
     # Get patients matching string street
@@ -70,10 +70,10 @@ class OdooApi(object):
         payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\" ,\"=\",1)]".format(patient)}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         response = requests.get(url, json=payload, headers=header)
-        print("**************************")
-        print("Get by active company member name")
-        print (response)
-        print("**************************")
+        # print("**************************")
+        # print("Get by active company member name")
+        # print (response)
+        # print("**************************")
         return response.json()
 
     # Get family memberes by matching string name (* in use)
@@ -84,10 +84,10 @@ class OdooApi(object):
         payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\" ,\"=\",1)]".format(patient)}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         response = requests.get(url, json=payload, headers=header)
-        print("**************************")
-        print("Get by active family member name")
-        print (response)
-        print("**************************")
+        # print("**************************")
+        # print("Get by active family member name")
+        # print (response)
+        # print("**************************")
         return response.json()
 
     # Get company member by id
