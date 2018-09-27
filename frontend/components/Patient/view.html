@@ -153,7 +153,7 @@
       </div>
     </div>
     <div class="col-4">
-      <div
+<!--       <div
         @click="() => emergency.has_paid = !emergency.has_paid"
         class="subscription_switch"
         :class="{'c-switch': true, 'is-active': source.has_paid }"
@@ -164,7 +164,6 @@
           id="has_paid"
           type="checkbox"
           v-model="source.has_paid"
-          readonly
         />
         <label v-if="source.has_paid" class="c-switch__label" for="has_paid">
           Pagado
@@ -172,7 +171,7 @@
         <label v-else class="c-switch__label" for="has_paid">
           Pago Pendiente
         </label>
-      </div>
+      </div> -->
 
       <div class="c-field">
         <label class="c-field__label" for="id_subscription_type">
