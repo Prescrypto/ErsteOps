@@ -496,7 +496,8 @@ class EmergencyText(View):
         try:
             emergency = Emergency.objects.get(id=emergency_id)
             #content = str(emergency.id)
-            content_patient = "*Paciente:* _%s_, *Genero:* _%s_, *Edad:* _%s_, *Alergias:* _%s_, *Enfermedades:* _%s_, *Notas:* _%s_, *Sintomas:* _%s_,"%(
+            content_patient = "*No_Emergencia:* _%s_, *Paciente:* _%s_, *Genero:* _%s_, *Edad:* _%s_, *Alergias:* _%s_, *Enfermedades:* _%s_, *Notas:* _%s_, *Sintomas:* _%s_,"%(
+                emergency.id,
                 emergency.patient_name,
                 emergency.patient_gender,
                 emergency.patient_age,
@@ -506,8 +507,8 @@ class EmergencyText(View):
                 emergency.main_complaint,
                 )
 
-            content_service = " *No_Emergencia:* _%s_,*Categoria_Servicio:* _%s_, *Grado:* _%s_, *Zona:* _%s_."%(
-                emergency.id,
+            content_service = " *Categoria_Servicio:* _%s_, *Grado:* _%s_, *Zona:* _%s_."%(
+
                 emergency.service_category,
                 emergency.grade_type,
                 emergency.zone.name,
