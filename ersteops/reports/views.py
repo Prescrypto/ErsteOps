@@ -89,15 +89,15 @@ class BaseReport(View):
     def post(self, request, *args, **kwargs):
         form = SimpleDateSelector(request.POST)
         if form.is_valid():
-            data = getBaseData(form.cleaned_data['from_date'],form.cleaned_data['until_date'])
+            correct_end_date = form.cleaned_data['until_date'] + datetime.timedelta(days=1)
+            print(correct_end_date)
+            #data = getBaseData(form.cleaned_data['from_date'],form.cleaned_data['until_date'])
+            data = getBaseData(form.cleaned_data['from_date'],correct_end_date)
         return render(request, self.template_name,{"form": form,"data":data,})
 
 
 # Get queryset and return json
 def getBaseData(start_date,end_date):
-    # print("Get data")
-    # print(start_date)
-    # print(end_date)
     qs= Emergency.objects.filter(created_at__range=[start_date,end_date]).values(
             'id',
             #'zone',
