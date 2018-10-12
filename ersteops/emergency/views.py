@@ -353,7 +353,7 @@ def patient_json(source_id,patient_data,parent_data):
     patient_data_json = {}
     if source_id == 1:
         patient_data_json = {
-            "id_odoo_client" : patient_data['reference_id'] if patient_data.get('reference_id', 'None') != 'None' else "Sin ID",
+            "id_odoo_client" : patient_data['reference_id'] if patient_data.get('reference_id', 'None') != None else "Sin ID",
             "id_patient_name" : "{}".format(patient_data['name']),
             "id_patient_allergies" : '',
             "id_patient_illnesses" : '',
@@ -369,7 +369,7 @@ def patient_json(source_id,patient_data,parent_data):
         }
     else:
         patient_data_json ={
-            "id_odoo_client" : parent_data['reference_id'] if parent_data.get('reference_id', 'None') != 'None' else "Sin ID",
+            "id_odoo_client" : parent_data['reference_id'] if parent_data.get('reference_id', 'None') != None else "Sin ID",
             "id_patient_name" : "{} ({})".format(patient_data['name'], parent_data['name']),
             "id_patient_allergies" : patient_data['allergies'],
             "id_patient_illnesses" : patient_data['prev_ailments'],
@@ -496,16 +496,19 @@ class EmergencyText(View):
         try:
             emergency = Emergency.objects.get(id=emergency_id)
             #content = str(emergency.id)
-            content_patient = "*Paciente:* _%s_, *Genero:* _%s_, *Edad:* _%s_, *Alergias:* _%s_, *Enfermedades:* _%s_, *Notas:* _%s_,"%(
+            content_patient = "*No_Emergencia:* _%s_, *Paciente:* _%s_, *Genero:* _%s_, *Edad:* _%s_, *Alergias:* _%s_, *Enfermedades:* _%s_, *Notas:* _%s_, *Sintomas:* _%s_,"%(
+                emergency.id,
                 emergency.patient_name,
                 emergency.patient_gender,
                 emergency.patient_age,
                 emergency.patient_allergies,
                 emergency.patient_illnesses,
                 emergency.patient_notes,
+                emergency.main_complaint,
                 )
 
             content_service = " *Categoria_Servicio:* _%s_, *Grado:* _%s_, *Zona:* _%s_."%(
+
                 emergency.service_category,
                 emergency.grade_type,
                 emergency.zone.name,

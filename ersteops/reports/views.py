@@ -95,7 +95,8 @@ class BaseReport(View):
 
 # Get queryset and return json
 def getBaseData(start_date,end_date):
-    qs= Emergency.objects.filter(created_at__range=[start_date,end_date]).values(
+    correct_end_date = end_date + datetime.timedelta(days=1)
+    qs= Emergency.objects.filter(created_at__range=[start_date,correct_end_date]).values(
             'id',
             #'zone',
             #'patient_gender',
@@ -107,16 +108,27 @@ def getBaseData(start_date,end_date):
             ).annotate(
             Grado=F('grade_type'),
             Zona=F('zone'),
+            #Patient Data
             Genero=F('patient_gender'),
+            Paciente=F('patient_name'),
+            Edad=F('patient_age'),
+            No_Socio=F('odoo_client'),
+            Convenio=F('erste_code'),
+            Calle_y_Numero=F('address_street'),
+            Calle=F('address_extra'),
+            Codigo_Postal=F('address_zip_code'),
+            Delegacion=F('address_county'),
+            Colonia=F('address_col'),
             Tipo_Unidad=F('units__unit_type'),
+            Sintomas_Principal=F('main_complaint'),
             Categoria_Servicio=F('service_category__name'),
             Tipo_Subscripcion=F('subscription_type'),
             Año=ExtractYear('created_at'),
             Semana=ExtractWeek('created_at'),
             Mes=ExtractMonth('created_at'),
             Fecha=Trunc('created_at', 'day', output_field=DateField()),
-            #Tiempo_de_Atencion=F('final_emergency_time')-F('start_time'),
-            Tiempo_de_Atencion=Cast(F('final_emergency_time')-F('start_time'),TimeField()),
+            Tiempo_de_Atencion=F('final_emergency_time')-F('start_time'),
+            #Tiempo_de_Atencion=Cast(F('final_emergency_time')-F('start_time'),TimeField()),
             Tiempo_de_Llegada=Cast(F('arrival_time')-F('start_time'),TimeField()),
             Tiempo_de_Atención_Efectiva=Cast(F('attention_time')-F('start_time'),TimeField()),
             Tiempo_de_Asignación_de_Unidad=Cast(F('unit_assigned_time')-F('start_time'),TimeField()),
