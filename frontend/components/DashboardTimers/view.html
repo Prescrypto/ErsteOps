@@ -1,12 +1,41 @@
 <form>
-	<p>Timers here!</p>
-	<div class="c-field timers-update">
-		<input type="radio" id="one" value="One" v-model="picked">
-		<label for="one">One</label>
-		<br>
-		<input type="radio" id="two" value="Two" v-model="picked">
-		<label for="two">Two</label>
-		<br>
-		<span>Picked: {{ picked }}</span>
+	<div class="timers-update">
+    <div class="c-field">
+      <div class="timers-label">
+		    <input type="radio" id="two" value="1" v-model="timerPicked">
+        <label for="two">Despacho de Unidad</label>
+        <br>
+        <small class="c-field__message u-color-info">
+          {{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit',hour: '2-digit', minute: '2-digit'}).format(new Date(Date.parse(emergency.unit_dispatched_time)))}}
+        </small>
+      </div>
+      <div class="timers-label">
+		    <input type="radio" id="two" value="2" v-model="timerPicked">
+        <label for="two" >Arrivo de Unidad</label>
+        <br>
+        <small class="c-field__message u-color-info">
+          {{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit',hour: '2-digit', minute: '2-digit'}).format(new Date(Date.parse(emergency.arrival_time)))}}
+        </small>
+      </div>
+      <div class="timers-label">
+        <input type="radio" id="two" value="3" v-model="timerPicked">
+        <label for="two" >Inicio de Derivacion</label>
+        <br>
+        <small class="c-field__message u-color-info">
+          {{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit',hour: '2-digit', minute: '2-digit'}).format(new Date(Date.parse(emergency.derivation_time)))}}
+        </small>
+      </div>
+      <div class="timers-label">
+        <input type="radio" id="two" value="4" v-model="timerPicked">
+        <label for="two" >Llegada del Paciente al Hospital</label>
+        <br>
+        <small class="c-field__message u-color-info">
+          {{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit',hour: '2-digit', minute: '2-digit'}).format(new Date(Date.parse(emergency.patient_arrival)))}}
+        </small>
+      </div>
+      <div class="timers-button">
+        <button @click="submit" :disabled="!isValid" class="c-btn c-btn--info" v-close-popover>Actualizar Timer</button>
+      </div>
+    </div>
 	</div>
 </form>
