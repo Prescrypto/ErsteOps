@@ -86,7 +86,7 @@ def timer_view(request):
                 emergency.derivation_time = timezone.now()
             if data['timer_type'] == '4':
                 emergency.patient_arrival = timezone.now()
- 
+
             emergency.save()
             data.update({'status': 'success', 'client_id':emergency.odoo_client})
             response = JsonResponse(data)
