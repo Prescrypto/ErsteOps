@@ -53,6 +53,10 @@ class OdooApi(object):
         url = self.url + '/api/res.partner/' + patient_id + '/'
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         response = requests.get(url,headers=header)
+        print("***********************")
+        print("From odoo api")
+        print(str(response.json()).encode('utf-8'))
+        print("***********************")
         return response.json()
 
     # Get all odoo clients
@@ -70,10 +74,10 @@ class OdooApi(object):
         payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\" ,\"=\",1)]".format(patient)}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         response = requests.get(url, json=payload, headers=header)
-        # print("**************************")
-        # print("Get by active company member name")
-        # print (response)
-        # print("**************************")
+        print("**************************")
+        print("Get by active company member name")
+        print (response.json())
+        print("**************************")
         return response.json()
 
     # Get family memberes by matching string name (* in use)
@@ -84,10 +88,10 @@ class OdooApi(object):
         payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\" ,\"=\",1)]".format(patient)}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         response = requests.get(url, json=payload, headers=header)
-        # print("**************************")
-        # print("Get by active family member name")
-        # print (response)
-        # print("**************************")
+        print("**************************")
+        print("Get by active family member name")
+        print (response.json())
+        print("**************************")
         return response.json()
 
     # Get company member by id

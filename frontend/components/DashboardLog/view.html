@@ -38,6 +38,9 @@
           <th class="c-table__cell c-table__cell--head">
 
           </th>
+          <th class="c-table__cell c-table__cell--head">
+
+          </th>
       </tr>
     </thead>
 
@@ -103,6 +106,40 @@
           </v-popover>
           <span @click="e => stop(e, emergency.id)" class="fa fa-stop-circle-o"></span>
         </td>
+        <!-- Dashboard Timers -->
+        <td class="c-table__cell u-text-center">
+          <!-- Popover Timers-->
+          <v-popover
+            offset="20"
+            popoverClass="grade"
+            defaultInnerClass="grade__inner"
+            defaultArrowClass="grade__rrrow"
+            :auto-hide="true"
+            
+            :open="showTimersToolTip(emergency.id)"
+          >
+          <!-- This will be the popover target (for the events and position) -->
+            <span class="tooltip-target b3 fa fa-clock-o"></span>
+
+            <!-- This will be the content of the popover -->
+            <template slot="popover">
+              
+              <button
+                @click="stoppedTimer = null"
+                type="button"
+                class="grid__close c-close u-color-primary" v-close-popover>×</button>
+              <div class="grade__wrapper">
+                <h1 class="tooltip__heading u-h6 u-text-center">
+                  Timers
+                </h1>
+                <!-- You can put other components too -->
+                <dashboard-timers :emergency="emergency" />
+              </div>
+            </template>
+          </v-popover>
+          <!-- /Popover Timers-->
+        </td>
+        <!-- /Dashboard Timers -->
       </tr><!-- // .table__row -->
     </tbody>
   </table>

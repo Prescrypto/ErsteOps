@@ -3,14 +3,17 @@ import find from 'lodash/fp/find';
 import { mapState, mapActions, mapMutations, mapGetters } from 'vuex';
 import { MODAL_CHANGE_TAB, EMERGENCY_TEXT_CLEAR } from 'store/constants';
 import EmergencyGrade from 'components/EmergencyGrade';
+import DashboardTimers from 'components/DashboardTimers';
 
 export default {
   name: 'dashboard-log',
   data: () => ({
     now: Date.now(),
     stopped: null,
+    msg: 'hell!',
+    stoppedTimer: null,
   }),
-  components: { EmergencyGrade },
+  components: { EmergencyGrade, DashboardTimers },
   mounted() {
     setInterval(() => {
       this.$data.now = Date.now();
@@ -66,6 +69,11 @@ export default {
         }
       }
     },
+    // async stopTimers(id) {
+    // prevent modal from opening
+    // e.stopPropagation();
+    // console.log('you call stopTimers');
+    // },
     graded(id /* , data */) {
       this.stopTimer(id);
     },
@@ -103,6 +111,13 @@ export default {
       const isNotMostSevere = emergency.grade_type !== 'G1';
 
       return isStopped && isNotMostSevere;
+    },
+    showTimersToolTip(id) {
+      const isstoppedTimer = id === this.stoppedTimer;
+      // console.log("you call showTimersToolTip")
+      // console.log(isstoppedTimer);
+      // console.log(id);
+      return isstoppedTimer;
     },
     // maps the search action from the store to the component
     ...mapActions(['emergency', 'stopTimer', 'emergencyDetails']),
