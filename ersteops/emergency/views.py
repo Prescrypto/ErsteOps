@@ -61,6 +61,44 @@ def grade_view(request):
     else:
         return bad_response
 
+# Update Timer Functionality
+@csrf_exempt
+def timer_view(request):
+    ''' '''
+    bad_response = JsonResponse({'status':'bad request'})
+    bad_response.status_code = 400
+
+    if not request.is_ajax():
+        return bad_response
+    if not request.body:
+        return bad_response
+
+    data = json.loads(request.body.decode('utf-8'))
+
+    if 'id' in data and 'timer_type' in data :
+        try:
+            emergency = Emergency.objects.get(id=data['id'])
+            if data['timer_type'] == '1':
+                emergency.unit_dispatched_time = timezone.now()
+            if data['timer_type'] == '2':
+                emergency.arrival_time = timezone.now()
+            if data['timer_type'] == '3':
+                emergency.derivation_time = timezone.now()
+            if data['timer_type'] == '4':
+                emergency.patient_arrival = timezone.now()
+ 
+            emergency.save()
+            data.update({'status': 'success', 'client_id':emergency.odoo_client})
+            response = JsonResponse(data)
+            response.status_code = 202
+            return response
+        except Exception as e:
+            logger.error("[Update Timer View ERROR]: {}, type: {}".format(e, type(e)))
+            return bad_response
+
+    else:
+        return bad_response
+# /Update Timer Functionality
 
 @method_decorator(login_required, name='dispatch')
 class EmergencyBlank(View):
