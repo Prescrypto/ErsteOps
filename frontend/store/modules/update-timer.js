@@ -13,7 +13,7 @@ export default {
   },
   actions: {
     setUpdateTimer({ commit }, data) {
-      console.log('setupdatetomer!');
+      // console.log('setupdatetomer!');
       commit(EMERGENCY_SET_TIMER_UPDATE_START);
       return http
         .post('/emergency/ajax/update_timer/', data)
