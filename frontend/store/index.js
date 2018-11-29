@@ -52,6 +52,7 @@ import {
 } from './constants';
 import search from './modules/search';
 import finalGrade from './modules/final-grade';
+import updateTimer from './modules/update-timer';
 import { default as unitModule } from './modules/unit';
 
 // Use VueX
@@ -60,7 +61,7 @@ Vue.use(Vuex);
 // Create VueX store
 const store = new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
-  modules: { search, finalGrade, unit: unitModule },
+  modules: { search, finalGrade, updateTimer, unit: unitModule },
   state: {
     error: false,
     loading: false,
