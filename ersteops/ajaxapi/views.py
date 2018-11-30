@@ -7,8 +7,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 # Our methods
-from core.utils import OdooApi
-
+from core.utils import OdooApi, logger_debug
 
 # Load Logging definition, this is defined in settings.py in the LOGGING section
 logger = logging.getLogger('django_info')
@@ -25,26 +24,17 @@ def get_subscriptor(request):
         # Get info from res.partner
         patients = _api_odoo.get_by_patient_name(q, result['access_token'])
         clients = patients['results']
-        # print("******** Find in Clients ********")
-        # print(clients)
-        # print("********")
-        logger.debug("******** Find in Clients ********",clients)
+        logger_debug("******** Find in Clients ********",clients)
 
         # get info from family.member
         family_members = _api_odoo.get_by_family_member(q, result['access_token'])
         clients_family = family_members['results']
-        # print("******** Find in Family Members ********")
-        # print(clients_family)
-        # print("********")
-        logger.debug("******** Find in Family Members ********",clients_family)
+        logger_debug("******** Find in Family Members ********",clients_family)
 
         # get info from company.member
         company_members = _api_odoo.get_by_company_member(q, result['access_token'])
         clients_company = company_members['results']
-        # print("******** Find in Company Members ********")
-        # print(clients_family)
-        # print("********")
-        logger.debug("******** Find in Company Members ********",clients_family)
+        logger_debug("******** Find in Company Members ********",clients_company)
 
         # Init result list
         results = []
@@ -102,8 +92,7 @@ def get_subscriptor(request):
             results.append(client_json)
 
         data = json.dumps(results)
-        #print(results)
-        logger.debug("******** Final Results ********", results)
+        logger_debug("******** Final Results ********", results)
         logger.info('[SUCCESS AjaxApiReturn]')
     else:
       logger.error("[ERROR Subscriptor ajaxview] Request no Valido")
