@@ -25,23 +25,26 @@ def get_subscriptor(request):
         # Get info from res.partner
         patients = _api_odoo.get_by_patient_name(q, result['access_token'])
         clients = patients['results']
-        print("******** Find in Clients ********")
-        print(clients)
-        print("********")
+        # print("******** Find in Clients ********")
+        # print(clients)
+        # print("********")
+        logger.debug("******** Find in Clients ********",clients)
 
         # get info from family.member
         family_members = _api_odoo.get_by_family_member(q, result['access_token'])
         clients_family = family_members['results']
-        print("******** Find in Family Members ********")
-        print(clients_family)
-        print("********")
+        # print("******** Find in Family Members ********")
+        # print(clients_family)
+        # print("********")
+        logger.debug("******** Find in Family Members ********",clients_family)
 
         # get info from company.member
         company_members = _api_odoo.get_by_company_member(q, result['access_token'])
         clients_company = company_members['results']
-        print("******** Find in Company Members ********")
-        print(clients_family)
-        print("********")
+        # print("******** Find in Company Members ********")
+        # print(clients_family)
+        # print("********")
+        logger.debug("******** Find in Company Members ********",clients_family)
 
         # Init result list
         results = []
@@ -99,7 +102,8 @@ def get_subscriptor(request):
             results.append(client_json)
 
         data = json.dumps(results)
-        print(results)
+        #print(results)
+        logger.debug("******** Final Results ********", results)
         logger.info('[SUCCESS AjaxApiReturn]')
     else:
       logger.error("[ERROR Subscriptor ajaxview] Request no Valido")
