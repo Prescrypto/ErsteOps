@@ -92,7 +92,7 @@ def get_subscriptor(request):
             results.append(client_json)
 
         data = json.dumps(results)
-        logger_debug("******** Final Results ********", results)
+        logger_debug("******** Final Results ********", data)
         logger.info('[SUCCESS AjaxApiReturn]')
     else:
       logger.error("[ERROR Subscriptor ajaxview] Request no Valido")

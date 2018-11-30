@@ -15,9 +15,9 @@ def logger_debug(title="title",message="msg"):
     if settings.DEBUG:
         logger.debug(title)
         logger.debug(message)
-        #print("************ logger_debug working ***********")
-        #print(title)
-        #print(message)
+        # print("************ logger_debug working ***********")
+        # print(title)
+        # print(message)
 
 # Calculate event duration
 def eventDuration(start_duration,end_duration):
