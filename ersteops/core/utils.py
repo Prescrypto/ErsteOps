@@ -48,6 +48,17 @@ class OdooApi(object):
         logger_debug("Get by active patient name",str(response.json()).encode('utf-8'))
         return response.json()
 
+    # Get patients matching string id (* in use)
+    def get_like_patient_id(self,patient,access_token):
+        url = self.url + '/api/res.partner/'
+        payload = {"filters": "[(\"id\", \"=\", \"{}\")]".format(patient)}
+        #payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\",\"=\",\"1\")]".format(patient)}
+        header = {"Access-Token": access_token,"Content-Type":"text/html"}
+        response = requests.get(url, json=payload, headers=header)
+        logger_debug("Get by equal patient id",str(response.json()).encode('utf-8'))
+        return response.json()
+
+
     # Get patients matching string street
     def get_by_patient_street(self,patient,access_token):
         url = self.url + '/api/res.partner/'

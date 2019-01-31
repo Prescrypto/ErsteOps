@@ -12,6 +12,13 @@ from core.utils import OdooApi #, logger_debug
 # Load Logging definition, this is defined in settings.py in the LOGGING section
 logger = logging.getLogger('django_info')
 
+# Use this to check if the search can be made by client id
+def num(s):
+    try:
+        return int(s)
+    except ValueError:
+        return 0
+
 # Create your views here.
 def get_subscriptor(request):
     if request.is_ajax():
@@ -36,10 +43,38 @@ def get_subscriptor(request):
         clients_company = company_members['results']
         #logger_debug("******** Find in Company Members ********",clients_company)
 
+        #get client by erste id
+        #first convert q to integer
+        q_int = num(q)
+        if q_int != 0:
+            client_by_id = _api_odoo.get_like_patient_id(q, result['access_token'])
+            clients_by_id = client_by_id['results']
+        else:
+            clients_by_id = []
+        #logger_debug("******** Find in clients by id ********",clients_by_id)
+
         # Init result list
         results = []
         # Add res.partner data
         for client in clients:
+            if client.get('client_type', None) is None:
+                continue
+
+            client_export_id_label= client['reference_id'] if client.get('reference_id', 'None') != 'None' else "Sin ID"
+            client_json = {
+                "id": client['id'],
+                "label": "{} -({}) Id: {}".format(client['name'], str(client["client_type"]), client_export_id_label),
+                "value": "{} -({}) Id: {}".format(client['name'], str(client["client_type"]), client_export_id_label),
+                "parent_id": client['id'],
+                "client_type": client['client_type'],
+                "source": 'res.partner',
+                "client_export_id": client['reference_id'],
+                "target": str(client['id']).zfill(6) + str(1).zfill(6) + str(client['id']).zfill(6)
+            }
+            results.append(client_json)
+
+        # Add res.partner data by id
+        for client in clients_by_id:
             if client.get('client_type', None) is None:
                 continue
 
