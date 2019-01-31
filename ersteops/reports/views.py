@@ -107,6 +107,7 @@ def getBaseData(start_date,end_date):
             #'service_category__name'
             ).annotate(
             Grado=F('grade_type'),
+            Grado_Final=F('attention_final_grade'),
             Zona=F('zone'),
             #Patient Data
             Genero=F('patient_gender'),
