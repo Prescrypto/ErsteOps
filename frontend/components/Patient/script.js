@@ -5355,12 +5355,17 @@ export default {
     };
   },
   computed: {
+    // Remove this becase the plan is not included and the subscription type is begin keeped without translation on erste database
+    // subscription() {
+    //   var plan_type = (this.emergency.comment != null ? ' - Plan: ' + this.emergency.comment : ' N/A');
+    //   return {
+    //     company: 'Compañia' + plan_type,
+    //     family: 'Familia' + plan_type,
+    //     private: 'Privado' + plan_type,
+    //   }[this.emergency.subscription_type];
+    // },
     subscription() {
-      return {
-        company: 'Compañia',
-        family: 'Familia',
-        private: 'Privado',
-      }[this.emergency.subscription_type];
+      return this.emergency.subscription_type;
     },
     ...mapState(['loading', 'emergency']),
     source() {
