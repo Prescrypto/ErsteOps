@@ -430,7 +430,7 @@ def patient_json(source_id,patient_data,parent_data):
 
 def get_subscription_plan(client_type,subscriptionplan):
     ''' Fill subscription type: concatenate client type + plan (if any), contained in comment field in odoo/client model'''
-    subscriptionplan = " - Plan: " + subscriptionplan if subscriptionplan != None else ' Plan: N/A' 
+    subscriptionplan = " - Plan: " + subscriptionplan if subscriptionplan != None else ' - Plan: N/A' 
     subscription_plan='N/A'
     if client_type == 'company':
         subscription_plan = 'Compañia'
