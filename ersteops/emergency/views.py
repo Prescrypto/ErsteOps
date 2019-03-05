@@ -62,10 +62,9 @@ def grade_view(request):
         return bad_response
 
 # Update Timer Functionality
-# Update emergency timer when option selected in FE
 @csrf_exempt
 def timer_view(request):
-    ''' '''
+    ''' Update emergency timer when option selected in FE'''
     bad_response = JsonResponse({'status':'bad request'})
     bad_response.status_code = 400
 
@@ -430,7 +429,7 @@ def patient_json(source_id,patient_data,parent_data):
     return patient_data_json
 
 def get_subscription_plan(client_type,subscriptionplan):
-    subscriptionplan = " - Plan: " + subscriptionplan if subscriptionplan != 'None' else ' Plan: N/A' 
+    subscriptionplan = " - Plan: " + subscriptionplan if subscriptionplan != None else ' Plan: N/A' 
     subscription_plan='N/A'
     if client_type == 'company':
         subscription_plan = 'Compañia'
