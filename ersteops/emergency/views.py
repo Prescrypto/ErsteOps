@@ -62,6 +62,7 @@ def grade_view(request):
         return bad_response
 
 # Update Timer Functionality
+# Update emergency timer when option selected in FE
 @csrf_exempt
 def timer_view(request):
     ''' '''
