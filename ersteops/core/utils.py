@@ -6,6 +6,17 @@ import requests
 from requests.auth import HTTPBasicAuth
 from django.conf import settings
 
+# Load Logging definition, this is defined in settings.py in the LOGGING section
+logger = logging.getLogger('django_info')
+
+
+#Debug logger use this instead of print for debug in develop
+def logger_debug(title="title",message="msg"):
+    ''' Function to print debug loggers just with DEBUG True'''
+    if settings.DEBUG:
+        logger.info(title)
+        logger.info(message)
+
 
 # Calculate event duration
 def eventDuration(start_duration,end_duration):
@@ -34,11 +45,19 @@ class OdooApi(object):
         #payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\",\"=\",\"1\")]".format(patient)}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         response = requests.get(url, json=payload, headers=header)
-        # print("**************************")
-        # print("Get by active patient name")
-        # print (response)
-        # print("**************************")
+        logger_debug("Get by active patient name",str(response.json()).encode('utf-8'))
         return response.json()
+
+    # Get patients matching string id (* in use)
+    def get_like_patient_id(self,patient,access_token):
+        url = self.url + '/api/res.partner/'
+        payload = {"filters": "[(\"id\", \"=\", \"{}\")]".format(patient)}
+        #payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\",\"=\",\"1\")]".format(patient)}
+        header = {"Access-Token": access_token,"Content-Type":"text/html"}
+        response = requests.get(url, json=payload, headers=header)
+        logger_debug("Get by equal patient id",str(response.json()).encode('utf-8'))
+        return response.json()
+
 
     # Get patients matching string street
     def get_by_patient_street(self,patient,access_token):
@@ -53,6 +72,7 @@ class OdooApi(object):
         url = self.url + '/api/res.partner/' + patient_id + '/'
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         response = requests.get(url,headers=header)
+        logger_debug("From odoo api, patient_id",str(response.json()).encode('utf-8'))
         return response.json()
 
     # Get all odoo clients
@@ -70,10 +90,7 @@ class OdooApi(object):
         payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\" ,\"=\",1)]".format(patient)}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         response = requests.get(url, json=payload, headers=header)
-        # print("**************************")
-        # print("Get by active company member name")
-        # print (response)
-        # print("**************************")
+        logger_debug("Get by active company member name",str(response.json()).encode('utf-8'))
         return response.json()
 
     # Get family memberes by matching string name (* in use)
@@ -84,10 +101,7 @@ class OdooApi(object):
         payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\" ,\"=\",1)]".format(patient)}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         response = requests.get(url, json=payload, headers=header)
-        # print("**************************")
-        # print("Get by active family member name")
-        # print (response)
-        # print("**************************")
+        logger_debug("Get by active family member name",str(response.json()).encode('utf-8'))
         return response.json()
 
     # Get company member by id

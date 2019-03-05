@@ -1,0 +1,55 @@
+<form>
+	<div class="timers-update">
+    <div class="c-field">
+      <div class="timers-label">
+        <p class="timers-text">Inicio del auxilio </p>
+        <p>
+        <small class="c-field__message u-color-info">
+          {{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit',hour: '2-digit', minute: '2-digit'}).format(new Date(Date.parse(emergency.start_time)))}}
+        </small></p>
+      </div>
+      <div class="timers-label">
+        <p class="timers-text">Asignacion de Unidad </p>
+        <p>
+        <small class="c-field__message u-color-info">
+          {{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit',hour: '2-digit', minute: '2-digit'}).format(new Date(Date.parse(emergency.unit_assigned_time)))}}
+        </small></p>
+      </div>
+      <div class="timers-label">
+		    <input type="radio" id="two" value="1" v-model="timerPicked" :disabled="!isValidUnitDispatchedTime">
+        <label for="two">Despacho de Unidad</label>
+        <br>
+        <small class="c-field__message u-color-info">
+          {{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit',hour: '2-digit', minute: '2-digit'}).format(new Date(Date.parse(emergency.unit_dispatched_time)))}}
+        </small>
+      </div>
+      <div class="timers-label">
+		    <input type="radio" id="two" value="2" v-model="timerPicked" :disabled="!isValidArrivalTime">
+        <label for="two" >Arrivo de Unidad</label>
+        <br>
+        <small class="c-field__message u-color-info">
+          {{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit',hour: '2-digit', minute: '2-digit'}).format(new Date(Date.parse(emergency.arrival_time)))}}
+        </small>
+      </div>
+      <div class="timers-label">
+        <input type="radio" id="two" value="3" v-model="timerPicked" :disabled="!isValidDerivationTime">
+        <label for="two" >Inicio de Derivacion</label>
+        <br>
+        <small class="c-field__message u-color-info">
+          {{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit',hour: '2-digit', minute: '2-digit'}).format(new Date(Date.parse(emergency.derivation_time)))}}
+        </small>
+      </div>
+      <div class="timers-label">
+        <input type="radio" id="two" value="4" v-model="timerPicked" :disabled="!isValidPatientArrivalTime">
+        <label for="two" >Llegada del Paciente al Hospital</label>
+        <br>
+        <small class="c-field__message u-color-info">
+          {{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit',hour: '2-digit', minute: '2-digit'}).format(new Date(Date.parse(emergency.patient_arrival)))}}
+        </small>
+      </div>
+      <div class="timers-button">
+        <button @click="submit" :disabled="!isValid" class="c-btn c-btn--info" v-close-popover>Actualizar Timer</button>
+      </div>
+    </div>
+	</div>
+</form>

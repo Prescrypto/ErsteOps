@@ -11,6 +11,7 @@ import Search from 'components/Search';
 import Patient from 'components/Patient';
 import Addresses from 'components/Addresses';
 import Units from 'components/Units';
+// import Timers from 'components/Timers';
 import map from 'lodash/fp/map';
 import store from 'store';
 import {
@@ -39,6 +40,7 @@ window.Erste.modal = new Vue({
         { name: 'patient', label: 'Paciente' },
         { name: 'address', label: 'Dirección' },
         { name: 'units', label: 'Unidad' },
+        // { name: 'timers', label: 'Timers' },
         // temporarily lock
         // { name: 'timers', label: 'Timers' },
       ],

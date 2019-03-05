@@ -61,6 +61,44 @@ def grade_view(request):
     else:
         return bad_response
 
+# Update Timer Functionality
+@csrf_exempt
+def timer_view(request):
+    ''' Update emergency timer when option selected in FE'''
+    bad_response = JsonResponse({'status':'bad request'})
+    bad_response.status_code = 400
+
+    if not request.is_ajax():
+        return bad_response
+    if not request.body:
+        return bad_response
+
+    data = json.loads(request.body.decode('utf-8'))
+
+    if 'id' in data and 'timer_type' in data :
+        try:
+            emergency = Emergency.objects.get(id=data['id'])
+            if data['timer_type'] == '1':
+                emergency.unit_dispatched_time = timezone.now()
+            if data['timer_type'] == '2':
+                emergency.arrival_time = timezone.now()
+            if data['timer_type'] == '3':
+                emergency.derivation_time = timezone.now()
+            if data['timer_type'] == '4':
+                emergency.patient_arrival = timezone.now()
+
+            emergency.save()
+            data.update({'status': 'success', 'client_id':emergency.odoo_client})
+            response = JsonResponse(data)
+            response.status_code = 202
+            return response
+        except Exception as e:
+            logger.error("[Update Timer View ERROR]: {}, type: {}".format(e, type(e)))
+            return bad_response
+
+    else:
+        return bad_response
+# /Update Timer Functionality
 
 @method_decorator(login_required, name='dispatch')
 class EmergencyBlank(View):
@@ -360,12 +398,14 @@ def patient_json(source_id,patient_data,parent_data):
             "id_caller_relation": '',
             "id_patient_age": 0,
             "id_zone": str(patient_data['zone']).upper(),
-            "id_subscription_type": patient_data['client_type'],
+            #"id_subscription_type": patient_data['client_type'],
+            "id_subscription_type": get_subscription_plan(patient_data['client_type'],patient_data['comment']),
             "addresses": address_json(patient_data,patient_data),
             "min_addresses": min_address_json(patient_data,patient_data),
             "copago_amount": get_copago(patient_data.get('copago_amount', 0)),
             "has_paid" : patient_data.get('outstanding', False),
             "erste_code": patient_data.get('group_code','Sin Id'),
+            #"comment": patient_data['comment'],
         }
     else:
         patient_data_json ={
@@ -376,15 +416,30 @@ def patient_json(source_id,patient_data,parent_data):
             "id_caller_relation" : partner_relationship(source_id,patient_data['relationship']),
             "id_patient_age": patient_age(patient_data['birthday']),
             "id_zone": str(parent_data['zone']).upper(),
-            "id_subscription_type": parent_data['client_type'],
+            #"id_subscription_type": parent_data['client_type'],
+            "id_subscription_type": get_subscription_plan(patient_data['client_type'],patient_data['comment']),
             "addresses": address_json(parent_data,patient_data),
             "min_addresses": min_address_json(parent_data,patient_data),
             "copago_amount": get_copago(parent_data.get('copago_amount', 0)),
             "has_paid" : parent_data.get('outstanding', False),
             "erste_code": parent_data.get('group_code','Sin Id'),
+            #"comment": patient_data['comment'],
         }
     logger.info('[ GET PATIENTJSON FOR FILLUP EMERGENCY FORM SUCCESS ]')
     return patient_data_json
+
+def get_subscription_plan(client_type,subscriptionplan):
+    ''' Fill subscription type: concatenate client type + plan (if any), contained in comment field in odoo/client model'''
+    subscriptionplan = " - Plan: " + subscriptionplan if subscriptionplan != None else ' - Plan: N/A' 
+    subscription_plan='N/A'
+    if client_type == 'company':
+        subscription_plan = 'Compañia'
+    if client_type == 'family':
+        subscription_plan = 'Familia'
+    if client_type == 'private':
+        subscription_plan = 'Privado'
+    return subscription_plan + subscriptionplan
+
 
 def partner_relationship(source_id,patient_relation):
     RELATIONSHIP_CODES_FAMILY = {
