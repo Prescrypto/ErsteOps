@@ -399,7 +399,8 @@ def patient_json(source_id,patient_data,parent_data):
             "id_patient_age": 0,
             "id_zone": str(patient_data['zone']).upper(),
             #"id_subscription_type": patient_data['client_type'],
-            "id_subscription_type": get_subscription_plan(patient_data['client_type'],patient_data['comment']),
+            #"id_subscription_type": get_subscription_plan(patient_data['client_type'],patient_data['comment']),
+            "id_subscription_type": get_subscription_plan(patient_data.get('client_type','N/A'),patient_data.get('comment',None)),
             "addresses": address_json(patient_data,patient_data),
             "min_addresses": min_address_json(patient_data,patient_data),
             "copago_amount": get_copago(patient_data.get('copago_amount', 0)),
@@ -417,7 +418,8 @@ def patient_json(source_id,patient_data,parent_data):
             "id_patient_age": patient_age(patient_data['birthday']),
             "id_zone": str(parent_data['zone']).upper(),
             #"id_subscription_type": parent_data['client_type'],
-            "id_subscription_type": get_subscription_plan(patient_data['client_type'],patient_data['comment']),
+            #"id_subscription_type": get_subscription_plan(patient_data['client_type'],patient_data['comment']),
+            "id_subscription_type": get_subscription_plan(parent_data.get('client_type','N/A'),patient_data.get('comment',None)),
             "addresses": address_json(parent_data,patient_data),
             "min_addresses": min_address_json(parent_data,patient_data),
             "copago_amount": get_copago(parent_data.get('copago_amount', 0)),
@@ -429,7 +431,7 @@ def patient_json(source_id,patient_data,parent_data):
     return patient_data_json
 
 def get_subscription_plan(client_type,subscriptionplan):
-    subscriptionplan = " - Plan: " + subscriptionplan if subscriptionplan != 'None' else ' Plan: N/A' 
+    subscriptionplan = " - Plan: " + subscriptionplan if subscriptionplan != None else ' Plan: N/A' 
     subscription_plan='N/A'
     if client_type == 'company':
         subscription_plan = 'Compañia'
