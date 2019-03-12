@@ -426,9 +426,9 @@ def patient_json(source_id,patient_data,parent_data):
     logger.info('[ GET PATIENTJSON FOR FILLUP EMERGENCY FORM SUCCESS ]')
     return patient_data_json
 
-def get_subscription_plan(client_type,subscriptionplan):
-    '''Get client type from oddo , translates to spanish equivalent and add subscription plan from odoo comment field'''
-    subscriptionplan = " - Plan: " + subscriptionplan if subscriptionplan != None else ' Plan: N/A' 
+def get_subscription_plan(client_type,subscription_plan):
+    '''Get client type from odoo , translates to spanish equivalent and add subscription plan from odoo comment field'''
+    subscription_plan = " - Plan: " + subscription_plan if subscription_plan != None else ' Plan: N/A' 
     client_plan='N/A'
     if client_type == 'company':
         client_plan = 'Compañia'
@@ -436,7 +436,7 @@ def get_subscription_plan(client_type,subscriptionplan):
         client_plan = 'Familia'
     if client_type == 'private':
         client_plan = 'Privado'
-    return client_plan + subscriptionplan
+    return client_plan + subscription_plan
 
 
 def partner_relationship(source_id,patient_relation):
