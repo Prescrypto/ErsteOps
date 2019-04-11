@@ -32,7 +32,7 @@ class OdooApi(object):
 
     # Get Token
     def get_token(self):
-        url = self.url + '/api/auth/get_tokens'
+        url = self.url + '/api/auth/get_tokens/'
         payload = {'username': settings.ODOO_USERNAME, 'password': settings.ODOO_PASSWORD}
         response = requests.post(url, data=json.dumps(payload), headers=self.headers)
 
