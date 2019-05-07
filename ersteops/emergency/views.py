@@ -594,7 +594,7 @@ class EmergencyEnd(View):
             logger.error("[EmergencyEnd] Not found emergency with patient id")
             return redirect('/emergency/dashboard/')
         emergency.is_active = False
-        emergency.final_emergency_time = datetime.date.today()
+        emergency.final_emergency_time = timezone.now()
         emergency.save()
         logger.info('Emergency Stop! ID:{}'.format(emergency.id))
         return redirect('/emergency/dashboard/')
@@ -609,7 +609,7 @@ class EmergencyJsonEnd(View):
             logger.error("[Error EmergencyJsonEnd] Not found emergency with patient id")
             return HttpResponse(status=404)
         emergency.is_active = False
-        emergency.final_emergency_time = datetime.date.today()
+        emergency.final_emergency_time = timezone.now()
         for unit in emergency.units.all():
             unit.is_assigned = False
             unit.save()
