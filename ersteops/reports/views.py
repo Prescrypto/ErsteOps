@@ -14,10 +14,10 @@ from django.core import serializers
 import json
 import datetime
 
-from django.db.models import Value, IntegerField, DateTimeField, DateField, F, CharField, DurationField, TimeField
+from django.db.models import Value, IntegerField, DateTimeField, DateField, F, CharField, DurationField, TimeField, CharField
 from reports.forms import SimpleDateSelector
 #Date
-from datetime import date, timedelta, datetime
+from datetime import date, timedelta, datetime, tzinfo
 import datetime
 import calendar
 from django.utils import timezone
@@ -27,6 +27,8 @@ from collections import defaultdict
 from django.db.models.functions import (ExtractDay, ExtractMonth, ExtractWeek,ExtractWeekDay, ExtractYear, Trunc, Cast)
 
 from django.core.serializers.json import DjangoJSONEncoder
+
+from django.utils.timezone import activate
 
 # Create your views here.
 # ********************
@@ -96,7 +98,12 @@ class BaseReport(View):
 # Get queryset and return json
 def getBaseData(start_date,end_date):
     correct_end_date = end_date + datetime.timedelta(days=1)
-    qs= Emergency.objects.filter(created_at__range=[start_date,correct_end_date]).values(
+
+    # Define tzinfo
+    mex =  pytz.timezone(TIME_ZONE)
+    # Get queryset and overdirve tzinfo with localtimezone
+    with timezone.override(mex): 
+        qs= Emergency.objects.filter(created_at__date__range=[start_date,correct_end_date]).values(
             'id',
             #'zone',
             #'patient_gender',
@@ -127,14 +134,20 @@ def getBaseData(start_date,end_date):
             Año=ExtractYear('created_at'),
             Semana=ExtractWeek('created_at'),
             Mes=ExtractMonth('created_at'),
-            Fecha=Trunc('created_at', 'day', output_field=DateField()),
-            Tiempo_de_Atencion=F('final_emergency_time')-F('start_time'),
-            #Tiempo_de_Atencion=Cast(F('final_emergency_time')-F('start_time'),TimeField()),
+            Dia=ExtractDay('created_at',tzinfo=mex),
+            Fecha=Trunc('created_at', 'day', output_field=DateTimeField()),
+            Fecha_1=F('created_at'),
+            Fecha_2=F('start_time'),
+            #Fecha_2=Cast(F('created_at'),CharField()),
+            #Fecha_2=Trunc('created_at', 'minute', output_field=TimeField() ,tzinfo=mytzinfo),
+            #Tiempo_de_Atencion=F('final_emergency_time')-F('start_time'),
+            Tiempo_de_Atencion=Cast(F('final_emergency_time')-F('start_time'),TimeField()),
             Tiempo_de_Llegada=Cast(F('arrival_time')-F('start_time'),TimeField()),
             Tiempo_de_Atención_Efectiva=Cast(F('attention_time')-F('start_time'),TimeField()),
             Tiempo_de_Asignación_de_Unidad=Cast(F('unit_assigned_time')-F('start_time'),TimeField()),
             Tiempo_de_Despacho_de_Unidad=Cast(F('unit_dispatched_time')-F('start_time'),TimeField()),
             #duracion=(F('final_emergency_time')-F('start_time'),CharField()),
             )
-    #print(qs)
-    return json.dumps(list(qs), cls=DjangoJSONEncoder)
+        json_qs=json.dumps(list(qs), cls=DjangoJSONEncoder)
+    #return json.dumps(list(qs), cls=DjangoJSONEncoder)
+    return json_qs
