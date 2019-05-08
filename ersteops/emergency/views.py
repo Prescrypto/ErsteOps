@@ -82,6 +82,7 @@ def timer_view(request):
                 emergency.unit_dispatched_time = timezone.now()
             if data['timer_type'] == '2':
                 emergency.arrival_time = timezone.now()
+                emergency.attention_time = timezone.now()
             if data['timer_type'] == '3':
                 emergency.derivation_time = timezone.now()
             if data['timer_type'] == '4':
