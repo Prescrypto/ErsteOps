@@ -37,7 +37,7 @@ class OdooApi(object):
     def get_token(self):
         url = self.url + '/api/auth/get_tokens/'
         payload = {'username': settings.ODOO_USERNAME, 'password': settings.ODOO_PASSWORD}
-        result = None
+        result = {'access_token': None}
         try:
             response = requests.post(url, data=json.dumps(payload), headers=self.headers, timeout=TIMEOUT_TOLERANCE)
             result = response.json()
@@ -47,6 +47,7 @@ class OdooApi(object):
             logger_debug("DEBUG: Get token ERROR!",e)
             logger_debug("DEBUG: Get token ERROR!",response)
             logger.error("[ERROR OdooApi -> get_token]")
+            logger.error(e)
         return result
 
     # Get patients matching string name (* in use)
