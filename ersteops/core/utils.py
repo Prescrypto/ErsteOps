@@ -5,10 +5,13 @@ import logging
 import requests
 from requests.auth import HTTPBasicAuth
 from django.conf import settings
+from django.contrib import messages
 
 # Load Logging definition, this is defined in settings.py in the LOGGING section
 logger = logging.getLogger('django_info')
 
+
+TIMEOUT_TOLERANCE = 25
 
 #Debug logger use this instead of print for debug in develop
 def logger_debug(title="title",message="msg"):
@@ -34,9 +37,17 @@ class OdooApi(object):
     def get_token(self):
         url = self.url + '/api/auth/get_tokens/'
         payload = {'username': settings.ODOO_USERNAME, 'password': settings.ODOO_PASSWORD}
-        response = requests.post(url, data=json.dumps(payload), headers=self.headers)
-
-        return response.json()
+        result = None
+        try:
+            response = requests.post(url, data=json.dumps(payload), headers=self.headers, timeout=TIMEOUT_TOLERANCE)
+            result = response.json()
+            logger_debug("DEBUG: Get token succesfully",str(response.json()).encode('utf-8'))
+            logger.info('[SUCCESS OdooApi -> get_token]')
+        except Exception as e:
+            logger_debug("DEBUG: Get token ERROR!",e)
+            logger_debug("DEBUG: Get token ERROR!",response)
+            logger.error("[ERROR OdooApi -> get_token]")
+        return result
 
     # Get patients matching string name (* in use)
     def get_by_patient_name(self,patient,access_token):
