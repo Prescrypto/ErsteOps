@@ -73,18 +73,6 @@ class OdooApi(object):
         #payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\",\"=\",\"1\")]".format(patient)}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         caller = "get_by_patient_name"
-        #result = { 'results': [] }
-        # try:
-        #     response = requests.get(url, json=payload, headers=header)
-        #     result = response.json()
-        #     logger_debug("Get by get_by_patient_name",str(response.json()).encode('utf-8'))
-        #     logger.info('[SUCCESS OdooApi -> get_by_patient_name]')
-        # except Exception as e:
-        #     logger_debug("DEBUG: get_by_patient_name ERROR!",e)
-        #     logger_debug("DEBUG: get_by_patient_name ERROR!",response)
-        #     logger.error("[ERROR OdooApi -> get_by_patient_name]")
-        #     logger.error(e)    
-        # return result
         return get_odoo_call_result(url,payload,header,caller)
 
 
@@ -95,19 +83,6 @@ class OdooApi(object):
         #payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\",\"=\",\"1\")]".format(patient)}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         caller = "get_like_patient_id"
-        # result = { 'results': [] }
-        # try:
-        #     response = requests.get(url, json=payload, headers=header)
-        #     result = response.json()
-        #     logger_debug("Get by get_like_patient_id",str(response.json()).encode('utf-8'))
-        #     logger.info('[SUCCESS OdooApi -> get_like_patient_id]')
-        # except Exception as e:
-        #     logger_debug("DEBUG: get_like_patient_id ERROR!",e)
-        #     logger_debug("DEBUG: get_like_patient_id ERROR!",response)
-        #     logger.error("[ERROR OdooApi -> get_like_patient_id]")
-        #     logger.error(e)
-        # #logger_debug("Get by equal patient id",str(response.json()).encode('utf-8'))
-        # return result
         return get_odoo_call_result(url,payload,header,caller)
 
 
@@ -142,19 +117,6 @@ class OdooApi(object):
         payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\" ,\"=\",1)]".format(patient)}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         caller = "get_by_company_member"
-        # result = { 'results': [] }
-        # try:
-        #     response = requests.get(url, json=payload, headers=header)
-        #     result = response.json()
-        #     logger_debug("Get by get_by_company_member",str(response.json()).encode('utf-8'))
-        #     logger.info('[SUCCESS OdooApi -> get_by_company_member]')
-        # except Exception as e:
-        #     logger_debug("DEBUG: get_by_company_member ERROR!",e)
-        #     logger_debug("DEBUG: get_by_company_member ERROR!",response)
-        #     logger.error("[ERROR OdooApi -> get_by_company_member]")
-        #     logger.error(e)
-        # #logger_debug("Get by active company member name",str(response.json()).encode('utf-8'))
-        # return result
         return get_odoo_call_result(url,payload,header,caller)
 
     # Get family memberes by matching string name (* in use)
@@ -165,19 +127,6 @@ class OdooApi(object):
         payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\" ,\"=\",1)]".format(patient)}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         caller = "get_by_family_member"
-        # result = { 'results': [] }
-        # try:
-        #     response = requests.get(url, json=payload, headers=header)
-        #     result = response.json()
-        #     logger_debug("Get by get_by_family_member",str(response.json()).encode('utf-8'))
-        #     logger.info('[SUCCESS OdooApi -> get_by_family_member]')
-        # except Exception as e:
-        #     logger_debug("DEBUG: get_by_family_member ERROR!",e)
-        #     logger_debug("DEBUG: get_by_family_member ERROR!",response)
-        #     logger.error("[ERROR OdooApi -> get_by_family_member]")
-        #     logger.error(e)   
-        # #logger_debug("Get by active family member name",str(response.json()).encode('utf-8'))
-        # return result
         return get_odoo_call_result(url,payload,header,caller)
 
     # Get company member by id
