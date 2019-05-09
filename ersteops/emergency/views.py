@@ -82,6 +82,7 @@ def timer_view(request):
                 emergency.unit_dispatched_time = timezone.now()
             if data['timer_type'] == '2':
                 emergency.arrival_time = timezone.now()
+                emergency.attention_time = timezone.now()
             if data['timer_type'] == '3':
                 emergency.derivation_time = timezone.now()
             if data['timer_type'] == '4':
@@ -389,41 +390,46 @@ def handle_patient_data(patient_id):
 # Resume and clean patient and partner data
 def patient_json(source_id,patient_data,parent_data):
     patient_data_json = {}
-    if source_id == 1:
-        patient_data_json = {
-            "id_odoo_client" : patient_data['reference_id'] if patient_data.get('reference_id', 'None') != None else "Sin ID",
-            "id_patient_name" : "{}".format(patient_data['name']),
-            "id_patient_allergies" : '',
-            "id_patient_illnesses" : '',
-            "id_caller_relation": '',
-            "id_patient_age": 0,
-            "id_zone": str(patient_data['zone']).upper(),
-            "id_subscription_type": get_subscription_plan(patient_data.get('client_type','N/A'),patient_data.get('comment',None)),
-            "addresses": address_json(patient_data,patient_data),
-            "min_addresses": min_address_json(patient_data,patient_data),
-            "copago_amount": get_copago(patient_data.get('copago_amount', 0)),
-            "has_paid" : patient_data.get('outstanding', False),
-            "erste_code": patient_data.get('group_code','Sin Id'),
-            #"comment": patient_data['comment'],
-        }
-    else:
-        patient_data_json ={
-            "id_odoo_client" : parent_data['reference_id'] if parent_data.get('reference_id', 'None') != None else "Sin ID",
-            "id_patient_name" : "{} ({})".format(patient_data['name'], parent_data['name']),
-            "id_patient_allergies" : patient_data['allergies'],
-            "id_patient_illnesses" : patient_data['prev_ailments'],
-            "id_caller_relation" : partner_relationship(source_id,patient_data['relationship']),
-            "id_patient_age": patient_age(patient_data['birthday']),
-            "id_zone": str(parent_data['zone']).upper(),
-            "id_subscription_type": get_subscription_plan(parent_data.get('client_type','N/A'),patient_data.get('comment',None)),
-            "addresses": address_json(parent_data,patient_data),
-            "min_addresses": min_address_json(parent_data,patient_data),
-            "copago_amount": get_copago(parent_data.get('copago_amount', 0)),
-            "has_paid" : parent_data.get('outstanding', False),
-            "erste_code": parent_data.get('group_code','Sin Id'),
-            #"comment": patient_data['comment'],
-        }
-    logger.info('[ GET PATIENTJSON FOR FILLUP EMERGENCY FORM SUCCESS ]')
+    try:
+        if source_id == 1:
+            patient_data_json = {
+                "id_odoo_client" : patient_data['reference_id'] if patient_data.get('reference_id', 'None') != None else "Sin ID",
+                "id_patient_name" : "{}".format(patient_data['name']),
+                "id_patient_allergies" : '',
+                "id_patient_illnesses" : '',
+                "id_caller_relation": '',
+                "id_patient_age": 0,
+                "id_zone": str(patient_data['zone']).upper(),
+                "id_subscription_type": get_subscription_plan(patient_data.get('client_type','N/A'),patient_data.get('comment',None)),
+                "addresses": address_json(patient_data,patient_data),
+                "min_addresses": min_address_json(patient_data,patient_data),
+                "copago_amount": get_copago(patient_data.get('copago_amount', 0)),
+                "has_paid" : patient_data.get('outstanding', False),
+                "erste_code": patient_data.get('group_code','Sin Id'),
+                #"comment": patient_data['comment'],
+            }
+        else:
+            patient_data_json ={
+                "id_odoo_client" : parent_data['reference_id'] if parent_data.get('reference_id', 'None') != None else "Sin ID",
+                "id_patient_name" : "{} ({})".format(patient_data['name'], parent_data['name']),
+                "id_patient_allergies" : patient_data['allergies'],
+                "id_patient_illnesses" : patient_data['prev_ailments'],
+                "id_caller_relation" : partner_relationship(source_id,patient_data['relationship']),
+                "id_patient_age": patient_age(patient_data['birthday']),
+                "id_zone": str(parent_data['zone']).upper(),
+                "id_subscription_type": get_subscription_plan(parent_data.get('client_type','N/A'),patient_data.get('comment',None)),
+                "addresses": address_json(parent_data,patient_data),
+                "min_addresses": min_address_json(parent_data,patient_data),
+                "copago_amount": get_copago(parent_data.get('copago_amount', 0)),
+                "has_paid" : parent_data.get('outstanding', False),
+                "erste_code": parent_data.get('group_code','Sin Id'),
+                #"comment": patient_data['comment'],
+            }
+        logger.info('[ GET PATIENTJSON FOR FILLUP EMERGENCY FORM SUCCESS ]')
+    except Exception as e:
+        logger_debug("DEBUG: patient_json ERROR!",e)
+        logger.error("GET PATIENTJSON FOR FILLUP EMERGENCY FORM ERROR! ")
+        logger.error(e)      
     return patient_data_json
 
 def get_subscription_plan(client_type,subscription_plan):
@@ -594,7 +600,7 @@ class EmergencyEnd(View):
             logger.error("[EmergencyEnd] Not found emergency with patient id")
             return redirect('/emergency/dashboard/')
         emergency.is_active = False
-        emergency.final_emergency_time = datetime.date.today()
+        emergency.final_emergency_time = timezone.now()
         emergency.save()
         logger.info('Emergency Stop! ID:{}'.format(emergency.id))
         return redirect('/emergency/dashboard/')
@@ -609,7 +615,7 @@ class EmergencyJsonEnd(View):
             logger.error("[Error EmergencyJsonEnd] Not found emergency with patient id")
             return HttpResponse(status=404)
         emergency.is_active = False
-        emergency.final_emergency_time = datetime.date.today()
+        emergency.final_emergency_time = timezone.now()
         for unit in emergency.units.all():
             unit.is_assigned = False
             unit.save()

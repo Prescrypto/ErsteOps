@@ -27,32 +27,36 @@ def get_subscriptor(request):
         # Get Access token
         result = _api_odoo.get_token()
         q = request.GET.get('term', '')
+        # Check if access token is exist!
+        if result['access_token']:
+            #################
+            # Get info from res.partner
+            patients = _api_odoo.get_by_patient_name(q, result['access_token'])
+            clients = patients['results']
+            #logger_debug("******** Find in Clients ********",clients)
 
-        # Get info from res.partner
-        patients = _api_odoo.get_by_patient_name(q, result['access_token'])
-        clients = patients['results']
-        #logger_debug("******** Find in Clients ********",clients)
+            # get info from family.member
+            family_members = _api_odoo.get_by_family_member(q, result['access_token'])
+            clients_family = family_members['results']
+            #logger_debug("******** Find in Family Members ********",clients_family)
 
-        # get info from family.member
-        family_members = _api_odoo.get_by_family_member(q, result['access_token'])
-        clients_family = family_members['results']
-        #logger_debug("******** Find in Family Members ********",clients_family)
+            # get info from company.member
+            company_members = _api_odoo.get_by_company_member(q, result['access_token'])
+            clients_company = company_members['results']
+            #logger_debug("******** Find in Company Members ********",clients_company)
 
-        # get info from company.member
-        company_members = _api_odoo.get_by_company_member(q, result['access_token'])
-        clients_company = company_members['results']
-        #logger_debug("******** Find in Company Members ********",clients_company)
-
-        #get client by erste id
-        #first convert q to integer
-        q_int = num(q)
-        if q_int != 0:
-            client_by_id = _api_odoo.get_like_patient_id(q, result['access_token'])
-            clients_by_id = client_by_id['results']
+            #get client by erste id
+            #first convert q to integer
+            q_int = num(q)
+            if q_int != 0:
+                client_by_id = _api_odoo.get_like_patient_id(q, result['access_token'])
+                clients_by_id = client_by_id['results']
+            else:
+                clients_by_id = []
+            #logger_debug("******** Find in clients by id ********",clients_by_id)
+            ##################
         else:
-            clients_by_id = []
-        #logger_debug("******** Find in clients by id ********",clients_by_id)
-
+            clients = clients_family = clients_company = clients_by_id = []
         # Init result list
         results = []
         # Add res.partner data
