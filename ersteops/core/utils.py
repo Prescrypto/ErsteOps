@@ -25,20 +25,7 @@ def logger_debug(title="title",message="msg"):
 def eventDuration(start_duration,end_duration):
     return end_duration - start_duration
 
-# # Get odoo results
-# def get_odoo_call_result(url,payload,header,caller):
-#     result = { 'results': [] }
-#     try:
-#         response = requests.get(url, json=payload, headers=header)
-#         result = response.json()
-#         logger_debug("DEBUG Get by " + caller,str(response.json()).encode('utf-8'))
-#         logger.info('[SUCCESS OdooApi -> ' + caller + ']')
-#     except Exception as e:
-#         logger_debug("DEBUG: " + caller + " ERROR!",e)
-#         logger_debug("DEBUG: " + caller + " ERROR!",response)
-#         logger.error("[ERROR OdooApi -> " + caller + "]")
-#         logger.error(e)    
-#     return result   
+
 
 class OdooApi(object):
 
