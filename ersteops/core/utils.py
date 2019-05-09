@@ -25,20 +25,20 @@ def logger_debug(title="title",message="msg"):
 def eventDuration(start_duration,end_duration):
     return end_duration - start_duration
 
-# Get odoo results
-def get_odoo_call_result(url,payload,header,caller):
-    result = { 'results': [] }
-    try:
-        response = requests.get(url, json=payload, headers=header)
-        result = response.json()
-        logger_debug("DEBUG Get by " + caller,str(response.json()).encode('utf-8'))
-        logger.info('[SUCCESS OdooApi -> ' + caller + ']')
-    except Exception as e:
-        logger_debug("DEBUG: " + caller + " ERROR!",e)
-        logger_debug("DEBUG: " + caller + " ERROR!",response)
-        logger.error("[ERROR OdooApi -> " + caller + "]")
-        logger.error(e)    
-    return result   
+# # Get odoo results
+# def get_odoo_call_result(url,payload,header,caller):
+#     result = { 'results': [] }
+#     try:
+#         response = requests.get(url, json=payload, headers=header)
+#         result = response.json()
+#         logger_debug("DEBUG Get by " + caller,str(response.json()).encode('utf-8'))
+#         logger.info('[SUCCESS OdooApi -> ' + caller + ']')
+#     except Exception as e:
+#         logger_debug("DEBUG: " + caller + " ERROR!",e)
+#         logger_debug("DEBUG: " + caller + " ERROR!",response)
+#         logger.error("[ERROR OdooApi -> " + caller + "]")
+#         logger.error(e)    
+#     return result   
 
 class OdooApi(object):
 
@@ -66,6 +66,22 @@ class OdooApi(object):
         return result
 
 
+    # Get odoo results
+    def get_odoo_call_result(self,url,payload,header,caller):
+        result = { 'results': [] }
+        try:
+            response = requests.get(url, json=payload, headers=header)
+            result = response.json()
+            logger_debug("DEBUG Get by " + caller,str(response.json()).encode('utf-8'))
+            logger.info('[SUCCESS OdooApi -> ' + caller + ']')
+        except Exception as e:
+            logger_debug("DEBUG: " + caller + " ERROR!",e)
+            logger_debug("DEBUG: " + caller + " ERROR!",response)
+            logger.error("[ERROR OdooApi -> " + caller + "]")
+            logger.error(e)    
+        return result   
+
+
     # Get patients matching string name (* in use)
     def get_by_patient_name(self,patient,access_token):
         url = self.url + '/api/res.partner/'
@@ -73,7 +89,7 @@ class OdooApi(object):
         #payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\",\"=\",\"1\")]".format(patient)}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         caller = "get_by_patient_name"
-        return get_odoo_call_result(url,payload,header,caller)
+        return self.get_odoo_call_result(url,payload,header,caller)
 
 
     # Get patients matching string id (* in use)
@@ -83,7 +99,7 @@ class OdooApi(object):
         #payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\",\"=\",\"1\")]".format(patient)}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         caller = "get_like_patient_id"
-        return get_odoo_call_result(url,payload,header,caller)
+        return self.get_odoo_call_result(url,payload,header,caller)
 
 
     # Get patients matching string street
@@ -117,7 +133,7 @@ class OdooApi(object):
         payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\" ,\"=\",1)]".format(patient)}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         caller = "get_by_company_member"
-        return get_odoo_call_result(url,payload,header,caller)
+        return self.get_odoo_call_result(url,payload,header,caller)
 
     # Get family memberes by matching string name (* in use)
     def get_by_family_member(self,patient,access_token):
@@ -127,7 +143,7 @@ class OdooApi(object):
         payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\" ,\"=\",1)]".format(patient)}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         caller = "get_by_family_member"
-        return get_odoo_call_result(url,payload,header,caller)
+        return self.get_odoo_call_result(url,payload,header,caller)
 
     # Get company member by id
     def get_by_company_member_id(self,patient_id,access_token):

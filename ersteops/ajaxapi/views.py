@@ -56,10 +56,7 @@ def get_subscriptor(request):
             #logger_debug("******** Find in clients by id ********",clients_by_id)
             ##################
         else:
-            clients = []
-            clients_family = []
-            clients_company = []
-            clients_by_id = []
+            clients = clients_family = clients_company = clients_by_id = []
         # Init result list
         results = []
         # Add res.partner data
