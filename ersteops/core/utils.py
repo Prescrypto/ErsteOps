@@ -47,7 +47,7 @@ class OdooApi(object):
             logger.info('[SUCCESS OdooApi -> get_token]')
         except Exception as e:
             logger_debug("DEBUG: Get token ERROR!",e)
-            logger_debug("DEBUG: Get token ERROR!",response)
+            logger_debug("DEBUG: Get token ERROR!",result)
             logger.error("[ERROR OdooApi -> get_token]")
             logger.error(e)
         return result
