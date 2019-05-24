@@ -427,7 +427,7 @@ def patient_json(source_id,patient_data,parent_data):
             }
         logger.info('[ GET PATIENTJSON FOR FILLUP EMERGENCY FORM SUCCESS ]')
     except Exception as e:
-        logger_debug("DEBUG: patient_json ERROR!",e)
+        logger.error("DEBUG: patient_json ERROR!")
         logger.error("GET PATIENTJSON FOR FILLUP EMERGENCY FORM ERROR! ")
         logger.error(e)      
     return patient_data_json
