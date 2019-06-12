@@ -266,6 +266,7 @@
         <template>
           <div>
             <treeselect
+            tabindex="14"
             v-model="source.tree_selection"
             :multiple="false"
             :clearable="clearable"
@@ -284,6 +285,37 @@
   </div>
 
   <span class="c-divider u-mv-medium"></span>
+  <div class="row">
+    <div class="col-6">
+      <label class="c-field__label" for="id_tel_local">
+        Teléfono
+      </label>
+      <input
+        tabindex="15"
+        v-model="source.tel_local"
+        type="text"
+        name="tel_local"
+        id="id_tel_local"
+        class="c-input"
+        maxlength="33"
+      />
+    </div>
+    <div class="col-6">
+      <label class="c-field__label" for="id_tel_mobile">
+        Celular
+      </label>
+      <input
+        tabindex="16"
+        v-model="source.tel_mobile"
+        type="text"
+        name="tel_mobile"
+        id="id_tel_mobile"
+        class="c-input"
+        maxlength="33"
+      />
+    </div>  
+  </div>
+  <span class="c-divider u-mv-medium"></span>
 
   <div class="row">
     <div class="col-4">
@@ -292,7 +324,7 @@
           Tipo de Auxilio
         </label>
         <select
-          tabindex="14"
+          tabindex="17"
           v-model="source.service_category"
           name="service_category"
           id="id_service_category"
@@ -314,7 +346,7 @@
           Grado de Auxilio
         </label>
         <select
-          tabindex="15"
+          tabindex="18"
           v-model="source.grade_type"
           v-validate="'required'"
           data-vv-scope="emergency"
@@ -343,7 +375,7 @@
           Co-pago
         </label>
         <input
-          tabindex="16"
+          tabindex="19"
           v-model="copago"
           v-validate="'required|decimal:2'"
           :class="{
@@ -369,17 +401,34 @@
   </div>
 
   <div class="row">
-    <div class="col-12">
+    <div class="col-6">
       <br />
       <div class="c-field">
         <label class="c-field__label" for="id_patient_notes">
-          Notas paciente
+          Notas Paciente
         </label>
         <textarea
-          tabindex="17"
+          tabindex="20"
           v-model="source.patient_notes"
           name="patient_notes"
           id="id_patient_notes"
+          class="c-input"
+          rows="2"
+          cols="40"
+        ></textarea>
+      </div>
+    </div>
+    <div class="col-6">
+      <br />
+      <div class="c-field">
+        <label class="c-field__label" for="id_operation_notes">
+          Notas Operativas
+        </label>
+        <textarea
+          tabindex="21"
+          v-model="source.operation_notes"
+          name="patient_notes"
+          id="id_operation_notes"
           class="c-input"
           rows="2"
           cols="40"
