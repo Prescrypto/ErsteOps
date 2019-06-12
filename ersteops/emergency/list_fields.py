@@ -46,4 +46,7 @@ EMERGENCY_LIST_FIELDS = [
     'complaint_description',
     'subscription_type',
     'tree_selection',
+    'tel_local',
+    'tel_mobile',
+    'operation_notes',
 ]
