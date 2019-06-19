@@ -113,6 +113,7 @@ def getBaseData(start_date,end_date):
             #'created_at',
             #'service_category__name'
             ).annotate(
+            Id_Emergencia=F('id'),
             Grado=F('grade_type'),
             Grado_Final=F('attention_final_grade'),
             Zona=F('zone'),
@@ -127,10 +128,12 @@ def getBaseData(start_date,end_date):
             Codigo_Postal=F('address_zip_code'),
             Delegacion=F('address_county'),
             Colonia=F('address_col'),
-            Tipo_Unidad=F('units__unit_type'),
+            #Tipo_Unidad=F('units__unit_type'),
+            Unidad=F('units__identifier'),
             Sintomas_Principal=F('main_complaint'),
             Categoria_Servicio=F('service_category__name'),
             Tipo_Subscripcion=F('subscription_type'),
+            Diagnostico_Final=F('attention_justification'),
             Año=ExtractYear('created_at'),
             Semana=ExtractWeek('created_at'),
             Mes=ExtractMonth('created_at'),
