@@ -134,6 +134,7 @@ def getBaseData(start_date,end_date):
             Categoria_Servicio=F('service_category__name'),
             Tipo_Subscripcion=F('subscription_type'),
             Diagnostico_Final=F('attention_justification'),
+            Notas_Operativas=F('operation_notes'),
             Año=ExtractYear('created_at'),
             Semana=ExtractWeek('created_at'),
             Mes=ExtractMonth('created_at'),
