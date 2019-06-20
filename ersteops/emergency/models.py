@@ -110,6 +110,10 @@ class Emergency(models.Model):
     subscription_type = models.CharField('Subscripción', max_length=100, default='', blank=True)
     copago_amount = models.IntegerField("Monto de Copago", blank=True, null=True, default=0)
 
+    #Telephones
+    tel_local = models.CharField('Tel de contacto',max_length=33,default='',blank=True)
+    tel_mobile = models.CharField('Movil de contacto',max_length=33,default='',blank=True)
+    operation_notes = models.TextField('Notas Operativas',default='',blank= True)
     # TODO when create derivation
     # derivation = models.ManyToManyField('AttentionDerivation',
     #     related_name = 'derivation_issue',
@@ -272,6 +276,9 @@ def emergency_dictionary(instance):
         "main_complaint":instance.main_complaint,
         "complaint_description":instance.complaint_description,
         "subscription_type":instance.subscription_type,
+        "tel_local":instance.tel_local,
+        "tel_mobile":instance.tel_mobile,
+        "operation_notes":instance.operation_notes,
     }
 
     return emergDict

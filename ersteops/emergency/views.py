@@ -406,6 +406,8 @@ def patient_json(source_id,patient_data,parent_data):
                 "copago_amount": get_copago(patient_data.get('copago_amount', 0)),
                 "has_paid" : patient_data.get('outstanding', False),
                 "erste_code": patient_data.get('group_code','Sin Id'),
+                "id_tel_local":patient_data.get('phone','N/A'),
+                "id_tel_mobile":patient_data.get('mobile','N/A'),
                 #"comment": patient_data['comment'],
             }
         else:
@@ -423,6 +425,8 @@ def patient_json(source_id,patient_data,parent_data):
                 "copago_amount": get_copago(parent_data.get('copago_amount', 0)),
                 "has_paid" : parent_data.get('outstanding', False),
                 "erste_code": parent_data.get('group_code','Sin Id'),
+                "id_tel_local":patient_data.get('phone','N/A'),
+                "id_tel_mobile":patient_data.get('mobile','N/A'),
                 #"comment": patient_data['comment'],
             }
         logger.info('[ GET PATIENTJSON FOR FILLUP EMERGENCY FORM SUCCESS ]')
@@ -549,6 +553,7 @@ class EmergencyActivate(View):
         emergency.save()
         return redirect('/emergency/list/')
 
+# Whatsapp text output generator
 class EmergencyText(View):
     def get(self, request, *args, **kwargs):
         emergency_id = kwargs['emergency_id']
