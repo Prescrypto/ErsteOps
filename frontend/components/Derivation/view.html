@@ -1,0 +1,13 @@
+<!-- request loading indicator -->
+<div v-if="loading">
+  <loader class="completion_loading" color="#2ea1f8" />
+  <small class="c-field__message u-color-info u-flex u-justify-center">
+    Buscando información del cliente...
+  </small>
+</div>
+
+<form v-else>
+	<div class="row">
+		Derivaciones
+	</div>
+</form>
