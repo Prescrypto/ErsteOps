@@ -49,4 +49,6 @@ EMERGENCY_LIST_FIELDS = [
     'tel_local',
     'tel_mobile',
     'operation_notes',
+    'partner_name',
+    'partner_legalname',
 ]
