@@ -101,13 +101,13 @@ def timer_view(request):
         return bad_response
 # /Update Timer Functionality
 
-@method_decorator(login_required, name='dispatch')
-class EmergencyBlank(View):
-    template_name = "emergency/blank.html"
+# @method_decorator(login_required, name='dispatch')
+# class EmergencyBlank(View):
+#     template_name = "emergency/blank.html"
 
-    def get(self, request, *args, **kwargs):
-        form=''
-        return render(request, self.template_name,{"form": form})
+#     def get(self, request, *args, **kwargs):
+#         form=''
+#         return render(request, self.template_name,{"form": form})
 
 
 @method_decorator(csrf_exempt, name='dispatch')
@@ -118,28 +118,28 @@ class EmergencyNew(AjaxableResponseMixin, CreateView):
     success_url = 'emergencydashboard'
 
 
-@method_decorator(login_required, name='dispatch')
-class EmergencyListView(ListView):
-    template_name = "emergency/list.html"
-    model = Emergency
+# @method_decorator(login_required, name='dispatch')
+# class EmergencyListView(ListView):
+#     template_name = "emergency/list.html"
+#     model = Emergency
 
-    def get_context_data(self, **kwargs):
-        context = super(EmergencyListView, self).get_context_data(**kwargs)
-        context['now'] = timezone.now()
-        return context
-
-
-@method_decorator(login_required, name='dispatch')
-class EmergencyDetailView(DetailView):
-    template_name = "emergency/detail.html"
-    model = Emergency
-
-    def get_context_data(self, **kwargs):
-        context = super(EmergencyDetailView, self).get_context_data(**kwargs)
-        context['now'] = timezone.now()
-        return context
+#     def get_context_data(self, **kwargs):
+#         context = super(EmergencyListView, self).get_context_data(**kwargs)
+#         context['now'] = timezone.now()
+#         return context
 
 
+# @method_decorator(login_required, name='dispatch')
+# class EmergencyDetailView(DetailView):
+#     template_name = "emergency/detail.html"
+#     model = Emergency
+
+#     def get_context_data(self, **kwargs):
+#         context = super(EmergencyDetailView, self).get_context_data(**kwargs)
+#         context['now'] = timezone.now()
+#         return context
+
+# Return Emergency data for selected item in dashboard
 class EmergencyJSONView(JSONResponseMixin, DetailView):
     ''' Custom Json View for Emergency details '''
     model = Emergency
@@ -148,23 +148,24 @@ class EmergencyJSONView(JSONResponseMixin, DetailView):
         return self.render_to_json_response(context, **response_kwargs)
 
 
-class EmergencyListJSONView(ListView):
-    model = Emergency
+# class EmergencyListJSONView(ListView):
+#     model = Emergency
 
-    def render_to_response(self, context, **response_kwargs):
-        return HttpResponse(
-            self.get_data(context),
-            content_type='application/json',
-            **response_kwargs
-        )
+#     def render_to_response(self, context, **response_kwargs):
+#         return HttpResponse(
+#             self.get_data(context),
+#             content_type='application/json',
+#             **response_kwargs
+#         )
 
-    def get_data(self, context):
-        fields = EMERGENCY_LIST_FIELDS
-        emm_list = Emergency.objects.filter(is_active=True)
-        data = serializers.serialize('json', list(emm_list), fields=fields)
-        return data
+#     def get_data(self, context):
+#         fields = EMERGENCY_LIST_FIELDS
+#         emm_list = Emergency.objects.filter(is_active=True)
+#         data = serializers.serialize('json', list(emm_list), fields=fields)
+#         return data
 
 
+# Display FE Dashboard 
 @method_decorator(login_required, name='dispatch')
 class EmergencyDashboardList(ListView):
     template_name = "emergency/dashboard.html"
@@ -191,161 +192,161 @@ class EmergencyDashboardList(ListView):
         return data
 
 
-@method_decorator(login_required, name='dispatch')
-class EmergencyDerivation(CreateView):
-    template_name = "emergency/derivation.html"
-    model = AttentionDerivation
-    fields = ['emergency',
-                'motive',
-                'hospital',
-                'eventualities',
-                'reception',
-                'notes',
-        ]
-    success_url = '/emergency/list/'
+# @method_decorator(login_required, name='dispatch')
+# class EmergencyDerivation(CreateView):
+#     template_name = "emergency/derivation.html"
+#     model = AttentionDerivation
+#     fields = ['emergency',
+#                 'motive',
+#                 'hospital',
+#                 'eventualities',
+#                 'reception',
+#                 'notes',
+#         ]
+#     success_url = '/emergency/list/'
 
 
-@method_decorator(login_required, name='dispatch')
-class EmergencyUpdate(UpdateView):
-    template_name = "emergency/update.html"
-    model = Emergency
-    fields = EMERGENCY_LIST_FIELDS
-    success_url = '/emergency/list/'
+# @method_decorator(login_required, name='dispatch')
+# class EmergencyUpdate(UpdateView):
+#     template_name = "emergency/update.html"
+#     model = Emergency
+#     fields = EMERGENCY_LIST_FIELDS
+#     success_url = '/emergency/list/'
 
 
 @method_decorator(csrf_exempt, name='dispatch')
 class EmergencyJSONUpdate(UpdateJsonResponseMixin, UpdateView):
-    template_name = "emergency/update.html"
+    #template_name = "emergency/update.html"
     model = Emergency
     fields = EMERGENCY_LIST_FIELDS
     success_url = 'emergencydashboard'
 
 
-@method_decorator(login_required, name='dispatch')
-class EmergencyClientOdoo(View):
-    template_name = "emergency/odooclient.html"
-    def get(self, request, *args, **kwargs):
-        form = OdooClientForm
+# @method_decorator(login_required, name='dispatch')
+# class EmergencyClientOdoo(View):
+#     template_name = "emergency/odooclient.html"
+#     def get(self, request, *args, **kwargs):
+#         form = OdooClientForm
 
-        return render(request, self.template_name,{"form": form})
+#         return render(request, self.template_name,{"form": form})
 
-    def post(self, request, *args, **kwargs):
-        form = OdooClientForm(request.POST)
-        if form.is_valid():
-            # Ini Odoo api
-            _api_odoo = OdooApi()
-            # Get Access token
-            result = _api_odoo.get_token()
-            logger.info('%s (%s)' % ('Access-Token', result['access_token']))
-            if form.cleaned_data['search_type'] == '1':
-                patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_patient_name(patient, result['access_token'])
-                #print(patient_data)
-                logger.info('%s (%s)' % ('OdooApi: ', patient_data))
-            if form.cleaned_data['search_type'] == '3':
-                patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_patient_id(patient, result['access_token'])
-                #print(patient_data)
-                logger.info('%s (%s)' % ('OdooApi: ', patient_data))
-            if form.cleaned_data['search_type'] == '2':
-                patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_patient_street(patient, result['access_token'])
-                #print(patient_data)
-                logger.info('%s (%s)' % ('OdooApi: ', patient_data))
-            if form.cleaned_data['search_type'] == '5':
-                patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_all(patient, result['access_token'])
-                #print(patient_data)
-                logger.info('%s (%s)' % ('OdooApi',patient_data))
-            else:
-                return render(request, self.template_name,{"form": form, "result": result})
-        return render(request, self.template_name,{"form": form, "result": result, "patients": patient_data})
-
-
-@method_decorator(login_required, name='dispatch')
-class EmergencyClientModal(View):
-    template_name = "emergency/blank_modal.html"
-    def get(self, request, *args, **kwargs):
-        form = OdooClientForm
-        feContext = {"openmodal":'false',"showMultiple": False,"count": 0}
-        find_data = []
-        request.session['patientrequest'] = {}
-        return render(request, self.template_name,{"form": form, "find_data": find_data, "feContext": feContext})
-
-    def post(self, request, *args, **kwargs):
-        form = OdooClientForm(request.POST)
-        find_data = []
-        patient_data = {}
-        feContext = {"openmodal":'true',"showMultiple": True,"count": 0}
-        if form.is_valid():
-            # Ini Odoo api
-            _api_odoo = OdooApi()
-            # Get Access token
-            result = _api_odoo.get_token()
-            logger.info('%s (%s)' % ('OdooApi', result))
-            logger.info('%s (%s)' % ('Access-Token', result['access_token']))
-            find_data = []
-
-            if form.cleaned_data['search_type'] == '1':
-                patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_patient_name(patient, result['access_token'])
-                find_data = patient_data['results']
-                feContext.update({"count": len(patient_data['results'])})
-                logger.info('%s (%s)' % ('OdooApi_name',patient_data))
-            if form.cleaned_data['search_type'] == '2':
-                patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_patient_street( patient,result['access_token'])
-                find_data = patient_data['results']
-                feContext.update({"count": len(patient_data['results'])})
-                logger.info('%s (%s)' % ('OdooApi_street',patient_data))
-            if form.cleaned_data['search_type'] == '3':
-                patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_patient_id( patient,result['access_token'])
-                find_data = patient_data
-                try:
-                    if find_data.name:
-                        feContext.update({"count": 1})
-                except:
-                    feContext.update({"count": 0})
-                feContext.update({"showMultiple": False})
-                logger.info('%s (%s)' % ('OdooApi_id',patient_data))
-            if form.cleaned_data['search_type'] == '5':
-                patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_all( patient,result['access_token'])
-                find_data = patient_data['results']
-                feContext.update({"count": len(patient_data['results'])})
-                logger.info('%s (%s)' % ('OdooApi',patient_data))
-            if form.cleaned_data['search_type'] == '6':
-                patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_family_member( patient,result['access_token'])
-                find_data = patient_data['results']
-                feContext.update({"count": len(patient_data['results'])})
-                logger.info('%s (%s)' % ('OdooApi_name_family_member',patient_data))
-            if form.cleaned_data['search_type'] == '7':
-                patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_company_member( patient,result['access_token'])
-                find_data = patient_data['results']
-                feContext.update({"count": len(patient_data['results'])})
-                logger.info('%s (%s)' % ('OdooApi_name_company_member',patient_data))
-            else:
-                return render(request, self.template_name,{"form": form, "result": result, "find_data": find_data, "feContext": feContext  })
-        return render(request, self.template_name,{'form': form, 'result': result,"find_data": find_data, "feContext": feContext })
+#     def post(self, request, *args, **kwargs):
+#         form = OdooClientForm(request.POST)
+#         if form.is_valid():
+#             # Ini Odoo api
+#             _api_odoo = OdooApi()
+#             # Get Access token
+#             result = _api_odoo.get_token()
+#             logger.info('%s (%s)' % ('Access-Token', result['access_token']))
+#             if form.cleaned_data['search_type'] == '1':
+#                 patient = form.cleaned_data['client_name']
+#                 patient_data = _api_odoo.get_by_patient_name(patient, result['access_token'])
+#                 #print(patient_data)
+#                 logger.info('%s (%s)' % ('OdooApi: ', patient_data))
+#             if form.cleaned_data['search_type'] == '3':
+#                 patient = form.cleaned_data['client_name']
+#                 patient_data = _api_odoo.get_by_patient_id(patient, result['access_token'])
+#                 #print(patient_data)
+#                 logger.info('%s (%s)' % ('OdooApi: ', patient_data))
+#             if form.cleaned_data['search_type'] == '2':
+#                 patient = form.cleaned_data['client_name']
+#                 patient_data = _api_odoo.get_by_patient_street(patient, result['access_token'])
+#                 #print(patient_data)
+#                 logger.info('%s (%s)' % ('OdooApi: ', patient_data))
+#             if form.cleaned_data['search_type'] == '5':
+#                 patient = form.cleaned_data['client_name']
+#                 patient_data = _api_odoo.get_by_all(patient, result['access_token'])
+#                 #print(patient_data)
+#                 logger.info('%s (%s)' % ('OdooApi',patient_data))
+#             else:
+#                 return render(request, self.template_name,{"form": form, "result": result})
+#         return render(request, self.template_name,{"form": form, "result": result, "patients": patient_data})
 
 
-@method_decorator(login_required, name='dispatch')
-class EmergencyNewModal(CreateView):
-    template_name = "emergency/blanknew_modal.html"
-    model = Emergency
-    fields = EMERGENCY_LIST_FIELDS
-    success_url = '/emergency/list/'
+# @method_decorator(login_required, name='dispatch')
+# class EmergencyClientModal(View):
+#     template_name = "emergency/blank_modal.html"
+#     def get(self, request, *args, **kwargs):
+#         form = OdooClientForm
+#         feContext = {"openmodal":'false',"showMultiple": False,"count": 0}
+#         find_data = []
+#         request.session['patientrequest'] = {}
+#         return render(request, self.template_name,{"form": form, "find_data": find_data, "feContext": feContext})
+
+#     def post(self, request, *args, **kwargs):
+#         form = OdooClientForm(request.POST)
+#         find_data = []
+#         patient_data = {}
+#         feContext = {"openmodal":'true',"showMultiple": True,"count": 0}
+#         if form.is_valid():
+#             # Ini Odoo api
+#             _api_odoo = OdooApi()
+#             # Get Access token
+#             result = _api_odoo.get_token()
+#             logger.info('%s (%s)' % ('OdooApi', result))
+#             logger.info('%s (%s)' % ('Access-Token', result['access_token']))
+#             find_data = []
+
+#             if form.cleaned_data['search_type'] == '1':
+#                 patient = form.cleaned_data['client_name']
+#                 patient_data = _api_odoo.get_by_patient_name(patient, result['access_token'])
+#                 find_data = patient_data['results']
+#                 feContext.update({"count": len(patient_data['results'])})
+#                 logger.info('%s (%s)' % ('OdooApi_name',patient_data))
+#             if form.cleaned_data['search_type'] == '2':
+#                 patient = form.cleaned_data['client_name']
+#                 patient_data = _api_odoo.get_by_patient_street( patient,result['access_token'])
+#                 find_data = patient_data['results']
+#                 feContext.update({"count": len(patient_data['results'])})
+#                 logger.info('%s (%s)' % ('OdooApi_street',patient_data))
+#             if form.cleaned_data['search_type'] == '3':
+#                 patient = form.cleaned_data['client_name']
+#                 patient_data = _api_odoo.get_by_patient_id( patient,result['access_token'])
+#                 find_data = patient_data
+#                 try:
+#                     if find_data.name:
+#                         feContext.update({"count": 1})
+#                 except:
+#                     feContext.update({"count": 0})
+#                 feContext.update({"showMultiple": False})
+#                 logger.info('%s (%s)' % ('OdooApi_id',patient_data))
+#             if form.cleaned_data['search_type'] == '5':
+#                 patient = form.cleaned_data['client_name']
+#                 patient_data = _api_odoo.get_by_all( patient,result['access_token'])
+#                 find_data = patient_data['results']
+#                 feContext.update({"count": len(patient_data['results'])})
+#                 logger.info('%s (%s)' % ('OdooApi',patient_data))
+#             if form.cleaned_data['search_type'] == '6':
+#                 patient = form.cleaned_data['client_name']
+#                 patient_data = _api_odoo.get_by_family_member( patient,result['access_token'])
+#                 find_data = patient_data['results']
+#                 feContext.update({"count": len(patient_data['results'])})
+#                 logger.info('%s (%s)' % ('OdooApi_name_family_member',patient_data))
+#             if form.cleaned_data['search_type'] == '7':
+#                 patient = form.cleaned_data['client_name']
+#                 patient_data = _api_odoo.get_by_company_member( patient,result['access_token'])
+#                 find_data = patient_data['results']
+#                 feContext.update({"count": len(patient_data['results'])})
+#                 logger.info('%s (%s)' % ('OdooApi_name_company_member',patient_data))
+#             else:
+#                 return render(request, self.template_name,{"form": form, "result": result, "find_data": find_data, "feContext": feContext  })
+#         return render(request, self.template_name,{'form': form, 'result': result,"find_data": find_data, "feContext": feContext })
 
 
-@method_decorator(login_required, name='dispatch')
-class EmergencyGetPatient(View):
-    def get(self, request, *args, **kwargs):
-        ''' LEgacy way to show modal with patient data'''
-        request.session['patientrequest'] = handle_patient_data(kwargs['patient_id'])
-        return redirect('/emergency/newmodal/')
+# @method_decorator(login_required, name='dispatch')
+# class EmergencyNewModal(CreateView):
+#     template_name = "emergency/blanknew_modal.html"
+#     model = Emergency
+#     fields = EMERGENCY_LIST_FIELDS
+#     success_url = '/emergency/list/'
+
+
+# @method_decorator(login_required, name='dispatch')
+# class EmergencyGetPatient(View):
+#     def get(self, request, *args, **kwargs):
+#         ''' LEgacy way to show modal with patient data'''
+#         request.session['patientrequest'] = handle_patient_data(kwargs['patient_id'])
+#         return redirect('/emergency/newmodal/')
 
 
 class EmergencyJSONGetPatient(View):
@@ -408,6 +409,8 @@ def patient_json(source_id,patient_data,parent_data):
                 "erste_code": patient_data.get('group_code','Sin Id'),
                 "id_tel_local":patient_data.get('phone','N/A'),
                 "id_tel_mobile":patient_data.get('mobile','N/A'),
+                "id_partner_name":patient_data.get('name','N/A'),
+                "id_partner_legalname":patient_data.get('legal_name','N/A'),
                 #"comment": patient_data['comment'],
             }
         else:
@@ -427,6 +430,8 @@ def patient_json(source_id,patient_data,parent_data):
                 "erste_code": parent_data.get('group_code','Sin Id'),
                 "id_tel_local":patient_data.get('phone','N/A'),
                 "id_tel_mobile":patient_data.get('mobile','N/A'),
+                "id_partner_name":parent_data.get('name','N/A'),
+                "id_partner_legalname":parent_data.get('legal_name','N/A'),
                 #"comment": patient_data['comment'],
             }
         logger.info('[ GET PATIENTJSON FOR FILLUP EMERGENCY FORM SUCCESS ]')
