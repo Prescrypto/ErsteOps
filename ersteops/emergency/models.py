@@ -96,6 +96,10 @@ class Emergency(models.Model):
     patient_illnesses = models.CharField('Enfermedades diagnosticadas', max_length=100, default='', blank=True)
     patient_notes = models.TextField('Notas paciente', blank=True, default='')
 
+    # Partner Data
+    partner_name = models.CharField('Nombre del socio',max_length=255,default='',blank=True)
+    partner_legalname = models.CharField('Razon legal del socio',max_length=255,default='',blank=True)
+
     #Details of attention
     attention_final_grade = models.ForeignKey("AttentionKind",
                                             related_name="final_attention_kind_name",
@@ -279,6 +283,8 @@ def emergency_dictionary(instance):
         "tel_local":instance.tel_local,
         "tel_mobile":instance.tel_mobile,
         "operation_notes":instance.operation_notes,
+        "partner_name":instance.partner_name,
+        "partner_legalname":instance.partner_legalname,
     }
 
     return emergDict
