@@ -37,7 +37,7 @@ class EmergencyAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Paciente', {
-            'fields': ('odoo_client', 'erste_code','has_paid', 'patient_name', 'patient_gender', 'patient_age',
+            'fields': ('odoo_client', 'erste_code','has_paid', 'partner_name', 'partner_legalname','patient_name', 'patient_gender', 'patient_age',
                     'is_active', 'copago_amount','caller_name', 'caller_relation','tel_local','tel_mobile', 'subscription_type',
                     'tree_selection','service_category', 'grade_type', 'zone',
                     'main_complaint', 'complaint_description',
