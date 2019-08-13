@@ -78,6 +78,15 @@ class OdooApi(object):
         caller = "get_by_patient_name"
         return self.get_odoo_call_result(url,payload,header,caller)
 
+    # Get patients matching string name (* in use)
+    def get_by_patient_legal_name(self,patient,access_token):
+        url = self.url + '/api/res.partner/'
+        payload = {"filters": "[(\"legal_name\", \"ilike\", \"{}\")]".format(patient)}
+        #payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\",\"=\",\"1\")]".format(patient)}
+        header = {"Access-Token": access_token,"Content-Type":"text/html"}
+        caller = "get_by_legal_name"
+        return self.get_odoo_call_result(url,payload,header,caller)
+
 
     # Get patients matching string id (* in use)
     def get_like_patient_id(self,patient,access_token):
@@ -87,6 +96,16 @@ class OdooApi(object):
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         caller = "get_like_patient_id"
         return self.get_odoo_call_result(url,payload,header,caller)
+
+    # Get patients matching string id (* in use)
+    def get_like_reference_id(self,patient,access_token):
+        url = self.url + '/api/res.partner/'
+        payload = {"filters": "[(\"reference_id\", \"=\", \"{}\")]".format(patient)}
+        #payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\",\"=\",\"1\")]".format(patient)}
+        header = {"Access-Token": access_token,"Content-Type":"text/html"}
+        caller = "get_like_reference_id"
+        return self.get_odoo_call_result(url,payload,header,caller)
+
 
 
     # Get patients matching string street

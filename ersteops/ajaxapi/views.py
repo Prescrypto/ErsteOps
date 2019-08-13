@@ -33,6 +33,8 @@ def get_subscriptor(request):
             # Get info from res.partner
             patients = _api_odoo.get_by_patient_name(q, result['access_token'])
             clients = patients['results']
+            patients_legal = _api_odoo.get_by_patient_legal_name(q, result['access_token'])
+            clients = clients + patients_legal['results']
             #logger_debug("******** Find in Clients ********",clients)
 
             # get info from family.member
@@ -51,8 +53,13 @@ def get_subscriptor(request):
             if q_int != 0:
                 client_by_id = _api_odoo.get_like_patient_id(q, result['access_token'])
                 clients_by_id = client_by_id['results']
+                #client_by_reference_id = _api_odoo.get_like_reference_id(q, result['access_token'])
+                #clients_by_id.update(client_by_reference_id['results'])
             else:
-                clients_by_id = []
+                #clients_by_id = []
+                client_by_id = _api_odoo.get_like_reference_id(q, result['access_token'])
+                clients_by_id = client_by_id['results']
+                #clients_by_id.update(client_by_reference_id['results'])
             #logger_debug("******** Find in clients by id ********",clients_by_id)
             ##################
         else:
