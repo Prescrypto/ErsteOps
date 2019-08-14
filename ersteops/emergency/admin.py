@@ -67,7 +67,7 @@ class EmergencyAdmin(admin.ModelAdmin):
         }),
         ('Derivaciones', {
             'classes': ('collapse',),
-            'fields': ('derivation','derivation_time',)
+            'fields': ('derivations',)
 
         }),
     )
