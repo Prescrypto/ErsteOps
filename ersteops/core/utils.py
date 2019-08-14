@@ -6,6 +6,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 from django.conf import settings
 from django.contrib import messages
+from pprint import pformat
 
 # Load Logging definition, this is defined in settings.py in the LOGGING section
 logger = logging.getLogger('django_info')
@@ -59,7 +60,7 @@ class OdooApi(object):
         try:
             response = requests.get(url, json=payload, headers=header)
             result = response.json()
-            logger_debug("DEBUG Get by " + caller,str(response.json()).encode('utf-8'))
+            logger_debug("DEBUG Get by " + caller,str(pformat(response.json(), width=20)).encode('utf-8'))
             logger.info('[SUCCESS OdooApi -> ' + caller + ']')
         except Exception as e:
             logger_debug("DEBUG: " + caller + " ERROR!",e)
