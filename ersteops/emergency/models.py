@@ -119,9 +119,9 @@ class Emergency(models.Model):
     tel_mobile = models.CharField('Movil de contacto',max_length=33,default='',blank=True)
     operation_notes = models.TextField('Notas Operativas',default='',blank= True)
     # TODO when create derivation
-    derivation = models.ManyToManyField('EmergencyDerivation',
+    derivations = models.ManyToManyField('EmergencyDerivation',
         related_name = 'derivation_issue',
-        verbose_name = 'Derivacion',
+        verbose_name = 'Derivaciones',
         blank=True,
         )
 
@@ -234,6 +234,8 @@ def emergency_dictionary(instance):
     units = []
     for unit in instance.units.all():
         units.append(unit.id)
+    # for derivation in instance.derivation.all():
+    #     derivation.append(derivation.id)    
     emergDict={
         "pk":instance.pk,
         "id":instance.pk,
@@ -285,6 +287,7 @@ def emergency_dictionary(instance):
         "operation_notes":instance.operation_notes,
         "partner_name":instance.partner_name,
         "partner_legalname":instance.partner_legalname,
+        #"derivation": derivation,
     }
 
     return emergDict
@@ -442,5 +445,5 @@ class EmergencyDerivation(models.Model):
 
     def __str__(self):
         #return "{}, {}, {}".format(unicodedata.normalize('NFKD', self.odoo_client), unicodedata.normalize('NFKD', self.patient_name), self.created_at)
-        return "{}, {}, ".format(unicodedata.normalize('NFKD', str(self.id)) , self.hospital.name)
+        return "{}, {}, {}".format(unicodedata.normalize('NFKD', str(self.id)) , self.hospital.name, self.created_at)
         #return str(self.hiospi)
