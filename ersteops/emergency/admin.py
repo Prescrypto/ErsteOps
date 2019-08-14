@@ -6,7 +6,7 @@ from rangefilter.filter import DateRangeFilter, DateTimeRangeFilter
 
 # Register your models here.
 from .models import (Emergency, AttentionKind, AttentionZone, AttentionHospital,
-	AttentionDerivation, ServiceCategory)
+	AttentionDerivation, ServiceCategory, EmergencyDerivation)
 
 def update_is_active(EmergencyAdmin, request, queryset):
     # action fuction to help change to plan to users
@@ -65,6 +65,11 @@ class EmergencyAdmin(admin.ModelAdmin):
             'fields': ('operation_notes',)
 
         }),
+        ('Derivaciones', {
+            'classes': ('collapse',),
+            'fields': ('derivation','derivation_time',)
+
+        }),
     )
 
     actions = [update_is_active, update_non_active]
@@ -74,5 +79,6 @@ admin.site.register(Emergency, EmergencyAdmin)
 admin.site.register(AttentionKind)
 admin.site.register(AttentionZone)
 admin.site.register(AttentionHospital)
-admin.site.register(AttentionDerivation)
+#admin.site.register(AttentionDerivation)
 admin.site.register(ServiceCategory)
+admin.site.register(EmergencyDerivation)
