@@ -119,11 +119,11 @@ class Emergency(models.Model):
     tel_mobile = models.CharField('Movil de contacto',max_length=33,default='',blank=True)
     operation_notes = models.TextField('Notas Operativas',default='',blank= True)
     # TODO when create derivation
-    # derivation = models.ManyToManyField('AttentionDerivation',
-    #     related_name = 'derivation_issue',
-    #     verbose_name = 'Derivacion',
-    #     blank=True,
-    #     )
+    derivation = models.ManyToManyField('EmergencyDerivation',
+        related_name = 'derivation_issue',
+        verbose_name = 'Derivacion',
+        blank=True,
+        )
 
     # Datetie utils
     created_at = models.DateTimeField("Fecha de alta",auto_now_add=True,editable=False)
@@ -423,3 +423,24 @@ class ServiceCategory(models.Model):
 
     def __str__(self):
         return self.name
+
+class EmergencyDerivation(models.Model):
+    hospital = models.ForeignKey("AttentionHospital",
+    related_name="em_attention_hospital_name",
+    verbose_name= "hospital"
+        )
+    reception = models.CharField("quien recibe en hospital", max_length=100, blank=True)
+    notes = models.TextField("notas", max_length=100, blank=True)
+
+    # Datetime utils
+    created_at = models.DateTimeField("fecha de alta",auto_now_add=True,editable=False)
+    last_modified = models.DateTimeField("ultima modificacion",auto_now=True,editable=False)
+
+    class Meta:
+        verbose_name_plural = "Derivacion de Emergencia"
+        ordering = ['created_at']
+
+    def __str__(self):
+        #return "{}, {}, {}".format(unicodedata.normalize('NFKD', self.odoo_client), unicodedata.normalize('NFKD', self.patient_name), self.created_at)
+        return "{}, {}, ".format(unicodedata.normalize('NFKD', str(self.id)) , self.hospital.name)
+        #return str(self.hiospi)
