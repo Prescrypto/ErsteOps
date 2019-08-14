@@ -8,9 +8,19 @@
 
 <form v-else>
   <div class="row">
-    <div class="col-12" >
+    <div class="col-4" >
       <div class="c-field">
         <label class="c-field__label">Emergencia: {{ emergency.id }} </label>
+      </div>
+    </div>
+    <div class="col-4" >
+      <div class="c-field">
+        <label class="c-field__label">Socio: {{ emergency.partner_name }} </label>
+      </div>
+    </div>
+        <div class="col-4" >
+      <div class="c-field">
+        <label class="c-field__label">Nombre Legal: {{ emergency.partner_legalname }} </label>
       </div>
     </div>
   </div>

@@ -96,6 +96,10 @@ class Emergency(models.Model):
     patient_illnesses = models.CharField('Enfermedades diagnosticadas', max_length=100, default='', blank=True)
     patient_notes = models.TextField('Notas paciente', blank=True, default='')
 
+    # Partner Data
+    partner_name = models.CharField('Nombre del socio',max_length=255,default='',blank=True)
+    partner_legalname = models.CharField('Razon legal del socio',max_length=255,default='',blank=True)
+
     #Details of attention
     attention_final_grade = models.ForeignKey("AttentionKind",
                                             related_name="final_attention_kind_name",
@@ -115,11 +119,11 @@ class Emergency(models.Model):
     tel_mobile = models.CharField('Movil de contacto',max_length=33,default='',blank=True)
     operation_notes = models.TextField('Notas Operativas',default='',blank= True)
     # TODO when create derivation
-    # derivation = models.ManyToManyField('AttentionDerivation',
-    #     related_name = 'derivation_issue',
-    #     verbose_name = 'Derivacion',
-    #     blank=True,
-    #     )
+    derivations = models.ManyToManyField('EmergencyDerivation',
+        related_name = 'derivation_issue',
+        verbose_name = 'Derivaciones',
+        blank=True,
+        )
 
     # Datetie utils
     created_at = models.DateTimeField("Fecha de alta",auto_now_add=True,editable=False)
@@ -230,6 +234,8 @@ def emergency_dictionary(instance):
     units = []
     for unit in instance.units.all():
         units.append(unit.id)
+    # for derivation in instance.derivation.all():
+    #     derivation.append(derivation.id)    
     emergDict={
         "pk":instance.pk,
         "id":instance.pk,
@@ -279,6 +285,9 @@ def emergency_dictionary(instance):
         "tel_local":instance.tel_local,
         "tel_mobile":instance.tel_mobile,
         "operation_notes":instance.operation_notes,
+        "partner_name":instance.partner_name,
+        "partner_legalname":instance.partner_legalname,
+        #"derivation": derivation,
     }
 
     return emergDict
@@ -417,3 +426,24 @@ class ServiceCategory(models.Model):
 
     def __str__(self):
         return self.name
+
+class EmergencyDerivation(models.Model):
+    hospital = models.ForeignKey("AttentionHospital",
+    related_name="em_attention_hospital_name",
+    verbose_name= "hospital"
+        )
+    reception = models.CharField("quien recibe en hospital", max_length=100, blank=True)
+    notes = models.TextField("notas", max_length=100, blank=True)
+
+    # Datetime utils
+    created_at = models.DateTimeField("fecha de alta",auto_now_add=True,editable=False)
+    last_modified = models.DateTimeField("ultima modificacion",auto_now=True,editable=False)
+
+    class Meta:
+        verbose_name_plural = "Derivacion de Emergencia"
+        ordering = ['created_at']
+
+    def __str__(self):
+        #return "{}, {}, {}".format(unicodedata.normalize('NFKD', self.odoo_client), unicodedata.normalize('NFKD', self.patient_name), self.created_at)
+        return "{}, {}, {}".format(unicodedata.normalize('NFKD', str(self.id)) , self.hospital.name, self.created_at)
+        #return str(self.hiospi)

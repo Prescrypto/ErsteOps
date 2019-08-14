@@ -6,7 +6,7 @@ from rangefilter.filter import DateRangeFilter, DateTimeRangeFilter
 
 # Register your models here.
 from .models import (Emergency, AttentionKind, AttentionZone, AttentionHospital,
-	AttentionDerivation, ServiceCategory)
+	AttentionDerivation, ServiceCategory, EmergencyDerivation)
 
 def update_is_active(EmergencyAdmin, request, queryset):
     # action fuction to help change to plan to users
@@ -37,7 +37,7 @@ class EmergencyAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Paciente', {
-            'fields': ('odoo_client', 'erste_code','has_paid', 'patient_name', 'patient_gender', 'patient_age',
+            'fields': ('odoo_client', 'erste_code','has_paid', 'partner_name', 'partner_legalname','patient_name', 'patient_gender', 'patient_age',
                     'is_active', 'copago_amount','caller_name', 'caller_relation','tel_local','tel_mobile', 'subscription_type',
                     'tree_selection','service_category', 'grade_type', 'zone',
                     'main_complaint', 'complaint_description',
@@ -65,6 +65,11 @@ class EmergencyAdmin(admin.ModelAdmin):
             'fields': ('operation_notes',)
 
         }),
+        ('Derivaciones', {
+            'classes': ('collapse',),
+            'fields': ('derivations',)
+
+        }),
     )
 
     actions = [update_is_active, update_non_active]
@@ -74,5 +79,6 @@ admin.site.register(Emergency, EmergencyAdmin)
 admin.site.register(AttentionKind)
 admin.site.register(AttentionZone)
 admin.site.register(AttentionHospital)
-admin.site.register(AttentionDerivation)
+#admin.site.register(AttentionDerivation)
 admin.site.register(ServiceCategory)
+admin.site.register(EmergencyDerivation)
