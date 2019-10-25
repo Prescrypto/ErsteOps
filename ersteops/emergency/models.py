@@ -124,6 +124,8 @@ class Emergency(models.Model):
         verbose_name = 'Derivaciones',
         blank=True,
         )
+    # SAles rep stuff
+    sales_rep = models.CharField('Vendedor',max_length=255,default='',blank=True)
 
     # Datetie utils
     created_at = models.DateTimeField("Fecha de alta",auto_now_add=True,editable=False)
