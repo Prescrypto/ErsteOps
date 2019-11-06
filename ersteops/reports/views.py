@@ -154,6 +154,7 @@ def getBaseData(start_date,end_date):
             #Tiempo_de_Atención_Efectiva=Cast(F('attention_time')-F('start_time'),TimeField()),
             Tiempo_de_Asignación_de_Unidad=Cast(F('unit_assigned_time')-F('start_time'),TimeField()),
             Tiempo_de_Despacho_de_Unidad=Cast(F('unit_dispatched_time')-F('start_time'),TimeField()),
+            Vendedor=F('sales_rep'),
             #duracion=(F('final_emergency_time')-F('start_time'),CharField()),
             )
         json_qs=json.dumps(list(qs), cls=DjangoJSONEncoder)

@@ -218,6 +218,7 @@ def patient_json(source_id,patient_data,parent_data):
                 "id_tel_mobile":patient_data.get('mobile','N/A'),
                 "id_partner_name":patient_data.get('name','N/A'),
                 "id_partner_legalname":patient_data.get('legal_name','N/A'),
+                "id_sales_rep":patient_data.get('sales_rep'),
                 #"comment": patient_data['comment'],
             }
         else:
@@ -239,6 +240,7 @@ def patient_json(source_id,patient_data,parent_data):
                 "id_tel_mobile":patient_data.get('mobile','N/A'),
                 "id_partner_name":parent_data.get('name','N/A'),
                 "id_partner_legalname":parent_data.get('legal_name','N/A'),
+                "id_sales_rep":patient_data.get('sales_rep'),
                 #"comment": patient_data['comment'],
             }
         logger.info('[ GET PATIENTJSON FOR FILLUP EMERGENCY FORM SUCCESS ]')

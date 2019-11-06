@@ -62,7 +62,7 @@ class EmergencyAdmin(admin.ModelAdmin):
         }),
         ('Operaciones', {
             'classes': ('collapse',),
-            'fields': ('operation_notes',)
+            'fields': ('operation_notes','sales_rep')
 
         }),
         ('Derivaciones', {

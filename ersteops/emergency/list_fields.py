@@ -51,5 +51,6 @@ EMERGENCY_LIST_FIELDS = [
     'operation_notes',
     'partner_name',
     'partner_legalname',
+    'sales_rep',
     #'derivation',
 ]
