@@ -75,7 +75,8 @@ class OdooApi(object):
         url = self.url + '/api/res.partner/'
         # Original payload keep line as reference
         #payload = {"filters": "[(\"name\", \"ilike\", \"{}\")]".format(patient)}
-        payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"sales_prospect\", \"is not\", \"TRUE\")]".format(patient)}
+        #payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"sales_prospect\",\"=\",False),(\"sales_prospect\",\"=\",None)]".format(patient)}
+        payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"sales_prospect\",\"!=\",True)]".format(patient)}
         #payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\",\"=\",\"1\")]".format(patient)}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         caller = "get_by_patient_name"
@@ -84,7 +85,7 @@ class OdooApi(object):
     # Get patients matching string name (* in use)
     def get_by_patient_legal_name(self,patient,access_token):
         url = self.url + '/api/res.partner/'
-        payload = {"filters": "[(\"legal_name\", \"ilike\", \"{}\")]".format(patient)}
+        payload = {"filters": "[(\"legal_name\", \"ilike\", \"{}\"),(\"sales_prospect\",\"!=\",True)]".format(patient)}
         #payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\",\"=\",\"1\")]".format(patient)}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         caller = "get_by_legal_name"
@@ -103,7 +104,7 @@ class OdooApi(object):
     # Get patients matching string id (* in use)
     def get_like_reference_id(self,patient,access_token):
         url = self.url + '/api/res.partner/'
-        payload = {"filters": "[(\"reference_id\", \"=\", \"{}\")]".format(patient)}
+        payload = {"filters": "[(\"reference_id\", \"=\", \"{}\"),(\"sales_prospect\",\"!=\",True)]".format(patient)}
         #payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\",\"=\",\"1\")]".format(patient)}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         caller = "get_like_reference_id"
@@ -139,7 +140,7 @@ class OdooApi(object):
     def get_by_company_member(self,patient,access_token):
         url = self.url + '/api/company.member/'
         #payload = {"filters": "[(\"name\", \"ilike\", \"{}\")]".format(patient)}
-        payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\" ,\"=\",1)]".format(patient)}
+        payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\" ,\"=\",1),(\"sales_prospect\",\"!=\",True)]".format(patient)}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         caller = "get_by_company_member"
         return self.get_odoo_call_result(url,payload,header,caller)
@@ -149,7 +150,7 @@ class OdooApi(object):
         url = self.url + '/api/family.member/'
         #payload = {"filters": "[(\"name\", \"ilike\", \"{}\")]".format(patient)}
         #payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\",\"=\",true)]".format(patient)}
-        payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\" ,\"=\",1)]".format(patient)}
+        payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\" ,\"=\",1),(\"sales_prospect\",\"!=\",True)]".format(patient)}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         caller = "get_by_family_member"
         return self.get_odoo_call_result(url,payload,header,caller)
