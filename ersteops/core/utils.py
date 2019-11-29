@@ -73,7 +73,9 @@ class OdooApi(object):
     # Get patients matching string name (* in use)
     def get_by_patient_name(self,patient,access_token):
         url = self.url + '/api/res.partner/'
-        payload = {"filters": "[(\"name\", \"ilike\", \"{}\")]".format(patient)}
+        # Original payload keep line as reference
+        #payload = {"filters": "[(\"name\", \"ilike\", \"{}\")]".format(patient)}
+        payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"sales_prospect\", \"is not\", \"TRUE\")]".format(patient)}
         #payload = {"filters": "[(\"name\", \"ilike\", \"{}\"),(\"user_active\",\"=\",\"1\")]".format(patient)}
         header = {"Access-Token": access_token,"Content-Type":"text/html"}
         caller = "get_by_patient_name"
