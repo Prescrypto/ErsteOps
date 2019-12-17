@@ -53,6 +53,7 @@ import {
 import search from './modules/search';
 import finalGrade from './modules/final-grade';
 import updateTimer from './modules/update-timer';
+import updateDerivation from './modules/update-derivation';
 import { default as unitModule } from './modules/unit';
 
 // Use VueX
@@ -61,7 +62,13 @@ Vue.use(Vuex);
 // Create VueX store
 const store = new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
-  modules: { search, finalGrade, updateTimer, unit: unitModule },
+  modules: {
+    search,
+    finalGrade,
+    updateTimer,
+    updateDerivation,
+    unit: unitModule,
+  },
   state: {
     error: false,
     loading: false,
@@ -117,6 +124,17 @@ const store = new Vuex.Store({
         })
         .catch(err => commit(REQUEST_UNITS_ERROR, err));
     },
+    // hospitals({ commit }) {
+    //   commit(REQUEST_UNITS_START);
+    //   http
+    //     .get('/units/ajax/local/')
+    //     .then(response => {
+    //       const { data } = response;
+    //       const flatUnits = map(u => ({ id: u.pk, ...u.fields }))(data);
+    //       commit(REQUEST_UNITS_SUCCESS, flatUnits);
+    //     })
+    //     .catch(err => commit(REQUEST_UNITS_ERROR, err));
+    // },
     emergency({ commit }, id) {
       commit(REQUEST_EMERGENCY_START);
       http
@@ -154,6 +172,7 @@ const store = new Vuex.Store({
     activeUnits: state => filter(unit => unit.is_active)(state.units),
     activeUnitsCount: (state, getters) => getters.activeUnits.length,
     selectedUnits: state => state.selected,
+    // actualDerivations: (state, getters) => emergency.derivations.all(),
     combinedUnits: (state, getters) =>
       uniq([
         ...filter(unit => includes(unit.id)(state.emergency.units))(
