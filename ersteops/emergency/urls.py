@@ -13,6 +13,7 @@ from emergency.views import (
     grade_view, 
     timer_view,
     derivation_view,
+    hospital_json_list,
 )
 
 urlpatterns = [
