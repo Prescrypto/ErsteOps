@@ -15,7 +15,7 @@ import {
 } from 'lodash/fp';
 import http from 'utils/http';
 import { removePrefix } from 'utils/normalize';
-import { emergencies, units } from 'utils/preload';
+import { emergencies, units, mapHospitals } from 'utils/preload';
 import { ws } from 'utils/url';
 import createWebSocketPlugin from 'utils/websocket';
 import ReconnectingWebSocket from 'reconnecting-websocket';
@@ -49,6 +49,9 @@ import {
   EMERGENCY_SET_INACTIVE_ERROR,
   EMERGENCY_TOGGLE_ACTIVE,
   UPDATE_COPAGO_AMOUNT,
+  REQUEST_HOSPITALS_START,
+  REQUEST_HOSPITALS_SUCCESS,
+  REQUEST_HOSPITALS_ERROR,
 } from './constants';
 import search from './modules/search';
 import finalGrade from './modules/final-grade';
@@ -77,6 +80,7 @@ const store = new Vuex.Store({
       address: {},
     },
     units,
+    mapHospitals,
     selected: [],
     emergencies,
     emergency: {
@@ -123,6 +127,17 @@ const store = new Vuex.Store({
           commit(REQUEST_UNITS_SUCCESS, flatUnits);
         })
         .catch(err => commit(REQUEST_UNITS_ERROR, err));
+    },
+    hospitals({ commit }) {
+      commit(REQUEST_HOSPITALS_START);
+      http
+        .get('/emergency/ajax/hospital/')
+        .then(response => {
+          const { data } = response;
+          const hospitals = map(u => ({ id: u.pk, ...u.fields }))(data);
+          commit(REQUEST_HOSPITALS_SUCCESS, hospitals);
+        })
+        .catch(err => commit(REQUEST_HOSPITALS_ERROR, err));
     },
     // hospitals({ commit }) {
     //   commit(REQUEST_UNITS_START);
@@ -231,6 +246,20 @@ const store = new Vuex.Store({
       state.loading = false;
     },
     [REQUEST_UNITS_ERROR](state, err) {
+      state.error = err;
+      state.loading = false;
+    },
+
+    // Hospitals
+    [REQUEST_HOSPITALS_START](state) {
+      state.error = false;
+      state.loading = true;
+    },
+    [REQUEST_HOSPITALS_SUCCESS](state, data) {
+      state.hospitals = data;
+      state.loading = false;
+    },
+    [REQUEST_HOSPITALS_ERROR](state, err) {
       state.error = err;
       state.loading = false;
     },
