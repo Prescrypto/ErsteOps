@@ -31,14 +31,31 @@
             <form>
               <div class="derivation-add">
                 <div class="c-field">
-                  <p class="derivation-text">Persona que recibe: </p>
+                  <p class="derivation-text">Agregar Derivación </p>
                   <p>
                     <small class="c-field__message u-color-info">
                     </small>
                   </p>
                 </div>
-                
-                
+                <label class="c-field__label" for="id_reception" >Persona que recibe</label>
+                <input name="id_reception" 
+                  v-model="reception"
+                  type="text"
+                  class="c-input"
+                  maxlength="100" 
+                />
+                <label class="c-field__label" for="id_derivation_hospital" >Hospital</label>
+                <select v-model="selected" class="c-input">
+                    <option v-for="hospital in mapHospitals" v-bind:value="hospital.id">
+                    {{ hospital.name}}
+                    </option>
+                </select> 
+                <label class="c-field__label" for="id_derivation_notes" >Notas</label> 
+                <textarea v-model="message" placeholder="Notas" class="c-input"></textarea>      
+              </div>
+
+              <div class="timers-button">
+                <button @click="submit" :disabled="!isValid" class="c-btn c-btn--info" v-close-popover>Guardar</button>
               </div>
             </form>   
           </div>
