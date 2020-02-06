@@ -508,6 +508,7 @@ def hospital_json_list(request):
         #         unit['fields'].update({'identifier': '{}{}'.format(unit['fields']['identifier'],' (Alianza)')})
         #     else:
         #         continue
+        logger.info("[Success HospitaljsonEnd] {}".format(json.dumps(_raw_data)))
         return HttpResponse(json.dumps(_raw_data), content_type='application/json', status=200)
     else:
         return BAD_REQUEST
