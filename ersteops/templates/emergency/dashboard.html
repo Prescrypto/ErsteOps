@@ -38,9 +38,11 @@
   var incidents_json_list = {{ object_list|safe }};
   var units_json_list = {{ units_list|safe }};
   var available_units_counter = {{ available_units_counter }} || 0;
+  var hospitals_json_list = {{hospitals|safe}};
 
   window.erste.incidents = incidents_json_list;
   window.erste.units = units_json_list;
+  window.erste.hospitals = hospitals_json_list;
 
   // example HTTP_PROTOCOL: {{ HTTP_PROTOCOL }}
   // ie. ABSOLUTE_URI : {{ HTTP_ABSOLUTE_URI }}
