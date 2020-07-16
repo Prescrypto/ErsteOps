@@ -45,7 +45,7 @@
     "date-fns": "^1.29.0",
     "file-loader": "^1.1.4",
     "js-cookie": "^2.2.0",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.19",
     "luxon": "^1.7.1",
     "node-sass": "^4.5.3",
     "postcss-loader": "^2.0.9",
