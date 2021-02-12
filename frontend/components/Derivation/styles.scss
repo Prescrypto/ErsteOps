@@ -1,0 +1,71 @@
+.tooltip.popover.grade {
+  display: none;
+
+  & .tooltip-arrow.popover-arrow {
+    border-color: #222c3c;
+  }
+
+  & .tooltip-inner.popover-inner {
+    background: #222c3c;
+    padding: 0;
+
+    & .grid__close {
+      position: absolute;
+      top: 1px;
+      left: 8px;
+      color: white !important;
+    }
+  }
+}
+
+
+.derivation-add {
+	//background: #eff3f6;
+	//text-align: center;
+	color: #eff3f6;
+}
+
+.derivation-button {
+	text-align: center;
+	padding-top: 10px;
+}
+
+.derivation-label {
+	padding-bottom: 10px;
+}
+
+.derivation-text {
+	color: white;
+}
+
+
+.c-field__addon {
+  color: #333;
+}
+
+.c-field__addon:active {
+  color: #ccc;
+}
+
+.close-button {
+  position: absolute;
+  left: -20px;
+  top: 30%;
+  color: red;
+}
+
+.tooltip__heading {
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: white;
+}
+
+.tooltip__subheading {
+  margin-top: 10px;
+  color: white;
+}
+
+.grade__wrapper {
+  padding: 8px 24px 20px;
+  width: 300px;
+}

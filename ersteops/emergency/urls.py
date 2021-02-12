@@ -11,7 +11,9 @@ from emergency.views import (
     EmergencyJSONUpdate, 
     EmergencyText, 
     grade_view, 
-    timer_view
+    timer_view,
+    derivation_view,
+    hospital_json_list,
 )
 
 urlpatterns = [
@@ -27,4 +29,6 @@ urlpatterns = [
     url(r'^ajax/patient/(?P<patient_id>[0-9]+)/$', EmergencyJSONGetPatient.as_view(), name="emergency_patient_json"),
     url(r'^ajax/change_grade/$', grade_view, name="ajax_change_grade"),
     url(r'^ajax/update_timer/$', timer_view, name="ajax_update_timer"),
+    url(r'^ajax/update_derivation/$', derivation_view, name="ajax_update_derivation"),
+    url(r'^ajax/hospital/$', hospital_json_list, name="hospital_json_list"),
 ]

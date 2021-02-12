@@ -29,7 +29,7 @@ class JSONResponseMixin(object):
         """
         fields = EMERGENCY_LIST_FIELDS
         emergency = Emergency.objects.filter(id=context["object"].id)
-        data = serializers.serialize('json', emergency, fields=fields)
+        data = serializers.serialize('json', emergency, fields=fields, use_natural_foreign_keys=True, use_natural_primary_keys=True)
         # Inyect to data addresses type
         raw_data = json.loads(data)
         raw_data[0]["fields"].update({
@@ -63,7 +63,7 @@ class UpdateJsonResponseMixin(object):
                 # del timers form form
                 entriesToRemove = ('attention_time', 'derivation_time', 'end_time', 'final_emergency_time', 'hospital_arrival',
                                     'patient_arrival', 'start_time', 'unit_assigned_time', 'unit_dispatched_time',
-                                    'arrival_time', )
+                                    'arrival_time', 'derivations')
                 for item in entriesToRemove:
                     data.pop(item, None)
                 # Accept update emergency with address

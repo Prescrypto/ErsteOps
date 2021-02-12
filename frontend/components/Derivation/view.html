@@ -10,13 +10,84 @@
 	<div class="row">
 		<div class="col-4">Derivaciones:</div>
 		<div class="col-4">
-			<a class="c-project__profile c-project__profile--btn c-tooltip c-tooltip--top" aria-label="Agregar Derivacion" :href="emergency_link">
-            <i class="fa fa-plus" />
-            </a>
+			<!-- -->
+      <v-popover
+        offset="20"
+        popoverClass="grade"
+        defaultInnerClass="grade__inner"
+        defaultArrowClass="grade__arrow"
+        :auto-hide="true"
+      >
+        <span class="tooltip-target b3 fa fa-plus"></span>
+        <template slot="popover">
+          <button
+                @click="stoppedTimer = null"
+                type="button"
+                class="grid__close c-close u-color-primary" v-close-popover>×</button>
+          <div class="grade__wrapper">
+
+
+            <!-- You can put other components too -->
+            <form>
+              <div class="derivation-add">
+                <div class="c-field">
+                  <p class="derivation-text">Agregar Derivación </p>
+                  <p>
+                    <small class="c-field__message u-color-info">
+                    </small>
+                  </p>
+                </div>
+                <label class="c-field__label" for="id_reception" >Persona que recibe</label>
+                <input name="id_reception" 
+                  v-model="reception"
+                  type="text"
+                  class="c-input"
+                  maxlength="100" 
+                />
+                <label class="c-field__label" for="id_derivation_hospital" >Hospital</label>
+                <select v-model="selected" class="c-input">
+                    <option v-for="hospital in mapHospitals" v-bind:value="hospital.id">
+                    {{ hospital.name}}
+                    </option>
+                </select> 
+                <label class="c-field__label" for="id_derivation_notes" >Notas</label> 
+                <textarea v-model="message" placeholder="Notas" class="c-input"></textarea>      
+              </div>
+
+              <div class="timers-button">
+                <button @click="submit" :disabled="!isValid" class="c-btn c-btn--info" v-close-popover>Guardar</button>
+              </div>
+            </form>   
+          </div>
+        </template>
+      </v-popover>
+      <!-- -->
 		</div>
 		<div class="col-4">
-               
-        </div>
+               aca-- {{ emergency.derivations }}            
+            <h1 class="tooltip__heading u-h6 u-text-center">
+                  Agregar Derivacion
+            </h1>
+                  <a class="c-project__profile c-project__profile--btn c-tooltip c-tooltip--top" aria-label="Agregar Derivacion" :href="emergency_link">
+            <i class="fa fa-plus" />
+            </a>
+    </div>
 
 	</div>
+  <div class="row">
+    <div class="col-12">
+      <label class="c-field__label" for="input2">Derivaciones Generadas</label>
+     
+      <div class="c-input selected-container">
+        <span v-for="derivation in emergency.derivations" 
+        :key="derivation.id"
+        >
+          ***
+          {{ derivation.hospital }}
+          ***;
+        </span>
+      </div>
+      
+    </div>    
+  </div>
 </form>

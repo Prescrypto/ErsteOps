@@ -15,7 +15,7 @@ import {
 } from 'lodash/fp';
 import http from 'utils/http';
 import { removePrefix } from 'utils/normalize';
-import { emergencies, units } from 'utils/preload';
+import { emergencies, units, mapHospitals } from 'utils/preload';
 import { ws } from 'utils/url';
 import createWebSocketPlugin from 'utils/websocket';
 import ReconnectingWebSocket from 'reconnecting-websocket';
@@ -49,10 +49,14 @@ import {
   EMERGENCY_SET_INACTIVE_ERROR,
   EMERGENCY_TOGGLE_ACTIVE,
   UPDATE_COPAGO_AMOUNT,
+  REQUEST_HOSPITALS_START,
+  REQUEST_HOSPITALS_SUCCESS,
+  REQUEST_HOSPITALS_ERROR,
 } from './constants';
 import search from './modules/search';
 import finalGrade from './modules/final-grade';
 import updateTimer from './modules/update-timer';
+import updateDerivation from './modules/update-derivation';
 import { default as unitModule } from './modules/unit';
 
 // Use VueX
@@ -61,7 +65,13 @@ Vue.use(Vuex);
 // Create VueX store
 const store = new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
-  modules: { search, finalGrade, updateTimer, unit: unitModule },
+  modules: {
+    search,
+    finalGrade,
+    updateTimer,
+    updateDerivation,
+    unit: unitModule,
+  },
   state: {
     error: false,
     loading: false,
@@ -70,6 +80,7 @@ const store = new Vuex.Store({
       address: {},
     },
     units,
+    mapHospitals,
     selected: [],
     emergencies,
     emergency: {
@@ -117,6 +128,28 @@ const store = new Vuex.Store({
         })
         .catch(err => commit(REQUEST_UNITS_ERROR, err));
     },
+    hospitals({ commit }) {
+      commit(REQUEST_HOSPITALS_START);
+      http
+        .get('/emergency/ajax/hospital/')
+        .then(response => {
+          const { data } = response;
+          const hospitals = map(u => ({ id: u.pk, ...u.fields }))(data);
+          commit(REQUEST_HOSPITALS_SUCCESS, hospitals);
+        })
+        .catch(err => commit(REQUEST_HOSPITALS_ERROR, err));
+    },
+    // hospitals({ commit }) {
+    //   commit(REQUEST_UNITS_START);
+    //   http
+    //     .get('/units/ajax/local/')
+    //     .then(response => {
+    //       const { data } = response;
+    //       const flatUnits = map(u => ({ id: u.pk, ...u.fields }))(data);
+    //       commit(REQUEST_UNITS_SUCCESS, flatUnits);
+    //     })
+    //     .catch(err => commit(REQUEST_UNITS_ERROR, err));
+    // },
     emergency({ commit }, id) {
       commit(REQUEST_EMERGENCY_START);
       http
@@ -154,6 +187,7 @@ const store = new Vuex.Store({
     activeUnits: state => filter(unit => unit.is_active)(state.units),
     activeUnitsCount: (state, getters) => getters.activeUnits.length,
     selectedUnits: state => state.selected,
+    // actualDerivations: (state, getters) => emergency.derivations.all(),
     combinedUnits: (state, getters) =>
       uniq([
         ...filter(unit => includes(unit.id)(state.emergency.units))(
@@ -212,6 +246,20 @@ const store = new Vuex.Store({
       state.loading = false;
     },
     [REQUEST_UNITS_ERROR](state, err) {
+      state.error = err;
+      state.loading = false;
+    },
+
+    // Hospitals
+    [REQUEST_HOSPITALS_START](state) {
+      state.error = false;
+      state.loading = true;
+    },
+    [REQUEST_HOSPITALS_SUCCESS](state, data) {
+      state.hospitals = data;
+      state.loading = false;
+    },
+    [REQUEST_HOSPITALS_ERROR](state, err) {
       state.error = err;
       state.loading = false;
     },
