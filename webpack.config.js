@@ -106,12 +106,12 @@ if (process.env.NODE_ENV === 'production') {
         NODE_ENV: JSON.stringify('production'),
       },
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false,
-      },
-    }),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   sourceMap: true,
+    //   compress: {
+    //     warnings: false,
+    //   },
+    // }),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
     }),
