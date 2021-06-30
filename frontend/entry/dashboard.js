@@ -1,12 +1,12 @@
 import Vue from 'vue';
 import Notifications from 'vue-notification';
 import VueClipboard from 'vue-clipboard2';
-// import VTooltip from 'v-tooltip';
+import VTooltip from 'v-tooltip';
 import DashboardLog from 'components/DashboardLog';
 import Analytics from 'components/Analytics';
 import store from 'store';
 
-// Vue.use(VTooltip);
+Vue.use(VTooltip);
 Vue.use(Notifications);
 Vue.use(VueClipboard);
 Vue.filter('currency', cents => cents / 100);
