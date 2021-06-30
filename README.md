@@ -75,3 +75,7 @@ $ python3 manage.py loaddata ../fixtures/auth/test_data.json
 ```
 
 HINT: Use in case have a lot of test with db or have change migrations file missing references
+
+
+# Enable python setup on heroku stack20
+source /vagrant/venv/bin/activate
