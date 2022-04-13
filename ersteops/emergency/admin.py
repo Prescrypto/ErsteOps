@@ -75,7 +75,8 @@ class EmergencyAdmin(admin.ModelAdmin):
     actions = [update_is_active, update_non_active]
 
 
-admin.site.register(Emergency, EmergencyAdmin)
+#admin.site.register(Emergency, EmergencyAdmin)
+admin.site.register(Emergency)
 admin.site.register(AttentionKind)
 admin.site.register(AttentionZone)
 admin.site.register(AttentionHospital)

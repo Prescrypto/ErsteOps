@@ -8,7 +8,7 @@ def home(request):
     ''' Login page '''
     logger = logging.getLogger('django_info')
     login_template = "home/login.html"
-    if not request.user.is_anonymous():
+    if not request.user.is_anonymous:
         return redirect("emergencydashboard")
 
     if request.POST:

@@ -326,7 +326,9 @@ const store = new Vuex.Store({
   },
 
   plugins: [
-    createWebSocketPlugin(new ReconnectingWebSocket(`${ws}/notify/emergency/`)),
+    createWebSocketPlugin(
+      new ReconnectingWebSocket(`${ws}/ws/notify/emergency/`)
+    ),
   ],
 });
 
