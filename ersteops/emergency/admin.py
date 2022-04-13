@@ -57,7 +57,7 @@ class EmergencyAdmin(admin.ModelAdmin):
         }),
         ('Timers', {
             'classes': ('collapse',),
-            'fields': ('start_time','unit_dispatched_time','arrival_time','derivation_time',
+            'fields': ('start_time','arrival_time','derivation_time',
                     'patient_arrival','final_emergency_time')
         }),
         ('Operaciones', {
@@ -75,8 +75,7 @@ class EmergencyAdmin(admin.ModelAdmin):
     actions = [update_is_active, update_non_active]
 
 
-#admin.site.register(Emergency, EmergencyAdmin)
-admin.site.register(Emergency)
+admin.site.register(Emergency, EmergencyAdmin)
 admin.site.register(AttentionKind)
 admin.site.register(AttentionZone)
 admin.site.register(AttentionHospital)
