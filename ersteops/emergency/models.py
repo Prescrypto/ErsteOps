@@ -6,7 +6,9 @@ import unicodedata
 from django.db import models
 from django.utils import timezone
 
-from channels import Group
+#from channels import Group
+import channels
+
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 
@@ -30,17 +32,20 @@ class Emergency(models.Model):
         related_name="service_category_name",
         verbose_name= "Tipo de emergencia",
         blank=True,
-        null=True
+        null=True,
+        on_delete=models.DO_NOTHING,
         )
 
     # Triage
     grade_type = models.ForeignKey("AttentionKind",
     related_name="attention_kind_name",
-    verbose_name= "Grado Emergencia"
+    verbose_name= "Grado Emergencia",
+    on_delete=models.DO_NOTHING,
         )
     zone = models.ForeignKey("AttentionZone",
     related_name="zone_name",
-    verbose_name="Zona de Atención"
+    verbose_name="Zona de Atención",
+    on_delete=models.DO_NOTHING,
         )
 
     tree_selection = models.CharField("Internal Code for tree selection", blank=True, max_length=255, default="")
@@ -105,7 +110,8 @@ class Emergency(models.Model):
                                             related_name="final_attention_kind_name",
                                             verbose_name= "Grado de atención final",
                                             blank=True,
-                                            null=True)
+                                            null=True,
+                                            on_delete=models.DO_NOTHING)
     attention_justification = models.TextField(u'Justificación', blank=True, default='')
 
     # Symptoms
@@ -236,8 +242,9 @@ def emergency_dictionary(instance):
     units = []
     for unit in instance.units.all():
         units.append(unit.id)
-    # for derivation in instance.derivation.all():
-    #     derivation.append(derivation.id)    
+    derivations = []    
+    for derivation in instance.derivations.all():
+         derivations.append(derivation.id)    
     emergDict={
         "pk":instance.pk,
         "id":instance.pk,
@@ -289,7 +296,7 @@ def emergency_dictionary(instance):
         "operation_notes":instance.operation_notes,
         "partner_name":instance.partner_name,
         "partner_legalname":instance.partner_legalname,
-        #"derivation": derivation,
+        "derivations": derivations,
     }
 
     return emergDict
@@ -347,6 +354,9 @@ class AttentionHospital(models.Model):
     def __str__(self):
         return self.name
 
+    def natural_key(self):
+        return( self.name )
+
 
 class AttentionDerivation(models.Model):
     '''  Service Derivation model'''
@@ -354,11 +364,13 @@ class AttentionDerivation(models.Model):
         related_name = "derivation_emergency_name",
         verbose_name = "emergencia",
         default=1,
+        on_delete=models.DO_NOTHING,
         )
     motive = models.CharField("Motivo", max_length=100, blank=True)
     hospital = models.ForeignKey("AttentionHospital",
     related_name="attention_hospital_name",
-    verbose_name= "hospital"
+    verbose_name= "hospital",
+    on_delete=models.DO_NOTHING,
         )
     eventualities = models.TextField("eventualidades", max_length=100, blank=True)
     reception = models.CharField("quien recibe en hospital", max_length=100, blank=True)
@@ -374,6 +386,9 @@ class AttentionDerivation(models.Model):
 
     def __str__(self):
         return self.motive
+
+    def natural_key(self):
+        return(self.motive, self.hospital.name)
 
     def save(self, **kwargs):
         newDerivation=True if self.pk is None else False
@@ -432,7 +447,8 @@ class ServiceCategory(models.Model):
 class EmergencyDerivation(models.Model):
     hospital = models.ForeignKey("AttentionHospital",
     related_name="em_attention_hospital_name",
-    verbose_name= "hospital"
+    verbose_name= "hospital",
+    on_delete=models.DO_NOTHING,
         )
     reception = models.CharField("quien recibe en hospital", max_length=100, blank=True)
     notes = models.TextField("notas", max_length=100, blank=True)
@@ -449,3 +465,6 @@ class EmergencyDerivation(models.Model):
         #return "{}, {}, {}".format(unicodedata.normalize('NFKD', self.odoo_client), unicodedata.normalize('NFKD', self.patient_name), self.created_at)
         return "{}, {}, {}".format(unicodedata.normalize('NFKD', str(self.id)) , self.hospital.name, self.created_at)
         #return str(self.hiospi)
+
+    def natural_key(self):
+        return({'id': self.id, 'reception': self.reception, 'hospital': self.hospital.name})

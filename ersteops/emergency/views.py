@@ -20,10 +20,10 @@ from django.db.models import Q
 from core.utils import OdooApi
 from .utils import JSONResponseMixin, AjaxableResponseMixin, UpdateJsonResponseMixin
 from .forms import OdooClientForm, OdooClientAuto
-from .models import Emergency,AttentionDerivation, AttentionKind
+from .models import Emergency,AttentionDerivation, AttentionKind, AttentionHospital, EmergencyDerivation
 from unit.models import Unit
 from unit.utils import UNIT_LIST_FIELD
-from .list_fields import EMERGENCY_LIST_FIELDS
+from .list_fields import EMERGENCY_LIST_FIELDS, HOSPITAL_LIST_FIELDS
 from .helpers import get_copago
 
 # Logging library
@@ -101,6 +101,45 @@ def timer_view(request):
         return bad_response
 # /Update Timer Functionality
 
+# Update Derivation Functionality
+@csrf_exempt
+def derivation_view(request):
+    ''' '''
+    bad_response = JsonResponse({'status':'bad request'})
+    bad_response.status_code = 400
+
+    if not request.is_ajax():
+        return bad_response
+    if not request.body:
+        return bad_response
+
+    data = json.loads(request.body.decode('utf-8'))
+
+    if 'id' in data and 'timer_type' in data :
+        try:
+            emergency = Emergency.objects.get(id=data['id'])
+            # if data['timer_type'] == '1':
+            #     emergency.unit_dispatched_time = timezone.now()
+            # if data['timer_type'] == '2':
+            #     emergency.arrival_time = timezone.now()
+            #     emergency.attention_time = timezone.now()
+            # if data['timer_type'] == '3':
+            #     emergency.derivation_time = timezone.now()
+            # if data['timer_type'] == '4':
+            #     emergency.patient_arrival = timezone.now()
+
+            # emergency.save()
+            data.update({'status': 'success', 'client_id':emergency.odoo_client})
+            response = JsonResponse(data)
+            response.status_code = 202
+            return response
+        except Exception as e:
+            logger.error("[Update Derivation View ERROR]: {}, type: {}".format(e, type(e)))
+            return bad_response
+
+    else:
+        return bad_response
+# /Update Derivation Functionality
 
 @method_decorator(csrf_exempt, name='dispatch')
 class EmergencyNew(AjaxableResponseMixin, CreateView):
@@ -128,6 +167,8 @@ class EmergencyDashboardList(ListView):
     def get_context_data(self, **kwargs):
         active_emergencies = Emergency.objects.filter(is_active=True).count()
         units = Unit.objects.available_units()
+        #hospitals = AttentionHospital.objects.all()
+        hospitals_lists = serializers.serialize('json',list(AttentionHospital.objects.all()),fields=HOSPITAL_LIST_FIELDS)
         available_units_counter = units.count()
         units_list = serializers.serialize('json', list(units), fields=UNIT_LIST_FIELD)
         context = super(EmergencyDashboardList, self).get_context_data(**kwargs)
@@ -135,14 +176,16 @@ class EmergencyDashboardList(ListView):
             'now': timezone.now(),
             'active_emergencies': active_emergencies,
             'available_units_counter': available_units_counter,
-            'units_list': units_list
+            'units_list': units_list,
+            'hospitals': hospitals_lists,
         })
         return context
 
     def get_queryset(self):
         fields = EMERGENCY_LIST_FIELDS
-        data = serializers.serialize('json', list(Emergency.objects.filter(is_active=True)), fields=fields)
+        data = serializers.serialize('json', list(Emergency.objects.filter(is_active=True)), fields=fields, use_natural_foreign_keys=True, use_natural_primary_keys=True)
         logger.info('[Dashboard List Sent SUCCESS')
+        #print("{}".format(data))
         return data
 
 
@@ -450,3 +493,22 @@ class OdooSubscription(View):
         form = OdooClientAuto
         return render(request, self.template_name,{"form": form})
 
+
+
+BAD_REQUEST = HttpResponse(json.dumps({'error': 'Bad Request'}), status=400, content_type='application/json')
+
+def hospital_json_list(request):
+    ''' List Json View for local available Hospitals '''
+    if request.is_ajax():
+        hospitals = AttentionHospital.objects.all()
+        data = serializers.serialize('json', list(hospitals), fields=HOSPITAL_LIST_FIELDS)
+        _raw_data = json.loads(data)
+        # for unit in _raw_data:
+        #     if unit['fields']['is_alliance']:
+        #         unit['fields'].update({'identifier': '{}{}'.format(unit['fields']['identifier'],' (Alianza)')})
+        #     else:
+        #         continue
+        logger.info("[Success HospitaljsonEnd] {}".format(json.dumps(_raw_data)))
+        return HttpResponse(json.dumps(_raw_data), content_type='application/json', status=200)
+    else:
+        return BAD_REQUEST
