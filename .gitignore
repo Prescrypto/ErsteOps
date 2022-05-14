@@ -30,6 +30,10 @@ pip-delete-this-directory.txt
 .venv
 venv/
 ENV/
+env_3.6/
+ChatTester/
+env_2_2_ok/
+
 
 
 # mypy
@@ -48,3 +52,4 @@ dist/
 npm-debug.log
 
 CFDI
+
