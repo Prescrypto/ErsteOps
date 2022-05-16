@@ -37,22 +37,52 @@ class EmergencyAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Paciente', {
-            'fields': ('odoo_client', 'erste_code','has_paid', 'partner_name', 'partner_legalname','patient_name', 'patient_gender', 'patient_age',
-                    'is_active', 'copago_amount','caller_name', 'caller_relation','tel_local','tel_mobile', 'subscription_type',
-                    'tree_selection','service_category', 'grade_type', 'zone',
-                    'main_complaint', 'complaint_description',
-                    'patient_allergies', 'patient_illnesses', 'attention_final_grade',
-                    'attention_justification', 'patient_notes',)
+            'fields': ( 'odoo_client', 
+                        'erste_code',
+                        'has_paid', 
+                        'partner_name', 
+                        'partner_legalname',
+                        'patient_name', 
+                        'patient_gender', 
+                        'patient_age',
+                        'is_active', 
+                        'copago_amount',
+                        'caller_name', 
+                        'caller_relation',
+                        'tel_local',
+                        'tel_mobile', 
+                        'subscription_type',
+                        'tree_selection',
+                        'service_category', 
+                        'grade_type', 
+                        'zone',
+                        'main_complaint', 
+                        'complaint_description',
+                        'patient_allergies', 
+                        'patient_illnesses', 
+                        'attention_final_grade',
+                        'attention_justification', 
+                        'patient_notes',)
         }),
         ('Direccion', {
             'classes': ('collapse',),
-            'fields': ('address_street', 'address_extra', 'address_zip_code', 'address_county',
-                    'address_col','address_between', 'address_and_street', 'address_ref',
-                    'address_front', 'address_instructions','address_notes',)
+            'fields': ( 'address_street',
+                        'address_extra', 
+                        'address_zip_code', 
+                        'address_county',
+                        'address_col',
+                        'address_between', 
+                        'address_and_street', 
+                        'address_ref',
+                        'address_front', 
+                        'address_instructions',
+                        'address_notes',)
         }),
         ('Unidades', {
             'classes': ('collapse',),
-            'fields': ('units', 'unit_assigned_time', 'unit_dispatched_time',
+            'fields': ( 'units', 
+                        'unit_assigned_time', 
+                        #'unit_dispatched_time',
                  )
         }),
         ('Timers', {

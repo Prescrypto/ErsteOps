@@ -2,6 +2,7 @@
 from django.conf.urls import include
 #import notifications
 
+
 # channel_routing = [
 #     include("notifications.routing.websocket_urlpatterns"),
 # ]

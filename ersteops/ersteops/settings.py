@@ -258,7 +258,6 @@ ODOO_URL = os.environ['ODOO_URL']
 ODOO_USERNAME = os.environ['ODOO_USERNAME']
 ODOO_PASSWORD = os.environ['ODOO_PASSWORD']
 
-
 # Channels
 ASGI_APPLICATION = 'ersteops.asgi.application'
 #ASGI_APPLICATION = 'asgi.application'
@@ -288,3 +287,4 @@ CHANNEL_LAYERS = {
         #"ROUTING": "ersteops.routing.channel_routing",
     },
 }
+
