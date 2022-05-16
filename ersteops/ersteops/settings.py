@@ -108,6 +108,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'ersteops.wsgi.application'
 
 APPEND_SLASH=False
+#APPEND_SLASH=True
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
@@ -155,6 +156,7 @@ USE_L10N = True
 USE_TZ = True
 
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
@@ -178,6 +180,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # https://github.com/ezhome/django-webpack-loader
 WEBPACK_LOADER = {
     'DEFAULT': {
+        'CACHE': not DEBUG,
         'BUNDLE_DIR_NAME': 'bundles/',
         'STATS_FILE': os.path.join(BASE_DIR, 'static/webpack-stats.json'),
     }
@@ -202,36 +205,13 @@ LOGGING = {
     'loggers': {
         'django_info': {
             'handlers': ['console'],
-            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
         }
     },
 }
 
 
 
-#define channel layer
-"""
-Django channels funciona un a wsgi, ahora todas las peticiones llegan a una nueva capa
-asgi "channels", para pruebas simples se puede usar runserver, para iniciar las capas
-por separado se usa lo siguiente.
-chanels(interface servers) ejemplo:
-    daphne ersteops.asgi:channel_layer --port 8000 -b 0.0.0.0
-
-worker (worker servers) ejemplo:
-    python manage.py runworker
-
-para mas informacion sobre el deployado o sus configuraciones
-http://channels.readthedocs.io/en/latest/deploying.html
-"""
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "asgi_redis.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379/0')],
-        },
-        "ROUTING": "ersteops.routing.channel_routing",
-    },
-}
 
 
 
@@ -278,4 +258,33 @@ ODOO_URL = os.environ['ODOO_URL']
 ODOO_USERNAME = os.environ['ODOO_USERNAME']
 ODOO_PASSWORD = os.environ['ODOO_PASSWORD']
 
-ASGI_APPLICATION = "ersteops.routing.application"
+# Channels
+ASGI_APPLICATION = 'ersteops.asgi.application'
+#ASGI_APPLICATION = 'asgi.application'
+
+#define channel layer
+"""
+Django channels funciona un a wsgi, ahora todas las peticiones llegan a una nueva capa
+asgi "channels", para pruebas simples se puede usar runserver, para iniciar las capas
+por separado se usa lo siguiente.
+chanels(interface servers) ejemplo:
+    daphne ersteops.asgi:channel_layer --port 8000 -b 0.0.0.0
+
+worker (worker servers) ejemplo:
+    python manage.py runworker
+
+para mas informacion sobre el deployado o sus configuraciones
+http://channels.readthedocs.io/en/latest/deploying.html
+"""
+
+CHANNEL_LAYERS = {
+    "default": {
+        #"BACKEND": "asgi_redis.RedisChannelLayer",
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379/0')],
+        },
+        #"ROUTING": "ersteops.routing.channel_routing",
+    },
+}
+

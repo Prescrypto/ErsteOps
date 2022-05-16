@@ -87,12 +87,8 @@ class EmergencyAdmin(admin.ModelAdmin):
         }),
         ('Timers', {
             'classes': ('collapse',),
-            'fields': ('start_time',
-                'unit_dispatched_time',
-                'arrival_time',
-                'derivation_time',
-                'patient_arrival',
-                'final_emergency_time')
+            'fields': ('start_time','arrival_time','derivation_time',
+                    'patient_arrival','final_emergency_time')
         }),
         ('Operaciones', {
             'classes': ('collapse',),

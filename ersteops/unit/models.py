@@ -55,7 +55,7 @@ class CrewMember(models.Model):
     crewroll = models.ForeignKey("CrewRoll",
         related_name="crew_members",
         verbose_name= "Tipo de tripulación",
-        on_delete=models.DO_NOTHING,
+        on_delete = models.DO_NOTHING
         )
     more_info = models.TextField("Más Información acerca del miembro tripulante", blank=True)
 

@@ -12,7 +12,7 @@ export default function createWebSocketPlugin(socket) {
     // Add to emergencies when receiving new data
     socket.onmessage = message => {
       const dataTemp = JSON.parse(message.data);
-      const data = JSON.parse(dataTemp);
+      const data = dataTemp;
       const { id } = data;
       const { emergencies } = state;
 
