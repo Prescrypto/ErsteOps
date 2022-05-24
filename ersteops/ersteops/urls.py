@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^units/', include('unit.urls')),
     url(r'^notify/', include('notifications.urls')),
     url(r'^ajaxapi/getsubscriptor/',get_subscriptor, name="get_subscriptor"),
+    url(r'^paperless/', include('paperless.urls')),
     # Jet Dashboard
     url(r'^jet/', include('jet.urls','jet')),
     url(r'^jet/dashboard/', include('jet.dashboard.urls','jet-dashboard')),
