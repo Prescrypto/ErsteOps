@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     'webpack_loader',
     'unit.apps.UnitConfig',
     'reports.apps.ReportsConfig',
+    'paperless.apps.PaperlessConfig',
 ]
 
 MIDDLEWARE = [
