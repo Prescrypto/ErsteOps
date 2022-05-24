@@ -11,18 +11,48 @@ Everyday usage
 
 vagrant up
 
-# Usage
 
-This app is developed using python 3 , be aware to use pyton3 instead python
+# Virtualenv
 
-Run server:
+The app still use vagrant but for felxibility on deploying to heroku now the development are made using virtualenv, is more flexible
 
-python3 manage.py runserver [::]:8000
+To create your venv:
 
-Migrate:
-python3 manage.py migrate
+`python3 -m venv env_2_2_ok`
 
-etc, etc,..
+Activate venv:
+
+`cd /vagrant/env_2_2_ok;source bin/activate;cd /vagrant/ersteops`
+
+Update pip if needed:
+
+`python -m pip install --upgrade pip`
+
+Install requirments:
+
+`pip install -r /vagrant/requirements.txt`
+
+
+# Usage 
+
+- Activate python venv.
+- Start yarn:
+
+`yarn dev`
+
+- Start daphne server:
+
+```
+$ cd /vagrant/ersteops
+$ daphne ersteops.asgi:application --port 8000 -b 0.0.0.0
+```
+
+- Start django server:
+
+```
+$ cd /vagrant/ersteops
+$ python manage.py runworker channels --settings=ersteops.settings -v3 --traceback
+```
 
 # Front End
 
