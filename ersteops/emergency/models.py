@@ -15,6 +15,7 @@ from django.db.models.signals import post_save
 
 from core.utils import eventDuration
 from unit.models import Unit
+from paperless.models import MedicalReport
 
 
 
@@ -133,6 +134,13 @@ class Emergency(models.Model):
         )
     # SAles rep stuff
     sales_rep = models.CharField('Vendedor',max_length=255,default='',blank=True)
+
+    medical_report = models.ForeignKey("paperless.MedicalReport", 
+        related_name = "medical_report",
+        verbose_name = "Parte Medico",
+        blank = True,
+        null = True,
+        on_delete = models.DO_NOTHING)
 
     # Datetie utils
     created_at = models.DateTimeField("Fecha de alta",auto_now_add=True,editable=False)
@@ -253,7 +261,12 @@ def emergency_dictionary(instance):
         units.append(unit.id)
     derivations = []    
     for derivation in instance.derivations.all():
-         derivations.append(derivation.id)    
+         derivations.append(derivation.id)  
+    #medicalreports =[]
+    #for medicalrepoort in instance.medical_report.all()
+    #    medicalreports.append(medicalrepoort.id)
+
+
     emergDict={
         "pk":instance.pk,
         "id":instance.pk,
@@ -306,6 +319,7 @@ def emergency_dictionary(instance):
         "partner_name":instance.partner_name,
         "partner_legalname":instance.partner_legalname,
         "derivations": derivations,
+        "medical_report": instance.medical_report,
     }
 
     return emergDict

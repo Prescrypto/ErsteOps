@@ -26,6 +26,8 @@ from unit.utils import UNIT_LIST_FIELD
 from .list_fields import EMERGENCY_LIST_FIELDS, HOSPITAL_LIST_FIELDS
 from .helpers import get_copago
 
+from django import template
+
 # Logging library
 import logging
 # Load Logging definition, this is defined in settings.py in the LOGGING section
@@ -512,3 +514,4 @@ def hospital_json_list(request):
         return HttpResponse(json.dumps(_raw_data), content_type='application/json', status=200)
     else:
         return BAD_REQUEST
+
