@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load user_tags %}
 
 {# Wrapper #}
 <div id="v-header">
@@ -14,15 +15,18 @@
     </button>
 
     <h2 class="c-navbar__title u-mr-auto">Dashboard</h2>
-    <a id="show-modal" @click="show" class="c-btn c-state-card__icon c-state-card__icon--success"><div><i class="fa fa-plus"></i></div></a>
-
+    {% if request.user|has_group:"Operator"%}
+      <a id="show-modal" @click="show" class="c-btn c-state-card__icon c-state-card__icon--success"><div><i class="fa fa-plus"></i></div></a>
+    {% endif %}
     <div class="c-dropdown dropdown">
       <a  class="c-avatar c-avatar--xsmall has-dropdown dropdown-toggle" href="#" id="dropdwonMenuAvatar" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <img class="c-avatar__img" src="{% static "ui_kit/img/avatar-72.jpg" %}" alt="User's Profile Picture">
       </a>
 
       <div class="c-dropdown__menu dropdown-menu dropdown-menu-right" aria-labelledby="dropdwonMenuAvatar">
-        <a class="c-dropdown__item dropdown-item" href="/admin/">Administración</a>
+        {% if request.user|has_group:"Operator"%}
+          <a class="c-dropdown__item dropdown-item" href="/admin/">Administración</a>
+        {% endif %}
         <a class="c-dropdown__item dropdown-item" href="{% url 'logout_page' %}">Logout</a>
       </div>
     </div>
