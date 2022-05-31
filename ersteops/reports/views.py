@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.shortcuts import render
-from django.views.generic import View
+from django.views.generic import View, ListView
 
 #django-pivot stuff
 from django_pivot.pivot import pivot
@@ -29,6 +29,7 @@ from django.db.models.functions import (ExtractDay, ExtractMonth, ExtractWeek,Ex
 from django.core.serializers.json import DjangoJSONEncoder
 
 from django.utils.timezone import activate
+
 
 # Create your views here.
 # ********************
@@ -160,3 +161,9 @@ def getBaseData(start_date,end_date):
         json_qs=json.dumps(list(qs), cls=DjangoJSONEncoder)
     #return json.dumps(list(qs), cls=DjangoJSONEncoder)
     return json_qs
+
+
+class GeoReport(ListView):
+    template_name = "reports/georeport.html"
+    model = Emergency
+
