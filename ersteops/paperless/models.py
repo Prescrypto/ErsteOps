@@ -75,6 +75,8 @@ class MedicalReport(models.Model):
     service_code = models.CharField("Codigo de Servicio",max_length=10)
     # Units m2m relation
     # Paient Data
+    service_geo_lat = models.CharField('Latitud',max_length=15, blank=True ,default='')
+    service_geo_lon = models.CharField('Longitud', max_length=15,  blank=True, default='')
     patient_name = models.CharField('Nombre del Paciente', max_length=255, default='')
     patient_gender = models.CharField('genero', max_length=9, default= '', blank=True, choices=GENDER)
     patient_age = models.IntegerField('edad (años)', default=0, blank=True)
@@ -85,9 +87,9 @@ class MedicalReport(models.Model):
     skin_color = models.CharField("Coloración de piel", max_length=50, default= '', blank=True,)
     service_type = models.CharField('Tipo de Servicio', max_length=9, default= '', blank=True, choices=SERVICE_TYPE)
     consultation_reason = models.CharField('Motivo de la Consulta', max_length=20, default= '', blank=True, choices=CONSULTATION_REASON)
-    event_type = models.CharField('Motivo de la Consulta', max_length=20, default= '', blank=True, choices=EVENT_TYPE)
-    traumatics = models.CharField('Motivo de la Consulta', max_length=20, default= '', blank=True, choices=TRAUMATICS)
-    airway = models.CharField('Motivo de la Consulta', max_length=20, default= '', blank=True, choices=AIRWAY)
+    event_type = models.CharField('Tipo de Evento', max_length=20, default= '', blank=True, choices=EVENT_TYPE)
+    traumatics = models.CharField('Traumatico', max_length=20, default= '', blank=True, choices=TRAUMATICS)
+    airway = models.CharField('Via Aerea', max_length=20, default= '', blank=True, choices=AIRWAY)
     # (physical_exploration = pe)
     pe_time = models.DateTimeField("Dia/Hora",blank= True)
     pe_heart_rate = models.CharField("Frequencia Cardiaca", max_length=20,default='', blank=True)
