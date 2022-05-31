@@ -30,6 +30,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 
 from django.utils.timezone import activate
 
+from django.conf import settings
 
 # Create your views here.
 # ********************
@@ -166,4 +167,8 @@ def getBaseData(start_date,end_date):
 class GeoReport(ListView):
     template_name = "reports/georeport.html"
     model = Emergency
+    def get(self, request, *args, **kwargs):
+        data = {'geo_key': settings.GEO_API_KEY}
+        return render(request, self.template_name,{"data":data,})
+
 
