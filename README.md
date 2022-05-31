@@ -109,3 +109,14 @@ HINT: Use in case have a lot of test with db or have change migrations file miss
 
 # Enable python setup on heroku stack20
 source /vagrant/venv/bin/activate
+
+
+# Redis
+
+Test
+
+redis-cli
+
+Start Server:
+
+sudo service redis-server start
