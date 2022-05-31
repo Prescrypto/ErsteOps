@@ -8,6 +8,8 @@ from rangefilter.filter import DateRangeFilter, DateTimeRangeFilter
 from .models import (Emergency, AttentionKind, AttentionZone, AttentionHospital,
 	AttentionDerivation, ServiceCategory, EmergencyDerivation)
 
+from paperless.models import (MedicalReport)
+
 def update_is_active(EmergencyAdmin, request, queryset):
     # action fuction to help change to plan to users
     for emergency in queryset:
@@ -100,6 +102,11 @@ class EmergencyAdmin(admin.ModelAdmin):
             'fields': ('derivations',)
 
         }),
+        ('Parte Medico',{
+            'classes': ('collapse,'),
+            'fields': ('medical_report',)
+
+            }),
     )
 
     actions = [update_is_active, update_non_active]
@@ -112,3 +119,4 @@ admin.site.register(AttentionHospital)
 #admin.site.register(AttentionDerivation)
 admin.site.register(ServiceCategory)
 admin.site.register(EmergencyDerivation)
+admin.site.register(MedicalReport)
