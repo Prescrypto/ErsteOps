@@ -259,6 +259,9 @@ ODOO_URL = os.environ['ODOO_URL']
 ODOO_USERNAME = os.environ['ODOO_USERNAME']
 ODOO_PASSWORD = os.environ['ODOO_PASSWORD']
 
+# Google maps key
+GEO_API_KEY = os.environ['GEO_API_KEY']
+
 # Channels
 ASGI_APPLICATION = 'ersteops.asgi.application'
 #ASGI_APPLICATION = 'asgi.application'
