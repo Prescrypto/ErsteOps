@@ -535,8 +535,8 @@ def hospital_json_list(request):
 
 
 def twillio_whatsap_send(msg_content):
-    account_sid = 'AC3af5fc2897080852175755b01fe86592' 
-    auth_token = '7c467eb2e94d63076ab336cffb7e24ce' 
+    account_sid = '' 
+    auth_token = '' 
     client = Client(account_sid, auth_token) 
     #sandbox
     send_from_number = 'whatsapp:+14155238886'
