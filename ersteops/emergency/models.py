@@ -319,7 +319,7 @@ def emergency_dictionary(instance):
         "partner_name":instance.partner_name,
         "partner_legalname":instance.partner_legalname,
         "derivations": derivations,
-        "medical_report": instance.medical_report,
+        #"medical_report": instance.medical_report,
     }
 
     return emergDict
