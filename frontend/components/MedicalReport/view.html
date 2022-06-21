@@ -1,0 +1,373 @@
+<!-- request loading indicators -->
+<div v-if="loading">
+  <loader class="completion_loading" color="#2ea1f8" />
+  <small class="c-field__message u-color-info u-flex u-justify-center">
+    Buscando información del cliente...
+  </small>
+</div>
+
+
+<form v-else class="uk-form-stacked">
+
+
+  <div class="row">   
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Unidad</h3>
+      <label class="uk-form-label" for="id_unidad_movil">Unidad Movil</label>
+      <div class="uk-form-controls">
+        <input class="uk-input" id="id_unidad_movil" type="text" placeholder="M011...">
+      </div>
+      <label class="uk-form-label" for="form-stacked-text">Tipo de Unidad</label>
+      <div class="uk-form-controls">
+        <input class="uk-input" id="form-stacked-text" type="text" placeholder="Basica...">
+      </div>
+      <label class="uk-form-label" for="form-stacked-text">No.Placas</label>
+      <div class="uk-form-controls">
+        <input class="uk-input" id="form-stacked-text" type="text" placeholder="ABC-134...">
+      </div>
+    </div> <!-- // .card -->
+
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Paciente</h3>
+      <label class="uk-form-label" for="form-stacked-text">No.Socio</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="E001...">
+        </div>
+      <label class="uk-form-label" for="form-stacked-text">Telefono</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="5555-555-555...">
+        </div>
+      <label class="uk-form-label" for="form-stacked-text">Sexo: {{ gender }}</label>
+      <div class="uk-form-controls">
+          
+          <input 
+          class="uk-radio" 
+          type="radio" 
+          id="id_gender_m" 
+          value="Masculino" 
+          v-model="gender" />
+          <label for="gender">Masculino</label>
+
+          <input 
+          class="uk-radio" 
+          type="radio" 
+          id="id_gender_f" 
+          value="Femenino" 
+          v-model="gender" />
+          <label for="two">Femenino</label>  
+      </div>
+      <label class="uk-form-label" for="form-stacked-text">Nombre Completo</label>
+      <div class="uk-form-controls">
+        <input class="uk-input" id="form-stacked-text" type="text" placeholder="Jaime Ramirez...">
+      </div>
+    </div> <!-- // .card -->
+
+
+    </div> <!-- // .row -->
+
+    <div class="row">
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Paciente Desconocido</h3>
+         <div class="uk-form-controls">
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Paciente desconocido...">
+        </div>     
+      <label class="uk-form-label" for="form-stacked-text">Filiacion</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Filiacion...">
+        </div>
+        <label class="uk-form-label" for="form-stacked-text">Vestimenta</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Vestimenta...">
+        </div>
+               <label class="uk-form-label" for="form-stacked-text">Coloracion de piel</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Coloracion...">
+        </div>          
+    </div> <!-- // .card -->
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+          
+    </div>      
+    </div>
+
+  <div class="row">
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Sitio de Atencion: </h3>
+        <select class="uk-select" v-model="attention_place">
+        <option disabled value="">Seleccione una opcion</option>
+        <option>Hogar</option>
+        <option>Escuela/Trabajo</option>
+        <option>Ins.Deportivas</option>
+        <option>Ins.de Recreacion</option>
+        <option>Via Publica</option>
+        <option>Otro</option>
+      </select>
+      <label class="uk-form-label" for="form-stacked-text">Domicilio</label>
+      <div class="uk-form-controls">
+        <textarea class="uk-textarea" id="form-stacked-text" placeholder="av.tol # ..."></textarea>
+      </div>   
+    </div> <!-- // .card -->
+
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Tipo de Servicio</h3>
+      <select class="uk-select" v-model="service_kind">
+        <option disabled value="">Seleccione una opcion</option> 
+        <option>Traslado</option>
+        <option>Urgencias</option>
+        <option>Cuidados Intensivos</option>
+        <option>Consulta Medica</option>
+        <option>Otro</option>
+      </select>
+      <label class="uk-form-label" for="form-stacked-text">Otro</label> 
+      <input class="uk-input" id="form-stacked-text" type="text" placeholder="Otro:... especifique">     
+    </div> <!-- // .card -->
+  </div> <!-- // .row -->
+
+  <div class="row">
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Motivo de Consulta</h3>
+      <p>{{ consultation_motive }}</p>
+      <select class="uk-select" v-model="consultation_motive" multiple>
+        <option disabled value="">Seleccione una opcion</option>
+        <option>Cefalea</option>
+        <option>Sincope</option>
+        <option>Incontinencia</option>
+        <option>Dolor Toracico</option>
+        <option>Otalgia</option>
+        <option>Disfalgia / Odinofagia</option>
+        <option>Disnea</option>
+        <option>Dolor Abdominal</option>
+        <option>Fiebre</option>
+        <option>Otro</option>
+      </select>
+      <label class="uk-form-label" for="form-stacked-text">Otro</label>
+      <textarea class="uk-textarea" id="form-stacked-text" placeholder="Otro:... especifique"></textarea>
+    </div> <!-- // .card -->
+
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title"> {{ traumatics }} </h3>
+      <label class="uk-form-label" for="form-stacked-text"> </label>
+          <div class="uk-form-controls">
+            <input 
+            class="uk-radio" 
+            type="radio" 
+            id="id_gender_m" 
+            value="Traumaticos" 
+            v-model="traumatics" />
+            <label for="gender">Traumaticos</label>
+
+            <input 
+            class="uk-radio" 
+            type="radio" 
+            id="id_gender_f" 
+            value="No Traumaticos" 
+            v-model="traumatics" />
+            <label for="two">No Traumaticos</label>  
+          </div>
+          <select class="uk-select" v-model="traumatics_type" multiple>
+            <option disabled value="">Seleccione una opcion</option>
+            <option>Craneal</option>
+            <option>Craneoencefalico</option>
+            <option>Facial</option>
+            <option>Cuello</option>
+            <option>Tórax</option>
+            <option>Abdomen</option>
+            <option>Extremidades</option>
+            <option>Columna Vertebral</option>
+            <option>Genitales</option>
+            <option>Otros</option>
+          </select>
+          <label class="uk-form-label" for="form-stacked-text">Otro</label>
+          <textarea class="uk-textarea" id="form-stacked-text" placeholder="Otro:... especifique"></textarea>
+      </div> <!-- // .card -->
+  </div> <!-- // .row -->
+
+  <div class="row">
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Via Aerea</h3>
+
+    <select class="uk-select" v-model="airway" multiple>
+        <option disabled value="">Seleccione una opcion</option>
+        <option>Ninguna</option>
+        <option>Manual</option>
+        <option>Facial</option>
+        <option>Cuello</option>
+        <option>Tórax</option>
+        <option>Abdomen</option>
+        <option>Extremidades</option>
+        <option>Columna Vertebral</option>
+        <option>Genitales</option>
+        <option>Otro</option>
+      </select>
+      <label class="uk-form-label" for="form-stacked-text">Otro</label>
+      <textarea class="uk-textarea" id="form-stacked-text" placeholder="Otro:... especifique"></textarea>
+    </div> <!-- // .card -->
+
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Estado de las pupilas</h3>
+    </div> <!-- // .card -->
+  </div> <!-- // .row -->
+
+  <div class="row">
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Padecimiento Actual</h3>
+       <textarea class="uk-textarea" id="form-stacked-text" placeholder="detalle"></textarea>
+    </div> <!-- // .card -->
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Antecedentes Patologicos:</h3>
+      <p>{{ patological_background }}</p>
+         <select class="uk-select" v-model="patological_background" multiple>
+          <option disabled value="">Seleccione una opcion</option>
+          <option>Diabetes Melitus</option>
+          <option>Hipertension Arterial</option>
+          <option>Cardiopatias</option>
+          <option>Neumopatias</option>
+          <option>Quirurgicos / Trauma</option>
+          <option>Alergias</option>
+          <option>Otros</option>
+        </select>
+        <label class="uk-form-label" for="form-stacked-text">Otro</label>
+       <textarea class="uk-textarea" id="form-stacked-text" placeholder="detalle"></textarea>
+    </div> <!-- // .card -->
+  </div> <!-- // .row -->
+
+  <div class="row">
+     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Exploracion Fisica</h3>
+     </div> <!-- // .card -->
+         <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Normal</h3>
+      <p>{{ normal_elements }}</p>
+      <div class="uk-form-controls">
+        <select class="uk-select" v-model="normal_elements" multiple>
+          <option disabled value="">Seleccione una opcion</option>
+          <option>Cabeza</option>
+          <option>Cara</option>
+          <option>Cuello</option>
+          <option>Tórax</option>
+          <option>Abdomen</option>
+          <option>Extremidades</option>
+          <option>Genitales</option>
+          <option>Columna Vertebral</option>
+        </select>
+      </div>
+    </div> <!-- // .card -->
+  </div> <!-- // .row -->
+
+  <div class="row">
+
+        <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Descripcion de lesiones</h3>
+      <textarea class="uk-textarea" id="form-stacked-text" placeholder="Descripcion de lesiones.."></textarea>
+    </div> <!-- // .card -->
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Electrocardiograma</h3>
+      <label class="uk-form-label" for="id_unidad_movil">Ritmo</label>
+      <div class="uk-form-controls">
+          <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Some text...">
+      </div>
+      <label class="uk-form-label" for="id_unidad_movil">Frecuencia</label>
+      <div class="uk-form-controls">
+        <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Some text...">
+      </div>
+          <label class="uk-form-label" for="id_unidad_movil">Onda P</label>
+            <div class="uk-form-controls">
+                <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Some text...">
+            </div>
+        <label class="uk-form-label" for="id_unidad_movil">PR</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Some text...">
+        </div>
+        <label class="uk-form-label" for="id_unidad_movil">Eje QRS</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Some text...">
+        </div>
+        <label class="uk-form-label" for="id_unidad_movil">ST</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Some text...">
+        </div>
+        <label class="uk-form-label" for="id_unidad_movil">Onda T</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Some text...">
+        </div>
+        <label class="uk-form-label" for="id_unidad_movil">QT</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Some text...">
+        </div>
+        <label class="uk-form-label" for="id_unidad_movil">Anormalidades</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Some text...">
+        </div>
+        <label class="uk-form-label" for="id_unidad_movil">Interpretacion electrocardiografica</label>
+        <div class="uk-form-controls">
+            <textarea class="uk-textarea" id="form-stacked-text" placeholder="Interpretacion.."></textarea>
+        </div>                              
+    </div> <!-- // .card -->
+  </div> <!-- // .row -->
+
+  <div class="row">
+
+        <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Impresion Diagnostica</h3>
+      <textarea class="uk-textarea" id="form-stacked-text" placeholder="Descripcion de lesiones.."></textarea>
+    </div> <!-- // .card -->
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Tratamiento</h3>
+      <textarea class="uk-textarea" id="form-stacked-text" placeholder="Detalle el tratamiento.."></textarea>
+    </div> <!-- // .card -->
+  </div> <!-- // .row -->
+
+
+  <div class="row">
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Derivación</h3>
+      <div class="uk-form-controls">
+        <select class="uk-select" v-model="derivation">
+          <option disabled value="">Seleccione una opcion</option>
+          <option>Si</option>
+          <option>No</option>
+          <option>Hogar</option>
+          <option>Hospital</option>
+          <option>Otro</option>
+        </select>
+        <textarea class="uk-textarea" id="form-stacked-text" placeholder="Notas derivacion..."></textarea>
+      </div>
+      <label class="uk-form-label" for="form-stacked-text">Estado de salud</label>
+        <select class="uk-select" v-model="state_of_health">
+          <option disabled value="">Seleccione el estado de salud</option>
+          <option>Delicado</option>
+          <option>Grave</option>
+          <option>Muy Grave</option>
+        </select>
+        <label class="uk-form-label" for="id_unidad_movil">Medico que recibe</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Medico...">
+        </div> 
+        <label class="uk-form-label" for="id_unidad_movil">Costo</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="$ Costo...">
+        </div>           
+      </div> <!-- // .card -->
+
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Estoy enterado de la impresion diagnostica y de las condiciones de mi paciente:</h3>
+      <label class="uk-form-label" for="id_unidad_movil">Responsable</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Nombre...">
+        </div>
+      <label class="uk-form-label" for="id_unidad_movil">Parentesco o relación</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Parentesco...">
+        </div>
+      <label class="uk-form-label" for="id_unidad_movil">Firma</label>           
+    </div> <!-- // .card -->
+  </div> <!-- // .row -->
+
+  <div class="row">
+    
+  </div>
+
+
+
+
+
+</form>
