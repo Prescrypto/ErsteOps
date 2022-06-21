@@ -262,6 +262,9 @@ ODOO_PASSWORD = os.environ['ODOO_PASSWORD']
 # Google maps key
 GEO_API_KEY = os.environ['GEO_API_KEY']
 
+# Paperless URL
+PAPERLESS_URL = os.environ['PAPERLESS_URL']
+
 # Channels
 ASGI_APPLICATION = 'ersteops.asgi.application'
 #ASGI_APPLICATION = 'asgi.application'
