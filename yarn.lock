@@ -4683,6 +4683,11 @@ meow@^3.7.0:
     redent "^1.0.0"
     trim-newlines "^1.0.0"
 
+merge-images@^1.1.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/merge-images/-/merge-images-1.2.0.tgz#740117bd655b310fe2046f7c980798ded8d6d4f2"
+  integrity sha512-hEGvgnTdXr08uzGvEArxRsKpy7WmozM73YaSi4s5IYF4LxrhANpqfHaz9CgBZ5+0+s2NsjPnPdStz3aCc0Yulw==
+
 metalsmith@^2.1.0:
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/metalsmith/-/metalsmith-2.4.3.tgz#fdff9e25be70213bde72166feb62123588120a19"
@@ -6429,6 +6434,11 @@ signal-exit@^3.0.0, signal-exit@^3.0.2:
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.7.tgz#a9a1767f8af84155114eaabd73f99273c8f59ad9"
   integrity sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==
 
+signature_pad@^3.0.0-beta.3:
+  version "3.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/signature_pad/-/signature_pad-3.0.0-beta.4.tgz#2a8441559e9f439e7f2f525da3ee630ef973ecf6"
+  integrity sha512-cOf2NhVuTiuNqe2X/ycEmizvCDXk0DoemhsEpnkcGnA4kS5iJYTCqZ9As7tFBbsch45Q1EdX61833+6sjJ8rrw==
+
 slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
@@ -7425,6 +7435,14 @@ vue-resize@^1.0.1:
   integrity sha512-z5M7lJs0QluJnaoMFTIeGx6dIkYxOwHThlZDeQnWZBizKblb99GSejPnK37ZbNE/rVwDcYcHY+Io+AxdpY952w==
   dependencies:
     "@babel/runtime" "^7.13.10"
+
+vue-signature-pad@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/vue-signature-pad/-/vue-signature-pad-3.0.2.tgz#5706f6d4197566773e14f5cb501f5383f21fdb33"
+  integrity sha512-o25o+lROfCmzASS2+fU8ZV801kV+D4/02zkZ+ez3NKeiUmbxW7kwlUf5oKQkvA+l7Ou9xGsGLsirBLch3jyX8A==
+  dependencies:
+    merge-images "^1.1.0"
+    signature_pad "^3.0.0-beta.3"
 
 vue-spinner@^1.0.4:
   version "1.0.4"
