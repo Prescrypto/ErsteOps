@@ -10,7 +10,8 @@
 {% block cssblock %}
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="stylesheet" media="screen" href={% static "maps/css/style.css" %} />
-  <link rel="stylesheet" href="{% static "uikit-3.14.1/css/uikit.css" %}">
+  <link rel="stylesheet" href="{% static "uikit-3.14.1/css/uikit.css" %}" />
+  <link rel="stylesheet" href="{% static "paperless/css/styles.css"%}" />
 {% endblock cssblock %}
 {% block header %}
   {% include "ui_component/sidebar.html" %}
@@ -24,67 +25,45 @@
     {% include "ui_component/header.html" %}
     <div class="container-fluid">
       <div class="row">
-        <div class="col-lg-12">
-          <h3>Parte Medico</h3>
-         
+        <div class="col-lg-6">
+          <!-- Error Messages-->
+          <div>
+            {% if messages %}
+              <div class="card bg-danger text-white">
+                <div class="card-heading">Errores Detectados</div>
+                  {% for message in messages %}
+                         <div class="card-body">{{ message }}</div>
+                  {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+          <hr>
+          <!-- /Error Messages-->
         </div>
       </div>
-      
-      <div class="row">        
-        <!-- This is a button toggling the modal -->
-        <!--         <button class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #modal-example">Open</button> -->
-        <!-- This is an anchor toggling the modal -->
-        <div class="col-lg-12">
-          <a href="#modal-example" uk-toggle>1.- Obtener Ubicacion Actual</a>
-        </div>
-      </div>
-
       <div class="row">
         <div class="col-lg-6">
-          <form>
+          <div class="uk-card uk-card-default uk-card-body">
+            <h3 class="uk-card-title">Parte Medico</h3>
+            <a href="#modal-example" uk-toggle>1.- Obtener Ubicacion Actual</a>
+
+            <!-- Main Form -->
+            <form action="/paperless/new/" class="uk-form-stacked" method="post" id="listForm" name="listForm" enctype="multipart/form-data" novalidate>
+              {% csrf_token %}
               <fieldset class="uk-fieldset">
-
-                  <legend class="uk-legend">Legend</legend>
-
-                  <div class="uk-margin">
-                      <input class="uk-input" type="text" placeholder="Input">
-                  </div>
-
-                  <div class="uk-margin">
-                      <select class="uk-select">
-                          <option>Option 01</option>
-                          <option>Option 02</option>
-                      </select>
-                  </div>
-
-                  <div class="uk-margin">
-                      <textarea class="uk-textarea" rows="5" placeholder="Textarea"></textarea>
-                  </div>
-
-                  <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                      <label><input class="uk-radio" type="radio" name="radio2" checked> A</label>
-                      <label><input class="uk-radio" type="radio" name="radio2"> B</label>
-                  </div>
-
-                  <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                      <label><input class="uk-checkbox" type="checkbox" checked> A</label>
-                      <label><input class="uk-checkbox" type="checkbox"> B</label>
-                  </div>
-
-                  <div class="uk-margin">
-                      <input class="uk-range" type="range" value="2" min="0" max="10" step="0.1">
-                  </div>
-
+                {% include 'paperless/new_medical_report_form.html' with form=form %}
               </fieldset>
-          </form>
+              <p uk-margin>
+                
+                <button type="submit" class="uk-button uk-button-primary">Guardar</button>
+
+              </p>
+            </form>  
+            <!-- /Main Form -->
+
+          </div>
         </div>
-        
       </div>
-
-
-
-
-
     </div> <!-- // .container -->
   </main><!-- // .o-page__content -->
 
@@ -185,7 +164,11 @@
     );
     infoWindow.open(map);
   }
-
+  $(document).ready(function(){
+    if ( $("#id_patient_name").val().length == 0) { $("#id_service_code").val( '{{ data.pl_emergency_id }}' ); } 
+    if ( $("#id_patient_name").val().length == 0) { $("#id_patient_name").val( '{{ data.pl_patient_name }}' ); } 
+    if ( $("#id_service_unit").val().length == 0) { $("#id_service_unit").val( '{{ data.pl_unit }}' ); }
+  });
 </script>
 
 <script async
