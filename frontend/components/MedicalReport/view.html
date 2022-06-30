@@ -22,7 +22,7 @@
           type="text" 
           placeholder="100...">
       </div>
-      <label class="uk-form-label" for="id_crum_reception">Recibe:</label>
+      <label class="uk-form-label" for="id_crum_reception">Medico que recibe:</label>
       <div class="uk-form-controls">
           <input class="uk-input" 
           tabindex="4" 
@@ -311,6 +311,7 @@
           </select>
           <label class="uk-form-label" for="form-stacked-text">Otro</label>
           <textarea class="uk-textarea" id="form-stacked-text" placeholder="Otro:... especifique"></textarea>
+          <p>{{ traumatics_type }}</p>
       </div> <!-- // .card -->
   </div> <!-- // .row -->
 
@@ -394,7 +395,13 @@
         </template>
       </v-popover>
       <!-- /Popover Medication-->
-
+      <div class="row">
+        <div class="timers-label">
+          <li v-for="(value, key) in paperless.medications">
+            {{ value.medication_type }} - {{ value.medication_name }} - {{ value.medication_dose }} -- {{ value.medication_hrs }} 
+          </li>
+        </div>  
+      </div>
 
 
     </div> <!-- // .card -->
@@ -721,8 +728,8 @@
   </div> <!-- // .row -->
 
   <div class="row">
-    <div class="col-lg-12">
-      <h1 class="uk-heading-small">Firma de cliente</h1>
+    <div class="uk-card uk-height-medium uk-card-default uk-card-body uk-width-1-2@m">
+    <h3 class="uk-card-title">Firma</h3>
       <SignatureClient />
     </div>
     

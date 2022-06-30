@@ -1,76 +1,93 @@
 <form>
 
-  <label class="uk-form-label" for="meeting-time">Hora:</label>
+  <label class="uk-form-label" for="id_peTime">Hora:</label>
   <input type="datetime-local"
   class="uk-input"
-  v-model="pe_time" 
-  id="meeting-time"
-   name="meeting-time" 
+  v-model="peTime" 
+  id="id_peTime"
+   name="peTime" 
    value="2022-06-21T10:30"
    min="2018-06-07T00:00" >
 
-  <label class="uk-form-label" for="id_pe_heart_rate">Frecuencia Cardiaca</label>
+  <label class="uk-form-label" for="id_peHeartRate">Frecuencia Cardiaca</label>
   <div class="uk-form-controls">
     <input class="uk-input" 
-    v-model="pe_heart_rate"
-    id="id_pe_heart_rate" 
+    v-model="peHeartRate"
+    id="id_peHeartRate" 
     type="text" placeholder="Frecuencia...">
   </div>
 
-  <label class="uk-form-label" for="form-stacked-text">Frecuencia Respiratoria</label>
+  <label class="uk-form-label" for="id_peRespiratoryRate">Frecuencia Respiratoria</label>
   <div class="uk-form-controls">
     <input class="uk-input" 
-    v-model="pe_respiratory_rate"
-    id="form-stacked-text" 
+    v-model="peRespiratoryRate"
+    id="id_peRespiratoryRate" 
     type="text" 
     placeholder="Rerspiratoria...">
   </div>
 
-  <label class="uk-form-label" for="form-stacked-text">Presion Arterial</label>
+  <label class="uk-form-label" for="id_peBloodPressure">Presion Arterial</label>
   <div class="uk-form-controls">
     <input class="uk-input"
-    v-model="pe_blood_pressure" 
-    id="form-stacked-text" 
+    v-model="peBloodPressure" 
+    id="id_peBloodPressure" 
     type="text" 
     placeholder="Presion Arterial..."/>
   </div>
 
-  <label class="uk-form-label" for="form-stacked-text">Temperatura</label>
+  <label class="uk-form-label" for="id_peTemperature">Temperatura (Grados Celsius)</label>
   <div class="uk-form-controls">
-    <input class="uk-input" 
-    v-model="pe_temperature"
-    id="form-stacked-text" 
-    type="number" 
+    <input type="number" class="uk-input" 
+    v-model="peTemperature"
+    id="id_peTemperature" 
+    :min="20"
+    :max="60" 
     placeholder="34.5" 
-    step="0.01"/>
+    step="0.10"/>
   </div>
 
-  <label class="uk-form-label" for="form-stacked-text">Saturacion</label>
+  <label class="uk-form-label" for="id_peOxygenSaturation">Saturacion (%)</label>
   <div class="uk-form-controls">
-    <input class="uk-input" 
-    v-model="pe_oxygen_saturation"
-    id="form-stacked-text" 
-    type="number" 
+    <input type="number" class="uk-input" 
+    v-model="peOxygenSaturation"
+    id="id_peOxygenSaturation" 
+     
     placeholder="98"/>
   </div>
 
-  <label class="uk-form-label" for="form-stacked-text">Glucometria</label>
+  <label class="uk-form-label" for="id_peGlucometry">Glucometria (mg/dl)</label>
   <div class="uk-form-controls">
     <input class="uk-input" 
-    v-model="pe_glucometry"
-    id="form-stacked-text" 
+    v-model="peGlucometry"
+    id="id_peGlucometry" 
     type="number" 
     placeholder="90"/>
   </div>
 
-  <label class="uk-form-label" for="form-stacked-text">Glasgow</label>
+  <label class="uk-form-label" for="id_peGlassgowMotor">Glasgow Motor</label>
+  <div class="uk-form-controls">
+    <input type="number" class="uk-input" 
+    v-model="peGlassgowMotor"
+    id="id_peGlassgowMotor" 
+    placeholder="1"/>
+  </div>  
+
+  <label class="uk-form-label" for="id_peGlassgowOcular">Glasgow Ocular</label>
+  <div class="uk-form-controls">
+    <input type="number" class="uk-input" 
+    v-model="peGlassgowOcular"
+    id="id_peGlassgowOcular" 
+    placeholder="1"/>
+  </div>  
+
+  <label class="uk-form-label" for="id_peGlassgowVerbal">Glasgow Verbal</label>
   <div class="uk-form-controls">
     <input class="uk-input" 
-    v-model="pe_glassgow"
-    id="form-stacked-text" 
-    type="number" 
-    placeholder="90"/>
-  </div>  
+    v-model="peGlassgowVerbal"
+    id="id_peGlassgowVerbal" 
+    type="number"
+    placeholder="1"/>
+  </div> 
 
   <div>
     <ul class="uk-list uk-list-striped">

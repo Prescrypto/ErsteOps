@@ -1,10 +1,14 @@
 export default {
   name: 'AirWay',
   data: () => ({
-    airway_type: [],
-    other_airway: '',
-    instructions: '',
-    prev_elements: [],
+    // airway_type: [],
+    // other_airway: '',
+    // instructions: '',
+    medicationType: '',
+    medicationName: '',
+    medicationDose: '',
+    medicationHrs: '',
+    prevElements: [],
     select_text: '',
     paperless: window.erste.paperless,
     selected: 'Ninguna',
@@ -29,21 +33,29 @@ export default {
       try {
         e.stopPropagation();
         e.preventDefault();
-        if (this.selected === 'Otro') {
-          this.select_text = this.other_airway;
-        } else {
-          this.select_text = this.selected;
+        // if (this.selected === 'Otro') {
+        //   this.select_text = this.other_airway;
+        // } else {
+        //   this.select_text = this.selected;
+        // }
+        // if (this.selected === 'Ninguna') {
+        //   this.prev_elements = [];
+        //   this.instructions = '';
+        // }
+        if (
+          this.selected === 'Hemoderivado-Solucion' ||
+          this.selected === 'Hemoderivado-Hemoderivado'
+        ) {
+          this.medicationHrs = 0;
         }
-        if (this.selected === 'Ninguna') {
-          this.prev_elements = [];
-          this.instructions = '';
-        }
-        const airwayElement = {
-          airway_type: this.select_text,
-          instruction: this.instructions,
+        const medicationElement = {
+          medication_type: this.selected,
+          medication_name: this.medicationName,
+          medication_dose: this.medicationDose,
+          medication_hrs: this.medicationHrs,
         };
-        this.prev_elements.push(airwayElement);
-        this.paperless.airway = this.prev_elements;
+        this.prevElements.push(medicationElement);
+        this.paperless.medications = this.prevElements;
       } catch (err) {
         this.$emit('error', err);
         this.$notify({
@@ -56,13 +68,13 @@ export default {
       try {
         e.stopPropagation();
         e.preventDefault();
-        this.prev_elements.splice(item, 1);
-        this.paperless.airway = this.prev_elements;
+        this.prevElements.splice(item, 1);
+        this.paperless.medications = this.prevElements;
         // console.log(item);
       } catch (err) {
         this.$emit('error', err);
         this.$notify({
-          text: `No se pudo eliminar via aerea${err}`,
+          text: `No se pudo eliminar ls medicación: ${err}`,
           type: 'error',
         });
       }

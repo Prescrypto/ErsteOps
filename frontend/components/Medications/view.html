@@ -10,54 +10,82 @@
           </option>
         </select>
         <div v-if="selected === 'Hemoderivado-Solucion'">
-          <label class="uk-form-label" for="form-stacked-text">Solucion</label>
-          <input class="uk-input" id="form-stacked-text" type="text" placeholder="Solucion...">
-          <label class="uk-form-label" for="form-stacked-text">Dosis</label>
-          <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
+          <label class="uk-form-label" for="id_medicationName">Solucion</label>
+          <input class="uk-input" 
+          v-model="medicationName"
+          id="id_medicationName" type="text" placeholder="Solucion...">
+          <label class="uk-form-label" for="id_medicationDose">Dosis</label>
+          <input class="uk-input" 
+          v-model="medicationDose"
+          id="id_medicationDose" type="text" placeholder="Dosis...">
         </div>    
       
         <div v-if="selected === 'Hemoderivado-Hemoderivado'">
-          <label class="uk-form-label" for="form-stacked-text">Hemoderivado</label>
-          <input class="uk-input" id="form-stacked-text" type="text" placeholder="Solucion...">
-          <label class="uk-form-label" for="form-stacked-text">Dosis</label>
-          <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
+          <label class="uk-form-label" for="id_medicationName">Hemoderivado</label>
+          <input class="uk-input"
+            v-model="medicationName"
+           id="id_medicationName" type="text" placeholder="Solucion...">
+          <label class="uk-form-label" for="id_medicationDose">Dosis</label>
+          <input class="uk-input" 
+          v-model="medicationDose"
+          id="id_medicationDose" type="text" placeholder="Dosis...">
         </div>
 
         <div v-if="selected === 'Cardiovascular-Desfibrilacion'">
-          <label class="uk-form-label" for="form-stacked-text">Desfibrilacion</label>
-          <input class="uk-input" id="form-stacked-text" type="text" placeholder="Ddesfibrilacion...">
-          <label class="uk-form-label" for="form-stacked-text">Dosis</label>
-          <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">          
+          <label class="uk-form-label" for="id_medicationName">Desfibrilacion</label>
+          <input class="uk-input" 
+            v-model="medicationName"
+            id="id_medicationName" type="text" placeholder="Ddesfibrilacion...">
+          <label class="uk-form-label" for="id_medicationDose">Dosis</label>
+          <input class="uk-input" 
+            v-model="medicationDose"
+            id="id_medicationDose" type="text" placeholder="Dosis...">          
         </div>
 
         <div v-if="selected === 'Cardiovascular-Cardioversion'">
-          <label class="uk-form-label" for="form-stacked-text">Cardioversion</label>
-          <input class="uk-input" id="form-stacked-text" type="text" placeholder="cardioversion...">
+          <label class="uk-form-label" for="id_medicationName">Cardioversion</label>
+          <input class="uk-input" 
+            v-model="medicationName"
+            id="id_medicationName" type="text" placeholder="cardioversion...">
           <label class="uk-form-label" for="form-stacked-text">Dosis</label>
-          <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">          
+          <input class="uk-input" 
+            v-model="medicationDose"
+            id="id_medicationDose" type="text" placeholder="Dosis...">          
         </div>
 
         <div v-if="selected === 'Farmacologico-Farmaco'">
-          <label class="uk-form-label" for="form-stacked-text">Farmaco</label>
-          <input class="uk-input" id="form-stacked-text" type="text" placeholder="Farmaco...">
-          <label class="uk-form-label" for="form-stacked-text">Dosis</label>
-          <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
-          <label class="uk-form-label" for="form-stacked-text">Hrs</label>
-          <input class="uk-input" id="form-stacked-text" type="text" placeholder="Hrs...">             
+          <label class="uk-form-label" for="id_medicationName">Farmaco</label>
+          <input class="uk-input" 
+            v-model="medicationName"
+            id="id_medicationName" type="text" placeholder="Farmaco...">
+          <label class="uk-form-label" for="id_medicationDose">Dosis</label>
+          <input class="uk-input" 
+            v-model="medicationDose"
+            id="id_medicationDose" type="text" placeholder="Dosis...">
+          <label class="uk-form-label" for="id_medicationHrs">Hrs</label>
+          <input class="uk-input" 
+            v-model="medicationHrs"
+            id="id_medicationHrs" type="text" placeholder="Hrs...">             
         </div>
 
         <div v-if="selected === 'Farmacologico-Aminas'">
-          <label class="uk-form-label" for="form-stacked-text">Aminas</label>
-          <input class="uk-input" id="form-stacked-text" type="text" placeholder="Farmaco...">
-          <label class="uk-form-label" for="form-stacked-text">Dosis</label>
-          <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
-          <label class="uk-form-label" for="form-stacked-text">Hrs</label>
-          <input class="uk-input" id="form-stacked-text" type="text" placeholder="Hrs...">             
+          <label class="uk-form-label" for="id_medicationName">Aminas</label>
+          <input class="uk-input" 
+            v-model="medicationName"
+            id="id_medicationName" type="text" placeholder="Farmaco...">
+          <label class="uk-form-label" for="id_medicationDose">Dosis</label>
+          <input class="uk-input" 
+            v-model="medicationDose"
+            id="id_medicationDose" type="text" placeholder="Dosis...">
+          <label class="uk-form-label" for="id_medicationHrs">Hrs</label>
+          <input class="uk-input" 
+            v-model="medicationHrs"
+            id="id_medicationHrs" type="text" placeholder="Hrs...">             
         </div>
 
         <div class="timers-label">
-          <li v-for="(value, key) in paperless.airway">
-            {{ value.airway_type }} : {{ value.instruction }} <button uk-icon="minus-circle" @click="eliminate($event,key)"></button>
+          <li v-for="(value, key) in paperless.medications">
+            {{ value.medication_type }} - {{ value.medication_name }} - {{ value.medication_dose }} -- {{ value.medication_hrs }} <button uk-icon="minus-circle" @click="eliminate($event,key)"></button>
           </li>
         </div>  
 
