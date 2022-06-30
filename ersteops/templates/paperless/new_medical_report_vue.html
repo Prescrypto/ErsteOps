@@ -28,6 +28,7 @@
           {# TODO add mini components of wireframe#}
           <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
             <legend class="uk-legend">Parte Medico</legend>
+            <div id="geoposition-map"></div>
             <div id="medicalreport-log"></div>
           </div>
         {% endif %}
@@ -39,14 +40,15 @@
 {% endblock %}
 
 {% block jsheadblock %}
+
 <script>
   //var incident_json_list = {{ object_list|safe }};
   //var units_json_list = {{ units_list|safe }};
   //var available_units_counter = {{ available_units_counter }} || 0;
   //var hospitals_json_list = {{hospitals|safe}};
 
-  var incident_data = {{ data|safe }};
-  window.erste.incident_data = incident_data;
+  var paperless = {{ data|safe }};
+  window.erste.paperless = paperless;
 
   //window.erste.incident = incidents_json_list;
   //window.erste.units = units_json_list;
@@ -54,6 +56,9 @@
 
   // example HTTP_PROTOCOL: {{ HTTP_PROTOCOL }}
   // ie. ABSOLUTE_URI : {{ HTTP_ABSOLUTE_URI }}
+
+
+
 </script>
 {% endblock jsheadblock %}
 
