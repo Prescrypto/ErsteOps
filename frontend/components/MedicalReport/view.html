@@ -361,40 +361,46 @@
 
   <div class="row">
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
-      <h3 class="uk-card-title">Hemoderivados <input type="checkbox" id="jack" v-model="hemoderivado"/></h3>
-      <div v-if="hemoderivado">
-
-          <div class="uk-column-1-2">
-            <label class="uk-form-label" for="form-stacked-text">Soluciones</label>
-            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Solucion...">
-            <label class="uk-form-label" for="form-stacked-text">Dosis</label>
-            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
-          </div>
-          <div class="uk-column-1-2">
-            <label class="uk-form-label" for="form-stacked-text">Soluciones</label>
-            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Solucion...">
-            <label class="uk-form-label" for="form-stacked-text">Dosis</label>
-            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
-          </div>
-          <div class="uk-column-1-2">
-            <label class="uk-form-label" for="form-stacked-text">Hemoderivado</label>
-            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Hemoderivado...">
-            <label class="uk-form-label" for="form-stacked-text">Dosis</label>
-            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
-          </div>
-          <div class="uk-column-1-2">
-            <label class="uk-form-label" for="form-stacked-text">Hemoderivado</label>
-            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Hemoderivado...">
-            <label class="uk-form-label" for="form-stacked-text">Dosis</label>
-            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
-          </div>
 
 
-      </div>
+      <!-- Popover Medication-->
+      <v-popover
+        offset="20"
+        popoverClass="grade"
+        defaultInnerClass="grade__inner"
+        defaultArrowClass="grade__rrrow"
+        :auto-hide="true" 
+      >
+      <!-- This will be the popover target (for the events and position) -->
+        <h3 class="uk-card-title">Medicamentos
+        <span class="tooltip-target b3 fa fa-plus-square" ></span>
+        </h3>
+        <!-- This will be the content of the popover -->
+        <template slot="popover">
+          
+          <button
+            @click="stoppedTimer = null"
+            type="button"
+            class="grid__close c-close u-color-primary" v-close-popover>×</button>
+          <div class="grade__wrapper">
+            <h1 class="tooltip__heading u-h6 u-text-center">
+              Medicaciones
+            </h1>
+            <Medications :paperless="paperless"/>
+
+            <!-- You can put other components too -->
+            
+          </div>
+        </template>
+      </v-popover>
+      <!-- /Popover Medication-->
+
+
+
     </div> <!-- // .card -->
 
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
-    <h3 class="uk-card-title">Cardiovascular <input type="checkbox" id="jack" v-model="cardiovascular"/></h3>
+<!--     <h3 class="uk-card-title">Cardiovascular <input type="checkbox" id="jack" v-model="cardiovascular"/></h3>
     <div v-if="cardiovascular">
 
           <div class="uk-column-1-2">
@@ -422,13 +428,13 @@
             <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
           </div>
       
-    </div>
+    </div> -->
     </div> <!-- // .card -->
   </div>  <!-- // .row -->
 
   <div class="row">
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
-    <h3 class="uk-card-title">Farmacologico <input type="checkbox" id="jack" v-model="farmacologico"/></h3>
+<!--     <h3 class="uk-card-title">Farmacologico <input type="checkbox" id="jack" v-model="farmacologico"/></h3>
     <div v-if="farmacologico">
 
           <div class="uk-column-1-3">
@@ -464,7 +470,7 @@
             <input class="uk-input" id="form-stacked-text" type="text" placeholder="Hrs...">
           </div>
       
-    </div>
+    </div> -->
     </div> <!-- // .card -->
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
     <h3 class="uk-card-title">Inmovilización <input type="checkbox" id="jack" v-model="fe_inmovilization"/></h3>

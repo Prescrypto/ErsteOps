@@ -49,5 +49,6 @@ MedicalReportDict = {
 "geo_key": "",
 "demarcation": "",
 "crum": "",
-"crum_reception": "", 
+"crum_reception": "",
+"medications": [], 
 }

@@ -2,6 +2,7 @@ import 'filters/time-since';
 import AirWay from 'components/AirWay';
 import PhysicalExploration from 'components/PhysicalExploration';
 import SignatureClient from 'components/SignatureClient';
+import Medications from 'components/Medications';
 // import GoogleMap from './components/GoogleMap.vue'
 // import find from 'lodash/fp/find';
 // import { mapState, mapActions, mapMutations, mapGetters } from 'vuex';
@@ -36,7 +37,7 @@ export default {
     // const canvas = document.querySelector("canvas");
     // const signaturePad = new SignaturePad(canvas);
   }),
-  components: { AirWay, PhysicalExploration, SignatureClient },
+  components: { AirWay, PhysicalExploration, SignatureClient, Medications },
   methods: {
     submit(e) {
       e.preventDefault();

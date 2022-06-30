@@ -1,0 +1,71 @@
+<form>
+  <div class="timers-update">
+    <div class="c-field">
+      <div class="timers-label">  
+
+        <select class="uk-select"
+        v-model="selected">
+          <option v-for="option in options" :value="option.value">
+            {{ option.text }}
+          </option>
+        </select>
+        <div v-if="selected === 'Hemoderivado-Solucion'">
+          <label class="uk-form-label" for="form-stacked-text">Solucion</label>
+          <input class="uk-input" id="form-stacked-text" type="text" placeholder="Solucion...">
+          <label class="uk-form-label" for="form-stacked-text">Dosis</label>
+          <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
+        </div>    
+      
+        <div v-if="selected === 'Hemoderivado-Hemoderivado'">
+          <label class="uk-form-label" for="form-stacked-text">Hemoderivado</label>
+          <input class="uk-input" id="form-stacked-text" type="text" placeholder="Solucion...">
+          <label class="uk-form-label" for="form-stacked-text">Dosis</label>
+          <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
+        </div>
+
+        <div v-if="selected === 'Cardiovascular-Desfibrilacion'">
+          <label class="uk-form-label" for="form-stacked-text">Desfibrilacion</label>
+          <input class="uk-input" id="form-stacked-text" type="text" placeholder="Ddesfibrilacion...">
+          <label class="uk-form-label" for="form-stacked-text">Dosis</label>
+          <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">          
+        </div>
+
+        <div v-if="selected === 'Cardiovascular-Cardioversion'">
+          <label class="uk-form-label" for="form-stacked-text">Cardioversion</label>
+          <input class="uk-input" id="form-stacked-text" type="text" placeholder="cardioversion...">
+          <label class="uk-form-label" for="form-stacked-text">Dosis</label>
+          <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">          
+        </div>
+
+        <div v-if="selected === 'Farmacologico-Farmaco'">
+          <label class="uk-form-label" for="form-stacked-text">Farmaco</label>
+          <input class="uk-input" id="form-stacked-text" type="text" placeholder="Farmaco...">
+          <label class="uk-form-label" for="form-stacked-text">Dosis</label>
+          <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
+          <label class="uk-form-label" for="form-stacked-text">Hrs</label>
+          <input class="uk-input" id="form-stacked-text" type="text" placeholder="Hrs...">             
+        </div>
+
+        <div v-if="selected === 'Farmacologico-Aminas'">
+          <label class="uk-form-label" for="form-stacked-text">Aminas</label>
+          <input class="uk-input" id="form-stacked-text" type="text" placeholder="Farmaco...">
+          <label class="uk-form-label" for="form-stacked-text">Dosis</label>
+          <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
+          <label class="uk-form-label" for="form-stacked-text">Hrs</label>
+          <input class="uk-input" id="form-stacked-text" type="text" placeholder="Hrs...">             
+        </div>
+
+        <div class="timers-label">
+          <li v-for="(value, key) in paperless.airway">
+            {{ value.airway_type }} : {{ value.instruction }} <button uk-icon="minus-circle" @click="eliminate($event,key)"></button>
+          </li>
+        </div>  
+
+        <div class="timers-button">
+          <button @click="submit" class="c-btn c-btn--info" v-close-popover>Agregar</button>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+</form>
