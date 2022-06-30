@@ -7,13 +7,19 @@ from django.contrib import messages
 from django.conf import settings
 from .forms import MedicalReportForm
 from emergency.models import Emergency
+from unit.models import CrewMember
 from .models import MedicalReport
+from unit.models import TodayUnitDoctor
+from django.contrib.auth.models import User
 
+from datetime import datetime, timedelta, time
 # Logging library
 import logging
 # Load Logging definition, this is defined in settings.py in the LOGGING section
 logger = logging.getLogger('django_info')
+from emergency.templatetags import user_tags
 
+from .dict_fields import MedicalReportDict
 #def emergency_data_dict(emergency):
 
 
@@ -42,10 +48,21 @@ class MedicalReportNew(View):
         'pl_emergency_id': pl_emergency_id,
         'pl_unit': attend_units, 
         'pl_patient_name': qs.patient_name,
+        'pl_erste_id': qs.erste_code,
+        'pl_tel_local': qs.tel_local,
         }
+    MedicalReportDict["service_code"] = pl_emergency_id
+    MedicalReportDict["service_unit"] = attend_units
+    MedicalReportDict["erste_code"] = qs.erste_code
+    MedicalReportDict["patient_name"] = qs.patient_name
+    MedicalReportDict["patient_age"] = qs.patient_age
+    MedicalReportDict["patient_phone"] = qs.tel_local
+    MedicalReportDict["patient_address"] = qs.address_street
+    MedicalReportDict["geo_key"]= settings.GEO_API_KEY
+    MedicalReportDict["copago_amount"] = qs.copago_amount
 
     request.session['pl_emergency_id'] = pl_emergency_id
-    return render(request, self.template_name,{"data":data,"form":form,})
+    return render(request, self.template_name,{"data": MedicalReportDict,"form":form, })
 
   def post(self, request, *args, **kwargs):
     form = MedicalReportForm(request.POST)
@@ -118,6 +135,45 @@ class MedicalReportList(ListView):
     context['now'] = timezone.now()
     return context
 
+  def get_queryset(self):
+    current_user = self.request.user
+    
+    if user_tags.has_group(current_user,"MedicalReports") and not user_tags.has_group(current_user,"Operator"):
+      qs = MedicalReport.objects.filter(user = current_user)
+    elif user_tags.has_group(current_user,"Operator"):
+      qs = MedicalReport.objects.all()
+
+    return qs
+
+
+class MedicalReportActive(ListView):
+  template_name = "paperless/list_active_medical_reports.html"
+  model = Emergency
+
+  def get_queryset(self):
+    current_user = self.request.user
+    #actual_user = CrewMember.objects.get( user= current_user)
+    #actual_date = []
+    #actual_date.append(datetime.now().date())
+    #actual_date = datetime.now().date() 
+    #qs_actual_unit = TodayUnitDoctor.objects.filter(unit_date__gte=actual_date)
+
+    #print("Actual units: {}".format(qs_actual_unit))
+    qs = Emergency.objects.filter(is_active = True)
+    #qs.filter(units is not null)
+    emergency_list = []
+    for emergency in qs:
+      if emergency.units.count() >0:
+        if not emergency.medical_report:
+          emergency_list.append(emergency.id)
+
+    qs = Emergency.objects.filter(id__in= emergency_list)
+    #qs.filter(medical_report__isnull= True)
+
+    logger.info('[ QS MedicalReportActive! Current User: {} ]'.format(current_user))
+    logger.info('[ QS MedicalReportActive! Emegrencies with units: {} ]'.format(emergency_list))
+    #logger.info('[ QS MedicalReportActive! Actual Units;: {} ]'.format(qs_actual_unit))
+    return qs
 
 class MedicalReportDetail(View):
   template_name = "paperless/detail_medical_report.html"
