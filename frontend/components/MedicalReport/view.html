@@ -9,56 +9,140 @@
 
 <form v-else class="uk-form-stacked">
 
-
-  <div class="row">   
+  <div class="row">
+    <div class="col-12">
+      <h5>Codigo incidente: {{ paperless.service_code }}</h5>
+      <label class="uk-form-label" for="id_crum">Folio CRUM:</label>
+      <div class="uk-form-controls">
+          <input class="uk-input" 
+          tabindex="4" 
+          v-model="paperless.crum"
+          id="id_crum"
+          name="crum" 
+          type="text" 
+          placeholder="100...">
+      </div>
+      <label class="uk-form-label" for="id_crum_reception">Recibe:</label>
+      <div class="uk-form-controls">
+          <input class="uk-input" 
+          tabindex="4" 
+          v-model="paperless.crum_reception"
+          id="id_crum_reception"
+          name="crum_reception" 
+          type="text" 
+          placeholder="Dr.Lopez...">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
       <h3 class="uk-card-title">Unidad</h3>
-      <label class="uk-form-label" for="id_unidad_movil">Unidad Movil</label>
+      <label class="uk-form-label" for="id_service_unit">Unidad Movil</label>
       <div class="uk-form-controls">
-        <input class="uk-input" id="id_unidad_movil" type="text" placeholder="M011...">
+        <input class="uk-input"
+          tabindex="1" 
+          v-model="paperless.service_unit"
+          id="id_service_unit"
+          name="service_unit" 
+          type="text" 
+          placeholder="M011..."/>
       </div>
-      <label class="uk-form-label" for="form-stacked-text">Tipo de Unidad</label>
+      <label class="uk-form-label" for="id_service_unit_type">Tipo de Unidad</label>
       <div class="uk-form-controls">
-        <input class="uk-input" id="form-stacked-text" type="text" placeholder="Basica...">
+        <input class="uk-input"
+          tabindex="2"
+          v-model="paperless.service_unit_type" 
+          id="id_service_unit_type" 
+          name="service_unit_type"
+          type="text" 
+          placeholder="Basica...">
       </div>
       <label class="uk-form-label" for="form-stacked-text">No.Placas</label>
       <div class="uk-form-controls">
-        <input class="uk-input" id="form-stacked-text" type="text" placeholder="ABC-134...">
+        <input class="uk-input"
+        tabindex="3" 
+        v-model="paperless.service_unit_plate" 
+        id="id_service_unit_plate"
+        name="service_unit_plate" 
+        type="text" 
+        placeholder="ABC-134...">
       </div>
     </div> <!-- // .card -->
 
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
       <h3 class="uk-card-title">Paciente</h3>
-      <label class="uk-form-label" for="form-stacked-text">No.Socio</label>
+      <label class="uk-form-label" for="id_erste_code">No.Socio</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="form-stacked-text" type="text" placeholder="E001...">
+            <input class="uk-input" 
+            tabindex="4" 
+            v-model="paperless.erste_code"
+            id="id_erste_code"
+            name="erste_code" 
+            type="text" 
+            placeholder="E001...">
         </div>
       <label class="uk-form-label" for="form-stacked-text">Telefono</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="form-stacked-text" type="text" placeholder="5555-555-555...">
+            <input class="uk-input"
+            tabindex="5" 
+            v-model="paperless.patient_phone"
+            id="id_patient_phone" 
+            name="patient_phone" 
+            type="tel" 
+            placeholder="5555-555-555...">
         </div>
-      <label class="uk-form-label" for="form-stacked-text">Sexo: {{ gender }}</label>
+      <label class="uk-form-label" for="id_patient_gender">Sexo: {{ paperless.patient_gender }}</label>
       <div class="uk-form-controls">
           
           <input 
-          class="uk-radio" 
-          type="radio" 
-          id="id_gender_m" 
-          value="Masculino" 
-          v-model="gender" />
+            tabindex="6" 
+            class="uk-radio" 
+            type="radio" 
+            id="id_patient_gender" 
+            value="Masculino" 
+            v-model="paperless.patient_gender" />
           <label for="gender">Masculino</label>
 
-          <input 
-          class="uk-radio" 
-          type="radio" 
-          id="id_gender_f" 
-          value="Femenino" 
-          v-model="gender" />
+          <input
+            tabindex="7" 
+            class="uk-radio" 
+            type="radio" 
+            id="id_patient_gender" 
+            value="Femenino" 
+            v-model="paperless.patient_gender" />
           <label for="two">Femenino</label>  
       </div>
-      <label class="uk-form-label" for="form-stacked-text">Nombre Completo</label>
+      <label class="uk-form-label" for="patient_age">Edad</label>
       <div class="uk-form-controls">
-        <input class="uk-input" id="form-stacked-text" type="text" placeholder="Jaime Ramirez...">
+        <input class="uk-input"
+          tabindex="8" 
+          v-model="paperless.patient_age" 
+          id="id_patient_age"
+          name="patient_age" 
+          type="number"
+          step="1"/>
+      </div>
+      <label class="uk-form-label" for="id_patient_name">Nombre Completo</label>
+      <div class="uk-form-controls">
+        <input class="uk-input"
+          tabindex="9" 
+          v-model="paperless.patient_name" 
+          id="id_patient_name"
+          name="patient_name" 
+          type="text" 
+          placeholder="Jaime Ramirez..."/>
+      </div>
+      <label class="uk-form-label" for="id_copago_amount">Co-pago</label>
+      <div class="uk-form-controls">
+        <input class="uk-input"
+          tabindex="9" 
+          v-model="paperless.copago_amount" 
+          id="id_copago_amount"
+          name="copago_amount" 
+          type="number" 
+          placeholder="0.0" 
+          step="0.01" />
       </div>
     </div> <!-- // .card -->
 
@@ -66,33 +150,61 @@
     </div> <!-- // .row -->
 
     <div class="row">
-    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
-      <h3 class="uk-card-title">Paciente Desconocido</h3>
-         <div class="uk-form-controls">
-            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Paciente desconocido...">
-        </div>     
-      <label class="uk-form-label" for="form-stacked-text">Filiacion</label>
-        <div class="uk-form-controls">
-            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Filiacion...">
-        </div>
-        <label class="uk-form-label" for="form-stacked-text">Vestimenta</label>
-        <div class="uk-form-controls">
-            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Vestimenta...">
-        </div>
-               <label class="uk-form-label" for="form-stacked-text">Coloracion de piel</label>
-        <div class="uk-form-controls">
-            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Coloracion...">
+      <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+        <h3 class="uk-card-title">Paciente desconocido 
+          <input tabindex="10" 
+          type="checkbox" id="is_patient_unknow" 
+          v-model="paperless.is_patient_unknow"/>
+        </h3>
+        <div v-if="paperless.is_patient_unknow">
+           <div class="uk-form-controls">
+              <input class="uk-input"
+              tabindex="11" 
+              id="form-stacked-text" 
+              type="text" 
+              placeholder="Paciente desconocido..."/>
+          </div>     
+          <label class="uk-form-label" for="id_patient_affiliations">Filiación</label>
+          <div class="uk-form-controls">
+              <input class="uk-input" 
+              tabindex="12" 
+              v-model="paperless.patient_affiliations"
+              id="id_patient_affiliations"
+              name="patient_affiliations" 
+              type="text" placeholder="Filiacion..."/>
+          </div>
+          <label class="uk-form-label" for="id_patient_clothes">Vestimenta</label>
+          <div class="uk-form-controls">
+              <input class="uk-input" 
+              tabindex="13" 
+              v-model="paperless.patient_clothes"
+              id="id_patient_clothes"
+              name="patient_clothes" 
+              type="text" 
+              placeholder="Vestimenta...">
+          </div>
+          <label class="uk-form-label" for="id_skin_color">Coloración de piel</label>
+          <div class="uk-form-controls">
+              <input class="uk-input" 
+              tabindex="14" 
+              v-model="paperless.skin_color"
+              id="id_skin_color"
+              name="skin_color" 
+              type="text" 
+              placeholder="Coloracion...">
+          </div>
         </div>          
-    </div> <!-- // .card -->
-    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
-          
-    </div>      
+      </div> <!-- // .card -->
+      <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m"> 
+      </div>      
     </div>
 
   <div class="row">
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
       <h3 class="uk-card-title">Sitio de Atencion: </h3>
-        <select class="uk-select" v-model="attention_place">
+        <select class="uk-select" 
+        tabindex="15" 
+        v-model="paperless.attention_place">
         <option disabled value="">Seleccione una opcion</option>
         <option>Hogar</option>
         <option>Escuela/Trabajo</option>
@@ -101,15 +213,27 @@
         <option>Via Publica</option>
         <option>Otro</option>
       </select>
-      <label class="uk-form-label" for="form-stacked-text">Domicilio</label>
+      <div v-if="paperless.attention_place === 'Otro'">
+        <textarea class="uk-textarea" 
+        v-model="paperless.other_attention_place"
+        id="other_attention_place" 
+        name="other_attention_place"
+        placeholder="Avion # ..."></textarea>
+      </div>
+      <label class="uk-form-label" for="id_patient_address">Domicilio</label>
       <div class="uk-form-controls">
-        <textarea class="uk-textarea" id="form-stacked-text" placeholder="av.tol # ..."></textarea>
+        <textarea class="uk-textarea" 
+        tabindex="16" 
+        v-model="paperless.patient_address"
+        id="id_patient_address" 
+        name="patient_address"
+        placeholder="av.tol # ..."></textarea>
       </div>   
     </div> <!-- // .card -->
 
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
       <h3 class="uk-card-title">Tipo de Servicio</h3>
-      <select class="uk-select" v-model="service_kind">
+      <select class="uk-select" v-model="paperless.service_type">
         <option disabled value="">Seleccione una opcion</option> 
         <option>Traslado</option>
         <option>Urgencias</option>
@@ -117,8 +241,13 @@
         <option>Consulta Medica</option>
         <option>Otro</option>
       </select>
-      <label class="uk-form-label" for="form-stacked-text">Otro</label> 
-      <input class="uk-input" id="form-stacked-text" type="text" placeholder="Otro:... especifique">     
+      <div v-if="paperless.service_type === 'Otro'">
+        <input class="uk-input" 
+        v-model="paperless.other_service_type"
+        id="other_service_type"
+        name="other_service_type" 
+        type="text" placeholder="Otro:... especifique"/>
+      </div>     
     </div> <!-- // .card -->
   </div> <!-- // .row -->
 
@@ -126,7 +255,7 @@
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
       <h3 class="uk-card-title">Motivo de Consulta</h3>
       <p>{{ consultation_motive }}</p>
-      <select class="uk-select" v-model="consultation_motive" multiple>
+      <select class="uk-select" v-model="consultation_motive">
         <option disabled value="">Seleccione una opcion</option>
         <option>Cefalea</option>
         <option>Sincope</option>
@@ -137,34 +266,38 @@
         <option>Disnea</option>
         <option>Dolor Abdominal</option>
         <option>Fiebre</option>
-        <option>Otro</option>
+        <option value="Otro">Otro</option>
       </select>
-      <label class="uk-form-label" for="form-stacked-text">Otro</label>
-      <textarea class="uk-textarea" id="form-stacked-text" placeholder="Otro:... especifique"></textarea>
+      <div v-if="consultation_motive === 'Otro'">
+        
+        <textarea class="uk-textarea" id="form-stacked-text" placeholder="Otro:... especifique" ></textarea>
+      </div>
     </div> <!-- // .card -->
 
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
-      <h3 class="uk-card-title"> {{ traumatics }} </h3>
-      <label class="uk-form-label" for="form-stacked-text"> </label>
+      <h3 class="uk-card-title"> Tipo de Evento:  {{ paperless.traumatics }} </h3>
+      <label class="uk-form-label" for="id_traumatics"> </label>
           <div class="uk-form-controls">
             <input 
             class="uk-radio" 
             type="radio" 
-            id="id_gender_m" 
+            id="id_traumatics" 
+            name="traumatics"
             value="Traumaticos" 
-            v-model="traumatics" />
+            v-model="paperless.traumatics" />
             <label for="gender">Traumaticos</label>
 
             <input 
             class="uk-radio" 
             type="radio" 
-            id="id_gender_f" 
+            id="id_traumatics" 
+            name="traumatics"
             value="No Traumaticos" 
-            v-model="traumatics" />
+            v-model="paperless.traumatics" />
             <label for="two">No Traumaticos</label>  
           </div>
           <select class="uk-select" v-model="traumatics_type" multiple>
-            <option disabled value="">Seleccione una opcion</option>
+            <option disabled value="">Seleccione una opción</option>
             <option>Craneal</option>
             <option>Craneoencefalico</option>
             <option>Facial</option>
@@ -183,23 +316,42 @@
 
   <div class="row">
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
-      <h3 class="uk-card-title">Via Aerea</h3>
+      
+      <!-- Popover Airway-->
+      <v-popover
+        offset="20"
+        popoverClass="grade"
+        defaultInnerClass="grade__inner"
+        defaultArrowClass="grade__rrrow"
+        :auto-hide="true" 
+      >
+      <!-- This will be the popover target (for the events and position) -->
+        <h3 class="uk-card-title">Via Aerea
+        <span class="tooltip-target b3 fa fa-plus-square" ></span>
+        </h3>
+        <!-- This will be the content of the popover -->
+        <template slot="popover">
+          
+          <button
+            @click="stoppedTimer = null"
+            type="button"
+            class="grid__close c-close u-color-primary" v-close-popover>×</button>
+          <div class="grade__wrapper">
+            <h1 class="tooltip__heading u-h6 u-text-center">
+              Via Aerea
+            </h1>
+            <AirWay :paperless="paperless"/>
 
-    <select class="uk-select" v-model="airway" multiple>
-        <option disabled value="">Seleccione una opcion</option>
-        <option>Ninguna</option>
-        <option>Manual</option>
-        <option>Facial</option>
-        <option>Cuello</option>
-        <option>Tórax</option>
-        <option>Abdomen</option>
-        <option>Extremidades</option>
-        <option>Columna Vertebral</option>
-        <option>Genitales</option>
-        <option>Otro</option>
-      </select>
-      <label class="uk-form-label" for="form-stacked-text">Otro</label>
-      <textarea class="uk-textarea" id="form-stacked-text" placeholder="Otro:... especifique"></textarea>
+            <!-- You can put other components too -->
+            
+          </div>
+        </template>
+      </v-popover>
+      <!-- /Popover Airway-->
+   
+    <li v-for="(value, key) in paperless.airway">
+      {{ value.airway_type }} : {{ value.instruction }}
+    </li>
     </div> <!-- // .card -->
 
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
@@ -209,13 +361,147 @@
 
   <div class="row">
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Hemoderivados <input type="checkbox" id="jack" v-model="hemoderivado"/></h3>
+      <div v-if="hemoderivado">
+
+          <div class="uk-column-1-2">
+            <label class="uk-form-label" for="form-stacked-text">Soluciones</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Solucion...">
+            <label class="uk-form-label" for="form-stacked-text">Dosis</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
+          </div>
+          <div class="uk-column-1-2">
+            <label class="uk-form-label" for="form-stacked-text">Soluciones</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Solucion...">
+            <label class="uk-form-label" for="form-stacked-text">Dosis</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
+          </div>
+          <div class="uk-column-1-2">
+            <label class="uk-form-label" for="form-stacked-text">Hemoderivado</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Hemoderivado...">
+            <label class="uk-form-label" for="form-stacked-text">Dosis</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
+          </div>
+          <div class="uk-column-1-2">
+            <label class="uk-form-label" for="form-stacked-text">Hemoderivado</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Hemoderivado...">
+            <label class="uk-form-label" for="form-stacked-text">Dosis</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
+          </div>
+
+
+      </div>
+    </div> <!-- // .card -->
+
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+    <h3 class="uk-card-title">Cardiovascular <input type="checkbox" id="jack" v-model="cardiovascular"/></h3>
+    <div v-if="cardiovascular">
+
+          <div class="uk-column-1-2">
+            <label class="uk-form-label" for="form-stacked-text">Desfibrilacion</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Solucion...">
+            <label class="uk-form-label" for="form-stacked-text">Dosis</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
+          </div>
+          <div class="uk-column-1-2">
+            <label class="uk-form-label" for="form-stacked-text">Desfibrilacion</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Solucion...">
+            <label class="uk-form-label" for="form-stacked-text">Dosis</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
+          </div>
+          <div class="uk-column-1-2">
+            <label class="uk-form-label" for="form-stacked-text">Cardioversion</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Hemoderivado...">
+            <label class="uk-form-label" for="form-stacked-text">Dosis</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
+          </div>
+          <div class="uk-column-1-2">
+            <label class="uk-form-label" for="form-stacked-text">Cardioversion</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Hemoderivado...">
+            <label class="uk-form-label" for="form-stacked-text">Dosis</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
+          </div>
+      
+    </div>
+    </div> <!-- // .card -->
+  </div>  <!-- // .row -->
+
+  <div class="row">
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+    <h3 class="uk-card-title">Farmacologico <input type="checkbox" id="jack" v-model="farmacologico"/></h3>
+    <div v-if="farmacologico">
+
+          <div class="uk-column-1-3">
+            <label class="uk-form-label" for="form-stacked-text">Farmaco</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Solucion...">
+            <label class="uk-form-label" for="form-stacked-text">Dosis</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
+            <label class="uk-form-label" for="form-stacked-text">Hrs.</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Hrs...">
+          </div>
+          <div class="uk-column-1-3">
+            <label class="uk-form-label" for="form-stacked-text">Farmaco</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Solucion...">
+            <label class="uk-form-label" for="form-stacked-text">Dosis</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
+            <label class="uk-form-label" for="form-stacked-text">Hrs.</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Hrs...">
+          </div>
+          <div class="uk-column-1-3">
+            <label class="uk-form-label" for="form-stacked-text">Aminas</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Solucion...">
+            <label class="uk-form-label" for="form-stacked-text">Dosis</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
+            <label class="uk-form-label" for="form-stacked-text">Hrs.</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Hrs...">
+          </div>
+          <div class="uk-column-1-3">
+            <label class="uk-form-label" for="form-stacked-text">Aminas</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Solucion...">
+            <label class="uk-form-label" for="form-stacked-text">Dosis</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
+            <label class="uk-form-label" for="form-stacked-text">Hrs.</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Hrs...">
+          </div>
+      
+    </div>
+    </div> <!-- // .card -->
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+    <h3 class="uk-card-title">Inmovilización <input type="checkbox" id="jack" v-model="fe_inmovilization"/></h3>
+      <div v-if="fe_inmovilization">
+      <p>{{ inmovilization }}</p>
+         <select class="uk-select" v-model="inmovilization" multiple>
+          <option disabled value="">Seleccione una opcion</option>
+          <option>Columna Cervical</option>
+          <option>Columna Toracica</option>
+          <option>Columna Lumbar</option>
+          <option>Extremidades</option>
+          <option>Total</option>
+          <option>Otro</option>
+        </select>
+        <label class="uk-form-label" for="form-stacked-text">Otro</label>
+       <textarea class="uk-textarea" id="form-stacked-text" placeholder="detalle"></textarea>  
+       </div>  
+    </div> <!-- // .card -->
+  </div>  <!-- // .row -->
+
+  <div class="row">
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
       <h3 class="uk-card-title">Padecimiento Actual</h3>
-       <textarea class="uk-textarea" id="form-stacked-text" placeholder="detalle"></textarea>
+       <textarea class="uk-textarea" 
+       v-model="paperless.current_condition"
+       id="id_current_condition"
+       name="current_condition" 
+        placeholder="detalle"></textarea>
     </div> <!-- // .card -->
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
       <h3 class="uk-card-title">Antecedentes Patologicos:</h3>
-      <p>{{ patological_background }}</p>
-         <select class="uk-select" v-model="patological_background" multiple>
+      <p>{{ paperless.pathological_history }}</p>
+         <select class="uk-select" 
+         v-model="paperless.pathological_history" 
+         id="id_pathological_history"
+         name="pathological_history" 
+         multiple>
           <option disabled value="">Seleccione una opcion</option>
           <option>Diabetes Melitus</option>
           <option>Hipertension Arterial</option>
@@ -226,13 +512,60 @@
           <option>Otros</option>
         </select>
         <label class="uk-form-label" for="form-stacked-text">Otro</label>
-       <textarea class="uk-textarea" id="form-stacked-text" placeholder="detalle"></textarea>
+       <textarea class="uk-textarea" 
+       v-model="paperless.other_pathological_history"
+       name="other_pathological_history"
+       id="id_other_pathological_history" 
+       placeholder="detalle"></textarea>
     </div> <!-- // .card -->
   </div> <!-- // .row -->
 
   <div class="row">
      <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
-      <h3 class="uk-card-title">Exploracion Fisica</h3>
+
+      <!-- Popover PhysicalExploration-->
+      <v-popover
+        offset="20"
+        popoverClass="grade"
+        defaultInnerClass="grade__inner"
+        defaultArrowClass="grade__rrrow"
+        :auto-hide="true" 
+      >
+      <!-- This will be the popover target (for the events and position) -->
+        <h3 class="uk-card-title">Exploración Fisica
+        <span class="tooltip-target b3 fa fa-plus-square" ></span>
+        </h3>
+        <!-- This will be the content of the popover -->
+        <template slot="popover">
+          
+          <button
+            @click="stoppedTimer = null"
+            type="button"
+            class="grid__close c-close u-color-primary" v-close-popover>×</button>
+          <div class="grade__wrapper">
+            <h1 class="tooltip__heading u-h6 u-text-center">
+              Exploración Fisica
+            </h1>
+            <PhysicalExploration :paperless="paperless"/>
+
+            <!-- You can put other components too -->
+            
+          </div>
+        </template>
+      </v-popover>
+      <!-- /Popover PhysicalExploration-->
+      <div>
+        <ul class="uk-list uk-list-striped">
+          <li v-for="(value, key) in paperless.physical_exploration">
+            <p>
+              Hora: {{ value.time }}
+              Frecuencia Cardiaca: {{ value.heart_rate }} 
+            </p> 
+          </li>
+        </ul>  
+      </div>
+
+
      </div> <!-- // .card -->
          <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
       <h3 class="uk-card-title">Normal</h3>
@@ -257,10 +590,15 @@
 
         <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
       <h3 class="uk-card-title">Descripcion de lesiones</h3>
-      <textarea class="uk-textarea" id="form-stacked-text" placeholder="Descripcion de lesiones.."></textarea>
+      <textarea class="uk-textarea" 
+      v-model="paperless.description_of_injuries"
+      id="id_description_of_injuries"
+      name="description_of_injuries"
+       placeholder="Descripcion de lesiones.."></textarea>
     </div> <!-- // .card -->
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
-      <h3 class="uk-card-title">Electrocardiograma</h3>
+      <h3 class="uk-card-title">Electrocardiograma <input type="checkbox" id="jack" v-model="electrocardiogram"/></h3>
+      <div v-if="electrocardiogram">
       <label class="uk-form-label" for="id_unidad_movil">Ritmo</label>
       <div class="uk-form-controls">
           <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Some text...">
@@ -300,7 +638,8 @@
         <label class="uk-form-label" for="id_unidad_movil">Interpretacion electrocardiografica</label>
         <div class="uk-form-controls">
             <textarea class="uk-textarea" id="form-stacked-text" placeholder="Interpretacion.."></textarea>
-        </div>                              
+        </div>
+      </div>                              
     </div> <!-- // .card -->
   </div> <!-- // .row -->
 
@@ -308,20 +647,27 @@
 
         <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
       <h3 class="uk-card-title">Impresion Diagnostica</h3>
-      <textarea class="uk-textarea" id="form-stacked-text" placeholder="Descripcion de lesiones.."></textarea>
+      <textarea class="uk-textarea" 
+      v-model="paperless.diagnostic_impresion"
+      id="id_diagnostic_impresion" 
+      name="diagnostic_impresion" 
+      placeholder="Descripcion de lesiones.."></textarea>
     </div> <!-- // .card -->
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
       <h3 class="uk-card-title">Tratamiento</h3>
-      <textarea class="uk-textarea" id="form-stacked-text" placeholder="Detalle el tratamiento.."></textarea>
+      <textarea class="uk-textarea" 
+      v-model="paperless.treatment"
+      id="id_treatment" placeholder="Detalle el tratamiento.."></textarea>
     </div> <!-- // .card -->
   </div> <!-- // .row -->
 
 
   <div class="row">
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
-      <h3 class="uk-card-title">Derivación</h3>
+      <h3 class="uk-card-title">Derivación <input type="checkbox" id="jack" v-model="derivarion"/></h3>
+      <div v-if="derivarion">
       <div class="uk-form-controls">
-        <select class="uk-select" v-model="derivation">
+        <select class="uk-select" v-model="derivation_type">
           <option disabled value="">Seleccione una opcion</option>
           <option>Si</option>
           <option>No</option>
@@ -329,7 +675,9 @@
           <option>Hospital</option>
           <option>Otro</option>
         </select>
-        <textarea class="uk-textarea" id="form-stacked-text" placeholder="Notas derivacion..."></textarea>
+        <div v-if="derivation_type === 'Otro'">
+          <textarea class="uk-textarea" id="form-stacked-text" placeholder="Notas derivacion..."></textarea>
+        </div>
       </div>
       <label class="uk-form-label" for="form-stacked-text">Estado de salud</label>
         <select class="uk-select" v-model="state_of_health">
@@ -345,29 +693,44 @@
         <label class="uk-form-label" for="id_unidad_movil">Costo</label>
         <div class="uk-form-controls">
             <input class="uk-input" id="id_unidad_movil" type="text" placeholder="$ Costo...">
+        </div>
         </div>           
       </div> <!-- // .card -->
 
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
-      <h3 class="uk-card-title">Estoy enterado de la impresion diagnostica y de las condiciones de mi paciente:</h3>
-      <label class="uk-form-label" for="id_unidad_movil">Responsable</label>
-        <div class="uk-form-controls">
-            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Nombre...">
+      <h3 class="uk-card-title">Deslinde <input type="checkbox" id="jack" v-model="demarcation"/></h3>
+        <div v-if="demarcation">
+        <h3 class="uk-card-title">Estoy enterado de la impresion diagnostica y de las condiciones de mi paciente:</h3>
+        <label class="uk-form-label" for="id_unidad_movil">Responsable</label>
+          <div class="uk-form-controls">
+              <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Nombre...">
+          </div>
+        <label class="uk-form-label" for="id_unidad_movil">Parentesco o relación</label>
+          <div class="uk-form-controls">
+              <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Parentesco...">
+          </div>
+        <label class="uk-form-label" for="id_unidad_movil">Firma</label>
         </div>
-      <label class="uk-form-label" for="id_unidad_movil">Parentesco o relación</label>
-        <div class="uk-form-controls">
-            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Parentesco...">
-        </div>
-      <label class="uk-form-label" for="id_unidad_movil">Firma</label>           
     </div> <!-- // .card -->
   </div> <!-- // .row -->
 
   <div class="row">
+    <div class="col-lg-12">
+      <h1 class="uk-heading-small">Firma de cliente</h1>
+      <SignatureClient />
+    </div>
     
   </div>
 
+  <div class="row">
+    <div class="col-lg-12">
+      <button
+      @click="submit"
+      class="c-btn c-btn--info">
+        Guardar Parte Médico 
+      </button>  
+    </div>
 
-
-
+  </div>
 
 </form>

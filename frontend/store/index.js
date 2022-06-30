@@ -52,6 +52,9 @@ import {
   REQUEST_HOSPITALS_START,
   REQUEST_HOSPITALS_SUCCESS,
   REQUEST_HOSPITALS_ERROR,
+  REQUEST_MEDICALREPORT_START,
+  REQUEST_MEDICALREPORT_SUCCESS,
+  REQUEST_MEDICALREPORT_ERROR,
 } from './constants';
 import search from './modules/search';
 import finalGrade from './modules/final-grade';
@@ -103,6 +106,19 @@ const store = new Vuex.Store({
           throw err;
         });
     },
+    newMedicalReport({ commit }, data) {
+      commit(REQUEST_MEDICALREPORT_START);
+      return http
+        .post(`/paperless/new/${data.id || ''}`, data)
+        .then(response => {
+          commit(REQUEST_MEDICALREPORT_SUCCESS, response.data);
+        })
+        .catch(err => {
+          commit(REQUEST_MEDICALREPORT_ERROR, err);
+          throw err;
+        });
+    },
+
     patient({ commit }, target) {
       commit(REQUEST_PATIENT_START);
       http
@@ -208,6 +224,19 @@ const store = new Vuex.Store({
   },
 
   mutations: {
+    // New Medical Report
+    [REQUEST_MEDICALREPORT_START](state) {
+      state.error = false;
+      state.loading = true;
+    },
+    [REQUEST_MEDICALREPORT_SUCCESS](state) {
+      state.loading = false;
+    },
+    [REQUEST_MEDICALREPORT_ERROR](state, err) {
+      state.error = err;
+      state.loading = false;
+    },
+
     // New Incident
     [REQUEST_NEW_INCIDENT_START](state) {
       state.error = false;
