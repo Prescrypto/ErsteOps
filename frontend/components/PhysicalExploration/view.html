@@ -1,0 +1,89 @@
+<form>
+
+  <label class="uk-form-label" for="meeting-time">Hora:</label>
+  <input type="datetime-local"
+  class="uk-input"
+  v-model="pe_time" 
+  id="meeting-time"
+   name="meeting-time" 
+   value="2022-06-21T10:30"
+   min="2018-06-07T00:00" >
+
+  <label class="uk-form-label" for="id_pe_heart_rate">Frecuencia Cardiaca</label>
+  <div class="uk-form-controls">
+    <input class="uk-input" 
+    v-model="pe_heart_rate"
+    id="id_pe_heart_rate" 
+    type="text" placeholder="Frecuencia...">
+  </div>
+
+  <label class="uk-form-label" for="form-stacked-text">Frecuencia Respiratoria</label>
+  <div class="uk-form-controls">
+    <input class="uk-input" 
+    v-model="pe_respiratory_rate"
+    id="form-stacked-text" 
+    type="text" 
+    placeholder="Rerspiratoria...">
+  </div>
+
+  <label class="uk-form-label" for="form-stacked-text">Presion Arterial</label>
+  <div class="uk-form-controls">
+    <input class="uk-input"
+    v-model="pe_blood_pressure" 
+    id="form-stacked-text" 
+    type="text" 
+    placeholder="Presion Arterial..."/>
+  </div>
+
+  <label class="uk-form-label" for="form-stacked-text">Temperatura</label>
+  <div class="uk-form-controls">
+    <input class="uk-input" 
+    v-model="pe_temperature"
+    id="form-stacked-text" 
+    type="number" 
+    placeholder="34.5" 
+    step="0.01"/>
+  </div>
+
+  <label class="uk-form-label" for="form-stacked-text">Saturacion</label>
+  <div class="uk-form-controls">
+    <input class="uk-input" 
+    v-model="pe_oxygen_saturation"
+    id="form-stacked-text" 
+    type="number" 
+    placeholder="98"/>
+  </div>
+
+  <label class="uk-form-label" for="form-stacked-text">Glucometria</label>
+  <div class="uk-form-controls">
+    <input class="uk-input" 
+    v-model="pe_glucometry"
+    id="form-stacked-text" 
+    type="number" 
+    placeholder="90"/>
+  </div>
+
+  <label class="uk-form-label" for="form-stacked-text">Glasgow</label>
+  <div class="uk-form-controls">
+    <input class="uk-input" 
+    v-model="pe_glassgow"
+    id="form-stacked-text" 
+    type="number" 
+    placeholder="90"/>
+  </div>  
+
+  <div>
+    <ul class="uk-list uk-list-striped">
+      <li v-for="(value, key) in paperless.physical_exploration">
+        <p>
+          Hora: {{ value.time }}
+          Frecuencia Cardiaca: {{ value.heart_rate }} 
+        </p> 
+      </li>
+    </ul>  
+  </div>
+
+  <div class="timers-button">
+    <button @click="submit" class="c-btn c-btn--info" v-close-popover>Agregar</button>
+  </div>
+</form>
