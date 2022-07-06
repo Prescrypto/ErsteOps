@@ -1,4 +1,4 @@
-<form>
+<form class="uk-form-stacked">
 
   <label class="uk-form-label" for="id_peTime">Hora:</label>
   <input type="datetime-local"
@@ -51,16 +51,21 @@
     <input type="number" class="uk-input" 
     v-model="peOxygenSaturation"
     id="id_peOxygenSaturation" 
-     
+    name="peOxygenSaturation"
+    :min="10"
+    :max="100"
+    step="1" 
     placeholder="98"/>
   </div>
 
   <label class="uk-form-label" for="id_peGlucometry">Glucometria (mg/dl)</label>
   <div class="uk-form-controls">
-    <input class="uk-input" 
+    <input type="number" class="uk-input" 
     v-model="peGlucometry"
     id="id_peGlucometry" 
-    type="number" 
+    name="peGlucometry"
+    :min="10" 
+    :max="300"
     placeholder="90"/>
   </div>
 
@@ -69,6 +74,8 @@
     <input type="number" class="uk-input" 
     v-model="peGlassgowMotor"
     id="id_peGlassgowMotor" 
+    :min="1"
+    :max="6"
     placeholder="1"/>
   </div>  
 
@@ -77,6 +84,9 @@
     <input type="number" class="uk-input" 
     v-model="peGlassgowOcular"
     id="id_peGlassgowOcular" 
+    name="peGlassgowOcular"
+    :min="1"
+    :max="4" 
     placeholder="1"/>
   </div>  
 
@@ -84,12 +94,51 @@
   <div class="uk-form-controls">
     <input class="uk-input" 
     v-model="peGlassgowVerbal"
-    id="id_peGlassgowVerbal" 
+    id="id_peGlassgowVerbal"
+    name="peGlassgowVerbal"
+    :min="1"
+    :max="5" 
     type="number"
     placeholder="1"/>
   </div> 
 
-  <div>
+  <div class="uk-overflow-auto">
+    <table class="uk-table uk-table-small uk-table-responsive uk-table-hover uk-table-middle uk-table-divider">
+      
+        <thead>
+          <tr>
+            <th class="uk-table-shrink">Hora</th>
+            <th class="uk-table-shrink">Frecuencia Cardiaca</th>
+            <th class="uk-table-shrink">Frecuencia Respiratoria</th>
+            <th class="uk-table-shrink">Presion Arterial</th>
+            <th class="uk-table-shrink">Temperatura</th>
+            <th class="uk-table-shrink">Saturacion (%)</th>
+            <th class="uk-table-shrink">Glucometria (mg/dl)</th>
+            <th class="uk-table-shrink">Glasgow Motor</th>
+            <th class="uk-table-shrink">Glasgow Ocular</th>
+            <th class="uk-table-shrink">Glasgow Verbal</th>
+            <th class="uk-table-shrink">Glasgow Total</th>
+          </tr>  
+        </thead>
+      
+      <tbody>
+        <tr v-for="(value, key) in paperless.physical_exploration">
+          <td>{{ value.time }}</td>
+          <td>{{ value.heart_rate }} </td>
+          <td>{{ value.respiratory_rate }}</td>
+          <td>{{ value.blood_pressure }}</td>
+          <td>{{ value.temperature }}</td>
+          <td>{{ value.oxygen_saturation }}</td>
+          <td>{{ value.glucometry }}</td>
+          <td>{{ value.glassgow_motor }}</td>
+          <td>{{ value.glassgow_ocular }}</td>
+          <td>{{ value.glassgow_verbal }}</td>
+          <td>{{ value.glassgow_total }}</td>
+        </tr>
+      </tbody>
+    </table>  
+  </div>
+<!--   <div>
     <ul class="uk-list uk-list-striped">
       <li v-for="(value, key) in paperless.physical_exploration">
         <p>
@@ -98,7 +147,7 @@
         </p> 
       </li>
     </ul>  
-  </div>
+  </div> -->
 
   <div class="timers-button">
     <button @click="submit" class="c-btn c-btn--info" v-close-popover>Agregar</button>

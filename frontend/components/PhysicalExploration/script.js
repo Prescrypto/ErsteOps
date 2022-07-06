@@ -1,5 +1,6 @@
 export default {
   name: 'PhysicalExploration',
+  inject: ['$validator'],
   data: () => ({
     peTime: '',
     peHeartRate: '',
@@ -16,6 +17,7 @@ export default {
     paperless: window.erste.paperless,
     prev_elements: [],
   }),
+
   methods: {
     async submit(e) {
       try {
