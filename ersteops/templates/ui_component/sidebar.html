@@ -66,15 +66,16 @@
       </ul>
     {% endif %}
 
-    {% if request.user|has_group:"MedicalReports"%}
+    
     <h4 class="c-sidebar__title">Partes Medico</h4>
     <ul class="c-sidebar__list">
+      {% if request.user|has_group:"MedicalReports"%}
       <li class="c-sidebar__item">
         <a class="c-sidebar__link" href="{% url 'medical_report_active' %}">
           <i class="fa fa-pencil-square-o u-mr-xsmall" aria-hidden="true"></i>Emergencias Activas
         </a>       
-        
       </li>
+      {% endif %}   
       <li class="c-sidebar__item">
         <a class="c-sidebar__link" href="{% url 'medicalreportlist' %}">
           <i class="fa fa-list u-mr-xsmall" aria-hidden="true"></i>Mis Partes Medicos
@@ -82,7 +83,7 @@
         
       </li>
     </ul>
-    {% endif %}
+    
 
   </div><!-- // .c-sidebar -->
 </div><!-- // .o-page__sidebar -->
