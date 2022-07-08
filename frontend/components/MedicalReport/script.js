@@ -3,6 +3,7 @@ import AirWay from 'components/AirWay';
 import PhysicalExploration from 'components/PhysicalExploration';
 import SignatureClient from 'components/SignatureClient';
 import Medications from 'components/Medications';
+import { mapActions } from 'vuex';
 // import GoogleMap from './components/GoogleMap.vue'
 // import find from 'lodash/fp/find';
 // import { mapState, mapActions, mapMutations, mapGetters } from 'vuex';
@@ -39,30 +40,66 @@ export default {
   }),
   components: { AirWay, PhysicalExploration, SignatureClient, Medications },
   methods: {
-    submit(e) {
-      e.preventDefault();
-      this.$validator
-        .validateAll('emergency')
-        .then(valid => {
-          if (valid) {
-            return this.newMedicalReport(this.form);
-          }
-          throw new Error();
-        })
-        .then(() => {
-          this.$notify({
-            text: 'Se ha guardado el parte medico en el sistema.',
-            type: 'success',
-          });
-          // close modal after submit if no errors
-          // this.$modal.hide('incident-modal');
-        })
-        .catch(() => {
-          this.$notify({
-            text: 'Hubo un error al guardar el parte medico, intente de nuevo.',
-            type: 'error',
-          });
+    ...mapActions('newMedicalReport', ['createMedicalReport']),
+
+    async submit(e) {
+      // e.preventDefault();
+      // this.$validator
+      //   .validateAll('paperless')
+      //   .then(valid => {
+      //     if (valid) {
+      //       return this.setNewMedicalReport(this.form);
+      //     }
+      //     throw new Error();
+      //   })
+      //   .then(() => {
+      //     this.$notify({
+      //       text: 'Se ha guardado el parte medico en el sistema.',
+      //       type: 'success',
+      //     });
+      //     // close modal after submit if no errors
+      //     // this.$modal.hide('incident-modal');
+      //   })
+      //   .catch(() => {
+      //     this.$notify({
+      //       text: 'Hubo un error al guardar el parte medico, intente de nuevo.',
+      //       type: 'error',
+      //     });
+      //   });
+      try {
+        e.stopPropagation();
+        e.preventDefault();
+        // var form = $(this);
+        // var jsonForm= form.serialize();
+        // var jsonForm=this.$refs.form.serialize();
+        const jsonForm = JSON.stringify(this.paperless);
+        console.log('SUBMIT');
+        console.log(jsonForm);
+
+        const response = await this.createMedicalReport({
+          // id: this.emergency.id,
+          // id: this.paperless.service_code,
+          // fe_paperless: this.paperless,
+          // paperless,
+          paperless: jsonForm,
+          // timer_type: this.timerPicked,
         });
+        this.$emit('newmedicalreport', response);
+
+        this.$notify({
+          text: `Se creo el parte medico existosamente: ${
+            // this.emergency.id
+            this.paperless.service_code
+          }`,
+          type: 'success',
+        });
+      } catch (err) {
+        this.$emit('error', err);
+        this.$notify({
+          text: `No se pudo crear el parte medico - ${err}`,
+          type: 'error',
+        });
+      }
     },
   },
   $_veeValidate: {
