@@ -20,6 +20,10 @@ logger = logging.getLogger('django_info')
 from emergency.templatetags import user_tags
 
 from .dict_fields import MedicalReportDict
+
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
+import json
 #def emergency_data_dict(emergency):
 
 
@@ -193,3 +197,54 @@ class MedicalReportDetail(View):
 
 #   def post (self, request, *args, **kwargs):
 #     return redirect('/paperless/')
+
+
+
+# Update Timer Functionality
+@csrf_exempt
+def new_medicalreport(request):
+    ''' '''
+    bad_response = JsonResponse({'status':'bad request'})
+    bad_response.status_code = 400
+    current_user = request.user
+    if not request.is_ajax():
+        logger.info('[ NEW MEWDICAL REPORT -1- Not ajax: {} ]'.format(current_user))
+        logger.info('[ NEW MEWDICAL REPORT DATA: {} ]'.format(data))
+        return bad_response
+    if not request.body:
+        logger.info('[ NEW MEWDICAL REPORT -2- Not body: {} ]'.format(current_user))
+        logger.info('[ NEW MEWDICAL REPORT DATA: {} ]'.format(data))
+        return bad_response
+
+    data = json.loads(request.body.decode('utf-8'))
+    #logger.info('[ NEW MEWDICAL REPORT: -3- {} ]'.format(current_user))
+    #logger.info('[ NEW MEWDICAL REPORT DATA: -4- {} ]'.format(data))
+    #if 'id' in data and 'timer_type' in data :
+    if 'paperless' in data :
+        try:
+            logger.info('[ NEW MEWDICAL REPORT DATA: -5- {} ]'.format(data['paperless']))
+            vue_data=json.loads(data['paperless'])
+            logger.info('[ NEW MEWDICAL REPORT DATA: -6- {} ]'.format(vue_data['service_code']))
+            emergency = Emergency.objects.get(id=vue_data['service_code'])
+            # if data['timer_type'] == '1':
+            #     emergency.unit_dispatched_time = timezone.now()
+            # if data['timer_type'] == '2':
+            #     emergency.arrival_time = timezone.now()
+            #     emergency.attention_time = timezone.now()
+            # if data['timer_type'] == '3':
+            #     emergency.derivation_time = timezone.now()
+            # if data['timer_type'] == '4':
+            #     emergency.patient_arrival = timezone.now()
+
+            # emergency.save()
+            data.update({'status': 'success', 'client_id':emergency.odoo_client})
+            response = JsonResponse(data)
+            response.status_code = 202
+            return response
+        except Exception as e:
+            logger.error("[Create Medical Report View ERROR]: {}, type: {}".format(e, type(e)))
+            return bad_response
+
+    else:
+        return bad_response
+# /Update Timer Functionality
