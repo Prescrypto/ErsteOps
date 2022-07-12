@@ -21,7 +21,7 @@ from emergency.templatetags import user_tags
 
 from .dict_fields import MedicalReportDict
 
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.http import JsonResponse
 import json
 #def emergency_data_dict(emergency):
@@ -201,7 +201,8 @@ class MedicalReportDetail(View):
 
 
 # Update Timer Functionality
-@csrf_exempt
+#@csrf_exempt
+@csrf_protect
 def new_medicalreport(request):
     ''' '''
     bad_response = JsonResponse({'status':'bad request'})
@@ -217,33 +218,63 @@ def new_medicalreport(request):
         return bad_response
 
     data = json.loads(request.body.decode('utf-8'))
+
     #logger.info('[ NEW MEWDICAL REPORT: -3- {} ]'.format(current_user))
     #logger.info('[ NEW MEWDICAL REPORT DATA: -4- {} ]'.format(data))
     #if 'id' in data and 'timer_type' in data :
     if 'paperless' in data :
-        try:
-            logger.info('[ NEW MEWDICAL REPORT DATA: -5- {} ]'.format(data['paperless']))
-            vue_data=json.loads(data['paperless'])
-            logger.info('[ NEW MEWDICAL REPORT DATA: -6- {} ]'.format(vue_data['service_code']))
-            emergency = Emergency.objects.get(id=vue_data['service_code'])
-            # if data['timer_type'] == '1':
-            #     emergency.unit_dispatched_time = timezone.now()
-            # if data['timer_type'] == '2':
-            #     emergency.arrival_time = timezone.now()
-            #     emergency.attention_time = timezone.now()
-            # if data['timer_type'] == '3':
-            #     emergency.derivation_time = timezone.now()
-            # if data['timer_type'] == '4':
-            #     emergency.patient_arrival = timezone.now()
+      #qs =  Emergency.objects.get(pk = pl_emergency_id)
+      try:
+          logger.info('[ NEW MEWDICAL REPORT DATA: -5- {} ]'.format(data['paperless']))
+          vue_data=json.loads(data['paperless'])
+          logger.info('[ NEW MEWDICAL REPORT DATA: -6- {} ]'.format(vue_data['service_code']))
+          qs = Emergency.objects.get(id=vue_data['service_code'])
+          medicalReport = MedicalReport.objects.create(
+          odoo_client = qs.odoo_client,
+          erste_code = qs.erste_code,
+          service_code = vue_data['service_code'],
+          service_geo_lat = vue_data['service_geo_lat'],
+          service_geo_lon = vue_data['service_geo_lon'],
+          service_unit = vue_data['service_unit'],  
+          service_unit_type = vue_data['service_unit_type'],
+          service_unit_plate = vue_data['service_unit_plate'],
+          patient_name = vue_data['patient_name'],
+          patient_gender = vue_data['patient_gender'],
+          patient_age = vue_data['patient_age'],
+          patient_affiliations = vue_data['patient_affiliations'],
+          is_patient_unknow = vue_data['is_patient_unknow'], 
+          patient_unknow = vue_data['patient_unknow'],
+          patient_clothes = vue_data['patient_clothes'],
+          copago_amount = vue_data['copago_amount'],
+          skin_color = vue_data['skin_color'],
+          attention_place = vue_data['attention_place'],
+          other_attention_place = vue_data['other_attention_place'],
+          consultation_reason = vue_data['consultation_reason'],
+          other_consultation_reason = vue_data['other_consultation_reason'],
 
-            # emergency.save()
-            data.update({'status': 'success', 'client_id':emergency.odoo_client})
-            response = JsonResponse(data)
-            response.status_code = 202
-            return response
-        except Exception as e:
-            logger.error("[Create Medical Report View ERROR]: {}, type: {}".format(e, type(e)))
-            return bad_response
+          user = request.user,
+          )
+          messages.error(request, "Parte Medico Guardado correctamente!!!")
+          # if data['timer_type'] == '1':
+          #     emergency.unit_dispatched_time = timezone.now()
+          # if data['timer_type'] == '2':
+          #     emergency.arrival_time = timezone.now()
+          #     emergency.attention_time = timezone.now()
+          # if data['timer_type'] == '3':
+          #     emergency.derivation_time = timezone.now()
+          # if data['timer_type'] == '4':
+          #     emergency.patient_arrival = timezone.now()
+
+          # emergency.save()
+          data.update({'status': 'success', 'client_id':emergency.odoo_client})
+          response = JsonResponse(data)
+          response.status_code = 202
+          return response
+      except Exception as e:
+          logger.error("[Create Medical Report View ERROR]: {}, type: {}".format(e, type(e)))
+          return bad_response
+      qs.medical_report = medicalReport
+      qs.save()
 
     else:
         return bad_response
