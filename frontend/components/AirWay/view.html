@@ -10,20 +10,20 @@
           </option>
         </select>
         <div v-if="selected === 'Otro'">
-          <label class="uk-form-label" for="form-stacked-text">Otro</label>
+          <label class="uk-form-label" for="id_other_airway">Otro</label>
           <input class="uk-input" 
               v-model="other_airway"
               id="id_other_airway"
               name="other_airway" 
-              type="text" placeholder="Otro:... especifique"/> 
+              type="text" placeholder="Otro:... "/> 
         </div>    
       
-        <label class="uk-form-label" for="form-stacked-text">Instrucción</label>
+        <label class="uk-form-label" for="id_instructions">Instrucción</label>
         <input class="uk-input" 
           v-model="instructions"
           id="id_instructions"
           name="instructions" 
-          type="text" placeholder="Otro:... especifique"/>
+          type="text" placeholder="Especifique..."/>
 
         <div class="timers-label">
           <li v-for="(value, key) in paperless.airway">
