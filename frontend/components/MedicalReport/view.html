@@ -8,8 +8,12 @@
 
 
 <form v-else class="uk-form-stacked" ref="form">
-
   <div class="row">
+    <div class="col-12">
+      <p>Tu ubicación actual: {{ paperless.service_geo_lat }} - {{ paperless.service_geo_lon }}</p>
+    </div>
+  </div>
+  <div class="row paperless__bottom">
     <div class="col-12">
       <h5>Codigo incidente: {{ paperless.service_code }}</h5>
       <label class="uk-form-label" for="id_crum">Folio CRUM:</label>
@@ -22,6 +26,8 @@
           type="text" 
           placeholder="100...">
       </div>
+      
+
       <label class="uk-form-label" for="id_crum_reception">Medico que recibe:</label>
       <div class="uk-form-controls">
           <input class="uk-input" 
@@ -79,7 +85,8 @@
             v-model="paperless.erste_code"
             id="id_erste_code"
             name="erste_code" 
-            type="text" 
+            type="text"
+            disabled 
             placeholder="E001...">
         </div>
       <label class="uk-form-label" for="form-stacked-text">Telefono</label>
@@ -92,7 +99,7 @@
             type="tel" 
             placeholder="5555-555-555...">
         </div>
-      <label class="uk-form-label" for="id_patient_gender">Sexo: {{ paperless.patient_gender }}</label>
+      <label class="uk-form-label" for="id_patient_gender">Genero: <span class="selected">{{ paperless.patient_gender }}</span></label>
       <div class="uk-form-controls">
           
           <input 
@@ -201,7 +208,8 @@
 
   <div class="row">
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
-      <h3 class="uk-card-title">Sitio de Atencion: </h3>
+      <h3 class="uk-card-title">Sitio de Atencion: <span class="selected">{{ paperless.attention_place }}</span></h3>
+
         <select class="uk-select" 
         tabindex="15" 
         v-model="paperless.attention_place">
@@ -232,7 +240,7 @@
     </div> <!-- // .card -->
 
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
-      <h3 class="uk-card-title">Tipo de Servicio</h3>
+      <h3 class="uk-card-title">Tipo de Servicio: <span class="selected">{{ paperless.service_type }}</span></h3>
       <select class="uk-select" v-model="paperless.service_type">
         <option disabled value="">Seleccione una opcion</option> 
         <option>Traslado</option>
@@ -254,8 +262,8 @@
   <div class="row">
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
       <h3 class="uk-card-title">Motivo de Consulta</h3>
-      <p>{{ consultation_motive }}</p>
-      <select class="uk-select" v-model="consultation_motive">
+      <p class="selected">{{ paperless.consultation_reason }}</p>
+      <select class="uk-select" v-model="paperless.consultation_reason" multiple>
         <option disabled value="">Seleccione una opcion</option>
         <option>Cefalea</option>
         <option>Sincope</option>
@@ -268,35 +276,39 @@
         <option>Fiebre</option>
         <option value="Otro">Otro</option>
       </select>
-      <div v-if="consultation_motive === 'Otro'">
+      <div v-if="paperless.consultation_reason.includes('Otro')">
         
-        <textarea class="uk-textarea" id="form-stacked-text" placeholder="Otro:... especifique" ></textarea>
+        <textarea class="uk-textarea" 
+        v-model='other_consultation_reason'
+        id="form-stacked-text" placeholder="Otro:... especifique" ></textarea>
       </div>
     </div> <!-- // .card -->
 
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
-      <h3 class="uk-card-title"> Tipo de Evento:  {{ paperless.traumatics }} </h3>
+      <h3 class="uk-card-title"> Tipo de Evento:  <span class="selected">{{ paperless.event_type }}</span> </h3>
+
       <label class="uk-form-label" for="id_traumatics"> </label>
           <div class="uk-form-controls">
             <input 
             class="uk-radio" 
             type="radio" 
-            id="id_traumatics" 
+            id="id_event_type" 
             name="traumatics"
             value="Traumaticos" 
-            v-model="paperless.traumatics" />
+            v-model="paperless.event_type" />
             <label for="gender">Traumaticos</label>
 
             <input 
             class="uk-radio" 
             type="radio" 
-            id="id_traumatics" 
+            id="id_event_type" 
             name="traumatics"
             value="No Traumaticos" 
-            v-model="paperless.traumatics" />
+            v-model="paperless.event_type" />
             <label for="two">No Traumaticos</label>  
           </div>
-          <select class="uk-select" v-model="traumatics_type" multiple>
+          <p class="selected">{{ paperless.traumatics }}</p>
+          <select class="uk-select" v-model="paperless.traumatics" multiple>
             <option disabled value="">Seleccione una opción</option>
             <option>Craneal</option>
             <option>Craneoencefalico</option>
@@ -307,11 +319,15 @@
             <option>Extremidades</option>
             <option>Columna Vertebral</option>
             <option>Genitales</option>
-            <option>Otros</option>
+            <option>Otro</option>
           </select>
+          <div v-if="paperless.traumatics.includes('Otro')">
           <label class="uk-form-label" for="form-stacked-text">Otro</label>
-          <textarea class="uk-textarea" id="form-stacked-text" placeholder="Otro:... especifique"></textarea>
-          <p>{{ traumatics_type }}</p>
+          <textarea class="uk-textarea" 
+          v-model="paperless.other_traumatics"
+          id="form-stacked-text" placeholder="Otro:... especifique"></textarea>
+          <p>{{ paperless.traumatics_type }}</p>
+        </div>
       </div> <!-- // .card -->
   </div> <!-- // .row -->
 
@@ -350,7 +366,7 @@
       </v-popover>
       <!-- /Popover Airway-->
    
-    <li v-for="(value, key) in paperless.airway">
+    <li class="selected" v-for="(value, key) in paperless.airway">
       {{ value.airway_type }} : {{ value.instruction }}
     </li>
     </div> <!-- // .card -->
@@ -396,7 +412,7 @@
       </v-popover>
       <!-- /Popover Medication-->
       <div class="row">
-        <div class="timers-label">
+        <div class="timers-label selected">
           <li v-for="(value, key) in paperless.medications">
             {{ value.medication_type }} - {{ value.medication_name }} - {{ value.medication_dose }} -- {{ value.medication_hrs }} 
           </li>
@@ -480,10 +496,10 @@
     </div> -->
     </div> <!-- // .card -->
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
-    <h3 class="uk-card-title">Inmovilización <input type="checkbox" id="jack" v-model="fe_inmovilization"/></h3>
-      <div v-if="fe_inmovilization">
-      <p>{{ inmovilization }}</p>
-         <select class="uk-select" v-model="inmovilization" multiple>
+    <h3 class="uk-card-title">Inmovilización <input type="checkbox" id="jack" v-model="paperless.inmovilization"/></h3>
+      <div v-if="paperless.inmovilization">
+      <p class="selected">{{ paperless.inmovilization_type }}</p>
+         <select class="uk-select" v-model="paperless.inmovilization_type" multiple>
           <option disabled value="">Seleccione una opcion</option>
           <option>Columna Cervical</option>
           <option>Columna Toracica</option>
@@ -492,9 +508,11 @@
           <option>Total</option>
           <option>Otro</option>
         </select>
-        <label class="uk-form-label" for="form-stacked-text">Otro</label>
-       <textarea class="uk-textarea" id="form-stacked-text" placeholder="detalle"></textarea>  
-       </div>  
+        <div v-if="paperless.inmovilization_type.includes('Otro')">
+          <label class="uk-form-label" for="form-stacked-text">Otro</label>
+          <textarea class="uk-textarea" id="form-stacked-text" placeholder="detalle"></textarea>
+        </div>  
+      </div>  
     </div> <!-- // .card -->
   </div>  <!-- // .row -->
 
@@ -509,27 +527,29 @@
     </div> <!-- // .card -->
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
       <h3 class="uk-card-title">Antecedentes Patologicos:</h3>
-      <p>{{ paperless.pathological_history }}</p>
+      <p class="selected">{{ paperless.pathological_history }}</p>
          <select class="uk-select" 
          v-model="paperless.pathological_history" 
          id="id_pathological_history"
          name="pathological_history" 
          multiple>
-          <option disabled value="">Seleccione una opcion</option>
+          <option disabled value="">Seleccione los que apliquen</option>
           <option>Diabetes Melitus</option>
           <option>Hipertension Arterial</option>
           <option>Cardiopatias</option>
           <option>Neumopatias</option>
           <option>Quirurgicos / Trauma</option>
           <option>Alergias</option>
-          <option>Otros</option>
+          <option>Otro</option>
         </select>
-        <label class="uk-form-label" for="form-stacked-text">Otro</label>
-       <textarea class="uk-textarea" 
-       v-model="paperless.other_pathological_history"
-       name="other_pathological_history"
-       id="id_other_pathological_history" 
-       placeholder="detalle"></textarea>
+        <div v-if="paperless.pathological_history.includes('Otro')">
+          <label class="uk-form-label" for="form-stacked-text">Otro</label>
+          <textarea class="uk-textarea" 
+           v-model="paperless.other_pathological_history"
+           name="other_pathological_history"
+           id="id_other_pathological_history" 
+           placeholder="detalle"></textarea>
+        </div>
     </div> <!-- // .card -->
   </div> <!-- // .row -->
 
@@ -577,7 +597,7 @@
           </li>
         </ul>  
       </div> -->
-   <div class="uk-overflow-auto">
+   <div class="uk-overflow-auto selected">
     <table class="uk-table uk-table-small uk-table-hover uk-table-middle uk-table-divider">
       
         <thead>
@@ -618,10 +638,10 @@
      </div> <!-- // .card -->
          <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
       <h3 class="uk-card-title">Normal</h3>
-      <p>{{ normal_elements }}</p>
+      <p class="selected">{{ normal_elements }}</p>
       <div class="uk-form-controls">
         <select class="uk-select" v-model="normal_elements" multiple>
-          <option disabled value="">Seleccione una opcion</option>
+          <option disabled value="">Seleccione los que apliquen</option>
           <option>Cabeza</option>
           <option>Cara</option>
           <option>Cuello</option>
@@ -650,39 +670,39 @@
       <div v-if="electrocardiogram">
       <label class="uk-form-label" for="id_unidad_movil">Ritmo</label>
       <div class="uk-form-controls">
-          <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Some text...">
+          <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Ritmo...">
       </div>
       <label class="uk-form-label" for="id_unidad_movil">Frecuencia</label>
       <div class="uk-form-controls">
-        <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Some text...">
+        <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Frecuencia...">
       </div>
           <label class="uk-form-label" for="id_unidad_movil">Onda P</label>
             <div class="uk-form-controls">
-                <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Some text...">
+                <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Onda P...">
             </div>
         <label class="uk-form-label" for="id_unidad_movil">PR</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Some text...">
+            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="PR...">
         </div>
         <label class="uk-form-label" for="id_unidad_movil">Eje QRS</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Some text...">
+            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Eje QRS...">
         </div>
         <label class="uk-form-label" for="id_unidad_movil">ST</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Some text...">
+            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="ST...">
         </div>
         <label class="uk-form-label" for="id_unidad_movil">Onda T</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Some text...">
+            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Onda T...">
         </div>
         <label class="uk-form-label" for="id_unidad_movil">QT</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Some text...">
+            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="QT...">
         </div>
         <label class="uk-form-label" for="id_unidad_movil">Anormalidades</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Some text...">
+            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Anormailides...">
         </div>
         <label class="uk-form-label" for="id_unidad_movil">Interpretacion electrocardiografica</label>
         <div class="uk-form-controls">
@@ -764,7 +784,7 @@
   </div> <!-- // .row -->
 
   <div class="row">
-    <div class="uk-card uk-height-medium uk-card-default uk-card-body uk-width-1-2@m">
+    <div class="uk-card uk-height-large uk-card-default uk-card-body uk-width-1-2@m">
     <h3 class="uk-card-title">Firma</h3>
       <SignatureClient />
     </div>
