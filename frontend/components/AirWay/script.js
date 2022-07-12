@@ -7,9 +7,9 @@ export default {
     prev_elements: [],
     select_text: '',
     paperless: window.erste.paperless,
-    selected: 'Ninguna',
+    selected: '',
     options: [
-      { text: 'Ninguna', value: 'Ninguna' },
+      { text: '', value: '' },
       { text: 'Manual', value: 'Manual' },
       { text: 'Orifaringea', value: 'Orifaringea' },
       { text: 'Endotraqueal', value: 'Endotraqueal' },
@@ -33,10 +33,10 @@ export default {
         } else {
           this.select_text = this.selected;
         }
-        if (this.selected === 'Ninguna') {
-          this.prev_elements = [];
-          this.instructions = '';
-        }
+        // if (this.selected === 'Ninguna') {
+        //   this.prev_elements = [];
+        //   this.instructions = '';
+        // }
         const airwayElement = {
           airway_type: this.select_text,
           instruction: this.instructions,

@@ -32,7 +32,7 @@
         </div>  
 
         <div class="timers-button">
-          <button @click="submit" class="c-btn c-btn--info" v-close-popover>Agregar</button>
+          <button @click="submit" class="c-btn c-btn--info" v-close-popover :disabled="!selected.length">Agregar</button>
         </div>
       
       </div>
