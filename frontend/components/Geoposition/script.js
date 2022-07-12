@@ -8,6 +8,7 @@ export default {
       currentPlace: null,
       markers: [],
       places: [],
+      paperless: window.erste.paperless,
     };
   },
   mounted() {
@@ -35,6 +36,11 @@ export default {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         };
+        console.log('actual position');
+        console.log(position.coords.latitude);
+        console.log(position.coords.longitude);
+        this.paperless.service_geo_lat = position.coords.latitude;
+        this.paperless.service_geo_lon = position.coords.longitude;
       });
     },
   },
