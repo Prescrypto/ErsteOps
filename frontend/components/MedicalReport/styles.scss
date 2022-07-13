@@ -55,3 +55,11 @@
 .paperless__bottom {
   padding-bottom: 30px;
 }
+
+#id_patient_age:valid {
+    color: green;
+}
+
+#id_patient_age:invalid {
+    color: red;
+}
