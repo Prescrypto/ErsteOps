@@ -68,11 +68,6 @@ class MedicalReport(models.Model):
         ("Miosis","Miosis"),
         ("Anisocoria","Anisocoria"),
         )
-    IMMOBILIZATION = (
-        ("Columna Cervical","Columna Cervical"),
-        ("Columna Torácica","Columna Torácica"),
-        ("Columna Lumbar","Columna Lumbar"),
-        )
     YES_NO = (
         ('Si','Si'),
         ('No','No'),
@@ -89,6 +84,13 @@ class MedicalReport(models.Model):
         ('Grave','Grave'),
         ('Muy Grave','Muy Grave'),
         )
+    INMOVILIZATION = (
+        ('Columna Cervical','Columna Cervical'),
+        ('Columna Toracica','Columna Toracica'),
+        ('Extremidades','Extremidades'),
+        ('Total','Total'),
+        ('Otro','Otro'),
+        )
     odoo_client = models.CharField("Cliente id(Legacy)", max_length=50,default ='',)
     erste_code = models.CharField("ID Code", max_length=50, blank=True, default="")
     service_code = models.CharField("Codigo de Servicio",max_length=10,default='')
@@ -99,6 +101,7 @@ class MedicalReport(models.Model):
     service_crum_dr = models.CharField("Medico CRUM",max_length=60,default='', blank=True)
     # Units m2m relation
     # Paient Data
+    copago_amount = models.CharField('Co-pago',max_length=10, blank=True ,default='0')
     service_geo_lat = models.CharField('Latitud',max_length=15, blank=True ,default='')
     service_geo_lon = models.CharField('Longitud', max_length=15,  blank=True, default='')
     patient_name = models.CharField('Nombre del Paciente', max_length=255, default='')
@@ -106,6 +109,7 @@ class MedicalReport(models.Model):
     patient_age = models.IntegerField('edad (años)', default=0, blank=True)
     patient_address = models.CharField('Direccion', max_length=50, default='', blank=False)
     patient_affiliations = models.CharField("Filiacion",max_length=50,blank=True)
+    is_patient_unknow = models.CharField("Es paciente desconocido",max_length=50,blank=True,default='')
     patient_unknow = models.CharField("Paciente Desconocido",max_length=50,blank=True)
     patient_clothes = models.CharField("Vestimenta", max_length=50,blank=True)
     patient_phone = models.CharField("Telefono:", max_length=15,blank=True ,default='')
@@ -113,8 +117,9 @@ class MedicalReport(models.Model):
     other_attention_place = models.CharField('Otro Sitio de Atencion', max_length=20, default= '', blank=True, choices=ATENTION_PLACE)
     skin_color = models.CharField("Coloración de piel", max_length=50, default= '', blank=True,)
     service_type = models.CharField('Tipo de Servicio', max_length=9, default= '', blank=True, choices=SERVICE_TYPE)
-    consultation_reason = models.CharField('Motivo de la Consulta', max_length=20, default= '', blank=True, choices=CONSULTATION_REASON)
-    other_consultation_reason = models.CharField('Otro Motivo de la Consulta', max_length=20, default= '', blank=True)
+    other_service_type = models.CharField('Tipo de Servicio', max_length=9, default= '', blank=True)
+    consultation_reason = models.CharField('Motivo de la Consulta', max_length=150, default= '', blank=True, choices=CONSULTATION_REASON)
+    other_consultation_reason = models.CharField('Otro Motivo de la Consulta', max_length=50, default= '', blank=True)
     event_type = models.CharField('Tipo de Evento', max_length=20, default= '', blank=True, choices=EVENT_TYPE)
     traumatics = models.CharField('Traumatico', max_length=100, default= '', blank=True, choices=TRAUMATICS)
     other_traumatics = models.CharField('Otro Traumatico', max_length=50, default= '', blank=True, choices=TRAUMATICS)
@@ -136,8 +141,9 @@ class MedicalReport(models.Model):
 
     pupil_state_left = models.CharField("Estado de la pupila, Izquierda",max_length=50, default='', blank=True ,choices=PUPIL_STATE)
     pupil_state_right = models.CharField("Estado de la pupilas, Derecha",max_length=50, default='', blank=True ,choices=PUPIL_STATE)
-    #inmovilization = models.
-    #inmovilization_type 
+    inmovilization = models.CharField("Inmovilizacion",max_length=50, default='', blank=True)
+    inmovilization_type = models.CharField("Inmovilizacion",max_length=50, default='', blank=True, choices=INMOVILIZATION)
+    other_inmovilization_type = models.CharField("Otra Inmovilizacion",max_length=50, default='', blank=True)
 
     pathological_history_daibetes_melitus = models.CharField("Diabetes Melitus",blank= True, default=False, max_length=10, choices=YES_NO )
     pathological_history_arterial_hypertension = models.CharField("Hipertension Arterial",blank= True, default=False , max_length=10, choices=YES_NO)
@@ -145,6 +151,7 @@ class MedicalReport(models.Model):
     pathological_history_pneumopathies = models.CharField("Neumopatias",blank= True, default=False,max_length=10 , choices=YES_NO)
     pathological_history_trauma = models.CharField("Quirurgicos/Trauma",blank= True, default=False,max_length=10, choices=YES_NO)
     pathological_history_alergy = models.CharField("Alergias",blank= True, default=False, max_length=10, choices=YES_NO)
+    other_pathological_history = models.CharField("Otra enfermedad",blank= True, default=False, max_length=50)
 
     current_therapeutics = models.TextField("Tiempo de Evolucion y Terapeutica Actual",blank=True)
     description_of_injuries = models.TextField("Descripcion de lesiones",blank=True)
@@ -152,8 +159,10 @@ class MedicalReport(models.Model):
     treatment = models.TextField("Tratamiento",blank=True)
     derivation = models.CharField("Derivacion",blank= True, default=False, max_length=20, choices=YES_NO)
     derivation_place = models.TextField("Notas Derivacion",blank= True )
-    state_of_health = models.CharField("Derivacion",blank= True, default=False, max_length=20, choices=HEALTH_STATE)
-
+    state_of_health = models.CharField("Estado de Salud",blank= True, default=False, max_length=20, choices=HEALTH_STATE)
+    demarcation = models.CharField("Deslinde",blank= True, default=False, max_length=20, choices=YES_NO)
+    crum = models.CharField("Folio CRUM",blank= True, default=False, max_length=20)
+    crum_reception = models.CharField("Medico Recibe CRUM",blank= True, default=False, max_length=120)    
 
     user = models.ForeignKey(User,verbose_name= "usuario",on_delete=models.DO_NOTHING, blank=True)
     # blood_products_solution 
