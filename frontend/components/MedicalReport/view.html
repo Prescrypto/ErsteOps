@@ -51,7 +51,8 @@
           v-model="paperless.service_unit"
           id="id_service_unit"
           name="service_unit" 
-          type="text" 
+          type="text"
+          maxlength="10" 
           placeholder="M011..."/>
       </div>
       <label class="uk-form-label" for="id_service_unit_type">Tipo de Unidad</label>
@@ -62,6 +63,7 @@
           id="id_service_unit_type" 
           name="service_unit_type"
           type="text" 
+          maxlength="50"
           placeholder="Basica...">
       </div>
       <label class="uk-form-label" for="form-stacked-text">No.Placas</label>
@@ -72,6 +74,7 @@
         id="id_service_unit_plate"
         name="service_unit_plate" 
         type="text" 
+        maxlength="10"
         placeholder="ABC-134...">
       </div>
     </div> <!-- // .card -->
@@ -128,6 +131,8 @@
           id="id_patient_age"
           name="patient_age" 
           type="number"
+          min="0"
+          max="110"
           pattern="[\d]{9}"
           step="1"/>
       </div>
@@ -139,6 +144,7 @@
           id="id_patient_name"
           name="patient_name" 
           type="text" 
+          maxlength="100"
           placeholder="Jaime Ramirez..."/>
       </div>
       <label class="uk-form-label" for="id_copago_amount">Co-pago</label>
@@ -169,7 +175,8 @@
               <input class="uk-input"
               tabindex="11" 
               id="form-stacked-text" 
-              type="text" 
+              type="text"
+              maxlength="50" 
               placeholder="Paciente desconocido..."/>
           </div>     
           <label class="uk-form-label" for="id_patient_affiliations">Filiación</label>
@@ -179,6 +186,7 @@
               v-model="paperless.patient_affiliations"
               id="id_patient_affiliations"
               name="patient_affiliations" 
+              maxlength="50" 
               type="text" placeholder="Filiacion..."/>
           </div>
           <label class="uk-form-label" for="id_patient_clothes">Vestimenta</label>
@@ -189,6 +197,7 @@
               id="id_patient_clothes"
               name="patient_clothes" 
               type="text" 
+              maxlength="50" 
               placeholder="Vestimenta...">
           </div>
           <label class="uk-form-label" for="id_skin_color">Coloración de piel</label>
@@ -199,6 +208,7 @@
               id="id_skin_color"
               name="skin_color" 
               type="text" 
+              maxlength="50" 
               placeholder="Coloracion...">
           </div>
         </div>          
@@ -280,7 +290,7 @@
       <div v-if="paperless.consultation_reason.includes('Otro')">
         
         <textarea class="uk-textarea" 
-        v-model='other_consultation_reason'
+        v-model='paperless.other_consultation_reason'
         id="form-stacked-text" placeholder="Otro:... especifique" ></textarea>
       </div>
     </div> <!-- // .card -->
@@ -341,7 +351,7 @@
         popoverClass="grade"
         defaultInnerClass="grade__inner"
         defaultArrowClass="grade__rrrow"
-        :auto-hide="true" 
+        :auto-hide="false" 
       >
       <!-- This will be the popover target (for the events and position) -->
         <h3 class="uk-card-title">Via Aerea
@@ -374,6 +384,22 @@
 
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
       <h3 class="uk-card-title">Estado de las pupilas</h3>
+        <label class="uk-form-label" for="id_left_eye">Ojo Izquierdo: <span class="selected">{{ paperless.pupil_state_left }}</span></label>
+        <select class="uk-select"
+        id="id_left_eye"
+        v-model="paperless.pupil_state_left" multiple>
+          <option v-for="option in eye_options" :value="option.value">
+            {{ option.text }}
+          </option>
+        </select>
+        <label class="uk-form-label" for="id_right_eye">Ojo Derecho: <span class="selected">{{ paperless.pupil_state_right }}</span></label>
+        <select class="uk-select"
+        id="id_right_eye"
+        v-model="paperless.pupil_state_right" multiple>
+          <option v-for="option in eye_options" :value="option.value">
+            {{ option.text }}
+          </option>
+        </select>
     </div> <!-- // .card -->
   </div> <!-- // .row -->
 
@@ -510,8 +536,10 @@
           <option>Otro</option>
         </select>
         <div v-if="paperless.inmovilization_type.includes('Otro')">
-          <label class="uk-form-label" for="form-stacked-text">Otro</label>
-          <textarea class="uk-textarea" id="form-stacked-text" placeholder="detalle"></textarea>
+          <label class="uk-form-label" for="id_other_inmovilization_type">Otro</label>
+          <textarea class="uk-textarea" 
+          v-model="paperless.other_inmovilization_type"
+          id="id_other_inmovilization_type" placeholder="detalle"></textarea>
         </div>  
       </div>  
     </div> <!-- // .card -->
@@ -639,9 +667,9 @@
      </div> <!-- // .card -->
          <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
       <h3 class="uk-card-title">Normal</h3>
-      <p class="selected">{{ normal_elements }}</p>
+      <p class="selected">{{ paperless.normal_elements }}</p>
       <div class="uk-form-controls">
-        <select class="uk-select" v-model="normal_elements" multiple>
+        <select class="uk-select" v-model="paperless.normal_elements" multiple>
           <option disabled value="">Seleccione los que apliquen</option>
           <option>Cabeza</option>
           <option>Cara</option>
