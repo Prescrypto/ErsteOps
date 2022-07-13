@@ -35,6 +35,12 @@ export default {
     cardiovascular: false,
     farmacologico: false,
     demarcation: false,
+    eye_options: [
+      { text: 'Isocoria', value: 'Isocoria' },
+      { text: 'Midriasis', value: 'Midriasis' },
+      { text: 'Miosis', value: 'Miosis' },
+      { text: 'Anisocoria', value: 'Anisocoria' },
+    ],
     // const canvas = document.querySelector("canvas");
     // const signaturePad = new SignaturePad(canvas);
   }),
