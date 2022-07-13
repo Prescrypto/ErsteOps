@@ -233,25 +233,65 @@ def new_medicalreport(request):
           odoo_client = qs.odoo_client,
           erste_code = qs.erste_code,
           service_code = vue_data['service_code'],
-          service_geo_lat = vue_data['service_geo_lat'],
-          service_geo_lon = vue_data['service_geo_lon'],
-          service_unit = vue_data['service_unit'],  
-          service_unit_type = vue_data['service_unit_type'],
-          service_unit_plate = vue_data['service_unit_plate'],
-          patient_name = vue_data['patient_name'],
-          patient_gender = vue_data['patient_gender'],
-          patient_age = vue_data['patient_age'],
-          patient_affiliations = vue_data['patient_affiliations'],
-          is_patient_unknow = vue_data['is_patient_unknow'], 
-          patient_unknow = vue_data['patient_unknow'],
-          patient_clothes = vue_data['patient_clothes'],
-          copago_amount = vue_data['copago_amount'],
-          skin_color = vue_data['skin_color'],
-          attention_place = vue_data['attention_place'],
-          other_attention_place = vue_data['other_attention_place'],
-          consultation_reason = vue_data['consultation_reason'],
-          other_consultation_reason = vue_data['other_consultation_reason'],
-
+          service_unit= vue_data['service_unit'], 
+          service_unit_type= vue_data['service_unit_type'], 
+          service_unit_plate= vue_data['service_unit_plate'], 
+          service_geo_lat= vue_data['service_geo_lat'], 
+          service_geo_lon= vue_data['service_geo_lon'], 
+          patient_name= vue_data['patient_name'], 
+          patient_gender= vue_data['patient_gender'], 
+          patient_age= vue_data['patient_age'], 
+          patient_affiliations= vue_data['patient_affiliations'],
+          is_patient_unknow= vue_data['is_patient_unknow'], 
+          patient_unknow= vue_data['patient_unknow'], 
+          patient_clothes= vue_data['patient_clothes'], 
+          patient_phone= vue_data['patient_phone'],
+          patient_address= vue_data['patient_address'], 
+          copago_amount= vue_data['copago_amount'],
+          attention_place= vue_data['attention_place'],
+          other_attention_place= vue_data['other_attention_place'], 
+          skin_color= vue_data['skin_color'], 
+          service_type= vue_data['service_type'], 
+          other_service_type= vue_data['other_service_type'],
+          consultation_reason= vue_data['consultation_reason'],
+          other_consultation_reason= vue_data['other_consultation_reason'], 
+          event_type= vue_data['event_type'], 
+          traumatics= vue_data['traumatics'],
+          other_traumatics= vue_data['other_traumatics'], 
+          airway= vue_data['airway'],
+          other_airway= vue_data['other_airway'], 
+          #physical_exploration= vue_data['physical_exploration'], 
+          normal_head= find_on_list(vue_data['normal_elements'],'Cabeza'), 
+          normal_face= find_on_list(vue_data['normal_elements'],'Cara'), 
+          normal_torax= find_on_list(vue_data['normal_elements'],'Tórax'), 
+          normal_abdomen= find_on_list(vue_data['normal_elements'],'Abdomen'), 
+          normal_limbs= find_on_list(vue_data['normal_elements'],'Extremidades'), 
+          normal_genitals= find_on_list(vue_data['normal_elements'],'Genitales'), 
+          normal_spine= find_on_list(vue_data['normal_elements'],'Columna Vertebral'), 
+          current_condition= vue_data['current_condition'], 
+          pupil_state_left= vue_data['pupil_state_left'], 
+          pupil_state_right= vue_data['pupil_state_right'], 
+          pathological_history_daibetes_melitus= find_on_list(vue_data['pathological_history'],'Diabetes Melitus'),
+          pathological_history_arterial_hypertension= find_on_list(vue_data['pathological_history'],'Hipertension Arterial'),
+          pathological_history_heart_disease= find_on_list(vue_data['pathological_history'],'Cardiopatias'),
+          pathological_history_pneumopathies= find_on_list(vue_data['pathological_history'],'Neumopatias'),
+          pathological_history_trauma= find_on_list(vue_data['pathological_history'],'Quirurgicos'),
+          pathological_history_alergy= find_on_list(vue_data['pathological_history'],'Alergias'),
+          other_pathological_history = vue_data['other_pathological_history'], 
+          current_therapeutics= vue_data['current_therapeutics'], 
+          description_of_injuries= vue_data['description_of_injuries'], 
+          diagnostic_impresion= vue_data['diagnostic_impresion'],
+          treatment= vue_data['treatment'], 
+          derivation= vue_data['derivation'], 
+          derivation_place= vue_data['derivation_place'], 
+          state_of_health= vue_data['state_of_health'],
+          demarcation= vue_data['demarcation'],
+          crum = vue_data['crum'],
+          crum_reception = vue_data['crum_reception'],
+          #medications = vue_data['medications'],
+          inmovilization = vue_data['inmovilization'],
+          inmovilization_type = vue_data['inmovilization_type'],
+          other_inmovilization_type = vue_data['other_inmovilization_type'],
           user = request.user,
           )
           messages.error(request, "Parte Medico Guardado correctamente!!!")
@@ -266,16 +306,26 @@ def new_medicalreport(request):
           #     emergency.patient_arrival = timezone.now()
 
           # emergency.save()
-          data.update({'status': 'success', 'client_id':emergency.odoo_client})
+          data.update({'status': 'success', 'client_id':qs.odoo_client})
           response = JsonResponse(data)
           response.status_code = 202
           return response
       except Exception as e:
           logger.error("[Create Medical Report View ERROR]: {}, type: {}".format(e, type(e)))
           return bad_response
-      qs.medical_report = medicalReport
-      qs.save()
+      #qs.medical_report = medicalReport
+      #qs.save()
 
     else:
         return bad_response
 # /Update Timer Functionality
+
+def find_on_list(my_list_Dict, what_to_search):
+  my_text='No'
+  if my_list_Dict.count(what_to_search) > 0:
+    my_text = 'Si'
+  return my_text
+
+
+
+
