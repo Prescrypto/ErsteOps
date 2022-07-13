@@ -103,11 +103,42 @@
               </div>
               <div class="col-lg-3">
                 <dt>Traumaticos</dt>
-                <dd> {{ data.consultation_reason }}</dd>
+                <dd> {{ data.traumatics }}</dd>
               </div>
               <div class="col-lg-3">
                 <dt>Via áerea</dt>
                 <dd> {{ data.airway }}</dd>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6">
+                <dt>Antecedentes Patologicos</dt>
+                <dd>
+                  <p>
+                    Diabetes Melitus: {{ data.pathological_history_daibetes_melitus }} <br>
+                    Hipertension Arterial: {{ data.pathological_history_arterial_hypertension }} <br>
+                    Cardiopatias: {{ data.pathological_history_heart_disease }} <br>
+                    Neumopatias: {{ data.pathological_history_pneumopathies }} <br>
+                    Quirurgicos: {{ data.pathological_history_trauma }} <br>
+                    Alergias: {{ data.pathological_history_alergy }} <br>
+                  </p>
+                </dd>
+              </div>
+              <div class="col-lg-6">
+                <dt>Normal</dt>
+                <dd>
+                  <p>
+                    Cabeza: {{ data.normal_head }}<br>
+                    Cara: {{ data.normal_face }} <br>
+                    Cuello: {{ data.normal_torax }} <br>
+                    Torax: {{ data.normal_torax }} <br>
+                    Abdómen: {{ data.normal_abdomen }} <br>
+                    Extremidades: {{ data.normal_limbs }} <br>
+                    Genitales: {{ data.normal_genitals }} <br>
+                    Columna Vertebral: {{ data.normal_spine }} <br>
+                  </p>
+                </dd>
               </div>
             </div>
 
