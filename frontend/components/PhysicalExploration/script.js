@@ -36,9 +36,9 @@ export default {
           glassgow_ocular: this.peGlassgowOcular,
           glassgow_verbal: this.peGlassgowVerbal,
           glassgow_total:
-            this.peGlassgowMotor +
-            this.peGlassgowOcular +
-            this.peGlassgowVerbal,
+            parseInt(this.peGlassgowMotor, 10) +
+            parseInt(this.peGlassgowOcular, 10) +
+            parseInt(this.peGlassgowVerbal, 10),
         };
         this.prev_elements.push(peElement);
         this.paperless.physical_exploration = this.prev_elements;

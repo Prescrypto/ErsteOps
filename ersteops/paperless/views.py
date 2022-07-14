@@ -302,7 +302,7 @@ def new_medicalreport(request):
           electro_qt= vue_data['electro_qt'],
           electro_abnormalities= vue_data['electro_abnormalities'],
           electro_interpretation= vue_data['electro_interpretation'],
-          derivation_amount= vue_data['derivation_amount'],
+          derivation_amount= int(vue_data['derivation_amount']),
           derivation_recive= vue_data['derivation_recive'],
           derivation_type= vue_data['derivation_type'],
           demarcation_responsable = vue_data['demarcation_responsable'],
