@@ -180,7 +180,7 @@ class MedicalReportActive(ListView):
     return qs
 
 class MedicalReportDetail(View):
-  template_name = "paperless/detail_medical_report.html"
+  template_name = "paperless/detail_medical_report_2.html"
 
   def get(self, request, *args, **kwargs):
     pk_medical_report= self.kwargs['pk']
@@ -260,7 +260,7 @@ def new_medicalreport(request):
           other_traumatics= vue_data['other_traumatics'], 
           airway= vue_data['airway'],
           other_airway= vue_data['other_airway'], 
-          #physical_exploration= vue_data['physical_exploration'], 
+          physical_exploration= vue_data['physical_exploration'], 
           normal_head= find_on_list(vue_data['normal_elements'],'Cabeza'), 
           normal_face= find_on_list(vue_data['normal_elements'],'Cara'), 
           normal_torax= find_on_list(vue_data['normal_elements'],'Tórax'), 
@@ -288,10 +288,25 @@ def new_medicalreport(request):
           demarcation= vue_data['demarcation'],
           crum = vue_data['crum'],
           crum_reception = vue_data['crum_reception'],
-          #medications = vue_data['medications'],
+          medications = vue_data['medications'],
           inmovilization = vue_data['inmovilization'],
           inmovilization_type = vue_data['inmovilization_type'],
           other_inmovilization_type = vue_data['other_inmovilization_type'],
+          electro_rhythm= vue_data['electro_rhythm'],
+          electro_frequency= vue_data['electro_frequency'],
+          electro_wave_p= vue_data['electro_wave_p'],
+          electro_pr= vue_data['electro_pr'],
+          electro_axis_qrs= vue_data['electro_axis_qrs'],
+          electro_st= vue_data['electro_st'],
+          electro_wave_t= vue_data['electro_wave_t'],
+          electro_qt= vue_data['electro_qt'],
+          electro_abnormalities= vue_data['electro_abnormalities'],
+          electro_interpretation= vue_data['electro_interpretation'],
+          derivation_amount= vue_data['derivation_amount'],
+          derivation_recive= vue_data['derivation_recive'],
+          derivation_type= vue_data['derivation_type'],
+          demarcation_responsable = vue_data['demarcation_responsable'],
+          demarcation_relation = vue_data['demarcation_relation'],
           user = request.user,
           )
           messages.error(request, "Parte Medico Guardado correctamente!!!")

@@ -157,6 +157,8 @@
           name="copago_amount" 
           type="number" 
           placeholder="0.0" 
+          pattern="[0-9]"
+          inputmode="numeric" 
           step="0.01" />
       </div>
     </div> <!-- // .card -->
@@ -700,43 +702,63 @@
       <div v-if="electrocardiogram">
       <label class="uk-form-label" for="id_unidad_movil">Ritmo</label>
       <div class="uk-form-controls">
-          <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Ritmo...">
+          <input class="uk-input" 
+          v-model="paperless.electro_rhythm"
+          id="id_unidad_movil" type="text" placeholder="Ritmo...">
       </div>
       <label class="uk-form-label" for="id_unidad_movil">Frecuencia</label>
       <div class="uk-form-controls">
-        <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Frecuencia...">
+        <input class="uk-input" 
+        v-model="paperless.electro_frequency"
+        id="id_unidad_movil" type="text" placeholder="Frecuencia...">
       </div>
           <label class="uk-form-label" for="id_unidad_movil">Onda P</label>
             <div class="uk-form-controls">
-                <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Onda P...">
+                <input class="uk-input" 
+                v-model="paperless.electro_wave_p"
+                id="id_unidad_movil" type="text" placeholder="Onda P...">
             </div>
         <label class="uk-form-label" for="id_unidad_movil">PR</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="PR...">
+            <input class="uk-input" 
+            v-model="paperless.electro_pr"
+            id="id_unidad_movil" type="text" placeholder="PR...">
         </div>
         <label class="uk-form-label" for="id_unidad_movil">Eje QRS</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Eje QRS...">
+            <input class="uk-input" 
+            v-model="paperless.electro_axis_qrs"
+            id="id_unidad_movil" type="text" placeholder="Eje QRS...">
         </div>
         <label class="uk-form-label" for="id_unidad_movil">ST</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="ST...">
+            <input class="uk-input" 
+            v-model="paperless.electro_st"
+            id="id_unidad_movil" type="text" placeholder="ST...">
         </div>
         <label class="uk-form-label" for="id_unidad_movil">Onda T</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Onda T...">
+            <input class="uk-input" 
+            v-model="paperless.electro_wave_t"
+            id="id_unidad_movil" type="text" placeholder="Onda T...">
         </div>
         <label class="uk-form-label" for="id_unidad_movil">QT</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="QT...">
+            <input class="uk-input" 
+            v-model="paperless.electro_qt"
+            id="id_unidad_movil" type="text" placeholder="QT...">
         </div>
         <label class="uk-form-label" for="id_unidad_movil">Anormalidades</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Anormailides...">
+            <input class="uk-input" 
+            v-model="paperless.electro_abnormalities"
+            id="id_unidad_movil" type="text" placeholder="Anormailides...">
         </div>
         <label class="uk-form-label" for="id_unidad_movil">Interpretacion electrocardiografica</label>
         <div class="uk-form-controls">
-            <textarea class="uk-textarea" id="form-stacked-text" placeholder="Interpretacion.."></textarea>
+            <textarea class="uk-textarea" 
+            v-model="paperless.electro_interpretation"
+            id="form-stacked-text" placeholder="Interpretacion.."></textarea>
         </div>
       </div>                              
     </div> <!-- // .card -->
@@ -766,7 +788,7 @@
       <h3 class="uk-card-title">Derivación <input type="checkbox" id="jack" v-model="derivarion"/></h3>
       <div v-if="derivarion">
       <div class="uk-form-controls">
-        <select class="uk-select" v-model="derivation_type">
+        <select class="uk-select" v-model="paperless.derivation_type">
           <option disabled value="">Seleccione una opcion</option>
           <option>Si</option>
           <option>No</option>
@@ -779,7 +801,7 @@
         </div>
       </div>
       <label class="uk-form-label" for="form-stacked-text">Estado de salud</label>
-        <select class="uk-select" v-model="state_of_health">
+        <select class="uk-select" v-model="paperless.state_of_health">
           <option disabled value="">Seleccione el estado de salud</option>
           <option>Delicado</option>
           <option>Grave</option>
@@ -787,11 +809,15 @@
         </select>
         <label class="uk-form-label" for="id_unidad_movil">Medico que recibe</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Medico...">
+            <input class="uk-input" 
+            v-model="paperless.derivation_recive"
+            id="id_unidad_movil" type="text" placeholder="Medico...">
         </div> 
         <label class="uk-form-label" for="id_unidad_movil">Costo</label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="id_unidad_movil" type="text" placeholder="$ Costo...">
+            <input class="uk-input" 
+            v-model="paperless.derivation_amount"
+            id="id_unidad_movil" type="text" placeholder="$ Costo...">
         </div>
         </div>           
       </div> <!-- // .card -->
@@ -802,13 +828,16 @@
         <h3 class="uk-card-title">Estoy enterado de la impresion diagnostica y de las condiciones de mi paciente:</h3>
         <label class="uk-form-label" for="id_unidad_movil">Responsable</label>
           <div class="uk-form-controls">
-              <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Nombre...">
+              <input class="uk-input" 
+              v-model="paperless.demarcation_responsable"
+              id="id_demarcation_responsable" type="text" placeholder="Nombre...">
           </div>
         <label class="uk-form-label" for="id_unidad_movil">Parentesco o relación</label>
           <div class="uk-form-controls">
-              <input class="uk-input" id="id_unidad_movil" type="text" placeholder="Parentesco...">
+              <input class="uk-input" 
+              v-model="paperless.demarcation_relation"
+              id="id_demarcation_relation" type="text" placeholder="Parentesco...">
           </div>
-        <label class="uk-form-label" for="id_unidad_movil">Firma</label>
         </div>
     </div> <!-- // .card -->
   </div> <!-- // .row -->
