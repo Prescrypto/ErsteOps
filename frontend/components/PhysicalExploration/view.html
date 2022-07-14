@@ -40,9 +40,11 @@
     <input type="number" class="uk-input" 
     v-model="peTemperature"
     id="id_peTemperature" 
-    :min="20"
-    :max="60" 
-    placeholder="34.5" 
+    min="20"
+    max="60" 
+    placeholder="34.5"
+    pattern="[0-9]" 
+    inputmode="numeric" 
     step="0.10"/>
   </div>
 
@@ -52,9 +54,11 @@
     v-model="peOxygenSaturation"
     id="id_peOxygenSaturation" 
     name="peOxygenSaturation"
-    :min="10"
-    :max="100"
+    min="10"
+    max="100"
     step="1" 
+    pattern="[0-9]"
+    inputmode="numeric" 
     placeholder="98"/>
   </div>
 
@@ -64,8 +68,10 @@
     v-model="peGlucometry"
     id="id_peGlucometry" 
     name="peGlucometry"
-    :min="10" 
-    :max="300"
+    min="10" 
+    max="300"
+    pattern="[0-9]"
+    inputmode="numeric" 
     placeholder="90"/>
   </div>
 
@@ -74,8 +80,10 @@
     <input type="number" class="uk-input" 
     v-model="peGlassgowMotor"
     id="id_peGlassgowMotor" 
-    :min="1"
-    :max="6"
+    min="1"
+    max="6"
+    pattern="[0-9]"
+    inputmode="numeric" 
     placeholder="1"/>
   </div>  
 
@@ -85,8 +93,10 @@
     v-model="peGlassgowOcular"
     id="id_peGlassgowOcular" 
     name="peGlassgowOcular"
-    :min="1"
-    :max="4" 
+    min="1"
+    max="4"
+    pattern="[0-9]"
+    inputmode="numeric"  
     placeholder="1"/>
   </div>  
 
@@ -96,9 +106,11 @@
     v-model="peGlassgowVerbal"
     id="id_peGlassgowVerbal"
     name="peGlassgowVerbal"
-    :min="1"
-    :max="5" 
+    min="1"
+    max="5" 
     type="number"
+    pattern="[0-9]"
+    inputmode="numeric" 
     placeholder="1"/>
   </div> 
 
