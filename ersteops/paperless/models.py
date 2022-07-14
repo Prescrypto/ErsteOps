@@ -121,13 +121,13 @@ class MedicalReport(models.Model):
     consultation_reason = models.CharField('Motivo de la Consulta', max_length=150, default= '', blank=True, choices=CONSULTATION_REASON)
     other_consultation_reason = models.CharField('Otro Motivo de la Consulta', max_length=50, default= '', blank=True)
     event_type = models.CharField('Tipo de Evento', max_length=20, default= '', blank=True, choices=EVENT_TYPE)
-    traumatics = models.CharField('Traumatico', max_length=100, default= '', blank=True, choices=TRAUMATICS)
+    traumatics = models.CharField('Traumatico', max_length=150, default= '', blank=True, choices=TRAUMATICS)
     other_traumatics = models.CharField('Otro Traumatico', max_length=50, default= '', blank=True, choices=TRAUMATICS)
-    airway = models.CharField('Via Aerea', max_length=20, default= '', blank=True, choices=AIRWAY)
+    airway = models.TextField('Via Aerea', default= '', blank=True )
     other_airway = models.CharField('Otra Via Aerea', max_length=20, default= '', blank=True, choices=AIRWAY)
     # (physical_exploration = pe)
-    physical_exploration = models.ManyToManyField('PhysicalExploration', 
-        related_name='physical_exploration', blank=True)
+    physical_exploration = models.TextField("Exploracion Fisica",blank=True, default='')
+    medications = models.TextField("Exploracion Fisica",blank=True, default='')
     # Normal
     normal_head = models.CharField("Cabeza", blank=True, default='', max_length=10, choices=YES_NO)
     normal_face = models.CharField("Face", blank=True, default='', max_length=10, choices=YES_NO)
@@ -139,10 +139,10 @@ class MedicalReport(models.Model):
 
     current_condition = models.TextField("Padecimiento Actual",blank=True)
 
-    pupil_state_left = models.CharField("Estado de la pupila, Izquierda",max_length=50, default='', blank=True ,choices=PUPIL_STATE)
-    pupil_state_right = models.CharField("Estado de la pupilas, Derecha",max_length=50, default='', blank=True ,choices=PUPIL_STATE)
-    inmovilization = models.CharField("Inmovilizacion",max_length=50, default='', blank=True)
-    inmovilization_type = models.CharField("Inmovilizacion",max_length=50, default='', blank=True, choices=INMOVILIZATION)
+    pupil_state_left = models.CharField("Estado de la pupila, Izquierda",max_length=150, default='', blank=True ,choices=PUPIL_STATE)
+    pupil_state_right = models.CharField("Estado de la pupilas, Derecha",max_length=150, default='', blank=True ,choices=PUPIL_STATE)
+    inmovilization = models.CharField("Inmovilizacion",max_length=150, default='', blank=True)
+    inmovilization_type = models.CharField("Inmovilizacion",max_length=150, default='', blank=True, choices=INMOVILIZATION)
     other_inmovilization_type = models.CharField("Otra Inmovilizacion",max_length=50, default='', blank=True)
 
     pathological_history_daibetes_melitus = models.CharField("Diabetes Melitus",blank= True, default=False, max_length=10, choices=YES_NO )
@@ -158,9 +158,14 @@ class MedicalReport(models.Model):
     diagnostic_impresion = models.TextField("Impresion Diagnostica", blank=True)
     treatment = models.TextField("Tratamiento",blank=True)
     derivation = models.CharField("Derivacion",blank= True, default=False, max_length=20, choices=YES_NO)
+    derivation_type = models.CharField("Tipo Derivacion",blank= True, default=False, max_length=20, choices=DERIVATION)
+    derivation_amount= models.IntegerField('Costo Derivacion', default=0, blank=True)
     derivation_place = models.TextField("Notas Derivacion",blank= True )
     state_of_health = models.CharField("Estado de Salud",blank= True, default=False, max_length=20, choices=HEALTH_STATE)
+    derivation_recive = models.CharField("Medico que recibe",blank= True, default=False, max_length=50)
     demarcation = models.CharField("Deslinde",blank= True, default=False, max_length=20, choices=YES_NO)
+    demarcation_responsable = models.CharField("Deslinde",blank= True, default=False, max_length=50)
+    demarcation_relation = models.CharField("Deslinde",blank= True, default=False, max_length=20)
     crum = models.CharField("Folio CRUM",blank= True, default=False, max_length=20)
     crum_reception = models.CharField("Medico Recibe CRUM",blank= True, default=False, max_length=120)    
 
@@ -170,6 +175,17 @@ class MedicalReport(models.Model):
     created_at = models.DateTimeField("Fecha de alta",auto_now_add=True,editable=False)
     last_modified = models.DateTimeField("Última modificación",auto_now=True,editable=False)
 
+    electro_rhythm = models.CharField("Ritmo", blank=True, default='', max_length=20)
+    electro_frequency = models.CharField("Frecuencia", blank=True, default='', max_length=20)
+    electro_wave_p = models.CharField("Onda P", blank=True, default='', max_length=20)
+    electro_pr = models.CharField("PR", blank=True, default='', max_length=20)
+    electro_axis_qrs = models.CharField("Eje QRS", blank=True, default='', max_length=20)
+    electro_st = models.CharField("ST", blank=True, default='', max_length=20)
+    electro_wave_t = models.CharField("Onda T", blank=True, default='', max_length=20)
+    electro_qt = models.CharField("QT", blank=True, default='', max_length=20)
+    electro_abnormalities = models.CharField("Anormalidades", blank=True, default='', max_length=100)
+    electro_interpretation = models.TextField("Interpretacion", blank=True, default='') 
+
     class Meta:
         verbose_name_plural = "Parte Medico"
         ordering = ['created_at']
@@ -178,28 +194,28 @@ class MedicalReport(models.Model):
     def __str__(self):
         return "{}, {}, {}, {}".format(unicodedata.normalize('NFKD',str(self.id)),unicodedata.normalize('NFKD', self.odoo_client), unicodedata.normalize('NFKD', self.patient_name), self.created_at)
 
-class PhysicalExploration(models.Model):
-    time = models.DateTimeField("Dia/Hora",blank= True, null =True)
-    heart_rate = models.CharField("Frequencia Cardiaca", max_length=20,default='', blank=True)
-    respiratory_rate = models.CharField("Frequencia Respiratoria", max_length=20,default='', blank=True)
-    blood_pressure = models.CharField("Presion Arterial", max_length=20,default='', blank=True)
-    temperature = models.CharField("Temperature", max_length=20,default='', blank=True)
-    oxygen_saturation = models.CharField("Saturacion O2", max_length=20,default='', blank=True)
-    glucometry = models.CharField("Glucometria", max_length=20,default='', blank=True)
-    glassgow_motor = models.CharField("Glassgow Motor", max_length=20,default='', blank=True)
-    glassgow_verbal = models.CharField("Glassgow Verbal", max_length=20,default='', blank=True)
-    glassgow_ocular = models.CharField("Glassgow Ocular", max_length=20,default='', blank=True)
-    glassgow_final = models.CharField("Glassgow Final", max_length=20,default='', blank=True)
+# class PhysicalExploration(models.Model):
+#     time = models.DateTimeField("Dia/Hora",blank= True, null =True)
+#     heart_rate = models.CharField("Frequencia Cardiaca", max_length=20,default='', blank=True)
+#     respiratory_rate = models.CharField("Frequencia Respiratoria", max_length=20,default='', blank=True)
+#     blood_pressure = models.CharField("Presion Arterial", max_length=20,default='', blank=True)
+#     temperature = models.CharField("Temperature", max_length=20,default='', blank=True)
+#     oxygen_saturation = models.CharField("Saturacion O2", max_length=20,default='', blank=True)
+#     glucometry = models.CharField("Glucometria", max_length=20,default='', blank=True)
+#     glassgow_motor = models.CharField("Glassgow Motor", max_length=20,default='', blank=True)
+#     glassgow_verbal = models.CharField("Glassgow Verbal", max_length=20,default='', blank=True)
+#     glassgow_ocular = models.CharField("Glassgow Ocular", max_length=20,default='', blank=True)
+#     glassgow_final = models.CharField("Glassgow Final", max_length=20,default='', blank=True)
 
-    created_at = models.DateTimeField("Fecha de alta",auto_now_add=True,editable=False)
-    last_modified = models.DateTimeField("Última modificación",auto_now=True,editable=False)
+#     created_at = models.DateTimeField("Fecha de alta",auto_now_add=True,editable=False)
+#     last_modified = models.DateTimeField("Última modificación",auto_now=True,editable=False)
 
-    class Meta:
-        verbose_name_plural = "Exploracion Fisica"
-        ordering = ['created_at']
+#     class Meta:
+#         verbose_name_plural = "Exploracion Fisica"
+#         ordering = ['created_at']
 
-    def __str__(self):
-        return "{}, {}, {}, {}".format(unicodedata.normalize('NFKD',str(self.id)), self.created_at)
+#     def __str__(self):
+#         return "{}, {}, {}, {}".format(unicodedata.normalize('NFKD',str(self.id)), self.created_at)
 
 
 #class Medications(models.Model):
