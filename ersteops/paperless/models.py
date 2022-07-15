@@ -260,29 +260,5 @@ class MedicalReport(models.Model):
     def __str__(self):
         return "{}, {}, {}, {}".format(unicodedata.normalize('NFKD',str(self.id)),unicodedata.normalize('NFKD', self.odoo_client), unicodedata.normalize('NFKD', self.patient_name), self.created_at)
 
-# class PhysicalExploration(models.Model):
-#     time = models.DateTimeField("Dia/Hora",blank= True, null =True)
-#     heart_rate = models.CharField("Frequencia Cardiaca", max_length=20,default='', blank=True)
-#     respiratory_rate = models.CharField("Frequencia Respiratoria", max_length=20,default='', blank=True)
-#     blood_pressure = models.CharField("Presion Arterial", max_length=20,default='', blank=True)
-#     temperature = models.CharField("Temperature", max_length=20,default='', blank=True)
-#     oxygen_saturation = models.CharField("Saturacion O2", max_length=20,default='', blank=True)
-#     glucometry = models.CharField("Glucometria", max_length=20,default='', blank=True)
-#     glassgow_motor = models.CharField("Glassgow Motor", max_length=20,default='', blank=True)
-#     glassgow_verbal = models.CharField("Glassgow Verbal", max_length=20,default='', blank=True)
-#     glassgow_ocular = models.CharField("Glassgow Ocular", max_length=20,default='', blank=True)
-#     glassgow_final = models.CharField("Glassgow Final", max_length=20,default='', blank=True)
 
-#     created_at = models.DateTimeField("Fecha de alta",auto_now_add=True,editable=False)
-#     last_modified = models.DateTimeField("Última modificación",auto_now=True,editable=False)
-
-#     class Meta:
-#         verbose_name_plural = "Exploracion Fisica"
-#         ordering = ['created_at']
-
-#     def __str__(self):
-#         return "{}, {}, {}, {}".format(unicodedata.normalize('NFKD',str(self.id)), self.created_at)
-
-
-#class Medications(models.Model):
 
