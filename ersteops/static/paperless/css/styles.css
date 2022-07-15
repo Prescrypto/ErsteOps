@@ -21,3 +21,11 @@
   height:200px;
   background-color: white;
 }
+
+.selected {
+  color: #6495ED;
+}
+
+.paperless__bottom {
+  padding-bottom: 30px;
+}

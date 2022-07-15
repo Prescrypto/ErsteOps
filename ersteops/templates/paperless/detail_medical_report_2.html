@@ -162,20 +162,23 @@
       <h3 class="uk-card-title">Motivo de Consulta</h3>
 
 
-      <div class="uk-form-controls selected">
-
-        {{ data.consultation_reason }}
-      </div>  
+      <ul class="uk-list uk-list-square">  
+      {% for item in data.json_consultation_reason%}
+        <li><span class="selected">{{ item }}</span></li>
+      {% endfor %}
+      </ul>
     </div> <!-- // .card -->
 
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
       <h3 class="uk-card-title"> Tipo de Evento:  <span class="selected">{{ data.event_type }}</span> </h3>
 
-      <label class="uk-form-label" for="id_traumatics"> </label>
+      <ul class="uk-list uk-list-square">
+      {% for item in data.json_traumatics%}
+        <li><span class="selected">{{ item }}</span></li> 
+      {% endfor%}       
+      </ul>
 
-          <p class="selected">{{ data.traumatics }}</p>
 
-          <p>{{ data.traumatics_type }}</p>
         </div>
       </div> <!-- // .card -->
   </div> <!-- // .row -->
@@ -183,9 +186,15 @@
   <div class="row">
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
       <h3 class="uk-card-title">Via Aerea</h3>
-        <div class="uk-form-controls selected">
+        <div class="uk-form-controls">
 
-          {{ data.airway }}
+          <ul class="uk-list uk-list-square">
+          {% for item in data.json_airway %}
+          <li>Via Aerea: <span class="selected">{{ item.airway_type }}</span></li>
+          <li>Instruccion: <span class="selected">{{ item.instruction }}</span></li>
+
+          {% endfor %}          
+          </ul>
         </div>     
 
     </div> <!-- // .card -->
@@ -193,22 +202,34 @@
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
       <h3 class="uk-card-title">Estado de las pupilas</h3>
         <label class="uk-form-label" for="id_left_eye">Ojo Izquierdo</label>
-        <div class="uk-form-controls selected">
-          {{ data.pupil_state_left }}
-        </div>
+        <ul class="uk-list uk-list-square">
+        {% for item in data.json_pupil_state_right %}
+          <li><span class="selected">{{ item }}</span></li>
+        {% endfor %}
+        </ul>
+
         <label class="uk-form-label" for="id_right_eye">Ojo Derecho</label>
-        <div class="uk-form-controls selected">
-          {{ data.pupil_state_right }}
-        </div>
+
+        <ul class="uk-list uk-list-square">
+        {% for item in data.json_pupil_state_left %}
+          <li><span class="selected">{{ item }}</span></li>
+        {% endfor %}
+        </ul>
     </div> <!-- // .card -->
   </div> <!-- // .row -->
 
   <div class="row">
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
         <h3 class="uk-card-title">Medicamentos</h3>
-        <div class="uk-form-controls selected">
-          {{ data.medications }}
-        </div>
+        <ul class="uk-list uk-list-square">
+        
+          {% for item in data.json_medications %}
+          <li>Tipo Medicamento: <span class="selected">{{ item.medication_type }}</span></li>
+          <li>Medicamento: <span class="selected">{{ item.medication_name }}</span></li>
+          <li>Prescripcion <span class="selected">{{ item.medication_hrs }}</span></li>
+          {% endfor %}
+
+        </ul>
     </div> <!-- // .card -->
 
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
@@ -290,6 +311,12 @@
         {{ data.inmovilization_type}}
       </div>
       
+      <ul class="uk-list uk-list-square">
+        {% for item in data.json_inmovilization_type %}
+          <li><span class="selected">{{ item }}</span></li>
+        {% endfor %}
+      </ul>
+
     </div> <!-- // .card -->
   </div>  <!-- // .row -->
 
@@ -302,15 +329,15 @@
     </div> <!-- // .card -->
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
       <h3 class="uk-card-title">Antecedentes Patologicos</h3>
-        <div class="uk-form-controls selected">
-          Diabetes Melitus - {{ data.pathological_history_daibetes_melitus }}<br>
-          Hipertension Arterial - {{ data.pathological_history_arterial_hypertension }}<br>
-          Cardiopatias - {{ data.pathological_history_heart_disease }}<br>
-          Neumopatias - {{ data.pathological_history_pneumopathies }}<br>
-          Quirurgicos/Trauma - {{ data.pathological_history_trauma }}<br>
-          Alergias - {{ data.pathological_history_alergy }}<br>
-          Otra enfermedad - {{ data.other_pathological_history }}<br>
-        </div> 
+          <ul class="uk-list uk-list-square">
+            <li>Diabetes Melitus - <span class="selected">{{ data.pathological_history_daibetes_melitus }}</span></li>
+            <li>Hipertension Arterial - <span class="selected">{{ data.pathological_history_arterial_hypertension }}</span></li>
+            <li>Cardiopatias - <span class="selected">{{ data.pathological_history_heart_disease }}</span></li>
+            <li>Neumopatias - <span class="selected">{{ data.pathological_history_pneumopathies }}</span></li>
+            <li>Quirurgicos/Trauma - <span class="selected">{{ data.pathological_history_trauma }}</span></li>
+            <li>Alergias - <span class="selected">{{ data.pathological_history_alergy }}</span></li>
+            <li>Otra enfermedad - <span class="selected">{{ data.other_pathological_history }}</span></li>
+          </ul>
 
 
     </div> <!-- // .card -->
@@ -319,8 +346,19 @@
   <div class="row">
      <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
       <h3 class="uk-card-title">Exploración Fisica</h3>
-      <div class="uk-form-controls selected">
-        {{ data.physical_exploration }}
+      <div class="uk-form-controls">
+        <ul class="uk-list uk-list-square">
+        {% for item in data.json_physical_exploration %}
+          <li>Fecha / Hora: <span class="selected"> {{ item.time }} </span></li>
+          <li>Frecuencia Cardiaca: <span class="selected">{{item.heart_rate}}</span></li>
+          <li>Frecuencia Respiratoria: <span class="selected">{{item.respiratory_rate}}</span></li>
+          <li>Presion Arterial: <span class="selected">{{item.blood_pressure}}</span></li>
+          <li>Temperatura: <span class="selected">{{item.temperature}}</span></li>
+          <li>Saturacion de O2: <span class="selected">{{item.oxygen_saturation}}</span></li>
+          <li>Glucometria: <span class="selected">{{item.glucometry}}</span></li>
+          <li>Glasgow: <span class="selected">{{item.glassgow_total}}</span></li>
+        {% endfor %}
+      </ul>
       </div>
 
    
@@ -330,17 +368,17 @@
 
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
       <h3 class="uk-card-title">Normal</h3>
-      <div class="uk-form-controls selected">
-
-          Cabeza - {{ data.normal_head }} <br>
-          Cara - {{ data.normal_face }} <br>
-          Cuello - {{ data.normal_torax }} <br>
-          Tórax - {{ data.normal_torax }} <br>
-          Abdomen  - {{ data.normal_abdomen }} <br>
-          Extremidades  - {{ data.normal_limbs }} <br> 
-          Genitales  - {{ data.normal_genitals }} <br>
-          Columna Vertebral  - {{ data.normal_spine }} <br> 
-
+      <div class="uk-form-controls">
+        <ul class="uk-list uk-list-square">
+          <li>Cabeza - <span class="selected">{{ data.normal_head }}</span> </li>
+          <li>Cara - <span class="selected">{{ data.normal_face }}</span> </li>
+          <li>Cuello - <span class="selected">{{ data.normal_torax }}</span> </li>
+          <li>Tórax - <span class="selected">{{ data.normal_torax }}</span> </li>
+          <li>Abdomen  - <span class="selected">{{ data.normal_abdomen }}</span> </li>
+          <li>Extremidades  - <span class="selected">{{ data.normal_limbs }}</span></li>
+          <li>Genitales  - <span class="selected">{{ data.normal_genitals }}</span> </li>
+          <li>Columna Vertebral  - <span class="selected">{{ data.normal_spine }}</span></li>   
+        </ul>
       </div>
     </div> <!-- // .card -->
   </div> <!-- // .row -->
