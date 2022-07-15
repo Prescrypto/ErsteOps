@@ -1,0 +1,136 @@
+% my_prescription_latex.tex
+{% autoescape on %}
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{graphicx}
+\usepackage{eso-pic}
+\usepackage{ifthen}
+\usepackage[abs]{overpic}
+\usepackage{pict2e,xcolor,varwidth}
+\usepackage{color}
+\usepackage{layout}
+\usepackage[paperwidth=8.5in, paperheight=5.5in, left=0.0cm,right=0.5cm,top=2.5in,bottom=1.5in,headheight=2.50in,headsep=5pt,footskip=114pt]{geometry}
+% Check parameters in: https://en.wikibooks.org/wiki/LaTeX/Page_Layout
+%{# Define where latex finds images #}
+{{ latex_graphics_path }}
+\usepackage{fancyhdr}
+
+% Dont break up words
+\hyphenpenalty 10000
+\exhyphenpenalty 10000
+
+\pagestyle{fancy}
+\fancyhf{}
+% Define Header content
+% fancyhead[C] image center
+% fancyhead[L] image left
+% fancyhead[L] image right
+\fancyhead[C]{
+    % Transparent head image
+    {{ latex_overpic_head }}
+    % Hospital Logo
+    \put(0,33){
+        % Logo Image
+        {{ latex_hospital_logo }}
+    }
+    % Folio
+    \textcolor{white}{\put(20,54){\textsf{\large{
+        % Foliotext
+        Folio: {{ content.id }}
+    }}}}
+    % Date
+    \textcolor{white}{\put(60,54){\textsf{\large{
+        Fecha: {{ content.date }}
+    }}}}
+    % Location
+    \put(118,54){\textsf{\parbox{2.65in}{
+        {{ content.location }}
+    }}}
+    % Patron
+    \put(60,40){\parbox{12cm}{\textbf{\huge
+        {{ content.company }}
+    }}}
+    % Patient
+    \put(8,10){\parbox{4.2cm}{\textsf{
+        {{ content.patient }}
+    }}}
+    % Informacion
+    \put(70,20){\parbox{4.2cm}{\textsf{
+        Edad: {{ content.patient_age }}
+    }}}
+    % Diagnostico
+    \put(125,20){\parbox{7cm}{\textsf{
+        {{ content.diagnosis }}
+    }}}
+    \end{overpic}
+}
+% End Header
+
+% Begin Footer content
+% fancyfoot[C] image center
+% fancyfoot[L] image left
+% fancyfoot[L] image right
+\fancyfoot[L]{
+    % Add grid param after unit to adjust text position over image
+    % Transparent foot image
+    {{ latex_overpic_foot }}
+    \put(5,6){
+        \includegraphics[width=2.9cm, height=2.9cm]{qr_signature}
+    }
+    % Medic Signature
+    \put(38,25){\textsl{\textbf{\parbox{2.1in}{
+        {\fontfamily{frc}\selectfont
+            \normalsize{ {{ content.medic }} }
+        }
+    }}}}
+    % Medic Right
+    % position <left, right(+5)>
+    \put(96,24){\textsf{\textsl{\parbox{2.2in}{
+        {{ content.medic_title }} \\
+        \textbf{Cédula profesional} {{ content.cedula }} \\
+        \textbf{Cédula especialidad} {{ content.specialty_no }} \\
+        \textbf{Universidad} {{ content.alma_mater }}
+    }}}}
+    % Cedula Especialidad
+    \put(155,22){\textsf{\parbox{1.8in}{
+        \textbf{Contacto} {{ content.contact }} \\
+        \textbf{Especialidad} {{ content.specialty }}
+    }}}
+    % Sello electronico
+    \put(38,9){\textsf{\parbox{4.1in}{
+        \textit{\textbf{Sello electrónico:} \\
+        {{ content.signature }} }
+    }}}
+    % Footer prescrypto
+    % Need try color here
+    \put(34,30){\textsf{\textbf{
+        %T
+    }}}
+    \end{overpic}
+}
+% End footer
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist
+\begin{document}
+    % Include Background in ./prescript/media/media/template_v1.pdf
+    \AddToShipoutPictureBG{\ifthenelse{\isodd{\value{page}}}{\includegraphics{template_half_v1}}{\includegraphics{template_half_v1}}}
+    % Define page content
+    \textsf{\large{
+    \begin{changemargin}{1.5cm}{1.2cm}
+        \begin{enumerate}
+            {{ all_medications }}
+         \end{enumerate}
+        %Indicaciones Extra
+        \begin{enumerate}
+            \textbf{Indicaciones Extra: \\ } {{ content.alter_med }}
+        \end{enumerate}
+    \end{changemargin}
+    }}
+\end{document}
+{% endautoescape %}
