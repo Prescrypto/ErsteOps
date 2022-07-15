@@ -2,6 +2,7 @@ from django.db import models
 #from unit.models import Unit
 from django.contrib.auth.models import User
 import unicodedata
+import json
 # Create your models here.
 
 class MedicalReport(models.Model):
@@ -101,11 +102,11 @@ class MedicalReport(models.Model):
     service_crum_dr = models.CharField("Medico CRUM",max_length=60,default='', blank=True)
     # Units m2m relation
     # Paient Data
-    copago_amount = models.CharField('Co-pago',max_length=10, blank=True ,default='0')
-    service_geo_lat = models.CharField('Latitud',max_length=15, blank=True ,default='')
-    service_geo_lon = models.CharField('Longitud', max_length=15,  blank=True, default='')
+    copago_amount = models.CharField('Co-pago',max_length=10, blank=True ,default='')
+    service_geo_lat = models.CharField('Latitud',max_length=25, blank=True ,default='')
+    service_geo_lon = models.CharField('Longitud', max_length=25,  blank=True, default='')
     patient_name = models.CharField('Nombre del Paciente', max_length=255, default='')
-    patient_gender = models.CharField('genero', max_length=9, default= '', blank=True, choices=GENDER)
+    patient_gender = models.CharField('genero', max_length=15, default= '', blank=True, choices=GENDER)
     patient_age = models.IntegerField('edad (años)', default=0, blank=True)
     patient_address = models.CharField('Direccion', max_length=50, default='', blank=False)
     patient_affiliations = models.CharField("Filiacion",max_length=50,blank=True)
@@ -116,8 +117,8 @@ class MedicalReport(models.Model):
     attention_place = models.CharField('Sitio de Atencion', max_length=20, default= '', blank=True, choices=ATENTION_PLACE)
     other_attention_place = models.CharField('Otro Sitio de Atencion', max_length=20, default= '', blank=True, choices=ATENTION_PLACE)
     skin_color = models.CharField("Coloración de piel", max_length=50, default= '', blank=True,)
-    service_type = models.CharField('Tipo de Servicio', max_length=9, default= '', blank=True, choices=SERVICE_TYPE)
-    other_service_type = models.CharField('Tipo de Servicio', max_length=9, default= '', blank=True)
+    service_type = models.CharField('Tipo de Servicio', max_length=50, default= '', blank=True, choices=SERVICE_TYPE)
+    other_service_type = models.CharField('Tipo de Servicio', max_length=50, default= '', blank=True)
     consultation_reason = models.CharField('Motivo de la Consulta', max_length=150, default= '', blank=True, choices=CONSULTATION_REASON)
     other_consultation_reason = models.CharField('Otro Motivo de la Consulta', max_length=50, default= '', blank=True)
     event_type = models.CharField('Tipo de Evento', max_length=20, default= '', blank=True, choices=EVENT_TYPE)
@@ -127,7 +128,7 @@ class MedicalReport(models.Model):
     other_airway = models.CharField('Otra Via Aerea', max_length=20, default= '', blank=True, choices=AIRWAY)
     # (physical_exploration = pe)
     physical_exploration = models.TextField("Exploracion Fisica",blank=True, default='')
-    medications = models.TextField("Exploracion Fisica",blank=True, default='')
+    medications = models.TextField("Medicamentos",blank=True, default='')
     # Normal
     normal_head = models.CharField("Cabeza", blank=True, default='', max_length=10, choices=YES_NO)
     normal_face = models.CharField("Face", blank=True, default='', max_length=10, choices=YES_NO)
@@ -159,7 +160,7 @@ class MedicalReport(models.Model):
     treatment = models.TextField("Tratamiento",blank=True)
     derivation = models.CharField("Derivacion",blank= True, default=False, max_length=20, choices=YES_NO)
     derivation_type = models.CharField("Tipo Derivacion",blank= True, default=False, max_length=20, choices=DERIVATION)
-    derivation_amount= models.IntegerField('Costo Derivacion', default=0, blank=True)
+    derivation_amount= models.CharField('Costo Derivacion', max_length=20,default='', blank=True)
     derivation_place = models.TextField("Notas Derivacion",blank= True )
     state_of_health = models.CharField("Estado de Salud",blank= True, default=False, max_length=20, choices=HEALTH_STATE)
     derivation_recive = models.CharField("Medico que recibe",blank= True, default=False, max_length=50)
@@ -185,6 +186,71 @@ class MedicalReport(models.Model):
     electro_qt = models.CharField("QT", blank=True, default='', max_length=20)
     electro_abnormalities = models.CharField("Anormalidades", blank=True, default='', max_length=100)
     electro_interpretation = models.TextField("Interpretacion", blank=True, default='') 
+
+    def json_physical_exploration(self):
+        #convert_to_json
+        try:
+            res = list(eval(self.physical_exploration))
+        except:
+            res = []
+        return res
+
+    def json_medications(self):
+        #convert_to_json
+        try:
+            res = list(eval(self.medications))
+        except:
+            res = []
+        return res
+    def json_airway(self):
+        #convert_to_json
+        try:
+            res = list(eval(self.airway))
+        except:
+            res = []
+        return res 
+
+    def json_consultation_reason(self):
+        #convert_to_json
+        try:
+            res = list(eval(self.consultation_reason))
+        except:
+            res = []
+        return res        
+
+    def json_pupil_state_left(self):
+        #convert_to_json
+        try:
+            res = list(eval(self.pupil_state_left))
+        except:
+            res = []
+        return res   
+
+    def json_pupil_state_right(self):
+        #convert_to_json
+        try:
+            res = list(eval(self.pupil_state_right))
+        except:
+            res = []
+        return res   
+
+    def json_traumatics(self):
+        #convert_to_json
+        try:
+            res = list(eval(self.traumatics))
+        except:
+            res = []
+        return res
+    
+    def json_inmovilization_type(type):
+        #convert_to_json
+        try:
+            res = list(eval(self.inmovilization_type))
+        except:
+            res = []
+        return res
+
+
 
     class Meta:
         verbose_name_plural = "Parte Medico"
