@@ -242,7 +242,7 @@ class MedicalReport(models.Model):
             res = []
         return res
     
-    def json_inmovilization_type(type):
+    def json_inmovilization_type(self):
         #convert_to_json
         try:
             res = list(eval(self.inmovilization_type))

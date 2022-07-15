@@ -306,14 +306,11 @@
     </div> -->
     </div> <!-- // .card -->
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
-    <h3 class="uk-card-title">Inmovilización {{ data.inmovilization }}</h3>
-      <div class="uk-form-controls selected">
-        {{ data.inmovilization_type}}
-      </div>
+      <h3 class="uk-card-title">Inmovilización {{ data.inmovilization }}</h3>
       
       <ul class="uk-list uk-list-square">
         {% for item in data.json_inmovilization_type %}
-          <li><span class="selected">{{ item }}</span></li>
+          <li><span class="selected"> {{ item }} </span></li>
         {% endfor %}
       </ul>
 
