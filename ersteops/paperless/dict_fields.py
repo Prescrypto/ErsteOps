@@ -68,4 +68,11 @@ MedicalReportDict = {
 "derivation_type": [],
 "demarcation_responsable": "",
 "demarcation_relation": "",
+"electro_qrs":"",
+"email": "",
+"send_email":"",
+"derivation_hospital": "",
+"crum_hospital":"",
+"crum_notes":"",
+"notes":"",
 }
