@@ -113,6 +113,9 @@ source /vagrant/venv/bin/activate
 
 # Redis
 
+Install redis with the script /bin/install_redis.sh
+need redis at last version 6! 
+
 Test
 
 redis-cli
