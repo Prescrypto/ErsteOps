@@ -187,6 +187,14 @@ class MedicalReport(models.Model):
     electro_abnormalities = models.CharField("Anormalidades", blank=True, default='', max_length=100)
     electro_interpretation = models.TextField("Interpretacion", blank=True, default='') 
 
+    electro_qrs = models.CharField("QRS", blank=True, default='', max_length=20)
+    email = models.CharField("Email", blank=True, default='', max_length=50)
+    send_email = models.CharField("Se envio Email", blank=True, default='', max_length=20)
+    derivation_hospital = models.CharField("Hospitar derivacion", blank=True, default='', max_length=100)
+    crum_hospital = models.CharField("Hospitar recibe CRUM", blank=True, default='', max_length=100)
+    crum_notes = models.TextField("Notas Crum",blank=True)
+    notes = models.TextField("Notas Emergencia",blank=True)  
+
     def json_physical_exploration(self):
         #convert_to_json
         try:
