@@ -16,6 +16,12 @@
   <div class="row paperless__bottom">
     <div class="col-12">
       <h5>Codigo incidente: {{ paperless.service_code }}</h5>
+
+
+      <h4>CRUM <input tabindex="10" 
+          type="checkbox" id="is_crum" 
+          v-model="paperless.is_crum"/></h4>
+ <div v-if="paperless.is_crum">
       <label class="uk-form-label" for="id_crum">Folio CRUM:</label>
       <div class="uk-form-controls">
           <input class="uk-input" 
@@ -27,9 +33,19 @@
           maxlength="20"
           placeholder="100...">
       </div>
-      
+      <label class="uk-form-label" for="id_crum_reception">Hospital CRUM:</label>
+      <div class="uk-form-controls">
+          <input class="uk-input" 
+          tabindex="4" 
+          v-model="paperless.crum_hospital"
+          id="id_crum_hospital"
+          name="crum_hospital" 
+          type="text" 
+          maxlength="100"
+          placeholder="Magdalena de las Salinas...">
+      </div>      
 
-      <label class="uk-form-label" for="id_crum_reception">Medico que recibe:</label>
+      <label class="uk-form-label" for="id_crum_reception">Medico que recibe(CRUM):</label>
       <div class="uk-form-controls">
           <input class="uk-input" 
           tabindex="4" 
@@ -40,6 +56,21 @@
           maxlength="100"
           placeholder="Dr.Lopez...">
       </div>
+
+        <label class="uk-form-label" for="id_patient_clothes">Notas CRUM</label>
+        <div class="uk-form-controls">
+              <textarea class="uk-textarea" 
+              tabindex="13" 
+              v-model="paperless.crum_notes"
+              id="id_patient_crum_notes"
+              name="crum_notes" 
+              type="text" 
+              maxlength="50" 
+              placeholder="Notas CRUM..."></textarea>
+            </div>
+
+</div>
+
     </div>
   </div>
   <div class="row">
@@ -151,7 +182,7 @@
           maxlength="100"
           placeholder="Jaime Ramirez..."/>
       </div>
-      <label class="uk-form-label" for="id_copago_amount">Co-pago</label>
+<!--       <label class="uk-form-label" for="id_copago_amount">Co-pago</label>
       <div class="uk-form-controls">
         <input class="uk-input"
           tabindex="9" 
@@ -163,7 +194,7 @@
           pattern="[0-9]"
           inputmode="numeric" 
           step="0.01" />
-      </div>
+      </div> -->
     </div> <!-- // .card -->
 
 
@@ -197,14 +228,14 @@
           </div>
           <label class="uk-form-label" for="id_patient_clothes">Vestimenta</label>
           <div class="uk-form-controls">
-              <input class="uk-input" 
+              <textarea class="uk-input" 
               tabindex="13" 
               v-model="paperless.patient_clothes"
               id="id_patient_clothes"
               name="patient_clothes" 
               type="text" 
               maxlength="50" 
-              placeholder="Vestimenta...">
+              placeholder="Vestimenta..."></textarea>
           </div>
           <label class="uk-form-label" for="id_skin_color">Coloración de piel</label>
           <div class="uk-form-controls">
@@ -556,7 +587,7 @@
 
   <div class="row">
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
-      <h3 class="uk-card-title">Padecimiento Actual</h3>
+      <h3 class="uk-card-title">Padecimiento Actual / Mecanismo de Lesion</h3>
        <textarea class="uk-textarea" 
        v-model="paperless.current_condition"
        id="id_current_condition"
@@ -603,7 +634,7 @@
         :auto-hide="true" 
       >
       <!-- This will be the popover target (for the events and position) -->
-        <h3 class="uk-card-title">Exploración Fisica
+        <h3 class="uk-card-title">Signos Vitales
         <span class="tooltip-target b3 fa fa-plus-square" ></span>
         </h3>
         <!-- This will be the content of the popover -->
@@ -615,7 +646,7 @@
             class="grid__close c-close u-color-primary" v-close-popover>×</button>
           <div class="grade__wrapper">
             <h1 class="tooltip__heading u-h6 u-text-center">
-              Exploración Fisica
+              Signos Vitales
             </h1>
             <PhysicalExploration :paperless="paperless"/>
 
@@ -675,7 +706,7 @@
 
      </div> <!-- // .card -->
          <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
-      <h3 class="uk-card-title">Normal</h3>
+      <h3 class="uk-card-title">Exploracion Fisica</h3>
       <p class="selected">{{ paperless.normal_elements }}</p>
       <div class="uk-form-controls">
         <select class="uk-select" v-model="paperless.normal_elements" multiple>
@@ -740,6 +771,13 @@
             v-model="paperless.electro_axis_qrs"
             maxlength="20" 
             id="id_unidad_movil" type="text" placeholder="Eje QRS...">
+        </div>
+        <label class="uk-form-label" for="id_unidad_movil">QRS</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" 
+            v-model="paperless.electro_qrs"
+            maxlength="20" 
+            id="id_unidad_movil" type="text" placeholder="QRS...">
         </div>
         <label class="uk-form-label" for="id_unidad_movil">ST</label>
         <div class="uk-form-controls">
@@ -818,13 +856,22 @@
           id="form-stacked-text" placeholder="Notas derivacion..."></textarea>
         </div>
       </div>
-      <label class="uk-form-label" for="form-stacked-text">Estado de salud</label>
+        <label class="uk-form-label" for="form-stacked-text">Estado de salud</label>
         <select class="uk-select" v-model="paperless.state_of_health">
           <option disabled value="">Seleccione el estado de salud</option>
+          <option>Estable</option>
           <option>Delicado</option>
           <option>Grave</option>
-          <option>Muy Grave</option>
         </select>
+
+        <label class="uk-form-label" for="id_derivation_recive">Hospital</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" 
+            v-model="paperless.derivation_hospital"
+            maxlength="50" 
+            id="id_derivation_hospital" type="text" placeholder="Hospital Derivación...">
+        </div> 
+
         <label class="uk-form-label" for="id_derivation_recive">Medico que recibe</label>
         <div class="uk-form-controls">
             <input class="uk-input" 
@@ -869,6 +916,40 @@
       <SignatureClient />
     </div>
     
+  </div>
+
+  <div class="row">
+    <div class="uk-card uk-height-large uk-card-default uk-card-body uk-width-1-2@m">
+    <h3 class="uk-card-title">Envio Parte Medico <input tabindex="10" 
+          type="checkbox" id="send_email" 
+          v-model="paperless.send_email"/></h3>
+    <div v-if="paperless.send_email">
+        <label class="uk-form-label" for="id_email">Destinatario</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" 
+            v-model="paperless.email"
+            maxlength="50" 
+            id="id_email" type="email" inputmode="email" placeholder="email...">
+        </div> 
+    </div>
+    </div>
+    
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Notas y Observaciones <input type="checkbox" id="id_paperless_notes" v-model="paperless.have_notes"/></h3>
+      <div v-if="paperless.have_notes">
+        <div class="uk-form-controls">
+              <textarea class="uk-textarea" 
+              tabindex="13" 
+              v-model="paperless.notes"
+              id="id_notes"
+              name="notes" 
+              type="text" 
+              maxlength="50" 
+              placeholder="Notas y Observaciones..."></textarea>
+            </div>
+      </div>
+    </div>
+
   </div>
 
   <div class="row">
