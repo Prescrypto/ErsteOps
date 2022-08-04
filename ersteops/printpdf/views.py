@@ -63,7 +63,7 @@ def document_as_pdf(request,pk):
     #print("PDF Error!!! ckeck /templates/printpdf/rendered_template.log")
     logger.info('[ PRINTPDF! - PDF Error!!! ckeck /templates/printpdf/rendered_template.log]') 
     messages.error(request, "PDF Error!!! ckeck /templates/printpdf/rendered_template.log")
-    return redirect('/petfile/review/')
+    return redirect('/paperless/')
 
 def document_as_pdf_print(request,pk):
   # Get document data
