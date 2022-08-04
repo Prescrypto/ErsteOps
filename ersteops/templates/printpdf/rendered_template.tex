@@ -12,11 +12,41 @@
 \usepackage{pict2e,xcolor,varwidth}
 \usepackage{color}
 \usepackage{layout}
-\usepackage[paperwidth=14cm, paperheight=22.5cm, left=0.0cm,right=0.5cm,top=3.3in,bottom=2.2in,headheight=3in,headsep=0pt,footskip=120pt]{geometry}
+\usepackage[paperwidth=27.94cm, paperheight=21.59cm, left=0.0cm,right=0.0cm,top=0.0in,bottom=0.0in,headheight=0in,headsep=0pt,footskip=120pt]{geometry}
 % Check parameters in: https://en.wikibooks.org/wiki/LaTeX/Page_Layout
 %
-\graphicspath{ {/vagrant/dev/petstore/static/img/printpdf/} }
+\graphicspath{ {/vagrant/ersteops/static/img/printpdf/} }
 \usepackage{fancyhdr}
+%Definitions from inkscape
+\makeatletter%
+\providecommand\color[2][]{%
+ \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+ \renewcommand\color[2][]{}%
+}%
+\providecommand\transparent[1]{%
+ \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+ \renewcommand\transparent[1]{}%
+}%
+\providecommand\rotatebox[2]{#2}%
+\newcommand*\fsize{\dimexpr\f@size pt\relax}%
+\newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+\ifx\svgwidth\undefined%
+ \setlength{\unitlength}{792bp}%
+ \ifx\svgscale\undefined%
+   \relax%
+ \else%
+   \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+ \fi%
+\else%
+ \setlength{\unitlength}{\svgwidth}%
+\fi%
+\global\let\svgwidth\undefined%
+\global\let\svgscale\undefined%
+\makeatother%
+\lineheight{1}%
+\setlength\tabcolsep{0pt}%
+%endDefinitions from inkscape
+
 
 % Dont break up words
 \hyphenpenalty 10000
@@ -30,64 +60,67 @@
 % fancyhead[L] image right
 \fancyhead[C]{
     % Transparent head image
-    \begin{overpic}[width=13.5cm,height=7cm,unit=1mm]{/vagrant/dev/petstore/templates/printpdf/transparent_head.png}
+    \begin{overpic}[width=13.5cm,height=7cm,unit=1mm]{/vagrant/ersteops/templates/printpdf/transparent_head.png}
     % Hospital Logo
     % \put(10,45){
     %     % Logo Image
     %     hospital_logo.jpg
     % }
-    % Consulta    
-    % \put(68,65){\parbox[t]{6cm}{\textsf{\large{
-    %    \textbf{Consulta \#:} 95
-    % }
-    % }}}    
+    Consulta    
+    \put(1,1){\parbox[t]{6cm}{\textsf{\large{
+       \textbf{Consulta \#:} 1
+    }
+    }}}
+
+    \put(0.01140896,0.54355203){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Paciente desconocido}\end{tabular}}}}% 
+
     % Date    
     \put(68,65){\parbox[t]{6cm}{\textsf{\large{
-       \textbf{Fecha:} 07, Jun 2018
+       %\textbf{Fecha:} 
     }
     }}}    
     % Patient
     \put(68,60){\parbox[t]{6cm}{\textsf{\large{
-       \textbf{Paciente:} pelotitas
+       %\textbf{Paciente:} 
     }
     }}}
     % Species / Breed
     \put(68,50){\parbox[t]{6cm}{\textsf{\large{
-       \textbf{Especie:} Gato / siames nordico
+       %\textbf{Especie:}  / 
     }
     }}}
     % Sex
     \put(68,40){\parbox[t]{6cm}{\textsf{\large{
-       \textbf{Sexo:} Hembra
+       %\textbf{Sexo:} 
     }
     }}}
     % weight
     \put(68,35){\parbox[t]{6cm}{\textsf{\large{
-       \textbf{Peso:} 6.0
+       %\textbf{Peso:} 
     }
     }}}
     % Dueño
     \put(68,30){\parbox[t]{6cm}{\textsf{\large{
-       \textbf{Responsable:} Lillian Garcia
+       %\textbf{Responsable:} 
     }
     }}}
     % Edad
     \put(68,20){\parbox[t]{6cm}{\textsf{\large{
-       \textbf{Edad:} 0 año,  meses
+       %\textbf{Edad:}  año,  meses
     }
     }}}
     % Diagnostico
     \put(10,5){\parbox[t]{10cm}{\textsf{\large{
-       \textbf{Diagnostico Presuntivo:} esta es una nueva mascota de cero
+       %\textbf{Diagnostico Presuntivo:} 
     }
     }}}
     % Tratamiento
     \put(10,-5){\parbox[t]{10cm}{\textsf{\large{
-       \textbf{Tratamiento:}
+       %\textbf{Tratamiento:}
     }
     }}}                            
     % \put(70,42){\parbox[l]{4.2cm}{\textsf{\large{
-    %    \textbf{Sexo:} Hembra
+    %    \textbf{Sexo:} 
     % }
     % }}}
     % Pet Gender
@@ -97,7 +130,7 @@
     % \textbf{
     % Sexo:
     % }
-    % Hembra
+    % 
     % }
     % }
     % }
@@ -108,17 +141,17 @@
     % \textbf{
     % Peso:
     % }
-    % 6.0
+    % 
     % }
     % }
     % }        
     % % Informacion
     % \put(65,70){\parbox{4.2cm}{\textsf{
-    %     Edad: Jan. 7, 2018
+    %     Edad: 
     % }}}
     % % Diagnostico
     % \put(10,16){\parbox{7cm}{\textsf{
-    %     Diagnostico Presuntivo: esta es una nueva mascota de cero
+    %     Diagnostico Presuntivo: 
     % }}}
     \end{overpic}
 }
@@ -131,26 +164,26 @@
 \fancyfoot[L]{
     % Add grid param after unit to adjust text position over image
     % Transparent foot image
-    \begin{overpic}[width=13.5cm,height=5cm,unit=1mm]{/vagrant/dev/petstore/templates/printpdf/transparent_foot.png}
+    \begin{overpic}[width=13.5cm,height=5cm,unit=1mm]{/vagrant/ersteops/templates/printpdf/transparent_foot.png}
     \put(1,5){
         \includegraphics[width=4cm, height=4cm]{qr_signature}
     }
     % Medic Signature
     % \put(50,33){\textsl{\textbf{\parbox[t]{2.4in}{
     %     {\fontfamily{frc}\selectfont
-    %         \normalsize{ Medico Responsable: Juan ManuelRivero Mercado }
+    %         \normalsize{ Medico Responsable:  }
     %     }
     % }}}}
     % Medic
     \put(45,25){\parbox[t]{10cm}{\textsf{
-       \textbf{Veterinario: } Juan Manuel Rivero Mercado
+       %\textbf{Veterinario: } 
     }}}
     % Cedula
     \put(45,20){\parbox[t]{10cm}{\textsf{
-       \textbf{Cedula Profesional: } 9999999999
+       %\textbf{Cedula Profesional: } 
     }}}
     \put(45,15){\parbox[t]{10cm}{\textsf{
-        \textbf{ UNAM } 
+        %\textbf{  } 
     }}}
     % Medic Right
     % position <left, right(+5)>
@@ -197,11 +230,12 @@
     \textsf{\large{
     \begin{changemargin}{1.5cm}{1.2cm}
         \begin{enumerate}
-            \item \textbf{Bordetella[ Vacuna Canina]} \qquad dsd sdfsdf df sdf
+            %
+            bla!
         \end{enumerate}
         % Indicaciones Extra
         % \begin{enumerate}
-        %     \textbf{Indicaciones Extra: \\ } \item \textbf{Bordetella[ Vacuna Canina]} \qquad dsd sdfsdf df sdf
+        %     \textbf{Indicaciones Extra: \\ } 
         % \end{enumerate}
     \end{changemargin}
     }}

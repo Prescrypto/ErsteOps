@@ -12,11 +12,41 @@
 \usepackage{pict2e,xcolor,varwidth}
 \usepackage{color}
 \usepackage{layout}
-\usepackage[paperwidth=14cm, paperheight=22.5cm, left=0.0cm,right=0.5cm,top=3.3in,bottom=2.2in,headheight=3in,headsep=0pt,footskip=120pt]{geometry}
+\usepackage[paperwidth=27.94cm, paperheight=21.59cm, left=0.0cm,right=0.0cm,top=0.0in,bottom=0.0in,headheight=0in,headsep=0pt,footskip=120pt]{geometry}
 % Check parameters in: https://en.wikibooks.org/wiki/LaTeX/Page_Layout
 %{# Define where latex finds images #}
 {{ latex_graphics_path }}
 \usepackage{fancyhdr}
+%Definitions from inkscape
+\makeatletter%
+\providecommand\color[2][]{%
+ \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+ \renewcommand\color[2][]{}%
+}%
+\providecommand\transparent[1]{%
+ \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+ \renewcommand\transparent[1]{}%
+}%
+\providecommand\rotatebox[2]{#2}%
+\newcommand*\fsize{\dimexpr\f@size pt\relax}%
+\newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+\ifx\svgwidth\undefined%
+ \setlength{\unitlength}{792bp}%
+ \ifx\svgscale\undefined%
+   \relax%
+ \else%
+   \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+ \fi%
+\else%
+ \setlength{\unitlength}{\svgwidth}%
+\fi%
+\global\let\svgwidth\undefined%
+\global\let\svgscale\undefined%
+\makeatother%
+\lineheight{1}%
+\setlength\tabcolsep{0pt}%
+%endDefinitions from inkscape
+
 
 % Dont break up words
 \hyphenpenalty 10000
@@ -36,54 +66,57 @@
     %     % Logo Image
     %     {{ latex_hospital_logo }}
     % }
-    % Consulta    
-    % \put(68,65){\parbox[t]{6cm}{\textsf{\large{
-    %    \textbf{Consulta \#:} {{ content.id }}
-    % }
-    % }}}    
+    Consulta    
+    \put(1,1){\parbox[t]{6cm}{\textsf{\large{
+       \textbf{Consulta \#:} {{ content.id }}
+    }
+    }}}
+
+    \put(0.01140896,0.54355203){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Paciente desconocido}\end{tabular}}}}% 
+
     % Date    
     \put(68,65){\parbox[t]{6cm}{\textsf{\large{
-       \textbf{Fecha:} {{ content.date_short }}
+       %\textbf{Fecha:} {{ content.date_short }}
     }
     }}}    
     % Patient
     \put(68,60){\parbox[t]{6cm}{\textsf{\large{
-       \textbf{Paciente:} {{ content.pet_name }}
+       %\textbf{Paciente:} {{ content.pet_name }}
     }
     }}}
     % Species / Breed
     \put(68,50){\parbox[t]{6cm}{\textsf{\large{
-       \textbf{Especie:} {{ content.pet_breed }} / {{ content.pet_species }}
+       %\textbf{Especie:} {{ content.pet_breed }} / {{ content.pet_species }}
     }
     }}}
     % Sex
     \put(68,40){\parbox[t]{6cm}{\textsf{\large{
-       \textbf{Sexo:} {{ content.pet_gender }}
+       %\textbf{Sexo:} {{ content.pet_gender }}
     }
     }}}
     % weight
     \put(68,35){\parbox[t]{6cm}{\textsf{\large{
-       \textbf{Peso:} {{ content.weight }}
+       %\textbf{Peso:} {{ content.weight }}
     }
     }}}
     % Dueño
     \put(68,30){\parbox[t]{6cm}{\textsf{\large{
-       \textbf{Responsable:} {{ content.client_name }}
+       %\textbf{Responsable:} {{ content.client_name }}
     }
     }}}
     % Edad
     \put(68,20){\parbox[t]{6cm}{\textsf{\large{
-       \textbf{Edad:} {{ content.pet_age.years }} año, {{ content.pet_age_months}} meses
+       %\textbf{Edad:} {{ content.pet_age.years }} año, {{ content.pet_age_months}} meses
     }
     }}}
     % Diagnostico
     \put(10,5){\parbox[t]{10cm}{\textsf{\large{
-       \textbf{Diagnostico Presuntivo:} {{ content.diagnostic }}
+       %\textbf{Diagnostico Presuntivo:} {{ content.diagnostic }}
     }
     }}}
     % Tratamiento
     \put(10,-5){\parbox[t]{10cm}{\textsf{\large{
-       \textbf{Tratamiento:}
+       %\textbf{Tratamiento:}
     }
     }}}                            
     % \put(70,42){\parbox[l]{4.2cm}{\textsf{\large{
@@ -143,14 +176,14 @@
     % }}}}
     % Medic
     \put(45,25){\parbox[t]{10cm}{\textsf{
-       \textbf{Veterinario: } {{ content.vet_full_name }}
+       %\textbf{Veterinario: } {{ content.vet_full_name }}
     }}}
     % Cedula
     \put(45,20){\parbox[t]{10cm}{\textsf{
-       \textbf{Cedula Profesional: } {{ content.vet_certificate}}
+       %\textbf{Cedula Profesional: } {{ content.vet_certificate}}
     }}}
     \put(45,15){\parbox[t]{10cm}{\textsf{
-        \textbf{ {{ content.vet_university }} } 
+        %\textbf{ {{ content.vet_university }} } 
     }}}
     % Medic Right
     % position <left, right(+5)>
@@ -197,7 +230,8 @@
     \textsf{\large{
     \begin{changemargin}{1.5cm}{1.2cm}
         \begin{enumerate}
-            {{ all_medications }}
+            %{{ all_medications }}
+            bla!
         \end{enumerate}
         % Indicaciones Extra
         % \begin{enumerate}
