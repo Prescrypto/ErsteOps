@@ -26,6 +26,7 @@
               <p>{{ medical_report.created_at|date }} Paciente: {{ medical_report.patient_name }} </p>
               <p>Lorem ipsum <a href="#">dolor</a> sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
               <span class="uk-margin-small-right" uk-icon="check"></span><a href="{% url 'medical_report_detail' pk=medical_report.id %}" uk-icon="mail"> Ver Detalle </a>
+              <span class="uk-margin-small-right" uk-icon="check"></span><a href="{% url 'pdf-generate' pk=medical_report.id %}" uk-icon="file-pdf"> pdf </a>
             </div>
         {% empty %}
             <li>No hay partes medicos aun!</li>
