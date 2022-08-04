@@ -24,6 +24,7 @@
           id="id_crum"
           name="crum" 
           type="text" 
+          maxlength="20"
           placeholder="100...">
       </div>
       
@@ -36,6 +37,7 @@
           id="id_crum_reception"
           name="crum_reception" 
           type="text" 
+          maxlength="100"
           placeholder="Dr.Lopez...">
       </div>
     </div>
@@ -99,7 +101,8 @@
             v-model="paperless.patient_phone"
             id="id_patient_phone" 
             name="patient_phone" 
-            type="tel" 
+            type="tel"
+            maxlength="15" 
             placeholder="5555-555-555...">
         </div>
       <label class="uk-form-label" for="id_patient_gender">Genero: <span class="selected">{{ paperless.patient_gender }}</span></label>
@@ -249,6 +252,7 @@
         v-model="paperless.patient_address"
         id="id_patient_address" 
         name="patient_address"
+        maxlength="50"
         placeholder="av.tol # ..."></textarea>
       </div>   
     </div> <!-- // .card -->
@@ -268,6 +272,7 @@
         v-model="paperless.other_service_type"
         id="other_service_type"
         name="other_service_type" 
+        maxlength="50"
         type="text" placeholder="Otro:... especifique"/>
       </div>     
     </div> <!-- // .card -->
@@ -294,6 +299,7 @@
         
         <textarea class="uk-textarea" 
         v-model='paperless.other_consultation_reason'
+        maxlength="50"
         id="form-stacked-text" placeholder="Otro:... especifique" ></textarea>
       </div>
     </div> <!-- // .card -->
@@ -704,54 +710,63 @@
       <div class="uk-form-controls">
           <input class="uk-input" 
           v-model="paperless.electro_rhythm"
+          maxlength="20" 
           id="id_unidad_movil" type="text" placeholder="Ritmo...">
       </div>
       <label class="uk-form-label" for="id_unidad_movil">Frecuencia</label>
       <div class="uk-form-controls">
         <input class="uk-input" 
         v-model="paperless.electro_frequency"
+        maxlength="20" 
         id="id_unidad_movil" type="text" placeholder="Frecuencia...">
       </div>
           <label class="uk-form-label" for="id_unidad_movil">Onda P</label>
             <div class="uk-form-controls">
                 <input class="uk-input" 
                 v-model="paperless.electro_wave_p"
+                maxlength="20" 
                 id="id_unidad_movil" type="text" placeholder="Onda P...">
             </div>
         <label class="uk-form-label" for="id_unidad_movil">PR</label>
         <div class="uk-form-controls">
             <input class="uk-input" 
             v-model="paperless.electro_pr"
+            maxlength="20" 
             id="id_unidad_movil" type="text" placeholder="PR...">
         </div>
         <label class="uk-form-label" for="id_unidad_movil">Eje QRS</label>
         <div class="uk-form-controls">
             <input class="uk-input" 
             v-model="paperless.electro_axis_qrs"
+            maxlength="20" 
             id="id_unidad_movil" type="text" placeholder="Eje QRS...">
         </div>
         <label class="uk-form-label" for="id_unidad_movil">ST</label>
         <div class="uk-form-controls">
             <input class="uk-input" 
             v-model="paperless.electro_st"
+            maxlength="20" 
             id="id_unidad_movil" type="text" placeholder="ST...">
         </div>
         <label class="uk-form-label" for="id_unidad_movil">Onda T</label>
         <div class="uk-form-controls">
             <input class="uk-input" 
             v-model="paperless.electro_wave_t"
+            maxlength="20" 
             id="id_unidad_movil" type="text" placeholder="Onda T...">
         </div>
         <label class="uk-form-label" for="id_unidad_movil">QT</label>
         <div class="uk-form-controls">
             <input class="uk-input" 
             v-model="paperless.electro_qt"
+            maxlength="20" 
             id="id_unidad_movil" type="text" placeholder="QT...">
         </div>
         <label class="uk-form-label" for="id_unidad_movil">Anormalidades</label>
         <div class="uk-form-controls">
             <input class="uk-input" 
             v-model="paperless.electro_abnormalities"
+            maxlength="20" 
             id="id_unidad_movil" type="text" placeholder="Anormailides...">
         </div>
         <label class="uk-form-label" for="id_unidad_movil">Interpretacion electrocardiografica</label>
@@ -797,7 +812,10 @@
           <option>Otro</option>
         </select>
         <div v-if="derivation_type === 'Otro'">
-          <textarea class="uk-textarea" id="form-stacked-text" placeholder="Notas derivacion..."></textarea>
+          <textarea class="uk-textarea" 
+          v-model="paperless.other_pathological_history"
+          maxlength="50" 
+          id="form-stacked-text" placeholder="Notas derivacion..."></textarea>
         </div>
       </div>
       <label class="uk-form-label" for="form-stacked-text">Estado de salud</label>
@@ -811,6 +829,7 @@
         <div class="uk-form-controls">
             <input class="uk-input" 
             v-model="paperless.derivation_recive"
+            maxlength="50" 
             id="id_derivation_recive" type="text" placeholder="Medico...">
         </div> 
         <label class="uk-form-label" for="id_derivation_amount">Costo</label>
@@ -830,12 +849,14 @@
           <div class="uk-form-controls">
               <input class="uk-input" 
               v-model="paperless.demarcation_responsable"
+              maxlength="50" 
               id="id_demarcation_responsable" type="text" placeholder="Nombre...">
           </div>
         <label class="uk-form-label" for="id_unidad_movil">Parentesco o relación</label>
           <div class="uk-form-controls">
               <input class="uk-input" 
               v-model="paperless.demarcation_relation"
+              maxlength="20" 
               id="id_demarcation_relation" type="text" placeholder="Parentesco...">
           </div>
         </div>
