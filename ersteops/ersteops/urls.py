@@ -19,4 +19,5 @@ urlpatterns = [
     # Jet Dashboard
     url(r'^jet/', include('jet.urls','jet')),
     url(r'^jet/dashboard/', include('jet.dashboard.urls','jet-dashboard')),
+    url(r'^printpdf/', include('printpdf.urls')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
