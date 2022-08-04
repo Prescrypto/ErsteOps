@@ -6,14 +6,7 @@ eso-pic
 overpic
 pict2e
 varwidth
-inputenc
 babel
-fontenc
-textcomp
-graphicx
-ifthen
-color
-layout
 eepic
 standalone
 xkeyval
