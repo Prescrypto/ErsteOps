@@ -349,6 +349,7 @@ def new_medicalreport(request):
 # /Update Timer Functionality
 
 def find_on_list(my_list_Dict, what_to_search):
+  #define Yes or No if key is on dict
   my_text='No'
   if my_list_Dict.count(what_to_search) > 0:
     my_text = 'Si'
@@ -356,7 +357,7 @@ def find_on_list(my_list_Dict, what_to_search):
 
 
 def Send_Mail_To(request,email_recive,pk):
-
+  #Send mail via smtp gmail server
   try:
     email = EmailMessage(
       'Parte Medico Vida uno subject',
@@ -368,6 +369,7 @@ def Send_Mail_To(request,email_recive,pk):
     tempdir = settings.BASE_DIR+'/templates/printpdf/'
     pdf_file = open(os.path.join(tempdir, 'rendered_template.pdf'), 'rb')
     pdf = document_as_new_pdf(request,pk)
+    file_name = 'Parte_Medico_Vida_Uno_{}.pdf'.format(str(pk))
     email.attach('Parte_Medico_Vida_Uno.pdf',pdf,'application/pdf')
     #pdf_to_attach = os.path.join(tempdir, 'rendered_template.pdf')
     #email.attach_file(pdf_to_attach)
