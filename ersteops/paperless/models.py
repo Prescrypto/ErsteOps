@@ -126,17 +126,29 @@ class MedicalReport(models.Model):
     other_traumatics = models.CharField('Otro Traumatico', max_length=50, default= '', blank=True, choices=TRAUMATICS)
     airway = models.TextField('Via Aerea', default= '', blank=True )
     other_airway = models.CharField('Otra Via Aerea', max_length=20, default= '', blank=True, choices=AIRWAY)
-    # (physical_exploration = pe)
+    
     physical_exploration = models.TextField("Exploracion Fisica",blank=True, default='')
     medications = models.TextField("Medicamentos",blank=True, default='')
     # Normal
+    # (physical_exploration = pe)
     normal_head = models.CharField("Cabeza", blank=True, default='', max_length=10, choices=YES_NO)
     normal_face = models.CharField("Face", blank=True, default='', max_length=10, choices=YES_NO)
+    normal_neck = models.CharField("Cuello", blank=True, default='', max_length=10, choices=YES_NO)
     normal_torax = models.CharField("Tórax", blank=True, default='', max_length=10, choices=YES_NO)
     normal_abdomen = models.CharField("Abdomen", blank=True, default='', max_length=10, choices=YES_NO)
     normal_limbs = models.CharField("Extremidades", blank=True, default='', max_length=10, choices=YES_NO)
     normal_genitals = models.CharField("Genitales", blank=True, default='', max_length=10, choices=YES_NO)
     normal_spine = models.CharField("Columna Vertebral", blank=True, default='', max_length=10, choices=YES_NO)
+
+    det_normal_head = models.TextField("Notas Cabeza", blank=True)
+    det_normal_face = models.TextField("Notas Cara", blank=True)
+    det_normal_neck = models.TextField("Notas Cuello", blank=True)    
+    det_normal_torax = models.TextField("Notas Tórax", blank=True)
+    det_normal_abdomen = models.TextField("Notas Abdomen", blank=True)
+    det_normal_limbs = models.TextField("Notas Extremidades", blank=True)
+    det_normal_genitals = models.TextField("Notas Genitales", blank=True)
+    det_normal_spine = models.TextField("Notas Columna Vertebral", blank=True)
+
 
     current_condition = models.TextField("Padecimiento Actual",blank=True)
 
@@ -153,6 +165,13 @@ class MedicalReport(models.Model):
     pathological_history_trauma = models.CharField("Quirurgicos/Trauma",blank= True, default=False,max_length=10, choices=YES_NO)
     pathological_history_alergy = models.CharField("Alergias",blank= True, default=False, max_length=10, choices=YES_NO)
     other_pathological_history = models.CharField("Otra enfermedad",blank= True, default=False, max_length=50)
+
+    detail_pat_history_daibetes_melitus = models.TextField("Notas Diabetes Melitus",blank= True )
+    detail_pat_history_arterial_hypertension = models.TextField("Notas Hipertension Arterial",blank= True)
+    detail_pat_history_heart_disease = models.TextField("Notas Cardiopatias",blank= True)
+    detail_pat_history_pneumopathies = models.TextField("Notas Neumopatias",blank= True)
+    detail_pat_history_trauma = models.TextField("Notas Quirurgicos/Trauma",blank= True)
+    detail_pat_history_alergy = models.TextField("Notas Alergias",blank= True )
 
     current_therapeutics = models.TextField("Tiempo de Evolucion y Terapeutica Actual",blank=True)
     description_of_injuries = models.TextField("Descripcion de lesiones",blank=True)
