@@ -36,6 +36,14 @@
       <div class="uk-form-controls selected">
           {{ data.crum_reception}}
       </div>
+      <label class="uk-form-label" for="id_crum_reception">Hospital CRUM:</label>
+      <div class="uk-form-controls selected">
+          {{ data.crum_hospital}}
+      </div>
+      <label class="uk-form-label" for="id_crum_reception">Notas CRUM:</label>
+      <div class="uk-form-controls selected">
+          {{ data.crum_notes}}
+      </div>
     </div>
   </div>
   <div class="row">
@@ -327,12 +335,12 @@
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
       <h3 class="uk-card-title">Antecedentes Patologicos</h3>
           <ul class="uk-list uk-list-square">
-            <li>Diabetes Melitus - <span class="selected">{{ data.pathological_history_daibetes_melitus }}</span></li>
-            <li>Hipertension Arterial - <span class="selected">{{ data.pathological_history_arterial_hypertension }}</span></li>
-            <li>Cardiopatias - <span class="selected">{{ data.pathological_history_heart_disease }}</span></li>
-            <li>Neumopatias - <span class="selected">{{ data.pathological_history_pneumopathies }}</span></li>
-            <li>Quirurgicos/Trauma - <span class="selected">{{ data.pathological_history_trauma }}</span></li>
-            <li>Alergias - <span class="selected">{{ data.pathological_history_alergy }}</span></li>
+            <li>Diabetes Melitus - <span class="selected">{{ data.pathological_history_daibetes_melitus }} - {{ data.detail_pat_history_daibetes_melitus }}</span></li>
+            <li>Hipertension Arterial - <span class="selected">{{ data.pathological_history_arterial_hypertension }} - {{ data.detail_pat_history_arterial_hypertension }}</span></li>
+            <li>Cardiopatias - <span class="selected">{{ data.pathological_history_heart_disease }} - {{ data.detail_pat_history_heart_disease }}</span></li>
+            <li>Neumopatias - <span class="selected">{{ data.pathological_history_pneumopathies }} - {{ data.detail_pat_history_pneumopathies }}</span></li>
+            <li>Quirurgicos/Trauma - <span class="selected">{{ data.pathological_history_trauma }} - {{ data.detail_pat_history_trauma }}</span></li>
+            <li>Alergias - <span class="selected">{{ data.pathological_history_alergy }} - {{ data.detail_pat_history_alergy }}</span></li>
             <li>Otra enfermedad - <span class="selected">{{ data.other_pathological_history }}</span></li>
           </ul>
 
@@ -342,7 +350,7 @@
 
   <div class="row">
      <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
-      <h3 class="uk-card-title">Exploración Fisica</h3>
+      <h3 class="uk-card-title">Signos Vitales</h3>
       <div class="uk-form-controls">
         <ul class="uk-list uk-list-square">
         {% for item in data.json_physical_exploration %}
@@ -364,17 +372,17 @@
      </div> <!-- // .card -->
 
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
-      <h3 class="uk-card-title">Normal</h3>
+      <h3 class="uk-card-title">Exploración fisica</h3>
       <div class="uk-form-controls">
         <ul class="uk-list uk-list-square">
-          <li>Cabeza - <span class="selected">{{ data.normal_head }}</span> </li>
-          <li>Cara - <span class="selected">{{ data.normal_face }}</span> </li>
-          <li>Cuello - <span class="selected">{{ data.normal_torax }}</span> </li>
-          <li>Tórax - <span class="selected">{{ data.normal_torax }}</span> </li>
-          <li>Abdomen  - <span class="selected">{{ data.normal_abdomen }}</span> </li>
-          <li>Extremidades  - <span class="selected">{{ data.normal_limbs }}</span></li>
-          <li>Genitales  - <span class="selected">{{ data.normal_genitals }}</span> </li>
-          <li>Columna Vertebral  - <span class="selected">{{ data.normal_spine }}</span></li>   
+          <li>Cabeza - <span class="selected">{{ data.normal_head }} - {{data.det_normal_head}}</span> </li>
+          <li>Cara - <span class="selected">{{ data.normal_face }} - {{ data.det_normal_face }} </span> </li>
+          <li>Cuello - <span class="selected">{{ data.normal_torax }} - {{ data.det_normal_torax }}</span> </li>
+          <li>Tórax - <span class="selected">{{ data.normal_torax }} - {{ data.det_normal_torax }}</span> </li>
+          <li>Abdomen  - <span class="selected">{{ data.normal_abdomen }} - {{ data.det_normal_abdomen }}</span> </li>
+          <li>Extremidades  - <span class="selected">{{ data.normal_limbs }} - {{ data.det_normal_limbs }}</span></li>
+          <li>Genitales  - <span class="selected">{{ data.normal_genitals }} - {{ data.det_normal_genitals }}</span> </li>
+          <li>Columna Vertebral  - <span class="selected">{{ data.normal_spine }} - {{ data.det_normal_spine }}</span></li>   
         </ul>
       </div>
     </div> <!-- // .card -->
@@ -411,6 +419,10 @@
         <label class="uk-form-label" for="id_unidad_movil">Eje QRS</label>
         <div class="uk-form-controls">
             {{ data.electro_axis_qrs }}
+        </div>
+        <label class="uk-form-label" for="id_unidad_movil">QRS</label>
+        <div class="uk-form-controls">
+            {{ data.electro_qrs }}
         </div>
         <label class="uk-form-label" for="id_unidad_movil">ST</label>
         <div class="uk-form-controls">
