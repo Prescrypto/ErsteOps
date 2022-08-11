@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.22)  4 AUG 2022 01:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.22)  10 AUG 2022 23:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -194,6 +194,10 @@ Package: layout 2021-03-10 v1.2e Show layout parameters
 \PositionY=\count300
 \ArrowLength=\count301
 )
+(/usr/local/texlive/2022/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count302
+)
 (/usr/local/texlive/2022/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
 
@@ -203,9 +207,9 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 (/usr/local/texlive/2022/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2022/02/03 v1.0f TeX engine tests
 ))
-\Gm@cnth=\count302
-\Gm@cntv=\count303
-\c@Gm@tempcnt=\count304
+\Gm@cnth=\count303
+\Gm@cntv=\count304
+\c@Gm@tempcnt=\count305
 \Gm@bindingoffset=\dimen160
 \Gm@wd@mp=\dimen161
 \Gm@odd@mp=\dimen162
@@ -216,56 +220,138 @@ Package: iftex 2022/02/03 v1.0f TeX engine tests
 \Gm@layoutvoffset=\dimen167
 \Gm@dimlist=\toks21
 )
-(/usr/local/texlive/2022/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
-Package: fancyhdr 2022/05/18 v4.0.3 Extensive control of page headers and foote
-rs
-\f@nch@headwidth=\skip49
-\f@nch@O@elh=\skip50
-\f@nch@O@erh=\skip51
-\f@nch@O@olh=\skip52
-\f@nch@O@orh=\skip53
-\f@nch@O@elf=\skip54
-\f@nch@O@erf=\skip55
-\f@nch@O@olf=\skip56
-\f@nch@O@orf=\skip57
+(/usr/local/texlive/2022/texmf-dist/tex/latex/ua1/uarial.sty
+Package: uarial 2006/03/21 1.0 (WaS)
+)
+(/usr/local/texlive/2022/texmf-dist/tex/latex/transparent/transparent.sty
+Package: transparent 2019/11/29 v1.4 Transparency via pdfTeX's color stack (HO)
+
+
+(/usr/local/texlive/2022/texmf-dist/tex/latex/auxhook/auxhook.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+))
+(/usr/local/texlive/2022/texmf-dist/tex/latex/microtype/microtype.sty
+Package: microtype 2022/06/23 v3.0f Micro-typographical refinements (RS)
+\MT@toks=\toks22
+\MT@tempbox=\box54
+\MT@count=\count306
+LaTeX Info: Redefining \noprotrusionifhmode on input line 1045.
+LaTeX Info: Redefining \leftprotrusion on input line 1046.
+LaTeX Info: Redefining \rightprotrusion on input line 1056.
+LaTeX Info: Redefining \textls on input line 1234.
+\MT@outer@kern=\dimen168
+LaTeX Info: Redefining \textmicrotypecontext on input line 1858.
+\MT@listname@count=\count307
+
+(/usr/local/texlive/2022/texmf-dist/tex/latex/microtype/microtype-pdftex.def
+File: microtype-pdftex.def 2022/06/23 v3.0f Definitions specific to pdftex (RS)
+
+LaTeX Info: Redefining \lsstyle on input line 900.
+LaTeX Info: Redefining \lslig on input line 900.
+\MT@outer@space=\skip49
+)
+Package microtype Info: Loading configuration file microtype.cfg.
+
+(/usr/local/texlive/2022/texmf-dist/tex/latex/microtype/microtype.cfg
+File: microtype.cfg 2022/06/23 v3.0f microtype main configuration file (RS)
+))
+(/usr/local/texlive/2022/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count308
+\calc@Bcount=\count309
+\calc@Adimen=\dimen169
+\calc@Bdimen=\dimen170
+\calc@Askip=\skip50
+\calc@Bskip=\skip51
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count310
+\calc@Cskip=\skip52
+)
+(/usr/local/texlive/2022/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2020-07-07 v1.5u LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks23
+\verbatim@line=\toks24
+\verbatim@in@stream=\read4
+)
+(/usr/local/texlive/2022/texmf-dist/tex/latex/lm/lmodern.sty
+Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/lmm/m/it on input line 23.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/lmsy/m/n on input line 24.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 25.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 26.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/lmm/b/it on input line 27.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/lmsy/b/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 31.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 32.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/lmr/m/it on input line 33.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 36.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
+)
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 39
+.
+
+(/usr/local/texlive/2022/texmf-dist/tex/latex/lm/t1lmr.fd
+File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 (/usr/local/texlive/2022/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2022-07-01 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count305
-\l__pdf_internal_box=\box54
+\l__color_backend_stack_int=\count311
+\l__pdf_internal_box=\box55
 )
 No file rendered_template.aux.
 \openout1 = `rendered_template.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 226.
-LaTeX Font Info:    ... okay on input line 226.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 226.
-LaTeX Font Info:    ... okay on input line 226.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 226.
-LaTeX Font Info:    ... okay on input line 226.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 226.
-LaTeX Font Info:    ... okay on input line 226.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 226.
-LaTeX Font Info:    ... okay on input line 226.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 226.
-LaTeX Font Info:    ... okay on input line 226.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 226.
-LaTeX Font Info:    ... okay on input line 226.
-LaTeX Info: Redefining \. on input line 226.
-LaTeX Info: Redefining \% on input line 226.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Info: Redefining \. on input line 39.
+LaTeX Info: Redefining \% on input line 39.
 (/usr/local/texlive/2022/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count306
-\scratchdimen=\dimen168
-\scratchbox=\box55
-\nofMPsegments=\count307
-\nofMParguments=\count308
-\everyMPshowfont=\toks22
-\MPscratchCnt=\count309
-\MPscratchDim=\dimen169
-\MPnumerator=\count310
-\makeMPintoPDFobject=\count311
-\everyMPtoPDFconversion=\toks23
+\scratchcounter=\count312
+\scratchdimen=\dimen171
+\scratchbox=\box56
+\nofMPsegments=\count313
+\nofMParguments=\count314
+\everyMPshowfont=\toks25
+\MPscratchCnt=\count315
+\MPscratchDim=\dimen172
+\MPnumerator=\count316
+\makeMPintoPDFobject=\count317
+\everyMPtoPDFconversion=\toks26
 ) (/usr/local/texlive/2022/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -309,88 +395,104 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Font Info:    Trying to load font information for T1+cmss on input line 2
-41.
-(/usr/local/texlive/2022/texmf-dist/tex/latex/base/t1cmss.fd
-File: t1cmss.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+LaTeX Info: Redefining \microtypecontext on input line 39.
+Package microtype Info: Applying patch `item' on input line 39.
+Package microtype Info: Applying patch `toc' on input line 39.
+Package microtype Info: Applying patch `eqnum' on input line 39.
+Package microtype Info: Applying patch `footnote' on input line 39.
+Package microtype Info: Generating PDF output.
+Package microtype Info: Character protrusion enabled (level 2).
+Package microtype Info: Using default protrusion set `alltext'.
+Package microtype Info: Automatic font expansion enabled (level 2),
+(microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
+Package microtype Info: Using default expansion set `alltext-nott'.
+LaTeX Info: Redefining \showhyphens on input line 39.
+Package microtype Info: No adjustment of tracking.
+Package microtype Info: No adjustment of interword spacing.
+Package microtype Info: No adjustment of character kerning.
+(/usr/local/texlive/2022/texmf-dist/tex/latex/microtype/mt-cmr.cfg
+File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
+(RS)
 )
-</vagrant/ersteops/templates/printpdf/transparent_head.png, id=1, 614.295pt x 3
-15.0972pt>
-File: /vagrant/ersteops/templates/printpdf/transparent_head.png Graphic file (t
-ype png)
-<use /vagrant/ersteops/templates/printpdf/transparent_head.png>
-Package pdftex.def Info: /vagrant/ersteops/templates/printpdf/transparent_head.
-png  used on input line 242.
-(pdftex.def)             Requested size: 384.11151pt x 199.16617pt.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 242.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 242.
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 4
+0.
 
+(/usr/local/texlive/2022/texmf-dist/tex/latex/lm/t1lmss.fd
+File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmss' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+</vagrant/ersteops/static/img/printpdf//paperless_template_page_1.pdf, id=1, pa
+ge=1, 794.97pt x 614.295pt>
+File: /vagrant/ersteops/static/img/printpdf//paperless_template_page_1.pdf Grap
+hic file (type pdf)
+<use /vagrant/ersteops/static/img/printpdf//paperless_template_page_1.pdf, page
+ 1>
+Package pdftex.def Info: /vagrant/ersteops/static/img/printpdf//paperless_templ
+ate_page_1.pdf , page1 used on input line 146.
+(pdftex.def)             Requested size: 794.97006pt x 614.31223pt.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
+48.
 
-Package fancyhdr Warning: \headheight is too small (0.0pt): 
-(fancyhdr)                Make it at least 199.92302pt, for example:
-(fancyhdr)                \setlength{\headheight}{199.92302pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
+(/usr/local/texlive/2022/texmf-dist/tex/latex/lm/ot1lmr.fd
+File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
+48.
 
-(fancyhdr)                \addtolength{\topmargin}{-199.92302pt}.
+(/usr/local/texlive/2022/texmf-dist/tex/latex/lm/omllmm.fd
+File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
+148.
 
-</vagrant/ersteops/templates/printpdf/transparent_foot.png, id=3, 614.295pt x 1
-22.1363pt>
-File: /vagrant/ersteops/templates/printpdf/transparent_foot.png Graphic file (t
-ype png)
-<use /vagrant/ersteops/templates/printpdf/transparent_foot.png>
-Package pdftex.def Info: /vagrant/ersteops/templates/printpdf/transparent_foot.
-png  used on input line 242.
-(pdftex.def)             Requested size: 384.11151pt x 142.27643pt.
-</vagrant/ersteops/static/img/printpdf//qr_signature.jpg, id=4, 451.6875pt x 45
-1.6875pt>
-File: /vagrant/ersteops/static/img/printpdf//qr_signature.jpg Graphic file (typ
-e jpg)
-<use /vagrant/ersteops/static/img/printpdf//qr_signature.jpg>
-Package pdftex.def Info: /vagrant/ersteops/static/img/printpdf//qr_signature.jp
-g  used on input line 242.
-(pdftex.def)             Requested size: 113.81068pt x 113.81068pt.
+(/usr/local/texlive/2022/texmf-dist/tex/latex/lm/omslmsy.fd
+File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
+148.
 
-Package fancyhdr Warning: \footskip is too small (120.0pt): 
-(fancyhdr)                Make it at least 145.86307pt, for example:
-(fancyhdr)                \setlength{\footskip}{145.86307pt}.
-
-</vagrant/ersteops/static/img/printpdf//laam_template.pdf, id=5, 794.97pt x 614
-.295pt>
-File: /vagrant/ersteops/static/img/printpdf//laam_template.pdf Graphic file (ty
-pe pdf)
-<use /vagrant/ersteops/static/img/printpdf//laam_template.pdf>
-Package pdftex.def Info: /vagrant/ersteops/static/img/printpdf//laam_template.p
-df  used on input line 242.
-(pdftex.def)             Requested size: 794.96806pt x 614.29349pt.
-[1{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
-
- </vagrant/ersteops/static/img/printpdf//laam_template.pdf> </vagrant/ersteops/
-templates/printpdf/transparent_head.png> </vagrant/ersteops/templates/printpdf/
-transparent_foot.png> </vagrant/ersteops/static/img/printpdf//qr_signature.jpg 
-(PNG copy)>] (/vagrant/ersteops/templates/printpdf//rendered_template.aux
-LaTeX Info: Redefining \. on input line 8.
-LaTeX Info: Redefining \% on input line 8.
-) ) 
+(/usr/local/texlive/2022/texmf-dist/tex/latex/lm/omxlmex.fd
+File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 148.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 148.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 148.
+</vagrant/ersteops/static/img/printpdf//paperless_template_page_2.pdf, id=2, pa
+ge=1, 794.97pt x 614.295pt>
+File: /vagrant/ersteops/static/img/printpdf//paperless_template_page_2.pdf Grap
+hic file (type pdf)
+<use /vagrant/ersteops/static/img/printpdf//paperless_template_page_2.pdf, page
+ 1>
+Package pdftex.def Info: /vagrant/ersteops/static/img/printpdf//paperless_templ
+ate_page_2.pdf , page1 used on input line 221.
+(pdftex.def)             Requested size: 794.97006pt x 614.31223pt.
+ [1{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map} </vag
+rant/ersteops/static/img/printpdf//paperless_template_page_1.pdf>] [2 </vagrant
+/ersteops/static/img/printpdf//paperless_template_page_2.pdf>]
+(/vagrant/ersteops/templates/printpdf//rendered_template.aux) ) 
 Here is how much of TeX's memory you used:
- 4920 strings out of 479474
- 79026 string characters out of 5873902
- 403149 words of memory out of 5000000
- 23115 multiletter control sequences out of 15000+600000
- 473100 words of font info for 33 fonts, out of 8000000 for 9000
+ 7158 strings out of 479474
+ 120528 string characters out of 5873902
+ 483474 words of memory out of 5000000
+ 25274 multiletter control sequences out of 15000+600000
+ 487610 words of font info for 51 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 55i,22n,66p,290b,480s stack positions out of 10000i,1000n,20000p,200000b,200000s
- </home/vagrant/.texlive2022/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.
-600pk> </home/vagrant/.texlive2022/texmf-var/fonts/pk/ljfour/jknappen/ec/ecss12
-00.600pk> </home/vagrant/.texlive2022/texmf-var/fonts/pk/ljfour/jknappen/ec/ecs
-x1200.600pk> </home/vagrant/.texlive2022/texmf-var/fonts/pk/ljfour/jknappen/ec/
-ecrm1000.600pk>
+ 55i,13n,62p,1051b,367s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{/usr/local/texl
+ive/2022/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</usr/local/texlive/2022/texmf
+-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts
+/type1/public/lm/lmss10.pfb>
 Output written on /vagrant/ersteops/templates/printpdf//rendered_template.pdf (
-1 page, 60344 bytes).
+2 pages, 201796 bytes).
 PDF statistics:
- 70 PDF objects out of 1000 (max. 8388607)
- 25 compressed objects within 1 object stream
+ 72 PDF objects out of 1000 (max. 8388607)
+ 45 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 10251 words of extra memory for PDF output out of 12000 (max. 10000000)
 
