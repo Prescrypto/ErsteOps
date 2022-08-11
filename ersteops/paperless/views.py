@@ -330,6 +330,10 @@ def new_medicalreport(request):
           det_normal_limbs = vue_data['det_normal_limbs'],
           det_normal_genitals = vue_data['det_normal_genitals'],
           det_normal_spine = vue_data['det_normal_spine'],
+          crew_medic = vue_data['crew_medic'],
+          crew_medic_id_card = vue_data['crew_medic_id_card'],
+          crew_tum = vue_data['crew_tum'],
+          crew_operator = vue_data['crew_operator'],
           )
           messages.info(request, "Parte Medico Guardado correctamente!!!")
           Send_Mail_To(request,vue_data['email'],medicalReport.id)

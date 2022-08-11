@@ -212,7 +212,11 @@ class MedicalReport(models.Model):
     derivation_hospital = models.CharField("Hospitar derivacion", blank=True, default='', max_length=100)
     crum_hospital = models.CharField("Hospitar recibe CRUM", blank=True, default='', max_length=100)
     crum_notes = models.TextField("Notas Crum",blank=True)
-    notes = models.TextField("Notas Emergencia",blank=True)  
+    notes = models.TextField("Notas Emergencia",blank=True)
+    crew_medic = models.CharField("Medico CREW",blank=True,default='',max_length=50)
+    crew_medic_id_card = models.CharField("Cedula Profesional",blank=True,default='',max_length=50)
+    crew_tum = models.CharField("TUM",blank=True,default='',max_length=50)
+    crew_operator = models.CharField("Operador",blank=True,default='',max_length=50) 
 
     def json_physical_exploration(self):
         #convert_to_json
