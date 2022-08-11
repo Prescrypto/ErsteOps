@@ -25,7 +25,7 @@ from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.http import JsonResponse
 import json
 #def emergency_data_dict(emergency):
-
+from django.core.mail import EmailMessage
 
 #@method_decorator(login_required, name='dispatch')
 class MedicalReportNew(View):
@@ -308,18 +308,29 @@ def new_medicalreport(request):
           demarcation_responsable = vue_data['demarcation_responsable'],
           demarcation_relation = vue_data['demarcation_relation'],
           user = request.user,
+          electro_qrs = vue_data['electro_qrs'],
+          email = vue_data['email'],
+          send_email = vue_data['send_email'],
+          derivation_hospital = vue_data['derivation_hospital'],
+          crum_hospital = vue_data['crum_hospital'],
+          crum_notes = vue_data['crum_notes'],
+          notes = vue_data['notes'],
+          detail_pat_history_daibetes_melitus = vue_data['detail_pat_history_daibetes_melitus'],
+          detail_pat_history_arterial_hypertension = vue_data['detail_pat_history_arterial_hypertension'],
+          detail_pat_history_heart_disease = vue_data['detail_pat_history_heart_disease'],
+          detail_pat_history_pneumopathies = vue_data['detail_pat_history_pneumopathies'],
+          detail_pat_history_trauma = vue_data['detail_pat_history_trauma'],
+          detail_pat_history_alergy = vue_data['detail_pat_history_alergy'],
+          det_normal_head = vue_data['det_normal_head'],
+          det_normal_face = vue_data['det_normal_face'],
+          det_normal_torax = vue_data['det_normal_torax'],
+          det_normal_abdomen = vue_data['det_normal_abdomen'],
+          det_normal_limbs = vue_data['det_normal_limbs'],
+          det_normal_genitals = vue_data['det_normal_genitals'],
+          det_normal_spine = vue_data['det_normal_spine'],
           )
           messages.error(request, "Parte Medico Guardado correctamente!!!")
-          # if data['timer_type'] == '1':
-          #     emergency.unit_dispatched_time = timezone.now()
-          # if data['timer_type'] == '2':
-          #     emergency.arrival_time = timezone.now()
-          #     emergency.attention_time = timezone.now()
-          # if data['timer_type'] == '3':
-          #     emergency.derivation_time = timezone.now()
-          # if data['timer_type'] == '4':
-          #     emergency.patient_arrival = timezone.now()
-
+          Send_Mail_To(vue_data['email'])
           # emergency.save()
           data.update({'status': 'success', 'client_id':qs.odoo_client})
           response = JsonResponse(data)
@@ -342,5 +353,17 @@ def find_on_list(my_list_Dict, what_to_search):
   return my_text
 
 
-
+def Send_Mail_To(email_recive):
+  try:
+    email = EmailMessage(
+      'Hello',
+      'Body goes here',
+      'info@keepitsimple.com.mx',
+      [ email_recive, ]
+    )
+    email.send()
+    logger.info('[ NEW MEWDICAL SEndMail : {} ]'.format(email_recive))
+  except Exception as e:
+    logger.error("[Create Medical Report Email ERROR]: {}, type: {}".format(e, type(e)))
+    return bad_response
 
