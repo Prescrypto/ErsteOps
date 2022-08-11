@@ -210,8 +210,9 @@
         <div v-if="paperless.is_patient_unknow">
            <div class="uk-form-controls">
               <input class="uk-input"
+              v-model="paperless.patient_unknow"
               tabindex="11" 
-              id="form-stacked-text" 
+              id="id_patient_unknow" 
               type="text"
               maxlength="50" 
               placeholder="Paciente desconocido..."/>
@@ -611,6 +612,54 @@
           <option>Alergias</option>
           <option>Otro</option>
         </select>
+        <div v-if="paperless.pathological_history.includes('Diabetes Melitus')">
+          <label class="uk-form-label" for="form-stacked-text">Diabetes Melitus</label>
+          <textarea class="uk-textarea" 
+           v-model="paperless.detail_pat_history_daibetes_melitus"
+           name="detail_pat_history_daibetes_melitus"
+           id="id_detail_pat_history_daibetes_melitus" 
+           placeholder="detalle"></textarea>
+        </div>
+        <div v-if="paperless.pathological_history.includes('Hipertension Arterial')">
+          <label class="uk-form-label" for="form-stacked-text">Hipertension Arterial</label>
+          <textarea class="uk-textarea" 
+           v-model="paperless.detail_pat_history_arterial_hypertension"
+           name="detail_pat_history_arterial_hypertension"
+           id="id_detail_pat_history_arterial_hypertension" 
+           placeholder="detalle"></textarea>
+        </div>
+        <div v-if="paperless.pathological_history.includes('Cardiopatias')">
+          <label class="uk-form-label" for="form-stacked-text">Cardiopatias</label>
+          <textarea class="uk-textarea" 
+           v-model="paperless.detail_pat_history_heart_disease"
+           name="detail_pat_history_heart_disease"
+           id="id_detail_pat_history_heart_disease" 
+           placeholder="detalle"></textarea>
+        </div>
+        <div v-if="paperless.pathological_history.includes('Neumopatias')">
+          <label class="uk-form-label" for="form-stacked-text">Neumopatias</label>
+          <textarea class="uk-textarea" 
+           v-model="paperless.detail_pat_history_pneumopathies"
+           name="detail_pat_history_pneumopathies"
+           id="id_detail_pat_history_pneumopathies" 
+           placeholder="detalle"></textarea>
+        </div>
+        <div v-if="paperless.pathological_history.includes('Quirurgicos / Trauma')">
+          <label class="uk-form-label" for="form-stacked-text">Quirurgicos</label>
+          <textarea class="uk-textarea" 
+           v-model="paperless.detail_pat_history_trauma"
+           name="detail_pat_history_trauma"
+           id="id_detail_pat_history_trauma" 
+           placeholder="detalle"></textarea>
+        </div>
+        <div v-if="paperless.pathological_history.includes('Alergias')">
+          <label class="uk-form-label" for="form-stacked-text">Alergias</label>
+          <textarea class="uk-textarea" 
+           v-model="paperless.detail_pat_history_alergy"
+           name="detail_pat_history_alergy"
+           id="id_detail_pat_history_alergy" 
+           placeholder="detalle"></textarea>
+        </div>
         <div v-if="paperless.pathological_history.includes('Otro')">
           <label class="uk-form-label" for="form-stacked-text">Otro</label>
           <textarea class="uk-textarea" 
@@ -720,6 +769,70 @@
           <option>Genitales</option>
           <option>Columna Vertebral</option>
         </select>
+        <div v-if="paperless.normal_elements.includes('Cabeza')">
+          <label class="uk-form-label" for="id_det_normal_head">Cabeza</label>
+          <textarea class="uk-textarea" 
+           v-model="paperless.det_normal_head"
+           name="det_normal_head"
+           id="id_det_normal_head" 
+           placeholder="detalle"></textarea>
+        </div>
+        <div v-if="paperless.normal_elements.includes('Cara')">
+          <label class="uk-form-label" for="id_det_normal_facet">Cara</label>
+          <textarea class="uk-textarea" 
+           v-model="paperless.det_normal_face"
+           name="det_normal_face"
+           id="id_det_normal_face" 
+           placeholder="detalle"></textarea>
+        </div>
+        <div v-if="paperless.normal_elements.includes('Cuello')">
+          <label class="uk-form-label" for="id_det_normal_neck">Cuello</label>
+          <textarea class="uk-textarea" 
+           v-model="paperless.det_normal_neck"
+           name="det_normal_neck"
+           id="id_det_normal_neck" 
+           placeholder="detalle"></textarea>
+        </div>
+        <div v-if="paperless.normal_elements.includes('Tórax')">
+          <label class="uk-form-label" for="form-stacked-text">Tórax</label>
+          <textarea class="uk-textarea" 
+           v-model="paperless.det_normal_torax"
+           name="det_normal_torax"
+           id="id_det_normal_torax" 
+           placeholder="detalle"></textarea>
+        </div>
+        <div v-if="paperless.normal_elements.includes('Abdomen')">
+          <label class="uk-form-label" for="id_det_normal_abdomen">Abdomen</label>
+          <textarea class="uk-textarea" 
+           v-model="paperless.det_normal_abdomen"
+           name="det_normal_abdomen"
+           id="id_det_normal_abdomen" 
+           placeholder="detalle"></textarea>
+        </div>
+        <div v-if="paperless.normal_elements.includes('Extremidades')">
+          <label class="uk-form-label" for="id_det_normal_limbs">Extremidades</label>
+          <textarea class="uk-textarea" 
+           v-model="paperless.det_normal_limbs"
+           name="det_normal_limbs"
+           id="id_det_normal_limbs" 
+           placeholder="detalle"></textarea>
+        </div>
+        <div v-if="paperless.normal_elements.includes('Genitales')">
+          <label class="uk-form-label" for="id_det_normal_genitals">Genitales</label>
+          <textarea class="uk-textarea" 
+           v-model="paperless.det_normal_genitals"
+           name="det_normal_genitals"
+           id="id_det_normal_genitals" 
+           placeholder="detalle"></textarea>
+        </div>
+        <div v-if="paperless.normal_elements.includes('Columna Vertebral')">
+          <label class="uk-form-label" for="id_det_normal_spine">Columna Vertebral</label>
+          <textarea class="uk-textarea" 
+           v-model="paperless.det_normal_spine"
+           name="det_normal_spine"
+           id="id_det_normal_spine" 
+           placeholder="detalle"></textarea>
+        </div>
       </div>
     </div> <!-- // .card -->
   </div> <!-- // .row -->
@@ -737,81 +850,83 @@
     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
       <h3 class="uk-card-title">Electrocardiograma <input type="checkbox" id="jack" v-model="electrocardiogram"/></h3>
       <div v-if="electrocardiogram">
-      <label class="uk-form-label" for="id_unidad_movil">Ritmo</label>
-      <div class="uk-form-controls">
+        <label class="uk-form-label" for="id_electro_rhythm">Ritmo</label>
+        <div class="uk-form-controls">
+            <input class="uk-input" 
+            v-model="paperless.electro_rhythm"
+            maxlength="20" 
+            id="id_electro_rhythm" type="text" placeholder="Ritmo...">
+        </div>
+        <label class="uk-form-label" for="id_electro_frequency">Frecuencia</label>
+        <div class="uk-form-controls">
           <input class="uk-input" 
-          v-model="paperless.electro_rhythm"
+          v-model="paperless.electro_frequency"
+          name="electro_frequency"
           maxlength="20" 
-          id="id_unidad_movil" type="text" placeholder="Ritmo...">
-      </div>
-      <label class="uk-form-label" for="id_unidad_movil">Frecuencia</label>
-      <div class="uk-form-controls">
-        <input class="uk-input" 
-        v-model="paperless.electro_frequency"
-        maxlength="20" 
-        id="id_unidad_movil" type="text" placeholder="Frecuencia...">
-      </div>
-          <label class="uk-form-label" for="id_unidad_movil">Onda P</label>
+          id="id_electro_frequency" type="text" placeholder="Frecuencia...">
+        </div>
+        <label class="uk-form-label" for="id_electro_wave_p">Onda P</label>
             <div class="uk-form-controls">
                 <input class="uk-input" 
                 v-model="paperless.electro_wave_p"
+                name="electro_wave_p" 
                 maxlength="20" 
-                id="id_unidad_movil" type="text" placeholder="Onda P...">
+                id="id_electro_wave_p" type="text" placeholder="Onda P...">
             </div>
-        <label class="uk-form-label" for="id_unidad_movil">PR</label>
+        <label class="uk-form-label" for="id_electro_pr">PR</label>
         <div class="uk-form-controls">
             <input class="uk-input" 
             v-model="paperless.electro_pr"
             maxlength="20" 
-            id="id_unidad_movil" type="text" placeholder="PR...">
+            id="id_electro_wave_pr" type="text" placeholder="PR...">
         </div>
-        <label class="uk-form-label" for="id_unidad_movil">Eje QRS</label>
+        <label class="uk-form-label" for="id_electro_axis_qrs">Eje QRS</label>
         <div class="uk-form-controls">
             <input class="uk-input" 
             v-model="paperless.electro_axis_qrs"
             maxlength="20" 
-            id="id_unidad_movil" type="text" placeholder="Eje QRS...">
+            id="id_electro_axis_qrs" type="text" placeholder="Eje QRS...">
         </div>
-        <label class="uk-form-label" for="id_unidad_movil">QRS</label>
+        <label class="uk-form-label" for="id_electro_qrs">QRS</label>
         <div class="uk-form-controls">
             <input class="uk-input" 
             v-model="paperless.electro_qrs"
             maxlength="20" 
-            id="id_unidad_movil" type="text" placeholder="QRS...">
+            id="id_electro_qrs" type="text" placeholder="QRS...">
         </div>
-        <label class="uk-form-label" for="id_unidad_movil">ST</label>
+        <label class="uk-form-label" for="id_electro_st">ST</label>
         <div class="uk-form-controls">
             <input class="uk-input" 
             v-model="paperless.electro_st"
             maxlength="20" 
-            id="id_unidad_movil" type="text" placeholder="ST...">
+            id="id_electro_st" type="text" placeholder="ST...">
         </div>
-        <label class="uk-form-label" for="id_unidad_movil">Onda T</label>
+        <label class="uk-form-label" for="id_electro_wave_t">Onda T</label>
         <div class="uk-form-controls">
             <input class="uk-input" 
             v-model="paperless.electro_wave_t"
             maxlength="20" 
-            id="id_unidad_movil" type="text" placeholder="Onda T...">
+            id="id_electro_wave_t" type="text" placeholder="Onda T...">
         </div>
-        <label class="uk-form-label" for="id_unidad_movil">QT</label>
+        <label class="uk-form-label" for="electro_qt">QT</label>
         <div class="uk-form-controls">
             <input class="uk-input" 
             v-model="paperless.electro_qt"
             maxlength="20" 
-            id="id_unidad_movil" type="text" placeholder="QT...">
+            id="id_electro_qt" type="text" placeholder="QT...">
         </div>
-        <label class="uk-form-label" for="id_unidad_movil">Anormalidades</label>
+        <label class="uk-form-label" for="id_electro_abnormalities">Anormalidades</label>
         <div class="uk-form-controls">
             <input class="uk-input" 
             v-model="paperless.electro_abnormalities"
             maxlength="20" 
-            id="id_unidad_movil" type="text" placeholder="Anormailides...">
+            id="id_electro_abnormalities" type="text" placeholder="Anormailides...">
         </div>
-        <label class="uk-form-label" for="id_unidad_movil">Interpretacion electrocardiografica</label>
+        <label class="uk-form-label" for="id_electro_interpretation">Interpretacion electrocardiografica</label>
         <div class="uk-form-controls">
             <textarea class="uk-textarea" 
             v-model="paperless.electro_interpretation"
-            id="form-stacked-text" placeholder="Interpretacion.."></textarea>
+            id="id_electro_interpretation" placeholder="Interpretacion.."></textarea>
         </div>
       </div>                              
     </div> <!-- // .card -->
