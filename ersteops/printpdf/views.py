@@ -30,6 +30,7 @@ import logging
 logger = logging.getLogger('django_info')
 
 
+
 # Create your views here.
 # generate pdf for screen
 def document_as_pdf(request,pk):
@@ -111,11 +112,14 @@ def generate_medication_tex(params):
 
 def generate_tex(params,output_mode):
   # Assign template
+  #Takes tex input from the directory templates/printpdf
+  #the pdf-background comes from /static/img/printpdf
   latex_hospital_logo = "hospital_logo.jpg"
   if output_mode == 'pdf':
-    template = get_template('printpdf/petstore_recip_template.tex')
+    #template = get_template('printpdf/petstore_recip_template.tex')
+    template = get_template('printpdf/paperless_template.tex')
   else:
-    template = get_template('printpdf/petstore_recip_template_print.tex')
+    template = get_template('printpdf/paperless_template_print.tex')
   # Define header and footer
   latex_overpic_head = '\\begin{overpic}[width=13.5cm,height=7cm,unit=1mm]{'+ settings.BASE_DIR +'/templates/printpdf/transparent_head.png}'
   latex_overpic_foot = '\\begin{overpic}[width=13.5cm,height=5cm,unit=1mm]{'+ settings.BASE_DIR +'/templates/printpdf/transparent_foot.png}'
