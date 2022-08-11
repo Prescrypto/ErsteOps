@@ -66,6 +66,40 @@ def document_as_pdf(request,pk):
     messages.error(request, "PDF Error!!! ckeck /templates/printpdf/rendered_template.log")
     return redirect('/paperless/')
 
+def document_as_new_pdf(request,pk):
+  # Get document data
+  user = request.user
+  params = get_medical_report(pk)
+
+  print(params)
+  # Generate QR Signature
+  #generate_qr(signature)
+  # Clean params strings
+  params = escape_params(params)
+  #params['diagnostic'] = (params['diagnostic'][:250]+ '...') if len(params['diagnostic']) > 250 else params['diagnostic']
+  # print "***************** diagnostic "
+  # print params['diagnostic']
+  # print "***************** diagnostic end "
+  #print params
+  generate_tex(params,'pdf')
+  tempdir = settings.BASE_DIR+'/templates/printpdf/'
+  tex_file = settings.BASE_DIR+'/templates/printpdf/rendered_template'
+
+  if generate_pdf(tempdir,tex_file):    
+    #print("PDF Generated Ok")
+    logger.info('[ PRINTPDF! - PDF Generated OK]')
+    pdf_file = open(os.path.join(tempdir, 'rendered_template.pdf'), 'rb')
+    pdf = pdf_file.read()
+    #r = HttpResponse(content_type='application/pdf')
+    #r.write(pdf)
+    return pdf
+  else:
+    #print("PDF Error!!! ckeck /templates/printpdf/rendered_template.log")
+    logger.info('[ PRINTPDF! - PDF Error!!! ckeck /templates/printpdf/rendered_template.log]') 
+    messages.error(request, "PDF Error!!! ckeck /templates/printpdf/rendered_template.log")
+    return redirect('/paperless/')
+
+
 def document_as_pdf_print(request,pk):
   # Get document data
   user = request.user
@@ -96,6 +130,7 @@ def document_as_pdf_print(request,pk):
     logger.info('[ PRINTPDF! - PDF Error!!! ckeck /templates/printpdf/rendered_template.log]') 
     messages.error(request, "PDF Error!!! ckeck /templates/printpdf/rendered_template.log")
     return redirect('/petfile/review/')
+
 
 
 

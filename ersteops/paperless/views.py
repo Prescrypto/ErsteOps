@@ -26,6 +26,8 @@ from django.http import JsonResponse
 import json
 #def emergency_data_dict(emergency):
 from django.core.mail import EmailMessage
+import os.path
+from printpdf.views import document_as_new_pdf
 
 #@method_decorator(login_required, name='dispatch')
 class MedicalReportNew(View):
@@ -329,8 +331,8 @@ def new_medicalreport(request):
           det_normal_genitals = vue_data['det_normal_genitals'],
           det_normal_spine = vue_data['det_normal_spine'],
           )
-          messages.error(request, "Parte Medico Guardado correctamente!!!")
-          Send_Mail_To(vue_data['email'])
+          messages.info(request, "Parte Medico Guardado correctamente!!!")
+          Send_Mail_To(request,vue_data['email'],medicalReport.id)
           # emergency.save()
           data.update({'status': 'success', 'client_id':qs.odoo_client})
           response = JsonResponse(data)
@@ -353,14 +355,23 @@ def find_on_list(my_list_Dict, what_to_search):
   return my_text
 
 
-def Send_Mail_To(email_recive):
+def Send_Mail_To(request,email_recive,pk):
+
   try:
     email = EmailMessage(
-      'Hello',
-      'Body goes here',
+      'Parte Medico Vida uno subject',
+      'Este es su parte medico body',
       'info@keepitsimple.com.mx',
       [ email_recive, ]
     )
+    pdf_to_attach = settings.BASE_DIR+'/templates/printpdf/rendered_template.pdf/'
+    tempdir = settings.BASE_DIR+'/templates/printpdf/'
+    pdf_file = open(os.path.join(tempdir, 'rendered_template.pdf'), 'rb')
+    pdf = document_as_new_pdf(request,pk)
+    email.attach('Parte_Medico_Vida_Uno.pdf',pdf,'application/pdf')
+    #pdf_to_attach = os.path.join(tempdir, 'rendered_template.pdf')
+    #email.attach_file(pdf_to_attach)
+
     email.send()
     logger.info('[ NEW MEWDICAL SEndMail : {} ]'.format(email_recive))
   except Exception as e:
