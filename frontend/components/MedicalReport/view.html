@@ -655,6 +655,7 @@
           <option>Alergias</option>
           <option>Otro</option>
         </select>
+        <p>Tiempo de evolución y terapéutica actual</p>
         <div v-if="paperless.pathological_history.includes('Diabetes Melitus')">
           <label class="uk-form-label" for="form-stacked-text">Diabetes Melitus</label>
           <textarea class="uk-textarea" 
@@ -812,6 +813,7 @@
           <option>Genitales</option>
           <option>Columna Vertebral</option>
         </select>
+        <p>Descripción de lesiones</p>
         <div v-if="paperless.normal_elements.includes('Cabeza')">
           <label class="uk-form-label" for="id_det_normal_head">Cabeza</label>
           <textarea class="uk-textarea" 
