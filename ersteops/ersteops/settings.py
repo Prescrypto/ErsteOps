@@ -302,3 +302,24 @@ EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD'] #past the key or passwor
 EMAIL_PORT = os.environ['EMAIL_PORT']
 EMAIL_USE_TLS = os.environ['EMAIL_USE_TLS']
 DEFAULT_FROM_EMAIL = os.environ['DEFAULT_FROM_EMAIL']
+
+
+MEDIA_LOCAL = ast.literal_eval(os.environ['PDF_MEDIA_LOCAL'])
+# Define if media storage is local or S3
+if MEDIA_LOCAL:
+  MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+  MEDIA_URL = os.path.join(BASE_DIR, 'media/')
+else:
+  # AWS S3 Settings
+  AWS_STORAGE_BUCKET_NAME = os.environ['PDF_AWS_STORAGE_BUCKET_NAME']
+  AWS_ACCESS_KEY_ID = os.environ['PDF_AWS_ACCESS_KEY_ID']
+  AWS_SECRET_ACCESS_KEY = os.environ['PDF_AWS_SECRET_ACCESS_KEY']
+  AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+  # AWS Config
+  MEDIAFILES_LOCATION = 'media'
+  MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+  #DEFAULT_FILE_STORAGE = 'ersteops.custom_storages.MediaStorage' 
+  DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+  AWS_S3_FILE_OVERWRITE = False
+  AWS_DEFAULT_ACL = None
+  
