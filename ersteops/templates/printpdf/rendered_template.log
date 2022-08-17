@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.22)  17 AUG 2022 21:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.22)  17 AUG 2022 21:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -327,6 +327,12 @@ LaTeX Font Info:    Trying to load font information for TS1+lmss on input line
 (/usr/local/texlive/2022/texmf-dist/tex/latex/lm/ts1lmss.fd
 File: ts1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
+LaTeX Font Info:    Trying to load font information for T1+qcr on input line 25
+1.
+
+(/usr/local/texlive/2022/texmf-dist/tex/latex/tex-gyre/t1qcr.fd
+File: t1qcr.fd 2009/09/25 v1.2 font definition file for T1/qcr
+)
 </vagrant/ersteops/static/img/printpdf//paperless_template_page_2.pdf, id=2, pa
 ge=1, 794.97pt x 614.295pt>
 File: /vagrant/ersteops/static/img/printpdf//paperless_template_page_2.pdf Grap
@@ -341,24 +347,26 @@ rant/ersteops/static/img/printpdf//paperless_template_page_1.pdf>] [2 </vagrant
 /ersteops/static/img/printpdf//paperless_template_page_2.pdf>]
 (/vagrant/ersteops/templates/printpdf//rendered_template.aux) ) 
 Here is how much of TeX's memory you used:
- 4830 strings out of 479474
- 78402 string characters out of 5873902
+ 4874 strings out of 479474
+ 79087 string characters out of 5873902
  425926 words of memory out of 5000000
- 23022 multiletter control sequences out of 15000+600000
- 474639 words of font info for 33 fonts, out of 8000000 for 9000
+ 23061 multiletter control sequences out of 15000+600000
+ 474972 words of font info for 34 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 55i,13n,62p,446b,433s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 55i,13n,62p,446b,438s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </home/vagrant/
-.texlive2022/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1000.600pk> </home/vagra
-nt/.texlive2022/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk>{/usr/loca
-l/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/local/texlive/202
-2/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</usr/local/texlive/2022/texmf-dist/f
-onts/type1/public/lm/lmss10.pfb>
+.texlive2022/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1000.600pk>{/usr/local/t
+exlive/2022/texmf-dist/fonts/enc/dvips/tex-gyre/q-ec.enc} </home/vagrant/.texli
+ve2022/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.600pk>{/usr/local/texlive
+/2022/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/local/texlive/2022/texmf-d
+ist/fonts/enc/dvips/lm/lm-ec.enc}</usr/local/texlive/2022/texmf-dist/fonts/type
+1/public/lm/lmss10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/t
+ex-gyre/qcrr.pfb>
 Output written on /vagrant/ersteops/templates/printpdf//rendered_template.pdf (
-2 pages, 184599 bytes).
+2 pages, 195814 bytes).
 PDF statistics:
- 93 PDF objects out of 1000 (max. 8388607)
- 53 compressed objects within 1 object stream
+ 99 PDF objects out of 1000 (max. 8388607)
+ 57 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
