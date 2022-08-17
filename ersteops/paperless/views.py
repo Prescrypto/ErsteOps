@@ -29,6 +29,8 @@ from django.core.mail import EmailMessage
 import os.path
 from printpdf.views import document_as_new_pdf
 
+from django.core.files.base import ContentFile, File
+
 #@method_decorator(login_required, name='dispatch')
 class MedicalReportNew(View):
   template_name = "paperless/new_medical_report_vue.html"
@@ -265,6 +267,7 @@ def new_medicalreport(request):
           physical_exploration= vue_data['physical_exploration'], 
           normal_head= find_on_list(vue_data['normal_elements'],'Cabeza'), 
           normal_face= find_on_list(vue_data['normal_elements'],'Cara'), 
+          normal_neck= find_on_list(vue_data['normal_elements'],'Cuello'), 
           normal_torax= find_on_list(vue_data['normal_elements'],'Tórax'), 
           normal_abdomen= find_on_list(vue_data['normal_elements'],'Abdomen'), 
           normal_limbs= find_on_list(vue_data['normal_elements'],'Extremidades'), 
@@ -325,6 +328,7 @@ def new_medicalreport(request):
           detail_pat_history_alergy = vue_data['detail_pat_history_alergy'],
           det_normal_head = vue_data['det_normal_head'],
           det_normal_face = vue_data['det_normal_face'],
+          det_normal_neck = vue_data['det_normal_neck'],          
           det_normal_torax = vue_data['det_normal_torax'],
           det_normal_abdomen = vue_data['det_normal_abdomen'],
           det_normal_limbs = vue_data['det_normal_limbs'],
@@ -337,6 +341,12 @@ def new_medicalreport(request):
           )
           messages.info(request, "Parte Medico Guardado correctamente!!!")
           Send_Mail_To(request,vue_data['email'],medicalReport.id)
+          tempdir = settings.BASE_DIR+'/templates/printpdf/'
+          pdf_file = open(os.path.join(tempdir, 'rendered_template.pdf'), 'rb')
+          pdf = pdf_file.read()
+          file_name = 'Parte_Medico_Vida_Uno_{}.pdf'.format(str(medicalReport.id))
+          medicalReport.final_report.save(file_name,ContentFile(pdf))
+          #medicalReport.save()
           # emergency.save()
           data.update({'status': 'success', 'client_id':qs.odoo_client})
           response = JsonResponse(data)
@@ -374,12 +384,12 @@ def Send_Mail_To(request,email_recive,pk):
     pdf_file = open(os.path.join(tempdir, 'rendered_template.pdf'), 'rb')
     pdf = document_as_new_pdf(request,pk)
     file_name = 'Parte_Medico_Vida_Uno_{}.pdf'.format(str(pk))
-    email.attach('Parte_Medico_Vida_Uno.pdf',pdf,'application/pdf')
+    email.attach(file_name,pdf,'application/pdf')
     #pdf_to_attach = os.path.join(tempdir, 'rendered_template.pdf')
     #email.attach_file(pdf_to_attach)
 
     email.send()
-    logger.info('[ NEW MEWDICAL SEndMail : {} ]'.format(email_recive))
+    logger.info('[ NEW MEWDICAL SendMail : {} ]'.format(email_recive))
   except Exception as e:
     logger.error("[Create Medical Report Email ERROR]: {}, type: {}".format(e, type(e)))
     return bad_response
