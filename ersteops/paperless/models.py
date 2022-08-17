@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 import unicodedata
 import json
+from django.core.validators import FileExtensionValidator
 # Create your models here.
 
 class MedicalReport(models.Model):
@@ -217,6 +218,8 @@ class MedicalReport(models.Model):
     crew_medic_id_card = models.CharField("Cedula Profesional",blank=True,default='',max_length=50)
     crew_tum = models.CharField("TUM",blank=True,default='',max_length=50)
     crew_operator = models.CharField("Operador",blank=True,default='',max_length=50) 
+    final_report = models.FileField("archivo de estudios(pdf o jpg)",validators=[FileExtensionValidator(allowed_extensions=['pdf','jpg'])],max_length=100,upload_to="pdffile/pdf_files",default="",blank=True)
+
 
     def json_physical_exploration(self):
         #convert_to_json
