@@ -232,6 +232,7 @@ def new_medicalreport(request):
           logger.info('[ NEW MEWDICAL REPORT DATA: -5- {} ]'.format(data['paperless']))
           vue_data=json.loads(data['paperless'])
           logger.info('[ NEW MEWDICAL REPORT DATA: -6- {} ]'.format(vue_data['service_code']))
+          logger.info('[ NEW MEWDICAL REPORT DATA: -7- {} ]'.format(vue_data['signature_client']))
           qs = Emergency.objects.get(id=vue_data['service_code'])
           medicalReport = MedicalReport.objects.create(
           odoo_client = qs.odoo_client,
@@ -338,8 +339,10 @@ def new_medicalreport(request):
           crew_medic_id_card = vue_data['crew_medic_id_card'],
           crew_tum = vue_data['crew_tum'],
           crew_operator = vue_data['crew_operator'],
+          signature_client = vue_data['signature_client'],
           )
           messages.info(request, "Parte Medico Guardado correctamente!!!")
+
           Send_Mail_To(request,vue_data['email'],medicalReport.id)
           tempdir = settings.BASE_DIR+'/templates/printpdf/'
           pdf_file = open(os.path.join(tempdir, 'rendered_template.pdf'), 'rb')
@@ -355,6 +358,7 @@ def new_medicalreport(request):
       except Exception as e:
           logger.error("[Create Medical Report View ERROR]: {}, type: {}".format(e, type(e)))
           return bad_response
+
       #qs.medical_report = medicalReport
       #qs.save()
 
