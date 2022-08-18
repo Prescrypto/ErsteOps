@@ -93,4 +93,6 @@ MedicalReportDict = {
 "crew_medic_id_card":"",
 "crew_tum":"",
 "crew_operator":"",
+"signature_client":"",
+"signature_medic":"",
 }
