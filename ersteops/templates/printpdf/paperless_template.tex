@@ -147,6 +147,9 @@
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{paperless_template_page_1}}%
 
+    %Folio
+    \put(0.91336785,0.68838718){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.id}}\end{tabular}}}}%
+
     \put(0.42638971,0.73960084){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.service_code}}\end{tabular}}}}%
     \put(0.43014479,0.72364315){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.service_unit}}\end{tabular}}}}%
    	\put(0.33829987,0.69381105){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.service_unit_type}}\end{tabular}}}}%
@@ -168,21 +171,29 @@
     \put(0.12588643,0.44615019){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.skin_color}}\end{tabular}}}}%
 
     %Padecimiento
-    \put(0.0159714,0.1825995){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.current_condition}}\end{tabular}}}}%
+    \put(0.0159714,0.1825995){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.fix_current_condition}}\end{tabular}}}}%
     %\put(0.02265882,0.24439213){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.current_condition}}\end{tabular}}}}%
 
     %Generales
     \put(0.12027596,0.41209986){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.attention_place}} \end{tabular}}}}%
     \put(0.30209431,0.41082061){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.service_type}} \end{tabular}}}}%
     \put(0.30209431,0.39566916){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.event_type}} \end{tabular}}}}%
-    \put(0.21257984,0.38532216){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.traumatics}} \end{tabular}}}}%
-    \put(0.20991809,0.36213786){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont Ojo Izquierdo:{{content.pupil_state_left}}\end{tabular}}}}%
-    \put(0.20991809,0.35077424){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont Ojo Derecho:  {{content.pupil_state_right}}\end{tabular}}}}%
-    \put(0.016641,0.38301062){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.consultation_reason}}\end{tabular}}}}%
+    %Trauma
+    \put(0.21257984,0.38532216){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {% for item in content.json_traumatics %}{{ item }},{% endfor %}\end{tabular}}}}%
+    %Ojo Izquierdo
+    \put(0.20991809,0.36213786){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont Ojo Izquierdo: {% for item in content.json_pupil_state_left%}{{ item }},{% endfor %}\end{tabular}}}}%
+    %Ojo Derecho
+    \put(0.20991809,0.35077424){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont Ojo Derecho:  {% for item in content.json_pupil_state_right%}{{ item }},{% endfor%}\end{tabular}}}}%
+    \put(0.016641,0.38301062){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {% for item in content.json_consultation_reason %}{{ item }},{% endfor%}
+    \end{tabular}}}}%
     %to_fix
+    %Via Aerea
+    \put(0.01535741,0.34684125){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}{% for item in content.json_airway %}\fontfamily{lmss}\selectfont\scriptsize {{ item.airway_type}} - {{ item.instruction }}\\{% endfor %}\end{tabular}}}}%
 
     %Medicamentos (to_fix)
-    %\put(0.0159714,0.27918911){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{ content.medications|truncatechars:20}}\end{tabular}}}}%
+    %\put(0.0159714,0.27918911){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{ content.medications }}\end{tabular}}}}%
+    %\put(0.0159714,0.27918911){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont la medi\end{tabular}}}}%
+    \put(0.0159714,0.27918911){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {% for item in content.json_medications %}{{ item.medication_type }} - {{ item.medication_name }} - {{ item.medication_hrs }} hrs\\{% endfor %}\end{tabular}}}}%
 
     %Antecedentes
     %Diabetes
@@ -258,25 +269,27 @@
     \put(0.7368123,0.14137953){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{content.electro_wave_t}}\end{tabular}}}}%
     \put(0.809729,0.1423264){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{content.electro_qt}}\end{tabular}}}}%    
     \put(0.49140242,0.11457272){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.electro_abnormalities}}\end{tabular}}}}%
-    \put(0.49140242,0.04639155){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.electro_interpretation}} {{content.json_physical_exploration}}\end{tabular}}}}%
+    %\put(0.49140242,0.04639155){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.electro_interpretation}} {{content.json_physical_exploration}}\end{tabular}}}}%
     %Signos Vitales 1
-    \put(0.48899072,0.62149126){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 12:31\end{tabular}}}}%
-    \put(0.56346295,0.62149126){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 120\end{tabular}}}}%
-    \put(0.62325414,0.62140804){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 121\end{tabular}}}}%
-    \put(0.68836013,0.62140804){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 122\end{tabular}}}}%
-    \put(0.74651878,0.62149126){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 123\end{tabular}}}}%
-    \put(0.81241818,0.62140804){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 124\end{tabular}}}}%
-    \put(0.87214411,0.62149126){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 125\end{tabular}}}}%
-    \put(0.93275252,0.62149126){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 126\end{tabular}}}}%
+    {% for item in content.json_physical_exploration%}
+    \put(0.47899072,0.62149126){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.time }}\end{tabular}}}}%
+    \put(0.56346295,0.62149126){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{ item.heart_rate }}\end{tabular}}}}%
+    \put(0.62325414,0.62140804){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{ item.respiratory_rate}}\end{tabular}}}}%
+    \put(0.68836013,0.62140804){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{ item.blood_pressure}}\end{tabular}}}}%
+    \put(0.74651878,0.62149126){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{ item.temperature}}\end{tabular}}}}%
+    \put(0.81241818,0.62140804){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{ item.oxygen_saturation}}\end{tabular}}}}%
+    \put(0.87214411,0.62149126){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{ item.glucometry}}\end{tabular}}}}%
+    \put(0.93275252,0.62149126){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{ item.glassgow_total }}\end{tabular}}}}%
+    {% endfor %}
     %Signos Vitales 2
-    \put(0.48899072,0.59441199){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 12:41\end{tabular}}}}%
-    \put(0.56346295,0.59441199){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 220\end{tabular}}}}%
-    \put(0.62325414,0.59432876){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 321\end{tabular}}}}%
-    \put(0.68836013,0.59432876){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 422\end{tabular}}}}%
-    \put(0.74651878,0.59441199){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 523\end{tabular}}}}%
-    \put(0.81241818,0.59432876){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 624\end{tabular}}}}%
-    \put(0.87214411,0.59441199){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 725\end{tabular}}}}%
-    \put(0.93275252,0.59441199){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 826\end{tabular}}}}%
+    %\put(0.48899072,0.59441199){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 12:41\end{tabular}}}}%
+    %\put(0.56346295,0.59441199){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 220\end{tabular}}}}%
+    %\put(0.62325414,0.59432876){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 321\end{tabular}}}}%
+    %\put(0.68836013,0.59432876){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 422\end{tabular}}}}%
+    %\put(0.74651878,0.59441199){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 523\end{tabular}}}}%
+    %\put(0.81241818,0.59432876){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 624\end{tabular}}}}%
+    %\put(0.87214411,0.59441199){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 725\end{tabular}}}}%
+    %\put(0.93275252,0.59441199){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 826\end{tabular}}}}%
   \end{picture}
 \endgroup%
 \end{figure}
@@ -319,9 +332,9 @@
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{paperless_template_page_2}}%
     %Impresion diagnostica
-    \put(0.02433222,0.72271027){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.treatment}}\end{tabular}}}}%
+    \put(0.02433222,0.72271027){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.fix_diagnostic_impresion}}\end{tabular}}}}%
     %Tratamiento
-    \put(0.02377709,0.34714045){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.diagnostic_impresion}}\end{tabular}}}}%
+    \put(0.02377709,0.34714045){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.fix_treatment}} \end{tabular}}}}%
     %Derivacion
     \put(0.56751227,0.6911999){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.derivation_type}}\end{tabular}}}}%
     \put(0.56751227,0.6721787){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.derivation_hospital}}\end{tabular}}}}%
@@ -335,10 +348,10 @@
     \put(0.59900976,0.48543641){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.crew_medic_id_card}}\end{tabular}}}}%
     \put(0.53065814,0.46522944){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.crew_tum}}\end{tabular}}}}%
     \put(0.55816754,0.44488927){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.crew_operator}}\end{tabular}}}}%
-    \put(0.92413649,0.32194201){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\textit{ X4 }}\end{tabular}}}}%
-    \put(0.65327278,0.35657174){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\textit{ X1 }}\end{tabular}}}}%
-    \put(0.77324116,0.32194201){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\textit{ X3 }}\end{tabular}}}}%
-    \put(0.76701121,0.33763243){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\textit{ X2 }}\end{tabular}}}}%
+    %\put(0.92413649,0.32194201){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\textit{ X4 }}\end{tabular}}}}%
+    \put(0.65327278,0.35657174){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\textit{ {{ content.demarcation_responsable }} }}\end{tabular}}}}%
+    %\put(0.77324116,0.32194201){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\textit{ X3 }}\end{tabular}}}}%
+    %\put(0.76701121,0.33763243){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\textit{ X2 }}\end{tabular}}}}%
     %\put(0.66004404,0.33814317){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\textit{☑︎}}\end{tabular}}}}%
 
 
