@@ -265,14 +265,14 @@ def new_medicalreport(request):
           airway= vue_data['airway'],
           other_airway= vue_data['other_airway'], 
           physical_exploration= vue_data['physical_exploration'], 
-          normal_head= find_on_list(vue_data['normal_elements'],'Cabeza'), 
-          normal_face= find_on_list(vue_data['normal_elements'],'Cara'), 
-          normal_neck= find_on_list(vue_data['normal_elements'],'Cuello'), 
-          normal_torax= find_on_list(vue_data['normal_elements'],'Tórax'), 
-          normal_abdomen= find_on_list(vue_data['normal_elements'],'Abdomen'), 
-          normal_limbs= find_on_list(vue_data['normal_elements'],'Extremidades'), 
-          normal_genitals= find_on_list(vue_data['normal_elements'],'Genitales'), 
-          normal_spine= find_on_list(vue_data['normal_elements'],'Columna Vertebral'), 
+          normal_head= not_find_on_list(vue_data['normal_elements'],'Cabeza'), 
+          normal_face= not_find_on_list(vue_data['normal_elements'],'Cara'), 
+          normal_neck= not_find_on_list(vue_data['normal_elements'],'Cuello'), 
+          normal_torax= not_find_on_list(vue_data['normal_elements'],'Tórax'), 
+          normal_abdomen= not_find_on_list(vue_data['normal_elements'],'Abdomen'), 
+          normal_limbs= not_find_on_list(vue_data['normal_elements'],'Extremidades'), 
+          normal_genitals= not_find_on_list(vue_data['normal_elements'],'Genitales'), 
+          normal_spine= not_find_on_list(vue_data['normal_elements'],'Columna Vertebral'), 
           current_condition= vue_data['current_condition'], 
           pupil_state_left= vue_data['pupil_state_left'], 
           pupil_state_right= vue_data['pupil_state_right'], 
@@ -367,6 +367,13 @@ def find_on_list(my_list_Dict, what_to_search):
   my_text='No'
   if my_list_Dict.count(what_to_search) > 0:
     my_text = 'Si'
+  return my_text
+
+def not_find_on_list(my_list_Dict, what_to_search):
+  #define Yes or No if key is on dict
+  my_text='Si'
+  if my_list_Dict.count(what_to_search) > 0:
+    my_text = 'No'
   return my_text
 
 
