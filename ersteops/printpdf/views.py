@@ -29,6 +29,7 @@ from paperless.models import MedicalReport
 import logging
 logger = logging.getLogger('django_info')
 
+import base64
 
 
 # Create your views here.
@@ -171,7 +172,7 @@ def generate_tex(params,output_mode):
            'latex_overpic_foot':latex_overpic_foot,
            'latex_graphics_path':latex_graphics_path,
        }
-  logger.info('[ PRINTPDF! - context {}]'.format(context)) 
+  #logger.info('[ PRINTPDF! - context {}]'.format(context)) 
   # Render template
   rendered_tpl = template.render(context).encode('utf-8')
   # Write Template to file
@@ -299,8 +300,35 @@ def get_medical_report(pk):
   medical_Report['fix_treatment'] = add_line_breaks(raw_medical_Report.treatment,67)
   medical_Report['fix_diagnostic_impresion'] = add_line_breaks(raw_medical_Report.diagnostic_impresion,67)
   medical_Report['fix_current_condition'] = add_line_breaks(raw_medical_Report.current_condition,67)  
-
+  medical_Report['have_client_signature'] = save_png('client_signature',raw_medical_Report.signature_client)
   return medical_Report
+
+def save_png(target_file,data_uri):
+  have_signature_file = True
+  if data_uri:
+    encoded_data = data_uri.split(",")
+    encoded_image = encoded_data[1]
+    res = bytes(encoded_image, 'utf-8')
+    logger.info('[ PRINTPDF! - signature to png encode -------------- ]')
+    png_recovered = base64.decodestring(res)
+    logger.info('[ PRINTPDF! - signature to png process {}]'.format(encoded_image))  
+    try:
+      f = open(settings.BASE_DIR+'/templates/printpdf/{}.png'.format(target_file),'wb')
+      f.write(png_recovered)
+      f.close
+      logger.info('[ PRINTPDF! - signature to png succesfull]')
+
+    except Exception as e:
+      logger.error('[ PRINTPDF! - signature ERROR]')
+      logger.error(e)
+      have_signature_file = False
+  else:
+    have_signature_file = False
+  return have_signature_file
+
+  #decoded_image = Base64.decode64(encoded_image)
+  #File.open("signature.png", "wb") { |f| f.write(decoded_image) }
+
 
 
 def add_line_breaks(break_string,every):
