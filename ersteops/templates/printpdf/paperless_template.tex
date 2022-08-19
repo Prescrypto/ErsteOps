@@ -337,8 +337,11 @@
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{paperless_template_page_2}}%
     {% if content.have_client_signature %}
-    \put(0.78960956,0.16450476){\includegraphics[scale=0.5]{client_signature}}%
+    \put(0.78960956,0.18450476){\includegraphics[scale=0.5]{client_signature}}%
+    \put(0.64203741,0.01450476){\includegraphics[scale=0.5]{client_signature}}%
+    %\put((0.64203741,0.06450476){\includegraphics[scale=0.5]{client_signature}}%
     \put(0.64203741,0.20450476){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.demarcation_responsable}}\end{tabular}}}}%
+    %\put(0.64203741,0.06450476){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.demarcation_responsable}}\end{tabular}}}}%
     {% endif %}
     {% if content.have_medic_signature %}
     \put(0.78960956,0.46450476){\includegraphics[scale=0.5,frame]{signature_medic}}%

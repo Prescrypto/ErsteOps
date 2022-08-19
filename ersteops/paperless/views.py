@@ -343,8 +343,7 @@ def new_medicalreport(request):
           signature_medic = vue_data['signature_medic'],
           )
           messages.info(request, "Parte Medico Guardado correctamente!!!")
-
-          Send_Mail_To(request,vue_data['email'],medicalReport.id)
+          Send_Mail_To(request,vue_data['email'],medicalReport.id,vue_data['send_email'])
           tempdir = settings.BASE_DIR+'/templates/printpdf/'
           pdf_file = open(os.path.join(tempdir, 'rendered_template.pdf'), 'rb')
           pdf = pdf_file.read()
@@ -382,7 +381,7 @@ def not_find_on_list(my_list_Dict, what_to_search):
   return my_text
 
 
-def Send_Mail_To(request,email_recive,pk):
+def Send_Mail_To(request,email_recive,pk,send_flag):
   #Send mail via smtp gmail server
   try:
     email = EmailMessage(
@@ -399,8 +398,8 @@ def Send_Mail_To(request,email_recive,pk):
     email.attach(file_name,pdf,'application/pdf')
     #pdf_to_attach = os.path.join(tempdir, 'rendered_template.pdf')
     #email.attach_file(pdf_to_attach)
-
-    email.send()
+    if send_flag:
+      email.send()
     logger.info('[ NEW MEWDICAL SendMail : {} ]'.format(email_recive))
   except Exception as e:
     logger.error("[Create Medical Report Email ERROR]: {}, type: {}".format(e, type(e)))
