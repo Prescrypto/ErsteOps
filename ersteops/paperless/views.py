@@ -340,6 +340,7 @@ def new_medicalreport(request):
           crew_tum = vue_data['crew_tum'],
           crew_operator = vue_data['crew_operator'],
           signature_client = vue_data['signature_client'],
+          signature_medic = vue_data['signature_medic'],
           )
           messages.info(request, "Parte Medico Guardado correctamente!!!")
 

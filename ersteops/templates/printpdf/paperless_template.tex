@@ -32,6 +32,9 @@
 %\makeatother 
 \usepackage{xcolor}
 
+
+\usepackage[export]{adjustbox}
+
 %\usepackage{lmodern}
 %\fontfamily{lmss}\selectfont
 %\usepackage[utf8]{inputenc}
@@ -333,8 +336,14 @@
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{paperless_template_page_2}}%
-    
+    {% if content.have_client_signature %}
     \put(0.78960956,0.16450476){\includegraphics[scale=0.5]{client_signature}}%
+    \put(0.64203741,0.20450476){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.demarcation_responsable}}\end{tabular}}}}%
+    {% endif %}
+    {% if content.have_medic_signature %}
+    \put(0.78960956,0.46450476){\includegraphics[scale=0.5,frame]{signature_medic}}%
+    \put(0.78960956,0.44450476){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont Firma Médico\end{tabular}}}}%
+    {% endif %}
     %Impresion diagnostica
     \put(0.02433222,0.72271027){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.fix_diagnostic_impresion}}\end{tabular}}}}%
     %Tratamiento
@@ -346,7 +355,8 @@
     \put(0.60169212,0.63688865){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.derivation_recive}}\end{tabular}}}}%    
     \put(0.54544497,0.61971664){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.derivation_amount}}\end{tabular}}}}%
     %Finalizacion
-    \put(0.57431346,0.56661945){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.demarcation_responsable}}\end{tabular}}}}%
+    \put(0.57431346,0.56661945){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.demarcation_responsable}}\end{tabular}}}}%\
+
     \put(0.6223905,0.54640692){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.demarcation_relation}}\end{tabular}}}}%
     \put(0.54203741,0.50578489){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.crew_medic}}\end{tabular}}}}%
     \put(0.59900976,0.48543641){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.crew_medic_id_card}}\end{tabular}}}}%

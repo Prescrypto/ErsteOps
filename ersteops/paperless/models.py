@@ -220,6 +220,7 @@ class MedicalReport(models.Model):
     crew_operator = models.CharField("Operador",blank=True,default='',max_length=50) 
     final_report = models.FileField("archivo de estudios(pdf o jpg)",validators=[FileExtensionValidator(allowed_extensions=['pdf','jpg'])],max_length=100,upload_to="pdffile/pdf_files",default="",blank=True)
     signature_client = models.TextField('Signature Client',blank=True)
+    signature_medic = models.TextField('Signature Medic',blank=True)
 
     def json_physical_exploration(self):
         #convert_to_json

@@ -301,6 +301,7 @@ def get_medical_report(pk):
   medical_Report['fix_diagnostic_impresion'] = add_line_breaks(raw_medical_Report.diagnostic_impresion,67)
   medical_Report['fix_current_condition'] = add_line_breaks(raw_medical_Report.current_condition,67)  
   medical_Report['have_client_signature'] = save_png('client_signature',raw_medical_Report.signature_client)
+  medical_Report['have_medic_signature'] = save_png('signature_medic',raw_medical_Report.signature_medic)  
   return medical_Report
 
 def save_png(target_file,data_uri):
