@@ -50,7 +50,7 @@ export default {
       console.log(data);
       this.paperless.signature_client = data;
       console.log(this.paperless.signature_client);
-      alert(`Firma almacenada${this.paperless.signature_client}`);
+      // alert(`Firma almacenada${this.paperless.signature_client}`);
     },
   },
 };

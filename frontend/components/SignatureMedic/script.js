@@ -50,7 +50,7 @@ export default {
       console.log(data);
       this.paperless.signature_medic = data;
       console.log(this.paperless.signature_medic);
-      alert(`Firma almacenada${this.paperless.signature_medic}`);
+      // alert(`Firma almacenada${this.paperless.signature_medic}`);
     },
   },
 };
