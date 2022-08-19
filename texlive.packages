@@ -11,3 +11,5 @@ eepic
 standalone
 xkeyval
 transparent
+adjustbox
+collectbox
