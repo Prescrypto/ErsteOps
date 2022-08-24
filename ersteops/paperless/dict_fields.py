@@ -65,7 +65,7 @@ MedicalReportDict = {
 "electro_interpretation": "",
 "derivation_amount": "",
 "derivation_recive": "",
-"derivation_type": [],
+"derivation_type": "",
 "demarcation_responsable": "",
 "demarcation_relation": "",
 "electro_qrs":"",
