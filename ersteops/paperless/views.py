@@ -341,8 +341,10 @@ def new_medicalreport(request):
           crew_operator = vue_data['crew_operator'],
           signature_client = vue_data['signature_client'],
           signature_medic = vue_data['signature_medic'],
+          odoo_client_name = qs.partner_name,
           )
           messages.info(request, "Parte Medico Guardado correctamente!!!")
+          messages.info(request, "Parte Medico Sending email an generating pdf!!!")
           Send_Mail_To(request,vue_data['email'],medicalReport.id,vue_data['send_email'])
           tempdir = settings.BASE_DIR+'/templates/printpdf/'
           pdf_file = open(os.path.join(tempdir, 'rendered_template.pdf'), 'rb')
