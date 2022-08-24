@@ -87,7 +87,7 @@
           maxlength="10" 
           placeholder="M011..."/>
       </div>
-      <label class="uk-form-label" for="id_service_unit_type">Tipo de Unidad</label>
+      <label class="uk-form-label" for="id_service_unit_type">* Tipo de Unidad</label>
       <div class="uk-form-controls">
         <input class="uk-input"
           tabindex="2"
@@ -98,7 +98,7 @@
           maxlength="50"
           placeholder="Basica...">
       </div>
-      <label class="uk-form-label" for="form-stacked-text">No.Placas</label>
+      <label class="uk-form-label" for="form-stacked-text">* No.Placas</label>
       <div class="uk-form-controls">
         <input class="uk-input"
         tabindex="3" 
@@ -109,7 +109,7 @@
         maxlength="10"
         placeholder="ABC-134...">
       </div>
-      <label class="uk-form-label" for="id_crew_medic">Medico</label>
+      <label class="uk-form-label" for="id_crew_medic">* Medico</label>
       <div class="uk-form-controls">
         <input class="uk-input"
         tabindex="3" 
@@ -120,7 +120,7 @@
         maxlength="50"
         placeholder="Medico...">
       </div>
-      <label class="uk-form-label" for="id_crew_medic_id_card">Cedula Profesional</label>
+      <label class="uk-form-label" for="id_crew_medic_id_card">* Cedula Profesional</label>
       <div class="uk-form-controls">
         <input class="uk-input"
         tabindex="3" 
@@ -131,7 +131,7 @@
         maxlength="50"
         placeholder="Cedula...">
       </div>
-      <label class="uk-form-label" for="id_crew_tum">TUM</label>
+      <label class="uk-form-label" for="id_crew_tum">* TUM</label>
       <div class="uk-form-controls">
         <input class="uk-input"
         tabindex="3" 
@@ -142,7 +142,7 @@
         maxlength="50"
         placeholder="Tum...">
       </div>
-      <label class="uk-form-label" for="id_crew_operator">Operador</label>
+      <label class="uk-form-label" for="id_crew_operator">* Operador</label>
       <div class="uk-form-controls">
         <input class="uk-input"
         tabindex="3" 
@@ -267,7 +267,7 @@
               v-model="paperless.patient_affiliations"
               id="id_patient_affiliations"
               name="patient_affiliations" 
-              maxlength="50" 
+              maxlength="150" 
               type="text" placeholder="Filiacion..."/>
           </div>
           <label class="uk-form-label" for="id_patient_clothes">Vestimenta</label>
@@ -278,7 +278,6 @@
               id="id_patient_clothes"
               name="patient_clothes" 
               type="text" 
-              maxlength="50" 
               placeholder="Vestimenta..."></textarea>
           </div>
           <label class="uk-form-label" for="id_skin_color">Coloración de piel</label>
@@ -289,7 +288,7 @@
               id="id_skin_color"
               name="skin_color" 
               type="text" 
-              maxlength="50" 
+              maxlength="150" 
               placeholder="Coloracion...">
           </div>
         </div>          
@@ -327,7 +326,7 @@
         v-model="paperless.patient_address"
         id="id_patient_address" 
         name="patient_address"
-        maxlength="50"
+        maxlength="150"
         placeholder="av.tol # ..."></textarea>
       </div>   
     </div> <!-- // .card -->
@@ -420,6 +419,7 @@
           <label class="uk-form-label" for="form-stacked-text">Otro</label>
           <textarea class="uk-textarea" 
           v-model="paperless.other_traumatics"
+          maxlength="150" 
           id="form-stacked-text" placeholder="Otro:... especifique"></textarea>
           <p>{{ paperless.traumatics_type }}</p>
         </div>
@@ -623,6 +623,7 @@
           <label class="uk-form-label" for="id_other_inmovilization_type">Otro</label>
           <textarea class="uk-textarea" 
           v-model="paperless.other_inmovilization_type"
+          maxlength="150" 
           id="id_other_inmovilization_type" placeholder="detalle"></textarea>
         </div>  
       </div>  
@@ -907,7 +908,7 @@
           <input class="uk-input" 
           v-model="paperless.electro_frequency"
           name="electro_frequency"
-          maxlength="20" 
+          maxlength="50" 
           id="id_electro_frequency" type="text" placeholder="Frecuencia...">
         </div>
         <label class="uk-form-label" for="id_electro_wave_p">Onda P</label>
@@ -915,56 +916,56 @@
                 <input class="uk-input" 
                 v-model="paperless.electro_wave_p"
                 name="electro_wave_p" 
-                maxlength="20" 
+                maxlength="50" 
                 id="id_electro_wave_p" type="text" placeholder="Onda P...">
             </div>
         <label class="uk-form-label" for="id_electro_pr">PR</label>
         <div class="uk-form-controls">
             <input class="uk-input" 
             v-model="paperless.electro_pr"
-            maxlength="20" 
+            maxlength="50" 
             id="id_electro_wave_pr" type="text" placeholder="PR...">
         </div>
         <label class="uk-form-label" for="id_electro_axis_qrs">Eje QRS</label>
         <div class="uk-form-controls">
             <input class="uk-input" 
             v-model="paperless.electro_axis_qrs"
-            maxlength="20" 
+            maxlength="50" 
             id="id_electro_axis_qrs" type="text" placeholder="Eje QRS...">
         </div>
         <label class="uk-form-label" for="id_electro_qrs">QRS</label>
         <div class="uk-form-controls">
             <input class="uk-input" 
             v-model="paperless.electro_qrs"
-            maxlength="20" 
+            maxlength="50" 
             id="id_electro_qrs" type="text" placeholder="QRS...">
         </div>
         <label class="uk-form-label" for="id_electro_st">ST</label>
         <div class="uk-form-controls">
             <input class="uk-input" 
             v-model="paperless.electro_st"
-            maxlength="20" 
+            maxlength="50" 
             id="id_electro_st" type="text" placeholder="ST...">
         </div>
         <label class="uk-form-label" for="id_electro_wave_t">Onda T</label>
         <div class="uk-form-controls">
             <input class="uk-input" 
             v-model="paperless.electro_wave_t"
-            maxlength="20" 
+            maxlength="50" 
             id="id_electro_wave_t" type="text" placeholder="Onda T...">
         </div>
         <label class="uk-form-label" for="electro_qt">QT</label>
         <div class="uk-form-controls">
             <input class="uk-input" 
             v-model="paperless.electro_qt"
-            maxlength="20" 
+            maxlength="50" 
             id="id_electro_qt" type="text" placeholder="QT...">
         </div>
         <label class="uk-form-label" for="id_electro_abnormalities">Anormalidades</label>
         <div class="uk-form-controls">
             <input class="uk-input" 
             v-model="paperless.electro_abnormalities"
-            maxlength="20" 
+            maxlength="100" 
             id="id_electro_abnormalities" type="text" placeholder="Anormailides...">
         </div>
         <label class="uk-form-label" for="id_electro_interpretation">Interpretacion electrocardiografica</label>
@@ -1012,7 +1013,7 @@
         <div v-if="derivation_type === 'Otro'">
           <textarea class="uk-textarea" 
           v-model="paperless.other_pathological_history"
-          maxlength="50" 
+          maxlength="250" 
           id="form-stacked-text" placeholder="Notas derivacion..."></textarea>
         </div>
       </div>
@@ -1028,7 +1029,7 @@
         <div class="uk-form-controls">
             <input class="uk-input" 
             v-model="paperless.derivation_hospital"
-            maxlength="50" 
+            maxlength="100" 
             id="id_derivation_hospital" type="text" placeholder="Hospital Derivación...">
         </div> 
 
@@ -1109,7 +1110,6 @@
               id="id_notes"
               name="notes" 
               type="text" 
-              maxlength="50" 
               placeholder="Notas y Observaciones..."></textarea>
             </div>
       </div>
