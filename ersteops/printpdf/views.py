@@ -24,7 +24,7 @@ import os.path
 
 from paperless.dict_fields import MedicalReportDict
 from paperless.models import MedicalReport
-
+from emergency.models import Emergency
 # Logging library
 import logging
 logger = logging.getLogger('django_info')
@@ -289,6 +289,7 @@ def get_medical_report(pk):
   #medical_Report = MedicalReport.get(id=pk)
   medical_Report = MedicalReport.objects.filter(id=pk).values()[0]
   raw_medical_Report = MedicalReport.objects.get(id=pk)
+  emergency = Emergency.objects.get(id=raw_medical_Report.service_code)
   medical_Report['json_physical_exploration'] = list(eval(raw_medical_Report.physical_exploration))
   medical_Report['json_medications'] = list(eval(raw_medical_Report.medications))
   medical_Report['json_airway'] = list(eval(raw_medical_Report.airway)) 
@@ -298,10 +299,17 @@ def get_medical_report(pk):
   medical_Report['json_traumatics'] = list(eval(raw_medical_Report.traumatics))    
   medical_Report['json_inmovilization_type'] = list(eval(raw_medical_Report.inmovilization_type))
   medical_Report['fix_treatment'] = add_line_breaks(raw_medical_Report.treatment,67)
-  medical_Report['fix_diagnostic_impresion'] = add_line_breaks(raw_medical_Report.diagnostic_impresion,67)
-  medical_Report['fix_current_condition'] = add_line_breaks(raw_medical_Report.current_condition,67)  
+  medical_Report['fix_diagnostic_impresion'] = add_line_breaks(raw_medical_Report.diagnostic_impresion,41)
+  medical_Report['fix_current_condition'] = add_line_breaks(raw_medical_Report.current_condition,41)  
   medical_Report['have_client_signature'] = save_png('client_signature',raw_medical_Report.signature_client)
-  medical_Report['have_medic_signature'] = save_png('signature_medic',raw_medical_Report.signature_medic)  
+  medical_Report['have_medic_signature'] = save_png('signature_medic',raw_medical_Report.signature_medic)
+  medical_Report['emergency_created_at'] = emergency.created_at.strftime('%Y-%m-%d')
+  medical_Report['unit_dispatched_time'] = emergency.unit_dispatched_time.strftime('%H:%M')
+  medical_Report['arrival_time'] = emergency.arrival_time.strftime('%H:%M')
+  medical_Report['attention_time'] = emergency.attention_time.strftime('%H:%M')
+  medical_Report['final_emergency_time'] = emergency.final_emergency_time.strftime('%H:%M')
+  medical_Report['attention_final_grade'] = str(emergency.attention_final_grade).strip()
+  #medical_Report['fix']
   return medical_Report
 
 def save_png(target_file,data_uri):
