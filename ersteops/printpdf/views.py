@@ -344,7 +344,7 @@ def add_line_breaks(break_string,every):
   #res = '\n '.join(a + b for a, b in zip(break_string[::3], break_string[1::3]))
   #return res
   # initializing K
-  K = '\n'
+  K = '\n \fontfamily{lmss}\selectfont\scriptsize'
  
   # initializing N
   N = every
