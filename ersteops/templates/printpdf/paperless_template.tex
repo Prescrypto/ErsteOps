@@ -42,82 +42,9 @@
 
 
 \begin{document}
-\fontfamily{lmss}\selectfont
-    % Include Background in ./prescript/media/media/template_v1.pdf
-    % \AddToShipoutPictureBG{\ifthenelse{\isodd{\value{page}}}{\includegraphics{laam_template}}{\includegraphics{laam_template}}}
-    % Define page content
-    %\textsf{\large{
-    %\begin{changemargin}{1.5cm}{1.2cm}
-        %\begin{enumerate}
-            %{{ all_medications }}
-            %bla!
-        %\end{enumerate}
-    %         \put(1,1){\parbox[t]{3cm}{\textsf{\large{
-    %    \textbf{Consulta \#:} {{ content.id }}
-    % }
-    % }}}
-        % Indicaciones Extra
-        % \begin{enumerate}
-        %     \textbf{Indicaciones Extra: \\ } {{ all_medications }}
-        % \end{enumerate}
-    %\end{changemargin}
-    %}}
-    % \begin{picture}(1,0.77272727)%
-    %     %Consulta    
-    % \put(200,0){\parbox[t]{3cm}{\textsf{\large{
-    %    \textbf{{ content.id }}
-    % }
-    % }}}
-    % \end{picture}
-% \begingroup%
-%   \makeatletter%
-%   \providecommand\color[2][]{%
-%     \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
-%     \renewcommand\color[2][]{}%
-%   }%
-%   \providecommand\transparent[1]{%
-%     \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
-%     \renewcommand\transparent[1]{}%
-%   }%
-%   \providecommand\rotatebox[2]{#2}%
-%   \newcommand\scaleInNode[1][1]{\tikzset{execute at begin node={\normalsize\larger[#1]}}}
-%   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
-%   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
-%   \ifx\svgwidth\undefined%
-%     \setlength{\unitlength}{792bp}%
-%     \ifx\svgscale\undefined%
-%       \relax%
-%     \else%
-%       \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
-%     \fi%
-%   \else%
-%     \setlength{\unitlength}{\svgwidth}%
-%   \fi%
-%   \global\let\svgwidth\undefined%
-%   \global\let\svgscale\undefined%
-%   \makeatother%
-%   \begin{picture}(1,0.77272727)%
-%     \lineheight{1}%
-%     \setlength\tabcolsep{0pt}%
-%     \put(0,0){\includegraphics[width=\unitlength,page=1]{laam_template}}%
+\fontfamily{lmss}\selectfont\scriptsize
 
-%     % \put(0.01140896,0.54355203){\parbox[t]{3cm}{\textsf{\large{
-%     %    \textbf{Consulta \#:} {{ content.id }}
-%     % }
-%     % }}}
-%     % \put(0.01140896,0.54355203){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Paciente desconocido {{content.id}} }\end{tabular}}}}%
-% 	\put(0.42718184,0.73912713){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{ {{content.id}} }\end{tabular}}}}%
-%    	\put(0.42718184,0.72336542){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{ {{content.service_unit }} }\end{tabular}}}}%
-%     \put(0.3690564,0.69389968){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{ {{content.service_unit_type}} }\end{tabular}}}}%
-%     \put(0.39254546,0.6775768){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textit{ {{content.service_unit_plate}} }\end{tabular}}}}%
 
-%   \end{picture}%
-% \endgroup%
-
-\begin{figure}
-  \centering
-  \def\svgwidth{\columnwidth}
-  %\input{paperless_template_6.pdf_tex}
 
 \begingroup%
   \makeatletter%
@@ -145,6 +72,7 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
+
   \begin{picture}(1,0.77245213)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
@@ -204,12 +132,8 @@
     {% endif%}
     %Trauma
     \put(0.23206628,0.45573384){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{0.8}\smash{\begin{tabular}[t]{l}{% for item in content.json_traumatics %}\fontfamily{lmss}\selectfont\scriptsize {{ item }}\\{% endfor %}\end{tabular}}}}%
-    %Ojo Izquierdo
-    %\put(0.20991809,0.36213786){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont Ojo Izquierdo: {% for item in content.json_pupil_state_left%}{{ item }},{% endfor %}\end{tabular}}}}%
-    %Ojo Derecho
-    %\put(0.20991809,0.35077424){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont Ojo Derecho:  {% for item in content.json_pupil_state_right%}{{ item }},{% endfor%}\end{tabular}}}}%
-    \put(0.13358814,0.46425894){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{0.8}\smash{\begin{tabular}[t]{l}{% for item in content.json_consultation_reason %}\fontfamily{lmss}\selectfont\scriptsize {{ item }}\\{% endfor%}
-    \end{tabular}}}}%
+    %Motivo de Consulta
+    \put(0.13358814,0.46425894){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{0.8}\smash{\begin{tabular}[t]{l}{% for item in content.json_consultation_reason %}\fontfamily{lmss}\selectfont\scriptsize {{ item }}\\{% endfor%}\end{tabular}}}}%
     %to_fix
     %Via Aerea
     \put(0.32505266,0.47551987){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}{% for item in content.json_airway %}\fontfamily{lmss}\selectfont\scriptsize {{ item.airway_type}} - {{ item.instruction }}\\{% endfor %}\end{tabular}}}}%
@@ -246,11 +170,10 @@
 
 
     %inmovilizacion
-    \put(0.38134429,0.33628328){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{0.7}\smash{\begin{tabular}[t]{l}{% for item in content.json_inmovilization_type %}\fontfamily{lmss}\selectfont\scriptsize {{ item }}\\{% endfor%}
-    \end{tabular}}}}%
+    \put(0.38134429,0.33628328){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{0.7}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {% for item in content.json_inmovilization_type %}{{ item }}\\{% endfor %} \end{tabular}}}}%
 
     %Impresion diagnostica
-    \put(0.51738337,0.45891074){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{content.fix_diagnostic_impresion}}\end{tabular}}}}%
+    \put(0.51738337,0.45891074){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\ {{content.fix_diagnostic_impresion}}\end{tabular}}}}%
     %Tratamiento
     \put(0.75885924,0.45916877){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{content.fix_treatment}} \end{tabular}}}}%
 
@@ -352,7 +275,7 @@
     \put(0.26601422,0.07073227){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.temperature}}\end{tabular}}}}%
     \put(0.32533826,0.07106162){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.oxygen_saturation}}\end{tabular}}}}%
     \put(0.39526948,0.07106162){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.glucometry}}\end{tabular}}}}%
-    \put(0.4490251,0.07053194){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.glassgow_total }}\end{tabular}}}}%
+    \put(0.4490251,0.07053194){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.glassgow_total }}\end{tabular}} }}%
     {% endfor %}
     %Signos Vitales 2
     %\put(0.48899072,0.59441199){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 12:41\end{tabular}}}}%
@@ -365,7 +288,7 @@
     %\put(0.93275252,0.59441199){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 826\end{tabular}}}}%
 
     %Derivacion
-    \put(0.56632851,0.33413518){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{content.derivation_type}} - {{content.derivation_hospital}}\end{tabular}}}}%
+    \put(0.56632851,0.33413518){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{content.derivation_type}} - {{content.derivation_hospital}}\end{tabular}} }}%
     %\put(0.56751227,0.6721787){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.derivation_hospital}}\end{tabular}}}}%
     \put(0.59086359,0.32494157){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{content.state_of_health}}\end{tabular}}}}%
     \put(0.5890775,0.31621801){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{content.derivation_recive}}\end{tabular}}}}%    
@@ -393,85 +316,12 @@
     {% endif %}
 
   \end{picture}
+
 \endgroup%
-\end{figure}
-
-% \newpage
-
-% \begin{figure}
-%   \centering
-%   \def\svgwidth{\columnwidth}
-%   %\input{paperless_template_6.pdf_tex}
-
-% \begingroup%
-%   \makeatletter%
-%   \providecommand\color[2][]{%
-%     \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
-%     \renewcommand\color[2][]{}%
-%   }%
-%   \providecommand\transparent[1]{%
-%     \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
-%     \renewcommand\transparent[1]{}%
-%   }%
-%   \providecommand\rotatebox[2]{#2}%
-%   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
-%   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
-%   \ifx\svgwidth\undefined%
-%     \setlength{\unitlength}{782.27360219bp}%
-%     \ifx\svgscale\undefined%
-%       \relax%
-%     \else%
-%       \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
-%     \fi%
-%   \else%
-%     \setlength{\unitlength}{\svgwidth}%
-%   \fi%
-%   \global\let\svgwidth\undefined%
-%   \global\let\svgscale\undefined%
-%   \makeatother%
-%   \begin{picture}(1,0.77245213)%
-%     \lineheight{1}%
-%     \setlength\tabcolsep{0pt}%
-%     \put(0,0){\includegraphics[width=\unitlength,page=1]{parte_medico_master}}%
-%     {% if content.have_client_signature %}
-%     \put(0.78960956,0.18450476){\includegraphics[scale=0.5]{client_signature}}%
-%     \put(0.64203741,0.01450476){\includegraphics[scale=0.5]{client_signature}}%
-%     %\put((0.64203741,0.06450476){\includegraphics[scale=0.5]{client_signature}}%
-%     \put(0.64203741,0.20450476){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.demarcation_responsable}}\end{tabular}}}}%
-%     %\put(0.64203741,0.06450476){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.demarcation_responsable}}\end{tabular}}}}%
-%     {% endif %}
-%     {% if content.have_medic_signature %}
-%     \put(0.78960956,0.46450476){\includegraphics[scale=0.5,frame]{signature_medic}}%
-%     \put(0.78960956,0.44450476){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont Firma Médico\end{tabular}}}}%
-%     {% endif %}
-%     %Impresion diagnostica
-%      \put(0.51738337,0.45891074){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{content.fix_diagnostic_impresion}}\end{tabular}}}}%
-%     %Tratamiento
-%      \put(0.75885924,0.45916877){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{content.fix_treatment}} \end{tabular}}}}%
-%     %Derivacion
-%     \put(0.56751227,0.6911999){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.derivation_type}}\end{tabular}}}}%
-%     \put(0.56751227,0.6721787){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.derivation_hospital}}\end{tabular}}}}%
-%     \put(0.60035291,0.65502334){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.state_of_health}}\end{tabular}}}}%
-%     \put(0.60169212,0.63688865){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.derivation_recive}}\end{tabular}}}}%    
-%     \put(0.54544497,0.61971664){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.derivation_amount}}\end{tabular}}}}%
-%     %Finalizacion
-%     \put(0.57431346,0.56661945){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.demarcation_responsable}}\end{tabular}}}}%\
-
-%     \put(0.6223905,0.54640692){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.demarcation_relation}}\end{tabular}}}}%
-%     \put(0.54203741,0.50578489){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.crew_medic}}\end{tabular}}}}%
-%     \put(0.59900976,0.48543641){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.crew_medic_id_card}}\end{tabular}}}}%
-%     \put(0.53065814,0.46522944){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.crew_tum}}\end{tabular}}}}%
-%     \put(0.55816754,0.44488927){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {{content.crew_operator}}\end{tabular}}}}%
-%     %\put(0.92413649,0.32194201){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\textit{ X4 }}\end{tabular}}}}%
-%     \put(0.65327278,0.35657174){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\textit{ {{ content.demarcation_responsable }} }}\end{tabular}}}}%
-%     %\put(0.77324116,0.32194201){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\textit{ X3 }}\end{tabular}}}}%
-%     %\put(0.76701121,0.33763243){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\textit{ X2 }}\end{tabular}}}}%
-%     %\put(0.66004404,0.33814317){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\textit{☑︎}}\end{tabular}}}}%
 
 
-%   \end{picture}
-% \endgroup%
-% \end{figure}
+
+
 
 
 \end{document}
