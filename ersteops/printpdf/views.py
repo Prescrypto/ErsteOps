@@ -298,7 +298,7 @@ def get_medical_report(pk):
   medical_Report['json_pupil_state_right'] = list(eval(raw_medical_Report.pupil_state_right))
   medical_Report['json_traumatics'] = list(eval(raw_medical_Report.traumatics))    
   medical_Report['json_inmovilization_type'] = list(eval(raw_medical_Report.inmovilization_type))
-  medical_Report['fix_treatment'] = add_line_breaks(raw_medical_Report.treatment,50)
+  medical_Report['fix_treatment'] = add_line_breaks(raw_medical_Report.treatment,49)
   medical_Report['fix_diagnostic_impresion'] = add_line_breaks(raw_medical_Report.diagnostic_impresion,38)
   medical_Report['fix_current_condition'] = add_line_breaks(raw_medical_Report.current_condition,41)  
   medical_Report['have_client_signature'] = save_png('client_signature',raw_medical_Report.signature_client)
