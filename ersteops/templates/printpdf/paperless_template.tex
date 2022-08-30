@@ -79,6 +79,16 @@
     \put(0,0){\includegraphics[width=\unitlength,page=1]{master_parte_medico}}%
     %\put(0.31336785,0.38838718){\includegraphics[scale=1]{test_image}}%
     %\put(0.78960956,0.24450476){\includegraphics[scale=0.5]{client_signature}}%
+
+    %CRUM
+    {% if content.crum and content.crum  != 'NA' %}
+    \put(0.03139789,0.68674397){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{CRUM}\end{tabular}}}}%    
+    \put(0.03100834,0.67744828){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Folio: {{content.crum}}\end{tabular}}}}%
+    \put(0.03122157,0.66837832){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Hospital: {{content.crum_hospital}}\end{tabular}}}}%
+    \put(0.03156192,0.65971048){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Médico: {{content.crum_reception}}\end{tabular}}}}%
+    \put(0.0314717,0.64991652){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Notas: {{content.crum_notes}}\end{tabular}}}}%
+    {% endif %}
+
     %Times
     \put(0.03117976,0.58432043){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{content.emergency_created_at}}\end{tabular}}}}%
     \put(0.06427789,0.58446308){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{content.unit_dispatched_time}}\end{tabular}}}}%
@@ -266,8 +276,10 @@
     \put(0.91520486,0.52665127){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{content.electro_qt}}\end{tabular}}}}%    
     \put(0.56987944,0.51728776){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{content.electro_abnormalities}}\end{tabular}}}}%
     \put(0.65016698,0.50867338){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{content.electro_interpretation}}\end{tabular}}}}%
+
     %Signos Vitales 1
     {% for item in content.json_physical_exploration %}
+    {% if forloop.counter0 == 0 %}
     \put(0.0271255,0.07062683){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.time|slice:"11:" }} \end{tabular}}}}%
     \put(0.05802029,0.07053194){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.heart_rate }}\end{tabular}}}}%
     \put(0.13098371,0.07106162){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.respiratory_rate}}\end{tabular}}}}%
@@ -276,8 +288,21 @@
     \put(0.32533826,0.07106162){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.oxygen_saturation}}\end{tabular}}}}%
     \put(0.39526948,0.07106162){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.glucometry}}\end{tabular}}}}%
     \put(0.4490251,0.07053194){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.glassgow_total }}\end{tabular}} }}%
-    {% endfor %}
+    {% endif %}
+
     %Signos Vitales 2
+    {% if forloop.counter0 == 1 %}
+    \put(0.02662482,0.05996336){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.time|slice:"11:" }}\end{tabular}}}}%
+    \put(0.0575196,0.05986849){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.heart_rate }}\end{tabular}}}}%
+    \put(0.13048304,0.06039818){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.respiratory_rate }}\end{tabular}}}}%
+    \put(0.20938116,0.06039818){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.blood_pressure }}\end{tabular}}}}%
+    \put(0.26551354,0.0600688){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.temperature }}\end{tabular}}}}%
+    \put(0.32483758,0.06039818){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.oxygen_saturation }}\end{tabular}}}}%
+    \put(0.39476872,0.06039818){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.glucometry }}\end{tabular}}}}%
+    \put(0.44852448,0.05986849){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.glassgow_total }}\end{tabular}}}}%
+    {% endif %}
+    {% endfor %}
+
     %\put(0.48899072,0.59441199){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 12:41\end{tabular}}}}%
     %\put(0.56346295,0.59441199){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 220\end{tabular}}}}%
     %\put(0.62325414,0.59432876){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont 321\end{tabular}}}}%
