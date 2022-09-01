@@ -41,6 +41,7 @@ export default {
         console.log(position.coords.longitude);
         this.paperless.service_geo_lat = position.coords.latitude;
         this.paperless.service_geo_lon = position.coords.longitude;
+        this.markers.push({ position: this.center });
       });
     },
   },
