@@ -387,8 +387,8 @@ def Send_Mail_To(request,email_recive,pk,send_flag):
   #Send mail via smtp gmail server
   try:
     email = EmailMessage(
-      'Parte Medico Vida uno subject',
-      'Este es su parte medico body',
+      'Parte Medico Vida uno Folio {}'.format(pk),
+      'Ha recibido su parte médico digital del emisor EMERGENCIAS MEDICAS DE MEDICO SC con Folio:{}'.format(pk),
       'info@keepitsimple.com.mx',
       [ email_recive, ]
     )
