@@ -123,3 +123,9 @@ redis-cli
 Start Server:
 
 sudo service redis-server start
+
+# Geokey
+
+check on
+
+https://console.cloud.google.com/apis/credentials
