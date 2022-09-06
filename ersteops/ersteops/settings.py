@@ -321,6 +321,4 @@ else:
   #DEFAULT_FILE_STORAGE = 'ersteops.custom_storages.MediaStorage' 
   DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
   AWS_S3_FILE_OVERWRITE = False
-  #AWS_DEFAULT_ACL = None
-  AWS_DEFAULT_ACL = 'bucket-owner-full-control'
-  
+  AWS_DEFAULT_ACL = None
