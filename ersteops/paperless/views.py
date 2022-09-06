@@ -31,7 +31,11 @@ from printpdf.views import document_as_new_pdf
 
 from django.core.files.base import ContentFile, File
 
-#@method_decorator(login_required, name='dispatch')
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
+
+@method_decorator(login_required, name='dispatch')
 class MedicalReportNew(View):
   template_name = "paperless/new_medical_report_vue.html"
   #model = MedicalReport
@@ -132,7 +136,7 @@ class MedicalReportNew(View):
 
 
 
-#@method_decorator(login_required, name='dispatch')
+@method_decorator(login_required, name='dispatch')
 class MedicalReportList(ListView):
   #template_name = "paperless/paperless_list.html"
   template_name = "paperless/list_medical_reports.html"
@@ -153,7 +157,7 @@ class MedicalReportList(ListView):
 
     return qs
 
-
+@method_decorator(login_required, name='dispatch')
 class MedicalReportActive(ListView):
   template_name = "paperless/list_active_medical_reports.html"
   model = Emergency
@@ -183,6 +187,7 @@ class MedicalReportActive(ListView):
     #logger.info('[ QS MedicalReportActive! Actual Units;: {} ]'.format(qs_actual_unit))
     return qs
 
+@method_decorator(login_required, name='dispatch')
 class MedicalReportDetail(View):
   template_name = "paperless/detail_medical_report_2.html"
 
@@ -349,7 +354,8 @@ def new_medicalreport(request):
           tempdir = settings.BASE_DIR+'/templates/printpdf/'
           pdf_file = open(os.path.join(tempdir, 'rendered_template.pdf'), 'rb')
           pdf = pdf_file.read()
-          file_name = 'Parte_Medico_Vida_Uno_{}.pdf'.format(str(medicalReport.id))
+          d = medicalReport.created_at.strftime('%Y-%m-%d')
+          file_name = 'Parte_Medico_Vida_Uno_{}_{}.pdf'.format(d,str(medicalReport.id))
           medicalReport.final_report.save(file_name,ContentFile(pdf))
           #medicalReport.save()
           # emergency.save()
