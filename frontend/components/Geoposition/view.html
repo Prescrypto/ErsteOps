@@ -1,0 +1,46 @@
+<div>
+  <!-- This is an anchor toggling the modal -->
+  <a href="#modal-example" uk-toggle>Verifica tu ubicacion</a>
+  
+
+<!-- This is the modal -->
+<div id="modal-example" uk-modal>
+    <div class="uk-modal-dialog uk-modal-body">
+        <h2 class="uk-modal-title">El Punto rojo indica la ubicación actual</h2>
+        
+<!--   <div>
+    <h2>Buscar direccion actual</h2>
+    <GmapAutocomplete
+      @place_changed='setPlace'
+    />
+    <button
+      @click='addMarker'
+    >
+      Add
+    </button>
+
+  </div> -->
+
+  <br>
+  <GmapMap
+    :center='center'
+    :zoom='12'
+    style='width:100%;  height: 400px;'
+  >
+  <GmapMarker
+      :key="index"
+      v-for="(m, index) in markers"
+      :position="m.position"
+      @click="center=m.position"
+    />
+  </GmapMap>
+
+        <p class="uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Cerrar</button>
+<!--             <button class="uk-button uk-button-primary" type="button">Save</button> -->
+        </p>
+    </div>
+</div>
+
+</div>
+

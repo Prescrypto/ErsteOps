@@ -26,6 +26,13 @@ from unit.utils import UNIT_LIST_FIELD
 from .list_fields import EMERGENCY_LIST_FIELDS, HOSPITAL_LIST_FIELDS
 from .helpers import get_copago
 
+from django import template
+
+from django.conf import settings
+
+from twilio.rest import Client 
+
+
 # Logging library
 import logging
 # Load Logging definition, this is defined in settings.py in the LOGGING section
@@ -447,8 +454,20 @@ class EmergencyText(View):
                 emergency.address_front,
                 emergency.address_instructions,
                 )
-            content = content_patient + content_address + content_service
-        except:
+            content_paperless="*Parte_Medico:* {}/paperless/new/{}/".format(settings.PAPERLESS_URL,emergency.id)
+            #for unit in emergency.units.all():
+            #    content_paperless += "*Parte_Medico:* http://{}/{}".format(unit)
+            logger.info("PAPERLESS DATA")    
+            logger.info(content_paperless)
+
+            content = content_patient + content_address + content_service + content_paperless
+            twillio_whatsap_send(content_paperless)
+
+        #except:
+        except Exception as e:
+            logger.error("DEBUG: WHATSAPP NOTIFY ERROR!")
+            logger.error("ERROR FORMATING MESSAGE ERROR! ")
+            logger.error(e) 
             content = "Emergencia no encontrada!"
 
         return HttpResponse(content, content_type='text/plain')
@@ -512,3 +531,45 @@ def hospital_json_list(request):
         return HttpResponse(json.dumps(_raw_data), content_type='application/json', status=200)
     else:
         return BAD_REQUEST
+
+
+
+def twillio_whatsap_send(msg_content):
+    account_sid = '' 
+    auth_token = '' 
+    client = Client(account_sid, auth_token) 
+    #sandbox
+    send_from_number = 'whatsapp:+14155238886'
+    #personal twillio number
+    #send_from_number = 'whatsapp:+18456403579'
+
+    try:
+        # message = client.messages.create( 
+        #                       from_= send_from_number,  
+        #                       body = msg_content,      
+        #                       to = 'whatsapp:+5215591984288' 
+        #                   ) 
+        #print(message.sid)
+
+        #from twilio.rest import Client 
+ 
+        #account_sid = 'AC3af5fc2897080852175755b01fe86592' 
+        #auth_token = '[AuthToken]' 
+        client = Client(account_sid, auth_token) 
+ 
+        message = client.messages.create( 
+                              from_='whatsapp:+14155238886',  
+                              body='Your Yummy Cupcakes Company order of 1 dozen frosted cupcakes has shipped and should be delivered on July 10, 2019. Details: {}'.format(msg_content),      
+                              to='whatsapp:+5215591984288' 
+                          ) 
+ 
+       # print(message.sid)
+
+        logger.info('[ WHATSAPP MESSAGE SUCCESS ]')
+        logger.info('[ Twillio response: {}'.format(message.sid))
+    except:
+        logger.error("DEBUG: WHATSAPP NOTIFY ERROR!")
+        logger.error(e)
+
+    #logger.info("[Success EmergencyJsonEnd] Deactivate emergency with id: {}".format(emergency.id))
+    return message.sid

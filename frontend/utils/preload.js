@@ -23,3 +23,6 @@ export const mapHospitals =
     id: attentionHospital.pk,
     ...attentionHospital.fields,
   }))(hospitals) || [];
+
+// export const paperlessData =
+//   map(paperless => ({ geo_key: paperless.geo_key, ...paperless.fields }))(paperless) ||[];

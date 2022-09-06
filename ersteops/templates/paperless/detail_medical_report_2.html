@@ -1,0 +1,528 @@
+{% extends "home/base_ui.html" %}
+{% load staticfiles %}
+{% block title %}Ver Parte Medico{% endblock title %}
+{% block cssblock %}
+  <link rel="stylesheet" href="{% static "uikit-3.14.1/css/uikit.css" %}" />
+  <link rel="stylesheet" href="{% static "data/css/styles.css"%}" />
+  <link rel="stylesheet" href="{% static "paperless/css/styles.css"%}" />
+{% endblock cssblock %}
+{% block header %}
+  {% include "ui_component/sidebar.html" %}
+{% endblock header %}
+
+{% block content %}
+  <main class="o-page__content">
+    {# Main header #}
+    {% include "ui_component/header.html" %}
+    <div class="container-fluid">
+
+
+  <div class="row">
+    <div class="col-12">
+      <p>Geolocalizacion: {{ data.service_geo_lat }} - {{ data.service_geo_lon }}</p>
+    </div>
+  </div>
+  <div class="row data__bottom">
+    <div class="col-12">
+      <h5>Codigo incidente: {{ data.service_code }}</h5>
+      <label class="uk-form-label" for="id_crum">Folio CRUM: </label>
+      <div class="uk-form-controls selected">
+
+          {{ data.crum }}
+      </div>
+      
+
+      <label class="uk-form-label" for="id_crum_reception">Medico que recibe:</label>
+      <div class="uk-form-controls selected">
+          {{ data.crum_reception}}
+      </div>
+      <label class="uk-form-label" for="id_crum_reception">Hospital CRUM:</label>
+      <div class="uk-form-controls selected">
+          {{ data.crum_hospital}}
+      </div>
+      <label class="uk-form-label" for="id_crum_reception">Notas CRUM:</label>
+      <div class="uk-form-controls selected">
+          {{ data.crum_notes}}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Unidad</h3>
+      <label class="uk-form-label" for="id_service_unit">Unidad Movil</label>
+      <div class="uk-form-controls selected">
+
+          {{ data.service_unit }}
+      </div>
+      <label class="uk-form-label" for="id_service_unit_type">Tipo de Unidad</label>
+      <div class="uk-form-controls selected">
+
+          {{ data.service_unit_type }}
+      </div>
+      <label class="uk-form-label" for="form-stacked-text">No.Placas</label>
+      <div class="uk-form-controls selected">
+
+        {{ data.service_unit_plate }}
+      </div>
+    </div> <!-- // .card -->
+
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Paciente</h3>
+      <label class="uk-form-label" for="id_erste_code">No.Socio</label>
+        <div class="uk-form-controls selected">
+
+            {{ data.erste_code }}
+        </div>
+      <label class="uk-form-label" for="form-stacked-text">Telefono</label>
+        <div class="uk-form-controls selected">
+
+            {{ data.patient_phone }}
+        </div>
+      <label class="uk-form-label" for="id_patient_gender">Genero: <span class="selected"></span></label>
+      <div class="uk-form-controls selected">
+          
+          {{ data.patient_gender }}  
+      </div>
+      <label class="uk-form-label" for="patient_age">Edad</label>
+      <div class="uk-form-controls selected">
+
+          {{ data.patient_age }}
+      </div>
+      <label class="uk-form-label" for="id_patient_name">Nombre Completo</label>
+      <div class="uk-form-controls selected">
+
+          {{ data.patient_name }}
+      </div>
+      <label class="uk-form-label" for="id_copago_amount">Co-pago</label>
+      <div class="uk-form-controls selected">
+
+          {{ data.copago_amount }}
+      </div>
+    </div> <!-- // .card -->
+
+
+    </div> <!-- // .row -->
+
+    <div class="row">
+      <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+        <h3 class="uk-card-title">Paciente desconocido 
+
+          <span class="selected">{{ data.is_patient_unknow }}</span>
+        </h3>
+        <div v-if="data.is_patient_unknow">
+           <div class="uk-form-controls selected">
+
+              {{ data.patient_unknow }}
+          </div>     
+          <label class="uk-form-label" for="id_patient_affiliations">Filiación</label>
+          <div class="uk-form-controls selected">
+
+              {{ data.patient_affiliations }}
+          </div>
+          <label class="uk-form-label" for="id_patient_clothes">Vestimenta</label>
+          <div class="uk-form-controls selected">
+
+              {{ data.patient_clothes }}
+          </div>
+          <label class="uk-form-label" for="id_skin_color">Coloración de piel</label>
+          <div class="uk-form-controls selected">
+
+              {{ data.skin_color }}
+          </div>
+        </div>          
+      </div> <!-- // .card -->
+      <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m"> 
+      </div>      
+    </div>
+
+  <div class="row">
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Sitio de Atencion: </h3>
+
+      <div class="uk-form-controls selected">
+        
+        {{ data.attention_place }}
+      </div>
+
+
+      <label class="uk-form-label" for="id_patient_address">Domicilio</label>
+      <div class="uk-form-controls selected">
+
+        {{ data.patient_address }}
+      </div>   
+    </div> <!-- // .card -->
+
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Tipo de Servicio</span></h3>
+
+      <div class="uk-form-controls selected">
+
+        {{ data.service_type }}
+      </div>  
+
+
+    </div> <!-- // .card -->
+  </div> <!-- // .row -->
+
+  <div class="row">
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Motivo de Consulta</h3>
+
+
+      <ul class="uk-list uk-list-square">  
+      {% for item in data.json_consultation_reason%}
+        <li><span class="selected">{{ item }}</span></li>
+      {% endfor %}
+      </ul>
+    </div> <!-- // .card -->
+
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title"> Tipo de Evento:  <span class="selected">{{ data.event_type }}</span> </h3>
+
+      <ul class="uk-list uk-list-square">
+      {% for item in data.json_traumatics%}
+        <li><span class="selected">{{ item }}</span></li> 
+      {% endfor%}       
+      </ul>
+
+
+        </div>
+      </div> <!-- // .card -->
+  </div> <!-- // .row -->
+
+  <div class="row">
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Via Aerea</h3>
+        <div class="uk-form-controls">
+
+          <ul class="uk-list uk-list-square">
+          {% for item in data.json_airway %}
+          <li>Via Aerea: <span class="selected">{{ item.airway_type }}</span></li>
+          <li>Instruccion: <span class="selected">{{ item.instruction }}</span></li>
+
+          {% endfor %}          
+          </ul>
+        </div>     
+
+    </div> <!-- // .card -->
+
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Estado de las pupilas</h3>
+        <label class="uk-form-label" for="id_left_eye">Ojo Izquierdo</label>
+        <ul class="uk-list uk-list-square">
+        {% for item in data.json_pupil_state_right %}
+          <li><span class="selected">{{ item }}</span></li>
+        {% endfor %}
+        </ul>
+
+        <label class="uk-form-label" for="id_right_eye">Ojo Derecho</label>
+
+        <ul class="uk-list uk-list-square">
+        {% for item in data.json_pupil_state_left %}
+          <li><span class="selected">{{ item }}</span></li>
+        {% endfor %}
+        </ul>
+    </div> <!-- // .card -->
+  </div> <!-- // .row -->
+
+  <div class="row">
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+        <h3 class="uk-card-title">Medicamentos</h3>
+        <ul class="uk-list uk-list-square">
+        
+          {% for item in data.json_medications %}
+          <li>Tipo Medicamento: <span class="selected">{{ item.medication_type }}</span></li>
+          <li>Medicamento: <span class="selected">{{ item.medication_name }}</span></li>
+          <li>Prescripcion <span class="selected">{{ item.medication_hrs }}</span></li>
+          {% endfor %}
+
+        </ul>
+    </div> <!-- // .card -->
+
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+<!--     <h3 class="uk-card-title">Cardiovascular <input type="checkbox" id="jack" v-model="cardiovascular"/></h3>
+    <div v-if="cardiovascular">
+
+          <div class="uk-column-1-2">
+            <label class="uk-form-label" for="form-stacked-text">Desfibrilacion</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Solucion...">
+            <label class="uk-form-label" for="form-stacked-text">Dosis</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
+          </div>
+          <div class="uk-column-1-2">
+            <label class="uk-form-label" for="form-stacked-text">Desfibrilacion</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Solucion...">
+            <label class="uk-form-label" for="form-stacked-text">Dosis</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
+          </div>
+          <div class="uk-column-1-2">
+            <label class="uk-form-label" for="form-stacked-text">Cardioversion</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Hemoderivado...">
+            <label class="uk-form-label" for="form-stacked-text">Dosis</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
+          </div>
+          <div class="uk-column-1-2">
+            <label class="uk-form-label" for="form-stacked-text">Cardioversion</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Hemoderivado...">
+            <label class="uk-form-label" for="form-stacked-text">Dosis</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
+          </div>
+      
+    </div> -->
+    </div> <!-- // .card -->
+  </div>  <!-- // .row -->
+
+  <div class="row">
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+<!--     <h3 class="uk-card-title">Farmacologico <input type="checkbox" id="jack" v-model="farmacologico"/></h3>
+    <div v-if="farmacologico">
+
+          <div class="uk-column-1-3">
+            <label class="uk-form-label" for="form-stacked-text">Farmaco</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Solucion...">
+            <label class="uk-form-label" for="form-stacked-text">Dosis</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
+            <label class="uk-form-label" for="form-stacked-text">Hrs.</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Hrs...">
+          </div>
+          <div class="uk-column-1-3">
+            <label class="uk-form-label" for="form-stacked-text">Farmaco</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Solucion...">
+            <label class="uk-form-label" for="form-stacked-text">Dosis</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
+            <label class="uk-form-label" for="form-stacked-text">Hrs.</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Hrs...">
+          </div>
+          <div class="uk-column-1-3">
+            <label class="uk-form-label" for="form-stacked-text">Aminas</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Solucion...">
+            <label class="uk-form-label" for="form-stacked-text">Dosis</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
+            <label class="uk-form-label" for="form-stacked-text">Hrs.</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Hrs...">
+          </div>
+          <div class="uk-column-1-3">
+            <label class="uk-form-label" for="form-stacked-text">Aminas</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Solucion...">
+            <label class="uk-form-label" for="form-stacked-text">Dosis</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Dosis...">
+            <label class="uk-form-label" for="form-stacked-text">Hrs.</label>
+            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Hrs...">
+          </div>
+      
+    </div> -->
+    </div> <!-- // .card -->
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Inmovilización {{ data.inmovilization }}</h3>
+      
+      <ul class="uk-list uk-list-square">
+        {% for item in data.json_inmovilization_type %}
+          <li><span class="selected"> {{ item }} </span></li>
+        {% endfor %}
+      </ul>
+
+    </div> <!-- // .card -->
+  </div>  <!-- // .row -->
+
+  <div class="row">
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Padecimiento Actual</h3>
+      <div class="uk-form-controls selected">
+        {{ data.current_condition }}
+      </div> 
+    </div> <!-- // .card -->
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Antecedentes Patologicos</h3>
+          <ul class="uk-list uk-list-square">
+            <li>Diabetes Melitus - <span class="selected">{{ data.pathological_history_daibetes_melitus }} - {{ data.detail_pat_history_daibetes_melitus }}</span></li>
+            <li>Hipertension Arterial - <span class="selected">{{ data.pathological_history_arterial_hypertension }} - {{ data.detail_pat_history_arterial_hypertension }}</span></li>
+            <li>Cardiopatias - <span class="selected">{{ data.pathological_history_heart_disease }} - {{ data.detail_pat_history_heart_disease }}</span></li>
+            <li>Neumopatias - <span class="selected">{{ data.pathological_history_pneumopathies }} - {{ data.detail_pat_history_pneumopathies }}</span></li>
+            <li>Quirurgicos/Trauma - <span class="selected">{{ data.pathological_history_trauma }} - {{ data.detail_pat_history_trauma }}</span></li>
+            <li>Alergias - <span class="selected">{{ data.pathological_history_alergy }} - {{ data.detail_pat_history_alergy }}</span></li>
+            <li>Otra enfermedad - <span class="selected">{{ data.other_pathological_history }}</span></li>
+          </ul>
+
+
+    </div> <!-- // .card -->
+  </div> <!-- // .row -->
+
+  <div class="row">
+     <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Signos Vitales</h3>
+      <div class="uk-form-controls">
+        <ul class="uk-list uk-list-square">
+        {% for item in data.json_physical_exploration %}
+          <li>Fecha / Hora: <span class="selected"> {{ item.time }} </span></li>
+          <li>Frecuencia Cardiaca: <span class="selected">{{item.heart_rate}}</span></li>
+          <li>Frecuencia Respiratoria: <span class="selected">{{item.respiratory_rate}}</span></li>
+          <li>Presion Arterial: <span class="selected">{{item.blood_pressure}}</span></li>
+          <li>Temperatura: <span class="selected">{{item.temperature}}</span></li>
+          <li>Saturacion de O2: <span class="selected">{{item.oxygen_saturation}}</span></li>
+          <li>Glucometria: <span class="selected">{{item.glucometry}}</span></li>
+          <li>Glasgow: <span class="selected">{{item.glassgow_total}}</span></li>
+        {% endfor %}
+      </ul>
+      </div>
+
+   
+
+
+     </div> <!-- // .card -->
+
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Exploración fisica</h3>
+      <div class="uk-form-controls">
+        <ul class="uk-list uk-list-square">
+          <li>Cabeza - <span class="selected">{{ data.normal_head }} - {{data.det_normal_head}}</span> </li>
+          <li>Cara - <span class="selected">{{ data.normal_face }} - {{ data.det_normal_face }} </span> </li>
+          <li>Cuello - <span class="selected">{{ data.normal_torax }} - {{ data.det_normal_torax }}</span> </li>
+          <li>Tórax - <span class="selected">{{ data.normal_torax }} - {{ data.det_normal_torax }}</span> </li>
+          <li>Abdomen  - <span class="selected">{{ data.normal_abdomen }} - {{ data.det_normal_abdomen }}</span> </li>
+          <li>Extremidades  - <span class="selected">{{ data.normal_limbs }} - {{ data.det_normal_limbs }}</span></li>
+          <li>Genitales  - <span class="selected">{{ data.normal_genitals }} - {{ data.det_normal_genitals }}</span> </li>
+          <li>Columna Vertebral  - <span class="selected">{{ data.normal_spine }} - {{ data.det_normal_spine }}</span></li>   
+        </ul>
+      </div>
+    </div> <!-- // .card -->
+  </div> <!-- // .row -->
+
+  <div class="row">
+
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Descripcion de lesiones</h3>
+    <div class="uk-form-controls selected">
+       {{ data.description_of_injuries }}
+     </div>
+    </div> <!-- // .card -->
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Electrocardiograma</h3>
+      <div class="selected">
+      <label class="uk-form-label" for="id_unidad_movil">Ritmo</label>
+      <div class="uk-form-controls selected">
+         {{ data.electro_rhythm }}
+
+      </div>
+      <label class="uk-form-label" for="id_unidad_movil">Frecuencia</label>
+      <div class="uk-form-controls selected">
+        {{ data.electro_frequency }}
+      </div>
+        <label class="uk-form-label" for="id_unidad_movil">Onda P</label>
+        <div class="uk-form-controls">
+            {{ data.electro_wave_p }}
+        </div>
+        <label class="uk-form-label" for="id_unidad_movil">PR</label>
+        <div class="uk-form-controls">
+            {{ data.electro_pr }}
+        </div>
+        <label class="uk-form-label" for="id_unidad_movil">Eje QRS</label>
+        <div class="uk-form-controls">
+            {{ data.electro_axis_qrs }}
+        </div>
+        <label class="uk-form-label" for="id_unidad_movil">QRS</label>
+        <div class="uk-form-controls">
+            {{ data.electro_qrs }}
+        </div>
+        <label class="uk-form-label" for="id_unidad_movil">ST</label>
+        <div class="uk-form-controls">
+            {{ data.electro_st }}
+        </div>
+        <label class="uk-form-label" for="id_unidad_movil">Onda T</label>
+        <div class="uk-form-controls">
+            {{ data.electro_wave_t }}
+        </div>
+        <label class="uk-form-label" for="id_unidad_movil">QT</label>
+        <div class="uk-form-controls">
+            {{ data.electro_qt }}
+        </div>
+        <label class="uk-form-label" for="id_unidad_movil">Anormalidades</label>
+        <div class="uk-form-controls">
+            {{ data.electro_abnormalities }}
+        </div>
+        <label class="uk-form-label" for="id_unidad_movil">Interpretacion electrocardiografica</label>
+        <div class="uk-form-controls">
+            {{ data.electro_interpretation }}
+        </div>
+      </div>                  
+    </div> <!-- // .card -->
+  </div> <!-- // .row -->
+
+  <div class="row">
+
+        <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Impresion Diagnostica</h3>
+
+      <div class="uk-form-controls selected">
+        {{ data.diagnostic_impresion }}
+      </div>  
+    </div> <!-- // .card -->
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Tratamiento</h3>
+      <div class="uk-form-controls selected">
+      {{ data.treatment }}
+    </div>
+    </div> <!-- // .card -->
+  </div> <!-- // .row -->
+
+
+  <div class="row">
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Derivación</h3>
+      <div v-if="derivarion">
+      <div class="uk-form-controls selected">
+
+        {{ data.derivation}}
+
+      </div>
+      <label class="uk-form-label" for="form-stacked-text">Estado de salud</label>
+      <div class="uk-form-controls selected">
+        {{ data.state_of_health }}
+      </div>
+        <label class="uk-form-label" for="id_unidad_movil">Medico que recibe</label>
+        <div class="uk-form-controls selected">
+            {{ data.derivation_recive }}
+        </div> 
+        <label class="uk-form-label" for="id_unidad_movil">Costo</label>
+        <div class="uk-form-controls selected">
+           {{ data.derivation_amount }}
+        </div>
+        </div>           
+      </div> <!-- // .card -->
+
+    <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+      <h3 class="uk-card-title">Deslinde {{data.demarcation}}</h3>
+        <div v-if="demarcation">
+        <h3 class="uk-card-title">Estoy enterado de la impresion diagnostica y de las condiciones de mi paciente:</h3>
+        <label class="uk-form-label" for="id_unidad_movil">Responsable</label>
+          <div class="uk-form-controls selected">
+              {{ data.demarcation_responsable }}
+          </div>
+        <label class="uk-form-label" for="id_unidad_movil">Parentesco o relación</label>
+          <div class="uk-form-controls selected">
+              {{ data.demarcation_relation }}
+          </div>
+        
+        </div>
+    </div> <!-- // .card -->
+  </div> <!-- // .row -->
+
+
+
+  <div class="row">
+    <div class="col-lg-12">
+ <span class="uk-margin-small-right" uk-icon="arrow-left"></span><a href="{% url 'medicalreportlist' %}"> Regresar </a> 
+    </div>
+
+  </div>
+
+
+
+    </div> <!-- // .container -->
+  </main><!-- // .o-page__content -->
+{% endblock content %}
+
+{% block jsblock %}
+  <script src="{% static "uikit-3.14.1/js/uikit.js" %}"></script>
+  <script src="{% static "uikit-3.14.1/js/uikit-icons.js" %}"></script>
+{% endblock jsblock %}

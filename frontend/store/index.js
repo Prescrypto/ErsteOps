@@ -57,6 +57,7 @@ import search from './modules/search';
 import finalGrade from './modules/final-grade';
 import updateTimer from './modules/update-timer';
 import updateDerivation from './modules/update-derivation';
+import newMedicalReport from './modules/keep-medicalreport';
 import { default as unitModule } from './modules/unit';
 
 // Use VueX
@@ -71,6 +72,7 @@ const store = new Vuex.Store({
     updateTimer,
     updateDerivation,
     unit: unitModule,
+    newMedicalReport,
   },
   state: {
     error: false,
@@ -103,6 +105,19 @@ const store = new Vuex.Store({
           throw err;
         });
     },
+    // newMedicalReport({ commit }, data) {
+    //   commit(REQUEST_MEDICALREPORT_START);
+    //   return http
+    //     .post(`/paperless/new/${data.id || ''}`, data)
+    //     .then(response => {
+    //       commit(REQUEST_MEDICALREPORT_SUCCESS, response.data);
+    //     })
+    //     .catch(err => {
+    //       commit(REQUEST_MEDICALREPORT_ERROR, err);
+    //       throw err;
+    //     });
+    // },
+
     patient({ commit }, target) {
       commit(REQUEST_PATIENT_START);
       http
@@ -208,6 +223,19 @@ const store = new Vuex.Store({
   },
 
   mutations: {
+    // New Medical Report
+    // [REQUEST_MEDICALREPORT_START](state) {
+    //   state.error = false;
+    //   state.loading = true;
+    // },
+    // [REQUEST_MEDICALREPORT_SUCCESS](state) {
+    //   state.loading = false;
+    // },
+    // [REQUEST_MEDICALREPORT_ERROR](state, err) {
+    //   state.error = err;
+    //   state.loading = false;
+    // },
+
     // New Incident
     [REQUEST_NEW_INCIDENT_START](state) {
       state.error = false;

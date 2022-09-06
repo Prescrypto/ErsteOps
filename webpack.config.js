@@ -9,6 +9,7 @@ module.exports = {
     dashboard: ['babel-polyfill', './frontend/entry/dashboard'],
     modal: ['./frontend/utils/global', './frontend/entry/modal'],
     nav: ['./frontend/utils/global', './frontend/entry/nav'],
+    medicalreport: ['babel-polyfill', './frontend/entry/medicalreport'],
   },
 
   output: {

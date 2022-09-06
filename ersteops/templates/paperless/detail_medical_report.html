@@ -1,0 +1,162 @@
+{% extends "home/base_ui.html" %}
+{% load staticfiles %}
+{% block title %}Ver Parte Medico{% endblock title %}
+{% block cssblock %}
+  <link rel="stylesheet" href="{% static "uikit-3.14.1/css/uikit.css" %}" />
+  <link rel="stylesheet" href="{% static "paperless/css/styles.css"%}" />
+{% endblock cssblock %}
+{% block header %}
+  {% include "ui_component/sidebar.html" %}
+{% endblock header %}
+
+{% block content %}
+  <main class="o-page__content">
+    {# Main header #}
+    {% include "ui_component/header.html" %}
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
+
+
+
+          <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+            <h3 class="uk-card-title">Parte Medico</h3>
+
+            <div class="row">
+              <div class="col-lg-3">
+                <dt>Código de servicio</dt>
+                <dd>{{ data.id }}</dd>
+              </div>
+              <div class="col-lg-3">
+                <dt>Unidad movil</dt>
+                <dd>{{ data.service_unit }}</dd>
+              </div>
+              <div class="col-lg-3">
+                <dt>Tipo de unidad</dt>
+                <dd>{{ data.service_unit_type }}</dd>
+              </div>
+              <div class="col-lg-3">
+                <dt>No.Placas</dt>
+                <dd>{{ data.service_unit_plate }}</dd>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6">
+                <dt>No. Socio</dt>
+                <dd>{{data.erste_code}}</dd>
+              </div>
+              <div class="col-lg-6">
+                <dt>Tel</dt>
+                <dd>{{data.erste_code}}</dd>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3">
+                <dt>Nombre Completo</dt>
+                <dd>{{ data.patient_name }}</dd>
+              </div>
+              <div class="col-lg-3">
+                <dt>Sexo</dt>
+                <dd>{{ data.patient_gender}}</dd>
+              </div>
+              <div class="col-lg-3">
+                <dt>Edad</dt>
+                <dd>{{ data.patient_age}}</dd>
+              </div>
+              <div class="col-lg-3">
+                <dt>Paciente desconocido</dt>
+                <dd>{{ data.patient_unknow}}</dd>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-12">
+                <dt>Filiacion</dt>
+                <dd>{{ data.patient_affiliations }}</dd>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-12">
+                <dt>Vestimenta</dt>
+                <dd> {{ data.patient_clothes }} </dd>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-12">
+                <dt>Coloración de piel</dt>
+                <dd>{{ data.skin_color }}</dd>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3">
+                <dt> Sitio de Atencion</dt>
+                <dd> {{ data.attention_place }}</dd>
+              </div>
+              <div class="col-lg-3">
+                <dt>Motivo de Consulta</dt>
+                <dd> {{ data.consultation_reason }}</dd>
+              </div>
+              <div class="col-lg-3">
+                <dt>Traumaticos</dt>
+                <dd> {{ data.traumatics }}</dd>
+              </div>
+              <div class="col-lg-3">
+                <dt>Via áerea</dt>
+                <dd> {{ data.airway }}</dd>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6">
+                <dt>Antecedentes Patologicos</dt>
+                <dd>
+                  <p>
+                    Diabetes Melitus: {{ data.pathological_history_daibetes_melitus }} <br>
+                    Hipertension Arterial: {{ data.pathological_history_arterial_hypertension }} <br>
+                    Cardiopatias: {{ data.pathological_history_heart_disease }} <br>
+                    Neumopatias: {{ data.pathological_history_pneumopathies }} <br>
+                    Quirurgicos: {{ data.pathological_history_trauma }} <br>
+                    Alergias: {{ data.pathological_history_alergy }} <br>
+                  </p>
+                </dd>
+              </div>
+              <div class="col-lg-6">
+                <dt>Normal</dt>
+                <dd>
+                  <p>
+                    Cabeza: {{ data.normal_head }}<br>
+                    Cara: {{ data.normal_face }} <br>
+                    Cuello: {{ data.normal_torax }} <br>
+                    Torax: {{ data.normal_torax }} <br>
+                    Abdómen: {{ data.normal_abdomen }} <br>
+                    Extremidades: {{ data.normal_limbs }} <br>
+                    Genitales: {{ data.normal_genitals }} <br>
+                    Columna Vertebral: {{ data.normal_spine }} <br>
+                  </p>
+                </dd>
+              </div>
+            </div>
+
+            <hr class="uk-divider-icon">
+            <div class="row">
+              <div class="col-lg-12">
+                <span class="uk-margin-small-right" uk-icon="arrow-left"></span><a href="{% url 'medicalreportlist' %}"> Regresar </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div> <!-- // .container -->
+  </main><!-- // .o-page__content -->
+{% endblock content %}
+
+{% block jsblock %}
+  <script src="{% static "uikit-3.14.1/js/uikit.js" %}"></script>
+  <script src="{% static "uikit-3.14.1/js/uikit-icons.js" %}"></script>
+{% endblock jsblock %}

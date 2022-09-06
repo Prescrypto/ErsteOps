@@ -53,6 +53,7 @@ EMERGENCY_LIST_FIELDS = [
     'partner_legalname',
     'sales_rep',
     'derivations',
+    'medical_report',
 ]
 
 HOSPITAL_LIST_FIELDS = [

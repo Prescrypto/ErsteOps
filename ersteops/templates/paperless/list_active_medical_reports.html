@@ -1,0 +1,48 @@
+{% extends "home/base_ui.html" %}
+{% load staticfiles %}
+{% block title %}Parte Medico{% endblock title %}
+{% block cssblock %}
+  <link rel="stylesheet" href="{% static "uikit-3.14.1/css/uikit.css" %}" />
+  <link rel="stylesheet" href="{% static "paperless/css/styles.css"%}" />
+{% endblock cssblock %}
+{% block header %}
+  {% include "ui_component/sidebar.html" %}
+{% endblock header %}
+
+{% block content %}
+  <main class="o-page__content">
+    {# Main header #}
+    {% include "ui_component/header.html" %}
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12">
+
+        <h3>Emergencias Pendientes de parte medico</h3>
+        <ul>
+        {% for medical_report in object_list %}
+            
+            <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
+              <h3 class="uk-card-title">Emergencia No.{{medical_report.id}}</h3>
+              <p>{{ medical_report.created_at|date }} Paciente: {{ medical_report.patient_name }} </p>
+              <p>Lorem ipsum <a href="#">dolor</a> sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <p>Undades:</p>
+              {% for actual_unit in medical_report.units.all %}
+                <p>{{ actual_unit.identifier }}</p>
+              {% endfor%}
+              <span class="uk-margin-small-right" uk-icon="check"></span><a href="{% url 'medicalreportnew' pk=medical_report.id %}" uk-icon="file-edit"> Llenar parte medico </a>
+            </div>
+        {% empty %}
+            <li>No hay partes medicos aun!</li>
+        {% endfor %}
+        </ul>
+
+        </div>
+      </div>
+    </div> <!-- // .container -->
+  </main><!-- // .o-page__content -->
+{% endblock content %}
+
+{% block jsblock %}
+  <script src="{% static "uikit-3.14.1/js/uikit.js" %}"></script>
+  <script src="{% static "uikit-3.14.1/js/uikit-icons.js" %}"></script>
+{% endblock jsblock %}

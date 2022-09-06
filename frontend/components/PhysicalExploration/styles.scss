@@ -1,0 +1,77 @@
+.timers-update {
+	//background: #eff3f6;
+	//text-align: center;
+	color: #eff3f6;
+}
+
+.timers-button {
+	text-align: center;
+	padding-top: 10px;
+}
+
+.timers-label {
+	padding-bottom: 10px;
+	color: #6495ED;
+}
+
+.timers-text {
+	color: white;
+}
+
+
+.emergency {
+  cursor: pointer;
+}
+
+.emergency:hover {
+  background: #eff3f6;
+}
+
+.serialized {
+  cursor: pointer;
+  position: fixed;
+  bottom: 10px;
+  right: 15px;
+  z-index: 9999;
+  width: 60%;
+  box-shadow: 3px 1px 5px rgba(0, 0, 0, 0.35);
+}
+
+.c-field__addon {
+  color: #333;
+}
+
+.c-field__addon:active {
+  color: #ccc;
+}
+
+.close-button {
+  position: absolute;
+  left: -20px;
+  top: 30%;
+  color: red;
+}
+
+.tooltip__heading {
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: black;
+}
+
+.tooltip__subheading {
+  margin-top: 10px;
+  color: black;
+}
+
+.grade__wrapper {
+  padding: 8px 24px 20px;
+  width: 300px;
+}
+
+#id_peTemperature:valid {
+    color: green;
+}
+
+#id_peTemperature:invalid {
+    color: red;
+}
