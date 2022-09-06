@@ -6,9 +6,9 @@
 <!-- This is the modal -->
 <div id="modal-example" uk-modal>
     <div class="uk-modal-dialog uk-modal-body">
-        <h2 class="uk-modal-title">Geolocalización</h2>
+        <h2 class="uk-modal-title">El Punto rojo indica la ubicación actual</h2>
         
-  <div>
+<!--   <div>
     <h2>Buscar direccion actual</h2>
     <GmapAutocomplete
       @place_changed='setPlace'
@@ -19,7 +19,8 @@
       Add
     </button>
 
-  </div>
+  </div> -->
+
   <br>
   <GmapMap
     :center='center'
@@ -35,8 +36,8 @@
   </GmapMap>
 
         <p class="uk-text-right">
-            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-            <button class="uk-button uk-button-primary" type="button">Save</button>
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Cerrar</button>
+<!--             <button class="uk-button uk-button-primary" type="button">Save</button> -->
         </p>
     </div>
 </div>
