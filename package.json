@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@riophae/vue-treeselect": "^0.0.29",
-    "axios": "^0.17.1",
+    "axios": "^0.21.2",
     "babel": "^6.23.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
