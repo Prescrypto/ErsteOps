@@ -30,6 +30,12 @@ pip-delete-this-directory.txt
 .venv
 venv/
 ENV/
+env_2_2
+env_3.6
+env_2_2_ok
+env_2_21_ok
+ChatTester
+
 
 
 # mypy
@@ -46,3 +52,9 @@ webpack-stats.json
 yarn-error.log
 dist/
 npm-debug.log
+
+CFDI
+
+dump.rdb
+
+media/

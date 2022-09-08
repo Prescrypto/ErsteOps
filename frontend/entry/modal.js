@@ -12,6 +12,7 @@ import Patient from 'components/Patient';
 import Addresses from 'components/Addresses';
 import Units from 'components/Units';
 // import Timers from 'components/Timers';
+import Derivation from 'components/Derivation';
 import map from 'lodash/fp/map';
 import store from 'store';
 import {
@@ -32,7 +33,7 @@ Validator.localize('es', es);
 window.Erste.modal = new Vue({
   el: '#v-header',
   delimiters: ['<%', '%>'],
-  components: { Search, Patient, Addresses, Units },
+  components: { Search, Patient, Addresses, Units, Derivation },
   data() {
     return {
       tabs: [
@@ -40,6 +41,7 @@ window.Erste.modal = new Vue({
         { name: 'patient', label: 'Paciente' },
         { name: 'address', label: 'Dirección' },
         { name: 'units', label: 'Unidad' },
+        { name: 'derivation', label: 'Derivacion' },
         // { name: 'timers', label: 'Timers' },
         // temporarily lock
         // { name: 'timers', label: 'Timers' },

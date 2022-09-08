@@ -1,0 +1,15 @@
+environ
+latexmk
+multirow
+xcolor
+eso-pic
+overpic
+pict2e
+varwidth
+babel
+eepic
+standalone
+xkeyval
+transparent
+adjustbox
+collectbox

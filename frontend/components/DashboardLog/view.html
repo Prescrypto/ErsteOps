@@ -62,6 +62,7 @@
           </span>
           <span v-else class="u-text-mute">N/A</span>
         </td>
+        
         <td class="c-table__cell" @click="populate(emergency.id)">
           <span class="u-text-mute">{{ emergency.start_time | time-since(now) }}</span>
         </td>
@@ -76,6 +77,7 @@
             </div>
           </div>
         </td>
+
         <td class="c-table__cell u-text-center">
           <v-popover
             v-if="showGradeTooltip(emergency.id)"
@@ -107,7 +109,7 @@
           <span @click="e => stop(e, emergency.id)" class="fa fa-stop-circle-o"></span>
         </td>
         <!-- Dashboard Timers -->
-        <td class="c-table__cell u-text-center">
+        <td class="c-table__cell u-text-left">
           <!-- Popover Timers-->
           <v-popover
             offset="20"

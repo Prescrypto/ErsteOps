@@ -27,32 +27,43 @@ def get_subscriptor(request):
         # Get Access token
         result = _api_odoo.get_token()
         q = request.GET.get('term', '')
+        # Check if access token is exist!
+        if result['access_token']:
+            #################
+            # Get info from res.partner
+            patients = _api_odoo.get_by_patient_name(q, result['access_token'])
+            clients = patients['results']
+            patients_legal = _api_odoo.get_by_patient_legal_name(q, result['access_token'])
+            clients_legal = patients_legal['results']
+            #logger_debug("******** Find in Clients ********",clients)
 
-        # Get info from res.partner
-        patients = _api_odoo.get_by_patient_name(q, result['access_token'])
-        clients = patients['results']
-        #logger_debug("******** Find in Clients ********",clients)
+            # get info from family.member
+            family_members = _api_odoo.get_by_family_member(q, result['access_token'])
+            clients_family = family_members['results']
+            #logger_debug("******** Find in Family Members ********",clients_family)
 
-        # get info from family.member
-        family_members = _api_odoo.get_by_family_member(q, result['access_token'])
-        clients_family = family_members['results']
-        #logger_debug("******** Find in Family Members ********",clients_family)
+            # get info from company.member
+            company_members = _api_odoo.get_by_company_member(q, result['access_token'])
+            clients_company = company_members['results']
+            #logger_debug("******** Find in Company Members ********",clients_company)
 
-        # get info from company.member
-        company_members = _api_odoo.get_by_company_member(q, result['access_token'])
-        clients_company = company_members['results']
-        #logger_debug("******** Find in Company Members ********",clients_company)
-
-        #get client by erste id
-        #first convert q to integer
-        q_int = num(q)
-        if q_int != 0:
-            client_by_id = _api_odoo.get_like_patient_id(q, result['access_token'])
-            clients_by_id = client_by_id['results']
+            #get client by erste id
+            #first convert q to integer
+            q_int = num(q)
+            if q_int != 0:
+                client_by_id = _api_odoo.get_like_patient_id(q, result['access_token'])
+                clients_by_id = client_by_id['results']
+                #client_by_reference_id = _api_odoo.get_like_reference_id(q, result['access_token'])
+                #clients_by_id.update(client_by_reference_id['results'])
+            else:
+                #clients_by_id = []
+                client_by_id = _api_odoo.get_like_reference_id(q, result['access_token'])
+                clients_by_id = client_by_id['results']
+                #clients_by_id.update(client_by_reference_id['results'])
+            #logger_debug("******** Find in clients by id ********",clients_by_id)
+            ##################
         else:
-            clients_by_id = []
-        #logger_debug("******** Find in clients by id ********",clients_by_id)
-
+            clients = clients_family = clients_company = clients_by_id = []
         # Init result list
         results = []
         # Add res.partner data
@@ -72,6 +83,25 @@ def get_subscriptor(request):
                 "target": str(client['id']).zfill(6) + str(1).zfill(6) + str(client['id']).zfill(6)
             }
             results.append(client_json)
+
+        # Add res.partner data search field legal name
+        for client in clients_legal:
+            if client.get('client_type', None) is None:
+                continue
+
+            client_export_id_label= client['reference_id'] if client.get('reference_id', 'None') != 'None' else "Sin ID"
+            client_json = {
+                "id": client['id'],
+                "label": "{} -({}) Id: {}".format(client['name'], str(client["client_type"]), client_export_id_label),
+                "value": "{} -({}) Id: {}".format(client['name'], str(client["client_type"]), client_export_id_label),
+                "parent_id": client['id'],
+                "client_type": client['client_type'],
+                "source": 'res.partner',
+                "client_export_id": client['reference_id'],
+                "target": str(client['id']).zfill(6) + str(1).zfill(6) + str(client['id']).zfill(6)
+            }
+            results.append(client_json)
+
 
         # Add res.partner data by id
         for client in clients_by_id:

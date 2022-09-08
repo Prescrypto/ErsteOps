@@ -46,4 +46,19 @@ EMERGENCY_LIST_FIELDS = [
     'complaint_description',
     'subscription_type',
     'tree_selection',
+    'tel_local',
+    'tel_mobile',
+    'operation_notes',
+    'partner_name',
+    'partner_legalname',
+    'sales_rep',
+    'derivations',
+    'medical_report',
+]
+
+HOSPITAL_LIST_FIELDS = [
+    'id',
+    'name',
+    'address',
+    'phone',
 ]

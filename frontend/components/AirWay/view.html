@@ -1,0 +1,41 @@
+<form>
+  <div class="timers-update">
+    <div class="c-field">
+      <div class="timers-label">  
+
+        <select class="uk-select"
+        v-model="selected">
+          <option v-for="option in options" :value="option.value">
+            {{ option.text }}
+          </option>
+        </select>
+        <div v-if="selected === 'Otro'">
+          <label class="uk-form-label" for="id_other_airway">Otro</label>
+          <input class="uk-input" 
+              v-model="other_airway"
+              id="id_other_airway"
+              name="other_airway" 
+              type="text" placeholder="Otro:... "/> 
+        </div>    
+      
+        <label class="uk-form-label" for="id_instructions">Instrucción</label>
+        <input class="uk-input" 
+          v-model="instructions"
+          id="id_instructions"
+          name="instructions" 
+          type="text" placeholder="Especifique..."/>
+
+        <div class="timers-label">
+          <li v-for="(value, key) in paperless.airway">
+            {{ value.airway_type }} : {{ value.instruction }} <button uk-icon="minus-circle" @click="eliminate($event,key)"></button>
+          </li>
+        </div>  
+
+        <div class="timers-button">
+          <button @click="submit" class="c-btn c-btn--info" v-close-popover :disabled="!selected.length">Agregar</button>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+</form>

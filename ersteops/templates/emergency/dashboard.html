@@ -1,5 +1,6 @@
 {% extends 'home/base_ui.html' %}
 {% load staticfiles %}
+{% load user_tags %}
 
 {% block cssblock %}
   <link rel="stylesheet" href='{% static "bower_components/jquery-ui/themes/base/jquery-ui.css" %}'  type="text/css" media="all" />
@@ -17,6 +18,7 @@
     {% include "ui_component/header.html" %}
 
     <div class="container">
+      {% if request.user|has_group:"Operator"%}
       <div id="analytics"></div>
       {# TODO add mini components of wireframe#}
       <div class="row row-fix">
@@ -29,7 +31,9 @@
           </div><!-- // .c-card -->
         </div>
       </div><!-- // .row -->
+      {% endif %}
     </div> <!-- // .container -->
+
   </main><!-- // .o-page__content -->
 {% endblock %}
 
@@ -38,9 +42,11 @@
   var incidents_json_list = {{ object_list|safe }};
   var units_json_list = {{ units_list|safe }};
   var available_units_counter = {{ available_units_counter }} || 0;
+  var hospitals_json_list = {{hospitals|safe}};
 
   window.erste.incidents = incidents_json_list;
   window.erste.units = units_json_list;
+  window.erste.hospitals = hospitals_json_list;
 
   // example HTTP_PROTOCOL: {{ HTTP_PROTOCOL }}
   // ie. ABSOLUTE_URI : {{ HTTP_ABSOLUTE_URI }}

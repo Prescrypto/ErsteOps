@@ -6,12 +6,16 @@ import unicodedata
 from django.db import models
 from django.utils import timezone
 
-from channels import Group
+#from channels import Group
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
+
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 
 from core.utils import eventDuration
 from unit.models import Unit
+from paperless.models import MedicalReport
 
 
 
@@ -30,17 +34,20 @@ class Emergency(models.Model):
         related_name="service_category_name",
         verbose_name= "Tipo de emergencia",
         blank=True,
-        null=True
+        null=True,
+        on_delete = models.DO_NOTHING
         )
 
     # Triage
     grade_type = models.ForeignKey("AttentionKind",
     related_name="attention_kind_name",
-    verbose_name= "Grado Emergencia"
+    verbose_name= "Grado Emergencia",
+    on_delete = models.DO_NOTHING
         )
     zone = models.ForeignKey("AttentionZone",
     related_name="zone_name",
-    verbose_name="Zona de Atención"
+    verbose_name="Zona de Atención",
+    on_delete = models.DO_NOTHING
         )
 
     tree_selection = models.CharField("Internal Code for tree selection", blank=True, max_length=255, default="")
@@ -96,12 +103,17 @@ class Emergency(models.Model):
     patient_illnesses = models.CharField('Enfermedades diagnosticadas', max_length=100, default='', blank=True)
     patient_notes = models.TextField('Notas paciente', blank=True, default='')
 
+    # Partner Data
+    partner_name = models.CharField('Nombre del socio',max_length=255,default='',blank=True)
+    partner_legalname = models.CharField('Razon legal del socio',max_length=255,default='',blank=True)
+
     #Details of attention
     attention_final_grade = models.ForeignKey("AttentionKind",
                                             related_name="final_attention_kind_name",
                                             verbose_name= "Grado de atención final",
                                             blank=True,
-                                            null=True)
+                                            null=True,
+                                            on_delete = models.DO_NOTHING)
     attention_justification = models.TextField(u'Justificación', blank=True, default='')
 
     # Symptoms
@@ -110,12 +122,25 @@ class Emergency(models.Model):
     subscription_type = models.CharField('Subscripción', max_length=100, default='', blank=True)
     copago_amount = models.IntegerField("Monto de Copago", blank=True, null=True, default=0)
 
+    #Telephones
+    tel_local = models.CharField('Tel de contacto',max_length=33,default='',blank=True)
+    tel_mobile = models.CharField('Movil de contacto',max_length=33,default='',blank=True)
+    operation_notes = models.TextField('Notas Operativas',default='',blank= True)
     # TODO when create derivation
-    # derivation = models.ManyToManyField('AttentionDerivation',
-    #     related_name = 'derivation_issue',
-    #     verbose_name = 'Derivacion',
-    #     blank=True,
-    #     )
+    derivations = models.ManyToManyField('EmergencyDerivation',
+        related_name = 'derivation_issue',
+        verbose_name = 'Derivaciones',
+        blank=True,
+        )
+    # SAles rep stuff
+    sales_rep = models.CharField('Vendedor',max_length=255,default='',blank=True)
+
+    medical_report = models.ForeignKey("paperless.MedicalReport", 
+        related_name = "medical_report",
+        verbose_name = "Parte Medico",
+        blank = True,
+        null = True,
+        on_delete = models.DO_NOTHING)
 
     # Datetie utils
     created_at = models.DateTimeField("Fecha de alta",auto_now_add=True,editable=False)
@@ -211,10 +236,18 @@ class Emergency(models.Model):
             "type_data" : "Emergency",
         })
         emergJson=json.dumps(emergDict)
-        print("TypeNotification: {}".format(type_notif))
-        Group('notifications').send({
-            "text": json.dumps(emergJson),
-        })
+
+        #New way in channels 2 and 3
+        channel_layer = get_channel_layer()
+        room_group_name = f'notifications'
+        async_to_sync(channel_layer.group_send)(
+            room_group_name,
+            {
+                'type': 'chat_message',
+                'message' : emergDict
+            }
+        )
+
 
     # Returns a verbose name - adjusted for Python3
     def __str__(self):
@@ -226,6 +259,14 @@ def emergency_dictionary(instance):
     units = []
     for unit in instance.units.all():
         units.append(unit.id)
+    derivations = []    
+    for derivation in instance.derivations.all():
+         derivations.append(derivation.id)  
+    #medicalreports =[]
+    #for medicalrepoort in instance.medical_report.all()
+    #    medicalreports.append(medicalrepoort.id)
+
+
     emergDict={
         "pk":instance.pk,
         "id":instance.pk,
@@ -272,6 +313,13 @@ def emergency_dictionary(instance):
         "main_complaint":instance.main_complaint,
         "complaint_description":instance.complaint_description,
         "subscription_type":instance.subscription_type,
+        "tel_local":instance.tel_local,
+        "tel_mobile":instance.tel_mobile,
+        "operation_notes":instance.operation_notes,
+        "partner_name":instance.partner_name,
+        "partner_legalname":instance.partner_legalname,
+        "derivations": derivations,
+        #"medical_report": instance.medical_report,
     }
 
     return emergDict
@@ -329,6 +377,9 @@ class AttentionHospital(models.Model):
     def __str__(self):
         return self.name
 
+    def natural_key(self):
+        return( self.name )
+
 
 class AttentionDerivation(models.Model):
     '''  Service Derivation model'''
@@ -336,11 +387,13 @@ class AttentionDerivation(models.Model):
         related_name = "derivation_emergency_name",
         verbose_name = "emergencia",
         default=1,
+        on_delete = models.DO_NOTHING
         )
     motive = models.CharField("Motivo", max_length=100, blank=True)
     hospital = models.ForeignKey("AttentionHospital",
     related_name="attention_hospital_name",
-    verbose_name= "hospital"
+    verbose_name= "hospital",
+    on_delete = models.DO_NOTHING
         )
     eventualities = models.TextField("eventualidades", max_length=100, blank=True)
     reception = models.CharField("quien recibe en hospital", max_length=100, blank=True)
@@ -356,6 +409,9 @@ class AttentionDerivation(models.Model):
 
     def __str__(self):
         return self.motive
+
+    def natural_key(self):
+        return(self.motive, self.hospital.name)
 
     def save(self, **kwargs):
         newDerivation=True if self.pk is None else False
@@ -410,3 +466,28 @@ class ServiceCategory(models.Model):
 
     def __str__(self):
         return self.name
+
+class EmergencyDerivation(models.Model):
+    hospital = models.ForeignKey("AttentionHospital",
+    related_name="em_attention_hospital_name",
+    verbose_name= "hospital",
+    on_delete = models.DO_NOTHING
+        )
+    reception = models.CharField("quien recibe en hospital", max_length=100, blank=True)
+    notes = models.TextField("notas", max_length=100, blank=True)
+
+    # Datetime utils
+    created_at = models.DateTimeField("fecha de alta",auto_now_add=True,editable=False)
+    last_modified = models.DateTimeField("ultima modificacion",auto_now=True,editable=False)
+
+    class Meta:
+        verbose_name_plural = "Derivacion de Emergencia"
+        ordering = ['created_at']
+
+    def __str__(self):
+        #return "{}, {}, {}".format(unicodedata.normalize('NFKD', self.odoo_client), unicodedata.normalize('NFKD', self.patient_name), self.created_at)
+        return "{}, {}, {}".format(unicodedata.normalize('NFKD', str(self.id)) , self.hospital.name, self.created_at)
+        #return str(self.hiospi)
+
+    def natural_key(self):
+        return({'id': self.id, 'reception': self.reception, 'hospital': self.hospital.name})

@@ -8,9 +8,20 @@
 
 <form v-else>
   <div class="row">
-    <div class="col-12" >
+    <div class="col-4" >
       <div class="c-field">
         <label class="c-field__label">Emergencia: {{ emergency.id }} </label>
+      </div>
+    </div>
+    <div class="col-4" >
+      <div class="c-field">
+        <label class="c-field__label">Vendedor: <span style="font-weight: bold;"> {{ emergency.sales_rep }} </span></label>
+        <label class="c-field__label">Socio: {{ emergency.partner_name }} </label>
+      </div>
+    </div>
+        <div class="col-4" >
+      <div class="c-field">
+        <label class="c-field__label">Nombre Legal: {{ emergency.partner_legalname }} </label>
       </div>
     </div>
   </div>
@@ -160,23 +171,13 @@
       </div>
     </div>
     <div class="col-4">
-      <div
-        @click="() => emergency.has_paid = !emergency.has_paid"
-        class="subscription_switch"
-        :class="{'c-switch': true, 'is-active': source.has_paid }"
-      >
-        <input
-          class="c-switch__input"
-          name="has_paid"
-          id="has_paid"
-          type="checkbox"
-          v-model="source.has_paid"
-        />
-        <label v-if="source.has_paid" class="c-switch__label" for="has_paid">
-          Pagado
+      <div class="subscription_switch">
+
+        <label v-if="source.has_paid" class="c-field__label" for="has_paid">
+          <span style="color: Green">Status: Pagado</span>
         </label>
-        <label v-else class="c-switch__label" for="has_paid">
-          Pago Pendiente
+        <label v-else class="c-field__label" for="has_paid">
+          <span style="color: Red">Status: Pago Pendiente</span>
         </label>
       </div>
 
@@ -276,6 +277,7 @@
         <template>
           <div>
             <treeselect
+            tabindex="14"
             v-model="source.tree_selection"
             :multiple="false"
             :clearable="clearable"
@@ -294,6 +296,37 @@
   </div>
 
   <span class="c-divider u-mv-medium"></span>
+  <div class="row">
+    <div class="col-6">
+      <label class="c-field__label" for="id_tel_local">
+        Teléfono
+      </label>
+      <input
+        tabindex="15"
+        v-model="source.tel_local"
+        type="text"
+        name="tel_local"
+        id="id_tel_local"
+        class="c-input"
+        maxlength="33"
+      />
+    </div>
+    <div class="col-6">
+      <label class="c-field__label" for="id_tel_mobile">
+        Celular
+      </label>
+      <input
+        tabindex="16"
+        v-model="source.tel_mobile"
+        type="text"
+        name="tel_mobile"
+        id="id_tel_mobile"
+        class="c-input"
+        maxlength="33"
+      />
+    </div>  
+  </div>
+  <span class="c-divider u-mv-medium"></span>
 
   <div class="row">
     <div class="col-4">
@@ -302,7 +335,7 @@
           Tipo de emergencia
         </label>
         <select
-          tabindex="14"
+          tabindex="17"
           v-model="source.service_category"
           name="service_category"
           id="id_service_category"
@@ -324,7 +357,7 @@
           Grado Emergencia
         </label>
         <select
-          tabindex="15"
+          tabindex="18"
           v-model="source.grade_type"
           v-validate="'required'"
           data-vv-scope="emergency"
@@ -353,7 +386,7 @@
           Co-pago
         </label>
         <input
-          tabindex="16"
+          tabindex="19"
           v-model="copago"
           v-validate="'required|decimal:2'"
           :class="{
@@ -364,7 +397,7 @@
           data-vv-name="copago_amount"
           data-vv-as="copago"
           type="number"
-          min="0.01"
+          min="0.00"
           step="0.01"
           name="copago"
           id="id_copago"
@@ -379,17 +412,34 @@
   </div>
 
   <div class="row">
-    <div class="col-12">
+    <div class="col-6">
       <br />
       <div class="c-field">
         <label class="c-field__label" for="id_patient_notes">
-          Notas paciente
+          Notas Paciente
         </label>
         <textarea
-          tabindex="17"
+          tabindex="20"
           v-model="source.patient_notes"
           name="patient_notes"
           id="id_patient_notes"
+          class="c-input"
+          rows="2"
+          cols="40"
+        ></textarea>
+      </div>
+    </div>
+    <div class="col-6">
+      <br />
+      <div class="c-field">
+        <label class="c-field__label" for="id_operation_notes">
+          Notas Operativas
+        </label>
+        <textarea
+          tabindex="21"
+          v-model="source.operation_notes"
+          name="patient_notes"
+          id="id_operation_notes"
           class="c-input"
           rows="2"
           cols="40"

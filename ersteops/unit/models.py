@@ -5,6 +5,10 @@ from django.forms.models import model_to_dict
 
 from .utils import UNIT_TYPE_LIST
 
+from django.contrib.auth.models import User
+
+import unicodedata
+
 class UnitQueryset(models.QuerySet):
     ''' Add custom querysets'''
 
@@ -38,7 +42,7 @@ class UnitManager(models.Manager):
 class CrewRoll(models.Model):
     ''' Crew type ej Medic, First Responder, Pilot '''
     name = models.CharField('Tipo de integrante',max_length=255, default='', unique=True)
-    description = models.TextField('Descripción del Rol', blank=True)
+    description = models.TextField('Descripción del Rol', blank=True, null=True)
 
     class Meta:
         ordering = ['name']
@@ -54,9 +58,11 @@ class CrewMember(models.Model):
     name = models.CharField('Nombre del miembro tripulante', max_length=255, default='')
     crewroll = models.ForeignKey("CrewRoll",
         related_name="crew_members",
-        verbose_name= "Tipo de tripulación"
+        verbose_name= "Tipo de tripulación",
+        on_delete = models.DO_NOTHING
         )
     more_info = models.TextField("Más Información acerca del miembro tripulante", blank=True)
+    user = models.ForeignKey(User,verbose_name= "Usuario",on_delete=models.DO_NOTHING, blank=True, null=True)
 
     # Datetime utils
     created_at = models.DateTimeField("Fecha de alta", auto_now_add=True)
@@ -126,3 +132,28 @@ class Unit(models.Model):
             return []
 
 
+class TodayUnitDoctor(models.Model):
+    unit = models.ForeignKey("Unit",
+        related_name = "today_Unit",
+        verbose_name = "Unidad",
+        blank = True,
+        null = True,
+        on_delete = models.DO_NOTHING)
+    doctor = models.ForeignKey("CrewMember",
+        related_name = "today_Doctor",
+        verbose_name = "Doctor",
+        blank = True,
+        null = True,
+        on_delete = models.DO_NOTHING)
+    unit_date = models.DateTimeField("Inicio Rol Dia/Hora",blank= True, null =True)
+    unit_date_end = models.DateTimeField("Fin Rol Dia/Hora",blank= True, null =True)
+
+    created_at = models.DateTimeField("Fecha de turno",auto_now_add=True,editable=False)
+    last_modified = models.DateTimeField("Última modificación",auto_now=True,editable=False)
+
+    def __str__(self):
+        verbose_name_plural = "Rol del Dia"
+        return "{}, {}, {}".format(unicodedata.normalize('NFKD', self.unit.identifier), unicodedata.normalize('NFKD', self.doctor.name), self.created_at)
+
+
+    

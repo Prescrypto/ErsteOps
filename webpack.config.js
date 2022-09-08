@@ -9,6 +9,7 @@ module.exports = {
     dashboard: ['babel-polyfill', './frontend/entry/dashboard'],
     modal: ['./frontend/utils/global', './frontend/entry/modal'],
     nav: ['./frontend/utils/global', './frontend/entry/nav'],
+    medicalreport: ['babel-polyfill', './frontend/entry/medicalreport'],
   },
 
   output: {
@@ -106,12 +107,12 @@ if (process.env.NODE_ENV === 'production') {
         NODE_ENV: JSON.stringify('production'),
       },
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false,
-      },
-    }),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   sourceMap: true,
+    //   compress: {
+    //     warnings: false,
+    //   },
+    // }),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
     }),

@@ -20,11 +20,18 @@ from django.db.models import Q
 from core.utils import OdooApi
 from .utils import JSONResponseMixin, AjaxableResponseMixin, UpdateJsonResponseMixin
 from .forms import OdooClientForm, OdooClientAuto
-from .models import Emergency,AttentionDerivation, AttentionKind
+from .models import Emergency,AttentionDerivation, AttentionKind, AttentionHospital, EmergencyDerivation
 from unit.models import Unit
 from unit.utils import UNIT_LIST_FIELD
-from .list_fields import EMERGENCY_LIST_FIELDS
+from .list_fields import EMERGENCY_LIST_FIELDS, HOSPITAL_LIST_FIELDS
 from .helpers import get_copago
+
+from django import template
+
+from django.conf import settings
+
+from twilio.rest import Client 
+
 
 # Logging library
 import logging
@@ -82,6 +89,7 @@ def timer_view(request):
                 emergency.unit_dispatched_time = timezone.now()
             if data['timer_type'] == '2':
                 emergency.arrival_time = timezone.now()
+                emergency.attention_time = timezone.now()
             if data['timer_type'] == '3':
                 emergency.derivation_time = timezone.now()
             if data['timer_type'] == '4':
@@ -100,14 +108,45 @@ def timer_view(request):
         return bad_response
 # /Update Timer Functionality
 
-@method_decorator(login_required, name='dispatch')
-class EmergencyBlank(View):
-    template_name = "emergency/blank.html"
+# Update Derivation Functionality
+@csrf_exempt
+def derivation_view(request):
+    ''' '''
+    bad_response = JsonResponse({'status':'bad request'})
+    bad_response.status_code = 400
 
-    def get(self, request, *args, **kwargs):
-        form=''
-        return render(request, self.template_name,{"form": form})
+    if not request.is_ajax():
+        return bad_response
+    if not request.body:
+        return bad_response
 
+    data = json.loads(request.body.decode('utf-8'))
+
+    if 'id' in data and 'timer_type' in data :
+        try:
+            emergency = Emergency.objects.get(id=data['id'])
+            # if data['timer_type'] == '1':
+            #     emergency.unit_dispatched_time = timezone.now()
+            # if data['timer_type'] == '2':
+            #     emergency.arrival_time = timezone.now()
+            #     emergency.attention_time = timezone.now()
+            # if data['timer_type'] == '3':
+            #     emergency.derivation_time = timezone.now()
+            # if data['timer_type'] == '4':
+            #     emergency.patient_arrival = timezone.now()
+
+            # emergency.save()
+            data.update({'status': 'success', 'client_id':emergency.odoo_client})
+            response = JsonResponse(data)
+            response.status_code = 202
+            return response
+        except Exception as e:
+            logger.error("[Update Derivation View ERROR]: {}, type: {}".format(e, type(e)))
+            return bad_response
+
+    else:
+        return bad_response
+# /Update Derivation Functionality
 
 @method_decorator(csrf_exempt, name='dispatch')
 class EmergencyNew(AjaxableResponseMixin, CreateView):
@@ -117,28 +156,7 @@ class EmergencyNew(AjaxableResponseMixin, CreateView):
     success_url = 'emergencydashboard'
 
 
-@method_decorator(login_required, name='dispatch')
-class EmergencyListView(ListView):
-    template_name = "emergency/list.html"
-    model = Emergency
-
-    def get_context_data(self, **kwargs):
-        context = super(EmergencyListView, self).get_context_data(**kwargs)
-        context['now'] = timezone.now()
-        return context
-
-
-@method_decorator(login_required, name='dispatch')
-class EmergencyDetailView(DetailView):
-    template_name = "emergency/detail.html"
-    model = Emergency
-
-    def get_context_data(self, **kwargs):
-        context = super(EmergencyDetailView, self).get_context_data(**kwargs)
-        context['now'] = timezone.now()
-        return context
-
-
+# Return Emergency data for selected item in dashboard
 class EmergencyJSONView(JSONResponseMixin, DetailView):
     ''' Custom Json View for Emergency details '''
     model = Emergency
@@ -147,23 +165,7 @@ class EmergencyJSONView(JSONResponseMixin, DetailView):
         return self.render_to_json_response(context, **response_kwargs)
 
 
-class EmergencyListJSONView(ListView):
-    model = Emergency
-
-    def render_to_response(self, context, **response_kwargs):
-        return HttpResponse(
-            self.get_data(context),
-            content_type='application/json',
-            **response_kwargs
-        )
-
-    def get_data(self, context):
-        fields = EMERGENCY_LIST_FIELDS
-        emm_list = Emergency.objects.filter(is_active=True)
-        data = serializers.serialize('json', list(emm_list), fields=fields)
-        return data
-
-
+# Display FE Dashboard 
 @method_decorator(login_required, name='dispatch')
 class EmergencyDashboardList(ListView):
     template_name = "emergency/dashboard.html"
@@ -172,6 +174,8 @@ class EmergencyDashboardList(ListView):
     def get_context_data(self, **kwargs):
         active_emergencies = Emergency.objects.filter(is_active=True).count()
         units = Unit.objects.available_units()
+        #hospitals = AttentionHospital.objects.all()
+        hospitals_lists = serializers.serialize('json',list(AttentionHospital.objects.all()),fields=HOSPITAL_LIST_FIELDS)
         available_units_counter = units.count()
         units_list = serializers.serialize('json', list(units), fields=UNIT_LIST_FIELD)
         context = super(EmergencyDashboardList, self).get_context_data(**kwargs)
@@ -179,172 +183,27 @@ class EmergencyDashboardList(ListView):
             'now': timezone.now(),
             'active_emergencies': active_emergencies,
             'available_units_counter': available_units_counter,
-            'units_list': units_list
+            'units_list': units_list,
+            'hospitals': hospitals_lists,
         })
         return context
 
     def get_queryset(self):
         fields = EMERGENCY_LIST_FIELDS
-        data = serializers.serialize('json', list(Emergency.objects.filter(is_active=True)), fields=fields)
+        data = serializers.serialize('json', list(Emergency.objects.filter(is_active=True)), fields=fields, use_natural_foreign_keys=True, use_natural_primary_keys=True)
         logger.info('[Dashboard List Sent SUCCESS')
+        #print("{}".format(data))
         return data
 
-
-@method_decorator(login_required, name='dispatch')
-class EmergencyDerivation(CreateView):
-    template_name = "emergency/derivation.html"
-    model = AttentionDerivation
-    fields = ['emergency',
-                'motive',
-                'hospital',
-                'eventualities',
-                'reception',
-                'notes',
-        ]
-    success_url = '/emergency/list/'
-
-
-@method_decorator(login_required, name='dispatch')
-class EmergencyUpdate(UpdateView):
-    template_name = "emergency/update.html"
-    model = Emergency
-    fields = EMERGENCY_LIST_FIELDS
-    success_url = '/emergency/list/'
 
 
 @method_decorator(csrf_exempt, name='dispatch')
 class EmergencyJSONUpdate(UpdateJsonResponseMixin, UpdateView):
-    template_name = "emergency/update.html"
+    #template_name = "emergency/update.html"
     model = Emergency
     fields = EMERGENCY_LIST_FIELDS
     success_url = 'emergencydashboard'
 
-
-@method_decorator(login_required, name='dispatch')
-class EmergencyClientOdoo(View):
-    template_name = "emergency/odooclient.html"
-    def get(self, request, *args, **kwargs):
-        form = OdooClientForm
-
-        return render(request, self.template_name,{"form": form})
-
-    def post(self, request, *args, **kwargs):
-        form = OdooClientForm(request.POST)
-        if form.is_valid():
-            # Ini Odoo api
-            _api_odoo = OdooApi()
-            # Get Access token
-            result = _api_odoo.get_token()
-            logger.info('%s (%s)' % ('Access-Token', result['access_token']))
-            if form.cleaned_data['search_type'] == '1':
-                patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_patient_name(patient, result['access_token'])
-                #print(patient_data)
-                logger.info('%s (%s)' % ('OdooApi: ', patient_data))
-            if form.cleaned_data['search_type'] == '3':
-                patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_patient_id(patient, result['access_token'])
-                #print(patient_data)
-                logger.info('%s (%s)' % ('OdooApi: ', patient_data))
-            if form.cleaned_data['search_type'] == '2':
-                patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_patient_street(patient, result['access_token'])
-                #print(patient_data)
-                logger.info('%s (%s)' % ('OdooApi: ', patient_data))
-            if form.cleaned_data['search_type'] == '5':
-                patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_all(patient, result['access_token'])
-                #print(patient_data)
-                logger.info('%s (%s)' % ('OdooApi',patient_data))
-            else:
-                return render(request, self.template_name,{"form": form, "result": result})
-        return render(request, self.template_name,{"form": form, "result": result, "patients": patient_data})
-
-
-@method_decorator(login_required, name='dispatch')
-class EmergencyClientModal(View):
-    template_name = "emergency/blank_modal.html"
-    def get(self, request, *args, **kwargs):
-        form = OdooClientForm
-        feContext = {"openmodal":'false',"showMultiple": False,"count": 0}
-        find_data = []
-        request.session['patientrequest'] = {}
-        return render(request, self.template_name,{"form": form, "find_data": find_data, "feContext": feContext})
-
-    def post(self, request, *args, **kwargs):
-        form = OdooClientForm(request.POST)
-        find_data = []
-        patient_data = {}
-        feContext = {"openmodal":'true',"showMultiple": True,"count": 0}
-        if form.is_valid():
-            # Ini Odoo api
-            _api_odoo = OdooApi()
-            # Get Access token
-            result = _api_odoo.get_token()
-            logger.info('%s (%s)' % ('OdooApi', result))
-            logger.info('%s (%s)' % ('Access-Token', result['access_token']))
-            find_data = []
-
-            if form.cleaned_data['search_type'] == '1':
-                patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_patient_name(patient, result['access_token'])
-                find_data = patient_data['results']
-                feContext.update({"count": len(patient_data['results'])})
-                logger.info('%s (%s)' % ('OdooApi_name',patient_data))
-            if form.cleaned_data['search_type'] == '2':
-                patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_patient_street( patient,result['access_token'])
-                find_data = patient_data['results']
-                feContext.update({"count": len(patient_data['results'])})
-                logger.info('%s (%s)' % ('OdooApi_street',patient_data))
-            if form.cleaned_data['search_type'] == '3':
-                patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_patient_id( patient,result['access_token'])
-                find_data = patient_data
-                try:
-                    if find_data.name:
-                        feContext.update({"count": 1})
-                except:
-                    feContext.update({"count": 0})
-                feContext.update({"showMultiple": False})
-                logger.info('%s (%s)' % ('OdooApi_id',patient_data))
-            if form.cleaned_data['search_type'] == '5':
-                patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_all( patient,result['access_token'])
-                find_data = patient_data['results']
-                feContext.update({"count": len(patient_data['results'])})
-                logger.info('%s (%s)' % ('OdooApi',patient_data))
-            if form.cleaned_data['search_type'] == '6':
-                patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_family_member( patient,result['access_token'])
-                find_data = patient_data['results']
-                feContext.update({"count": len(patient_data['results'])})
-                logger.info('%s (%s)' % ('OdooApi_name_family_member',patient_data))
-            if form.cleaned_data['search_type'] == '7':
-                patient = form.cleaned_data['client_name']
-                patient_data = _api_odoo.get_by_company_member( patient,result['access_token'])
-                find_data = patient_data['results']
-                feContext.update({"count": len(patient_data['results'])})
-                logger.info('%s (%s)' % ('OdooApi_name_company_member',patient_data))
-            else:
-                return render(request, self.template_name,{"form": form, "result": result, "find_data": find_data, "feContext": feContext  })
-        return render(request, self.template_name,{'form': form, 'result': result,"find_data": find_data, "feContext": feContext })
-
-
-@method_decorator(login_required, name='dispatch')
-class EmergencyNewModal(CreateView):
-    template_name = "emergency/blanknew_modal.html"
-    model = Emergency
-    fields = EMERGENCY_LIST_FIELDS
-    success_url = '/emergency/list/'
-
-
-@method_decorator(login_required, name='dispatch')
-class EmergencyGetPatient(View):
-    def get(self, request, *args, **kwargs):
-        ''' LEgacy way to show modal with patient data'''
-        request.session['patientrequest'] = handle_patient_data(kwargs['patient_id'])
-        return redirect('/emergency/newmodal/')
 
 
 class EmergencyJSONGetPatient(View):
@@ -389,56 +248,71 @@ def handle_patient_data(patient_id):
 # Resume and clean patient and partner data
 def patient_json(source_id,patient_data,parent_data):
     patient_data_json = {}
-    if source_id == 1:
-        patient_data_json = {
-            "id_odoo_client" : patient_data['reference_id'] if patient_data.get('reference_id', 'None') != None else "Sin ID",
-            "id_patient_name" : "{}".format(patient_data['name']),
-            "id_patient_allergies" : '',
-            "id_patient_illnesses" : '',
-            "id_caller_relation": '',
-            "id_patient_age": 0,
-            "id_zone": str(patient_data['zone']).upper(),
-            #"id_subscription_type": patient_data['client_type'],
-            "id_subscription_type": get_subscription_plan(patient_data['client_type'],patient_data['comment']),
-            "addresses": address_json(patient_data,patient_data),
-            "min_addresses": min_address_json(patient_data,patient_data),
-            "copago_amount": get_copago(patient_data.get('copago_amount', 0)),
-            "has_paid" : patient_data.get('outstanding', False),
-            "erste_code": patient_data.get('group_code','Sin Id'),
-            #"comment": patient_data['comment'],
-        }
-    else:
-        patient_data_json ={
-            "id_odoo_client" : parent_data['reference_id'] if parent_data.get('reference_id', 'None') != None else "Sin ID",
-            "id_patient_name" : "{} ({})".format(patient_data['name'], parent_data['name']),
-            "id_patient_allergies" : patient_data['allergies'],
-            "id_patient_illnesses" : patient_data['prev_ailments'],
-            "id_caller_relation" : partner_relationship(source_id,patient_data['relationship']),
-            "id_patient_age": patient_age(patient_data['birthday']),
-            "id_zone": str(parent_data['zone']).upper(),
-            #"id_subscription_type": parent_data['client_type'],
-            "id_subscription_type": get_subscription_plan(patient_data['client_type'],patient_data['comment']),
-            "addresses": address_json(parent_data,patient_data),
-            "min_addresses": min_address_json(parent_data,patient_data),
-            "copago_amount": get_copago(parent_data.get('copago_amount', 0)),
-            "has_paid" : parent_data.get('outstanding', False),
-            "erste_code": parent_data.get('group_code','Sin Id'),
-            #"comment": patient_data['comment'],
-        }
-    logger.info('[ GET PATIENTJSON FOR FILLUP EMERGENCY FORM SUCCESS ]')
+    try:
+        if source_id == 1:
+            patient_data_json = {
+                "id_odoo_client" : patient_data['reference_id'] if patient_data.get('reference_id', 'None') != None else "Sin ID",
+                "id_patient_name" : "{}".format(patient_data['name']),
+                "id_patient_allergies" : '',
+                "id_patient_illnesses" : '',
+                "id_caller_relation": '',
+                "id_patient_age": 0,
+                "id_zone": str(patient_data['zone']).upper(),
+                "id_subscription_type": get_subscription_plan(patient_data.get('client_type','N/A'),patient_data.get('comment',None)),
+                "addresses": address_json(patient_data,patient_data),
+                "min_addresses": min_address_json(patient_data,patient_data),
+                "copago_amount": get_copago(patient_data.get('copago_amount', 0)),
+                "has_paid" : patient_data.get('outstanding', False),
+                "erste_code": patient_data.get('group_code','Sin Id'),
+                "id_tel_local":patient_data.get('phone','N/A'),
+                "id_tel_mobile":patient_data.get('mobile','N/A'),
+                "id_partner_name":patient_data.get('name','N/A'),
+                "id_partner_legalname":patient_data.get('legal_name','N/A'),
+                "id_sales_rep":patient_data.get('sales_rep'),
+                #"comment": patient_data['comment'],
+            }
+        else:
+            patient_data_json ={
+                "id_odoo_client" : parent_data['reference_id'] if parent_data.get('reference_id', 'None') != None else "Sin ID",
+                "id_patient_name" : "{} ({})".format(patient_data['name'], parent_data['name']),
+                "id_patient_allergies" : patient_data['allergies'],
+                "id_patient_illnesses" : patient_data['prev_ailments'],
+                "id_caller_relation" : partner_relationship(source_id,patient_data['relationship']),
+                "id_patient_age": patient_age(patient_data['birthday']),
+                "id_zone": str(parent_data['zone']).upper(),
+                "id_subscription_type": get_subscription_plan(parent_data.get('client_type','N/A'),patient_data.get('comment',None)),
+                "addresses": address_json(parent_data,patient_data),
+                "min_addresses": min_address_json(parent_data,patient_data),
+                "copago_amount": get_copago(parent_data.get('copago_amount', 0)),
+                "has_paid" : parent_data.get('outstanding', False),
+                "erste_code": parent_data.get('group_code','Sin Id'),
+                "id_tel_local":patient_data.get('phone','N/A'),
+                "id_tel_mobile":patient_data.get('mobile','N/A'),
+                "id_partner_name":parent_data.get('name','N/A'),
+                "id_partner_legalname":parent_data.get('legal_name','N/A'),
+                "id_sales_rep":patient_data.get('sales_rep'),
+                #"comment": patient_data['comment'],
+            }
+        logger.info('[ GET PATIENTJSON FOR FILLUP EMERGENCY FORM SUCCESS ]')
+    except Exception as e:
+        logger.error("DEBUG: patient_json ERROR!")
+        logger.error("GET PATIENTJSON FOR FILLUP EMERGENCY FORM ERROR! ")
+        logger.error(e)      
     return patient_data_json
 
-def get_subscription_plan(client_type,subscriptionplan):
-    ''' Fill subscription type: concatenate client type + plan (if any), contained in comment field in odoo/client model'''
-    subscriptionplan = " - Plan: " + subscriptionplan if subscriptionplan != None else ' - Plan: N/A' 
-    subscription_plan='N/A'
+
+def get_subscription_plan(client_type,subscription_plan):
+    '''Get client type from odoo , translates to spanish equivalent and add subscription plan from odoo comment field'''
+    subscription_plan = " - Plan: " + subscription_plan if subscription_plan != None else ' Plan: N/A' 
+    client_plan='N/A'
+
     if client_type == 'company':
-        subscription_plan = 'Compañia'
+        client_plan = 'Compañia'
     if client_type == 'family':
-        subscription_plan = 'Familia'
+        client_plan = 'Familia'
     if client_type == 'private':
-        subscription_plan = 'Privado'
-    return subscription_plan + subscriptionplan
+        client_plan = 'Privado'
+    return client_plan + subscription_plan
 
 
 def partner_relationship(source_id,patient_relation):
@@ -545,6 +419,7 @@ class EmergencyActivate(View):
         emergency.save()
         return redirect('/emergency/list/')
 
+# Whatsapp text output generator
 class EmergencyText(View):
     def get(self, request, *args, **kwargs):
         emergency_id = kwargs['emergency_id']
@@ -581,8 +456,20 @@ class EmergencyText(View):
                 emergency.address_front,
                 emergency.address_instructions,
                 )
-            content = content_patient + content_address + content_service
-        except:
+            content_paperless="*Parte_Medico:* {}/paperless/new/{}/".format(settings.PAPERLESS_URL,emergency.id)
+            #for unit in emergency.units.all():
+            #    content_paperless += "*Parte_Medico:* http://{}/{}".format(unit)
+            logger.info("PAPERLESS DATA")    
+            logger.info(content_paperless)
+
+            content = content_patient + content_address + content_service + content_paperless
+            twillio_whatsap_send(content_paperless)
+
+        #except:
+        except Exception as e:
+            logger.error("DEBUG: WHATSAPP NOTIFY ERROR!")
+            logger.error("ERROR FORMATING MESSAGE ERROR! ")
+            logger.error(e) 
             content = "Emergencia no encontrada!"
 
         return HttpResponse(content, content_type='text/plain')
@@ -596,7 +483,7 @@ class EmergencyEnd(View):
             logger.error("[EmergencyEnd] Not found emergency with patient id")
             return redirect('/emergency/dashboard/')
         emergency.is_active = False
-        emergency.final_emergency_time = datetime.date.today()
+        emergency.final_emergency_time = timezone.now()
         emergency.save()
         logger.info('Emergency Stop! ID:{}'.format(emergency.id))
         return redirect('/emergency/dashboard/')
@@ -611,7 +498,7 @@ class EmergencyJsonEnd(View):
             logger.error("[Error EmergencyJsonEnd] Not found emergency with patient id")
             return HttpResponse(status=404)
         emergency.is_active = False
-        emergency.final_emergency_time = datetime.date.today()
+        emergency.final_emergency_time = timezone.now()
         for unit in emergency.units.all():
             unit.is_assigned = False
             unit.save()
@@ -627,3 +514,64 @@ class OdooSubscription(View):
         form = OdooClientAuto
         return render(request, self.template_name,{"form": form})
 
+
+
+BAD_REQUEST = HttpResponse(json.dumps({'error': 'Bad Request'}), status=400, content_type='application/json')
+
+def hospital_json_list(request):
+    ''' List Json View for local available Hospitals '''
+    if request.is_ajax():
+        hospitals = AttentionHospital.objects.all()
+        data = serializers.serialize('json', list(hospitals), fields=HOSPITAL_LIST_FIELDS)
+        _raw_data = json.loads(data)
+        # for unit in _raw_data:
+        #     if unit['fields']['is_alliance']:
+        #         unit['fields'].update({'identifier': '{}{}'.format(unit['fields']['identifier'],' (Alianza)')})
+        #     else:
+        #         continue
+        logger.info("[Success HospitaljsonEnd] {}".format(json.dumps(_raw_data)))
+        return HttpResponse(json.dumps(_raw_data), content_type='application/json', status=200)
+    else:
+        return BAD_REQUEST
+
+
+
+def twillio_whatsap_send(msg_content):
+    account_sid = '' 
+    auth_token = '' 
+    client = Client(account_sid, auth_token) 
+    #sandbox
+    send_from_number = 'whatsapp:+14155238886'
+    #personal twillio number
+    #send_from_number = 'whatsapp:+18456403579'
+
+    try:
+        # message = client.messages.create( 
+        #                       from_= send_from_number,  
+        #                       body = msg_content,      
+        #                       to = 'whatsapp:+5215591984288' 
+        #                   ) 
+        #print(message.sid)
+
+        #from twilio.rest import Client 
+ 
+        #account_sid = 'AC3af5fc2897080852175755b01fe86592' 
+        #auth_token = '[AuthToken]' 
+        client = Client(account_sid, auth_token) 
+ 
+        message = client.messages.create( 
+                              from_='whatsapp:+14155238886',  
+                              body='Your Yummy Cupcakes Company order of 1 dozen frosted cupcakes has shipped and should be delivered on July 10, 2019. Details: {}'.format(msg_content),      
+                              to='whatsapp:+5215591984288' 
+                          ) 
+ 
+       # print(message.sid)
+
+        logger.info('[ WHATSAPP MESSAGE SUCCESS ]')
+        logger.info('[ Twillio response: {}'.format(message.sid))
+    except:
+        logger.error("DEBUG: WHATSAPP NOTIFY ERROR!")
+        logger.error(e)
+
+    #logger.info("[Success EmergencyJsonEnd] Deactivate emergency with id: {}".format(emergency.id))
+    return message.sid
