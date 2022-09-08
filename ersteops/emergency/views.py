@@ -71,7 +71,7 @@ def grade_view(request):
 # Update Timer Functionality
 @csrf_exempt
 def timer_view(request):
-    ''' '''
+    ''' Update emergency timer when option selected in FE'''
     bad_response = JsonResponse({'status':'bad request'})
     bad_response.status_code = 400
 
@@ -300,10 +300,12 @@ def patient_json(source_id,patient_data,parent_data):
         logger.error(e)      
     return patient_data_json
 
+
 def get_subscription_plan(client_type,subscription_plan):
     '''Get client type from odoo , translates to spanish equivalent and add subscription plan from odoo comment field'''
     subscription_plan = " - Plan: " + subscription_plan if subscription_plan != None else ' Plan: N/A' 
     client_plan='N/A'
+
     if client_type == 'company':
         client_plan = 'Compañia'
     if client_type == 'family':
