@@ -463,7 +463,7 @@ class EmergencyText(View):
             logger.info(content_paperless)
 
             content = content_patient + content_address + content_service + content_paperless
-            twillio_whatsap_send(content_paperless)
+            # twillio_whatsap_send(content_paperless)
 
         #except:
         except Exception as e:
