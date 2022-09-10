@@ -2,7 +2,7 @@
 
 echo "==>Post DEPLOY Rules"
 
-if [ -z "$AUTO_MIGRATE" ] ; then
+if [ $AUTO_MIGRATE = True ] ; then
 	echo "==>Automigrate ON"
 	python ./ersteops/manage.py migrate
 else
@@ -10,7 +10,7 @@ else
 	echo "==>Not Applying migrations"
 fi
 
-if [ -z "$LOAD_FIXTURES" ] ; then
+if [ $LOAD_FIXTURES = True ] ; then
 	echo "==>Loading Fixtures enabled"
 	python ./ersteops/manage.py loaddata fixtures/auth/initial_data.json
 	python ./ersteops/manage.py loaddata fixtures/auth/test_data.json
