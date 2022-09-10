@@ -1,12 +1,24 @@
 #!/usr/bin/env bash
 
 echo "==>Post DEPLOY Rules"
-python ./ersteops/manage.py migrate
 
-python ./ersteops/manage.py loaddata fixtures/auth/initial_data.json
+if [ -z "$AUTO_MIGRATE" ] ; then
+	echo "==>Automigrate ON"
+	python ./ersteops/manage.py migrate
+else
+	echo "==>Automigrate OFF"
+	echo "==>Not Applying migrations"
+fi
 
-python ./ersteops/manage.py loaddata fixtures/auth/test_data.json
-python ./ersteops/manage.py loaddata fixtures/auth/crewroll.json
-python ./ersteops/manage.py loaddata fixtures/auth/unit_initial_data.json
-python ./ersteops/manage.py loaddata fixtures/auth/hospital_initial_data.json
-echo "==> END postdeploy"
+if [ -z "$LOAD_FIXTURES" ] ; then
+	echo "==>Loading Fixtures enabled"
+	python ./ersteops/manage.py loaddata fixtures/auth/initial_data.json
+	python ./ersteops/manage.py loaddata fixtures/auth/test_data.json
+	python ./ersteops/manage.py loaddata fixtures/auth/crewroll.json
+	python ./ersteops/manage.py loaddata fixtures/auth/unit_initial_data.json
+	python ./ersteops/manage.py loaddata fixtures/auth/hospital_initial_data.json	
+else
+	echo "==>Not Applying Fixtures"
+fi
+
+echo "==>END postdeploy"
