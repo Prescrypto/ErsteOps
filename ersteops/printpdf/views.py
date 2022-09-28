@@ -291,7 +291,18 @@ def get_medical_report(pk):
   raw_medical_Report = MedicalReport.objects.get(id=pk)
   emergency = Emergency.objects.get(id=raw_medical_Report.service_code)
   medical_Report['json_physical_exploration'] = list(eval(raw_medical_Report.physical_exploration))
-  medical_Report['json_medications'] = list(eval(raw_medical_Report.medications))
+  json_medications = list(eval(raw_medical_Report.medications))
+  medical_Report['json_medications'] = json_medications
+
+  medical_Report['json_medications_solution'] = group_medications(json_medications,"Hemoderivado-Solucion")
+  medical_Report['json_medications_hemder'] = group_medications(json_medications,"Hemoderivado-Hemoderivado")
+
+  medical_Report['json_medications_desfib'] = group_medications(json_medications,"Cardiovascular-Desfibrilacion")
+  medical_Report['json_medications_cardio'] = group_medications(json_medications,"Cardiovascular-Cardioversion")
+
+  medical_Report['json_medications_farma'] = group_medications(json_medications,"Farmacologico-Farmaco")
+  medical_Report['json_medications_amina'] = group_medications(json_medications,"Farmacologico-Aminas")
+
   medical_Report['json_airway'] = list(eval(raw_medical_Report.airway)) 
   medical_Report['json_consultation_reason'] = list(eval(raw_medical_Report.consultation_reason))
   medical_Report['json_pupil_state_left'] = list(eval(raw_medical_Report.pupil_state_left))
@@ -311,6 +322,19 @@ def get_medical_report(pk):
   medical_Report['attention_final_grade'] = str(emergency.attention_final_grade).strip()
   #medical_Report['fix']
   return medical_Report
+
+def group_medications(input_data,filter):
+  l = []
+  logger.info('[ PRINTPDF! - group medications input_data-------------- {}]'.format(input_data))
+  for item in input_data:
+    d = {}
+    if item["medication_type"] == filter:
+      d["medication_name"] = item["medication_name"]
+      d["medication_dose"] = item["medication_dose"]
+      d["medication_hrs"] = item["medication_hrs"]
+      l.append(d)
+  logger.info('[ PRINTPDF! - group medications output_data-------------- {}]'.format(l))
+  return l
 
 def save_png(target_file,data_uri):
   have_signature_file = True
