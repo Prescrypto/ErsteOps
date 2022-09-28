@@ -95,7 +95,7 @@
           name="service_unit_type"
           type="text" 
           maxlength="50"
-          placeholder="Basica...">
+          placeholder="ej. Basica...">
       </div>
       <label class="uk-form-label" for="form-stacked-text">* No.Placas</label>
       <div class="uk-form-controls">
@@ -106,7 +106,7 @@
         name="service_unit_plate" 
         type="text" 
         maxlength="10"
-        placeholder="ABC-134...">
+        placeholder="ej. ABC-134...">
       </div>
       <label class="uk-form-label" for="id_crew_medic">* Medico</label>
       <div class="uk-form-controls">
@@ -499,7 +499,7 @@
         :auto-hide="true" 
       >
       <!-- This will be the popover target (for the events and position) -->
-        <h3 class="uk-card-title">Medicamentos
+        <h3 class="uk-card-title">Medicamentos de base
         <span class="tooltip-target b3 fa fa-plus-square" ></span>
         </h3>
         <!-- This will be the content of the popover -->
@@ -771,9 +771,9 @@
             <th class="uk-table-shrink">Temperatura</th>
             <th class="uk-table-shrink">Saturacion (%)</th>
             <th class="uk-table-shrink">Glucometria (mg/dl)</th>
-            <th class="uk-table-shrink">Glasgow Motor</th>
             <th class="uk-table-shrink">Glasgow Ocular</th>
             <th class="uk-table-shrink">Glasgow Verbal</th>
+            <th class="uk-table-shrink">Glasgow Motor</th>
             <th class="uk-table-shrink">Glasgow Total</th>
           </tr>  
         </thead>
@@ -787,9 +787,9 @@
           <td>{{ value.temperature }}</td>
           <td>{{ value.oxygen_saturation }}</td>
           <td>{{ value.glucometry }}</td>
-          <td>{{ value.glassgow_motor }}</td>
           <td>{{ value.glassgow_ocular }}</td>
           <td>{{ value.glassgow_verbal }}</td>
+          <td>{{ value.glassgow_motor }}</td>
           <td>{{ value.glassgow_total }}</td>
         </tr>
       </tbody>
@@ -1124,6 +1124,9 @@
       class="c-btn c-btn--info">
         Guardar Parte Médico 
       </button>  
+      </div>
+      <div v-else>
+        Completa minimo los datos de la unidad para poder guardar el parte medico!
       </div>
 
     </div>
