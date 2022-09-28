@@ -192,6 +192,25 @@
     %\put(0.0159714,0.27918911){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont la medi\end{tabular}}}}%
     %\put(0.0159714,0.27918911){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {% for item in content.json_medications %}{{ item.medication_type }} - {{ item.medication_name }} - {{ item.medication_hrs }} hrs\\{% endfor %}\end{tabular}}}}%
 
+    {% for item in content.json_medications_solution %}
+      {% if forloop.counter0 == 0 %}
+          \put(0.04964403,0.32745002){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_name }}\end{tabular}}}}%
+          \put(0.11108429,0.32756971){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_dose }}\end{tabular}}}}%
+      {% endif %}
+      {% if forloop.counter0 == 1 %}
+          \put(0.04964403,0.31750983){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_name }}\end{tabular}}}}%
+          \put(0.11108429,0.31762951){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_dose }}\end{tabular}}}}%
+      {% endif %}
+      {% if forloop.counter0 == 2 %}
+          \put(0.04964403,0.30867309){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_name }}\end{tabular}}}}%
+          \put(0.11108429,0.30879277){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_dose }}\end{tabular}}}}%
+      {% endif %}
+    {% endfor %}
+
+
+
+    {{ content.medications }}
+
     %Antecedentes
     %Diabetes
     %\put(0.48529688,0.5272494){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont Diabetes mellitus\end{tabular}}}}%
