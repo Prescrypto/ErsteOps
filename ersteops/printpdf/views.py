@@ -322,11 +322,12 @@ def get_medical_report(pk):
 def group_medications(input_data,filter):
   l = []
   for item in input_data:
-    d = {}
     if item["medication_type"] == filter:
-      d["medication_name"] = item["medication_name"]
-      d["medication_dose"] = item["medication_dose"]
-      d["medication_hrs"] = item["medication_hrs"]
+      d = {
+        "medication_name" : item.get("medication_name",""),
+        "medication_dose" : item.get("medication_dose",""),
+        "medication_hrs" : item.get("medication_hrs","")
+      }
       l.append(d)
   return l
 
