@@ -8,6 +8,7 @@
 
 
 <form v-else class="uk-form-stacked" ref="form">
+  <div v-if="paperless.submited === 'False'">
   <div class="row">
     <div class="col-12">
       <p>Tu ubicación actual: {{ paperless.service_geo_lat }} - {{ paperless.service_geo_lon }}</p>
@@ -1132,5 +1133,8 @@
     </div>
 
   </div>
-
+</div>
+<div v-else>
+  Enviando...<span class="uk-margin-small-right" uk-spinner="ratio: 3"></span>
+</div>
 </form>

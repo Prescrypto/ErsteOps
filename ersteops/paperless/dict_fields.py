@@ -95,4 +95,5 @@ MedicalReportDict = {
 "crew_operator":"",
 "signature_client":"",
 "signature_medic":"",
+"submited": "False",
 }
