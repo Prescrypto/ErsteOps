@@ -82,6 +82,7 @@ export default {
       try {
         e.stopPropagation();
         e.preventDefault();
+        this.paperless.submited = 'True';
         // var form = $(this);
         // var jsonForm= form.serialize();
         // var jsonForm=this.$refs.form.serialize();
@@ -106,6 +107,7 @@ export default {
           }`,
           type: 'success',
         });
+        this.paperless.submited = 'False';
       } catch (err) {
         this.$emit('error', err);
         this.$notify({

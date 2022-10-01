@@ -192,6 +192,103 @@
     %\put(0.0159714,0.27918911){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont la medi\end{tabular}}}}%
     %\put(0.0159714,0.27918911){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont {% for item in content.json_medications %}{{ item.medication_type }} - {{ item.medication_name }} - {{ item.medication_hrs }} hrs\\{% endfor %}\end{tabular}}}}%
 
+    {% for item in content.json_medications_solution %}
+      {% if forloop.counter0 == 0 %}
+          \put(0.04964403,0.32745002){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_name }}\end{tabular}}}}%
+          \put(0.11108429,0.32756971){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_dose }}\end{tabular}}}}%
+      {% endif %}
+      {% if forloop.counter0 == 1 %}
+          \put(0.04964403,0.31750983){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_name }}\end{tabular}}}}%
+          \put(0.11108429,0.31762951){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_dose }}\end{tabular}}}}%
+      {% endif %}
+      {% if forloop.counter0 == 2 %}
+          \put(0.04964403,0.30867309){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_name }}\end{tabular}}}}%
+          \put(0.11108429,0.30879277){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_dose }}\end{tabular}}}}%
+      {% endif %}
+    {% endfor %}
+
+    {% for item in content.json_medications_hemder %}
+      {% if forloop.counter0 == 0 %}
+          \put(0.04940118,0.2888225){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_name }}\end{tabular}}}}%
+          \put(0.11084145,0.28894218){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_dose }}\end{tabular}}}}%
+      {% endif %}
+      {% if forloop.counter0 == 1 %}
+          \put(0.04940118,0.27893225){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_name }}\end{tabular}}}}%
+          \put(0.11023136,0.27905193){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_dose }}\end{tabular}}}}%
+      {% endif %}
+      {% if forloop.counter0 == 2 %}
+          \put(0.04940118,0.26982475){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_name }}\end{tabular}}}}%
+          \put(0.10959944,0.26994443){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_dose }}\end{tabular}}}}%
+      {% endif %}
+    {% endfor %}
+
+    {% for item in content.json_medications_desfib %}
+      {% if forloop.counter0 == 0 %}
+          \put(0.1589072,0.32726279){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_name }}\end{tabular}}}}%
+          \put(0.21626297,0.3273940){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_dose }}\end{tabular}}}}%
+      {% endif %}
+      {% if forloop.counter0 == 1 %}
+          \put(0.15916412,0.31839182){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_name }}\end{tabular}}}}%
+          \put(0.11023136,0.27905193){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_dose }}\end{tabular}}}}%
+      {% endif %}
+      {% if forloop.counter0 == 2 %}
+          \put(0.1584999,0.30822806){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_name }}\end{tabular}}}}%
+          \put(0.21585568,0.30835933){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_dose }}\end{tabular}}}}%
+      {% endif %}
+    {% endfor %}
+
+    {% for item in content.json_medications_cardio %}
+      {% if forloop.counter0 == 0 %}
+          \put(0.15866873,0.2898937){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_name }}\end{tabular}}}}%
+          \put(0.21668871,0.2898937){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_dose }}\end{tabular}}}}%
+      {% endif %}
+      {% if forloop.counter0 == 1 %}
+          \put(0.15887895,0.27981739){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_name }}\end{tabular}}}}%
+          \put(){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_dose }}\end{tabular}}}}%
+      {% endif %}
+      {% if forloop.counter0 == 2 %}
+          \put(0.15887895,0.27981739){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_name }}\end{tabular}}}}%
+          \put(0.21689892,0.27981739){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{ item.medication_dose }}\end{tabular}}}}%
+      {% endif %}
+    {% endfor %}
+
+    {% for item in content.json_medications_farma %}
+      {% if forloop.counter0 == 0 %}
+        \put(0.26321649,0.32734768){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.medication_name }}\end{tabular}}}}%
+        \put(0.30511372,0.32734768){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.medication_dose }}\end{tabular}}}}%
+        \put(0.33483843,0.32720095){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.medication_hrs }}\end{tabular}}}}%
+      {% endif %}
+      {% if forloop.counter0 == 1 %}
+        \put(0.26342897,0.31837723){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.medication_name }}\end{tabular}}}}%
+        \put(0.3053262,0.31837723){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.medication_dose }}\end{tabular}}}}%
+        \put(0.33505092,0.31823051){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.medication_hrs }}\end{tabular}}}}%
+      {% endif %}
+      {% if forloop.counter0 == 2 %}
+        \put(0.26308947,0.3081286){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.medication_name }}\end{tabular}}}}%
+        \put(0.3049867,0.3081286){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.medication_dose }}\end{tabular}}}}%
+        \put(0.33471142,0.30798187){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.medication_hrs }}\end{tabular}}}}%
+      {% endif %}
+    {% endfor %}
+
+    {% for item in content.json_medications_amina %}
+      {% if forloop.counter0 == 0 %}
+        \put(0.26517407,0.28858281){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.medication_name }}\end{tabular}}}}%
+        \put(0.30543707,0.28852296){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.medication_dose }}\end{tabular}}}}%
+        \put(0.33395328,0.28858473){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.medication_hrs }}\end{tabular}}}}%
+      {% endif %}
+      {% if forloop.counter0 == 1 %}
+        \put(0.26491781,0.27987623){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.medication_name }}\end{tabular}}}}%
+        \put(0.30518081,0.27981639){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.medication_dose }}\end{tabular}}}}%
+        \put(0.33369702,0.27987816){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.medication_hrs }}\end{tabular}}}}%
+      {% endif %}
+      {% if forloop.counter0 == 2 %}
+        \put(0.26516689,0.27001966){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.medication_name }}\end{tabular}}}}%
+        \put(0.3054299,0.26995982){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.medication_dose }}\end{tabular}}}}%
+        \put(0.3339461,0.27002158){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{ item.medication_hrs }}\end{tabular}}}}%
+      {% endif %}
+    {% endfor %}
+
+
     %Antecedentes
     %Diabetes
     %\put(0.48529688,0.5272494){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont Diabetes mellitus\end{tabular}}}}%

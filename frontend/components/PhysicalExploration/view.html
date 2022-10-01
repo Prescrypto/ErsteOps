@@ -40,11 +40,11 @@
     <input type="number" class="uk-input" 
     v-model="peTemperature"
     id="id_peTemperature" 
-    min="20"
-    max="60" 
-    placeholder="34.5"
+    min="24"
+    max="40" 
+    placeholder="24"
     pattern="[0-9]" 
-    inputmode="numeric" 
+    inputmode="numeric"
     step="0.10"/>
   </div>
 
@@ -75,18 +75,6 @@
     placeholder="90"/>
   </div>
 
-  <label class="uk-form-label" for="id_peGlassgowMotor">Glasgow Motor</label>
-  <div class="uk-form-controls">
-    <input type="number" class="uk-input" 
-    v-model="peGlassgowMotor"
-    id="id_peGlassgowMotor" 
-    min="1"
-    max="6"
-    pattern="[0-9]"
-    inputmode="numeric" 
-    placeholder="1"/>
-  </div>  
-
   <label class="uk-form-label" for="id_peGlassgowOcular">Glasgow Ocular</label>
   <div class="uk-form-controls">
     <input type="number" class="uk-input" 
@@ -114,6 +102,18 @@
     placeholder="1"/>
   </div> 
 
+  <label class="uk-form-label" for="id_peGlassgowMotor">Glasgow Motor</label>
+  <div class="uk-form-controls">
+    <input type="number" class="uk-input" 
+    v-model="peGlassgowMotor"
+    id="id_peGlassgowMotor" 
+    min="1"
+    max="6"
+    pattern="[0-9]"
+    inputmode="numeric" 
+    placeholder="1"/>
+  </div>  
+
   <div class="uk-overflow-auto">
     <table class="uk-table uk-table-responsive uk-table-hover uk-table-middle uk-table-divider">
       
@@ -126,9 +126,9 @@
             <th class="uk-table-shrink">Temperatura</th>
             <th class="uk-table-shrink">Saturacion (%)</th>
             <th class="uk-table-shrink">Glucometria (mg/dl)</th>
-            <th class="uk-table-shrink">Glasgow Motor</th>
             <th class="uk-table-shrink">Glasgow Ocular</th>
             <th class="uk-table-shrink">Glasgow Verbal</th>
+            <th class="uk-table-shrink">Glasgow Motor</th>
             <th class="uk-table-shrink">Glasgow Total</th>
           </tr>  
         </thead>
@@ -142,9 +142,9 @@
           <td>{{ value.temperature }}</td>
           <td>{{ value.oxygen_saturation }}</td>
           <td>{{ value.glucometry }}</td>
-          <td>{{ value.glassgow_motor }}</td>
           <td>{{ value.glassgow_ocular }}</td>
           <td>{{ value.glassgow_verbal }}</td>
+          <td>{{ value.glassgow_motor }}</td>
           <td>{{ value.glassgow_total }}</td>
         </tr>
       </tbody>
@@ -162,6 +162,8 @@
   </div> -->
 
   <div class="timers-button">
-    <button @click="submit" class="c-btn c-btn--info" v-close-popover>Agregar</button>
+    <div v-if="peGlassgowOcular>=1 && peGlassgowOcular<=4 && peGlassgowVerbal>=1 && peGlassgowVerbal<=5 && peGlassgowMotor>=1 && peGlassgowMotor<=6">
+      <button @click="submit" class="c-btn c-btn--info" v-close-popover>Agregar</button>
+    </div>
   </div>
 </form>

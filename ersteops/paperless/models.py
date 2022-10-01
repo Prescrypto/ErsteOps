@@ -115,7 +115,7 @@ class MedicalReport(models.Model):
     is_patient_unknow = models.CharField("Es paciente desconocido",max_length=50,blank=True,default='')
     patient_unknow = models.CharField("Paciente Desconocido",max_length=50,blank=True)
     patient_clothes = models.CharField("Vestimenta", max_length=50,blank=True)
-    patient_phone = models.CharField("Telefono:", max_length=15,blank=True ,default='')
+    patient_phone = models.CharField("Telefono:", max_length=50,blank=True ,default='')
     attention_place = models.CharField('Sitio de Atencion', max_length=20, default= '', blank=True, choices=ATENTION_PLACE)
     other_attention_place = models.CharField('Otro Sitio de Atencion', max_length=20, default= '', blank=True, choices=ATENTION_PLACE)
     skin_color = models.CharField("Coloración de piel", max_length=150, default= '', blank=True,)
