@@ -34,6 +34,7 @@ export default {
   // },
   data: () => ({
     paperless: window.erste.paperless,
+    signature_ok: '',
   }),
   methods: {
     async undo(e) {
@@ -50,6 +51,7 @@ export default {
       console.log(data);
       this.paperless.signature_medic = data;
       console.log(this.paperless.signature_medic);
+      this.signature_ok = 'Firma del Medico recibida';
       // alert(`Firma almacenada${this.paperless.signature_medic}`);
     },
   },
