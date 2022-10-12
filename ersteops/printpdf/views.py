@@ -31,6 +31,10 @@ logger = logging.getLogger('django_info')
 
 import base64
 
+#Set timezone requirments
+from django.utils import timezone
+import pytz
+TIME_ZONE = "America/Mexico_City"
 
 # Create your views here.
 # generate pdf for screen
@@ -286,7 +290,11 @@ def escape_text(s):
 
 
 def get_medical_report(pk):
-  #medical_Report = MedicalReport.get(id=pk)
+
+  #Set time zone
+  mex =  pytz.timezone(TIME_ZONE)
+
+
   medical_Report = MedicalReport.objects.filter(id=pk).values()[0]
   raw_medical_Report = MedicalReport.objects.get(id=pk)
   emergency = Emergency.objects.get(id=raw_medical_Report.service_code)
@@ -311,10 +319,10 @@ def get_medical_report(pk):
   medical_Report['have_client_signature'] = save_png('client_signature',raw_medical_Report.signature_client)
   medical_Report['have_medic_signature'] = save_png('signature_medic',raw_medical_Report.signature_medic)
   medical_Report['emergency_created_at'] = emergency.created_at.strftime('%Y-%m-%d')
-  medical_Report['unit_dispatched_time'] = emergency.unit_dispatched_time.strftime('%H:%M')
-  medical_Report['arrival_time'] = emergency.arrival_time.astimezone().strftime('%H:%M')
-  medical_Report['attention_time'] = emergency.attention_time.astimezone().strftime('%H:%M')
-  medical_Report['final_emergency_time'] = emergency.final_emergency_time.astimezone().strftime('%H:%M')
+  medical_Report['unit_dispatched_time'] = emergency.unit_dispatched_time.astimezone(mex).strftime('%H:%M')
+  medical_Report['arrival_time'] = emergency.arrival_time.astimezone(mex).strftime('%H:%M')
+  medical_Report['attention_time'] = emergency.attention_time.astimezone(mex).strftime('%H:%M')
+  medical_Report['final_emergency_time'] = emergency.final_emergency_time.astimezone(mex).strftime('%H:%M')
   medical_Report['attention_final_grade'] = str(emergency.attention_final_grade).strip()
   #medical_Report['fix']
   return medical_Report
