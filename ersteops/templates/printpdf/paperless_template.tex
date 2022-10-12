@@ -90,11 +90,11 @@
     {% endif %}
 
     %Times
-    \put(0.03117976,0.58432043){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{content.emergency_created_at}}\end{tabular}}}}%
-    \put(0.06427789,0.58446308){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{content.unit_dispatched_time}}\end{tabular}}}}%
-    \put(0.10029604,0.58387567){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{content.arrival_time}}\end{tabular}}}}%
-    \put(0.13910523,0.58360406){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{content.attention_time}}\end{tabular}}}}%
-    \put(0.17543913,0.58380438){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{content.final_emergency_time}}\end{tabular}}}}%
+    {% include "printpdf/latex_text.html" with position="0.03117976,0.58432043" font_size="tiny" content_text=content.emergency_created_at %}
+    {% include "printpdf/latex_text.html" with position="0.06427789,0.58446308" font_size="tiny" content_text=content.unit_dispatched_time %}
+    {% include "printpdf/latex_text.html" with position="0.10029604,0.58387567" font_size="tiny" content_text=content.arrival_time %}
+    {% include "printpdf/latex_text.html" with position="0.13910523,0.58360406" font_size="tiny" content_text=content.attention_time %}
+    {% include "printpdf/latex_text.html" with position="0.17543913,0.58380438" font_size="tiny" content_text=content.final_emergency_time %}
 
     {% if content.attention_final_grade == 'G0' %}
     \put(0.37115545,0.5742565){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}X\end{tabular}}}}%
@@ -110,11 +110,11 @@
 
     \put(0.10902655,0.55515604){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{content.service_code}}\end{tabular}}}}%
     \put(0.20804855,0.55435574){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{content.service_unit}}\end{tabular}}}}%
-   	\put(0.32826955,0.55435574){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{content.service_unit_type}}\end{tabular}}}}%
+   	\put(0.32826955,0.55435574){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{content.service_unit_type}}\end{tabular}}}}%
     \put(0.43247465,0.55435574){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{content.service_unit_plate}}\end{tabular}}}}%
 
     %Paciente
-    \put(0.08748365,0.54597578){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{content.erste_code}} - {{content.odoo_client_name}}\end{tabular}}}}%
+    \put(0.08748365,0.54597578){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\tiny {{content.erste_code}} - {{content.odoo_client_name}}\end{tabular}}}}%
     \put(0.32347436,0.544854){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{content.patient_phone}}\end{tabular}}}}%
     \put(0.05306258,0.51467754){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{content.patient_gender}}\end{tabular}}}}%
     \put(0.12394486,0.51552412){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{content.patient_age}}\end{tabular}}}}%
