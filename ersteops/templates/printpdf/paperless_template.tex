@@ -97,13 +97,13 @@
     {% include "printpdf/latex_text.html" with position="0.17543913,0.58380438" font_size="tiny" content_text=content.final_emergency_time %}
 
     {% if content.attention_final_grade == 'G0' %}
-    \put(0.37115545,0.5742565){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}X\end{tabular}}}}%
+      {% include "printpdf/latex_text.html" with position="0.37115545,0.574256" font_size="scriptsize" content_text="X" %}
     {% endif %}
     {% if content.attention_final_grade == 'G1' %}
-    \put(0.42545332,0.57475133){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}X\end{tabular}}}}%
+      {% include "printpdf/latex_text.html" with position="0.42545332,0.57475133" font_size="scriptsize" content_text="X" %}
     {% endif %}
     {% if content.attention_final_grade == 'G2' %}
-    \put(0.4811341,0.5742217){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}X\end{tabular}}}}%
+      {% include "printpdf/latex_text.html" with position="0.4811341,0.5742217" font_size="scriptsize" content_text="X" %}
     {% endif %}
     %Folio
     \put(0.41796551,0.60954148){\color[rgb]{0.11764706,0.20784314,0.36862745}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\fontfamily{lmss}\selectfont\scriptsize {{content.id}}\end{tabular}}}}%
