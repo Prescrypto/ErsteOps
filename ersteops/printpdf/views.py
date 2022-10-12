@@ -311,10 +311,10 @@ def get_medical_report(pk):
   medical_Report['have_client_signature'] = save_png('client_signature',raw_medical_Report.signature_client)
   medical_Report['have_medic_signature'] = save_png('signature_medic',raw_medical_Report.signature_medic)
   medical_Report['emergency_created_at'] = emergency.created_at.strftime('%Y-%m-%d')
-  medical_Report['unit_dispatched_time'] = emergency.unit_dispatched_time.strftime('%H:%M')
-  medical_Report['arrival_time'] = emergency.arrival_time.strftime('%H:%M')
-  medical_Report['attention_time'] = emergency.attention_time.strftime('%H:%M')
-  medical_Report['final_emergency_time'] = emergency.final_emergency_time.strftime('%H:%M')
+  medical_Report['unit_dispatched_time'] = emergency.unit_dispatched_time.astimezone().strftime('%H:%M')
+  medical_Report['arrival_time'] = emergency.arrival_time.astimezone().strftime('%H:%M')
+  medical_Report['attention_time'] = emergency.attention_time.astimezone().strftime('%H:%M')
+  medical_Report['final_emergency_time'] = emergency.final_emergency_time.astimezone().strftime('%H:%M')
   medical_Report['attention_final_grade'] = str(emergency.attention_final_grade).strip()
   #medical_Report['fix']
   return medical_Report
