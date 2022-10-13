@@ -130,6 +130,7 @@
             <th class="uk-table-shrink">Glasgow Verbal</th>
             <th class="uk-table-shrink">Glasgow Motor</th>
             <th class="uk-table-shrink">Glasgow Total</th>
+            <th class="uk-table-shrink"> Eliminar </th>
           </tr>  
         </thead>
       
@@ -145,7 +146,8 @@
           <td>{{ value.glassgow_ocular }}</td>
           <td>{{ value.glassgow_verbal }}</td>
           <td>{{ value.glassgow_motor }}</td>
-          <td>{{ value.glassgow_total }}</td>
+          <td>{{ value.glassgow_total }} </td>
+          <td><button uk-icon="minus-circle" @click="eliminate($event,key)"></button></td>
         </tr>
       </tbody>
     </table>  
