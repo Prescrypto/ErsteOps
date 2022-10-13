@@ -58,3 +58,7 @@ CFDI
 dump.rdb
 
 media/
+
+ersteops/templates/printpdf/rendered_template.*
+ersteops/templates/printpdf/*.png
+

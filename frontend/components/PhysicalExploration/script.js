@@ -49,6 +49,21 @@ export default {
           type: 'error',
         });
       }
-    },
+    }, // submit
+    async eliminate(e, item) {
+      try {
+        e.stopPropagation();
+        e.preventDefault();
+        this.prev_elements.splice(item, 1);
+        this.paperless.physical_exploration = this.prevElements;
+        // console.log(item);
+      } catch (err) {
+        this.$emit('error', err);
+        this.$notify({
+          text: `No se pudo eliminar la exploracion: ${err}`,
+          type: 'error',
+        });
+      }
+    }, // eliminate
   },
 };
