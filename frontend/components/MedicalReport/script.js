@@ -63,7 +63,7 @@ export default {
 
   beforeRouteLeave(to, from, next) {
     if (this.isEditing) {
-      if (!window.confirm('Salir sin guardar?')) {
+      if (!window.confirm('Salir sin guardar ?')) {
         return;
       }
     }
