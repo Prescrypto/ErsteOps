@@ -14,7 +14,13 @@
     <input class="uk-input" 
     v-model="peHeartRate"
     id="id_peHeartRate" 
-    type="text" placeholder="Frecuencia...">
+    pattern="[0-9]" 
+    min="40"
+    max="200"    
+    type="number"
+    inputmode="numeric"
+    step="10"      
+    placeholder="100">
   </div>
 
   <label class="uk-form-label" for="id_peRespiratoryRate">Frecuencia Respiratoria</label>
@@ -22,8 +28,13 @@
     <input class="uk-input" 
     v-model="peRespiratoryRate"
     id="id_peRespiratoryRate" 
-    type="text" 
-    placeholder="Rerspiratoria...">
+    type="number" 
+    pattern="[0-9]"
+    min="10"
+    max="100"
+    inputmode="numeric"
+    step="10"        
+    placeholder="60">
   </div>
 
   <label class="uk-form-label" for="id_peBloodPressure">Presion Arterial</label>
