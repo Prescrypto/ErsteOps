@@ -134,6 +134,7 @@ export default {
         });
         this.paperless.submited = 'False';
       } catch (err) {
+        this.paperless.submited = 'False';
         this.$emit('error', err);
         this.$notify({
           text: `No se pudo crear el parte medico - ${err}`,
