@@ -231,13 +231,14 @@ def new_medicalreport(request):
     #logger.info('[ NEW MEWDICAL REPORT: -3- {} ]'.format(current_user))
     #logger.info('[ NEW MEWDICAL REPORT DATA: -4- {} ]'.format(data))
     #if 'id' in data and 'timer_type' in data :
+    # Save data from FE to MODEL
     if 'paperless' in data :
       #qs =  Emergency.objects.get(pk = pl_emergency_id)
       try:
           logger.info('[ NEW MEWDICAL REPORT DATA: -5- {} ]'.format(data['paperless']))
           vue_data=json.loads(data['paperless'])
           logger.info('[ NEW MEWDICAL REPORT DATA: -6- {} ]'.format(vue_data['service_code']))
-          logger.info('[ NEW MEWDICAL REPORT DATA: -7- {} ]'.format(vue_data['signature_client']))
+          #logger.info('[ NEW MEWDICAL REPORT DATA: -7- {} ]'.format(vue_data['signature_client']))
           qs = Emergency.objects.get(id=vue_data['service_code'])
           medicalReport = MedicalReport.objects.create(
           odoo_client = qs.odoo_client,
@@ -349,16 +350,22 @@ def new_medicalreport(request):
           odoo_client_name = qs.partner_name,
           )
           messages.info(request, "Parte Medico Guardado correctamente!!!")
-          messages.info(request, "Parte Medico Sending email an generating pdf!!!")
-          Send_Mail_To(request,vue_data['email'],medicalReport.id,vue_data['send_email'])
+          messages.info(request, "Parte Medico Generating pdf!!!")
+          #pdf_to_attach = settings.BASE_DIR+'/templates/printpdf/rendered_template.pdf/'
           tempdir = settings.BASE_DIR+'/templates/printpdf/'
-          pdf_file = open(os.path.join(tempdir, 'rendered_template.pdf'), 'rb')
-          pdf = pdf_file.read()
-          d = medicalReport.created_at.strftime('%Y-%m-%d')
-          file_name = 'Parte_Medico_Vida_Uno_{}_{}.pdf'.format(d,str(medicalReport.id))
-          medicalReport.final_report.save(file_name,ContentFile(pdf))
-          #medicalReport.save()
-          # emergency.save()
+          pdf = document_as_new_pdf(request,medicalReport.id)
+
+          if pdf:
+            tempdir = settings.BASE_DIR+'/templates/printpdf/'
+            pdf_file = open(os.path.join(tempdir, 'rendered_template.pdf'), 'rb')
+            pdf = pdf_file.read()
+            messages.info(request, "Parte Medico Sending email with pdf!!!")
+            Send_Mail_To(request,vue_data['email'],medicalReport.id,vue_data['send_email'],pdf)
+            d = medicalReport.created_at.strftime('%Y-%m-%d')
+            file_name = 'Parte_Medico_Vida_Uno_{}_{}.pdf'.format(d,str(medicalReport.id))
+            medicalReport.final_report.save(file_name,ContentFile(pdf))
+            #medicalReport.save()
+            # emergency.save()
           data.update({'status': 'success', 'client_id':qs.odoo_client})
           response = JsonResponse(data)
           response.status_code = 202
@@ -389,19 +396,25 @@ def not_find_on_list(my_list_Dict, what_to_search):
   return my_text
 
 
-def Send_Mail_To(request,email_recive,pk,send_flag):
+def Send_Mail_To(request,email_recive,pk,send_flag,pdf):
   #Send mail via smtp gmail server
+  #pdf_to_attach = settings.BASE_DIR+'/templates/printpdf/rendered_template.pdf/'
+  #tempdir = settings.BASE_DIR+'/templates/printpdf/'
+  #pdf = document_as_new_pdf(request,pk)
+  # Test if pdf was generated correctly
+  #try:
+  #  pdf_file = open(os.path.join(tempdir, 'rendered_template.pdf'), 'rb')
+  #except Exception as e:
+  #  send_flag = False
+  #  logger.error("[Create Medical Report Email ERROR not pdf]: {}, type: {}".format(e, type(e)))
+  #  return bad_response
   try:
     email = EmailMessage(
       'Parte Medico Vida uno Folio {}'.format(pk),
       'Ha recibido su parte médico digital del emisor EMERGENCIAS MEDICAS DE MEDICO SC con Folio:{}'.format(pk),
       'info@keepitsimple.com.mx',
       [ email_recive, ]
-    )
-    pdf_to_attach = settings.BASE_DIR+'/templates/printpdf/rendered_template.pdf/'
-    tempdir = settings.BASE_DIR+'/templates/printpdf/'
-    pdf_file = open(os.path.join(tempdir, 'rendered_template.pdf'), 'rb')
-    pdf = document_as_new_pdf(request,pk)
+    )    
     file_name = 'Parte_Medico_Vida_Uno_{}.pdf'.format(str(pk))
     email.attach(file_name,pdf,'application/pdf')
     #pdf_to_attach = os.path.join(tempdir, 'rendered_template.pdf')
