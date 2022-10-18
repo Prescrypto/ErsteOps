@@ -114,9 +114,9 @@ def emailNotifryError(pk):
     try:
       email = EmailMessage(
         'Parte Medico Vida uno Folio {}'.format(pk),
-        'Ha recibido su parte médico digital del emisor EMERGENCIAS MEDICAS DE MEDICO SC con Folio:{}'.format(pk),
+        'Notificacion de error en generacion del parte medico PDF: {}'.format(pk),
         'info@keepitsimple.com.mx',
-        [ 'juanmanuelriverom@gmail.com', ]
+        [ settings.NOTIFY_ERROR_EMAIL ]
       )
       pdf_to_attach = settings.BASE_DIR+'/templates/printpdf/rendered_template.log/'
       tempdir = settings.BASE_DIR+'/templates/printpdf/'

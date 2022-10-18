@@ -302,7 +302,7 @@ EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD'] #past the key or passwor
 EMAIL_PORT = os.environ['EMAIL_PORT']
 EMAIL_USE_TLS = os.environ['EMAIL_USE_TLS']
 DEFAULT_FROM_EMAIL = os.environ['DEFAULT_FROM_EMAIL']
-
+NOTIFY_ERROR_EMAIL = os.environ['NOTIFY_ERROR_EMAIL']
 
 MEDIA_LOCAL = ast.literal_eval(os.environ['PDF_MEDIA_LOCAL'])
 # Define if media storage is local or S3
