@@ -36,6 +36,8 @@ from django.utils import timezone
 import pytz
 TIME_ZONE = "America/Mexico_City"
 
+from django.core.mail import EmailMessage
+
 # Create your views here.
 # generate pdf for screen
 def document_as_pdf(request,pk):
@@ -67,6 +69,7 @@ def document_as_pdf(request,pk):
     return r
   else:
     #print("PDF Error!!! ckeck /templates/printpdf/rendered_template.log")
+    emailNotifryError(pk)
     logger.info('[ PRINTPDF! - PDF Error!!! ckeck /templates/printpdf/rendered_template.log]') 
     messages.error(request, "PDF Error!!! ckeck /templates/printpdf/rendered_template.log")
     return redirect('/paperless/')
@@ -99,11 +102,39 @@ def document_as_new_pdf(request,pk):
     #r.write(pdf)
     return pdf
   else:
+    emailNotifryError(pk)
     #print("PDF Error!!! ckeck /templates/printpdf/rendered_template.log")
     logger.info('[ PRINTPDF! - PDF Error!!! ckeck /templates/printpdf/rendered_template.log]') 
     messages.error(request, "PDF Error!!! ckeck /templates/printpdf/rendered_template.log")
-    return redirect('/paperless/')
+    #return redirect('/paperless/')
+    return False
 
+
+def emailNotifryError(pk):
+    try:
+      email = EmailMessage(
+        'Parte Medico Vida uno Folio {}'.format(pk),
+        'Ha recibido su parte médico digital del emisor EMERGENCIAS MEDICAS DE MEDICO SC con Folio:{}'.format(pk),
+        'info@keepitsimple.com.mx',
+        [ 'juanmanuelriverom@gmail.com', ]
+      )
+      pdf_to_attach = settings.BASE_DIR+'/templates/printpdf/rendered_template.log/'
+      tempdir = settings.BASE_DIR+'/templates/printpdf/'
+      log_file = open(os.path.join(tempdir, 'rendered_template.log'), 'rb')
+      pdf = log_file.read()
+      file_name = 'Parte_Medico_Vida_Uno_{}.log'.format(str(pk))
+      #attach log file
+      email.attach(file_name,pdf,'application/txt')
+      # attach tex file
+      tex_file = open(os.path.join(tempdir, 'rendered_template.tex'), 'rb')
+      tex = tex_file.read()
+      file_name = 'Parte_Medico_Vida_Uno_{}.tex'.format(str(pk))
+      email.attach(file_name,tex,'application/txt')
+      email.send()
+      logger.info('[ PRINTPDF! - NOTIFY PDF Error!!! ckeck /templates/printpdf/rendered_template.log]') 
+    except Exception as e:
+      logger.error('[ PRINTPDF! - Error Sending notify]')
+      logger.error(e)
 
 def document_as_pdf_print(request,pk):
   # Get document data
@@ -133,7 +164,7 @@ def document_as_pdf_print(request,pk):
   else:
     #print("PDF Error!!! ckeck /templates/printpdf/rendered_template.log" )
     logger.info('[ PRINTPDF! - PDF Error!!! ckeck /templates/printpdf/rendered_template.log]') 
-    messages.error(request, "PDF Error!!! ckeck /templates/printpdf/rendered_template.log")
+    messages.error(request, "PDF Error!!! >generate_pdf< ckeck /templates/printpdf/rendered_template.log")
     return redirect('/petfile/review/')
 
 
@@ -241,8 +272,10 @@ def generate_pdf(tempdir,tex_file):
     process.communicate(tex_to_pdf)
     logger.info('[ PRINTPDF! - tex to pdf succesfull]')
   except Exception as e:
+    emailNotifryError(0)
     logger.error('[ PRINTPDF! - generate_tex ERROR 2]')
-    logger.error(e) 
+    logger.error(e)
+    return false
 
   if os.path.exists(tex_file+'.pdf'):
     return True
@@ -268,6 +301,7 @@ def clean_text(text):
 def escape_text(s):
     # Convert from python escape text to latex format.
     s = s.replace("\'","\\textquotesingle ")
+    s = s.replace("&#39;","\\textquotesingle ")
     s = s.replace("<","\\textless ")
     s = s.replace(">","\\textgreater ")
     s = s.replace(u"&","\\& ")
