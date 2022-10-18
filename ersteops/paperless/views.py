@@ -363,6 +363,8 @@ def new_medicalreport(request):
             Send_Mail_To(request,vue_data['email'],medicalReport.id,vue_data['send_email'],pdf)
             d = medicalReport.created_at.strftime('%Y-%m-%d')
             file_name = 'Parte_Medico_Vida_Uno_{}_{}.pdf'.format(d,str(medicalReport.id))
+            medicalReport.email_sent = True
+            medicalReport.save()
             medicalReport.final_report.save(file_name,ContentFile(pdf))
             #medicalReport.save()
             # emergency.save()
@@ -371,8 +373,11 @@ def new_medicalreport(request):
           response.status_code = 202
           return response
       except Exception as e:
-          logger.error("[Create Medical Report View ERROR]: {}, type: {}".format(e, type(e)))
-          return bad_response
+          medicalReport.email_sent = False
+          medicalReport.save()
+          logger.error("[Create Medical Report View ERROR SENDING EMAIL]: {}, type: {}".format(e, type(e)))
+          #return bad_response
+          return redirect('/paperless')
 
       #qs.medical_report = medicalReport
       #qs.save()

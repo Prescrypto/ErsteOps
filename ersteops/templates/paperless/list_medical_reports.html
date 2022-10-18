@@ -24,6 +24,9 @@
             <div class="uk-card uk-card-default uk-card-body uk-width-1-2@m">
               <h3 class="uk-card-title">Parte Medico No.{{medical_report.id}}</h3>
               <p>{{ medical_report.created_at|date }} Paciente: {{ medical_report.patient_name }} </p>
+              <p>Medico: {{ medical_report.crew_medic }} </p>
+              <p>Usuario: {{ medical_report.user }} </p>
+              <p>Correo enviado: {{ medical_report.email_sent }}</p>
               <p>Lorem ipsum <a href="#">dolor</a> sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
               <span class="uk-margin-small-right" uk-icon="check"></span><a href="{% url 'medical_report_detail' pk=medical_report.id %}" uk-icon="mail"> Ver Detalle </a>
               <span class="uk-margin-small-right" uk-icon="check"></span><a href="{% url 'pdf-generate' pk=medical_report.id %}" uk-icon="file-pdf"> pdf </a>
