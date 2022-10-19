@@ -164,24 +164,13 @@ class MedicalReportActive(ListView):
 
   def get_queryset(self):
     current_user = self.request.user
-    #actual_user = CrewMember.objects.get( user= current_user)
-    #actual_date = []
-    #actual_date.append(datetime.now().date())
-    #actual_date = datetime.now().date() 
-    #qs_actual_unit = TodayUnitDoctor.objects.filter(unit_date__gte=actual_date)
-
-    #print("Actual units: {}".format(qs_actual_unit))
     qs = Emergency.objects.filter(is_active = True)
-    #qs.filter(units is not null)
     emergency_list = []
     for emergency in qs:
       if emergency.units.count() >0:
         if not emergency.medical_report:
           emergency_list.append(emergency.id)
-
     qs = Emergency.objects.filter(id__in= emergency_list)
-    #qs.filter(medical_report__isnull= True)
-
     logger.info('[ QS MedicalReportActive! Current User: {} ]'.format(current_user))
     logger.info('[ QS MedicalReportActive! Emegrencies with units: {} ]'.format(emergency_list))
     #logger.info('[ QS MedicalReportActive! Actual Units;: {} ]'.format(qs_actual_unit))
@@ -204,13 +193,7 @@ class MedicalReportDetail(View):
 
     return render(request, self.template_name,{"data":qs,})
 
-#   def post (self, request, *args, **kwargs):
-#     return redirect('/paperless/')
 
-
-
-# Update Timer Functionality
-#@csrf_exempt
 @csrf_protect
 def new_medicalreport(request):
     ''' '''
@@ -225,12 +208,7 @@ def new_medicalreport(request):
         logger.info('[ NEW MEWDICAL REPORT -2- Not body: {} ]'.format(current_user))
         logger.info('[ NEW MEWDICAL REPORT DATA: {} ]'.format(data))
         return bad_response
-
     data = json.loads(request.body.decode('utf-8'))
-
-    #logger.info('[ NEW MEWDICAL REPORT: -3- {} ]'.format(current_user))
-    #logger.info('[ NEW MEWDICAL REPORT DATA: -4- {} ]'.format(data))
-    #if 'id' in data and 'timer_type' in data :
     # Save data from FE to MODEL
     if 'paperless' in data :
       #qs =  Emergency.objects.get(pk = pl_emergency_id)
@@ -365,8 +343,6 @@ def new_medicalreport(request):
             medicalReport.email_sent = True
             medicalReport.save()
             medicalReport.final_report.save(file_name,ContentFile(pdf))
-            #medicalReport.save()
-            # emergency.save()
           data.update({'status': 'success', 'client_id':qs.odoo_client})
           response = JsonResponse(data)
           response.status_code = 202
@@ -377,13 +353,9 @@ def new_medicalreport(request):
           logger.error("[Create Medical Report View ERROR SENDING EMAIL]: {}, type: {}".format(e, type(e)))
           #return bad_response
           return redirect('/paperless')
-
-      #qs.medical_report = medicalReport
-      #qs.save()
-
     else:
         return bad_response
-# /Update Timer Functionality
+
 
 def find_on_list(my_list_Dict, what_to_search):
   #define Yes or No if key is on dict
@@ -411,8 +383,6 @@ def Send_Mail_To(request,email_recive,pk,send_flag,pdf):
     )    
     file_name = 'Parte_Medico_Vida_Uno_{}.pdf'.format(str(pk))
     email.attach(file_name,pdf,'application/pdf')
-    #pdf_to_attach = os.path.join(tempdir, 'rendered_template.pdf')
-    #email.attach_file(pdf_to_attach)
     if send_flag:
       email.send()
     logger.info('[ NEW MEWDICAL SendMail : {} ]'.format(email_recive))

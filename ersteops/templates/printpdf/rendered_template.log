@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.22)  19 OCT 2022 00:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.22)  19 OCT 2022 21:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -363,12 +363,6 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 87.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 87.
-LaTeX Font Info:    Trying to load font information for TS1+lmss on input line 
-118.
-
-(/usr/local/texlive/2022/texmf-dist/tex/latex/lm/ts1lmss.fd
-File: ts1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
 <signature_medic.png, id=2, 199.74625pt x 150.5625pt>
 File: signature_medic.png Graphic file (type png)
 <use signature_medic.png>
@@ -399,22 +393,21 @@ LaTeX Info: Redefining \. on input line 9.
 LaTeX Info: Redefining \% on input line 9.
 ) ) 
 Here is how much of TeX's memory you used:
- 5886 strings out of 479474
- 96774 string characters out of 5873902
+ 5857 strings out of 479474
+ 96143 string characters out of 5873902
  439053 words of memory out of 5000000
- 24049 multiletter control sequences out of 15000+600000
- 479479 words of font info for 34 fonts, out of 8000000 for 9000
+ 24024 multiletter control sequences out of 15000+600000
+ 479102 words of font info for 33 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 55i,12n,62p,380b,363s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 55i,12n,62p,312b,363s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </home/vagrant/.texlive2022/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1000.
-600pk>{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/l
-ocal/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</usr/local/texlive/2
-022/texmf-dist/fonts/type1/public/lm/lmss8.pfb>
+600pk>{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</usr/lo
+cal/texlive/2022/texmf-dist/fonts/type1/public/lm/lmss8.pfb>
 Output written on /vagrant/ersteops/templates/printpdf//rendered_template.pdf (
-1 page, 256313 bytes).
+1 page, 253016 bytes).
 PDF statistics:
- 1031 PDF objects out of 1200 (max. 8388607)
- 678 compressed objects within 7 object streams
+ 1027 PDF objects out of 1200 (max. 8388607)
+ 675 compressed objects within 7 object streams
  0 named destinations out of 1000 (max. 500000)
  16 words of extra memory for PDF output out of 10000 (max. 10000000)
 
