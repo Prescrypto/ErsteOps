@@ -42,6 +42,7 @@ export default {
       { text: 'Miosis', value: 'Miosis' },
       { text: 'Anisocoria', value: 'Anisocoria' },
     ],
+    isEditing: true,
     // const canvas = document.querySelector("canvas");
     // const signaturePad = new SignaturePad(canvas);
   }),
@@ -52,8 +53,31 @@ export default {
     SignatureMedic,
     Medications,
   },
+
+  beforeMount() {
+    window.addEventListener('beforeunload', this.preventNav);
+    this.$once('hook:beforeDestroy', () => {
+      window.removeEventListener('beforeunload', this.preventNav);
+    });
+  },
+
+  beforeRouteLeave(to, from, next) {
+    if (this.isEditing) {
+      if (!window.confirm('Salir sin guardar ?')) {
+        return;
+      }
+    }
+    next();
+  },
+
   methods: {
     ...mapActions('newMedicalReport', ['createMedicalReport']),
+
+    preventNav(event) {
+      if (!this.isEditing) return;
+      event.preventDefault();
+      event.returnValue = '';
+    },
 
     async submit(e) {
       // e.preventDefault();
@@ -82,6 +106,7 @@ export default {
       try {
         e.stopPropagation();
         e.preventDefault();
+        this.isEditing = false;
         this.paperless.submited = 'True';
         // var form = $(this);
         // var jsonForm= form.serialize();
@@ -109,6 +134,7 @@ export default {
         });
         this.paperless.submited = 'False';
       } catch (err) {
+        this.paperless.submited = 'False';
         this.$emit('error', err);
         this.$notify({
           text: `No se pudo crear el parte medico - ${err}`,
