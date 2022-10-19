@@ -59,6 +59,6 @@ dump.rdb
 
 media/
 
-ersteops/templates/printpdf/rendered_template.*
-ersteops/templates/printpdf/*.png
+#ersteops/templates/printpdf/rendered_template.*
+#ersteops/templates/printpdf/*.png
 

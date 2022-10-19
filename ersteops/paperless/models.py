@@ -211,6 +211,7 @@ class MedicalReport(models.Model):
     electro_qrs = models.CharField("QRS", blank=True, default='', max_length=20)
     email = models.CharField("Email", blank=True, default='', max_length=50)
     send_email = models.CharField("Se envio Email", blank=True, default='', max_length=20)
+    email_sent = models.BooleanField(blank= True, default = False)
     derivation_hospital = models.CharField("Hospitar derivacion", blank=True, default='', max_length=100)
     crum_hospital = models.CharField("Hospitar recibe CRUM", blank=True, default='', max_length=100)
     crum_notes = models.TextField("Notas Crum",blank=True)
