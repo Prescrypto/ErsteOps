@@ -351,7 +351,6 @@ def new_medicalreport(request):
           )
           messages.info(request, "Parte Medico Guardado correctamente!!!")
           messages.info(request, "Parte Medico Generating pdf!!!")
-          #pdf_to_attach = settings.BASE_DIR+'/templates/printpdf/rendered_template.pdf/'
           tempdir = settings.BASE_DIR+'/templates/printpdf/'
           pdf = document_as_new_pdf(request,medicalReport.id)
 
@@ -403,16 +402,6 @@ def not_find_on_list(my_list_Dict, what_to_search):
 
 def Send_Mail_To(request,email_recive,pk,send_flag,pdf):
   #Send mail via smtp gmail server
-  #pdf_to_attach = settings.BASE_DIR+'/templates/printpdf/rendered_template.pdf/'
-  #tempdir = settings.BASE_DIR+'/templates/printpdf/'
-  #pdf = document_as_new_pdf(request,pk)
-  # Test if pdf was generated correctly
-  #try:
-  #  pdf_file = open(os.path.join(tempdir, 'rendered_template.pdf'), 'rb')
-  #except Exception as e:
-  #  send_flag = False
-  #  logger.error("[Create Medical Report Email ERROR not pdf]: {}, type: {}".format(e, type(e)))
-  #  return bad_response
   try:
     email = EmailMessage(
       'Parte Medico Vida uno Folio {}'.format(pk),
