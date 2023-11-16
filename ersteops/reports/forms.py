@@ -22,12 +22,12 @@ class SimpleDateSelector(forms.Form):
       label='Desde:',
       initial=date(utc_mx.year, 1, 1),
       widget=forms.SelectDateWidget(
-              years=range(2014, 2023),attrs={'class': 'uk-width-1-2 ui-form-controls c-btn c-btn--secondary has-dropdown dropdown-toggle'}
+              years=range(2014, 2026),attrs={'class': 'uk-width-1-2 ui-form-controls c-btn c-btn--secondary has-dropdown dropdown-toggle'}
           ))
   until_date = forms.DateField(
       required=True,
       label='Hasta:',
       initial=date(utc_mx.year,utc_mx.month,utc_mx.day),
       widget=forms.SelectDateWidget(
-              years=range(2014, 2023),attrs={'class': 'uk-form-controls c-btn c-btn--secondary has-dropdown dropdown-toggle'}
+              years=range(2014, 2026),attrs={'class': 'uk-form-controls c-btn c-btn--secondary has-dropdown dropdown-toggle'}
           ))
