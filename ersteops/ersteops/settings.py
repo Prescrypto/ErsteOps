@@ -283,13 +283,14 @@ worker (worker servers) ejemplo:
 para mas informacion sobre el deployado o sus configuraciones
 http://channels.readthedocs.io/en/latest/deploying.html
 """
-
+FIX_REDIS_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')+'/0?ssl_cert_reqs=CERT_NONE'
+ 
 CHANNEL_LAYERS = {
     "default": {
         #"BACKEND": "asgi_redis.RedisChannelLayer",
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379/0')+'/0?ssl_cert_reqs=CERT_NONE'],
+            "hosts": [FIX_REDIS_URL],
         },
         #"ROUTING": "ersteops.routing.channel_routing",
     },
