@@ -289,7 +289,7 @@ CHANNEL_LAYERS = {
         #"BACKEND": "asgi_redis.RedisChannelLayer",
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379/0')],
+            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379/0')+'/0?ssl_cert_reqs=CERT_NONE'],
         },
         #"ROUTING": "ersteops.routing.channel_routing",
     },
