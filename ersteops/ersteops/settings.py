@@ -284,13 +284,13 @@ para mas informacion sobre el deployado o sus configuraciones
 http://channels.readthedocs.io/en/latest/deploying.html
 """
 FIX_REDIS_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')+'/0?ssl_cert_reqs=CERT_NONE'
- 
+# os.environ.get('REDIS_TLS_URL', 'redis://localhost:6379/0')
 CHANNEL_LAYERS = {
     "default": {
         #"BACKEND": "asgi_redis.RedisChannelLayer",
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [FIX_REDIS_URL],
+            "hosts": [os.environ.get('REDIS_TLS_URL', 'redis://localhost:6379/0')],
         },
         #"ROUTING": "ersteops.routing.channel_routing",
     },
