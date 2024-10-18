@@ -314,7 +314,7 @@ CHANNEL_LAYERS = {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
             "hosts": [{
-                'address': (redis_host, redis_port),
+                'address': f"redis://{redis_host}:{redis_port}",
                 'password': redis_password,
                 'ssl': url.scheme == 'rediss',  # True if scheme is 'rediss'
                 'ssl_cert_reqs': None  # Disable SSL certificate verification
