@@ -323,6 +323,7 @@ CHANNEL_LAYERS = {
     },
 }
 
+
 EMAIL_BACKEND = os.environ['EMAIL_BACKEND']
 EMAIL_HOST = os.environ['EMAIL_HOST']
 EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
