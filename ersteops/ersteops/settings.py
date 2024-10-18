@@ -15,6 +15,17 @@ import os
 import dj_database_url
 # To transform strings from environment variables to boolean values
 import ast
+# decode redis URI
+import urllib.parse
+
+redis_url=os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
+# Parse the Redis URI
+url = urllib.parse.urlparse(redis_url)
+
+# Extract the host, port, and password
+redis_host = url.hostname
+redis_port = url.port
+redis_password = url.password
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -286,14 +297,29 @@ http://channels.readthedocs.io/en/latest/deploying.html
 #FIX_REDIS_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')+'/0?ssl_cert_reqs=CERT_NONE'
 # os.environ.get('REDIS_TLS_URL', 'redis://localhost:6379/0')
 
+# CHANNEL_LAYERS = {
+#     "default": {
+#         #"BACKEND": "asgi_redis.RedisChannelLayer",
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [os.environ.get('REDIS_TEMPORARY_URL', 'redis://localhost:6379/0')],
+#         },
+#         #"ROUTING": "ersteops.routing.channel_routing",
+#     },
+# }
+
+# Configure Django Channels to use the parsed Redis details
 CHANNEL_LAYERS = {
-    "default": {
-        #"BACKEND": "asgi_redis.RedisChannelLayer",
-        "BACKEND": "channels_redis.core.RedisChannelLayer",
-        "CONFIG": {
-            "hosts": [os.environ.get('REDIS_TEMPORARY_URL', 'redis://localhost:6379/0')],
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [{
+                'address': (redis_host, redis_port),
+                'password': redis_password,
+                'ssl': url.scheme == 'rediss',  # True if scheme is 'rediss'
+                'ssl_cert_reqs': None  # Disable SSL certificate verification
+            }],
         },
-        #"ROUTING": "ersteops.routing.channel_routing",
     },
 }
 
