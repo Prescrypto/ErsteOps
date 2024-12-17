@@ -18,14 +18,14 @@ import ast
 # decode redis URI
 import urllib.parse
 
-redis_url=os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
-# Parse the Redis URI
-url = urllib.parse.urlparse(redis_url)
+# redis_url=os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
+# # Parse the Redis URI
+# url = urllib.parse.urlparse(redis_url)
 
-# Extract the host, port, and password
-redis_host = url.hostname
-redis_port = url.port
-redis_password = url.password
+# # Extract the host, port, and password
+# redis_host = url.hostname
+# redis_port = url.port
+# redis_password = url.password
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -304,10 +304,6 @@ CHANNEL_LAYERS = {
         "CONFIG": {
             "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379/0')],
         },
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            "CONNECTION_POOL_KWARGS": {"ssl_cert_reqs": None}
-        }
         #"ROUTING": "ersteops.routing.channel_routing",
     },
 }
