@@ -303,8 +303,11 @@ CHANNEL_LAYERS = {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
             "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379/0')],
-            "ssl_cert_reqs": None, 
         },
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "CONNECTION_POOL_KWARGS": {"ssl_cert_reqs": None}
+        }
         #"ROUTING": "ersteops.routing.channel_routing",
     },
 }
